@@ -1,0 +1,65 @@
+name: Apostas LoL — daily cron
+
+# Horários BRT:
+#   03:50 BRT (06:50 UTC) todo dia → captura LCK+LPL pré-jogo + analisa ontem
+#   12:00 BRT (15:00 UTC) sáb e dom → captura LEC+CBLOL pré-jogo
+on:
+  schedule:
+    - cron: '50 6 * * *'    # 03:50 BRT (UTC-3) — todo dia
+    - cron: '0 15 * * 6,0'  # 12:00 BRT — sáb (6) e dom (0)
+  workflow_dispatch: {}     # permite rodar manual
+
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # pra commitar JSON gerado
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Detectar tipo de execução
+        id: trigger
+        run: |
+          HOUR=$(date -u +%H)
+          DOW=$(date -u +%u)  # 1=seg ... 7=dom
+          # Se UTC ~06h → execução matinal (LCK+LPL + ontem)
+          # Se UTC ~15h E (sab=6 ou dom=7) → fim-de-semana (LEC+CBLOL)
+          if [ "$HOUR" = "06" ]; then
+            echo "kind=morning" >> $GITHUB_OUTPUT
+          elif [ "$HOUR" = "15" ] && { [ "$DOW" = "6" ] || [ "$DOW" = "7" ]; }; then
+            echo "kind=weekend_noon" >> $GITHUB_OUTPUT
+          else
+            echo "kind=manual" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Capture fair lines (LCK + LPL)
+        if: steps.trigger.outputs.kind == 'morning' || steps.trigger.outputs.kind == 'manual'
+        run: node cron/capture_fair_lines.cjs lck,lpl
+
+      - name: Capture fair lines (LEC + CBLOL)
+        if: steps.trigger.outputs.kind == 'weekend_noon' || steps.trigger.outputs.kind == 'manual'
+        run: node cron/capture_fair_lines.cjs lec,cblol
+
+      - name: Analyze yesterday's games
+        if: steps.trigger.outputs.kind == 'morning' || steps.trigger.outputs.kind == 'manual'
+        run: node cron/analyze_yesterday.cjs
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cron/cron-data/
+          if git diff --cached --quiet; then
+            echo "Nada novo pra commitar"
+          else
+            git commit -m "cron: ${{ steps.trigger.outputs.kind }} $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
