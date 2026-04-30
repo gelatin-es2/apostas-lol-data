@@ -31,8 +31,6 @@ jobs:
           curl -sSL -o /tmp/oracle_2026.csv \
             'https://oracleselixir-downloadable-match-data.s3.us-east-2.amazonaws.com/2026_LoL_esports_match_data_from_OraclesElixir.csv'
           ls -la /tmp/oracle_2026.csv
-        env:
-          # nada
 
       - name: Detectar tipo de execução
         id: trigger
