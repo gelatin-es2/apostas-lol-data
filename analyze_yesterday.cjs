@@ -9,8 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const ROOT = path.resolve(__dirname, '..');
-const ORACLE_CSV = path.join(ROOT, 'year_backtest/datasets/2026_oracle.csv');
+const ORACLE_CSV = process.env.ORACLE_CSV || path.resolve(__dirname, '..', 'year_backtest/datasets/2026_oracle.csv');
 const OUT_DIR = path.join(__dirname, 'cron-data');
 
 const LOLESPORTS_KEY = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
@@ -70,6 +69,7 @@ for (let i = 1; i < lines.length; i++) {
 }
 for (const [, p] of teamProfile) { p.n = p.kills.length; p.avg = p.kills.reduce((a,b)=>a+b,0)/p.n; }
 
+(async () => {
 console.error('[2/3] Buscando jogos de ontem (' + YESTERDAY_STR + ')...');
 const results = [];
 for (const [liga, leagueId] of Object.entries(LEAGUE_IDS)) {
@@ -176,3 +176,4 @@ fs.writeFileSync(outFile, JSON.stringify({
   results,
 }, null, 2));
 console.error(`Wrote: ${outFile}`);
+})().catch(e => { console.error('ERRO:', e.message); process.exit(1); });

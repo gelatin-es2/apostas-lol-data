@@ -11,8 +11,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const ROOT = path.resolve(__dirname, '..');
-const ORACLE_CSV = path.join(ROOT, 'year_backtest/datasets/2026_oracle.csv');
+const ORACLE_CSV = process.env.ORACLE_CSV || path.resolve(__dirname, '..', 'year_backtest/datasets/2026_oracle.csv');
 const OUT_DIR = path.join(__dirname, 'cron-data');
 
 const LIGAS_ALVO = (process.argv[2] || 'lck,lpl').toLowerCase().split(',');
@@ -85,6 +84,7 @@ for (const [, p] of teamProfile) {
 }
 console.error(`  ${teamProfile.size} times com perfil de kills`);
 
+(async () => {
 console.error('[2/3] Buscando schedule no lolesports...');
 const fairLines = [];
 for (const liga of LIGAS_ALVO) {
@@ -150,3 +150,4 @@ fs.writeFileSync(outFile, JSON.stringify(existing, null, 2));
 console.error(`Wrote: ${outFile}`);
 console.error(`Fair lines capturadas: ${fairLines.length}`);
 fairLines.forEach(f => console.error(`  ${f.league} ${f.team_a} vs ${f.team_b} → fair=${f.fair_per_map}`));
+})().catch(e => { console.error('ERRO:', e.message); process.exit(1); });

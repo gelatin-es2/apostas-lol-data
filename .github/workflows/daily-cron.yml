@@ -25,6 +25,15 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Download Oracle's Elixir CSV (2026)
+        run: |
+          mkdir -p /tmp
+          curl -sSL -o /tmp/oracle_2026.csv \
+            'https://oracleselixir-downloadable-match-data.s3.us-east-2.amazonaws.com/2026_LoL_esports_match_data_from_OraclesElixir.csv'
+          ls -la /tmp/oracle_2026.csv
+        env:
+          # nada
+
       - name: Detectar tipo de execução
         id: trigger
         run: |
@@ -42,21 +51,27 @@ jobs:
 
       - name: Capture fair lines (LCK + LPL)
         if: steps.trigger.outputs.kind == 'morning' || steps.trigger.outputs.kind == 'manual'
-        run: node cron/capture_fair_lines.cjs lck,lpl
+        env:
+          ORACLE_CSV: /tmp/oracle_2026.csv
+        run: node capture_fair_lines.cjs lck,lpl
 
       - name: Capture fair lines (LEC + CBLOL)
         if: steps.trigger.outputs.kind == 'weekend_noon' || steps.trigger.outputs.kind == 'manual'
-        run: node cron/capture_fair_lines.cjs lec,cblol
+        env:
+          ORACLE_CSV: /tmp/oracle_2026.csv
+        run: node capture_fair_lines.cjs lec,cblol
 
       - name: Analyze yesterday's games
         if: steps.trigger.outputs.kind == 'morning' || steps.trigger.outputs.kind == 'manual'
-        run: node cron/analyze_yesterday.cjs
+        env:
+          ORACLE_CSV: /tmp/oracle_2026.csv
+        run: node analyze_yesterday.cjs
 
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add cron/cron-data/
+          git add cron-data/
           if git diff --cached --quiet; then
             echo "Nada novo pra commitar"
           else
