@@ -32,7 +32,15 @@ const LEAGUE_IDS = {
 
 function fetch(url, headers = {}) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0', ...headers } }, res => {
+    const browserHeaders = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36',
+      'Accept': 'application/json, text/plain, */*',
+      'Accept-Language': 'en-US,en;q=0.9',
+      'Origin': 'https://lolesports.com',
+      'Referer': 'https://lolesports.com/',
+      ...headers,
+    };
+    https.get(url, { headers: browserHeaders }, res => {
       let body = '';
       res.on('data', c => body += c);
       res.on('end', () => {
