@@ -1,6 +1,6 @@
 {
   "date": "2026-04-30",
-  "analyzed_at": "2026-05-01T11:50:27.905Z",
+  "analyzed_at": "2026-05-01T11:53:01.317Z",
   "ligas": [
     "LPL",
     "LCK",
@@ -18,7 +18,7 @@
       "team_blue": "TT",
       "team_red": "LGD",
       "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615924499588646?startingTime=2026-05-01T11:50:25.924Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"startingTime must be evenly divisible by 10 seconds. Was 2026-05-01T11:50:25.924Z\",\"implementationDetails\":\"filtered\"}"
+      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615924499588646?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.66 sec old). requested window: [2026-05-01T11:53:00Z, 202"
     },
     {
       "league": "LPL",
@@ -28,7 +28,7 @@
       "team_blue": "TT",
       "team_red": "LGD",
       "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615926685761097?startingTime=2026-05-01T11:50:26.337Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"startingTime must be evenly divisible by 10 seconds. Was 2026-05-01T11:50:26.337Z\",\"implementationDetails\":\"filtered\"}"
+      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615926685761097?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.58 sec old). requested window: [2026-05-01T11:53:00Z, 202"
     },
     {
       "league": "LPL",
@@ -38,7 +38,7 @@
       "team_blue": "TT",
       "team_red": "LGD",
       "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615926685761098?startingTime=2026-05-01T11:50:26.552Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"startingTime must be evenly divisible by 10 seconds. Was 2026-05-01T11:50:26.552Z\",\"implementationDetails\":\"filtered\"}"
+      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615926685761098?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.50 sec old). requested window: [2026-05-01T11:53:00Z, 202"
     },
     {
       "league": "LPL",
@@ -48,7 +48,7 @@
       "team_blue": "EDG",
       "team_red": "UP",
       "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615924499588640?startingTime=2026-05-01T11:50:26.783Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"startingTime must be evenly divisible by 10 seconds. Was 2026-05-01T11:50:26.783Z\",\"implementationDetails\":\"filtered\"}"
+      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615924499588640?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.42 sec old). requested window: [2026-05-01T11:53:00Z, 202"
     },
     {
       "league": "LPL",
@@ -58,7 +58,7 @@
       "team_blue": "EDG",
       "team_red": "UP",
       "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615926685761091?startingTime=2026-05-01T11:50:27.005Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"startingTime must be evenly divisible by 10 seconds. Was 2026-05-01T11:50:27.005Z\",\"implementationDetails\":\"filtered\"}"
+      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615926685761091?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.21 sec old). requested window: [2026-05-01T11:53:00Z, 202"
     },
     {
       "league": "LPL",
@@ -68,7 +68,7 @@
       "team_blue": "EDG",
       "team_red": "UP",
       "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615926685761092?startingTime=2026-05-01T11:50:27.232Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"startingTime must be evenly divisible by 10 seconds. Was 2026-05-01T11:50:27.232Z\",\"implementationDetails\":\"filtered\"}"
+      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615926685761092?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.13 sec old). requested window: [2026-05-01T11:53:00Z, 202"
     },
     {
       "league": "LCK",
@@ -78,7 +78,7 @@
       "team_blue": "GEN",
       "team_red": "KRX",
       "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962906284?startingTime=2026-05-01T11:50:27.320Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"startingTime must be evenly divisible by 10 seconds. Was 2026-05-01T11:50:27.320Z\",\"implementationDetails\":\"filtered\"}"
+      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962906284?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.05 sec old). requested window: [2026-05-01T11:53:00Z, 202"
     },
     {
       "league": "LCK",
@@ -88,7 +88,7 @@
       "team_blue": "GEN",
       "team_red": "KRX",
       "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962906285?startingTime=2026-05-01T11:50:27.538Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"startingTime must be evenly divisible by 10 seconds. Was 2026-05-01T11:50:27.538Z\",\"implementationDetails\":\"filtered\"}"
+      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962906285?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -8.97 sec old). requested window: [2026-05-01T11:53:00Z, 202"
     },
     {
       "league": "LCK",
@@ -98,7 +98,7 @@
       "team_blue": "GEN",
       "team_red": "KRX",
       "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962906286?startingTime=2026-05-01T11:50:27.630Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"startingTime must be evenly divisible by 10 seconds. Was 2026-05-01T11:50:27.630Z\",\"implementationDetails\":\"filtered\"}"
+      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962906286?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -8.89 sec old). requested window: [2026-05-01T11:53:00Z, 202"
     },
     {
       "league": "LCK",
@@ -108,7 +108,7 @@
       "team_blue": "BFX",
       "team_red": "DK",
       "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962840676?startingTime=2026-05-01T11:50:27.728Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"startingTime must be evenly divisible by 10 seconds. Was 2026-05-01T11:50:27.728Z\",\"implementationDetails\":\"filtered\"}"
+      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962840676?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -8.81 sec old). requested window: [2026-05-01T11:53:00Z, 202"
     },
     {
       "league": "LCK",
@@ -118,7 +118,7 @@
       "team_blue": "BFX",
       "team_red": "DK",
       "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962840677?startingTime=2026-05-01T11:50:27.819Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"startingTime must be evenly divisible by 10 seconds. Was 2026-05-01T11:50:27.819Z\",\"implementationDetails\":\"filtered\"}"
+      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962840677?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -8.72 sec old). requested window: [2026-05-01T11:53:00Z, 202"
     }
   ]
 }
