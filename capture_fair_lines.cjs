@@ -14,6 +14,81 @@ const https = require('https');
 const ORACLE_CSV = process.env.ORACLE_CSV || path.resolve(__dirname, '..', 'year_backtest/datasets/2026_oracle.csv');
 const OUT_DIR = path.join(__dirname, 'cron-data');
 
+// === DoH bypass (provedor BR bloqueia DNS Polymarket) ===
+const ipCache = new Map();
+function dohResolve(host) {
+  return new Promise((resolve, reject) => {
+    https.get(`https://1.1.1.1/dns-query?name=${host}&type=A`, { headers: { accept: 'application/dns-json' } }, res => {
+      let body = ''; res.on('data', c => body += c); res.on('end', () => {
+        try { const j = JSON.parse(body); const a = (j.Answer || []).find(x => x.type === 1); if (!a) return reject(new Error(`No A for ${host}`)); resolve(a.data); }
+        catch (e) { reject(e); }
+      });
+    }).on('error', reject);
+  });
+}
+async function fetchDoH(url) {
+  const u = new URL(url);
+  if (!ipCache.has(u.hostname)) ipCache.set(u.hostname, await dohResolve(u.hostname));
+  const ip = ipCache.get(u.hostname);
+  return new Promise((resolve, reject) => {
+    https.get({ host: ip, port: 443, path: u.pathname + u.search, headers: { Host: u.hostname, 'User-Agent': 'Mozilla/5.0', accept: 'application/json' }, servername: u.hostname }, res => {
+      let body = ''; res.on('data', c => body += c); res.on('end', () => {
+        if (res.statusCode >= 400) return reject(new Error(`HTTP ${res.statusCode}: ${body.slice(0,200)}`));
+        try { resolve(JSON.parse(body)); } catch (e) { reject(new Error(`JSON err: ${e.message}`)); }
+      });
+    }).on('error', reject);
+  });
+}
+async function fetchPolymarketLolEvents() {
+  const nowMinus4h = new Date(Date.now() - 4 * 3600 * 1000).toISOString();
+  let events;
+  try {
+    events = await fetchDoH(`https://gamma-api.polymarket.com/events?tag_slug=esports&closed=false&active=true&end_date_min=${nowMinus4h}&limit=200`);
+  } catch (e) { console.error('  Polymarket fetch failed:', e.message); return []; }
+  const lolKw = ['league of legends', 'lol:', ' lol ', 'lpl', ' lck', ' lec', ' lcs', 'cblol'];
+  return events.filter(e => {
+    if (e.closed || e.archived) return false;
+    const t = (e.title || '').toLowerCase();
+    return lolKw.some(k => t.includes(k));
+  });
+}
+function extractPolymarketLines(ev) {
+  // markets: pega só "Total Kills Over/Under X in Game N"
+  const markets = ev.markets || [];
+  const byMap = {};
+  for (const m of markets) {
+    if (m.closed || m.archived) continue;
+    const q = (m.question || '').toLowerCase();
+    if (!q.includes('total kills')) continue;
+    const lineMatch = (m.question || '').match(/(?:over|under)\s*(\d+(?:\.\d+)?)/i);
+    const mapMatch = (m.question || '').match(/(?:game|map)\s*(\d+)/i);
+    if (!lineMatch || !mapMatch) continue;
+    const line = parseFloat(lineMatch[1]);
+    const mapN = parseInt(mapMatch[1], 10);
+    let outcomes = m.outcomes, prices = m.outcomePrices;
+    if (typeof outcomes === 'string') try { outcomes = JSON.parse(outcomes); } catch {}
+    if (typeof prices === 'string') try { prices = JSON.parse(prices); } catch {}
+    let yesPrice = null;
+    if (Array.isArray(outcomes) && Array.isArray(prices)) {
+      const i = outcomes.findIndex(o => /^(yes|over)$/i.test(o));
+      if (i >= 0) yesPrice = parseFloat(prices[i]);
+    }
+    // Filtrar live polarizado (yes ≥0.95 ou ≤0.05) — não é fair de mercado real
+    if (yesPrice == null || yesPrice >= 0.95 || yesPrice <= 0.05) continue;
+    if (!byMap[mapN]) byMap[mapN] = [];
+    byMap[mapN].push({ line, yes_over: yesPrice, vol24h: m.volume24hr || null });
+  }
+  return byMap;
+}
+function matchPolymarketEvent(events, teamA, teamB) {
+  const a = teamA?.toLowerCase(), b = teamB?.toLowerCase();
+  if (!a || !b) return null;
+  return events.find(ev => {
+    const t = (ev.title || '').toLowerCase();
+    return t.includes(a) && t.includes(b);
+  });
+}
+
 const LIGAS_ALVO = (process.argv[2] || 'lck,lpl').toLowerCase().split(',');
 const TODAY = new Date().toISOString().slice(0, 10);
 const MIN_TEAM_MAPS = 10;
@@ -106,7 +181,9 @@ function findTeam(name) {
 }
 
 (async () => {
-console.error('[2/3] Buscando schedule no lolesports...');
+console.error('[2/3] Buscando schedule no lolesports + Polymarket...');
+const polymarketEvents = await fetchPolymarketLolEvents();
+console.error(`  Polymarket: ${polymarketEvents.length} eventos LoL futuros`);
 const fairLines = [];
 for (const liga of LIGAS_ALVO) {
   const leagueId = LEAGUE_IDS[liga];
@@ -139,6 +216,11 @@ for (const liga of LIGAS_ALVO) {
     let avg2 = p2 && p2.n >= MIN_TEAM_MAPS ? p2.avg : null;
     const fair = (avg1 != null && avg2 != null) ? Math.round((avg1 + avg2) - 0.5) + 0.5 : null;
 
+    // Tentar matchar evento Polymarket pelos times
+    const pmEvent = matchPolymarketEvent(polymarketEvents, t1, t2)
+      || matchPolymarketEvent(polymarketEvents, teams[0]?.name, teams[1]?.name);
+    const polymarketLines = pmEvent ? extractPolymarketLines(pmEvent) : null;
+
     fairLines.push({
       league: liga.toUpperCase(),
       league_id: leagueId,
@@ -146,9 +228,11 @@ for (const liga of LIGAS_ALVO) {
       start_time: ev.startTime,
       team_a: t1, team_b: t2,
       team_a_avg: avg1, team_b_avg: avg2,
-      fair_per_map: fair,
+      fair_calculated: fair,
       fair_team_a_n: p1?.n, fair_team_b_n: p2?.n,
       bo: ev.match?.strategy?.count || null,
+      polymarket_event: pmEvent ? { id: pmEvent.id, slug: pmEvent.slug, title: pmEvent.title } : null,
+      polymarket_lines_per_map: polymarketLines,
     });
   }
 }
