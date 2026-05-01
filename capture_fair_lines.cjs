@@ -292,5 +292,14 @@ existing.captures.push({
 fs.writeFileSync(outFile, JSON.stringify(existing, null, 2));
 console.error(`Wrote: ${outFile}`);
 console.error(`Fair lines capturadas: ${fairLines.length}`);
-fairLines.forEach(f => console.error(`  ${f.league} ${f.team_a} vs ${f.team_b} → fair=${f.fair_per_map}`));
+fairLines.forEach(f => console.error(`  ${f.league} ${f.team_a} vs ${f.team_b} → fair=${f.fair_calculated} (a=${f.team_a_avg ? f.team_a_avg.toFixed(1) : '?'} b=${f.team_b_avg ? f.team_b_avg.toFixed(1) : '?'})`));
+// Debug: testar lookup pra alguns times conhecidos
+console.error('--- DEBUG team lookup ---');
+['HLE', 'T1', 'GEN', 'BLG', 'TT', 'LGD'].forEach(code => {
+  const p = findTeam(code);
+  console.error(`  findTeam('${code}'):`, p ? `OK (n=${p.n}, avg=${p.avg.toFixed(1)})` : 'NULL');
+});
+console.error(`Total teams no profile: ${teamProfile.size}`);
+const hleVariants = [...teamProfile.keys()].filter(k => k.toLowerCase().includes('hanwha') || k.toLowerCase().includes('hle'));
+console.error('HLE variants no Oracle:', hleVariants);
 })().catch(e => { console.error('ERRO:', e.message); process.exit(1); });
