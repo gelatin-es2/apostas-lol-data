@@ -31,11 +31,19 @@ const YESTERDAY = ymd(new Date(Date.now() - 24*3600*1000));
 
 function fetch(url, headers = {}) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0', ...headers } }, res => {
+    const browserHeaders = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36',
+      'Accept': 'application/json, text/plain, */*',
+      'Accept-Language': 'en-US,en;q=0.9',
+      'Origin': 'https://lolesports.com',
+      'Referer': 'https://lolesports.com/',
+      ...headers,
+    };
+    https.get(url, { headers: browserHeaders }, res => {
       let body = '';
       res.on('data', c => body += c);
       res.on('end', () => {
-        if (res.statusCode >= 400) return reject(new Error(`HTTP ${res.statusCode}: ${body.slice(0,200)}`));
+        if (res.statusCode >= 400) return reject(new Error(`HTTP ${res.statusCode} for ${url.slice(0,120)}: ${body.slice(0,200)}`));
         try { resolve(JSON.parse(body)); }
         catch (e) { reject(new Error(`JSON err: ${e.message} — ${body.slice(0,200)}`)); }
       });
@@ -134,7 +142,7 @@ for (const g of allGames) {
     });
   } catch (e) {
     console.error(`  game ${g.game_id} window falhou: ${e.message}`);
-    results.push({ ...g, error: 'window_failed' });
+    results.push({ ...g, error: 'window_failed', error_detail: e.message.slice(0, 300) });
     continue;
   }
   const last = win?.frames?.[win.frames.length - 1];
