@@ -84,6 +84,19 @@ for (const [, p] of teamProfile) {
 }
 console.error(`  ${teamProfile.size} times com perfil de kills`);
 
+// Match flexível: lolesports usa "BRO", oracle usa "HANJIN BRION"
+const _norm = s => s ? s.toLowerCase().replace(/\s+/g,'') : '';
+function findTeam(name) {
+  if (!name) return null;
+  if (teamProfile.has(name)) return teamProfile.get(name);
+  const target = _norm(name);
+  for (const [oracleName, p] of teamProfile) {
+    const o = _norm(oracleName);
+    if (o.includes(target) || target.includes(o)) return p;
+  }
+  return null;
+}
+
 (async () => {
 console.error('[2/3] Buscando schedule no lolesports...');
 const fairLines = [];
@@ -112,8 +125,8 @@ for (const liga of LIGAS_ALVO) {
     const t2 = teams[1]?.code || teams[1]?.name;
     if (!t1 || !t2) continue;
 
-    const p1 = teamProfile.get(t1) || teamProfile.get(teams[0]?.name);
-    const p2 = teamProfile.get(t2) || teamProfile.get(teams[1]?.name);
+    const p1 = findTeam(t1) || findTeam(teams[0]?.name);
+    const p2 = findTeam(t2) || findTeam(teams[1]?.name);
     let avg1 = p1 && p1.n >= MIN_TEAM_MAPS ? p1.avg : null;
     let avg2 = p2 && p2.n >= MIN_TEAM_MAPS ? p2.avg : null;
     const fair = (avg1 != null && avg2 != null) ? Math.round((avg1 + avg2) - 0.5) + 0.5 : null;
