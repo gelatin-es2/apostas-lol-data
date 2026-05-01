@@ -640,6 +640,141 @@
         "CBLOL"
       ],
       "fair_lines": []
+    },
+    {
+      "captured_at": "2026-05-01T12:14:01.328Z",
+      "ligas": [
+        "LCK",
+        "LPL"
+      ],
+      "fair_lines": [
+        {
+          "league": "LCK",
+          "league_id": "98767991310872058",
+          "event_id": "115548128962906311",
+          "start_time": "2026-05-01T10:00:00Z",
+          "team_a": "HLE",
+          "team_b": "T1",
+          "team_a_avg": null,
+          "team_b_avg": null,
+          "fair_calculated": null,
+          "bo": 3,
+          "polymarket_event": {
+            "id": "419408",
+            "slug": "lol-hle1-t1-2026-05-01",
+            "title": "LoL: Hanwha Life Esports vs T1 (BO3) - LCK Rounds 1-2"
+          },
+          "polymarket_lines_per_map": {
+            "1": [
+              {
+                "line": 29.5,
+                "yes_over": 0.515,
+                "vol24h": 434.54181500000004
+              },
+              {
+                "line": 30.5,
+                "yes_over": 0.9,
+                "vol24h": 442.45969599999995
+              },
+              {
+                "line": 24.5,
+                "yes_over": 0.995,
+                "vol24h": 105
+              },
+              {
+                "line": 25.5,
+                "yes_over": 0.9,
+                "vol24h": 105
+              },
+              {
+                "line": 35.5,
+                "yes_over": 0.9,
+                "vol24h": 105
+              },
+              {
+                "line": 36.5,
+                "yes_over": 0.9,
+                "vol24h": 105
+              },
+              {
+                "line": 32.5,
+                "yes_over": 0.9,
+                "vol24h": 155
+              },
+              {
+                "line": 33.5,
+                "yes_over": 0.9,
+                "vol24h": 105
+              },
+              {
+                "line": 34.5,
+                "yes_over": 0.9,
+                "vol24h": 105
+              },
+              {
+                "line": 39.5,
+                "yes_over": 0.1,
+                "vol24h": 55
+              },
+              {
+                "line": 46.5,
+                "yes_over": 0.495,
+                "vol24h": null
+              },
+              {
+                "line": 45.5,
+                "yes_over": 0.495,
+                "vol24h": null
+              }
+            ],
+            "2": [
+              {
+                "line": 27.5,
+                "yes_over": 0.005,
+                "vol24h": 271.5625
+              },
+              {
+                "line": 29.5,
+                "yes_over": 0.1,
+                "vol24h": 183.636362
+              },
+              {
+                "line": 28.5,
+                "yes_over": 0.1,
+                "vol24h": 566.442838
+              },
+              {
+                "line": 30.5,
+                "yes_over": 0.1,
+                "vol24h": 137.26
+              },
+              {
+                "line": 26.5,
+                "yes_over": 0.1,
+                "vol24h": 32.835817
+              },
+              {
+                "line": 25.5,
+                "yes_over": 0.9,
+                "vol24h": 100
+              },
+              {
+                "line": 24.5,
+                "yes_over": 0.9,
+                "vol24h": 100
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "captured_at": "2026-05-01T12:14:03.018Z",
+      "ligas": [
+        "LEC",
+        "CBLOL"
+      ],
+      "fair_lines": []
     }
   ]
 }
