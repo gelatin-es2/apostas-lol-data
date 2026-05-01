@@ -1,6 +1,6 @@
 {
   "date": "2026-04-30",
-  "analyzed_at": "2026-05-01T11:53:01.317Z",
+  "analyzed_at": "2026-05-01T11:56:28.726Z",
   "ligas": [
     "LPL",
     "LCK",
@@ -17,8 +17,7 @@
       "game_number": 1,
       "team_blue": "TT",
       "team_red": "LGD",
-      "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615924499588646?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.66 sec old). requested window: [2026-05-01T11:53:00Z, 202"
+      "error": "not_finished"
     },
     {
       "league": "LPL",
@@ -27,8 +26,7 @@
       "game_number": 2,
       "team_blue": "TT",
       "team_red": "LGD",
-      "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615926685761097?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.58 sec old). requested window: [2026-05-01T11:53:00Z, 202"
+      "error": "not_finished"
     },
     {
       "league": "LPL",
@@ -37,8 +35,7 @@
       "game_number": 3,
       "team_blue": "TT",
       "team_red": "LGD",
-      "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615926685761098?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.50 sec old). requested window: [2026-05-01T11:53:00Z, 202"
+      "error": "not_finished"
     },
     {
       "league": "LPL",
@@ -47,8 +44,7 @@
       "game_number": 1,
       "team_blue": "EDG",
       "team_red": "UP",
-      "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615924499588640?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.42 sec old). requested window: [2026-05-01T11:53:00Z, 202"
+      "error": "not_finished"
     },
     {
       "league": "LPL",
@@ -57,8 +53,7 @@
       "game_number": 2,
       "team_blue": "EDG",
       "team_red": "UP",
-      "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615926685761091?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.21 sec old). requested window: [2026-05-01T11:53:00Z, 202"
+      "error": "not_finished"
     },
     {
       "league": "LPL",
@@ -67,8 +62,7 @@
       "game_number": 3,
       "team_blue": "EDG",
       "team_red": "UP",
-      "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115615926685761092?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.13 sec old). requested window: [2026-05-01T11:53:00Z, 202"
+      "error": "not_finished"
     },
     {
       "league": "LCK",
@@ -77,8 +71,7 @@
       "game_number": 1,
       "team_blue": "GEN",
       "team_red": "KRX",
-      "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962906284?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -9.05 sec old). requested window: [2026-05-01T11:53:00Z, 202"
+      "error": "not_finished"
     },
     {
       "league": "LCK",
@@ -87,8 +80,7 @@
       "game_number": 2,
       "team_blue": "GEN",
       "team_red": "KRX",
-      "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962906285?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -8.97 sec old). requested window: [2026-05-01T11:53:00Z, 202"
+      "error": "not_finished"
     },
     {
       "league": "LCK",
@@ -97,8 +89,7 @@
       "game_number": 3,
       "team_blue": "GEN",
       "team_red": "KRX",
-      "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962906286?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -8.89 sec old). requested window: [2026-05-01T11:53:00Z, 202"
+      "error": "not_finished"
     },
     {
       "league": "LCK",
@@ -107,8 +98,7 @@
       "game_number": 1,
       "team_blue": "BFX",
       "team_red": "DK",
-      "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962840676?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -8.81 sec old). requested window: [2026-05-01T11:53:00Z, 202"
+      "error": "not_finished"
     },
     {
       "league": "LCK",
@@ -117,8 +107,7 @@
       "game_number": 2,
       "team_blue": "BFX",
       "team_red": "DK",
-      "error": "window_failed",
-      "error_detail": "HTTP 400 for https://feed.lolesports.com/livestats/v1/window/115548128962840677?startingTime=2026-05-01T11:53:00.000Z: {\"httpStatus\":400,\"errorCode\":\"BAD_QUERY_PARAMETER\",\"message\":\"disallowed window with end time less than 20 sec old (was -8.72 sec old). requested window: [2026-05-01T11:53:00Z, 202"
+      "error": "not_finished"
     }
   ]
 }
