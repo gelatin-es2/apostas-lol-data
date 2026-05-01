@@ -133,17 +133,11 @@ console.error(`  ${allGames.length} games completed ontem`);
 
 console.error('[3/4] Buscando window + comp pra cada game...');
 const results = [];
-// startingTime tem que ser múltiplo de 10s sem milissegundos (regra da API lolesports)
-function tsRoundedTo10s(date) {
-  const t = Math.floor(date.getTime() / 10000) * 10000;
-  return new Date(t).toISOString().replace(/\.\d{3}Z$/, '.000Z');
-}
-
 for (const g of allGames) {
-  const startingTime = tsRoundedTo10s(new Date());
   let win;
   try {
-    win = await fetch(`https://feed.lolesports.com/livestats/v1/window/${g.game_id}?startingTime=${startingTime}`, {
+    // Sem startingTime: API retorna o último frame disponível (pra jogo finalizado = state final)
+    win = await fetch(`https://feed.lolesports.com/livestats/v1/window/${g.game_id}`, {
       'x-api-key': LOLESPORTS_KEY,
     });
   } catch (e) {
