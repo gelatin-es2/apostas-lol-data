@@ -73,8 +73,13 @@ function extractPolymarketLines(ev) {
       const i = outcomes.findIndex(o => /^(yes|over)$/i.test(o));
       if (i >= 0) yesPrice = parseFloat(prices[i]);
     }
-    // Filtrar live polarizado (yes ≥0.95 ou ≤0.05) — não é fair de mercado real
-    if (yesPrice == null || yesPrice >= 0.95 || yesPrice <= 0.05) continue;
+    // Filtrar polarizado / sem volume real:
+    //   - Yes ≥0.85 ou ≤0.15: bid/ask extremo, sem mercado de verdade
+    //   - EXCETO se vol24h > 20 (significa que tem traders, pode ser sinal real do meio do jogo)
+    if (yesPrice == null) continue;
+    const vol = m.volume24hr || 0;
+    const polarized = yesPrice >= 0.85 || yesPrice <= 0.15;
+    if (polarized && vol < 20) continue;
     if (!byMap[mapN]) byMap[mapN] = [];
     byMap[mapN].push({ line, yes_over: yesPrice, vol24h: m.volume24hr || null });
   }
