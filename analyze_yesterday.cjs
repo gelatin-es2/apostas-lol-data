@@ -79,14 +79,38 @@ for (let i = 1; i < lines.length; i++) {
 }
 for (const [, p] of teamProfile) { p.n = p.kills.length; p.avg = p.kills.reduce((a,b)=>a+b,0)/p.n; }
 
-// Match team por nome OU substring (lolesports usa "BRO", oracle usa "HANJIN BRION")
+// Hardcoded mapping codes lolesports → Oracle teamname (5 majors patch atual)
+const TEAM_CODE_TO_ORACLE = {
+  'T1': 'T1', 'GEN': 'Gen.G eSports', 'KT': 'KT Rolster', 'HLE': 'Hanwha Life Esports',
+  'DK': 'Dplus KIA', 'BRO': 'HANJIN BRION', 'NS': 'Nongshim RedForce',
+  'DRX': 'Kiwoom DRX', 'DNS': 'DN SOOPers', 'BFX': 'BNK FearX',
+  'BLG': 'Bilibili Gaming', 'JDG': 'JD Gaming', 'EDG': 'EDward Gaming', 'IG': 'Invictus Gaming',
+  'TES': 'Top Esports', 'WBG': 'Weibo Gaming', 'AL': "Anyone's Legend",
+  'TT': 'ThunderTalk Gaming', 'LGD': 'LGD Gaming', 'NIP': 'Ninjas in Pyjamas.CN',
+  'OMG': 'Oh My God', 'FPX': 'FunPlus Phoenix', 'RNG': 'Royal Never Give Up',
+  'RA': 'Rare Atom', 'LNG': 'LNG Esports', 'UP': 'Ultra Prime', 'WE': 'Team WE',
+  'G2': 'G2 Esports', 'FNC': 'Fnatic', 'MAD': 'MAD Lions KOI', 'SK': 'SK Gaming',
+  'KOI': 'Movistar KOI', 'BDS': 'Team BDS', 'GX': 'GIANTX', 'TH': 'Team Heretics',
+  'KC': 'Karmine Corp', 'RGE': 'Rogue', 'VIT': 'Team Vitality', 'NAVI': 'Natus Vincere',
+  'SHFT': 'Shifters',
+  'C9': 'Cloud9', 'TL': 'Team Liquid', 'FLY': 'FlyQuest', '100T': '100 Thieves',
+  'NRG': 'NRG', 'DIG': 'Disguised', 'SR': 'Shopify Rebellion', 'IMT': 'Immortals',
+  'EG': 'Evil Geniuses', 'GG': 'Golden Guardians', 'LYON': 'LYON',
+  'LOUD': 'LOUD', 'PNG': 'paiN Gaming', 'FUR': 'FURIA', 'RED': 'RED Canids',
+  'KBM': 'KaBuM! e-Sports', 'VKS': 'Vivo Keyd Stars', 'INTZ': 'INTZ',
+  'ITZ': 'Isurus Estral', 'FLX': 'Fluxo W7M', 'LEV': 'Leviatan Esports',
+};
+
 function findTeamProfile(name) {
   if (!name) return null;
   if (teamProfile.has(name)) return teamProfile.get(name);
+  const oracleName = TEAM_CODE_TO_ORACLE[name];
+  if (oracleName && teamProfile.has(oracleName)) return teamProfile.get(oracleName);
   const target = norm(name);
-  for (const [oracleName, profile] of teamProfile) {
-    const o = norm(oracleName);
-    if (o.includes(target) || target.includes(o)) return profile;
+  if (target.length < 2) return null;
+  for (const [otherName, p] of teamProfile) {
+    const o = norm(otherName);
+    if (o === target || (target.length >= 3 && (o.startsWith(target) || target.startsWith(o)))) return p;
   }
   return null;
 }

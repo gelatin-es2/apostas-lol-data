@@ -172,15 +172,48 @@ for (const [, p] of teamProfile) {
 }
 console.error(`  ${teamProfile.size} times com perfil de kills`);
 
-// Match flexível: lolesports usa "BRO", oracle usa "HANJIN BRION"
-const _norm = s => s ? s.toLowerCase().replace(/\s+/g,'') : '';
+// Match flexível: lolesports usa códigos curtos (BRO, T1, GEN), oracle usa nome completo.
+// Hardcoded mapping cobre as 5 majors no patch atual:
+const TEAM_CODE_TO_ORACLE = {
+  // LCK
+  'T1': 'T1', 'GEN': 'Gen.G eSports', 'KT': 'KT Rolster', 'HLE': 'Hanwha Life Esports',
+  'DK': 'Dplus KIA', 'BRO': 'HANJIN BRION', 'NS': 'Nongshim RedForce',
+  'DRX': 'Kiwoom DRX', 'DNS': 'DN SOOPers', 'BFX': 'BNK FearX',
+  // LPL
+  'BLG': 'Bilibili Gaming', 'JDG': 'JD Gaming', 'EDG': 'EDward Gaming', 'IG': 'Invictus Gaming',
+  'TES': 'Top Esports', 'WBG': 'Weibo Gaming', 'AL': "Anyone's Legend",
+  'TT': 'ThunderTalk Gaming', 'LGD': 'LGD Gaming', 'NIP': 'Ninjas in Pyjamas.CN',
+  'OMG': 'Oh My God', 'FPX': 'FunPlus Phoenix', 'RNG': 'Royal Never Give Up',
+  'RA': 'Rare Atom', 'LNG': 'LNG Esports', 'UP': 'Ultra Prime', 'WE': 'Team WE',
+  // LEC
+  'G2': 'G2 Esports', 'FNC': 'Fnatic', 'MAD': 'MAD Lions KOI', 'SK': 'SK Gaming',
+  'KOI': 'Movistar KOI', 'BDS': 'Team BDS', 'GX': 'GIANTX', 'TH': 'Team Heretics',
+  'KC': 'Karmine Corp', 'RGE': 'Rogue', 'VIT': 'Team Vitality', 'NAVI': 'Natus Vincere',
+  'SHFT': 'Shifters',
+  // LCS
+  'C9': 'Cloud9', 'TL': 'Team Liquid', 'FLY': 'FlyQuest', '100T': '100 Thieves',
+  'NRG': 'NRG', 'DIG': 'Disguised', 'SR': 'Shopify Rebellion', 'IMT': 'Immortals',
+  'EG': 'Evil Geniuses', 'GG': 'Golden Guardians', 'LYON': 'LYON',
+  // CBLOL
+  'LOUD': 'LOUD', 'PNG': 'paiN Gaming', 'FUR': 'FURIA', 'RED': 'RED Canids',
+  'KBM': 'KaBuM! e-Sports', 'VKS': 'Vivo Keyd Stars', 'INTZ': 'INTZ', 'LLL': 'LOUD',
+  'ITZ': 'Isurus Estral', 'FLX': 'Fluxo W7M', 'LEV': 'Leviatan Esports',
+};
+
+const _norm = s => s ? s.toLowerCase().replace(/[\s.\-']/g, '') : '';
 function findTeam(name) {
   if (!name) return null;
+  // 1. Exato
   if (teamProfile.has(name)) return teamProfile.get(name);
+  // 2. Mapping hard-coded por code
+  const oracleName = TEAM_CODE_TO_ORACLE[name];
+  if (oracleName && teamProfile.has(oracleName)) return teamProfile.get(oracleName);
+  // 3. Fuzzy match (norm + substring)
   const target = _norm(name);
-  for (const [oracleName, p] of teamProfile) {
-    const o = _norm(oracleName);
-    if (o.includes(target) || target.includes(o)) return p;
+  if (target.length < 2) return null;
+  for (const [otherName, p] of teamProfile) {
+    const o = _norm(otherName);
+    if (o === target || (target.length >= 3 && (o.startsWith(target) || target.startsWith(o)))) return p;
   }
   return null;
 }

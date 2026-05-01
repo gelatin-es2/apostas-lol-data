@@ -5,8 +5,9 @@ name: Apostas LoL — daily cron
 #   12:00 BRT (15:00 UTC) sáb e dom → captura LEC+CBLOL pré-jogo
 on:
   schedule:
-    - cron: '50 6 * * *'    # 03:50 BRT (UTC-3) — todo dia
-    - cron: '0 15 * * 6,0'  # 12:00 BRT — sáb (6) e dom (0)
+    # GitHub Actions free tier tem delay de 5min a 1h. Por isso schedule mais cedo:
+    - cron: '30 5 * * *'    # 02:30 BRT (05:30 UTC) — LCK começa 5h BRT, dá margem de 2h+ pro delay
+    - cron: '0 14 * * 6,0'  # 11:00 BRT — sáb e dom (LEC/CBLOL começam ~13h BRT)
   workflow_dispatch: {}     # permite rodar manual
 
 jobs:
@@ -37,11 +38,10 @@ jobs:
         run: |
           HOUR=$(date -u +%H)
           DOW=$(date -u +%u)  # 1=seg ... 7=dom
-          # Se UTC ~06h → execução matinal (LCK+LPL + ontem)
-          # Se UTC ~15h E (sab=6 ou dom=7) → fim-de-semana (LEC+CBLOL)
-          if [ "$HOUR" = "06" ]; then
+          # Trigger window mais largo (cobre delay variável GitHub Actions free tier)
+          if [ "$HOUR" -ge "05" ] && [ "$HOUR" -le "07" ]; then
             echo "kind=morning" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" = "15" ] && { [ "$DOW" = "6" ] || [ "$DOW" = "7" ]; }; then
+          elif [ "$HOUR" -ge "13" ] && [ "$HOUR" -le "16" ] && { [ "$DOW" = "6" ] || [ "$DOW" = "7" ]; }; then
             echo "kind=weekend_noon" >> $GITHUB_OUTPUT
           else
             echo "kind=manual" >> $GITHUB_OUTPUT
