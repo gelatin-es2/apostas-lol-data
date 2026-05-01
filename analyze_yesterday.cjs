@@ -125,6 +125,7 @@ for (const [liga, leagueId] of Object.entries(LEAGUE_IDS)) {
         game_number: g.number,
         team_blue: ev.match.teams[0]?.code || ev.match.teams[0]?.name,
         team_red: ev.match.teams[1]?.code || ev.match.teams[1]?.name,
+        match_start: ev.startTime,
       });
     }
   }
@@ -133,11 +134,20 @@ console.error(`  ${allGames.length} games completed ontem`);
 
 console.error('[3/4] Buscando window + comp pra cada game...');
 const results = [];
+// startingTime: precisa ser múltiplo de 10s + jogo já terminou. Usamos match_start + 6h (qualquer série já fechou).
+function tsRoundedTo10s(date) {
+  const t = Math.floor(date.getTime() / 10000) * 10000;
+  return new Date(t).toISOString().replace(/\.\d{3}Z$/, '.000Z');
+}
+
 for (const g of allGames) {
+  // Tenta vários offsets até encontrar um frame "finished"
+  // Game 1 termina ~30-50min depois do match start; mapas 2-3 mais longe.
+  // 6h cobre BO5 inteiro com folga.
+  const startingTime = tsRoundedTo10s(new Date(new Date(g.match_start).getTime() + 6 * 3600 * 1000));
   let win;
   try {
-    // Sem startingTime: API retorna o último frame disponível (pra jogo finalizado = state final)
-    win = await fetch(`https://feed.lolesports.com/livestats/v1/window/${g.game_id}`, {
+    win = await fetch(`https://feed.lolesports.com/livestats/v1/window/${g.game_id}?startingTime=${startingTime}`, {
       'x-api-key': LOLESPORTS_KEY,
     });
   } catch (e) {
