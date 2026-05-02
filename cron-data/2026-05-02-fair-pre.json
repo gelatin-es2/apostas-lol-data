@@ -106,6 +106,185 @@
           }
         }
       ]
+    },
+    {
+      "captured_at": "2026-05-02T13:40:46.878Z",
+      "ligas": [
+        "LEC",
+        "CBLOL"
+      ],
+      "fair_lines": [
+        {
+          "league": "LEC",
+          "league_id": "98767991302996019",
+          "event_id": "115548668059523660",
+          "start_time": "2026-05-02T15:00:00Z",
+          "team_a": "FNC",
+          "team_b": "TH",
+          "team_a_avg": 12.894736842105264,
+          "team_b_avg": 10.147058823529411,
+          "fair_calculated": 23.5,
+          "fair_team_a_n": 38,
+          "fair_team_b_n": 34,
+          "bo": 3,
+          "polymarket_event": {
+            "id": "423271",
+            "slug": "lol-fnc-th-2026-05-02",
+            "title": "LoL: Fnatic vs Team Heretics (BO3) - LEC Regular Season"
+          },
+          "polymarket_lines_per_map": {
+            "1": [
+              {
+                "line": 22.5,
+                "yes_over": 0.625,
+                "vol24h": null
+              },
+              {
+                "line": 26.5,
+                "yes_over": 0.395,
+                "vol24h": null
+              },
+              {
+                "line": 27.5,
+                "yes_over": 0.36,
+                "vol24h": null
+              },
+              {
+                "line": 23.5,
+                "yes_over": 0.56,
+                "vol24h": null
+              },
+              {
+                "line": 25.5,
+                "yes_over": 0.45,
+                "vol24h": 782.322031
+              },
+              {
+                "line": 24.5,
+                "yes_over": 0.485,
+                "vol24h": 16517.399717
+              }
+            ],
+            "2": [
+              {
+                "line": 27.5,
+                "yes_over": 0.38,
+                "vol24h": null
+              },
+              {
+                "line": 26.5,
+                "yes_over": 0.415,
+                "vol24h": null
+              },
+              {
+                "line": 24.5,
+                "yes_over": 0.58,
+                "vol24h": null
+              },
+              {
+                "line": 23.5,
+                "yes_over": 0.545,
+                "vol24h": null
+              },
+              {
+                "line": 25.5,
+                "yes_over": 0.46,
+                "vol24h": null
+              },
+              {
+                "line": 22.5,
+                "yes_over": 0.585,
+                "vol24h": null
+              }
+            ]
+          }
+        },
+        {
+          "league": "LEC",
+          "league_id": "98767991302996019",
+          "event_id": "115548668059523712",
+          "start_time": "2026-05-02T17:15:00Z",
+          "team_a": "VIT",
+          "team_b": "SK",
+          "team_a_avg": 15.642857142857142,
+          "team_b_avg": 13.363636363636363,
+          "fair_calculated": 29.5,
+          "fair_team_a_n": 42,
+          "fair_team_b_n": 33,
+          "bo": 3,
+          "polymarket_event": {
+            "id": "423272",
+            "slug": "lol-vit-sk-2026-05-02",
+            "title": "LoL: Team Vitality vs SK Gaming (BO3) - LEC Regular Season"
+          },
+          "polymarket_lines_per_map": {
+            "1": [
+              {
+                "line": 29.5,
+                "yes_over": 0.41,
+                "vol24h": null
+              },
+              {
+                "line": 26.5,
+                "yes_over": 0.56,
+                "vol24h": null
+              },
+              {
+                "line": 27.5,
+                "yes_over": 0.495,
+                "vol24h": null
+              },
+              {
+                "line": 25.5,
+                "yes_over": 0.585,
+                "vol24h": null
+              },
+              {
+                "line": 24.5,
+                "yes_over": 0.635,
+                "vol24h": null
+              },
+              {
+                "line": 28.5,
+                "yes_over": 0.455,
+                "vol24h": null
+              }
+            ],
+            "2": [
+              {
+                "line": 29.5,
+                "yes_over": 0.395,
+                "vol24h": null
+              },
+              {
+                "line": 28.5,
+                "yes_over": 0.43,
+                "vol24h": null
+              },
+              {
+                "line": 26.5,
+                "yes_over": 0.56,
+                "vol24h": 1517.77
+              },
+              {
+                "line": 27.5,
+                "yes_over": 0.565,
+                "vol24h": 472
+              },
+              {
+                "line": 25.5,
+                "yes_over": 0.64,
+                "vol24h": null
+              },
+              {
+                "line": 24.5,
+                "yes_over": 0.57,
+                "vol24h": null
+              }
+            ]
+          }
+        }
+      ]
     }
   ]
 }
