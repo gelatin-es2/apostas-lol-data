@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-05-02T13:17:09.156Z",
+  "generated_at": "2026-05-02T14:40:59.277Z",
   "split_start": "2026-04-01",
   "line": 29.5,
   "stake": 100,
   "odd": 1.85,
   "backtest": {
-    "n": 96,
-    "hit": 74,
-    "profit": 3535,
-    "roi": 36.8,
+    "n": 97,
+    "hit": 74.2,
+    "profit": 3620,
+    "roi": 37.3,
     "breakeven": 54.1
   },
   "ligas": [
@@ -29,8 +29,8 @@
     },
     {
       "name": "LPL",
-      "n": 40,
-      "hit": 70
+      "n": 41,
+      "hit": 70.7
     }
   ],
   "supports": [
@@ -51,13 +51,13 @@
     },
     {
       "name": "Milio",
-      "n": 29,
-      "hit": 79.3
+      "n": 30,
+      "hit": 80
     },
     {
       "name": "Seraphine",
-      "n": 33,
-      "hit": 72.7
+      "n": 34,
+      "hit": 73.5
     },
     {
       "name": "Lulu",
@@ -142,6 +142,12 @@
       "hit": 80
     },
     {
+      "name": "Invictus Gaming",
+      "lg": "LPL",
+      "n": 9,
+      "hit": 77.8
+    },
+    {
       "name": "Hanwha Life Esports",
       "lg": "LCK",
       "n": 4,
@@ -154,7 +160,7 @@
       "hit": 75
     },
     {
-      "name": "Invictus Gaming",
+      "name": "Anyone's Legend",
       "lg": "LPL",
       "n": 8,
       "hit": 75
@@ -174,12 +180,6 @@
     {
       "name": "Natus Vincere",
       "lg": "LEC",
-      "n": 7,
-      "hit": 71.4
-    },
-    {
-      "name": "Anyone's Legend",
-      "lg": "LPL",
       "n": 7,
       "hit": 71.4
     },
@@ -266,8 +266,14 @@
     {
       "champ": "Lucian",
       "role": "adc",
-      "n": 31,
-      "hit": 80.6
+      "n": 32,
+      "hit": 81.3
+    },
+    {
+      "champ": "Jayce",
+      "role": "top",
+      "n": 19,
+      "hit": 78.9
     },
     {
       "champ": "Renekton",
@@ -279,12 +285,6 @@
       "champ": "Orianna",
       "role": "mid",
       "n": 9,
-      "hit": 77.8
-    },
-    {
-      "champ": "Jayce",
-      "role": "top",
-      "n": 18,
       "hit": 77.8
     },
     {
@@ -312,16 +312,22 @@
       "hit": 74.4
     },
     {
+      "champ": "Ashe",
+      "role": "adc",
+      "n": 30,
+      "hit": 73.3
+    },
+    {
       "champ": "Yunara",
       "role": "adc",
       "n": 44,
       "hit": 72.7
     },
     {
-      "champ": "Ashe",
-      "role": "adc",
-      "n": 29,
-      "hit": 72.4
+      "champ": "Annie",
+      "role": "mid",
+      "n": 25,
+      "hit": 72
     },
     {
       "champ": "Corki",
@@ -330,22 +336,16 @@
       "hit": 71.1
     },
     {
-      "champ": "Annie",
-      "role": "mid",
-      "n": 24,
-      "hit": 70.8
+      "champ": "Vi",
+      "role": "jungle",
+      "n": 17,
+      "hit": 70.6
     },
     {
       "champ": "JarvanIV",
       "role": "jungle",
       "n": 29,
       "hit": 69
-    },
-    {
-      "champ": "Vi",
-      "role": "jungle",
-      "n": 16,
-      "hit": 68.8
     },
     {
       "champ": "Ezreal",
@@ -392,8 +392,8 @@
     {
       "champ": "Pantheon",
       "role": "jungle",
-      "n": 25,
-      "hit": 56
+      "n": 26,
+      "hit": 57.7
     },
     {
       "champ": "Akali",
