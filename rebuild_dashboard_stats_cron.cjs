@@ -85,6 +85,14 @@ async function fetchGameMeta(gameId) {
       const get = (role) => p.find(x => x.role === role)?.championId || null;
       return { top: get('top'), jungle: get('jungle'), mid: get('mid'), adc: get('bottom'), support: get('support') };
     };
+    // winner = team with more inhibitors destroyed
+    const blueInh = lastFrame.blueTeam?.inhibitors || 0;
+    const redInh = lastFrame.redTeam?.inhibitors || 0;
+    const blueTowers = lastFrame.blueTeam?.towers || 0;
+    const redTowers = lastFrame.redTeam?.towers || 0;
+    let winnerSide = null;
+    if (blueInh !== redInh) winnerSide = blueInh > redInh ? 'blue' : 'red';
+    else if (blueTowers !== redTowers) winnerSide = blueTowers > redTowers ? 'blue' : 'red';
     return {
       blueTeamId: blueMeta.esportsTeamId,
       redTeamId: redMeta.esportsTeamId,
@@ -92,8 +100,30 @@ async function fetchGameMeta(gameId) {
       redPicks: picks(redMeta),
       kills,
       gameState: lastFrame.gameState,
+      winnerSide,
     };
   } catch { return null; }
+}
+
+// Champion name → Data Dragon slug (overrides for special-case names)
+const DDRAGON_OVERRIDE = {
+  'Wukong': 'MonkeyKing', 'Renata Glasc': 'Renata',
+};
+function ddragonSlug(name) {
+  if (DDRAGON_OVERRIDE[name]) return DDRAGON_OVERRIDE[name];
+  return name; // lolesports já retorna sem espaços/apóstrofos (ex: "KSante", "TwistedFate")
+}
+
+async function fetchLatestDdragonVersion() {
+  return new Promise((resolve) => {
+    https.get('https://ddragon.leagueoflegends.com/api/versions.json', res => {
+      let body = ''; res.on('data', c => body += c);
+      res.on('end', () => {
+        try { const arr = JSON.parse(body); if (Array.isArray(arr) && arr[0]) return resolve(arr[0]); } catch {}
+        resolve('16.9.1');
+      });
+    }).on('error', () => resolve('16.9.1'));
+  });
 }
 
 (async () => {
@@ -223,4 +253,62 @@ async function fetchGameMeta(gameId) {
   fs.writeFileSync(outFile, JSON.stringify(out, null, 2));
   console.error(`Wrote: ${outFile}`);
   console.error(`Backtest: n=${backtest.n} hit=${backtest.hit}% profit=R$${backtest.profit} ROI=${backtest.roi}%`);
+
+  // === ML PICKS (winrate por champion × posição) ===
+  console.error('[ML] computing winrates...');
+  const ddv = await fetchLatestDdragonVersion();
+  const POS_MAP = { top: 'top', jungle: 'jng', mid: 'mid', adc: 'bot', support: 'sup' };
+  const champWr = {}; // { 'Champion|pos' -> { wins, losses, lgs: Set } }
+  let gamesUsed = 0;
+  for (const g of games) {
+    if (!g.winnerSide) continue;
+    gamesUsed++;
+    const sides = [
+      { picks: g.bluePicks, won: g.winnerSide === 'blue' },
+      { picks: g.redPicks, won: g.winnerSide === 'red' },
+    ];
+    for (const s of sides) {
+      for (const [role, pos] of Object.entries(POS_MAP)) {
+        const champ = s.picks[role];
+        if (!champ) continue;
+        const key = `${champ}|${pos}`;
+        if (!champWr[key]) champWr[key] = { champion: champ, pos, wins: 0, losses: 0, lgs: {} };
+        if (s.won) champWr[key].wins++; else champWr[key].losses++;
+        champWr[key].lgs[g.lg] = (champWr[key].lgs[g.lg] || 0) + 1;
+      }
+    }
+  }
+  const MIN = 8;
+  const byPosition = { top: [], jng: [], mid: [], bot: [], sup: [] };
+  const totalMaps = { top: 0, jng: 0, mid: 0, bot: 0, sup: 0 };
+  for (const g of games) if (g.winnerSide) for (const pos of ['top','jng','mid','bot','sup']) totalMaps[pos]++;
+  for (const [key, c] of Object.entries(champWr)) {
+    const n = c.wins + c.losses;
+    if (n < MIN) continue;
+    byPosition[c.pos].push({
+      champion: c.champion,
+      slug: ddragonSlug(c.champion),
+      n, wins: c.wins, losses: c.losses,
+      wr: +(c.wins / n).toFixed(3),
+      ligas: Object.entries(c.lgs).sort((a,b) => b[1] - a[1]).map(([lg, n]) => `${lg}(${n})`).join(' '),
+    });
+  }
+  for (const pos of Object.keys(byPosition)) byPosition[pos].sort((a, b) => b.wr - a.wr || b.n - a.n);
+  const ml = {
+    generated_at: new Date().toISOString(),
+    split_label: `${SPLIT2_START} → ${games.length ? games.map(g => g.date).sort().pop() : '?'}`,
+    leagues: LEAGUES.map(l => l.name),
+    cutoff_date: SPLIT2_START,
+    min_games: MIN,
+    total_rows: Object.values(byPosition).reduce((s, arr) => s + arr.length, 0),
+    total_maps_per_pos: totalMaps,
+    ddragon_version: ddv,
+    by_position: byPosition,
+  };
+  const mlFile = path.join(outDir, 'ml_picks.json');
+  fs.writeFileSync(mlFile, JSON.stringify(ml, null, 2));
+  // Wrap as JS for dashboard inclusion
+  const mlJsFile = path.join(outDir, 'ml_picks.js');
+  fs.writeFileSync(mlJsFile, `window.ML_DATA = ${JSON.stringify(ml, null, 2)};\n`);
+  console.error(`Wrote: ${mlFile} (${ml.total_rows} entries, ${gamesUsed} games used)`);
 })();
