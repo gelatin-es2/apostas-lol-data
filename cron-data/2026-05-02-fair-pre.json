@@ -1,0 +1,111 @@
+{
+  "date": "2026-05-02",
+  "captures": [
+    {
+      "captured_at": "2026-05-02T07:11:21.454Z",
+      "ligas": [
+        "LCK",
+        "LPL"
+      ],
+      "fair_lines": [
+        {
+          "league": "LCK",
+          "league_id": "98767991310872058",
+          "event_id": "115548128963037523",
+          "start_time": "2026-05-02T08:00:00Z",
+          "team_a": "GEN",
+          "team_b": "DK",
+          "team_a_avg": null,
+          "team_b_avg": null,
+          "fair_calculated": null,
+          "bo": 3,
+          "polymarket_event": null,
+          "polymarket_lines_per_map": null
+        },
+        {
+          "league": "LCK",
+          "league_id": "98767991310872058",
+          "event_id": "115548128963037559",
+          "start_time": "2026-05-02T10:00:00Z",
+          "team_a": "KRX",
+          "team_b": "NS",
+          "team_a_avg": null,
+          "team_b_avg": null,
+          "fair_calculated": null,
+          "bo": 3,
+          "polymarket_event": {
+            "id": "419410",
+            "slug": "lol-drx-ns-2026-05-02",
+            "title": "LoL: Kiwoom DRX vs Nongshim Red Force (BO3) - LCK Rounds 1-2"
+          },
+          "polymarket_lines_per_map": {
+            "1": [
+              {
+                "line": 26.5,
+                "yes_over": 0.575,
+                "vol24h": null
+              },
+              {
+                "line": 30.5,
+                "yes_over": 0.425,
+                "vol24h": null
+              },
+              {
+                "line": 28.5,
+                "yes_over": 0.49,
+                "vol24h": null
+              },
+              {
+                "line": 29.5,
+                "yes_over": 0.465,
+                "vol24h": 99.985452
+              },
+              {
+                "line": 31.5,
+                "yes_over": 0.365,
+                "vol24h": 491.8
+              },
+              {
+                "line": 27.5,
+                "yes_over": 0.545,
+                "vol24h": null
+              }
+            ],
+            "2": [
+              {
+                "line": 26.5,
+                "yes_over": 0.605,
+                "vol24h": null
+              },
+              {
+                "line": 29.5,
+                "yes_over": 0.535,
+                "vol24h": null
+              },
+              {
+                "line": 30.5,
+                "yes_over": 0.495,
+                "vol24h": null
+              },
+              {
+                "line": 28.5,
+                "yes_over": 0.56,
+                "vol24h": null
+              },
+              {
+                "line": 27.5,
+                "yes_over": 0.595,
+                "vol24h": null
+              },
+              {
+                "line": 31.5,
+                "yes_over": 0.465,
+                "vol24h": null
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
