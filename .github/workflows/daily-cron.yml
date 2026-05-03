@@ -1,72 +1,67 @@
 name: Apostas LoL — daily cron
 
-# Horários BRT:
-#   03:50 BRT (06:50 UTC) todo dia → captura LCK+LPL pré-jogo + analisa ontem
-#   12:00 BRT (15:00 UTC) sáb e dom → captura LEC+CBLOL pré-jogo
+# Roda todo dia 03:30 BRT (06:30 UTC) e 11:00 BRT (14:00 UTC).
+# Cada execução é idempotente: roda TODOS os jobs sem gating de hora.
+# Free tier do GitHub Actions tem delay variável (5min a 1h+); por isso
+# nunca confiamos em hora exata pra decidir o que rodar.
 on:
   schedule:
-    # GitHub Actions free tier tem delay de 5min a 1h. Por isso schedule mais cedo:
-    - cron: '30 5 * * *'    # 02:30 BRT (05:30 UTC) — LCK começa 5h BRT, dá margem de 2h+ pro delay
-    - cron: '0 14 * * 6,0'  # 11:00 BRT — sáb e dom (LEC/CBLOL começam ~13h BRT)
-  workflow_dispatch: {}     # permite rodar manual
+    - cron: '30 6 * * *'    # 03:30 BRT — captura LCK+LPL pré-jogo + analisa ontem
+    - cron: '0 14 * * *'    # 11:00 BRT — captura LEC+CBLOL (weekdays vazio, sem problema)
+  workflow_dispatch: {}
 
 jobs:
   cron:
     runs-on: ubuntu-latest
     permissions:
-      contents: write       # pra commitar JSON gerado
+      contents: write
+    env:
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Download Oracle's Elixir CSV (2026)
-        run: |
-          mkdir -p /tmp
-          curl -sSL -o /tmp/oracle_2026.csv \
-            'https://oracleselixir-downloadable-match-data.s3.us-east-2.amazonaws.com/2026_LoL_esports_match_data_from_OraclesElixir.csv'
-          ls -la /tmp/oracle_2026.csv
-
-      - name: Detectar tipo de execução
-        id: trigger
-        run: |
-          HOUR=$(date -u +%H)
-          DOW=$(date -u +%u)  # 1=seg ... 7=dom
-          # Trigger window mais largo (cobre delay variável GitHub Actions free tier)
-          if [ "$HOUR" -ge "05" ] && [ "$HOUR" -le "07" ]; then
-            echo "kind=morning" >> $GITHUB_OUTPUT
-          elif [ "$HOUR" -ge "13" ] && [ "$HOUR" -le "16" ] && { [ "$DOW" = "6" ] || [ "$DOW" = "7" ]; }; then
-            echo "kind=weekend_noon" >> $GITHUB_OUTPUT
-          else
-            echo "kind=manual" >> $GITHUB_OUTPUT
-          fi
-
+      # Capture fair lines — ambos blocos rodam sempre. Cada bloco é idempotente
+      # (skipa eventos já completed). Em weekdays, lec/cblol vai retornar 0 lines.
       - name: Capture fair lines (LCK + LPL)
-        if: steps.trigger.outputs.kind == 'morning' || steps.trigger.outputs.kind == 'manual'
-        env:
-          ORACLE_CSV: /tmp/oracle_2026.csv
         run: node capture_fair_lines.cjs lck,lpl
+        continue-on-error: true
 
       - name: Capture fair lines (LEC + CBLOL)
-        if: steps.trigger.outputs.kind == 'weekend_noon' || steps.trigger.outputs.kind == 'manual'
-        env:
-          ORACLE_CSV: /tmp/oracle_2026.csv
         run: node capture_fair_lines.cjs lec,cblol
+        continue-on-error: true
 
+      # Analisa ontem (sempre)
       - name: Analyze yesterday's games
-        if: steps.trigger.outputs.kind == 'morning' || steps.trigger.outputs.kind == 'manual'
-        env:
-          ORACLE_CSV: /tmp/oracle_2026.csv
         run: node analyze_yesterday.cjs
+        continue-on-error: true
 
-      - name: Rebuild dashboard stats (Split 2 only)
+      # Analisa hoje também — pega jogos da manhã que já completaram
+      # (importante na execução das 14:00 UTC quando LCK/LPL da manhã já fecharam)
+      - name: Analyze today's games (best-effort)
+        run: node analyze_yesterday.cjs $(date -u +%Y-%m-%d)
+        continue-on-error: true
+
+      # Salva relatório dos triggered maps no Supabase (ontem + hoje)
+      - name: Save report — yesterday
+        if: env.SUPABASE_SECRET_KEY != ''
+        run: node save_report_to_db.cjs $(date -u -d 'yesterday' +%Y-%m-%d)
+        continue-on-error: true
+
+      - name: Save report — today
+        if: env.SUPABASE_SECRET_KEY != ''
+        run: node save_report_to_db.cjs $(date -u +%Y-%m-%d)
+        continue-on-error: true
+
+      # Rebuild dashboard stats (Split 2 only)
+      - name: Rebuild dashboard stats
         run: node rebuild_dashboard_stats_cron.cjs
+        continue-on-error: true
 
       - name: Commit results
         run: |
@@ -76,6 +71,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "Nada novo pra commitar"
           else
-            git commit -m "cron: ${{ steps.trigger.outputs.kind }} $(date -u +%Y-%m-%dT%H:%MZ)"
+            git commit -m "cron: $(date -u +%Y-%m-%dT%H:%MZ)"
             git push
           fi

@@ -17,17 +17,15 @@ const LEAGUE_IDS = {
   CBLOL: '98767991325878492',
   LCS: '98767991299243165',
 };
-const PEEL_NO_BARD = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','nami','milio'];
+const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','nami','milio'];
+const FLEX_ENGAGE = ['bard','rakan','alistar'];
 const norm = s => s ? s.toLowerCase().replace(/\s+/g,'') : '';
-const isPeel = (sup, liga) => {
-  if (!sup) return false;
-  const n = norm(sup);
-  if (n === 'bard') return liga === 'LEC';
-  return PEEL_NO_BARD.includes(n);
-};
+const isPurePeel = sup => sup && PEEL_PURE.includes(norm(sup));
+const isFlexEngage = sup => sup && FLEX_ENGAGE.includes(norm(sup));
 
 function ymd(d) { return d.toISOString().slice(0, 10); }
-const YESTERDAY = ymd(new Date(Date.now() - 24*3600*1000));
+const TARGET_DATE = process.argv[2] || ymd(new Date(Date.now() - 24*3600*1000));
+const YESTERDAY = TARGET_DATE;
 
 function fetch(url, headers = {}) {
   return new Promise((resolve, reject) => {
@@ -167,8 +165,13 @@ function tsRoundedTo10s(date) {
 for (const g of allGames) {
   // Tenta vários offsets até encontrar um frame "finished"
   // Game 1 termina ~30-50min depois do match start; mapas 2-3 mais longe.
-  // 6h cobre BO5 inteiro com folga.
-  const startingTime = tsRoundedTo10s(new Date(new Date(g.match_start).getTime() + 6 * 3600 * 1000));
+  // 6h cobre BO5 inteiro com folga. Cap em "now - 1min" pra rodar no mesmo dia
+  // (API rejeita janelas no futuro com erro 400).
+  const targetMs = Math.min(
+    new Date(g.match_start).getTime() + 6 * 3600 * 1000,
+    Date.now() - 60 * 1000,
+  );
+  const startingTime = tsRoundedTo10s(new Date(targetMs));
   let win;
   try {
     win = await fetch(`https://feed.lolesports.com/livestats/v1/window/${g.game_id}?startingTime=${startingTime}`, {
@@ -191,9 +194,16 @@ for (const g of allGames) {
   const supRed = meta?.redTeamMetadata?.participantMetadata?.find(p => p.role === 'support')?.championId;
 
   const p1 = findTeamProfile(g.team_blue), p2 = findTeamProfile(g.team_red);
-  const fair = (p1 && p2 && p1.n >= 11 && p2.n >= 11) ? Math.round((p1.avg + p2.avg) - 0.5) + 0.5 : null;
-  const peelCount = (isPeel(supBlue, g.league) ? 1 : 0) + (isPeel(supRed, g.league) ? 1 : 0);
-  const peelBucket = peelCount === 2 ? '2peel' : (peelCount === 1 ? '1peel' : '0peel');
+  const fairFromOracle = (p1 && p2 && p1.n >= 11 && p2.n >= 11) ? Math.round((p1.avg + p2.avg) - 0.5) + 0.5 : null;
+  // Fallback p/ linha default usada no backtest do dashboard (Oracle bucket morto desde abril/2026).
+  const fair = fairFromOracle != null ? fairFromOracle : 29.5;
+  const fairSource = fairFromOracle != null ? 'oracle_avg' : 'default_29.5';
+  const purePeels = (isPurePeel(supBlue) ? 1 : 0) + (isPurePeel(supRed) ? 1 : 0);
+  const flexEngages = [supBlue, supRed].filter(isFlexEngage);
+  let triggerType = null;
+  if (purePeels === 2) triggerType = '2peel';
+  else if (purePeels === 1 && flexEngages.length >= 1) triggerType = '1peel+flex';
+  const peelBucket = purePeels === 2 ? '2peel' : (purePeels === 1 ? '1peel' : '0peel');
   const underHit = (fair != null) ? (kBlue + kRed) < fair : null;
 
   results.push({
@@ -205,10 +215,13 @@ for (const g of allGames) {
     kills_blue: kBlue, kills_red: kRed,
     total_kills: kBlue + kRed,
     sup_blue: supBlue, sup_red: supRed,
-    peel_count: peelCount, peel_bucket: peelBucket,
-    matchup_fair: fair, under_hit: underHit,
+    peel_count: purePeels, peel_bucket: peelBucket,
+    flex_engages: flexEngages,
+    trigger_type: triggerType,
+    matchup_fair: fair, fair_source: fairSource, under_hit: underHit,
   });
-  console.error(`  ${g.league} ${g.team_blue} v ${g.team_red} M${g.game_number}: ${kBlue+kRed}k | sup=${supBlue}/${supRed} (${peelBucket}) | fair=${fair} U=${underHit}`);
+  const trig = triggerType || 'no-trigger';
+  console.error(`  ${g.league} ${g.team_blue} v ${g.team_red} M${g.game_number}: ${kBlue+kRed}k | sup=${supBlue}/${supRed} | ${trig} | fair=${fair} U=${underHit}`);
 }
 
 console.error(`[4/4] Salvando ${results.length} resultados...`);

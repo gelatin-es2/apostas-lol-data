@@ -1,6 +1,6 @@
 {
   "date": "2026-05-02",
-  "analyzed_at": "2026-05-03T07:29:05.472Z",
+  "analyzed_at": "2026-05-03T15:23:46.456Z",
   "ligas": [
     "LPL",
     "LCK",
@@ -24,8 +24,11 @@
       "sup_red": "Karma",
       "peel_count": 1,
       "peel_bucket": "1peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": null,
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LPL",
@@ -41,8 +44,11 @@
       "sup_red": "Lulu",
       "peel_count": 2,
       "peel_bucket": "2peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": "2peel",
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LPL",
@@ -58,8 +64,11 @@
       "sup_red": "Nami",
       "peel_count": 1,
       "peel_bucket": "1peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": null,
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": false
     },
     {
       "league": "LPL",
@@ -75,8 +84,13 @@
       "sup_red": "Nautilus",
       "peel_count": 0,
       "peel_bucket": "0peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [
+        "Alistar"
+      ],
+      "trigger_type": null,
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LPL",
@@ -92,8 +106,11 @@
       "sup_red": "Karma",
       "peel_count": 2,
       "peel_bucket": "2peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": "2peel",
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LPL",
@@ -109,8 +126,13 @@
       "sup_red": "Bard",
       "peel_count": 1,
       "peel_bucket": "1peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [
+        "Bard"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": false
     },
     {
       "league": "LPL",
@@ -126,8 +148,11 @@
       "sup_red": "Milio",
       "peel_count": 2,
       "peel_bucket": "2peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": "2peel",
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LCK",
@@ -143,8 +168,13 @@
       "sup_red": "Bard",
       "peel_count": 1,
       "peel_bucket": "1peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [
+        "Bard"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LCK",
@@ -160,8 +190,11 @@
       "sup_red": "Pyke",
       "peel_count": 1,
       "peel_bucket": "1peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": null,
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LCK",
@@ -177,8 +210,13 @@
       "sup_red": "Karma",
       "peel_count": 1,
       "peel_bucket": "1peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [
+        "Rakan"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LCK",
@@ -194,8 +232,11 @@
       "sup_red": "Neeko",
       "peel_count": 1,
       "peel_bucket": "1peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": null,
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": false
     },
     {
       "league": "LCK",
@@ -211,8 +252,11 @@
       "sup_red": "Milio",
       "peel_count": 1,
       "peel_bucket": "1peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": null,
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": false
     },
     {
       "league": "LEC",
@@ -226,10 +270,15 @@
       "total_kills": 23,
       "sup_blue": "Bard",
       "sup_red": "Seraphine",
-      "peel_count": 2,
-      "peel_bucket": "2peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "peel_count": 1,
+      "peel_bucket": "1peel",
+      "flex_engages": [
+        "Bard"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LEC",
@@ -245,8 +294,11 @@
       "sup_red": "Nami",
       "peel_count": 2,
       "peel_bucket": "2peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": "2peel",
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LEC",
@@ -260,10 +312,15 @@
       "total_kills": 36,
       "sup_blue": "Rell",
       "sup_red": "Bard",
-      "peel_count": 1,
-      "peel_bucket": "1peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "peel_count": 0,
+      "peel_bucket": "0peel",
+      "flex_engages": [
+        "Bard"
+      ],
+      "trigger_type": null,
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": false
     },
     {
       "league": "LEC",
@@ -279,8 +336,13 @@
       "sup_red": "Nami",
       "peel_count": 1,
       "peel_bucket": "1peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [
+        "Rakan"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LEC",
@@ -296,8 +358,11 @@
       "sup_red": "Lulu",
       "peel_count": 2,
       "peel_bucket": "2peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": "2peel",
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LCS",
@@ -313,8 +378,11 @@
       "sup_red": "Seraphine",
       "peel_count": 2,
       "peel_bucket": "2peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": "2peel",
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LCS",
@@ -330,8 +398,11 @@
       "sup_red": "Nami",
       "peel_count": 1,
       "peel_bucket": "1peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": null,
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LCS",
@@ -347,8 +418,14 @@
       "sup_red": "Alistar",
       "peel_count": 0,
       "peel_bucket": "0peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [
+        "Rakan",
+        "Alistar"
+      ],
+      "trigger_type": null,
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": false
     },
     {
       "league": "LCS",
@@ -364,8 +441,11 @@
       "sup_red": "Seraphine",
       "peel_count": 2,
       "peel_bucket": "2peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [],
+      "trigger_type": "2peel",
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     },
     {
       "league": "LCS",
@@ -381,8 +461,14 @@
       "sup_red": "Alistar",
       "peel_count": 0,
       "peel_bucket": "0peel",
-      "matchup_fair": null,
-      "under_hit": null
+      "flex_engages": [
+        "Rakan",
+        "Alistar"
+      ],
+      "trigger_type": null,
+      "matchup_fair": 29.5,
+      "fair_source": "default_29.5",
+      "under_hit": true
     }
   ]
 }
