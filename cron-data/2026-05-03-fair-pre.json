@@ -193,6 +193,191 @@
           "polymarket_lines_per_map": null
         }
       ]
+    },
+    {
+      "captured_at": "2026-05-03T14:39:56.678Z",
+      "ligas": [
+        "LEC",
+        "CBLOL"
+      ],
+      "fair_lines": [
+        {
+          "league": "LEC",
+          "league_id": "98767991302996019",
+          "event_id": "115548668059523644",
+          "start_time": "2026-05-03T15:00:00Z",
+          "team_a": "TH",
+          "team_b": "SHFT",
+          "team_a_avg": null,
+          "team_b_avg": null,
+          "fair_calculated": null,
+          "bo": 3,
+          "polymarket_event": {
+            "id": "423273",
+            "slug": "lol-th-shft-2026-05-03",
+            "title": "LoL: Team Heretics vs Shifters (BO3) - LEC Regular Season"
+          },
+          "polymarket_lines_per_map": {
+            "1": [
+              {
+                "line": 26.5,
+                "yes_over": 0.47,
+                "vol24h": null
+              },
+              {
+                "line": 29.5,
+                "yes_over": 0.35,
+                "vol24h": null
+              },
+              {
+                "line": 30.5,
+                "yes_over": 0.315,
+                "vol24h": null
+              },
+              {
+                "line": 27.5,
+                "yes_over": 0.435,
+                "vol24h": null
+              },
+              {
+                "line": 28.5,
+                "yes_over": 0.385,
+                "vol24h": null
+              },
+              {
+                "line": 25.5,
+                "yes_over": 0.54,
+                "vol24h": null
+              },
+              {
+                "line": 24.5,
+                "yes_over": 0.605,
+                "vol24h": 610.769228
+              }
+            ],
+            "2": [
+              {
+                "line": 26.5,
+                "yes_over": 0.5,
+                "vol24h": null
+              },
+              {
+                "line": 30.5,
+                "yes_over": 0.46,
+                "vol24h": null
+              },
+              {
+                "line": 29.5,
+                "yes_over": 0.465,
+                "vol24h": null
+              },
+              {
+                "line": 27.5,
+                "yes_over": 0.5,
+                "vol24h": null
+              },
+              {
+                "line": 28.5,
+                "yes_over": 0.495,
+                "vol24h": null
+              },
+              {
+                "line": 24.5,
+                "yes_over": 0.775,
+                "vol24h": 999.967132
+              },
+              {
+                "line": 25.5,
+                "yes_over": 0.5,
+                "vol24h": null
+              }
+            ]
+          }
+        },
+        {
+          "league": "LEC",
+          "league_id": "98767991302996019",
+          "event_id": "115548668059523700",
+          "start_time": "2026-05-03T17:15:00Z",
+          "team_a": "NAVI",
+          "team_b": "G2",
+          "team_a_avg": null,
+          "team_b_avg": null,
+          "fair_calculated": null,
+          "bo": 3,
+          "polymarket_event": {
+            "id": "423274",
+            "slug": "lol-g2-navi-2026-05-03",
+            "title": "LoL: G2 Esports vs Natus Vincere (BO3) - LEC Regular Season"
+          },
+          "polymarket_lines_per_map": {
+            "1": [
+              {
+                "line": 26.5,
+                "yes_over": 0.475,
+                "vol24h": null
+              },
+              {
+                "line": 27.5,
+                "yes_over": 0.385,
+                "vol24h": 2862.5380440000004
+              },
+              {
+                "line": 28.5,
+                "yes_over": 0.375,
+                "vol24h": null
+              },
+              {
+                "line": 24.5,
+                "yes_over": 0.585,
+                "vol24h": null
+              },
+              {
+                "line": 25.5,
+                "yes_over": 0.535,
+                "vol24h": null
+              },
+              {
+                "line": 23.5,
+                "yes_over": 0.635,
+                "vol24h": null
+              }
+            ],
+            "2": [
+              {
+                "line": 26.5,
+                "yes_over": 0.455,
+                "vol24h": null
+              },
+              {
+                "line": 25.5,
+                "yes_over": 0.5,
+                "vol24h": null
+              },
+              {
+                "line": 24.5,
+                "yes_over": 0.545,
+                "vol24h": null
+              },
+              {
+                "line": 27.5,
+                "yes_over": 0.355,
+                "vol24h": null
+              },
+              {
+                "line": 28.5,
+                "yes_over": 0.32,
+                "vol24h": null
+              },
+              {
+                "line": 23.5,
+                "yes_over": 0.59,
+                "vol24h": null
+              }
+            ]
+          }
+        }
+      ]
     }
   ]
 }
