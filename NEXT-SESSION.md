@@ -88,10 +88,16 @@ Atualmente `decideOutcome` retorna `skip_reason: 'moneyline_settle_not_implement
 
 ## Como começar a próxima sessão
 
-1. Roda `start-session.ps1` na raiz do repo (ou abre o VS Code direto na pasta `C:\Users\Elvis\projects\apostas-lol-data`)
-2. Abre Claude Code dentro do VS Code
-3. Digita `/resume` (ele lê esse arquivo + mostra git log recente + summary)
-4. Decide qual dos top 5 próximos passos atacar
+**Modo fácil (1 clique):**
+1. Vai em `C:\Users\Elvis\projects\apostas-lol-data\` no Explorer
+2. **Duplo-clique em `start-session.cmd`** — ele faz git pull, mostra status + próximos passos, abre o VS Code
+3. Dentro do VS Code, abre Claude Code (Ctrl+Esc ou ícone na sidebar)
+4. Digita `/resume` — eu (Claude) leio esse arquivo + git log + reporto estado
+5. Confirma a direção e a gente segue
+
+**Modo manual (se preferir):**
+1. Abre o VS Code direto na pasta `C:\Users\Elvis\projects\apostas-lol-data`
+2. Abre Claude Code, digita `/resume`
 
 ---
 
