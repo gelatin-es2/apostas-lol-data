@@ -10,7 +10,7 @@
 
 const fs = require('fs');
 const https = require('https');
-const { loadConfig } = require('./_load-config');
+const { loadConfig } = require('./_load-config.cjs');
 
 const REQUIRED = ['bookmaker', 'team_a', 'team_b', 'market', 'pick', 'odd', 'stake'];
 
