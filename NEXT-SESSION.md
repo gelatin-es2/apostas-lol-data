@@ -1,6 +1,6 @@
 # Próxima sessão — ponto de retomada
 
-> Atualizado em: 2026-05-05 ao final da sessão de bootstrap do COO
+> Atualizado em: 2026-05-05 ao final da sessão de Quant Analyst + auto-settle + skill autodisparo
 > Esse arquivo é a "tela de boas-vindas" da próxima sessão. Mantém atualizado ao final de cada rodada.
 
 ---
@@ -36,22 +36,38 @@ Detalhes: [`knowledge/lessons/2026-05-05-real-vs-backtest-trigger-performance.md
 
 ---
 
-## Top 5 próximos passos (priorizado)
+## Entregue nesta sessão (2026-05-05)
 
-### 1. Quant Analyst (P0)
-Subagent + slash commands `/analyze 2peel`, `/analyze cblol`, `/analyze 1peel-flex --by flex_engage` etc. Pra cavar de onde vem o sangramento de CBLOL e 1peel+flex sob demanda. Reusa scripts existentes em `.claude/scripts/`.
+### ✅ Quant Analyst (era P0)
+- `.claude/scripts/quant-query.cjs` — engine com filtros (`--trigger`, `--league`, `--bookmaker`, `--map_number`, `--since/--until`, `--flex`, `--market`) e 11 breakdowns (`--by trigger|league|team|bookmaker|map_number|flex_engage|sup_blue|sup_red|sup_pair|line|odd_bucket|weekday|bet_date|status`)
+- `.claude/agents/quant-analyst.md` — subagent persona (interpreta pt-BR → flags do script)
+- `.claude/commands/analyze.md` — slash `/analyze <subset> [--by <campo>]`
+- **Validado contra snapshot:** 2peel/1peel+flex/CBLOL totais batem exato
+- **Achado novo:** breakdown de 1peel+flex por flex_engage **inverte hipótese anterior** — Bard (n=9) é o maior sangrador (-R$3.399, ROI -56,7%). Rakan (n=4) e Alistar (n=3) com amostra pequena.
 
-### 2. Hook UserPromptSubmit pra auto-settle (P1)
-Toda mensagem do CEO → script `settle-pending-bets.cjs` roda em background → atualiza bets `pending` automaticamente sem precisar de `/settle`. Configurar em `.claude/settings.json` (versionado).
+### ✅ Hook auto-settle (era P1)
+- `.claude/settings.json` (versionado) — `UserPromptSubmit` async dispara `settle-pending-bets.cjs` a cada mensagem
+- Output silencioso → `.claude/logs/settle.log` (gitignored via `*.log`)
+- Smoke test rodado: exit 0, log capturado
+- ⚠️ **Watcher caveat:** sessão precisa abrir `/hooks` ou restart pra carregar (settings.json novo)
 
-### 3. Skill `bet-logger-extract` pra autodisparo (P1)
-Quando CEO mandar print no chat sem `/log-bet`, skill detecta contexto e dispara o subagent `bet-logger`. Define em `.claude/skills/bet-logger-extract.md`.
+### ✅ Skill bet-logger-extract (era P1)
+- `.claude/skills/bet-logger-extract.md` — autodisparo do bet-logger quando CEO manda print sem `/log-bet`
+- Trigger: imagem anexada com pistas visuais de comprovante (logo do bookmaker, stake, odd, bet ID) + ausência de `/log-bet` explícito
+- Frontmatter validado, conteúdo cobre triggers + casos NÃO-usar
 
-### 4. Re-rodar enrich nos 16 skipped (P2)
+---
+
+## Top próximos passos (priorizado)
+
+### 1. Re-rodar enrich nos 16 skipped (P2)
 Bets de 29/04 (Nongshim-T1, NIP-JDG) deram `game_window_in_game`. Ajustar janela temporal no `enrich-match-context.cjs` ou tentar com `startingTime` mais distante. Comando: `node .claude/scripts/enrich-match-context.cjs` (já tem filtro `match_context.lolesports_match_id IS NULL`, vai pegar só esses 16).
 
-### 5. Money Line settle (P3)
+### 2. Money Line settle (P3)
 Atualmente `decideOutcome` retorna `skip_reason: 'moneyline_settle_not_implemented_yet'`. Implementar lookup do team_pick contra `winner_side` capturado.
+
+### 3. Investigar Bard com mais amostra (P2)
+Achado novo da sessão: Bard (n=9, -56,7% ROI) é o maior sangrador do 1peel+flex, não Rakan/Alistar como o snapshot anterior sugeria. Mas n=9 ainda é pequeno — precisa mais bets pra confirmar se é edge negativa real ou variância. Rodar `/analyze bard` periodicamente conforme novas bets entram.
 
 ---
 
@@ -67,9 +83,16 @@ Atualmente `decideOutcome` retorna `skip_reason: 'moneyline_settle_not_implement
 | Save bet | ✅ testado em prod | `.claude/scripts/supabase-save-bet.cjs` |
 | Settle | ✅ testado em prod | `.claude/scripts/settle-pending-bets.cjs` |
 | Enrich retroativo | ✅ rodou em 99 bets | `.claude/scripts/enrich-match-context.cjs` |
-| Hook auto-settle | ❌ próximo |
-| Skill autodisparo | ❌ próximo |
+| Hook auto-settle | ✅ | `.claude/settings.json` (UserPromptSubmit async) |
+| Skill autodisparo | ✅ | `.claude/skills/bet-logger-extract.md` |
 | Money Line settle | ❌ stubbed |
+
+### Quant Analyst
+| Componente | Status | Path |
+|-----------|--------|------|
+| Engine de query | ✅ validado contra snapshot | `.claude/scripts/quant-query.cjs` |
+| Subagent | ✅ | `.claude/agents/quant-analyst.md` |
+| Slash command | ✅ | `.claude/commands/analyze.md` |
 
 ### Sistema de produção (`*.cjs` na raiz)
 | Componente | Status |
