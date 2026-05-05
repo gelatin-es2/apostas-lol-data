@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "_comment": "Settings versionados do projeto. Roda hook UserPromptSubmit em background pra settle bets pending sem precisar de /settle manual. Logs em .claude/logs/settle.log (gitignored via *.log).",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "async": true,
+            "timeout": 60,
+            "command": "& \"C:\\Program Files\\nodejs\\node.exe\" .claude/scripts/settle-pending-bets.cjs *>> .claude/logs/settle.log"
+          }
+        ]
+      }
+    ]
+  }
+}
