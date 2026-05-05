@@ -14,7 +14,7 @@ const LEAGUE_IDS = {
   LPL: '98767991314006698',
   LCK: '98767991310872058',
   LEC: '98767991302996019',
-  CBLOL: '98767991325878492',
+  CBLOL: '98767991332355509',
   LCS: '98767991299243165',
 };
 const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','nami','milio'];
