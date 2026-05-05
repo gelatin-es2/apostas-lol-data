@@ -1,0 +1,34 @@
+# Secrets — nunca commitar
+.env
+.env.*
+*.local
+secrets/
+credentials.json
+*.kdbx
+*.pem
+*.key
+
+# Claude Code — config local não vai pro repo (settings.json versionado, settings.local.json não)
+.claude/settings.local.json
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs locais
+*.log
+_change-log.md

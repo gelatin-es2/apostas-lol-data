@@ -4,10 +4,14 @@ Captura **fair lines pré-jogo** das majors e analisa **resultados do dia anteri
 
 ## O que roda
 
-| Schedule | UTC | BRT | Faz |
-|----------|-----|-----|-----|
-| Todo dia | 06:50 | 03:50 | Captura LCK+LPL pré-jogo + analisa ontem |
-| Sáb e dom | 15:00 | 12:00 | Captura LEC+CBLOL pré-jogo |
+Workflow idempotente: cada execução roda TODOS os jobs (capture → analyze → save → rebuild). Cron só varia as ligas que fazem sentido capturar pré-jogo no horário.
+
+| Cron | UTC | BRT | Captura pré-jogo |
+|------|-----|-----|-----|
+| `30 6 * * *`  | 06:30 | 03:30 | LCK + LPL |
+| `0 14 * * *`  | 14:00 | 11:00 | LEC + CBLOL |
+
+Em ambos os horários: analisa jogos de ontem + hoje, salva no Supabase, rebuilda dashboard stats.
 
 ## Output
 
