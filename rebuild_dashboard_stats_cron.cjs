@@ -154,44 +154,93 @@ async function fetchLatestDdragonVersion() {
 
   console.error('[4/4] Computing stats...');
 
-  // 2-peel filter (both supports in PEEL list)
+  const FLEX = ['Bard', 'Rakan', 'Alistar'];
+
+  // Filtros por trigger type
   const peel2 = games.filter(g => PEEL.includes(g.bluePicks.support) && PEEL.includes(g.redPicks.support));
+  const peel1Flex = games.filter(g => {
+    const sB = g.bluePicks.support, sR = g.redPicks.support;
+    if (PEEL.includes(sB) && PEEL.includes(sR)) return false; // já é 2peel
+    const bluePeel = PEEL.includes(sB), redPeel = PEEL.includes(sR);
+    const blueFlex = FLEX.includes(sB), redFlex = FLEX.includes(sR);
+    return (bluePeel && redFlex) || (redPeel && blueFlex);
+  });
+  const allTriggers = [...peel2, ...peel1Flex];
 
-  // BACKTEST
-  const bN = peel2.length;
-  let bGreen = 0, bRed = 0;
-  for (const g of peel2) { if (g.kills < LINE) bGreen++; else bRed++; }
-  const bProfit = bGreen * STAKE * (ODD - 1) - bRed * STAKE;
-  const backtest = {
-    n: bN,
-    hit: bN ? +(100 * bGreen / bN).toFixed(1) : 0,
-    profit: +bProfit.toFixed(2),
-    roi: bN ? +(100 * bProfit / (bN * STAKE)).toFixed(1) : 0,
-    breakeven: +(100 / ODD).toFixed(1),
-  };
+  console.error(`  triggers: 2peel=${peel2.length} | 1peel+flex=${peel1Flex.length} | all=${allTriggers.length}`);
 
-  // LIGAS
-  const ligaAgg = {};
-  for (const g of peel2) {
-    if (!ligaAgg[g.lg]) ligaAgg[g.lg] = { n: 0, h: 0 };
-    ligaAgg[g.lg].n++;
-    if (g.kills < LINE) ligaAgg[g.lg].h++;
-  }
-  const ligas = Object.entries(ligaAgg).map(([name, s]) => ({ name, n: s.n, hit: +(100 * s.h / s.n).toFixed(1) })).sort((a, b) => b.hit - a.hit);
+  // Agrega backtest + ligas + supports + teams + champs pra um subset de games
+  function computeStats(subset) {
+    // BACKTEST
+    let green = 0, red = 0;
+    for (const g of subset) { if (g.kills < LINE) green++; else red++; }
+    const profit = green * STAKE * (ODD - 1) - red * STAKE;
+    const backtest = {
+      n: subset.length,
+      hit: subset.length ? +(100 * green / subset.length).toFixed(1) : 0,
+      profit: +profit.toFixed(2),
+      roi: subset.length ? +(100 * profit / (subset.length * STAKE)).toFixed(1) : 0,
+      breakeven: +(100 / ODD).toFixed(1),
+    };
 
-  // SUPPORTS
-  const supAgg = {};
-  for (const g of peel2) {
-    for (const s of [g.bluePicks.support, g.redPicks.support]) {
-      if (!PEEL.includes(s)) continue;
-      if (!supAgg[s]) supAgg[s] = { n: 0, h: 0 };
-      supAgg[s].n++;
-      if (g.kills < LINE) supAgg[s].h++;
+    // LIGAS
+    const ligaAgg = {};
+    for (const g of subset) {
+      if (!ligaAgg[g.lg]) ligaAgg[g.lg] = { n: 0, h: 0 };
+      ligaAgg[g.lg].n++;
+      if (g.kills < LINE) ligaAgg[g.lg].h++;
     }
-  }
-  const supports = Object.entries(supAgg).filter(([_,s]) => s.n >= 3).map(([name, s]) => ({ name, n: s.n, hit: +(100 * s.h / s.n).toFixed(1) })).sort((a, b) => b.hit - a.hit);
+    const ligas = Object.entries(ligaAgg).map(([name, s]) => ({ name, n: s.n, hit: +(100 * s.h / s.n).toFixed(1) })).sort((a, b) => b.hit - a.hit);
 
-  // BARDO (LEC vs other) — based on bardPlusPeel pattern
+    // SUPPORTS (peel + flex)
+    const supAgg = {};
+    for (const g of subset) {
+      for (const s of [g.bluePicks.support, g.redPicks.support]) {
+        if (!PEEL.includes(s) && !FLEX.includes(s)) continue;
+        if (!supAgg[s]) supAgg[s] = { n: 0, h: 0 };
+        supAgg[s].n++;
+        if (g.kills < LINE) supAgg[s].h++;
+      }
+    }
+    const supports = Object.entries(supAgg).filter(([_, s]) => s.n >= 3).map(([name, s]) => ({ name, n: s.n, hit: +(100 * s.h / s.n).toFixed(1) })).sort((a, b) => b.hit - a.hit);
+
+    // TIMES
+    const teamAgg = {};
+    for (const g of subset) {
+      for (const tid of [g.blueTeamId, g.redTeamId]) {
+        const tname = teamsMap.get(tid) || tid;
+        if (!teamAgg[tname]) teamAgg[tname] = { n: 0, h: 0, lg: g.lg };
+        teamAgg[tname].n++;
+        if (g.kills < LINE) teamAgg[tname].h++;
+      }
+    }
+    const teams = Object.entries(teamAgg).filter(([_, s]) => s.n >= 4).map(([name, s]) => ({ name, lg: s.lg, n: s.n, hit: +(100 * s.h / s.n).toFixed(1) })).sort((a, b) => b.hit - a.hit);
+
+    // CHAMPS POR LANE
+    const champAgg = {};
+    for (const g of subset) {
+      for (const picks of [g.bluePicks, g.redPicks]) {
+        for (const role of ['top','jungle','mid','adc']) {
+          const champ = picks[role];
+          if (!champ) continue;
+          const key = `${champ}|${role}`;
+          if (!champAgg[key]) champAgg[key] = { champ, role, n: 0, h: 0 };
+          champAgg[key].n++;
+          if (g.kills < LINE) champAgg[key].h++;
+        }
+      }
+    }
+    const champs = Object.values(champAgg).filter(c => c.n >= 8).map(c => ({ champ: c.champ, role: c.role, n: c.n, hit: +(100 * c.h / c.n).toFixed(1) })).sort((a, b) => b.hit - a.hit);
+
+    return { backtest, ligas, supports, teams, champs };
+  }
+
+  const stats2peel = computeStats(peel2);
+  const stats1PeelFlex = computeStats(peel1Flex);
+  const statsAll = computeStats(allTriggers);
+
+  // Bardo (LEC vs fora) — análise especial: jogos com Bard + outro peel (subset de 1peel+flex).
+  // Mantida porque LEC tem comportamento de Bard distinto do resto — split histórico útil pra UI.
   const bardLec = { n: 0, h: 0 };
   const bardOther = { n: 0, h: 0 };
   for (const g of games) {
@@ -203,36 +252,9 @@ async function fetchLatestDdragonVersion() {
     bucket.n++;
     if (g.kills < LINE) bucket.h++;
   }
-  if (bardLec.n) supports.unshift({ name: 'Bard (LEC)', n: bardLec.n, hit: +(100 * bardLec.h / bardLec.n).toFixed(1) });
-  if (bardOther.n) supports.push({ name: 'Bard (fora LEC)', n: bardOther.n, hit: +(100 * bardOther.h / bardOther.n).toFixed(1) });
-
-  // TIMES (em 2-peel)
-  const teamAgg = {};
-  for (const g of peel2) {
-    for (const tid of [g.blueTeamId, g.redTeamId]) {
-      const tname = teamsMap.get(tid) || tid;
-      if (!teamAgg[tname]) teamAgg[tname] = { n: 0, h: 0, lg: g.lg };
-      teamAgg[tname].n++;
-      if (g.kills < LINE) teamAgg[tname].h++;
-    }
-  }
-  const teams = Object.entries(teamAgg).filter(([_, s]) => s.n >= 4).map(([name, s]) => ({ name, lg: s.lg, n: s.n, hit: +(100 * s.h / s.n).toFixed(1) })).sort((a, b) => b.hit - a.hit);
-
-  // BONECOS POR LANE
-  const champAgg = {};
-  for (const g of peel2) {
-    for (const picks of [g.bluePicks, g.redPicks]) {
-      for (const role of ['top','jungle','mid','adc']) {
-        const champ = picks[role];
-        if (!champ) continue;
-        const key = `${champ}|${role}`;
-        if (!champAgg[key]) champAgg[key] = { champ, role, n: 0, h: 0 };
-        champAgg[key].n++;
-        if (g.kills < LINE) champAgg[key].h++;
-      }
-    }
-  }
-  const champs = Object.values(champAgg).filter(c => c.n >= 8).map(c => ({ champ: c.champ, role: c.role, n: c.n, hit: +(100 * c.h / c.n).toFixed(1) })).sort((a, b) => b.hit - a.hit);
+  // Bardo é flex_engage, não peel — semanticamente entra no 1peel+flex
+  if (bardLec.n) stats1PeelFlex.supports.unshift({ name: 'Bard (LEC)', n: bardLec.n, hit: +(100 * bardLec.h / bardLec.n).toFixed(1) });
+  if (bardOther.n) stats1PeelFlex.supports.push({ name: 'Bard (fora LEC)', n: bardOther.n, hit: +(100 * bardOther.h / bardOther.n).toFixed(1) });
 
   const out = {
     generated_at: new Date().toISOString(),
@@ -240,11 +262,20 @@ async function fetchLatestDdragonVersion() {
     line: LINE,
     stake: STAKE,
     odd: ODD,
-    backtest,
-    ligas,
-    supports,
-    teams,
-    champs,
+    // Top-level = 2peel (compat com frontend atual; novos consumidores devem usar by_trigger).
+    // Importante: top-level NÃO inclui mais a injeção especial Bard(LEC)/Bard(fora LEC)
+    // — ela vive em by_trigger['1peel+flex'].supports porque Bard é flex, não peel.
+    backtest: stats2peel.backtest,
+    ligas: stats2peel.ligas,
+    supports: stats2peel.supports,
+    teams: stats2peel.teams,
+    champs: stats2peel.champs,
+    // Granular por trigger — fonte da verdade pra novos consumidores
+    by_trigger: {
+      '2peel': stats2peel,
+      '1peel+flex': stats1PeelFlex,
+      all: statsAll,
+    },
   };
 
   const outDir = path.join(__dirname, 'cron-data');
