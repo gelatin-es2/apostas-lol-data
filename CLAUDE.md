@@ -102,6 +102,7 @@ Conflict key: `(game_id, map_number)`. Mesmo jogo rodado 2x no cron sobrescreve 
 
 ## Convenções operacionais
 
+- **Pendências antes de tudo:** a cada nova mensagem do CEO, antes de responder, rodar `node .claude/scripts/enrich-match-context.cjs` e `node .claude/scripts/settle-pending-bets.cjs`. Se nada pendente, segue direto sem reportar. Se houver settle/enrich efetivo, mencionar 1 linha no início da resposta.
 - **Não mexer** em `cron-data/*.json` na mão — são gerados pelos scripts. Editar = quebrar idempotência.
 - Adicionar `.gitignore` é prioridade próxima (proteção anti-secret).
 - Adicionar `package.json` mínimo é higiene (mesmo que sem deps externas) — facilita ferramentas de análise.

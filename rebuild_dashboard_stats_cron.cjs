@@ -11,7 +11,10 @@ const SPLIT2_START = '2026-04-01';
 const PEEL = ['Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio'];
 const STAKE = 100;
 const ODD = 1.85;
-const LINE = 29.5;
+// LINE fallback (compat) — se nem Polymarket nem livestats tiver dado
+const FALLBACK_LINE = 29.5;
+const MIN_SAMPLE_TEAM = 5;
+const FAIR_ADJUSTMENT = -1; // CEO 2026-05-06
 
 const LEAGUES = [
   { id: '98767991302996019', name: 'LEC' },
@@ -79,7 +82,9 @@ async function fetchGameMeta(gameId) {
     const blueMeta = r.gameMetadata.blueTeamMetadata;
     const redMeta = r.gameMetadata.redTeamMetadata;
     const lastFrame = r.frames[r.frames.length - 1];
-    const kills = (lastFrame.blueTeam?.totalKills || 0) + (lastFrame.redTeam?.totalKills || 0);
+    const kBlue = lastFrame.blueTeam?.totalKills || 0;
+    const kRed = lastFrame.redTeam?.totalKills || 0;
+    const kills = kBlue + kRed;
     const picks = (md) => {
       const p = md.participantMetadata;
       const get = (role) => p.find(x => x.role === role)?.championId || null;
@@ -99,10 +104,40 @@ async function fetchGameMeta(gameId) {
       bluePicks: picks(blueMeta),
       redPicks: picks(redMeta),
       kills,
+      kBlue, kRed,
       gameState: lastFrame.gameState,
       winnerSide,
     };
   } catch { return null; }
+}
+
+// === Polymarket index (lê todos os arquivos polymarket-lines em cron-data) ===
+function loadPolymarketIndex() {
+  const idx = { byMatchId: new Map(), byTeamsDate: new Map() };
+  const dir = path.join(__dirname, 'cron-data');
+  if (!fs.existsSync(dir)) return idx;
+  for (const f of fs.readdirSync(dir)) {
+    if (!f.endsWith('-polymarket-lines.json')) continue;
+    let j;
+    try { j = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); }
+    catch { continue; }
+    for (const cap of (j.captured || [])) {
+      if (!cap.games || cap.games.length === 0) continue;
+      const matchLevel = cap.games.find(g => g.game_number == null);
+      const game1 = cap.games.find(g => g.game_number === 1);
+      const principal = matchLevel || game1 || cap.games[0];
+      const entry = {
+        line: principal.line,
+        source: matchLevel ? 'polymarket_match_level' : `polymarket_game${principal.game_number}`,
+        event_slug: cap.polymarket_event_slug,
+        games: cap.games,
+      };
+      if (cap.match_id_lolesports) idx.byMatchId.set(String(cap.match_id_lolesports), entry);
+      const tkey = [cap.team_a, cap.team_b, cap.match_date].sort().join('|');
+      idx.byTeamsDate.set(tkey, entry);
+    }
+  }
+  return idx;
 }
 
 // Champion name → Data Dragon slug (overrides for special-case names)
@@ -152,7 +187,67 @@ async function fetchLatestDdragonVersion() {
   }
   console.error(`  ${games.length} games fetched`);
 
-  console.error('[4/4] Computing stats...');
+  // === Anexa fair line dinâmica em cada game (hierarquia: polymarket > calculado(-1) > 29.5) ===
+  console.error('[4/4] Computing per-game fair lines...');
+  const polymarketIdx = loadPolymarketIndex();
+  console.error(`  polymarket index: ${polymarketIdx.byMatchId.size} matches`);
+
+  // Avg de kills por team (todos os games coletados; exclui o próprio jogo no cálculo)
+  const teamKillsList = new Map(); // teamName → [kills_próprios]
+  const leagueKillsList = new Map(); // liga → [kills_por_time]
+  function teamName(g, side) {
+    const tid = side === 'blue' ? g.blueTeamId : g.redTeamId;
+    return teamsMap.get(tid) || tid;
+  }
+  for (const g of games) {
+    const blueName = teamName(g, 'blue');
+    const redName = teamName(g, 'red');
+    if (!teamKillsList.has(blueName)) teamKillsList.set(blueName, []);
+    if (!teamKillsList.has(redName))  teamKillsList.set(redName, []);
+    teamKillsList.get(blueName).push(g.kBlue);
+    teamKillsList.get(redName).push(g.kRed);
+    if (!leagueKillsList.has(g.lg)) leagueKillsList.set(g.lg, []);
+    leagueKillsList.get(g.lg).push(g.kBlue, g.kRed);
+  }
+  const leagueAvg = new Map();
+  for (const [l, arr] of leagueKillsList) {
+    leagueAvg.set(l, arr.reduce((a,b)=>a+b,0)/arr.length);
+  }
+
+  function fairForGame(g) {
+    // 1) polymarket
+    const pmEntry = polymarketIdx.byMatchId.get(String(g.matchId)) ||
+      polymarketIdx.byTeamsDate.get([teamName(g,'blue'), teamName(g,'red'), g.date].sort().join('|'));
+    if (pmEntry) {
+      const specific = pmEntry.games?.find(x => x.game_number === g.mapNum);
+      const principal = specific || (pmEntry.games?.find(x => x.game_number == null)) || pmEntry;
+      const line = specific?.line ?? pmEntry.line;
+      if (line != null) return { line, source: specific ? `polymarket_game${g.mapNum}` : pmEntry.source };
+    }
+    // 2) calculado (avg_a + avg_b - 1)
+    const blueArr = teamKillsList.get(teamName(g,'blue')) || [];
+    const redArr  = teamKillsList.get(teamName(g,'red')) || [];
+    const blueAvgEx = blueArr.length > 1 ? (blueArr.reduce((a,b)=>a+b,0) - g.kBlue) / (blueArr.length - 1) : null;
+    const redAvgEx  = redArr.length  > 1 ? (redArr.reduce((a,b)=>a+b,0) - g.kRed) / (redArr.length - 1) : null;
+    const lAvg = leagueAvg.get(g.lg) ?? null;
+    const blueAvg = (blueArr.length - 1 >= MIN_SAMPLE_TEAM) ? blueAvgEx : lAvg;
+    const redAvg  = (redArr.length  - 1 >= MIN_SAMPLE_TEAM) ? redAvgEx  : lAvg;
+    if (blueAvg == null || redAvg == null) return { line: FALLBACK_LINE, source: 'fallback_29.5' };
+    const adjusted = blueAvg + redAvg + FAIR_ADJUSTMENT;
+    const line = Math.round(adjusted - 0.5) + 0.5;
+    return { line, source: 'livestats_team_avg(team+team)-1' };
+  }
+  for (const g of games) {
+    const f = fairForGame(g);
+    g.line = f.line;
+    g.fairSource = f.source;
+  }
+  // Telemetria de proveniência
+  const sourceTally = {};
+  for (const g of games) sourceTally[g.fairSource] = (sourceTally[g.fairSource] || 0) + 1;
+  console.error(`  fair sources:`, JSON.stringify(sourceTally));
+
+  console.error('[5/5] Computing stats...');
 
   const FLEX = ['Bard', 'Rakan', 'Alistar'];
 
@@ -171,9 +266,9 @@ async function fetchLatestDdragonVersion() {
 
   // Agrega backtest + ligas + supports + teams + champs pra um subset de games
   function computeStats(subset) {
-    // BACKTEST
+    // BACKTEST — agora cada game usa SUA OWN line (polymarket > calculado > fallback)
     let green = 0, red = 0;
-    for (const g of subset) { if (g.kills < LINE) green++; else red++; }
+    for (const g of subset) { if (g.kills < g.line) green++; else red++; }
     const profit = green * STAKE * (ODD - 1) - red * STAKE;
     const backtest = {
       n: subset.length,
@@ -188,7 +283,7 @@ async function fetchLatestDdragonVersion() {
     for (const g of subset) {
       if (!ligaAgg[g.lg]) ligaAgg[g.lg] = { n: 0, h: 0 };
       ligaAgg[g.lg].n++;
-      if (g.kills < LINE) ligaAgg[g.lg].h++;
+      if (g.kills < g.line) ligaAgg[g.lg].h++;
     }
     const ligas = Object.entries(ligaAgg).map(([name, s]) => ({ name, n: s.n, hit: +(100 * s.h / s.n).toFixed(1) })).sort((a, b) => b.hit - a.hit);
 
@@ -199,7 +294,7 @@ async function fetchLatestDdragonVersion() {
         if (!PEEL.includes(s) && !FLEX.includes(s)) continue;
         if (!supAgg[s]) supAgg[s] = { n: 0, h: 0 };
         supAgg[s].n++;
-        if (g.kills < LINE) supAgg[s].h++;
+        if (g.kills < g.line) supAgg[s].h++;
       }
     }
     const supports = Object.entries(supAgg).filter(([_, s]) => s.n >= 3).map(([name, s]) => ({ name, n: s.n, hit: +(100 * s.h / s.n).toFixed(1) })).sort((a, b) => b.hit - a.hit);
@@ -211,7 +306,7 @@ async function fetchLatestDdragonVersion() {
         const tname = teamsMap.get(tid) || tid;
         if (!teamAgg[tname]) teamAgg[tname] = { n: 0, h: 0, lg: g.lg };
         teamAgg[tname].n++;
-        if (g.kills < LINE) teamAgg[tname].h++;
+        if (g.kills < g.line) teamAgg[tname].h++;
       }
     }
     const teams = Object.entries(teamAgg).filter(([_, s]) => s.n >= 4).map(([name, s]) => ({ name, lg: s.lg, n: s.n, hit: +(100 * s.h / s.n).toFixed(1) })).sort((a, b) => b.hit - a.hit);
@@ -226,7 +321,7 @@ async function fetchLatestDdragonVersion() {
           const key = `${champ}|${role}`;
           if (!champAgg[key]) champAgg[key] = { champ, role, n: 0, h: 0 };
           champAgg[key].n++;
-          if (g.kills < LINE) champAgg[key].h++;
+          if (g.kills < g.line) champAgg[key].h++;
         }
       }
     }
@@ -250,7 +345,7 @@ async function fetchLatestDdragonVersion() {
     if (!PEEL.includes(otherSup)) continue;
     const bucket = g.lg === 'LEC' ? bardLec : bardOther;
     bucket.n++;
-    if (g.kills < LINE) bucket.h++;
+    if (g.kills < g.line) bucket.h++;
   }
   // Bardo é flex_engage, não peel — semanticamente entra no 1peel+flex
   if (bardLec.n) stats1PeelFlex.supports.unshift({ name: 'Bard (LEC)', n: bardLec.n, hit: +(100 * bardLec.h / bardLec.n).toFixed(1) });
@@ -259,7 +354,8 @@ async function fetchLatestDdragonVersion() {
   const out = {
     generated_at: new Date().toISOString(),
     split_start: SPLIT2_START,
-    line: LINE,
+    line_fallback: FALLBACK_LINE,
+    line_sources: sourceTally,
     stake: STAKE,
     odd: ODD,
     // Top-level = 2peel (compat com frontend atual; novos consumidores devem usar by_trigger).
@@ -283,7 +379,8 @@ async function fetchLatestDdragonVersion() {
   const outFile = path.join(outDir, 'dashboard_stats.json');
   fs.writeFileSync(outFile, JSON.stringify(out, null, 2));
   console.error(`Wrote: ${outFile}`);
-  console.error(`Backtest: n=${backtest.n} hit=${backtest.hit}% profit=R$${backtest.profit} ROI=${backtest.roi}%`);
+  const bt = stats2peel.backtest;
+  console.error(`Backtest 2peel: n=${bt.n} hit=${bt.hit}% profit=R$${bt.profit} ROI=${bt.roi}%`);
 
   // === ML PICKS (winrate por champion × posição) ===
   console.error('[ML] computing winrates...');

@@ -1,13 +1,15 @@
 name: Apostas LoL — daily cron
 
-# Roda todo dia 03:30 BRT (06:30 UTC) e 11:00 BRT (14:00 UTC).
+# Roda todo dia 03:30 BRT (06:30 UTC) e 09:00 BRT (12:00 UTC).
 # Cada execução é idempotente: roda TODOS os jobs sem gating de hora.
 # Free tier do GitHub Actions tem delay variável (5min a 1h+); por isso
 # nunca confiamos em hora exata pra decidir o que rodar.
+# Janela 12:00 UTC dá ~3h de folga até 1º jogo LEC/CBLOL (15h UTC = 12h BRT)
+# pra capturar Polymarket Total Kills pré-jogo (linha abre ~24h antes).
 on:
   schedule:
     - cron: '30 6 * * *'    # 03:30 BRT — captura LCK+LPL pré-jogo + analisa ontem
-    - cron: '0 14 * * *'    # 11:00 BRT — captura LEC+CBLOL (weekdays vazio, sem problema)
+    - cron: '0 12 * * *'    # 09:00 BRT — captura LEC+CBLOL pré-jogo (sábado/domingo)
   workflow_dispatch: {}
 
 jobs:
@@ -26,8 +28,16 @@ jobs:
         with:
           node-version: '20'
 
-      # Capture fair lines — ambos blocos rodam sempre. Cada bloco é idempotente
-      # (skipa eventos já completed). Em weekdays, lec/cblol vai retornar 0 lines.
+      # Capture Polymarket Total Kills lines (pré-jogo) — runner US/EU sem geo-block.
+      # Mercados de Total Kills no Polymarket abrem ~24h antes do jogo. O cron precisa
+      # rodar dentro dessa janela. Resultado vai pra cron-data/{date}-polymarket-lines.json
+      # e é consumido como fonte primária pelo analyze_range + rebuild_dashboard.
+      - name: Capture Polymarket Total Kills lines
+        run: node capture_polymarket_lines.cjs
+        continue-on-error: true
+
+      # Capture fair lines (legacy do bookmaker pré-jogo) — ambos blocos rodam sempre.
+      # Cada bloco é idempotente (skipa eventos já completed). Em weekdays, lec/cblol = 0.
       - name: Capture fair lines (LCK + LPL)
         run: node capture_fair_lines.cjs lck,lpl
         continue-on-error: true
