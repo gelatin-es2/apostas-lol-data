@@ -221,23 +221,28 @@ function pickClosestToTargetOdd(markets) {
 }
 
 (async () => {
-  // Range padrão: 12h atrás a 36h à frente (cobre próximos 1.5 dia + jogos do dia anterior que podem ter linha pré-jogo ainda)
+  // Range padrão: agora a +30h (só pré-jogo upcoming).
+  // Jogos já encerrados não têm Total Kills aberto no Polymarket — descartar evita
+  // logs ruidosos de NO_EVENT/NO_TK pra matches que já fecharam mercado.
   const fromArg = getArg('from');
   const toArg = getArg('to');
   const now = new Date();
-  const FROM = fromArg || ymd(new Date(now.getTime() - 12*3600*1000));
-  const TO   = toArg   || ymd(new Date(now.getTime() + 36*3600*1000));
+  const FROM = fromArg || ymd(now);
+  const TO   = toArg   || ymd(new Date(now.getTime() + 30*3600*1000));
 
   console.error(`[setup] capture range ${FROM} → ${TO}`);
 
-  // 1. lista matches via lolesports
+  // 1. lista matches via lolesports + filtra só os que ainda não começaram (pré-jogo)
+  const cutoffTs = now.getTime();
   const allMatches = [];
   for (const [league, leagueId] of Object.entries(LEAGUE_IDS)) {
     const matches = await listMatchesForLeague(league, leagueId, FROM, TO);
-    console.error(`[1/3] ${league}: ${matches.length} matches no range`);
-    allMatches.push(...matches);
+    const upcoming = matches.filter(m => new Date(m.start_time).getTime() > cutoffTs);
+    const skipped = matches.length - upcoming.length;
+    console.error(`[1/3] ${league}: ${upcoming.length} upcoming (${skipped} já iniciados, ignorados)`);
+    allMatches.push(...upcoming);
   }
-  console.error(`[1/3] total ${allMatches.length} matches`);
+  console.error(`[1/3] total ${allMatches.length} upcoming matches`);
 
   // 2. busca cada match no Polymarket
   const captured = [];
