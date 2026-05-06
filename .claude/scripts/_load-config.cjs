@@ -29,7 +29,8 @@ function loadConfig() {
   const settingsPath = path.join(repoRoot, '.claude', 'settings.local.json');
 
   let supabaseUrl = process.env.SUPABASE_URL;
-  let supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // Aceita ambos os nomes (workflow GH Actions usa SUPABASE_SECRET_KEY; local e .env tipicamente SUPABASE_SERVICE_ROLE_KEY)
+  let supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY;
   let source = 'process.env';
 
   if ((!supabaseUrl || !supabaseKey) && fs.existsSync(envPath)) {

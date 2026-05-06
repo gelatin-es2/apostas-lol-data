@@ -1,0 +1,135 @@
+{
+  "generated_at": "2026-05-06T20:09:32.927Z",
+  "total_bets_universe": 107,
+  "total_settled": 105,
+  "method_rules": {
+    "peel_pure": [
+      "soraka",
+      "sona",
+      "janna",
+      "lulu",
+      "yuumi",
+      "karma",
+      "seraphine",
+      "renataglasc",
+      "renata",
+      "nami",
+      "milio"
+    ],
+    "flex_engage": [
+      "bard",
+      "rakan",
+      "alistar"
+    ],
+    "bard_only_in": [
+      "LEC"
+    ],
+    "breakeven_pct": 54.1
+  },
+  "by_trigger": {
+    "2peel": {
+      "n": 38,
+      "wins": 30,
+      "losses": 8,
+      "hit": 78.9,
+      "stake": 17061.53,
+      "profit": 3911.84,
+      "roi": 22.9,
+      "breakeven": 54.1
+    },
+    "1peel+flex": {
+      "n": 9,
+      "wins": 5,
+      "losses": 4,
+      "hit": 55.6,
+      "stake": 4200,
+      "profit": 1012.8,
+      "roi": 24.1,
+      "breakeven": 54.1
+    },
+    "method_total": {
+      "n": 47,
+      "wins": 35,
+      "losses": 12,
+      "hit": 74.5,
+      "stake": 21261.53,
+      "profit": 4924.64,
+      "roi": 23.2,
+      "breakeven": 54.1
+    }
+  },
+  "flex_breakdown": {
+    "Rakan": {
+      "n": 4,
+      "wins": 4,
+      "losses": 0,
+      "hit": 100,
+      "stake": 2400,
+      "profit": 1786.8,
+      "roi": 74.5,
+      "breakeven": 54.1
+    },
+    "Alistar": {
+      "n": 3,
+      "wins": 0,
+      "losses": 3,
+      "hit": 0,
+      "stake": 600,
+      "profit": -600,
+      "roi": -100,
+      "breakeven": 54.1
+    },
+    "Bard": {
+      "n": 2,
+      "wins": 1,
+      "losses": 1,
+      "hit": 50,
+      "stake": 1200,
+      "profit": -174,
+      "roi": -14.5,
+      "breakeven": 54.1
+    }
+  },
+  "by_league": {
+    "LPL": {
+      "n": 15,
+      "wins": 13,
+      "losses": 2,
+      "hit": 86.7,
+      "stake": 7434.05,
+      "profit": 3158.24,
+      "roi": 42.5,
+      "breakeven": 54.1
+    },
+    "LEC": {
+      "n": 16,
+      "wins": 12,
+      "losses": 4,
+      "hit": 75,
+      "stake": 6330,
+      "profit": 1443.1,
+      "roi": 22.8,
+      "breakeven": 54.1
+    },
+    "LCK": {
+      "n": 9,
+      "wins": 7,
+      "losses": 2,
+      "hit": 77.8,
+      "stake": 5097.48,
+      "profit": 1661.3,
+      "roi": 32.6,
+      "breakeven": 54.1
+    },
+    "CBLOL": {
+      "n": 7,
+      "wins": 3,
+      "losses": 4,
+      "hit": 42.9,
+      "stake": 2400,
+      "profit": -1338,
+      "roi": -55.8,
+      "breakeven": 54.1
+    }
+  }
+}

@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Apostas LoL — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050b1a;
+      --bg-2: #0a1632;
+      --card: #0f1f44;
+      --card-2: #142855;
+      --border: #1e3a8a;
+      --border-soft: #1e2c5a;
+      --accent: #3b82f6;
+      --accent-2: #60a5fa;
+      --accent-glow: rgba(59, 130, 246, 0.25);
+      --text: #e6efff;
+      --muted: #7d92c2;
+      --green: #22c55e;
+      --green-soft: rgba(34, 197, 94, 0.15);
+      --red: #ef4444;
+      --red-soft: rgba(239, 68, 68, 0.15);
+      --yellow: #eab308;
+      --yellow-soft: rgba(234, 179, 8, 0.15);
+    }
+
+    html, body {
+      background: radial-gradient(ellipse at top, #0a1632 0%, var(--bg) 60%);
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .header {
+      padding: 24px 24px 12px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .header h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .header h1 .icon {
+      color: var(--accent-2);
+    }
+    .header .meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 24px 48px;
+    }
+
+    .section-title {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 28px 0 12px;
+    }
+
+    /* KPI cards */
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .kpi {
+      background: linear-gradient(135deg, var(--card) 0%, var(--card-2) 100%);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--accent);
+    }
+    .kpi.green::before { background: var(--green); }
+    .kpi.red::before { background: var(--red); }
+    .kpi .label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .kpi .value {
+      font-size: 24px;
+      font-weight: 800;
+      margin-top: 6px;
+      letter-spacing: -0.02em;
+    }
+    .kpi .value.green { color: var(--green); }
+    .kpi .value.red { color: var(--red); }
+    .kpi .sub {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    /* Daily summary */
+    .days {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+    .day {
+      background: var(--card);
+      border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .day .date { color: var(--muted); font-size: 12px; font-weight: 600; }
+    .day .stats { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .day .profit { font-size: 18px; font-weight: 800; }
+    .day .profit.green { color: var(--green); }
+    .day .profit.red { color: var(--red); }
+    .day .profit.muted { color: var(--muted); }
+    .day-clickable { cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+    .day-clickable:hover { border-color: var(--accent); }
+    .day-active { border-color: var(--accent) !important; background: rgba(99, 102, 241, 0.08); }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .chip {
+      background: var(--card);
+      border: 1px solid var(--border-soft);
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .chip:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+    .chip.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* Bet rows */
+    .bets {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .bet {
+      background: var(--card);
+      border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      transition: border-color 0.15s;
+    }
+    .bet:hover { border-color: var(--accent); }
+    .bet .head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .bet .teams {
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .bet .league {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .bet .market {
+      color: var(--text);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+    .bet .market strong { color: var(--accent-2); }
+    .bet .meta {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+    .bet .comp {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border-soft);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      font-size: 11px;
+    }
+    .bet .comp .side {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .bet .comp .side b {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .bet .comp .sup {
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+    .bet .right {
+      text-align: right;
+    }
+    .bet .profit {
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .bet .profit.green { color: var(--green); }
+    .bet .profit.red { color: var(--red); }
+    .bet .profit.muted { color: var(--muted); }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .badge.green { background: var(--green-soft); color: var(--green); }
+    .badge.red { background: var(--red-soft); color: var(--red); }
+    .badge.pending { background: var(--yellow-soft); color: var(--yellow); }
+    .badge.void { background: rgba(125,146,194,0.15); color: var(--muted); }
+    .badge.cashout { background: var(--accent-glow); color: var(--accent-2); }
+    .badge.hedge { background: var(--accent-glow); color: var(--accent-2); margin-left: 4px; }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 60px 20px;
+      font-size: 14px;
+    }
+    .loading {
+      text-align: center;
+      color: var(--muted);
+      padding: 60px 20px;
+      font-size: 14px;
+    }
+    .loading::after {
+      content: '';
+      display: inline-block;
+      width: 14px; height: 14px;
+      margin-left: 8px;
+      border: 2px solid var(--accent);
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 600px) {
+      .header { padding: 18px 16px 8px; }
+      .container { padding: 8px 16px 32px; }
+      .kpi .value { font-size: 20px; }
+      .bet { grid-template-columns: 1fr; }
+      .bet .right { text-align: left; }
+    }
+
+    .tabs {
+      display: flex; gap: 4px; padding: 0 24px;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border-soft);
+      overflow-x: auto;
+    }
+    .tab {
+      padding: 14px 20px; cursor: pointer; color: var(--muted);
+      font-weight: 700; font-size: 13px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--accent-2); border-bottom-color: var(--accent); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    .method-summary {
+      background: linear-gradient(135deg, var(--card), var(--card-2));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+    .method-summary h2 {
+      font-size: 11px; color: var(--accent-2);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      font-weight: 800;
+    }
+    .method-summary .desc {
+      color: var(--muted); font-size: 13px; margin-top: 4px;
+    }
+    .method-summary .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 16px; margin-top: 16px;
+    }
+    .method-summary .stat .label {
+      color: var(--muted); font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;
+    }
+    .method-summary .stat .value {
+      color: var(--text); font-size: 22px; font-weight: 800; margin-top: 2px;
+    }
+    .method-summary .stat .value.green { color: var(--green); }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .method-card {
+      background: var(--card);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .method-card h3 {
+      font-size: 11px; color: var(--accent-2);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      font-weight: 800; margin-bottom: 12px;
+    }
+    .method-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border-soft);
+      font-size: 13px;
+    }
+    .method-row:last-child { border-bottom: none; }
+    .method-row .name { color: var(--text); font-weight: 600; }
+    .method-row .name .liga {
+      color: var(--muted); font-size: 11px; font-weight: 500; margin-left: 4px;
+    }
+    .method-row .pct {
+      font-weight: 800; font-family: ui-monospace, monospace;
+    }
+    .method-row .pct.green { color: var(--green); }
+    .method-row .pct.yellow { color: var(--yellow); }
+    .method-row .pct.red { color: var(--red); }
+    .method-row .n {
+      color: var(--muted); font-size: 11px; margin-left: 6px;
+    }
+    .method-dot {
+      display: inline-block; width: 8px; height: 8px;
+      border-radius: 50%; margin-right: 8px; vertical-align: middle;
+    }
+    .method-dot.green { background: var(--green); }
+    .method-dot.yellow { background: var(--yellow); }
+    .method-dot.red { background: var(--red); }
+    .legend {
+      margin-top: 20px; padding: 14px 18px;
+      background: var(--card); border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      font-size: 12px; color: var(--muted); line-height: 1.7;
+    }
+    .legend strong { color: var(--text); }
+
+    /* ===== Aba ML ===== */
+    .ml-header { margin-bottom: 18px; }
+    .ml-header h2 { font-size: 18px; font-weight: 800; }
+    .ml-header .meta { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+    .ml-pos-nav {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin: 16px 0 12px;
+    }
+    .ml-pos-nav .ml-pos {
+      padding: 6px 12px; border-radius: 999px;
+      background: var(--card); border: 1px solid var(--border-soft);
+      font-size: 12px; font-weight: 600; cursor: pointer;
+      color: var(--muted);
+      user-select: none;
+    }
+    .ml-pos-nav .ml-pos.active {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--accent-2);
+    }
+
+    .ml-section { display: none; }
+    .ml-section.active { display: block; }
+    .ml-section h3 {
+      font-size: 11px; color: var(--accent-2);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      font-weight: 800; margin: 18px 0 8px;
+    }
+
+    .ml-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+    }
+    .ml-card {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--card); border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .ml-card.win { border-left: 3px solid var(--green); }
+    .ml-card.loss { border-left: 3px solid var(--red); }
+    .ml-card.neutral { border-left: 3px solid var(--yellow); }
+    .ml-card img {
+      width: 48px; height: 48px; border-radius: 6px;
+      background: var(--bg-2);
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .ml-card .info { flex: 1; min-width: 0; }
+    .ml-card .name {
+      font-size: 14px; font-weight: 700;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .ml-card .stats-line {
+      font-size: 11px; color: var(--muted);
+      margin-top: 2px;
+      font-family: ui-monospace, monospace;
+    }
+    .ml-card .wr {
+      font-size: 16px; font-weight: 800;
+      font-family: ui-monospace, monospace;
+      flex-shrink: 0;
+    }
+    .ml-card .wr.green { color: var(--green); }
+    .ml-card .wr.red { color: var(--red); }
+    .ml-card .wr.yellow { color: var(--yellow); }
+    .ml-card .ligas {
+      font-size: 10px; color: var(--muted);
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1><span class="icon">●</span> Apostas LoL</h1>
+    <div class="meta" id="metaInfo">carregando…</div>
+  </header>
+
+  <nav class="tabs">
+    <div class="tab active" data-tab="tracker">Tracker</div>
+    <div class="tab" data-tab="metodo">Método 2-peel</div>
+    <div class="tab" data-tab="ml">Método ML</div>
+  </nav>
+
+  <main class="container tab-pane active" data-pane="tracker">
+    <div id="kpis" class="kpis"></div>
+
+    <div class="section-title">Por mês</div>
+    <div id="months" class="days"></div>
+
+    <div class="section-title">Por dia</div>
+    <div id="days" class="days"></div>
+
+    <div class="section-title">Lucro por suporte (apostas Under)</div>
+    <div id="bySupport" class="days"></div>
+
+    <div class="section-title">Apostas</div>
+    <div class="filters">
+      <span class="chip active" data-filter="all">Todas</span>
+      <span class="chip" data-filter="pending">Pendentes</span>
+      <span class="chip" data-filter="green">Greens</span>
+      <span class="chip" data-filter="red">Reds</span>
+    </div>
+    <div id="bets" class="bets">
+      <div class="loading">Carregando apostas</div>
+    </div>
+  </main>
+
+  <main class="container tab-pane" data-pane="metodo">
+    <div class="method-summary">
+      <h2>Método 2-peel Under · Spring 2026</h2>
+      <div class="desc" id="methodDesc"><strong>SPLIT 2 2026 apenas</strong> · 4 ligas tier S (LEC/LCK/LPL/CBLOL) · ambos supports peel · linha 29.5 · stake R$100 · odd 1.85 · Bardo só conta peel em LEC · <span id="methodUpdated">carregando…</span></div>
+      <div class="stats" id="methodStats">
+        <div class="stat"><div class="label">Jogos 2-peel</div><div class="value">…</div></div>
+        <div class="stat"><div class="label">Hit Under</div><div class="value green">…</div></div>
+        <div class="stat"><div class="label">Lucro líq.</div><div class="value green">…</div></div>
+        <div class="stat"><div class="label">ROI</div><div class="value green">…</div></div>
+        <div class="stat"><div class="label">Breakeven</div><div class="value">54,1%</div></div>
+      </div>
+    </div>
+
+    <div class="method-grid" id="methodGrid">
+
+      <div class="method-card">
+        <h3>Ligas</h3>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>LEC</span><span><span class="pct green">79%</span><span class="n">n=38</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>CBLOL</span><span><span class="pct green">72%</span><span class="n">n=18</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>LCK</span><span><span class="pct green">69%</span><span class="n">n=26</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>LPL</span><span><span class="pct green">67%</span><span class="n">n=51</span></span></div>
+      </div>
+
+      <div class="method-card">
+        <h3>Supports peel</h3>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Bard <span class="liga">só LEC</span></span><span><span class="pct green">92%</span><span class="n">n=13</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Milio</span><span><span class="pct green">82%</span><span class="n">n=33</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Karma</span><span><span class="pct green">72%</span><span class="n">n=32</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Lulu</span><span><span class="pct green">71%</span><span class="n">n=52</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Nami</span><span><span class="pct green">70%</span><span class="n">n=47</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Seraphine</span><span><span class="pct yellow">68%</span><span class="n">n=44</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Renata</span><span><span class="pct yellow">60%</span><span class="n">n=5</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Bard <span class="liga">fora LEC</span></span><span><span class="pct yellow">57%</span><span class="n">n=35</span></span></div>
+      </div>
+
+      <div class="method-card">
+        <h3>Times — bons pra Under</h3>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Heretics <span class="liga">LEC</span></span><span><span class="pct green">100%</span><span class="n">n=7</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>GIANTX <span class="liga">LEC</span></span><span><span class="pct green">100%</span><span class="n">n=6</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Dplus KIA <span class="liga">LCK</span></span><span><span class="pct green">100%</span><span class="n">n=4</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>OK Brion <span class="liga">LCK</span></span><span><span class="pct green">100%</span><span class="n">n=4</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>DN Freecs <span class="liga">LCK</span></span><span><span class="pct green">100%</span><span class="n">n=5</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>EDward Gaming <span class="liga">LPL</span></span><span><span class="pct green">100%</span><span class="n">n=4</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Oh My God <span class="liga">LPL</span></span><span><span class="pct green">100%</span><span class="n">n=6</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>LGD Gaming <span class="liga">LPL</span></span><span><span class="pct green">100%</span><span class="n">n=7</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>ThunderTalk <span class="liga">LPL</span></span><span><span class="pct green">100%</span><span class="n">n=5</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Fluxo <span class="liga">CBLOL</span></span><span><span class="pct green">100%</span><span class="n">n=5</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Vivo Keyd <span class="liga">CBLOL</span></span><span><span class="pct green">83%</span><span class="n">n=6</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Shifters <span class="liga">LEC</span></span><span><span class="pct green">80%</span><span class="n">n=10</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Natus Vincere <span class="liga">LEC</span></span><span><span class="pct green">80%</span><span class="n">n=10</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Fnatic <span class="liga">LEC</span></span><span><span class="pct green">78%</span><span class="n">n=9</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Vitality <span class="liga">LEC</span></span><span><span class="pct green">75%</span><span class="n">n=8</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Movistar KOI <span class="liga">LEC</span></span><span><span class="pct green">75%</span><span class="n">n=4</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>KIWOOM DRX <span class="liga">LCK</span></span><span><span class="pct green">75%</span><span class="n">n=4</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>JD Gaming <span class="liga">LPL</span></span><span><span class="pct green">75%</span><span class="n">n=8</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Anyone's Legend <span class="liga">LPL</span></span><span><span class="pct green">75%</span><span class="n">n=8</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>G2 Esports <span class="liga">LEC</span></span><span><span class="pct green">71%</span><span class="n">n=7</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Gen.G <span class="liga">LCK</span></span><span><span class="pct green">71%</span><span class="n">n=7</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Karmine Corp <span class="liga">LEC</span></span><span><span class="pct green">70%</span><span class="n">n=10</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Invictus Gaming <span class="liga">LPL</span></span><span><span class="pct green">70%</span><span class="n">n=10</span></span></div>
+      </div>
+
+      <div class="method-card">
+        <h3>Times — cuidado / não apostar</h3>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>BNK FearX <span class="liga">LCK</span></span><span><span class="pct yellow">67%</span><span class="n">n=6</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>KT Rolster <span class="liga">LCK</span></span><span><span class="pct yellow">67%</span><span class="n">n=6</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Weibo Gaming <span class="liga">LPL</span></span><span><span class="pct yellow">67%</span><span class="n">n=12</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>LOUD <span class="liga">CBLOL</span></span><span><span class="pct yellow">67%</span><span class="n">n=6</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>FURIA <span class="liga">CBLOL</span></span><span><span class="pct yellow">67%</span><span class="n">n=6</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>SK Gaming <span class="liga">LEC</span></span><span><span class="pct yellow">60%</span><span class="n">n=5</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>T1 <span class="liga">LCK</span></span><span><span class="pct yellow">60%</span><span class="n">n=5</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>paiN Gaming <span class="liga">CBLOL</span></span><span><span class="pct yellow">60%</span><span class="n">n=5</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Team WE <span class="liga">LPL</span></span><span><span class="pct yellow">57%</span><span class="n">n=7</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot red"></span>HLE <span class="liga">LCK</span></span><span><span class="pct red">40%</span><span class="n">n=5</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot red"></span>NIP <span class="liga">LPL</span></span><span><span class="pct red">40%</span><span class="n">n=10</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot red"></span>Nongshim <span class="liga">LCK</span></span><span><span class="pct red">33%</span><span class="n">n=6</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot red"></span>Bilibili Gaming <span class="liga">LPL</span></span><span><span class="pct red">30%</span><span class="n">n=10</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot red"></span>Top Esports <span class="liga">LPL</span></span><span><span class="pct red">22%</span><span class="n">n=9</span></span></div>
+      </div>
+
+      <div class="method-card">
+        <h3>Bonecos por lane (n≥8)</h3>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Lee Sin <span class="liga">jg</span></span><span><span class="pct green">90%</span><span class="n">n=10</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Syndra <span class="liga">mid</span></span><span><span class="pct green">88%</span><span class="n">n=8</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Aurora <span class="liga">mid</span></span><span><span class="pct green">86%</span><span class="n">n=28</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Renekton <span class="liga">top</span></span><span><span class="pct green">83%</span><span class="n">n=24</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Lucian <span class="liga">adc</span></span><span><span class="pct green">82%</span><span class="n">n=34</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Orianna <span class="liga">mid</span></span><span><span class="pct green">82%</span><span class="n">n=11</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Skarner <span class="liga">jg</span></span><span><span class="pct green">79%</span><span class="n">n=14</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Wukong <span class="liga">jg</span></span><span><span class="pct green">79%</span><span class="n">n=14</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Yunara <span class="liga">adc</span></span><span><span class="pct green">77%</span><span class="n">n=47</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Jayce <span class="liga">top</span></span><span><span class="pct green">76%</span><span class="n">n=21</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Gnar <span class="liga">top</span></span><span><span class="pct green">76%</span><span class="n">n=42</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Mel <span class="liga">mid</span></span><span><span class="pct green">75%</span><span class="n">n=12</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Caitlyn <span class="liga">adc</span></span><span><span class="pct green">75%</span><span class="n">n=20</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Twisted Fate <span class="liga">mid</span></span><span><span class="pct green">75%</span><span class="n">n=8</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Viktor <span class="liga">mid</span></span><span><span class="pct green">73%</span><span class="n">n=15</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Naafiri <span class="liga">jg</span></span><span><span class="pct green">73%</span><span class="n">n=11</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Anivia <span class="liga">mid</span></span><span><span class="pct green">73%</span><span class="n">n=11</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Xin Zhao <span class="liga">jg</span></span><span><span class="pct green">72%</span><span class="n">n=54</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Ambessa <span class="liga">top</span></span><span><span class="pct green">71%</span><span class="n">n=35</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Corki <span class="liga">adc</span></span><span><span class="pct green">71%</span><span class="n">n=41</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span>Ahri <span class="liga">mid</span></span><span><span class="pct green">70%</span><span class="n">n=23</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Vi <span class="liga">jg</span></span><span><span class="pct yellow">68%</span><span class="n">n=19</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Nocturne <span class="liga">jg</span></span><span><span class="pct yellow">68%</span><span class="n">n=19</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Sion <span class="liga">top</span></span><span><span class="pct yellow">68%</span><span class="n">n=28</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Pantheon <span class="liga">jg</span></span><span><span class="pct yellow">68%</span><span class="n">n=37</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Ashe <span class="liga">adc</span></span><span><span class="pct yellow">68%</span><span class="n">n=40</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Ezreal <span class="liga">adc</span></span><span><span class="pct yellow">67%</span><span class="n">n=43</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Ryze <span class="liga">mid</span></span><span><span class="pct yellow">67%</span><span class="n">n=33</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>K'Sante <span class="liga">top</span></span><span><span class="pct yellow">67%</span><span class="n">n=30</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Azir <span class="liga">mid</span></span><span><span class="pct yellow">67%</span><span class="n">n=30</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Jarvan IV <span class="liga">jg</span></span><span><span class="pct yellow">66%</span><span class="n">n=44</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Sivir <span class="liga">adc</span></span><span><span class="pct yellow">63%</span><span class="n">n=8</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Rumble <span class="liga">top</span></span><span><span class="pct yellow">62%</span><span class="n">n=29</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Annie <span class="liga">mid</span></span><span><span class="pct yellow">61%</span><span class="n">n=33</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Akali <span class="liga">mid</span></span><span><span class="pct yellow">60%</span><span class="n">n=15</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Jhin <span class="liga">adc</span></span><span><span class="pct yellow">56%</span><span class="n">n=16</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Aatrox <span class="liga">jg</span></span><span><span class="pct yellow">56%</span><span class="n">n=9</span></span></div>
+      </div>
+
+    </div>
+
+    <div class="legend">
+      <strong>🟢 verde</strong> = lucra com folga (hit &gt; 65%) ·
+      <strong>🟡 amarelo</strong> = lucra mas no fio (54-65%, stake reduzido) ·
+      <strong>🔴 vermelho</strong> = perde dinheiro (&lt; 54%, NÃO apostar)<br>
+      <strong>Lista peel</strong>: Soraka, Sona, Janna, Lulu, Yuumi, Karma, Seraphine, Renata Glasc, Nami, Milio (Bard só LEC).<br>
+      <strong>Casas</strong>: EstrelaBet · Pinnacle · Parimatch · Betano. Nunca Bet365.<br>
+      <strong>Atualizado</strong>: 2026-05-02 · base <strong>133 mapas 2-peel Split 2 2026</strong> (datas ≥ 01/04/2026, LEC/LCK/LPL/CBLOL). Filtro de data aplicado, sem mistura com Split 1.
+    </div>
+
+    <!-- ============= MINHAS BETS REAIS (auto-atualiza) ============= -->
+    <div class="method-summary" id="myBetsSummary" style="margin-top:32px">
+      <h2>Suas apostas seguindo o método (real)</h2>
+      <div class="desc" id="myBetsDesc">
+        Bets settled aplicando regras do método: <strong>2peel puro</strong> ou <strong>1peel + flex</strong> (Bard só LEC, Rakan/Alistar qualquer liga). <span id="myBetsUpdated">carregando…</span>
+      </div>
+      <div class="stats" id="myBetsStats">
+        <div class="stat"><div class="label">Bets método</div><div class="value">…</div></div>
+        <div class="stat"><div class="label">Hit Under</div><div class="value green">…</div></div>
+        <div class="stat"><div class="label">Lucro líq.</div><div class="value green">…</div></div>
+        <div class="stat"><div class="label">ROI</div><div class="value green">…</div></div>
+        <div class="stat"><div class="label">Stake total</div><div class="value">…</div></div>
+      </div>
+    </div>
+
+    <div class="method-grid" id="myBetsGrid"></div>
+  </main>
+
+  <main class="container tab-pane" data-pane="ml">
+    <div class="loading">Carregando dados ML…</div>
+  </main>
+
+  <script src="../cron-data/ml_picks.js"></script>
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
+
+    const SUPABASE_URL = 'https://yxhpopkxlupdpqkdaffg.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_wGL02eZiYN9RV37jK-rzWg_LznsLOko';
+
+    const sb = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+    const fmtMoney = (n) =>
+      (n ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    const TZ = 'America/Sao_Paulo';
+
+    const fmtDate = (s) => {
+      if (!s) return '—';
+      const d = new Date(s);
+      return d.toLocaleString('pt-BR', {
+        day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit',
+        timeZone: TZ,
+      });
+    };
+
+    // Agrupa pela data em BRT (YYYY-MM-DD, sem timezone shift)
+    const dayKeyBRT = (dt) =>
+      new Date(dt).toLocaleDateString('en-CA', { timeZone: TZ });
+
+    // "2026-04-25" -> "25/04"
+    const dayLabelFromKey = (key) => {
+      const [, m, d] = key.split('-');
+      return `${d}/${m}`;
+    };
+
+    let allBets = [];
+    let currentFilter = 'all';
+    let currentDayFilter = null; // 'YYYY-MM-DD' ou null
+    let currentMonthFilter = null; // 'YYYY-MM' ou null
+
+    async function load() {
+      const { data, error } = await sb
+        .from('bets')
+        .select('*')
+        .order('bet_datetime', { ascending: false })
+        .limit(500);
+
+      if (error) {
+        document.getElementById('bets').innerHTML =
+          `<div class="empty">Erro: ${error.message}</div>`;
+        return;
+      }
+
+      allBets = data || [];
+      render();
+    }
+
+    function computeKPIs(bets) {
+      const settled = bets.filter((b) => b.status !== 'pending');
+      const wins = bets.filter((b) => b.status === 'green').length;
+      const losses = bets.filter((b) => b.status === 'red').length;
+      const pending = bets.filter((b) => b.status === 'pending').length;
+      const turnover = settled.reduce((s, b) => s + (Number(b.stake) || 0), 0);
+      const profit = settled.reduce((s, b) => s + (Number(b.profit) || 0), 0);
+      const roi = turnover > 0 ? (profit / turnover) * 100 : 0;
+      const hitRate = wins + losses > 0 ? (wins / (wins + losses)) * 100 : 0;
+      return { profit, roi, hitRate, turnover, total: bets.length, wins, losses, pending };
+    }
+
+    function renderKPIs(k) {
+      const profitClass = k.profit >= 0 ? 'green' : 'red';
+      const roiClass = k.roi >= 0 ? 'green' : 'red';
+      document.getElementById('kpis').innerHTML = `
+        <div class="kpi ${profitClass}">
+          <div class="label">Lucro total</div>
+          <div class="value ${profitClass}">${k.profit >= 0 ? '+' : ''}${fmtMoney(k.profit)}</div>
+          <div class="sub">de R$ ${fmtMoney(k.turnover)} apostados</div>
+        </div>
+        <div class="kpi ${roiClass}">
+          <div class="label">ROI</div>
+          <div class="value ${roiClass}">${k.roi.toFixed(1)}%</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Hit rate</div>
+          <div class="value">${k.hitRate.toFixed(1)}%</div>
+          <div class="sub">${k.wins}W / ${k.losses}L</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Apostas</div>
+          <div class="value">${k.total}</div>
+          <div class="sub">${k.pending} pendente${k.pending === 1 ? '' : 's'}</div>
+        </div>
+      `;
+    }
+
+    const MONTH_NAMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    function renderMonths(bets) {
+      const byMonth = {};
+      bets.forEach((b) => {
+        const dt = b.bet_datetime || b.created_at;
+        if (!dt) return;
+        const dayKey = dayKeyBRT(dt); // YYYY-MM-DD
+        const monthKey = dayKey.slice(0, 7); // YYYY-MM
+        if (!byMonth[monthKey]) byMonth[monthKey] = { date: monthKey, total: 0, profit: 0, settled: 0, pending: 0, stake: 0 };
+        byMonth[monthKey].total++;
+        byMonth[monthKey].stake += Number(b.stake) || 0;
+        if (b.status === 'pending') byMonth[monthKey].pending++;
+        else { byMonth[monthKey].settled++; byMonth[monthKey].profit += Number(b.profit) || 0; }
+      });
+      const sorted = Object.values(byMonth).sort((a, b) => b.date.localeCompare(a.date));
+      const allCard = `
+        <div class="day day-clickable ${currentMonthFilter === null ? 'day-active' : ''}" data-month="all">
+          <div>
+            <div class="date">Todos meses</div>
+            <div class="stats">${bets.length} apostas</div>
+          </div>
+          <div class="profit muted">—</div>
+        </div>
+      `;
+      const html = allCard + sorted.map((m) => {
+        const cls = m.profit >= 0 ? 'green' : 'red';
+        const [y, mn] = m.date.split('-');
+        const label = `${MONTH_NAMES[parseInt(mn, 10) - 1]}/${y.slice(2)}`;
+        const roi = m.stake ? ((m.profit / m.stake) * 100).toFixed(1) + '%' : '';
+        const isActive = currentMonthFilter === m.date;
+        return `
+          <div class="day day-clickable ${isActive ? 'day-active' : ''}" data-month="${m.date}">
+            <div>
+              <div class="date">${label}</div>
+              <div class="stats">${m.total} apostas${m.pending ? ` · ${m.pending} pend` : ''} · ROI ${roi}</div>
+            </div>
+            <div class="profit ${cls}">${m.profit >= 0 ? '+' : ''}${fmtMoney(m.profit)}</div>
+          </div>
+        `;
+      }).join('');
+      const monthsEl = document.getElementById('months');
+      monthsEl.innerHTML = html || '<div class="empty">Sem dados</div>';
+      monthsEl.querySelectorAll('.day-clickable').forEach((el) => {
+        el.addEventListener('click', () => {
+          const m = el.dataset.month;
+          currentMonthFilter = m === 'all' ? null : m;
+          currentDayFilter = null; // limpar filtro de dia ao trocar mês
+          render();
+        });
+      });
+    }
+    function renderDays(bets) {
+      const byDay = {};
+      bets.forEach((b) => {
+        const dt = b.bet_datetime || b.created_at;
+        if (!dt) return;
+        const dayKey = dayKeyBRT(dt);
+        if (!byDay[dayKey]) byDay[dayKey] = { date: dayKey, total: 0, profit: 0, settled: 0, pending: 0 };
+        byDay[dayKey].total++;
+        if (b.status === 'pending') byDay[dayKey].pending++;
+        else {
+          byDay[dayKey].settled++;
+          byDay[dayKey].profit += Number(b.profit) || 0;
+        }
+      });
+
+      const sorted = Object.values(byDay).sort((a, b) => b.date.localeCompare(a.date));
+      const allCard = `
+        <div class="day day-clickable ${currentDayFilter === null ? 'day-active' : ''}" data-day="all">
+          <div>
+            <div class="date">Todos</div>
+            <div class="stats">${bets.length} apostas</div>
+          </div>
+          <div class="profit muted">—</div>
+        </div>
+      `;
+      const html = allCard + sorted
+        .map((d) => {
+          const cls = d.profit >= 0 ? 'green' : 'red';
+          const dateLabel = dayLabelFromKey(d.date);
+          const isActive = currentDayFilter === d.date;
+          return `
+            <div class="day day-clickable ${isActive ? 'day-active' : ''}" data-day="${d.date}">
+              <div>
+                <div class="date">${dateLabel}</div>
+                <div class="stats">${d.total} apostas${d.pending ? ` · ${d.pending} pend` : ''}</div>
+              </div>
+              <div class="profit ${cls}">${d.profit >= 0 ? '+' : ''}${fmtMoney(d.profit)}</div>
+            </div>
+          `;
+        })
+        .join('');
+      const daysEl = document.getElementById('days');
+      daysEl.innerHTML = html || '<div class="empty">Sem dados</div>';
+      // Click handlers
+      daysEl.querySelectorAll('.day-clickable').forEach((el) => {
+        el.addEventListener('click', () => {
+          const day = el.dataset.day;
+          currentDayFilter = day === 'all' ? null : day;
+          render();
+        });
+      });
+    }
+
+    function renderBets(bets) {
+      let filtered = currentFilter === 'all' ? bets : bets.filter((b) => b.status === currentFilter);
+      if (currentMonthFilter) {
+        filtered = filtered.filter((b) => {
+          const dt = b.bet_datetime || b.created_at;
+          return dt && dayKeyBRT(dt).slice(0, 7) === currentMonthFilter;
+        });
+      }
+      if (currentDayFilter) {
+        filtered = filtered.filter((b) => {
+          const dt = b.bet_datetime || b.created_at;
+          return dt && dayKeyBRT(dt) === currentDayFilter;
+        });
+      }
+
+      if (!filtered.length) {
+        document.getElementById('bets').innerHTML =
+          '<div class="empty">Nenhuma aposta nessa filtragem.</div>';
+        return;
+      }
+
+      const renderComp = (comp) => {
+        if (!comp || !comp.team_a || !comp.team_b) return '';
+        const fmtSide = (t) => {
+          if (!t?.picks) return '';
+          const p = t.picks;
+          return `<div class="side"><b>${t.name ?? '?'}</b>${t.side ? ` <span style="opacity:.6">(${t.side})</span>` : ''}<br>
+            ${p.top ?? '?'} · ${p.jungle ?? '?'} · ${p.mid ?? '?'} · ${p.adc ?? '?'} · <span class="sup">${p.support ?? '?'}</span></div>`;
+        };
+        return `<div class="comp">${fmtSide(comp.team_a)}${fmtSide(comp.team_b)}</div>`;
+      };
+
+      const html = filtered
+        .map((b) => {
+          const profit = b.profit;
+          const profitText =
+            profit == null ? '—' : `${profit >= 0 ? '+' : ''}R$ ${fmtMoney(profit)}`;
+          const profitCls = profit == null ? 'muted' : profit >= 0 ? 'green' : 'red';
+          const isHedge = b.raw_extraction?.strategy === 'hedge';
+          const mapInfo = b.is_map_bet ? ` · M${b.map_number ?? '?'}` : '';
+          const compHtml = renderComp(b.raw_extraction?.compositions);
+
+          return `
+            <div class="bet">
+              <div>
+                <div class="head">
+                  <span class="teams">${b.team_a ?? '?'} <span style="color:var(--muted);font-weight:500">vs</span> ${b.team_b ?? '?'}</span>
+                  ${b.league ? `<span class="league">· ${b.league}</span>` : ''}
+                  <span class="badge ${b.status}">${b.status}</span>
+                  ${isHedge ? '<span class="badge hedge">hedge</span>' : ''}
+                </div>
+                <div class="market">
+                  ${b.market ?? '?'} → <strong>${b.pick ?? '?'}</strong>${mapInfo}
+                </div>
+                <div class="meta">
+                  ${fmtDate(b.bet_datetime || b.created_at)} · ${b.bookmaker ?? '?'} · Odd ${(Number(b.odd) || 0).toFixed(2)} · Stake R$ ${fmtMoney(b.stake)}
+                </div>
+                ${compHtml}
+              </div>
+              <div class="right">
+                <div class="profit ${profitCls}">${profitText}</div>
+              </div>
+            </div>
+          `;
+        })
+        .join('');
+      document.getElementById('bets').innerHTML = html;
+    }
+
+    function renderBySupport(bets) {
+      const underBets = bets.filter(
+        (b) => /under|menos/i.test(b.pick ?? '') && b.raw_extraction?.compositions
+      );
+      const bySup = {};
+
+      underBets.forEach((b) => {
+        const comps = b.raw_extraction.compositions;
+        [comps.team_a, comps.team_b].forEach((t) => {
+          const sup = t?.picks?.support;
+          if (!sup) return;
+          if (!bySup[sup]) bySup[sup] = { name: sup, total: 0, wins: 0, losses: 0, pending: 0, profit: 0 };
+          bySup[sup].total++;
+          if (b.status === 'green') {
+            bySup[sup].wins++;
+            bySup[sup].profit += Number(b.profit) || 0;
+          } else if (b.status === 'red') {
+            bySup[sup].losses++;
+            bySup[sup].profit += Number(b.profit) || 0;
+          } else if (b.status === 'pending') bySup[sup].pending++;
+        });
+      });
+
+      const sorted = Object.values(bySup).sort((a, b) => b.profit - a.profit);
+      const html = sorted
+        .map((s) => {
+          const cls = s.profit >= 0 ? 'green' : 'red';
+          return `
+            <div class="day">
+              <div>
+                <div class="date">${s.name}</div>
+                <div class="stats">${s.total} aposta${s.total !== 1 ? 's' : ''} · ${s.wins}W ${s.losses}L${s.pending ? ` · ${s.pending} pend` : ''}</div>
+              </div>
+              <div class="profit ${cls}">${s.profit >= 0 ? '+' : ''}${fmtMoney(s.profit)}</div>
+            </div>
+          `;
+        })
+        .join('');
+      document.getElementById('bySupport').innerHTML =
+        html || '<div class="empty">Sem dados ainda — comps começarão a aparecer quando bets fecharem.</div>';
+    }
+
+    function betsForView() {
+      let v = allBets;
+      if (currentMonthFilter) {
+        v = v.filter(b => {
+          const dt = b.bet_datetime || b.created_at;
+          return dt && dayKeyBRT(dt).slice(0, 7) === currentMonthFilter;
+        });
+      }
+      if (currentDayFilter) {
+        v = v.filter(b => {
+          const dt = b.bet_datetime || b.created_at;
+          return dt && dayKeyBRT(dt) === currentDayFilter;
+        });
+      }
+      return v;
+    }
+    // Bets a serem mostradas em "Por dia" (filtra pelo mês mas não pelo dia)
+    function betsForDays() {
+      if (!currentMonthFilter) return allBets;
+      return allBets.filter(b => {
+        const dt = b.bet_datetime || b.created_at;
+        return dt && dayKeyBRT(dt).slice(0, 7) === currentMonthFilter;
+      });
+    }
+    function render() {
+      const view = betsForView();
+      const k = computeKPIs(view);
+      renderKPIs(k);
+      renderMonths(allBets);
+      renderDays(betsForDays());
+      renderBySupport(view);
+      renderBets(allBets);
+
+      const lastBet = allBets[0];
+      const lastDt = lastBet ? fmtDate(lastBet.bet_datetime || lastBet.created_at) : '—';
+      const parts = [];
+      if (currentMonthFilter) {
+        const [y, mn] = currentMonthFilter.split('-');
+        parts.push(`mês ${MONTH_NAMES[parseInt(mn,10)-1]}/${y.slice(2)}`);
+      }
+      if (currentDayFilter) parts.push(`dia ${dayLabelFromKey(currentDayFilter)}`);
+      const filterStr = parts.length ? ` · vendo ${parts.join(' / ')}` : '';
+      document.getElementById('metaInfo').textContent =
+        `${allBets.length} apostas · última em ${lastDt}${filterStr}`;
+    }
+
+    document.querySelectorAll('.chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.chip').forEach((c) => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentFilter = chip.dataset.filter;
+        renderBets(allBets);
+      });
+    });
+
+    load();
+    setInterval(load, 60_000);
+
+    // Tabs
+    document.querySelectorAll('.tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        document.querySelectorAll('.tab').forEach((t) => t.classList.toggle('active', t === tab));
+        document.querySelectorAll('.tab-pane').forEach((p) => {
+          p.classList.toggle('active', p.dataset.pane === target);
+        });
+      });
+    });
+
+    // ===== ML tab render =====
+    const ML_URL = '../cron-data/ml_picks.json';
+    async function loadMlData() {
+      try {
+        const res = await fetch(ML_URL + '?v=' + Date.now(), { cache: 'no-store' });
+        if (res.ok) window.ML_DATA = await res.json();
+      } catch (e) { console.warn('ML fetch failed, mantendo fallback estático:', e); }
+      renderMlTab();
+    }
+    function renderMlTab() {
+      const data = window.ML_DATA;
+      const root = document.querySelector('[data-pane="ml"]');
+      if (!data) {
+        root.innerHTML = '<div class="loading">Dados ML carregando…</div>';
+        return;
+      }
+
+      const POS_LABELS = { top: 'Top', jng: 'Jungle', mid: 'Mid', bot: 'Bot (ADC)', sup: 'Support' };
+      const ddv = data.ddragon_version;
+      // Data Dragon (oficial Riot) às vezes está atrasado pra champions novos (ex: Zaahen, Yunara).
+      // Fallback: CommunityDragon (CDN comunidade, atualiza rápido).
+      function ddragonUrl(slug) { return `https://ddragon.leagueoflegends.com/cdn/${ddv}/img/champion/${slug}.png`; }
+      function communityDragonUrl(slug) { return `https://cdn.communitydragon.org/latest/champion/${slug}/square`; }
+      function imgFallback(slug) {
+        // Inline string usado em onerror — escapa aspas pra encaixar em atributo
+        const cdUrl = communityDragonUrl(slug);
+        return `if(!this.dataset.tried){this.dataset.tried='1';this.src='${cdUrl}';}else{this.style.opacity='0.2';}`;
+      }
+      function wrClass(wr) { if (wr >= 0.60) return 'green'; if (wr <= 0.40) return 'red'; return 'yellow'; }
+      function pctFmt(v, d=0) { return (v*100).toFixed(d) + '%'; }
+
+      function cardHtml(c) {
+        const cls = c.wr >= 0.60 ? 'win' : (c.wr <= 0.40 ? 'loss' : 'neutral');
+        return `
+          <div class="ml-card ${cls}">
+            <img src="${ddragonUrl(c.slug)}" alt="${c.champion}" loading="lazy" onerror="${imgFallback(c.slug)}">
+            <div class="info">
+              <div class="name">${c.champion}</div>
+              <div class="stats-line">n=${c.n} · ${c.wins}W-${c.losses}L · PR ${pctFmt(c.pr,1)}</div>
+              <div class="ligas">${c.ligas.join(' · ')}</div>
+            </div>
+            <div class="wr ${wrClass(c.wr)}">${pctFmt(c.wr)}</div>
+          </div>
+        `;
+      }
+
+      function sectionHtml(pos) {
+        const arr = data.by_position[pos] || [];
+        const wins = arr.filter(c => c.wr >= 0.60);
+        const neutrals = arr.filter(c => c.wr > 0.40 && c.wr < 0.60);
+        const losses = arr.filter(c => c.wr <= 0.40);
+        const total = data.total_maps_per_pos[pos] || 0;
+        return `
+          <div class="ml-section" data-section="${pos}">
+            <div class="meta" style="color:var(--muted);font-size:12px;margin-bottom:6px">${arr.length} picks com n≥${data.min_games} · ${total} mapas totais nessa posição</div>
+            <h3>✅ Vencedores (WR ≥60%) — ${wins.length}</h3>
+            <div class="ml-grid">${wins.map(cardHtml).join('') || '<div style="color:var(--muted);font-size:12px">nenhum</div>'}</div>
+            <h3>➖ Neutros (40% &lt; WR &lt; 60%) — ${neutrals.length}</h3>
+            <div class="ml-grid">${neutrals.map(cardHtml).join('') || '<div style="color:var(--muted);font-size:12px">nenhum</div>'}</div>
+            <h3>❌ Perdedores (WR ≤40%) — ${losses.length}</h3>
+            <div class="ml-grid">${losses.map(cardHtml).join('') || '<div style="color:var(--muted);font-size:12px">nenhum</div>'}</div>
+          </div>
+        `;
+      }
+
+      root.innerHTML = `
+        <div class="ml-header">
+          <h2>Método ML — Champion Winrate</h2>
+          <div class="meta">5 majors (LPL · LCK · LEC · CBLOL · LCS) · Split atual: ${data.split_label} · Filtro: n≥${data.min_games} · Fonte: Oracle's Elixir</div>
+        </div>
+        <div class="ml-pos-nav">
+          ${['top','jng','mid','bot','sup'].map((p, i) => `<div class="ml-pos ${i===0?'active':''}" data-pos="${p}">${POS_LABELS[p]}</div>`).join('')}
+        </div>
+        ${['top','jng','mid','bot','sup'].map((p, i) => sectionHtml(p).replace('ml-section', i===0 ? 'ml-section active' : 'ml-section')).join('')}
+      `;
+
+      // Position nav
+      root.querySelectorAll('.ml-pos').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const pos = btn.dataset.pos;
+          root.querySelectorAll('.ml-pos').forEach(b => b.classList.toggle('active', b === btn));
+          root.querySelectorAll('.ml-section').forEach(s => s.classList.toggle('active', s.dataset.section === pos));
+        });
+      });
+    }
+    loadMlData();
+
+    // ===== Método tab — fetch dynamic stats from cron output =====
+    const STATS_URL = '../cron-data/dashboard_stats.json';
+    function dotClassByHit(hit) {
+      if (hit >= 70) return 'green';
+      if (hit >= 55) return 'yellow';
+      return 'red';
+    }
+    function rowHtml(label, sub, hit, n) {
+      const dot = dotClassByHit(hit);
+      const subHtml = sub ? `<span class="liga">${sub}</span>` : '';
+      return `<div class="method-row"><span class="name"><span class="method-dot ${dot}"></span>${label} ${subHtml}</span><span><span class="pct ${dot}">${hit}%</span><span class="n">n=${n}</span></span></div>`;
+    }
+    function cardHtml(title, rows) {
+      return `<div class="method-card"><h3>${title}</h3>${rows.join('')}</div>`;
+    }
+    async function loadMethodStats() {
+      try {
+        const res = await fetch(STATS_URL + '?v=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('fetch failed');
+        const d = await res.json();
+        // Header
+        const upd = new Date(d.generated_at);
+        const updStr = upd.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        const updEl = document.getElementById('methodUpdated');
+        if (updEl) updEl.textContent = `Atualizado ${updStr} (auto)`;
+        // Stats
+        const statsEl = document.getElementById('methodStats');
+        const profitFmt = d.backtest.profit.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+        statsEl.innerHTML = `
+          <div class="stat"><div class="label">Jogos 2-peel</div><div class="value">${d.backtest.n}</div></div>
+          <div class="stat"><div class="label">Hit Under</div><div class="value green">${d.backtest.hit.toFixed(1).replace('.',',')}%</div></div>
+          <div class="stat"><div class="label">Lucro líq.</div><div class="value green">R$ ${profitFmt}</div></div>
+          <div class="stat"><div class="label">ROI</div><div class="value green">+${d.backtest.roi.toFixed(1).replace('.',',')}%</div></div>
+          <div class="stat"><div class="label">Breakeven</div><div class="value">${d.backtest.breakeven.toFixed(1).replace('.',',')}%</div></div>
+        `;
+        // Cards
+        const grid = document.getElementById('methodGrid');
+        const ligaRows = d.ligas.map(l => rowHtml(l.name, '', l.hit, l.n));
+        const supRows = d.supports.map(s => rowHtml(s.name, '', s.hit, s.n));
+        const teamsBons = d.teams.filter(t => t.hit >= 70).map(t => rowHtml(t.name, t.lg, t.hit, t.n));
+        const teamsCuidado = d.teams.filter(t => t.hit < 70).map(t => rowHtml(t.name, t.lg, t.hit, t.n));
+        const champRows = d.champs.map(c => rowHtml(c.champ, c.role === 'bottom' ? 'adc' : (c.role === 'jungle' ? 'jg' : c.role), c.hit, c.n));
+        grid.innerHTML = [
+          cardHtml('Ligas', ligaRows),
+          cardHtml('Supports peel', supRows),
+          cardHtml('Times — bons pra Under', teamsBons),
+          cardHtml('Times — cuidado / não apostar', teamsCuidado),
+          cardHtml('Bonecos por lane (n≥8)', champRows),
+        ].join('');
+      } catch (e) {
+        console.warn('Stats fetch failed, mantendo HTML estático:', e);
+      }
+    }
+    loadMethodStats();
+
+    // ===== Minhas bets reais — fetch real_bets_method.json =====
+    const REAL_BETS_URL = '../cron-data/real_bets_method.json';
+    function fmtBRL(n) {
+      const sign = n >= 0 ? '+' : '−';
+      return `${sign}R$ ${Math.abs(n).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+    }
+    function valueClass(n) { return n > 0 ? 'green' : (n < 0 ? 'red' : ''); }
+    async function loadMyBets() {
+      try {
+        const res = await fetch(REAL_BETS_URL + '?v=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('fetch failed');
+        const d = await res.json();
+        const total = d.by_trigger.method_total;
+        const peel2 = d.by_trigger['2peel'];
+        const peel1f = d.by_trigger['1peel+flex'];
+
+        // Header
+        const updEl = document.getElementById('myBetsUpdated');
+        if (updEl) {
+          const upd = new Date(d.generated_at);
+          const updStr = upd.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+          updEl.textContent = `Atualizado ${updStr} (auto)`;
+        }
+
+        // KPIs
+        const profitCls = valueClass(total.profit);
+        const roiCls = valueClass(total.roi);
+        document.getElementById('myBetsStats').innerHTML = `
+          <div class="stat"><div class="label">Bets método</div><div class="value">${total.n}</div></div>
+          <div class="stat"><div class="label">Hit Under</div><div class="value ${valueClass(total.hit - 54.1)}">${total.hit.toFixed(1).replace('.',',')}%</div></div>
+          <div class="stat"><div class="label">Lucro líq.</div><div class="value ${profitCls}">${fmtBRL(total.profit)}</div></div>
+          <div class="stat"><div class="label">ROI</div><div class="value ${roiCls}">${total.roi >= 0 ? '+' : ''}${total.roi.toFixed(1).replace('.',',')}%</div></div>
+          <div class="stat"><div class="label">Stake total</div><div class="value">R$ ${total.stake.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</div></div>
+        `;
+
+        // Cards: por trigger, por flex, por liga
+        const triggerCard = `
+          <div class="method-card">
+            <h3>Por trigger</h3>
+            <div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(peel2.hit)}"></span>2peel puro</span><span><span class="pct ${dotClassByHit(peel2.hit)}">${peel2.hit.toFixed(1).replace('.',',')}%</span><span class="n">n=${peel2.n}</span></span></div>
+            <div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(peel1f.hit)}"></span>1peel+flex</span><span><span class="pct ${dotClassByHit(peel1f.hit)}">${peel1f.hit.toFixed(1).replace('.',',')}%</span><span class="n">n=${peel1f.n}</span></span></div>
+            <div class="method-row" style="border-top:1px solid var(--border-soft); margin-top:6px; padding-top:8px"><span class="name" style="font-weight:700"><span class="method-dot ${dotClassByHit(total.hit)}"></span>Total método</span><span><span class="pct ${dotClassByHit(total.hit)}">${total.hit.toFixed(1).replace('.',',')}%</span><span class="n">n=${total.n}</span></span></div>
+            <div class="method-row" style="font-size:12px; color:var(--muted)"><span class="name">Lucro 2peel</span><span><span class="pct ${valueClass(peel2.profit)}">${fmtBRL(peel2.profit)}</span></span></div>
+            <div class="method-row" style="font-size:12px; color:var(--muted)"><span class="name">Lucro 1peel+flex</span><span><span class="pct ${valueClass(peel1f.profit)}">${fmtBRL(peel1f.profit)}</span></span></div>
+          </div>
+        `;
+        const flexRows = Object.entries(d.flex_breakdown || {}).sort((a,b)=>b[1].n-a[1].n).map(([name, s]) =>
+          `<div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(s.hit)}"></span>${name}</span><span><span class="pct ${dotClassByHit(s.hit)}">${s.hit.toFixed(1).replace('.',',')}%</span><span class="n">n=${s.n}</span></span></div>`
+        ).join('');
+        const flexCard = flexRows ? `<div class="method-card"><h3>1peel+flex — por flex</h3>${flexRows}<div class="method-row" style="font-size:11px; color:var(--muted); margin-top:6px"><span>Bard só conta em LEC (regra do método)</span></div></div>` : '';
+
+        const ligaRows = Object.entries(d.by_league || {}).sort((a,b)=>b[1].profit-a[1].profit).map(([lg, s]) =>
+          `<div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(s.hit)}"></span>${lg}</span><span><span class="pct ${valueClass(s.profit)}">${fmtBRL(s.profit)}</span><span class="n">n=${s.n}</span></span></div>`
+        ).join('');
+        const ligaCard = ligaRows ? `<div class="method-card"><h3>Por liga (lucro)</h3>${ligaRows}</div>` : '';
+
+        document.getElementById('myBetsGrid').innerHTML = triggerCard + flexCard + ligaCard;
+      } catch (e) {
+        console.warn('My bets fetch failed:', e);
+        const desc = document.getElementById('myBetsUpdated');
+        if (desc) desc.textContent = '(falhou ao carregar — talvez ainda não tenha rodado o cron)';
+      }
+    }
+    loadMyBets();
+  </script>
+</body>
+</html>

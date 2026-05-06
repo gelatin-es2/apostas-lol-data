@@ -73,6 +73,12 @@ jobs:
         run: node rebuild_dashboard_stats_cron.cjs
         continue-on-error: true
 
+      # Compute real bets method stats (aplicando regra Bardo só LEC) — pra dashboard frontend
+      - name: Compute real bets method stats
+        if: env.SUPABASE_SECRET_KEY != ''
+        run: node compute_real_bets_method.cjs
+        continue-on-error: true
+
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
