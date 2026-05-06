@@ -43,13 +43,14 @@ const POLYMARKET_TEAM = {
   'TT':'tt','LGD':'lgd','RA':'ra','UP':'up',
   // LCK
   'T1':'t1','GEN':'gen','KT':'kt','HLE':'hle','DK':'dk','BRO':'bro','NS':'ns',
-  'DRX':'drx','DNS':'dns','BFX':'bfx',
+  'DRX':'drx','KRX':'krx','DNS':'dns','BFX':'bfx',
   // LEC
-  'G2':'g2','FNC':'fnc','MAD':'mad','KOI':'koi','BDS':'bds','GX':'gx','TH':'th',
-  'KC':'kc','VIT':'vit','RGE':'rge','NAVI':'navi','SHFT':'shft','SK':'sk',
+  'G2':'g2','FNC':'fnc','MAD':'mad','KOI':'koi','MKOI':'mkoi','BDS':'bds',
+  'GX':'gx','TH':'th','KC':'kc','KCB':'kcb','LR':'lr','VIT':'vit','RGE':'rge',
+  'NAVI':'navi','SHFT':'shft','SK':'sk',
   // CBLOL
-  'LOUD':'loud','PNG':'png','FUR':'fur','RED':'red','KBM':'kbm','VKS':'vks',
-  'INTZ':'intz','ITZ':'itz','FLX':'flx','LEV':'lev','FX':'fx','LOS':'los',
+  'LOUD':'loud','PNG':'png','PAIN':'pain','FUR':'fur','RED':'red','KBM':'kbm',
+  'VKS':'vks','INTZ':'intz','ITZ':'itz','FLX':'flx','LEV':'lev','FX':'fx','LOS':'los',
 };
 
 const argv = process.argv.slice(2);
