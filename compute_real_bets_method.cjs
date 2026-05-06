@@ -92,6 +92,14 @@ function fetchAllBets(supabaseUrl, supabaseKey) {
   });
 }
 
+function pickKind(bet) {
+  const lower = (bet.pick || '').toLowerCase();
+  if (/menos|under/.test(lower)) return 'under';
+  if (/mais|over/.test(lower)) return 'over';
+  if (/money|vencedor|resultado/.test((bet.market || '').toLowerCase())) return 'moneyline';
+  return 'outro';
+}
+
 (async () => {
   const { supabaseUrl, supabaseKey } = loadConfig();
   const all = await fetchAllBets(supabaseUrl, supabaseKey);
@@ -105,6 +113,12 @@ function fetchAllBets(supabaseUrl, supabaseKey) {
   }
 
   const both = [...by_trigger['2peel'], ...by_trigger['1peel+flex']];
+
+  // Bets FORA do método — separadas por tipo de pick
+  const offMethod = by_trigger.none;
+  const off_under = offMethod.filter(b => pickKind(b) === 'under');
+  const off_over = offMethod.filter(b => pickKind(b) === 'over');
+  const off_ml = offMethod.filter(b => pickKind(b) === 'moneyline');
 
   // Breakdown 1peel+flex por flex específico (Bard, Rakan, Alistar)
   const flexBreakdown = {};
@@ -142,6 +156,16 @@ function fetchAllBets(supabaseUrl, supabaseKey) {
       '2peel': aggregate(by_trigger['2peel']),
       '1peel+flex': aggregate(by_trigger['1peel+flex']),
       method_total: aggregate(both),
+    },
+    discipline: {
+      following_method: aggregate(both),
+      not_following_method: aggregate(offMethod),
+      diff_profit: +(aggregate(both).profit - aggregate(offMethod).profit).toFixed(2),
+      not_following_breakdown: {
+        under: aggregate(off_under),
+        over: aggregate(off_over),
+        moneyline: aggregate(off_ml),
+      },
     },
     flex_breakdown,
     by_league,

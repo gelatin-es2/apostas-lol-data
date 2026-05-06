@@ -651,6 +651,17 @@
     </div>
 
     <div class="method-grid" id="myBetsGrid"></div>
+
+    <!-- ============= DISCIPLINA vs MÉTODO ============= -->
+    <div class="method-summary" id="disciplineSummary" style="margin-top:32px">
+      <h2>Disciplina — quando seguiu o método vs quando não seguiu</h2>
+      <div class="desc">
+        Comparação direta. <strong>Seguiu</strong> = bet com trigger 2peel ou 1peel+flex válido. <strong>Não seguiu</strong> = qualquer bet sem esses triggers (Under sem trigger, Over, Moneyline). <span id="disciplineUpdated"></span>
+      </div>
+      <div class="stats" id="disciplineStats"></div>
+    </div>
+
+    <div class="method-grid" id="disciplineGrid"></div>
   </main>
 
   <main class="container tab-pane" data-pane="ml">
@@ -1233,6 +1244,42 @@
         const ligaCard = ligaRows ? `<div class="method-card"><h3>Por liga (lucro)</h3>${ligaRows}</div>` : '';
 
         document.getElementById('myBetsGrid').innerHTML = triggerCard + flexCard + ligaCard;
+
+        // === Disciplina vs Método ===
+        if (d.discipline) {
+          const disc = d.discipline;
+          const fol = disc.following_method;
+          const off = disc.not_following_method;
+          document.getElementById('disciplineUpdated').textContent = `(diff: ${fmtBRL(disc.diff_profit)} entre seguir e não seguir)`;
+          document.getElementById('disciplineStats').innerHTML = `
+            <div class="stat"><div class="label">✅ Seguiu método</div><div class="value">${fol.n} bets</div></div>
+            <div class="stat"><div class="label">→ Lucro</div><div class="value ${valueClass(fol.profit)}">${fmtBRL(fol.profit)}</div></div>
+            <div class="stat"><div class="label">❌ Não seguiu</div><div class="value">${off.n} bets</div></div>
+            <div class="stat"><div class="label">→ Lucro</div><div class="value ${valueClass(off.profit)}">${fmtBRL(off.profit)}</div></div>
+            <div class="stat"><div class="label">Diferença</div><div class="value ${valueClass(disc.diff_profit)}">${fmtBRL(disc.diff_profit)}</div></div>
+          `;
+
+          // Breakdown card
+          const br = disc.not_following_breakdown || {};
+          const offRows = [];
+          if (br.under?.n > 0) offRows.push(`<div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(br.under.hit)}"></span>Under fora método</span><span><span class="pct ${valueClass(br.under.profit)}">${fmtBRL(br.under.profit)}</span><span class="n">n=${br.under.n}</span></span></div>`);
+          if (br.over?.n > 0)  offRows.push(`<div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(br.over.hit)}"></span>Over fora método</span><span><span class="pct ${valueClass(br.over.profit)}">${fmtBRL(br.over.profit)}</span><span class="n">n=${br.over.n}</span></span></div>`);
+          if (br.moneyline?.n > 0) offRows.push(`<div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(br.moneyline.hit)}"></span>Moneyline</span><span><span class="pct ${valueClass(br.moneyline.profit)}">${fmtBRL(br.moneyline.profit)}</span><span class="n">n=${br.moneyline.n}</span></span></div>`);
+
+          const compareCard = `
+            <div class="method-card">
+              <h3>Seguir vs não seguir</h3>
+              <div class="method-row"><span class="name"><span class="method-dot green"></span>Seguindo método</span><span><span class="pct green">${fol.hit.toFixed(1).replace('.',',')}%</span><span class="n">n=${fol.n}</span></span></div>
+              <div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(off.hit)}"></span>Fora do método</span><span><span class="pct ${dotClassByHit(off.hit)}">${off.hit.toFixed(1).replace('.',',')}%</span><span class="n">n=${off.n}</span></span></div>
+              <div class="method-row" style="border-top:1px solid var(--border-soft); margin-top:6px; padding-top:8px"><span class="name" style="font-weight:700">Lucro seguindo</span><span><span class="pct green">${fmtBRL(fol.profit)}</span></span></div>
+              <div class="method-row"><span class="name" style="font-weight:700">Lucro fora</span><span><span class="pct ${valueClass(off.profit)}">${fmtBRL(off.profit)}</span></span></div>
+              <div class="method-row" style="border-top:1px solid var(--border-soft); margin-top:6px; padding-top:8px; font-size:13px"><span class="name" style="font-weight:700">💸 Custo da indisciplina</span><span><span class="pct ${valueClass(disc.diff_profit)}" style="font-size:14px">${fmtBRL(disc.diff_profit)}</span></span></div>
+            </div>
+          `;
+          const breakdownCard = offRows.length > 0 ? `<div class="method-card"><h3>Bets fora do método</h3>${offRows.join('')}</div>` : '';
+
+          document.getElementById('disciplineGrid').innerHTML = compareCard + breakdownCard;
+        }
       } catch (e) {
         console.warn('My bets fetch failed:', e);
         const desc = document.getElementById('myBetsUpdated');

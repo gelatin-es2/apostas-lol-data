@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-06T20:09:32.927Z",
+  "generated_at": "2026-05-06T21:12:15.974Z",
   "total_bets_universe": 107,
   "total_settled": 105,
   "method_rules": {
@@ -56,6 +56,61 @@
       "profit": 4924.64,
       "roi": 23.2,
       "breakeven": 54.1
+    }
+  },
+  "discipline": {
+    "following_method": {
+      "n": 47,
+      "wins": 35,
+      "losses": 12,
+      "hit": 74.5,
+      "stake": 21261.53,
+      "profit": 4924.64,
+      "roi": 23.2,
+      "breakeven": 54.1
+    },
+    "not_following_method": {
+      "n": 58,
+      "wins": 28,
+      "losses": 30,
+      "hit": 48.3,
+      "stake": 24626.91,
+      "profit": -4962.79,
+      "roi": -20.2,
+      "breakeven": 54.1
+    },
+    "diff_profit": 9887.43,
+    "not_following_breakdown": {
+      "under": {
+        "n": 54,
+        "wins": 25,
+        "losses": 29,
+        "hit": 46.3,
+        "stake": 22726.91,
+        "profit": -5337.79,
+        "roi": -23.5,
+        "breakeven": 54.1
+      },
+      "over": {
+        "n": 3,
+        "wins": 3,
+        "losses": 0,
+        "hit": 100,
+        "stake": 1300,
+        "profit": 975,
+        "roi": 75,
+        "breakeven": 54.1
+      },
+      "moneyline": {
+        "n": 1,
+        "wins": 0,
+        "losses": 1,
+        "hit": 0,
+        "stake": 600,
+        "profit": -600,
+        "roi": -100,
+        "breakeven": 54.1
+      }
     }
   },
   "flex_breakdown": {
