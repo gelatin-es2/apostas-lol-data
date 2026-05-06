@@ -1,35 +1,14 @@
 {
-  "captured_at": "2026-05-06T18:44:35.164Z",
+  "captured_at": "2026-05-06T18:55:50.538Z",
   "range": {
     "from": "2026-05-06",
     "to": "2026-05-08"
   },
   "target_odd": 1.83,
-  "matches_total": 14,
-  "matches_with_polymarket_event": 9,
+  "matches_total": 10,
+  "matches_with_polymarket_event": 7,
   "matches_with_total_kills": 7,
   "captured": [
-    {
-      "match_id_lolesports": "115548128963037531",
-      "league": "LCK",
-      "match_date": "2026-05-06",
-      "match_start_utc": "2026-05-06T08:00:00Z",
-      "team_a": "NS",
-      "team_b": "GEN",
-      "polymarket_event_slug": "lol-gen-ns-2026-05-06",
-      "polymarket_event_title": "LoL: Gen.G vs Nongshim Red Force (BO3) - LCK Rounds 1-2",
-      "total_kills_markets_found": 0,
-      "games": []
-    },
-    {
-      "match_id_lolesports": "115548128962971855",
-      "league": "LCK",
-      "match_date": "2026-05-06",
-      "team_a": "DNS",
-      "team_b": "HLE",
-      "polymarket_event_slug": null,
-      "reason": "event_not_found_on_polymarket"
-    },
     {
       "match_id_lolesports": "115548128963037539",
       "league": "LCK",
@@ -57,16 +36,16 @@
         },
         {
           "game_number": 1,
-          "line": 26.5,
-          "under_price": 0.5,
-          "over_price": 0.5,
-          "under_odd": 2,
-          "over_odd": 2,
-          "market_id": "2157452",
-          "question": "Total Kills Over/Under 26.5 in Game 1?",
+          "line": 30.5,
+          "under_price": 0.495,
+          "over_price": 0.505,
+          "under_odd": 2.02,
+          "over_odd": 1.98,
+          "market_id": "2157459",
+          "question": "Total Kills Over/Under 30.5 in Game 1?",
           "sportsMarketType": "kill_over_under_game",
           "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.17,
+          "distance_to_target": 0.15,
           "alternatives_count": 5
         }
       ]
@@ -97,27 +76,6 @@
       "team_b": "GEN",
       "polymarket_event_slug": null,
       "reason": "event_not_found_on_polymarket"
-    },
-    {
-      "match_id_lolesports": "115615926677896655",
-      "league": "LPL",
-      "match_date": "2026-05-06",
-      "team_a": "WE",
-      "team_b": "IG",
-      "polymarket_event_slug": null,
-      "reason": "event_not_found_on_polymarket"
-    },
-    {
-      "match_id_lolesports": "115615926677896675",
-      "league": "LPL",
-      "match_date": "2026-05-06",
-      "match_start_utc": "2026-05-06T11:00:00Z",
-      "team_a": "JDG",
-      "team_b": "TES",
-      "polymarket_event_slug": "lol-tes-jdg-2026-05-06",
-      "polymarket_event_title": "LoL: Top Esports vs JD Gaming (BO3) - LPL Group Ascend",
-      "total_kills_markets_found": 0,
-      "games": []
     },
     {
       "match_id_lolesports": "115615926677896699",
