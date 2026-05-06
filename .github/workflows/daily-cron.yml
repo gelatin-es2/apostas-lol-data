@@ -79,6 +79,13 @@ jobs:
         run: node compute_real_bets_method.cjs
         continue-on-error: true
 
+      # Tier 2 EU analysis (LFL/LES/LIT/EMEA Masters etc) — split 2 inteiro, standalone
+      # Roda todo dia mas só atualiza se há novos games (idempotente).
+      # Importante pra Qua/Qui (dias que essas ligas jogam, antes das 12h BRT)
+      - name: Analyze Tier 2 EU (LFL/LES/LIT)
+        run: node analyze_tier2_eu.cjs
+        continue-on-error: true
+
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"

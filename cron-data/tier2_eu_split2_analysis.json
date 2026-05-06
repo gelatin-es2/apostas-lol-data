@@ -1,0 +1,302 @@
+{
+  "generated_at": "2026-05-06T20:25:46.206Z",
+  "split_start": "2026-04-01",
+  "line": 29.5,
+  "stake": 100,
+  "odd": 1.85,
+  "leagues_analyzed": [
+    "EMEA Masters",
+    "LFL",
+    "NLC",
+    "Prime League",
+    "LES",
+    "Hitpoint Masters",
+    "LIT",
+    "Liga Portuguesa",
+    "Rift Legends"
+  ],
+  "totals": {
+    "games_analyzed": 313,
+    "2peel": {
+      "n": 87,
+      "hit": 51.7,
+      "profit": -375,
+      "roi": -4.3,
+      "breakeven": 54.1
+    },
+    "1peel+flex": {
+      "n": 57,
+      "hit": 49.1,
+      "profit": -520,
+      "roi": -9.1,
+      "breakeven": 54.1
+    },
+    "method_total": {
+      "n": 144,
+      "hit": 50.7,
+      "profit": -895,
+      "roi": -6.2,
+      "breakeven": 54.1
+    }
+  },
+  "by_league": {
+    "EMEA Masters": {
+      "total_games": 15,
+      "2peel": {
+        "n": 5,
+        "hit": 100,
+        "profit": 425,
+        "roi": 85,
+        "breakeven": 54.1
+      },
+      "1peel+flex": {
+        "n": 2,
+        "hit": 50,
+        "profit": -15,
+        "roi": -7.5,
+        "breakeven": 54.1
+      },
+      "method_total": {
+        "n": 7,
+        "hit": 85.7,
+        "profit": 410,
+        "roi": 58.6,
+        "breakeven": 54.1
+      }
+    },
+    "LFL": {
+      "total_games": 48,
+      "2peel": {
+        "n": 10,
+        "hit": 80,
+        "profit": 480,
+        "roi": 48,
+        "breakeven": 54.1
+      },
+      "1peel+flex": {
+        "n": 12,
+        "hit": 58.3,
+        "profit": 95,
+        "roi": 7.9,
+        "breakeven": 54.1
+      },
+      "method_total": {
+        "n": 22,
+        "hit": 68.2,
+        "profit": 575,
+        "roi": 26.1,
+        "breakeven": 54.1
+      }
+    },
+    "NLC": {
+      "total_games": 0,
+      "2peel": {
+        "n": 0,
+        "hit": 0,
+        "profit": 0,
+        "roi": 0,
+        "breakeven": 54.1
+      },
+      "1peel+flex": {
+        "n": 0,
+        "hit": 0,
+        "profit": 0,
+        "roi": 0,
+        "breakeven": 54.1
+      },
+      "method_total": {
+        "n": 0,
+        "hit": 0,
+        "profit": 0,
+        "roi": 0,
+        "breakeven": 54.1
+      }
+    },
+    "Prime League": {
+      "total_games": 74,
+      "2peel": {
+        "n": 20,
+        "hit": 55,
+        "profit": 35,
+        "roi": 1.8,
+        "breakeven": 54.1
+      },
+      "1peel+flex": {
+        "n": 11,
+        "hit": 54.5,
+        "profit": 10,
+        "roi": 0.9,
+        "breakeven": 54.1
+      },
+      "method_total": {
+        "n": 31,
+        "hit": 54.8,
+        "profit": 45,
+        "roi": 1.5,
+        "breakeven": 54.1
+      }
+    },
+    "LES": {
+      "total_games": 40,
+      "2peel": {
+        "n": 12,
+        "hit": 66.7,
+        "profit": 280,
+        "roi": 23.3,
+        "breakeven": 54.1
+      },
+      "1peel+flex": {
+        "n": 9,
+        "hit": 66.7,
+        "profit": 210,
+        "roi": 23.3,
+        "breakeven": 54.1
+      },
+      "method_total": {
+        "n": 21,
+        "hit": 66.7,
+        "profit": 490,
+        "roi": 23.3,
+        "breakeven": 54.1
+      }
+    },
+    "Hitpoint Masters": {
+      "total_games": 43,
+      "2peel": {
+        "n": 16,
+        "hit": 6.3,
+        "profit": -1415,
+        "roi": -88.4,
+        "breakeven": 54.1
+      },
+      "1peel+flex": {
+        "n": 7,
+        "hit": 0,
+        "profit": -700,
+        "roi": -100,
+        "breakeven": 54.1
+      },
+      "method_total": {
+        "n": 23,
+        "hit": 4.3,
+        "profit": -2115,
+        "roi": -92,
+        "breakeven": 54.1
+      }
+    },
+    "LIT": {
+      "total_games": 42,
+      "2peel": {
+        "n": 8,
+        "hit": 75,
+        "profit": 310,
+        "roi": 38.8,
+        "breakeven": 54.1
+      },
+      "1peel+flex": {
+        "n": 7,
+        "hit": 57.1,
+        "profit": 40,
+        "roi": 5.7,
+        "breakeven": 54.1
+      },
+      "method_total": {
+        "n": 15,
+        "hit": 66.7,
+        "profit": 350,
+        "roi": 23.3,
+        "breakeven": 54.1
+      }
+    },
+    "Liga Portuguesa": {
+      "total_games": 8,
+      "2peel": {
+        "n": 2,
+        "hit": 0,
+        "profit": -200,
+        "roi": -100,
+        "breakeven": 54.1
+      },
+      "1peel+flex": {
+        "n": 1,
+        "hit": 100,
+        "profit": 85,
+        "roi": 85,
+        "breakeven": 54.1
+      },
+      "method_total": {
+        "n": 3,
+        "hit": 33.3,
+        "profit": -115,
+        "roi": -38.3,
+        "breakeven": 54.1
+      }
+    },
+    "Rift Legends": {
+      "total_games": 43,
+      "2peel": {
+        "n": 14,
+        "hit": 42.9,
+        "profit": -290,
+        "roi": -20.7,
+        "breakeven": 54.1
+      },
+      "1peel+flex": {
+        "n": 8,
+        "hit": 37.5,
+        "profit": -245,
+        "roi": -30.6,
+        "breakeven": 54.1
+      },
+      "method_total": {
+        "n": 22,
+        "hit": 40.9,
+        "profit": -535,
+        "roi": -24.3,
+        "breakeven": 54.1
+      }
+    }
+  },
+  "games_sample": [
+    {
+      "league": "EMEA Masters",
+      "match_date": "2026-04-07",
+      "teams": "FK v BIG",
+      "sups": "Seraphine/Bard",
+      "kills": 29,
+      "trigger": "1peel+flex"
+    },
+    {
+      "league": "EMEA Masters",
+      "match_date": "2026-04-07",
+      "teams": "FK v BIG",
+      "sups": "Rakan/Nami",
+      "kills": 43,
+      "trigger": "1peel+flex"
+    },
+    {
+      "league": "EMEA Masters",
+      "match_date": "2026-04-07",
+      "teams": "FK v BIG",
+      "sups": "Karma/Lulu",
+      "kills": 21,
+      "trigger": "2peel"
+    },
+    {
+      "league": "EMEA Masters",
+      "match_date": "2026-04-07",
+      "teams": "MISA v USE",
+      "sups": "Nami/Lulu",
+      "kills": 17,
+      "trigger": "2peel"
+    },
+    {
+      "league": "EMEA Masters",
+      "match_date": "2026-04-07",
+      "teams": "MISA v USE",
+      "sups": "Karma/Seraphine",
+      "kills": 26,
+      "trigger": "2peel"
+    }
+  ]
+}

@@ -27,10 +27,15 @@ const TARGET_ODD = 1.83; // regra CEO: linha do Polymarket mais próxima dessa o
 const TARGET_PROB = 1 / TARGET_ODD;
 
 const LEAGUE_IDS = {
+  // Tier 1
   LCK:   '98767991310872058',
   LPL:   '98767991314006698',
   LEC:   '98767991302996019',
   CBLOL: '98767991332355509',
+  // Tier 2 EU operadas (LFL/LES/LIT — método rentável Split 2 conforme analyze_tier2_eu.cjs)
+  LFL:   '105266103462388553',
+  LES:   '105266074488398661',
+  LIT:   '105266094998946936',
 };
 
 // Mapping lolesports team code → polymarket slug fragment.
