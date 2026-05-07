@@ -476,6 +476,7 @@
   <nav class="tabs">
     <div class="tab active" data-tab="tracker">Tracker</div>
     <div class="tab" data-tab="metodo">Método 2-peel</div>
+    <div class="tab" data-tab="lfl">LFL · tier 2</div>
     <div class="tab" data-tab="ml">Método ML</div>
   </nav>
 
@@ -662,6 +663,32 @@
     </div>
 
     <div class="method-grid" id="disciplineGrid"></div>
+  </main>
+
+  <main class="container tab-pane" data-pane="lfl">
+    <div class="method-summary">
+      <h2>LFL · Ligue Française · Spring 2026</h2>
+      <div class="desc" id="lflDesc"><strong>Tier 2 EU · Split 2 2026</strong> · método 2-peel Under · fair line dinâmica (avg+avg-1 por jogo) · stake R$100 · odd 1.85 · <span id="lflUpdated">carregando…</span></div>
+      <div class="stats" id="lflStats">
+        <div class="stat"><div class="label">Jogos 2-peel</div><div class="value">…</div></div>
+        <div class="stat"><div class="label">Hit Under</div><div class="value green">…</div></div>
+        <div class="stat"><div class="label">Lucro líq.</div><div class="value green">…</div></div>
+        <div class="stat"><div class="label">ROI</div><div class="value green">…</div></div>
+        <div class="stat"><div class="label">Breakeven</div><div class="value">54,1%</div></div>
+      </div>
+    </div>
+
+    <div class="method-grid" id="lflGrid">
+      <div class="loading">Carregando dados LFL…</div>
+    </div>
+
+    <div class="legend">
+      <strong>🟢 verde</strong> = lucra com folga (hit ≥ 70%) ·
+      <strong>🟡 amarelo</strong> = lucra mas no fio (55-70%, stake reduzido) ·
+      <strong>🔴 vermelho</strong> = perde dinheiro (&lt; 55%, NÃO apostar)<br>
+      <strong>Fonte</strong>: backtest dinâmico Split 2 (>= 01/04/2026), fair line por jogo via livestats team avg.<br>
+      <strong>Por que só LFL aqui</strong>: das 3 ligas tier 2 EU operadas (LFL/LES/LIT), LFL é a única lucrativa em fair dinâmica com odd real ~1,75 (LES sangra com hit 43,5%, LIT marginal).
+    </div>
   </main>
 
   <main class="container tab-pane" data-pane="ml">
@@ -1186,6 +1213,49 @@
       }
     }
     loadMethodStats();
+
+    // ===== LFL tab — fetch tier 2 stats =====
+    const LFL_STATS_URL = '../cron-data/lfl_dashboard_stats.json';
+    async function loadLflStats() {
+      try {
+        const res = await fetch(LFL_STATS_URL + '?v=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('fetch failed');
+        const d = await res.json();
+        const upd = new Date(d.generated_at);
+        const updStr = upd.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        const updEl = document.getElementById('lflUpdated');
+        if (updEl) updEl.textContent = `Atualizado ${updStr} (auto)`;
+        const bt = d.backtest_2peel;
+        const statsEl = document.getElementById('lflStats');
+        const profitFmt = bt.profit.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+        const profitClass = bt.profit >= 0 ? 'green' : 'red';
+        const roiClass = bt.roi >= 0 ? 'green' : 'red';
+        const hitClass = bt.hit >= 54.1 ? 'green' : 'red';
+        statsEl.innerHTML = `
+          <div class="stat"><div class="label">Jogos 2-peel</div><div class="value">${bt.n}</div></div>
+          <div class="stat"><div class="label">Hit Under</div><div class="value ${hitClass}">${bt.hit.toFixed(1).replace('.',',')}%</div></div>
+          <div class="stat"><div class="label">Lucro líq.</div><div class="value ${profitClass}">R$ ${profitFmt}</div></div>
+          <div class="stat"><div class="label">ROI</div><div class="value ${roiClass}">${bt.roi >= 0 ? '+' : ''}${bt.roi.toFixed(1).replace('.',',')}%</div></div>
+          <div class="stat"><div class="label">Breakeven</div><div class="value">54,1%</div></div>
+        `;
+        const grid = document.getElementById('lflGrid');
+        const supRows = (d.supports_all || []).map(s => rowHtml(s.name, '', s.hit, s.n));
+        const teamsBons = (d.teams_all || []).filter(t => t.hit >= 70).map(t => rowHtml(t.name, '', t.hit, t.n));
+        const teamsCuidado = (d.teams_all || []).filter(t => t.hit < 70).map(t => rowHtml(t.name, '', t.hit, t.n));
+        const champRows = (d.champs_all || []).map(c => rowHtml(c.champ, c.role === 'bottom' ? 'adc' : (c.role === 'jungle' ? 'jg' : c.role), c.hit, c.n));
+        grid.innerHTML = [
+          cardHtml('Supports peel + flex', supRows),
+          cardHtml('Times — bons pra Under', teamsBons),
+          cardHtml('Times — cuidado / não apostar', teamsCuidado),
+          cardHtml('Bonecos por lane (n≥4)', champRows),
+        ].join('');
+      } catch (e) {
+        console.warn('LFL stats fetch failed:', e);
+        const grid = document.getElementById('lflGrid');
+        if (grid) grid.innerHTML = '<div class="loading">Falha ao carregar dados LFL.</div>';
+      }
+    }
+    loadLflStats();
 
     // ===== Minhas bets reais — fetch real_bets_method.json =====
     const REAL_BETS_URL = '../cron-data/real_bets_method.json';

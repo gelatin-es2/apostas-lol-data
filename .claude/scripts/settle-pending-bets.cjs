@@ -118,19 +118,23 @@ function tsRoundedTo10s(date) {
 }
 
 async function fetchGameWindow(gameId, matchStart) {
-  const targetMs = Math.min(
-    new Date(matchStart).getTime() + 6 * 3600 * 1000,
-    Date.now() - 60 * 1000,
-  );
+  // Guard: se matchStart é null/inválido, vira Date(null)=epoch 1970+6h e livestats
+  // retorna body vazio (jogo nem existia). Fallback pra "agora-60s" preserva safety.
+  const startMs = matchStart ? new Date(matchStart).getTime() : NaN;
+  const baseMs = Number.isFinite(startMs) && startMs > 0 ? startMs + 6 * 3600 * 1000 : Date.now() - 60 * 1000;
+  const targetMs = Math.min(baseMs, Date.now() - 60 * 1000);
   const startingTime = tsRoundedTo10s(new Date(targetMs));
   return fetchJson('feed.lolesports.com', `/livestats/v1/window/${gameId}?startingTime=${startingTime}`);
 }
 
-function extractGameData(window) {
+function extractGameData(window, trustCompleted) {
   const meta = window?.gameMetadata;
   if (!meta || !window.frames?.length) return null;
   const lastFrame = window.frames[window.frames.length - 1];
-  if (lastFrame.gameState !== 'finished') return { gameState: lastFrame.gameState };
+  // Riot API às vezes nunca publica frame com gameState='finished' mesmo quando
+  // eventDetails marca o game como completed. Se trustCompleted=true (eventDetails
+  // confirmou completed), usar último frame disponível pra extrair dados.
+  if (!trustCompleted && lastFrame.gameState !== 'finished') return { gameState: lastFrame.gameState };
 
   const picks = (md) => {
     const p = md.participantMetadata;
@@ -215,9 +219,14 @@ async function settleBet(supabaseUrl, supabaseKey, bet) {
   } catch (e) {
     return { bet_id: bet.id, status: 'error', reason: `livestats: ${e.message}` };
   }
-  const gd = extractGameData(win);
+  // game.state === 'completed' no eventDetails é a fonte autoritativa do "jogo terminou".
+  // Passamos trustCompleted=true pra extractGameData usar último frame disponível mesmo
+  // que gameState do frame esteja 'in_game' (Riot às vezes não publica frame final).
+  const gd = extractGameData(win, game.state === 'completed');
   if (!gd) return { bet_id: bet.id, status: 'error', reason: 'livestats_no_data' };
-  if (gd.gameState !== 'finished') return { bet_id: bet.id, status: 'skipped', reason: `game_window_state_${gd.gameState}` };
+  if (gd.gameState && gd.gameState !== 'finished' && game.state !== 'completed') {
+    return { bet_id: bet.id, status: 'skipped', reason: `game_window_state_${gd.gameState}` };
+  }
 
   // 4. decide outcome
   const outcome = decideOutcome(bet, gd);

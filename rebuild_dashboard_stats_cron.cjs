@@ -382,6 +382,29 @@ async function fetchLatestDdragonVersion() {
   const bt = stats2peel.backtest;
   console.error(`Backtest 2peel: n=${bt.n} hit=${bt.hit}% profit=R$${bt.profit} ROI=${bt.roi}%`);
 
+  // Export team avg kills (Split 2 inteiro) — usado pelo briefing pra calcular fair pros
+  // jogos do EWC qualifier (LCK/LEC/LPL), que não estão na API Riot mas reusam os mesmos times.
+  const teamAvgOut = {
+    generated_at: new Date().toISOString(),
+    split_start: SPLIT2_START,
+    fair_adjustment: FAIR_ADJUSTMENT,
+    teams: {},
+    league_avg: {},
+  };
+  for (const [tname, arr] of teamKillsList) {
+    if (arr.length === 0) continue;
+    teamAvgOut.teams[tname] = {
+      avg_kills: +(arr.reduce((a, b) => a + b, 0) / arr.length).toFixed(2),
+      n_games: arr.length,
+    };
+  }
+  for (const [lg, avg] of leagueAvg) {
+    teamAvgOut.league_avg[lg] = +avg.toFixed(2);
+  }
+  const teamAvgFile = path.join(outDir, 'team_avg_kills.json');
+  fs.writeFileSync(teamAvgFile, JSON.stringify(teamAvgOut, null, 2));
+  console.error(`Wrote: ${teamAvgFile} (${Object.keys(teamAvgOut.teams).length} teams)`);
+
   // === ML PICKS (winrate por champion × posição) ===
   console.error('[ML] computing winrates...');
   const ddv = await fetchLatestDdragonVersion();
