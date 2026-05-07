@@ -1073,7 +1073,7 @@
     });
 
     // ===== ML tab render =====
-    const ML_URL = '../cron-data/ml_picks.json';
+    const ML_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/ml_picks.json';
     async function loadMlData() {
       try {
         const res = await fetch(ML_URL + '?v=' + Date.now(), { cache: 'no-store' });
@@ -1160,7 +1160,7 @@
     loadMlData();
 
     // ===== Método tab — fetch dynamic stats from cron output =====
-    const STATS_URL = '../cron-data/dashboard_stats.json';
+    const STATS_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/dashboard_stats.json';
     function dotClassByHit(hit) {
       if (hit >= 70) return 'green';
       if (hit >= 55) return 'yellow';
@@ -1258,7 +1258,7 @@
     loadLflStats();
 
     // ===== Minhas bets reais — fetch real_bets_method.json =====
-    const REAL_BETS_URL = '../cron-data/real_bets_method.json';
+    const REAL_BETS_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/real_bets_method.json';
     function fmtBRL(n) {
       const sign = n >= 0 ? '+' : '−';
       return `${sign}R$ ${Math.abs(n).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
