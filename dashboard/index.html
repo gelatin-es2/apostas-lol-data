@@ -1215,7 +1215,7 @@
     loadMethodStats();
 
     // ===== LFL tab — fetch tier 2 stats =====
-    const LFL_STATS_URL = '../cron-data/lfl_dashboard_stats.json';
+    const LFL_STATS_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/lfl_dashboard_stats.json';
     async function loadLflStats() {
       try {
         const res = await fetch(LFL_STATS_URL + '?v=' + Date.now(), { cache: 'no-store' });
