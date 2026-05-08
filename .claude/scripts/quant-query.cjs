@@ -29,7 +29,7 @@
 const https = require('https');
 const { loadConfig } = require('./_load-config.cjs');
 
-const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','nami','milio'];
+const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
 const FLEX_ENGAGE = ['bard','rakan','alistar'];
 const FLEX_CANON = { bard: 'Bard', rakan: 'Rakan', alistar: 'Alistar' };
 

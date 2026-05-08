@@ -20,7 +20,7 @@ const { loadConfig } = require('./_load-config.cjs');
 const LOLES_KEY = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 
 // Manter sincronizado com analyze_yesterday.cjs:20-21
-const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','nami','milio'];
+const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
 const FLEX_ENGAGE = ['bard','rakan','alistar'];
 
 const argv = process.argv.slice(2);
@@ -121,8 +121,8 @@ async function fetchGameWindow(gameId, matchStart) {
   // Guard: se matchStart é null/inválido, vira Date(null)=epoch 1970+6h e livestats
   // retorna body vazio (jogo nem existia). Fallback pra "agora-60s" preserva safety.
   const startMs = matchStart ? new Date(matchStart).getTime() : NaN;
-  const baseMs = Number.isFinite(startMs) && startMs > 0 ? startMs + 6 * 3600 * 1000 : Date.now() - 60 * 1000;
-  const targetMs = Math.min(baseMs, Date.now() - 60 * 1000);
+  const baseMs = Number.isFinite(startMs) && startMs > 0 ? startMs + 6 * 3600 * 1000 : Date.now() - 200 * 1000;
+  const targetMs = Math.min(baseMs, Date.now() - 200 * 1000);
   const startingTime = tsRoundedTo10s(new Date(targetMs));
   return fetchJson('feed.lolesports.com', `/livestats/v1/window/${gameId}?startingTime=${startingTime}`);
 }

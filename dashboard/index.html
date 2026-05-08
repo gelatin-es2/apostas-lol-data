@@ -751,7 +751,8 @@
     }
 
     function computeKPIs(bets) {
-      const settled = bets.filter((b) => b.status !== 'pending');
+      // Settled = só green/red (cashout fica fora dos KPIs do método).
+      const settled = bets.filter((b) => b.status === 'green' || b.status === 'red');
       const wins = bets.filter((b) => b.status === 'green').length;
       const losses = bets.filter((b) => b.status === 'red').length;
       const pending = bets.filter((b) => b.status === 'pending').length;

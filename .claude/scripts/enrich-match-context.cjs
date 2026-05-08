@@ -15,7 +15,7 @@ const { loadConfig } = require('./_load-config.cjs');
 const LOLES_KEY = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 
 // Manter sincronizado com analyze_yesterday.cjs:20-21
-const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','nami','milio'];
+const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
 const FLEX_ENGAGE = ['bard','rakan','alistar'];
 
 // LEAGUE_IDS sem EWC (não está no lolesports — ver knowledge/lessons/2026-05-05-ewc-not-in-lolesports-api.md)
@@ -34,6 +34,7 @@ const LEAGUE_IDS = {
 
 const argv = process.argv.slice(2);
 const DRY_RUN = argv.includes('--dry-run');
+const FORCE = argv.includes('--force');
 const limitIdx = argv.indexOf('--limit');
 const LIMIT = limitIdx >= 0 ? parseInt(argv[limitIdx + 1], 10) : null;
 
@@ -241,13 +242,13 @@ async function processBet(supabaseUrl, supabaseKey, cache, bet) {
     mc?.lolesports_match_id &&
     mc.blue_picks?.support &&
     bet.raw_extraction?.compositions?.team_a?.picks?.support;
-  if (hasFullEnrichment) {
+  if (hasFullEnrichment && !FORCE) {
     result.status = 'skipped';
     result.reason = 'already_fully_enriched';
     return result;
   }
   // EWC já marcado também pula
-  if (mc?.coverage_status === 'ewc_not_in_lolesports') {
+  if (mc?.coverage_status === 'ewc_not_in_lolesports' && !FORCE) {
     result.status = 'skipped';
     result.reason = 'ewc_already_marked';
     return result;
@@ -429,7 +430,7 @@ async function processBet(supabaseUrl, supabaseKey, cache, bet) {
     }).on('error', reject);
   });
 
-  const target = all.filter(b => {
+  const target = FORCE ? all : all.filter(b => {
     const mc = b.raw_extraction?.match_context;
     const hasComp = !!b.raw_extraction?.compositions?.team_a?.picks?.support;
     // Já totalmente enriquecida

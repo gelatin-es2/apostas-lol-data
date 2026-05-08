@@ -88,7 +88,7 @@ const LEAGUE_IDS = {
   CBLOL: '98767991332355509',
 };
 
-const PEEL_PURE   = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','nami','milio'];
+const PEEL_PURE   = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
 const FLEX_ENGAGE = ['bard','rakan','alistar'];
 
 const HISTORY_DAYS = 21;        // janela pra construir avg dos times

@@ -17,6 +17,7 @@ const { loadConfig } = require('./.claude/scripts/_load-config.cjs');
 const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
 const FLEX_ENGAGE = ['bard','rakan','alistar'];
 const BARD_ONLY_IN = ['LEC']; // regra do método: Bardo só conta peel em LEC
+const SPLIT2_START = '2026-04-01';
 
 const norm = s => s ? String(s).toLowerCase().replace(/[\s.\-']/g,'') : '';
 const STDOUT_ONLY = process.argv.includes('--stdout');
@@ -102,7 +103,9 @@ function pickKind(bet) {
 
 (async () => {
   const { supabaseUrl, supabaseKey } = loadConfig();
-  const all = await fetchAllBets(supabaseUrl, supabaseKey);
+  const allRaw = await fetchAllBets(supabaseUrl, supabaseKey);
+  // Filtro Split 2: bet_datetime >= SPLIT2_START
+  const all = allRaw.filter(b => b.bet_datetime && b.bet_datetime >= SPLIT2_START);
   const settled = all.filter(b => b.status === 'green' || b.status === 'red');
 
   const by_trigger = { '2peel': [], '1peel+flex': [], 'none': [] };
