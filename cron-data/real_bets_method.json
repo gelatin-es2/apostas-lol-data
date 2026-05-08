@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-08T14:07:26.784Z",
+  "generated_at": "2026-05-08T14:45:18.110Z",
   "total_bets_universe": 125,
-  "total_settled": 122,
+  "total_settled": 119,
   "method_rules": {
     "peel_pure": [
       "soraka",
@@ -70,35 +70,35 @@
       "breakeven": 54.1
     },
     "not_following_method": {
-      "n": 66,
+      "n": 63,
       "wins": 33,
-      "losses": 33,
-      "hit": 50,
-      "stake": 29809.43,
-      "profit": -4826.31,
-      "roi": -16.2,
+      "losses": 30,
+      "hit": 52.4,
+      "stake": 27926.91,
+      "profit": -2943.79,
+      "roi": -10.5,
       "breakeven": 54.1
     },
-    "diff_profit": 9084.95,
+    "diff_profit": 7202.43,
     "not_following_breakdown": {
       "under": {
-        "n": 60,
+        "n": 59,
         "wins": 30,
-        "losses": 30,
-        "hit": 50,
-        "stake": 26326.91,
-        "profit": -3618.79,
-        "roi": -13.7,
+        "losses": 29,
+        "hit": 50.8,
+        "stake": 26026.91,
+        "profit": -3318.79,
+        "roi": -12.8,
         "breakeven": 54.1
       },
       "over": {
-        "n": 5,
+        "n": 3,
         "wins": 3,
-        "losses": 2,
-        "hit": 60,
-        "stake": 2882.52,
-        "profit": -607.52,
-        "roi": -21.1,
+        "losses": 0,
+        "hit": 100,
+        "stake": 1300,
+        "profit": 975,
+        "roi": 75,
         "breakeven": 54.1
       },
       "moneyline": {
