@@ -27,6 +27,9 @@ const LEAGUE_IDS = {
   LCS: '98767991299243165',
   MSI: '98767991325878492',
   Worlds: '98767975604431411',
+  LFL: '105266103462388553',
+  LIT: '105266094998946936',
+  EUM: '100695891328981122',
 };
 
 const argv = process.argv.slice(2);
@@ -142,6 +145,9 @@ function inferLeagueShort(leagueText) {
   if (/\bLCS\b/.test(u)) return 'LCS';
   if (/MSI/.test(u)) return 'MSI';
   if (/WORLDS|CHAMPIONSHIP/.test(u)) return 'Worlds';
+  if (/\bLFL\b|LIGUE FRAN/.test(u)) return 'LFL';
+  if (/\bLIT\b|ITALIAN TOURN/.test(u)) return 'LIT';
+  if (/EMEA MASTERS|\bEUM\b/.test(u)) return 'EUM';
   return null;
 }
 
@@ -228,10 +234,22 @@ function parsePickLine(pickRaw) {
 async function processBet(supabaseUrl, supabaseKey, cache, bet) {
   const result = { bet_id: bet.id, league: bet.league, teams: `${bet.team_a} vs ${bet.team_b}` };
 
-  // Já tem match_context?
-  if (bet.raw_extraction?.match_context?.lolesports_match_id) {
+  // Já tem match_context COM picks COM compositions casadas? Skip.
+  // Bets que têm match_context mas faltam compositions são reprocessadas pra retrofit do formato dashboard.
+  const mc = bet.raw_extraction?.match_context;
+  const hasFullEnrichment =
+    mc?.lolesports_match_id &&
+    mc.blue_picks?.support &&
+    bet.raw_extraction?.compositions?.team_a?.picks?.support;
+  if (hasFullEnrichment) {
     result.status = 'skipped';
-    result.reason = 'already_has_match_context';
+    result.reason = 'already_fully_enriched';
+    return result;
+  }
+  // EWC já marcado também pula
+  if (mc?.coverage_status === 'ewc_not_in_lolesports') {
+    result.status = 'skipped';
+    result.reason = 'ewc_already_marked';
     return result;
   }
 
@@ -317,6 +335,30 @@ async function processBet(supabaseUrl, supabaseKey, cache, bet) {
   const pickLine = parsePickLine(bet.pick);
   const underHit = pickLine != null ? gd.totalKills < pickLine : null;
 
+  // Mapeia bet.team_a/team_b → blue/red usando esportsTeamId do getEventDetails
+  // (getSchedule não retorna id; getEventDetails sim).
+  // Memória: champions por TIME, não por side — times alternam side por mapa.
+  const eventTeams = (detail?.data?.event?.match?.teams || []).map(t => ({
+    id: String(t.id || ''),
+    code: t.code,
+    name: t.name,
+  }));
+  const matchTeamFor = (q) => {
+    if (!q) return null;
+    const qn = norm(q);
+    return eventTeams.find(t => {
+      const codes = norm(t.code);
+      const names = norm(t.name);
+      return codes === qn || names === qn ||
+        (qn.length >= 3 && (codes.startsWith(qn) || qn.startsWith(codes) || names.includes(qn) || qn.includes(names)));
+    }) || null;
+  };
+  const teamA_event = matchTeamFor(bet.team_a);
+  const teamB_event = matchTeamFor(bet.team_b) || (teamA_event ? eventTeams.find(t => t !== teamA_event) : null);
+  const sideOf = (teamEv) => teamEv?.id === gd.blueTeamId ? 'blue' : (teamEv?.id === gd.redTeamId ? 'red' : null);
+  const teamA_side = sideOf(teamA_event);
+  const teamB_side = sideOf(teamB_event);
+
   // Monta novo raw_extraction (preserva campos antigos)
   const newRaw = JSON.parse(JSON.stringify(bet.raw_extraction || {}));
   newRaw.match_context = {
@@ -338,6 +380,16 @@ async function processBet(supabaseUrl, supabaseKey, cache, bet) {
     match_ambiguous_at_link: ambiguous,
     enriched_at: new Date().toISOString(),
   };
+
+  // Compositions no formato lido pelo dashboard (team_a/team_b casados com a bet, com side blue/red)
+  if (teamA_side && teamB_side) {
+    const picksFor = (side) => side === 'blue' ? gd.bluePicks : gd.redPicks;
+    newRaw.compositions = {
+      source: `lolesports livestats game ${game.id}`,
+      team_a: { name: teamA_event?.name || bet.team_a, side: teamA_side, picks: picksFor(teamA_side) },
+      team_b: { name: teamB_event?.name || bet.team_b, side: teamB_side, picks: picksFor(teamB_side) },
+    };
+  }
 
   if (DRY_RUN) {
     result.status = 'dry_run_would_enrich';
@@ -377,7 +429,15 @@ async function processBet(supabaseUrl, supabaseKey, cache, bet) {
     }).on('error', reject);
   });
 
-  const target = all.filter(b => !b.raw_extraction?.match_context?.lolesports_match_id);
+  const target = all.filter(b => {
+    const mc = b.raw_extraction?.match_context;
+    const hasComp = !!b.raw_extraction?.compositions?.team_a?.picks?.support;
+    // Já totalmente enriquecida
+    if (mc?.lolesports_match_id && mc.blue_picks?.support && hasComp) return false;
+    // EWC já marcado
+    if (mc?.coverage_status === 'ewc_not_in_lolesports') return false;
+    return true;
+  });
   const toProcess = LIMIT ? target.slice(0, LIMIT) : target;
   console.error(`[3/3] Processando ${toProcess.length}/${target.length} bets sem match_context...`);
 
