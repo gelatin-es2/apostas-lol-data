@@ -799,9 +799,14 @@
         const monthKey = dayKey.slice(0, 7); // YYYY-MM
         if (!byMonth[monthKey]) byMonth[monthKey] = { date: monthKey, total: 0, profit: 0, settled: 0, pending: 0, stake: 0 };
         byMonth[monthKey].total++;
-        byMonth[monthKey].stake += Number(b.stake) || 0;
-        if (b.status === 'pending') byMonth[monthKey].pending++;
-        else { byMonth[monthKey].settled++; byMonth[monthKey].profit += Number(b.profit) || 0; }
+        // Stake e profit só de green/red — cashout fica fora do método (igual computeKPIs).
+        if (b.status === 'pending') {
+          byMonth[monthKey].pending++;
+        } else if (b.status === 'green' || b.status === 'red') {
+          byMonth[monthKey].settled++;
+          byMonth[monthKey].stake += Number(b.stake) || 0;
+          byMonth[monthKey].profit += Number(b.profit) || 0;
+        }
       });
       const sorted = Object.values(byMonth).sort((a, b) => b.date.localeCompare(a.date));
       const allCard = `
@@ -848,8 +853,10 @@
         const dayKey = dayKeyBRT(dt);
         if (!byDay[dayKey]) byDay[dayKey] = { date: dayKey, total: 0, profit: 0, settled: 0, pending: 0 };
         byDay[dayKey].total++;
-        if (b.status === 'pending') byDay[dayKey].pending++;
-        else {
+        // Cashout fica fora do profit do método (igual computeKPIs/renderMonths).
+        if (b.status === 'pending') {
+          byDay[dayKey].pending++;
+        } else if (b.status === 'green' || b.status === 'red') {
           byDay[dayKey].settled++;
           byDay[dayKey].profit += Number(b.profit) || 0;
         }
