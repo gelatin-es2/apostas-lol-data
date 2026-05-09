@@ -507,7 +507,7 @@
   <main class="container tab-pane" data-pane="metodo">
     <div class="method-summary">
       <h2>Método 2-peel Under · Spring 2026</h2>
-      <div class="desc" id="methodDesc"><strong>SPLIT 2 2026 apenas</strong> · 4 ligas tier S (LEC/LCK/LPL/CBLOL) · ambos supports peel · linha 29.5 · stake R$100 · odd 1.85 · Bardo só conta peel em LEC · <span id="methodUpdated">carregando…</span></div>
+      <div class="desc" id="methodDesc"><strong>SPLIT 2 2026 apenas</strong> · ligas operadas: LCK/LPL/LEC/CBLOL/LFL · ambos supports peel · linha 29.5 · stake R$1.000 · odd 1.85 · <span id="methodUpdated">carregando…</span></div>
       <div class="stats" id="methodStats">
         <div class="stat"><div class="label">Jogos 2-peel</div><div class="value">…</div></div>
         <div class="stat"><div class="label">Hit Under</div><div class="value green">…</div></div>
@@ -518,6 +518,18 @@
     </div>
 
     <div class="method-grid" id="methodGrid">
+
+      <div class="method-card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(234,179,8,0.06)); border: 1px solid rgba(255,255,255,0.08);">
+        <h3>📌 Regra de stake por gatilho × liga (decisão 2026-05-08)</h3>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span><strong>2peel puro</strong> (qualquer liga operada)</span><span><span class="pct green">R$ 1.000</span><span class="n">stake normal</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot green"></span><strong>Bard + peel</strong> · LEC</span><span><span class="pct green">R$ 1.000</span><span class="n">stake normal</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span><strong>Bard + peel</strong> · LFL</span><span><span class="pct yellow">R$ 500</span><span class="n">meia u</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot yellow"></span><strong>Bard + peel</strong> · LCK</span><span><span class="pct yellow">R$ 500</span><span class="n">meia u</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot red"></span><strong>Bard + peel</strong> · LPL</span><span><span class="pct red">SUSPENDER</span><span class="n">hit ~58% colado no BE</span></span></div>
+        <div class="method-row"><span class="name"><span class="method-dot red"></span><strong>Bard + peel</strong> · CBLOL</span><span><span class="pct red">SUSPENDER</span><span class="n">n insuficiente</span></span></div>
+        <div class="method-row" style="font-size:11px;color:var(--muted);margin-top:8px;border-top:1px solid rgba(255,255,255,0.05);padding-top:8px"><span class="name">⚠️ NUNCA subir a linha (line+0.5/+1) — odd cai mais rápido que hit, mata EV</span><span></span></div>
+        <div class="method-row" style="font-size:11px;color:var(--muted)"><span class="name">Conservadorismo via stake (meia u), não via linha. Reavaliar quando LEC chegar n≥20, LCK/LFL n≥25.</span><span></span></div>
+      </div>
 
       <div class="method-card">
         <h3>Ligas</h3>
@@ -751,9 +763,10 @@
     }
 
     function computeKPIs(bets) {
-      // Lucro/turnover incluem TUDO que afetou banca (green + red + cashout).
-      // Hit rate só conta green/red — cashout não tem hit definido.
-      const realized = bets.filter((b) => b.status !== 'pending');
+      // Lucro/turnover incluem green + red + cashout (banca real).
+      // Void = bet anulada pelo bookmaker (mapa não jogado, jogo cancelado, etc) — stake devolvida.
+      // Hit rate só conta green/red.
+      const realized = bets.filter((b) => b.status !== 'pending' && b.status !== 'void');
       const wins = bets.filter((b) => b.status === 'green').length;
       const losses = bets.filter((b) => b.status === 'red').length;
       const pending = bets.filter((b) => b.status === 'pending').length;

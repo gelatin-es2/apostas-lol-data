@@ -1,4 +1,4 @@
-// Briefing diário — lista todos os jogos do dia (LCK/LPL/LEC/CBLOL + LFL/LES/LIT
+// Briefing diário — lista todos os jogos do dia (LCK/LPL/LEC/CBLOL/LFL
 // + EWC qualifiers Korea/EMEA/China via Liquipedia) com fair line, flags de
 // times ruins e ligas ruins. Pra agente apresentar como "primeira resposta de bet".
 //
@@ -16,16 +16,14 @@ const zlib = require('zlib');
 const REPO = path.resolve(__dirname, '..', '..');
 const LOLES = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 
+// Ligas operadas pelo Elvis (decisão 2026-05-08): LCK, LPL, LEC, CBLOL, LFL.
+// LIT e LES removidas do briefing — Elvis não opera essas.
 const LEAGUE_IDS = {
-  // Tier 1 majors
   LCK:   '98767991310872058',
   LPL:   '98767991314006698',
   LEC:   '98767991302996019',
   CBLOL: '98767991332355509',
-  // Tier 2 EU operadas
   LFL:   '105266103462388553',
-  LES:   '105266074488398661',
-  LIT:   '105266094998946936',
 };
 
 // Dias úteis em ms (offset BRT = UTC -3)
@@ -310,7 +308,7 @@ function flagLeague(lg, leagueHitMap) {
   // Header
   console.log(`# Jogos de ${TARGET} — briefing método 2peel\n`);
   if (allMatches.length === 0) {
-    console.log('Sem jogos das ligas operadas (LCK/LPL/LEC/CBLOL/LFL/LES/LIT/EWC) hoje.');
+    console.log('Sem jogos das ligas operadas (LCK/LPL/LEC/CBLOL/LFL) hoje.');
     return;
   }
 
