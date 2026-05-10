@@ -1,31 +1,31 @@
 {
-  "generated_at": "2026-05-09T12:58:52.813Z",
+  "generated_at": "2026-05-10T08:32:22.560Z",
   "split_start": "2026-04-01",
   "line_fallback": 29.5,
   "line_sources": {
-    "livestats_team_avg(team+team)-1": 378,
-    "polymarket_game1": 9,
-    "polymarket_game2": 7
+    "livestats_team_avg(team+team)-1": 382,
+    "polymarket_game1": 12,
+    "polymarket_game2": 10
   },
   "stake": 100,
   "odd": 1.85,
   "backtest": {
-    "n": 122,
-    "hit": 58.2,
-    "profit": 935,
-    "roi": 7.7,
+    "n": 127,
+    "hit": 58.3,
+    "profit": 990,
+    "roi": 7.8,
     "breakeven": 54.1
   },
   "ligas": [
     {
       "name": "CBLOL",
-      "n": 14,
-      "hit": 71.4
+      "n": 16,
+      "hit": 68.8
     },
     {
       "name": "LEC",
-      "n": 35,
-      "hit": 62.9
+      "n": 37,
+      "hit": 62.2
     },
     {
       "name": "LCK",
@@ -34,35 +34,35 @@
     },
     {
       "name": "LPL",
-      "n": 49,
-      "hit": 51
+      "n": 50,
+      "hit": 52
     }
   ],
   "supports": [
     {
       "name": "Karma",
-      "n": 32,
-      "hit": 78.1
+      "n": 34,
+      "hit": 73.5
     },
     {
       "name": "Milio",
-      "n": 41,
-      "hit": 58.5
-    },
-    {
-      "name": "Lulu",
-      "n": 63,
-      "hit": 57.1
+      "n": 43,
+      "hit": 60.5
     },
     {
       "name": "Nami",
-      "n": 55,
-      "hit": 54.5
+      "n": 58,
+      "hit": 56.9
+    },
+    {
+      "name": "Lulu",
+      "n": 65,
+      "hit": 56.9
     },
     {
       "name": "Seraphine",
-      "n": 43,
-      "hit": 53.5
+      "n": 44,
+      "hit": 52.3
     },
     {
       "name": "Yuumi",
@@ -85,14 +85,8 @@
     {
       "name": "Vivo Keyd Stars",
       "lg": "CBLOL",
-      "n": 5,
-      "hit": 100
-    },
-    {
-      "name": "Movistar KOI",
-      "lg": "LEC",
-      "n": 6,
-      "hit": 83.3
+      "n": 7,
+      "hit": 85.7
     },
     {
       "name": "DN SOOPers",
@@ -115,8 +109,8 @@
     {
       "name": "G2 Esports",
       "lg": "LEC",
-      "n": 8,
-      "hit": 75
+      "n": 9,
+      "hit": 77.8
     },
     {
       "name": "Fnatic",
@@ -147,6 +141,12 @@
       "lg": "LPL",
       "n": 4,
       "hit": 75
+    },
+    {
+      "name": "Movistar KOI",
+      "lg": "LEC",
+      "n": 7,
+      "hit": 71.4
     },
     {
       "name": "WeiboGaming",
@@ -191,6 +191,18 @@
       "hit": 60
     },
     {
+      "name": "LOUD",
+      "lg": "CBLOL",
+      "n": 5,
+      "hit": 60
+    },
+    {
+      "name": "Xi'an Team WE",
+      "lg": "LPL",
+      "n": 9,
+      "hit": 55.6
+    },
+    {
       "name": "Beijing JDG Esports",
       "lg": "LPL",
       "n": 9,
@@ -209,16 +221,16 @@
       "hit": 50
     },
     {
-      "name": "Xi'an Team WE",
-      "lg": "LPL",
-      "n": 8,
-      "hit": 50
-    },
-    {
       "name": "Ultra Prime",
       "lg": "LPL",
       "n": 4,
       "hit": 50
+    },
+    {
+      "name": "TOP ESPORTS",
+      "lg": "LPL",
+      "n": 11,
+      "hit": 45.5
     },
     {
       "name": "Natus Vincere",
@@ -227,13 +239,13 @@
       "hit": 44.4
     },
     {
-      "name": "Karmine Corp",
+      "name": "Team Heretics",
       "lg": "LEC",
-      "n": 7,
-      "hit": 42.9
+      "n": 5,
+      "hit": 40
     },
     {
-      "name": "Team Heretics",
+      "name": "GIANTX",
       "lg": "LEC",
       "n": 5,
       "hit": 40
@@ -245,10 +257,10 @@
       "hit": 40
     },
     {
-      "name": "TOP ESPORTS",
-      "lg": "LPL",
-      "n": 10,
-      "hit": 40
+      "name": "Karmine Corp",
+      "lg": "LEC",
+      "n": 8,
+      "hit": 37.5
     },
     {
       "name": "Invictus Gaming",
@@ -261,12 +273,6 @@
       "lg": "LCK",
       "n": 6,
       "hit": 33.3
-    },
-    {
-      "name": "GIANTX",
-      "lg": "LEC",
-      "n": 4,
-      "hit": 25
     },
     {
       "name": "THUNDER TALK GAMING",
@@ -295,28 +301,22 @@
       "hit": 87.5
     },
     {
-      "champ": "Jhin",
-      "role": "adc",
-      "n": 12,
-      "hit": 75
-    },
-    {
       "champ": "Skarner",
       "role": "jungle",
-      "n": 8,
-      "hit": 75
+      "n": 9,
+      "hit": 77.8
     },
     {
       "champ": "Yorick",
       "role": "top",
-      "n": 8,
-      "hit": 75
+      "n": 9,
+      "hit": 77.8
     },
     {
-      "champ": "Ezreal",
+      "champ": "Jhin",
       "role": "adc",
-      "n": 28,
-      "hit": 71.4
+      "n": 12,
+      "hit": 75
     },
     {
       "champ": "MonkeyKing",
@@ -327,26 +327,26 @@
     {
       "champ": "XinZhao",
       "role": "jungle",
-      "n": 51,
-      "hit": 70.6
+      "n": 52,
+      "hit": 71.2
+    },
+    {
+      "champ": "Ezreal",
+      "role": "adc",
+      "n": 30,
+      "hit": 70
     },
     {
       "champ": "Trundle",
       "role": "jungle",
-      "n": 10,
-      "hit": 70
-    },
-    {
-      "champ": "Caitlyn",
-      "role": "adc",
-      "n": 9,
+      "n": 12,
       "hit": 66.7
     },
     {
       "champ": "Gnar",
       "role": "top",
-      "n": 35,
-      "hit": 65.7
+      "n": 37,
+      "hit": 64.9
     },
     {
       "champ": "Azir",
@@ -361,27 +361,39 @@
       "hit": 63.6
     },
     {
+      "champ": "Aurora",
+      "role": "mid",
+      "n": 30,
+      "hit": 63.3
+    },
+    {
+      "champ": "Lucian",
+      "role": "adc",
+      "n": 46,
+      "hit": 63
+    },
+    {
+      "champ": "Aatrox",
+      "role": "jungle",
+      "n": 8,
+      "hit": 62.5
+    },
+    {
       "champ": "TwistedFate",
       "role": "mid",
       "n": 8,
       "hit": 62.5
     },
     {
-      "champ": "Lucian",
-      "role": "adc",
-      "n": 44,
-      "hit": 61.4
-    },
-    {
-      "champ": "Aurora",
-      "role": "mid",
-      "n": 28,
-      "hit": 60.7
-    },
-    {
       "champ": "Viktor",
       "role": "mid",
-      "n": 20,
+      "n": 21,
+      "hit": 61.9
+    },
+    {
+      "champ": "Caitlyn",
+      "role": "adc",
+      "n": 10,
       "hit": 60
     },
     {
@@ -391,10 +403,10 @@
       "hit": 58.8
     },
     {
-      "champ": "KSante",
+      "champ": "Ambessa",
       "role": "top",
-      "n": 26,
-      "hit": 57.7
+      "n": 25,
+      "hit": 56
     },
     {
       "champ": "Jayce",
@@ -415,34 +427,22 @@
       "hit": 55.6
     },
     {
-      "champ": "Orianna",
-      "role": "mid",
-      "n": 11,
-      "hit": 54.5
+      "champ": "KSante",
+      "role": "top",
+      "n": 27,
+      "hit": 55.6
     },
     {
       "champ": "Rumble",
-      "role": "top",
-      "n": 22,
-      "hit": 54.5
-    },
-    {
-      "champ": "Ambessa",
       "role": "top",
       "n": 24,
       "hit": 54.2
     },
     {
-      "champ": "Annie",
-      "role": "mid",
-      "n": 32,
-      "hit": 53.1
-    },
-    {
       "champ": "Corki",
       "role": "adc",
-      "n": 42,
-      "hit": 52.4
+      "n": 43,
+      "hit": 53.5
     },
     {
       "champ": "Renekton",
@@ -451,10 +451,22 @@
       "hit": 51.7
     },
     {
+      "champ": "Annie",
+      "role": "mid",
+      "n": 33,
+      "hit": 51.5
+    },
+    {
+      "champ": "Orianna",
+      "role": "mid",
+      "n": 12,
+      "hit": 50
+    },
+    {
       "champ": "Ashe",
       "role": "adc",
-      "n": 37,
-      "hit": 51.4
+      "n": 38,
+      "hit": 50
     },
     {
       "champ": "Ahri",
@@ -475,10 +487,10 @@
       "hit": 43.5
     },
     {
-      "champ": "Ryze",
-      "role": "mid",
-      "n": 26,
-      "hit": 42.3
+      "champ": "Pantheon",
+      "role": "jungle",
+      "n": 35,
+      "hit": 42.9
     },
     {
       "champ": "Vi",
@@ -487,10 +499,10 @@
       "hit": 40
     },
     {
-      "champ": "Pantheon",
-      "role": "jungle",
-      "n": 33,
-      "hit": 39.4
+      "champ": "Ryze",
+      "role": "mid",
+      "n": 28,
+      "hit": 39.3
     },
     {
       "champ": "Anivia",
@@ -502,22 +514,22 @@
   "by_trigger": {
     "2peel": {
       "backtest": {
-        "n": 122,
-        "hit": 58.2,
-        "profit": 935,
-        "roi": 7.7,
+        "n": 127,
+        "hit": 58.3,
+        "profit": 990,
+        "roi": 7.8,
         "breakeven": 54.1
       },
       "ligas": [
         {
           "name": "CBLOL",
-          "n": 14,
-          "hit": 71.4
+          "n": 16,
+          "hit": 68.8
         },
         {
           "name": "LEC",
-          "n": 35,
-          "hit": 62.9
+          "n": 37,
+          "hit": 62.2
         },
         {
           "name": "LCK",
@@ -526,35 +538,35 @@
         },
         {
           "name": "LPL",
-          "n": 49,
-          "hit": 51
+          "n": 50,
+          "hit": 52
         }
       ],
       "supports": [
         {
           "name": "Karma",
-          "n": 32,
-          "hit": 78.1
+          "n": 34,
+          "hit": 73.5
         },
         {
           "name": "Milio",
-          "n": 41,
-          "hit": 58.5
-        },
-        {
-          "name": "Lulu",
-          "n": 63,
-          "hit": 57.1
+          "n": 43,
+          "hit": 60.5
         },
         {
           "name": "Nami",
-          "n": 55,
-          "hit": 54.5
+          "n": 58,
+          "hit": 56.9
+        },
+        {
+          "name": "Lulu",
+          "n": 65,
+          "hit": 56.9
         },
         {
           "name": "Seraphine",
-          "n": 43,
-          "hit": 53.5
+          "n": 44,
+          "hit": 52.3
         },
         {
           "name": "Yuumi",
@@ -577,14 +589,8 @@
         {
           "name": "Vivo Keyd Stars",
           "lg": "CBLOL",
-          "n": 5,
-          "hit": 100
-        },
-        {
-          "name": "Movistar KOI",
-          "lg": "LEC",
-          "n": 6,
-          "hit": 83.3
+          "n": 7,
+          "hit": 85.7
         },
         {
           "name": "DN SOOPers",
@@ -607,8 +613,8 @@
         {
           "name": "G2 Esports",
           "lg": "LEC",
-          "n": 8,
-          "hit": 75
+          "n": 9,
+          "hit": 77.8
         },
         {
           "name": "Fnatic",
@@ -639,6 +645,12 @@
           "lg": "LPL",
           "n": 4,
           "hit": 75
+        },
+        {
+          "name": "Movistar KOI",
+          "lg": "LEC",
+          "n": 7,
+          "hit": 71.4
         },
         {
           "name": "WeiboGaming",
@@ -683,6 +695,18 @@
           "hit": 60
         },
         {
+          "name": "LOUD",
+          "lg": "CBLOL",
+          "n": 5,
+          "hit": 60
+        },
+        {
+          "name": "Xi'an Team WE",
+          "lg": "LPL",
+          "n": 9,
+          "hit": 55.6
+        },
+        {
           "name": "Beijing JDG Esports",
           "lg": "LPL",
           "n": 9,
@@ -701,16 +725,16 @@
           "hit": 50
         },
         {
-          "name": "Xi'an Team WE",
-          "lg": "LPL",
-          "n": 8,
-          "hit": 50
-        },
-        {
           "name": "Ultra Prime",
           "lg": "LPL",
           "n": 4,
           "hit": 50
+        },
+        {
+          "name": "TOP ESPORTS",
+          "lg": "LPL",
+          "n": 11,
+          "hit": 45.5
         },
         {
           "name": "Natus Vincere",
@@ -719,13 +743,13 @@
           "hit": 44.4
         },
         {
-          "name": "Karmine Corp",
+          "name": "Team Heretics",
           "lg": "LEC",
-          "n": 7,
-          "hit": 42.9
+          "n": 5,
+          "hit": 40
         },
         {
-          "name": "Team Heretics",
+          "name": "GIANTX",
           "lg": "LEC",
           "n": 5,
           "hit": 40
@@ -737,10 +761,10 @@
           "hit": 40
         },
         {
-          "name": "TOP ESPORTS",
-          "lg": "LPL",
-          "n": 10,
-          "hit": 40
+          "name": "Karmine Corp",
+          "lg": "LEC",
+          "n": 8,
+          "hit": 37.5
         },
         {
           "name": "Invictus Gaming",
@@ -753,12 +777,6 @@
           "lg": "LCK",
           "n": 6,
           "hit": 33.3
-        },
-        {
-          "name": "GIANTX",
-          "lg": "LEC",
-          "n": 4,
-          "hit": 25
         },
         {
           "name": "THUNDER TALK GAMING",
@@ -787,28 +805,22 @@
           "hit": 87.5
         },
         {
-          "champ": "Jhin",
-          "role": "adc",
-          "n": 12,
-          "hit": 75
-        },
-        {
           "champ": "Skarner",
           "role": "jungle",
-          "n": 8,
-          "hit": 75
+          "n": 9,
+          "hit": 77.8
         },
         {
           "champ": "Yorick",
           "role": "top",
-          "n": 8,
-          "hit": 75
+          "n": 9,
+          "hit": 77.8
         },
         {
-          "champ": "Ezreal",
+          "champ": "Jhin",
           "role": "adc",
-          "n": 28,
-          "hit": 71.4
+          "n": 12,
+          "hit": 75
         },
         {
           "champ": "MonkeyKing",
@@ -819,26 +831,26 @@
         {
           "champ": "XinZhao",
           "role": "jungle",
-          "n": 51,
-          "hit": 70.6
+          "n": 52,
+          "hit": 71.2
+        },
+        {
+          "champ": "Ezreal",
+          "role": "adc",
+          "n": 30,
+          "hit": 70
         },
         {
           "champ": "Trundle",
           "role": "jungle",
-          "n": 10,
-          "hit": 70
-        },
-        {
-          "champ": "Caitlyn",
-          "role": "adc",
-          "n": 9,
+          "n": 12,
           "hit": 66.7
         },
         {
           "champ": "Gnar",
           "role": "top",
-          "n": 35,
-          "hit": 65.7
+          "n": 37,
+          "hit": 64.9
         },
         {
           "champ": "Azir",
@@ -853,27 +865,39 @@
           "hit": 63.6
         },
         {
+          "champ": "Aurora",
+          "role": "mid",
+          "n": 30,
+          "hit": 63.3
+        },
+        {
+          "champ": "Lucian",
+          "role": "adc",
+          "n": 46,
+          "hit": 63
+        },
+        {
+          "champ": "Aatrox",
+          "role": "jungle",
+          "n": 8,
+          "hit": 62.5
+        },
+        {
           "champ": "TwistedFate",
           "role": "mid",
           "n": 8,
           "hit": 62.5
         },
         {
-          "champ": "Lucian",
-          "role": "adc",
-          "n": 44,
-          "hit": 61.4
-        },
-        {
-          "champ": "Aurora",
-          "role": "mid",
-          "n": 28,
-          "hit": 60.7
-        },
-        {
           "champ": "Viktor",
           "role": "mid",
-          "n": 20,
+          "n": 21,
+          "hit": 61.9
+        },
+        {
+          "champ": "Caitlyn",
+          "role": "adc",
+          "n": 10,
           "hit": 60
         },
         {
@@ -883,10 +907,10 @@
           "hit": 58.8
         },
         {
-          "champ": "KSante",
+          "champ": "Ambessa",
           "role": "top",
-          "n": 26,
-          "hit": 57.7
+          "n": 25,
+          "hit": 56
         },
         {
           "champ": "Jayce",
@@ -907,34 +931,22 @@
           "hit": 55.6
         },
         {
-          "champ": "Orianna",
-          "role": "mid",
-          "n": 11,
-          "hit": 54.5
+          "champ": "KSante",
+          "role": "top",
+          "n": 27,
+          "hit": 55.6
         },
         {
           "champ": "Rumble",
-          "role": "top",
-          "n": 22,
-          "hit": 54.5
-        },
-        {
-          "champ": "Ambessa",
           "role": "top",
           "n": 24,
           "hit": 54.2
         },
         {
-          "champ": "Annie",
-          "role": "mid",
-          "n": 32,
-          "hit": 53.1
-        },
-        {
           "champ": "Corki",
           "role": "adc",
-          "n": 42,
-          "hit": 52.4
+          "n": 43,
+          "hit": 53.5
         },
         {
           "champ": "Renekton",
@@ -943,10 +955,22 @@
           "hit": 51.7
         },
         {
+          "champ": "Annie",
+          "role": "mid",
+          "n": 33,
+          "hit": 51.5
+        },
+        {
+          "champ": "Orianna",
+          "role": "mid",
+          "n": 12,
+          "hit": 50
+        },
+        {
           "champ": "Ashe",
           "role": "adc",
-          "n": 37,
-          "hit": 51.4
+          "n": 38,
+          "hit": 50
         },
         {
           "champ": "Ahri",
@@ -967,10 +991,10 @@
           "hit": 43.5
         },
         {
-          "champ": "Ryze",
-          "role": "mid",
-          "n": 26,
-          "hit": 42.3
+          "champ": "Pantheon",
+          "role": "jungle",
+          "n": 35,
+          "hit": 42.9
         },
         {
           "champ": "Vi",
@@ -979,10 +1003,10 @@
           "hit": 40
         },
         {
-          "champ": "Pantheon",
-          "role": "jungle",
-          "n": 33,
-          "hit": 39.4
+          "champ": "Ryze",
+          "role": "mid",
+          "n": 28,
+          "hit": 39.3
         },
         {
           "champ": "Anivia",
@@ -994,17 +1018,17 @@
     },
     "1peel+flex": {
       "backtest": {
-        "n": 81,
-        "hit": 58,
-        "profit": 595,
-        "roi": 7.3,
+        "n": 83,
+        "hit": 55.4,
+        "profit": 210,
+        "roi": 2.5,
         "breakeven": 54.1
       },
       "ligas": [
         {
           "name": "LEC",
-          "n": 20,
-          "hit": 70
+          "n": 21,
+          "hit": 61.9
         },
         {
           "name": "LCK",
@@ -1012,21 +1036,21 @@
           "hit": 57.1
         },
         {
-          "name": "CBLOL",
-          "n": 9,
-          "hit": 55.6
-        },
-        {
           "name": "LPL",
           "n": 31,
           "hit": 51.6
+        },
+        {
+          "name": "CBLOL",
+          "n": 10,
+          "hit": 50
         }
       ],
       "supports": [
         {
           "name": "Bard (LEC)",
-          "n": 16,
-          "hit": 68.8
+          "n": 17,
+          "hit": 64.7
         },
         {
           "name": "Nami",
@@ -1040,13 +1064,8 @@
         },
         {
           "name": "Bard",
-          "n": 66,
-          "hit": 60.6
-        },
-        {
-          "name": "Karma",
-          "n": 16,
-          "hit": 56.3
+          "n": 67,
+          "hit": 59.7
         },
         {
           "name": "Lulu",
@@ -1054,19 +1073,29 @@
           "hit": 53.3
         },
         {
-          "name": "Seraphine",
-          "n": 24,
+          "name": "Karma",
+          "n": 16,
           "hit": 50
         },
         {
-          "name": "Rakan",
-          "n": 10,
-          "hit": 50
+          "name": "Seraphine",
+          "n": 25,
+          "hit": 48
         },
         {
           "name": "Alistar",
           "n": 5,
           "hit": 40
+        },
+        {
+          "name": "Rakan",
+          "n": 11,
+          "hit": 36.4
+        },
+        {
+          "name": "Renata",
+          "n": 3,
+          "hit": 33.3
         },
         {
           "name": "Bard (fora LEC)",
@@ -1077,18 +1106,6 @@
       "teams": [
         {
           "name": "GIANTX",
-          "lg": "LEC",
-          "n": 5,
-          "hit": 100
-        },
-        {
-          "name": "Shifters",
-          "lg": "LEC",
-          "n": 4,
-          "hit": 100
-        },
-        {
-          "name": "Karmine Corp",
           "lg": "LEC",
           "n": 5,
           "hit": 80
@@ -1106,10 +1123,22 @@
           "hit": 80
         },
         {
+          "name": "Shifters",
+          "lg": "LEC",
+          "n": 4,
+          "hit": 75
+        },
+        {
+          "name": "Karmine Corp",
+          "lg": "LEC",
+          "n": 6,
+          "hit": 66.7
+        },
+        {
           "name": "LOUD",
           "lg": "CBLOL",
-          "n": 5,
-          "hit": 80
+          "n": 6,
+          "hit": 66.7
         },
         {
           "name": "Anyone's Legend",
@@ -1204,28 +1233,16 @@
       ],
       "champs": [
         {
-          "champ": "Jayce",
-          "role": "top",
-          "n": 10,
-          "hit": 80
-        },
-        {
-          "champ": "Renekton",
-          "role": "top",
-          "n": 9,
-          "hit": 77.8
-        },
-        {
-          "champ": "Vi",
-          "role": "jungle",
-          "n": 16,
-          "hit": 75
-        },
-        {
           "champ": "Lucian",
           "role": "adc",
           "n": 12,
           "hit": 75
+        },
+        {
+          "champ": "Vi",
+          "role": "jungle",
+          "n": 17,
+          "hit": 70.6
         },
         {
           "champ": "Corki",
@@ -1234,15 +1251,15 @@
           "hit": 70
         },
         {
-          "champ": "Skarner",
-          "role": "jungle",
-          "n": 13,
-          "hit": 69.2
+          "champ": "Renekton",
+          "role": "top",
+          "n": 9,
+          "hit": 66.7
         },
         {
-          "champ": "Azir",
-          "role": "mid",
-          "n": 21,
+          "champ": "Jayce",
+          "role": "top",
+          "n": 12,
           "hit": 66.7
         },
         {
@@ -1252,16 +1269,10 @@
           "hit": 66.7
         },
         {
-          "champ": "Ryze",
-          "role": "mid",
-          "n": 26,
-          "hit": 65.4
-        },
-        {
-          "champ": "Sion",
-          "role": "top",
-          "n": 20,
-          "hit": 65
+          "champ": "Skarner",
+          "role": "jungle",
+          "n": 14,
+          "hit": 64.3
         },
         {
           "champ": "Rumble",
@@ -1270,28 +1281,34 @@
           "hit": 63.2
         },
         {
+          "champ": "Sion",
+          "role": "top",
+          "n": 21,
+          "hit": 61.9
+        },
+        {
+          "champ": "Ryze",
+          "role": "mid",
+          "n": 26,
+          "hit": 61.5
+        },
+        {
           "champ": "Caitlyn",
           "role": "adc",
-          "n": 24,
-          "hit": 62.5
-        },
-        {
-          "champ": "Varus",
-          "role": "adc",
-          "n": 8,
-          "hit": 62.5
-        },
-        {
-          "champ": "Pantheon",
-          "role": "jungle",
-          "n": 23,
-          "hit": 60.9
+          "n": 25,
+          "hit": 60
         },
         {
           "champ": "XinZhao",
           "role": "jungle",
           "n": 27,
           "hit": 59.3
+        },
+        {
+          "champ": "Azir",
+          "role": "mid",
+          "n": 22,
+          "hit": 59.1
         },
         {
           "champ": "Yunara",
@@ -1306,6 +1323,12 @@
           "hit": 58.6
         },
         {
+          "champ": "Pantheon",
+          "role": "jungle",
+          "n": 24,
+          "hit": 58.3
+        },
+        {
           "champ": "Aurora",
           "role": "mid",
           "n": 14,
@@ -1314,8 +1337,8 @@
         {
           "champ": "JarvanIV",
           "role": "jungle",
-          "n": 23,
-          "hit": 56.5
+          "n": 24,
+          "hit": 54.2
         },
         {
           "champ": "Ambessa",
@@ -1324,21 +1347,9 @@
           "hit": 52.4
         },
         {
-          "champ": "Jhin",
+          "champ": "Varus",
           "role": "adc",
-          "n": 21,
-          "hit": 52.4
-        },
-        {
-          "champ": "Ashe",
-          "role": "adc",
-          "n": 20,
-          "hit": 50
-        },
-        {
-          "champ": "Nocturne",
-          "role": "jungle",
-          "n": 14,
+          "n": 8,
           "hit": 50
         },
         {
@@ -1348,16 +1359,28 @@
           "hit": 50
         },
         {
-          "champ": "Ahri",
-          "role": "mid",
-          "n": 17,
-          "hit": 47.1
+          "champ": "Jhin",
+          "role": "adc",
+          "n": 21,
+          "hit": 47.6
+        },
+        {
+          "champ": "Ashe",
+          "role": "adc",
+          "n": 21,
+          "hit": 47.6
         },
         {
           "champ": "KSante",
           "role": "top",
           "n": 17,
           "hit": 47.1
+        },
+        {
+          "champ": "Ahri",
+          "role": "mid",
+          "n": 18,
+          "hit": 44.4
         },
         {
           "champ": "Gnar",
@@ -1370,6 +1393,12 @@
           "role": "mid",
           "n": 9,
           "hit": 44.4
+        },
+        {
+          "champ": "Nocturne",
+          "role": "jungle",
+          "n": 14,
+          "hit": 42.9
         },
         {
           "champ": "Naafiri",
@@ -1387,22 +1416,22 @@
     },
     "all": {
       "backtest": {
-        "n": 203,
-        "hit": 58.1,
-        "profit": 1530,
-        "roi": 7.5,
+        "n": 210,
+        "hit": 57.1,
+        "profit": 1200,
+        "roi": 5.7,
         "breakeven": 54.1
       },
       "ligas": [
         {
           "name": "LEC",
-          "n": 55,
-          "hit": 65.5
+          "n": 58,
+          "hit": 62.1
         },
         {
           "name": "CBLOL",
-          "n": 23,
-          "hit": 65.2
+          "n": 26,
+          "hit": 61.5
         },
         {
           "name": "LCK",
@@ -1411,50 +1440,40 @@
         },
         {
           "name": "LPL",
-          "n": 80,
-          "hit": 51.3
+          "n": 81,
+          "hit": 51.9
         }
       ],
       "supports": [
         {
           "name": "Karma",
-          "n": 48,
-          "hit": 70.8
+          "n": 50,
+          "hit": 66
         },
         {
           "name": "Milio",
-          "n": 51,
-          "hit": 60.8
-        },
-        {
-          "name": "Bard",
-          "n": 66,
-          "hit": 60.6
+          "n": 53,
+          "hit": 62.3
         },
         {
           "name": "Nami",
+          "n": 70,
+          "hit": 60
+        },
+        {
+          "name": "Bard",
           "n": 67,
-          "hit": 58.2
+          "hit": 59.7
         },
         {
           "name": "Lulu",
-          "n": 78,
-          "hit": 56.4
+          "n": 80,
+          "hit": 56.3
         },
         {
           "name": "Seraphine",
-          "n": 67,
-          "hit": 52.2
-        },
-        {
-          "name": "Rakan",
-          "n": 10,
-          "hit": 50
-        },
-        {
-          "name": "Renata",
-          "n": 7,
-          "hit": 42.9
+          "n": 69,
+          "hit": 50.7
         },
         {
           "name": "Yuumi",
@@ -1465,15 +1484,19 @@
           "name": "Alistar",
           "n": 5,
           "hit": 40
+        },
+        {
+          "name": "Renata",
+          "n": 8,
+          "hit": 37.5
+        },
+        {
+          "name": "Rakan",
+          "n": 11,
+          "hit": 36.4
         }
       ],
       "teams": [
-        {
-          "name": "Movistar KOI",
-          "lg": "LEC",
-          "n": 7,
-          "hit": 85.7
-        },
         {
           "name": "Dplus KIA",
           "lg": "LCK",
@@ -1483,12 +1506,6 @@
         {
           "name": "LGD GAMING",
           "lg": "LPL",
-          "n": 7,
-          "hit": 85.7
-        },
-        {
-          "name": "Vivo Keyd Stars",
-          "lg": "CBLOL",
           "n": 7,
           "hit": 85.7
         },
@@ -1523,21 +1540,9 @@
           "hit": 75
         },
         {
-          "name": "LOUD",
-          "lg": "CBLOL",
-          "n": 8,
-          "hit": 75
-        },
-        {
           "name": "SK Gaming",
           "lg": "LEC",
           "n": 7,
-          "hit": 71.4
-        },
-        {
-          "name": "Shifters",
-          "lg": "LEC",
-          "n": 14,
           "hit": 71.4
         },
         {
@@ -1545,6 +1550,12 @@
           "lg": "LCK",
           "n": 7,
           "hit": 71.4
+        },
+        {
+          "name": "Vivo Keyd Stars",
+          "lg": "CBLOL",
+          "n": 10,
+          "hit": 70
         },
         {
           "name": "Fnatic",
@@ -1559,7 +1570,13 @@
           "hit": 69.2
         },
         {
-          "name": "GIANTX",
+          "name": "G2 Esports",
+          "lg": "LEC",
+          "n": 12,
+          "hit": 66.7
+        },
+        {
+          "name": "Movistar KOI",
           "lg": "LEC",
           "n": 9,
           "hit": 66.7
@@ -1571,8 +1588,14 @@
           "hit": 66.7
         },
         {
-          "name": "G2 Esports",
+          "name": "Shifters",
           "lg": "LEC",
+          "n": 14,
+          "hit": 64.3
+        },
+        {
+          "name": "LOUD",
+          "lg": "CBLOL",
           "n": 11,
           "hit": 63.6
         },
@@ -1583,16 +1606,16 @@
           "hit": 62.5
         },
         {
+          "name": "GIANTX",
+          "lg": "LEC",
+          "n": 10,
+          "hit": 60
+        },
+        {
           "name": "paiN Gaming",
           "lg": "CBLOL",
           "n": 5,
           "hit": 60
-        },
-        {
-          "name": "Karmine Corp",
-          "lg": "LEC",
-          "n": 12,
-          "hit": 58.3
         },
         {
           "name": "Beijing JDG Esports",
@@ -1619,9 +1642,21 @@
           "hit": 50
         },
         {
+          "name": "Karmine Corp",
+          "lg": "LEC",
+          "n": 14,
+          "hit": 50
+        },
+        {
           "name": "T1",
           "lg": "LCK",
           "n": 8,
+          "hit": 50
+        },
+        {
+          "name": "TOP ESPORTS",
+          "lg": "LPL",
+          "n": 18,
           "hit": 50
         },
         {
@@ -1629,12 +1664,6 @@
           "lg": "CBLOL",
           "n": 8,
           "hit": 50
-        },
-        {
-          "name": "TOP ESPORTS",
-          "lg": "LPL",
-          "n": 17,
-          "hit": 47.1
         },
         {
           "name": "BILIBILI GAMING",
@@ -1697,16 +1726,16 @@
           "hit": 36.4
         },
         {
+          "name": "Xi'an Team WE",
+          "lg": "LPL",
+          "n": 14,
+          "hit": 35.7
+        },
+        {
           "name": "KIWOOM DRX",
           "lg": "LCK",
           "n": 6,
           "hit": 33.3
-        },
-        {
-          "name": "Xi'an Team WE",
-          "lg": "LPL",
-          "n": 13,
-          "hit": 30.8
         },
         {
           "name": "EDWARD GAMING",
@@ -1729,19 +1758,13 @@
           "hit": 77.8
         },
         {
-          "champ": "DrMundo",
-          "role": "jungle",
-          "n": 8,
-          "hit": 75
+          "champ": "Leblanc",
+          "role": "mid",
+          "n": 11,
+          "hit": 72.7
         },
         {
           "champ": "MonkeyKing",
-          "role": "jungle",
-          "n": 21,
-          "hit": 71.4
-        },
-        {
-          "champ": "Skarner",
           "role": "jungle",
           "n": 21,
           "hit": 71.4
@@ -1753,15 +1776,27 @@
           "hit": 70
         },
         {
-          "champ": "XinZhao",
+          "champ": "Skarner",
           "role": "jungle",
-          "n": 78,
-          "hit": 66.7
+          "n": 23,
+          "hit": 69.6
         },
         {
-          "champ": "Leblanc",
+          "champ": "Yorick",
+          "role": "top",
+          "n": 13,
+          "hit": 69.2
+        },
+        {
+          "champ": "XinZhao",
+          "role": "jungle",
+          "n": 79,
+          "hit": 67.1
+        },
+        {
+          "champ": "Viktor",
           "role": "mid",
-          "n": 9,
+          "n": 24,
           "hit": 66.7
         },
         {
@@ -1771,58 +1806,40 @@
           "hit": 66.7
         },
         {
-          "champ": "Yorick",
-          "role": "top",
-          "n": 12,
-          "hit": 66.7
-        },
-        {
-          "champ": "Viktor",
-          "role": "mid",
-          "n": 23,
-          "hit": 65.2
-        },
-        {
-          "champ": "Azir",
-          "role": "mid",
-          "n": 43,
-          "hit": 65.1
+          "champ": "Lucian",
+          "role": "adc",
+          "n": 58,
+          "hit": 65.5
         },
         {
           "champ": "Ezreal",
           "role": "adc",
-          "n": 57,
-          "hit": 64.9
+          "n": 59,
+          "hit": 64.4
         },
         {
-          "champ": "Lucian",
-          "role": "adc",
-          "n": 56,
-          "hit": 64.3
+          "champ": "Zaahen",
+          "role": "jungle",
+          "n": 8,
+          "hit": 62.5
         },
         {
-          "champ": "Caitlyn",
-          "role": "adc",
-          "n": 33,
-          "hit": 63.6
+          "champ": "DrMundo",
+          "role": "jungle",
+          "n": 8,
+          "hit": 62.5
         },
         {
-          "champ": "Jayce",
-          "role": "top",
-          "n": 35,
-          "hit": 62.9
-        },
-        {
-          "champ": "Galio",
+          "champ": "Azir",
           "role": "mid",
-          "n": 8,
-          "hit": 62.5
+          "n": 44,
+          "hit": 61.4
         },
         {
-          "champ": "Varus",
-          "role": "adc",
-          "n": 8,
-          "hit": 62.5
+          "champ": "Aurora",
+          "role": "mid",
+          "n": 44,
+          "hit": 61.4
         },
         {
           "champ": "Naafiri",
@@ -1831,27 +1848,15 @@
           "hit": 61.1
         },
         {
-          "champ": "Jhin",
+          "champ": "Caitlyn",
           "role": "adc",
-          "n": 33,
-          "hit": 60.6
-        },
-        {
-          "champ": "Orianna",
-          "role": "mid",
-          "n": 20,
+          "n": 35,
           "hit": 60
         },
         {
-          "champ": "Sivir",
-          "role": "adc",
-          "n": 10,
-          "hit": 60
-        },
-        {
-          "champ": "Aurora",
-          "role": "mid",
-          "n": 42,
+          "champ": "Jayce",
+          "role": "top",
+          "n": 37,
           "hit": 59.5
         },
         {
@@ -1861,28 +1866,46 @@
           "hit": 58.8
         },
         {
-          "champ": "Rumble",
-          "role": "top",
-          "n": 41,
-          "hit": 58.5
-        },
-        {
-          "champ": "Trundle",
-          "role": "jungle",
+          "champ": "Sivir",
+          "role": "adc",
           "n": 12,
           "hit": 58.3
         },
         {
-          "champ": "Renekton",
+          "champ": "Rumble",
           "role": "top",
-          "n": 38,
-          "hit": 57.9
+          "n": 43,
+          "hit": 58.1
+        },
+        {
+          "champ": "Jhin",
+          "role": "adc",
+          "n": 33,
+          "hit": 57.6
+        },
+        {
+          "champ": "Orianna",
+          "role": "mid",
+          "n": 21,
+          "hit": 57.1
+        },
+        {
+          "champ": "Trundle",
+          "role": "jungle",
+          "n": 14,
+          "hit": 57.1
+        },
+        {
+          "champ": "Corki",
+          "role": "adc",
+          "n": 53,
+          "hit": 56.6
         },
         {
           "champ": "Gnar",
           "role": "top",
-          "n": 62,
-          "hit": 56.5
+          "n": 64,
+          "hit": 56.3
         },
         {
           "champ": "Mel",
@@ -1891,49 +1914,37 @@
           "hit": 56.3
         },
         {
-          "champ": "JarvanIV",
-          "role": "jungle",
-          "n": 59,
-          "hit": 55.9
+          "champ": "Galio",
+          "role": "mid",
+          "n": 9,
+          "hit": 55.6
         },
         {
-          "champ": "Corki",
-          "role": "adc",
-          "n": 52,
-          "hit": 55.8
+          "champ": "Renekton",
+          "role": "top",
+          "n": 38,
+          "hit": 55.3
+        },
+        {
+          "champ": "JarvanIV",
+          "role": "jungle",
+          "n": 60,
+          "hit": 55
+        },
+        {
+          "champ": "Ambessa",
+          "role": "top",
+          "n": 46,
+          "hit": 54.3
         },
         {
           "champ": "Vi",
           "role": "jungle",
-          "n": 36,
-          "hit": 55.6
+          "n": 37,
+          "hit": 54.1
         },
         {
           "champ": "Sion",
-          "role": "top",
-          "n": 44,
-          "hit": 54.5
-        },
-        {
-          "champ": "Ryze",
-          "role": "mid",
-          "n": 52,
-          "hit": 53.8
-        },
-        {
-          "champ": "Aatrox",
-          "role": "jungle",
-          "n": 13,
-          "hit": 53.8
-        },
-        {
-          "champ": "KSante",
-          "role": "top",
-          "n": 43,
-          "hit": 53.5
-        },
-        {
-          "champ": "Ambessa",
           "role": "top",
           "n": 45,
           "hit": 53.3
@@ -1945,40 +1956,58 @@
           "hit": 53.3
         },
         {
-          "champ": "Ashe",
+          "champ": "KSante",
+          "role": "top",
+          "n": 44,
+          "hit": 52.3
+        },
+        {
+          "champ": "Ryze",
+          "role": "mid",
+          "n": 54,
+          "hit": 50
+        },
+        {
+          "champ": "Aatrox",
+          "role": "jungle",
+          "n": 14,
+          "hit": 50
+        },
+        {
+          "champ": "Varus",
           "role": "adc",
-          "n": 57,
-          "hit": 50.9
+          "n": 8,
+          "hit": 50
         },
         {
           "champ": "Pantheon",
           "role": "jungle",
-          "n": 56,
-          "hit": 48.2
+          "n": 59,
+          "hit": 49.2
+        },
+        {
+          "champ": "Ashe",
+          "role": "adc",
+          "n": 59,
+          "hit": 49.2
         },
         {
           "champ": "Annie",
           "role": "mid",
-          "n": 53,
-          "hit": 47.2
+          "n": 54,
+          "hit": 46.3
         },
         {
           "champ": "Ahri",
           "role": "mid",
-          "n": 36,
-          "hit": 47.2
+          "n": 37,
+          "hit": 45.9
         },
         {
           "champ": "Nocturne",
           "role": "jungle",
           "n": 37,
-          "hit": 45.9
-        },
-        {
-          "champ": "Vayne",
-          "role": "top",
-          "n": 14,
-          "hit": 42.9
+          "hit": 43.2
         },
         {
           "champ": "Anivia",
@@ -1987,14 +2016,20 @@
           "hit": 41.2
         },
         {
-          "champ": "Kalista",
-          "role": "adc",
-          "n": 8,
-          "hit": 37.5
+          "champ": "Vayne",
+          "role": "top",
+          "n": 14,
+          "hit": 35.7
         },
         {
           "champ": "Aurora",
           "role": "top",
+          "n": 9,
+          "hit": 33.3
+        },
+        {
+          "champ": "Kalista",
+          "role": "adc",
           "n": 9,
           "hit": 33.3
         }
