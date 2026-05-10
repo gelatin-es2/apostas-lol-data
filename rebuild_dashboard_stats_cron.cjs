@@ -21,6 +21,7 @@ const LEAGUES = [
   { id: '98767991310872058', name: 'LCK' },
   { id: '98767991314006698', name: 'LPL' },
   { id: '98767991332355509', name: 'CBLOL' },
+  { id: '98767991299243165', name: 'LCS' },
 ];
 
 function fetchJsonSafe(host, path_, headers) {
