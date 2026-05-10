@@ -252,9 +252,10 @@ function buildLeagueHitMap(dashboard, tier2) {
 
 function flagTeam(name, teamHitMap) {
   const e = teamHitMap.get((name || '').toLowerCase());
-  if (!e) return null;
-  if (e.hit < 50 && e.n >= 4) return `🔴 ${name} ruim (${e.hit}% n=${e.n})`;
-  if (e.hit < 60 && e.n >= 4) return `🟡 ${name} marginal (${e.hit}% n=${e.n})`;
+  if (!e || e.n < 4) return null;
+  if (e.hit < 50) return `🔴 ${name} ruim (${e.hit}% n=${e.n})`;
+  if (e.hit < 60) return `🟡 ${name} marginal (${e.hit}% n=${e.n})`;
+  if (e.hit >= 70) return `🟢 ${name} bom (${e.hit}% n=${e.n})`;
   return null;
 }
 
@@ -263,6 +264,7 @@ function flagLeague(lg, leagueHitMap) {
   if (!e) return null;
   if (e.hit < 50) return `🔴 ${lg} liga ruim (${e.hit}% n=${e.n})`;
   if (e.hit < 60) return `🟡 ${lg} liga marginal (${e.hit}% n=${e.n})`;
+  if (e.hit >= 70) return `🟢 ${lg} liga forte (${e.hit}% n=${e.n})`;
   return null;
 }
 
