@@ -161,6 +161,59 @@ async function fetchLatestDdragonVersion() {
   });
 }
 
+// Fetch bets settled do Elvis (Split 2). Retorna Map indexado por gameId E (matchId|mapNum) — fail-soft.
+// Regra fair_line override (decisão CEO 2026-05-09):
+//  - Se game tem bet do Elvis: fair_line = pickLine da bet (ajusta -1 se odd < 1.72)
+//  - Senão: lógica normal (polymarket > team-avg-1 > fallback)
+async function fetchUserBets() {
+  let supabaseUrl = process.env.SUPABASE_URL;
+  let supabaseKey = process.env.SUPABASE_SECRET_KEY;
+  if (!supabaseUrl || !supabaseKey) {
+    try {
+      const cfg = require('./.claude/scripts/_load-config.cjs').loadConfig();
+      supabaseUrl = supabaseUrl || cfg.supabaseUrl;
+      supabaseKey = supabaseKey || cfg.supabaseKey;
+    } catch {}
+  }
+  if (!supabaseUrl || !supabaseKey) {
+    console.error('  no Supabase creds — skipping user bets fair_line override');
+    return new Map();
+  }
+  return new Promise((resolve) => {
+    const u = new URL(`${supabaseUrl}/rest/v1/bets?select=id,pick,odd,status,map_number,raw_extraction&bet_datetime=gte.${SPLIT2_START}&status=in.(green,red)&limit=2000`);
+    https.get({ host: u.hostname, path: u.pathname + u.search, headers: { apikey: supabaseKey, Authorization: 'Bearer ' + supabaseKey } }, r => {
+      let body = ''; r.on('data', c => body += c);
+      r.on('end', () => {
+        try {
+          const rows = JSON.parse(body);
+          const idx = new Map();
+          for (const b of rows) {
+            const mc = b.raw_extraction?.match_context;
+            if (!mc?.lolesports_match_id) continue;
+            const m = (b.pick || '').match(/(\d+(?:[.,]\d+)?)/);
+            if (!m) continue;
+            const pickLine = parseFloat(m[1].replace(',', '.'));
+            const odd = parseFloat(b.odd);
+            if (isNaN(pickLine) || isNaN(odd)) continue;
+            const entry = { pickLine, odd, betId: b.id, status: b.status };
+            if (mc.lolesports_game_id) idx.set(String(mc.lolesports_game_id), entry);
+            if (mc[`map${b.map_number}_game_id`]) idx.set(String(mc[`map${b.map_number}_game_id`]), entry);
+            if (b.map_number) idx.set(`${mc.lolesports_match_id}|${b.map_number}`, entry);
+          }
+          console.error(`  user bets indexed: ${idx.size} keys (gameId + matchId|map)`);
+          resolve(idx);
+        } catch (e) {
+          console.error(`  fetchUserBets parse err: ${e.message}`);
+          resolve(new Map());
+        }
+      });
+    }).on('error', (e) => {
+      console.error(`  fetchUserBets http err: ${e.message}`);
+      resolve(new Map());
+    });
+  });
+}
+
 (async () => {
   console.error('[1/4] Fetching teams map...');
   const teamsMap = await fetchTeamsMap();
@@ -187,8 +240,15 @@ async function fetchLatestDdragonVersion() {
   }
   console.error(`  ${games.length} games fetched`);
 
-  // === Anexa fair line dinâmica em cada game (hierarquia: polymarket > calculado(-1) > 29.5) ===
-  console.error('[4/4] Computing per-game fair lines...');
+  // === Fair line dinâmica (CEO 2026-05-09):
+  // 0) Bet do Elvis no game → linha = pickLine (ajusta -1 se odd<1.72)
+  // 1) polymarket
+  // 2) calculado (team_avg + team_avg + FAIR_ADJUSTMENT)
+  // 3) fallback 29.5
+  console.error('[4/5] Fetching user bets from Supabase...');
+  const userBets = await fetchUserBets();
+
+  console.error('[5/5] Computing per-game fair lines...');
   const polymarketIdx = loadPolymarketIndex();
   console.error(`  polymarket index: ${polymarketIdx.byMatchId.size} matches`);
 
@@ -215,6 +275,14 @@ async function fetchLatestDdragonVersion() {
   }
 
   function fairForGame(g) {
+    // 0) Bet do Elvis tem prioridade (decisão 2026-05-09)
+    let userBet = userBets.get(String(g.gameId));
+    if (!userBet) userBet = userBets.get(`${g.matchId}|${g.mapNum}`);
+    if (userBet) {
+      const adjusted = userBet.odd < 1.72;
+      const line = adjusted ? userBet.pickLine - 1 : userBet.pickLine;
+      return { line, source: `user_bet@${userBet.odd.toFixed(2)}${adjusted ? '_minus1' : ''}` };
+    }
     // 1) polymarket
     const pmEntry = polymarketIdx.byMatchId.get(String(g.matchId)) ||
       polymarketIdx.byTeamsDate.get([teamName(g,'blue'), teamName(g,'red'), g.date].sort().join('|'));
@@ -334,6 +402,34 @@ async function fetchLatestDdragonVersion() {
   const stats1PeelFlex = computeStats(peel1Flex);
   const statsAll = computeStats(allTriggers);
 
+  // MISSED OPPORTUNITIES — games com método válido (2peel ou 1peel+flex) onde Elvis NÃO apostou
+  const missedOpportunities = [];
+  for (const g of allTriggers) {
+    const userBet = userBets.get(String(g.gameId)) || userBets.get(`${g.matchId}|${g.mapNum}`);
+    if (userBet) continue; // tem bet do Elvis, não é missed
+    const triggerType = peel2.includes(g) ? '2peel' : '1peel+flex';
+    const hit = g.kills < g.line;
+    missedOpportunities.push({
+      gameId: String(g.gameId),
+      matchId: String(g.matchId),
+      date: g.date,
+      league: g.lg,
+      map: g.mapNum,
+      teams: [teamsMap.get(g.blueTeamId) || g.blueTeamId, teamsMap.get(g.redTeamId) || g.redTeamId],
+      trigger: triggerType,
+      line: g.line,
+      kills: g.kills,
+      hit_simulated: hit,
+      profit_simulated: hit ? +(STAKE * (ODD - 1)).toFixed(2) : -STAKE,
+      blue_picks: g.bluePicks,
+      red_picks: g.redPicks,
+    });
+  }
+  // Ordena por data desc
+  missedOpportunities.sort((a, b) => b.date.localeCompare(a.date));
+  const missedHits = missedOpportunities.filter(m => m.hit_simulated).length;
+  console.error(`  missed opportunities: ${missedOpportunities.length} (${missedHits} would have hit, ${missedOpportunities.length - missedHits} would have missed)`);
+
   // Bardo (LEC vs fora) — análise especial: jogos com Bard + outro peel (subset de 1peel+flex).
   // Mantida porque LEC tem comportamento de Bard distinto do resto — split histórico útil pra UI.
   const bardLec = { n: 0, h: 0 };
@@ -371,6 +467,15 @@ async function fetchLatestDdragonVersion() {
       '2peel': stats2peel,
       '1peel+flex': stats1PeelFlex,
       all: statsAll,
+    },
+    // MISSED OPPORTUNITIES (CEO 2026-05-09): games com método válido onde Elvis não apostou
+    missed_opportunities: {
+      count: missedOpportunities.length,
+      would_hit: missedHits,
+      would_miss: missedOpportunities.length - missedHits,
+      hit_pct: missedOpportunities.length ? +(100 * missedHits / missedOpportunities.length).toFixed(1) : 0,
+      profit_simulated: +missedOpportunities.reduce((s, m) => s + m.profit_simulated, 0).toFixed(2),
+      list: missedOpportunities,
     },
   };
 

@@ -1223,7 +1223,47 @@
         const teamsBons = d.teams.filter(t => t.hit >= 70).map(t => rowHtml(t.name, t.lg, t.hit, t.n));
         const teamsCuidado = d.teams.filter(t => t.hit < 70).map(t => rowHtml(t.name, t.lg, t.hit, t.n));
         const champRows = d.champs.map(c => rowHtml(c.champ, c.role === 'bottom' ? 'adc' : (c.role === 'jungle' ? 'jg' : c.role), c.hit, c.n));
+
+        // MISSED OPPORTUNITIES — games com método válido onde Elvis NÃO apostou
+        let missedCardHtml = '';
+        const mo = d.missed_opportunities;
+        if (mo && mo.count > 0) {
+          const profitFmt = mo.profit_simulated.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+          const profitClass = mo.profit_simulated >= 0 ? 'green' : 'red';
+          const last10 = (mo.list || []).slice(0, 10).map(m => {
+            const cls = m.hit_simulated ? 'green' : 'red';
+            const sign = m.hit_simulated ? '✓' : '✗';
+            const teams = m.teams.join(' vs ').slice(0, 28);
+            return `<div class="method-row" style="font-size:12px"><span class="name"><span class="method-dot ${cls}"></span>${m.date} · ${teams} · M${m.map}</span><span><span class="pct ${cls}">${sign} ${m.kills}/${m.line}</span><span class="n">${m.trigger}</span></span></div>`;
+          });
+          missedCardHtml = `
+            <div class="method-card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(234,179,8,0.06), rgba(239,68,68,0.04)); border: 1px solid rgba(255,255,255,0.08);">
+              <h3>⚠️ Oportunidades perdidas (método disparou, você não apostou)</h3>
+              <div class="method-row"><span class="name"><strong>Total games</strong> com método válido sem bet</span><span><span class="pct yellow">${mo.count}</span></span></div>
+              <div class="method-row"><span class="name">Teriam batido (hit Under)</span><span><span class="pct green">${mo.would_hit}</span><span class="n">${mo.hit_pct.toFixed(1)}%</span></span></div>
+              <div class="method-row"><span class="name">Teriam errado</span><span><span class="pct red">${mo.would_miss}</span></span></div>
+              <div class="method-row"><span class="name">Profit simulado se tivesse apostado todas (stake unit ${d.stake})</span><span><span class="pct ${profitClass}">R$ ${profitFmt}</span></span></div>
+              <div class="method-row" style="font-size:11px;color:var(--muted);margin-top:6px;border-top:1px solid rgba(255,255,255,0.05);padding-top:6px"><span class="name">Últimos 10 games (mais recentes primeiro):</span><span></span></div>
+              ${last10.join('')}
+            </div>`;
+        }
+
+        // Card destaque de regra de stake (decisão 2026-05-08, persistente)
+        const stakeRuleCard = `
+          <div class="method-card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(234,179,8,0.06)); border: 1px solid rgba(255,255,255,0.08);">
+            <h3>📌 Regra de stake por gatilho × liga (decisão 2026-05-08)</h3>
+            <div class="method-row"><span class="name"><span class="method-dot green"></span><strong>2peel puro</strong> (qualquer liga operada)</span><span><span class="pct green">R$ 1.000</span><span class="n">stake normal</span></span></div>
+            <div class="method-row"><span class="name"><span class="method-dot green"></span><strong>Bard + peel</strong> · LEC</span><span><span class="pct green">R$ 1.000</span><span class="n">stake normal</span></span></div>
+            <div class="method-row"><span class="name"><span class="method-dot yellow"></span><strong>Bard + peel</strong> · LFL</span><span><span class="pct yellow">R$ 500</span><span class="n">meia u</span></span></div>
+            <div class="method-row"><span class="name"><span class="method-dot yellow"></span><strong>Bard + peel</strong> · LCK</span><span><span class="pct yellow">R$ 500</span><span class="n">meia u</span></span></div>
+            <div class="method-row"><span class="name"><span class="method-dot red"></span><strong>Bard + peel</strong> · LPL</span><span><span class="pct red">SUSPENDER</span><span class="n">hit colado no BE</span></span></div>
+            <div class="method-row"><span class="name"><span class="method-dot red"></span><strong>Bard + peel</strong> · CBLOL</span><span><span class="pct red">SUSPENDER</span><span class="n">n insuficiente</span></span></div>
+            <div class="method-row" style="font-size:11px;color:var(--muted);margin-top:8px;border-top:1px solid rgba(255,255,255,0.05);padding-top:8px"><span class="name">⚠️ NUNCA subir a linha (line+0.5/+1) — odd cai mais rápido que hit, mata EV</span><span></span></div>
+          </div>`;
+
         grid.innerHTML = [
+          stakeRuleCard,
+          missedCardHtml,
           cardHtml('Ligas', ligaRows),
           cardHtml('Supports peel', supRows),
           cardHtml('Times — bons pra Under', teamsBons),
