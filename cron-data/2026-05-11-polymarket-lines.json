@@ -1,0 +1,63 @@
+{
+  "captured_at": "2026-05-11T10:07:30.215Z",
+  "range": {
+    "from": "2026-05-11",
+    "to": "2026-05-12"
+  },
+  "target_odd": 1.83,
+  "matches_total": 2,
+  "matches_with_polymarket_event": 1,
+  "matches_with_total_kills": 1,
+  "captured": [
+    {
+      "match_id_lolesports": "115615926677896687",
+      "league": "LPL",
+      "match_date": "2026-05-12",
+      "match_start_utc": "2026-05-12T09:00:00Z",
+      "team_a": "TES",
+      "team_b": "NIP",
+      "polymarket_event_slug": "lol-tes-nip-2026-05-12",
+      "polymarket_event_title": "LoL: Top Esports vs Ninjas in Pyjamas (BO3) - LPL Group Ascend",
+      "total_kills_markets_found": 10,
+      "games": [
+        {
+          "game_number": 1,
+          "line": 28.5,
+          "under_price": 0.455,
+          "over_price": 0.545,
+          "under_odd": 2.198,
+          "over_odd": 1.835,
+          "market_id": "2225187",
+          "question": "Total Kills Over/Under 28.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.005,
+          "alternatives_count": 5
+        },
+        {
+          "game_number": 2,
+          "line": 26.5,
+          "under_price": 0.58,
+          "over_price": 0.42,
+          "under_odd": 1.724,
+          "over_odd": 2.381,
+          "market_id": "2225186",
+          "question": "Total Kills Over/Under 26.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.106,
+          "alternatives_count": 5
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115615926677896623",
+      "league": "LPL",
+      "match_date": "2026-05-12",
+      "team_a": "IG",
+      "team_b": "BLG",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    }
+  ]
+}
