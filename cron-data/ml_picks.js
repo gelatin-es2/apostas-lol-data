@@ -1,5 +1,5 @@
 window.ML_DATA = {
-  "generated_at": "2026-05-12T13:16:17.962Z",
+  "generated_at": "2026-05-12T13:57:28.121Z",
   "split_label": "2026-04-01 → 2026-05-12",
   "leagues": [
     "LEC",
@@ -12,11 +12,11 @@ window.ML_DATA = {
   "min_games": 8,
   "total_rows": 84,
   "total_maps_per_pos": {
-    "top": 489,
-    "jng": 489,
-    "mid": 489,
-    "bot": 489,
-    "sup": 489
+    "top": 490,
+    "jng": 490,
+    "mid": 490,
+    "bot": 490,
+    "sup": 490
   },
   "ddragon_version": "16.9.1",
   "by_position": {
@@ -76,22 +76,22 @@ window.ML_DATA = {
         "ligas": "LPL(28) LEC(23) LCS(20) CBLOL(19) LCK(14)"
       },
       {
-        "champion": "Ambessa",
-        "slug": "Ambessa",
-        "n": 91,
-        "wins": 46,
-        "losses": 45,
-        "wr": 0.505,
-        "ligas": "LPL(33) LCK(22) LEC(15) CBLOL(15) LCS(6)"
-      },
-      {
         "champion": "Sion",
         "slug": "Sion",
-        "n": 97,
-        "wins": 48,
+        "n": 98,
+        "wins": 49,
         "losses": 49,
-        "wr": 0.495,
-        "ligas": "LPL(37) LCK(19) LEC(15) CBLOL(13) LCS(13)"
+        "wr": 0.5,
+        "ligas": "LPL(38) LCK(19) LEC(15) CBLOL(13) LCS(13)"
+      },
+      {
+        "champion": "Ambessa",
+        "slug": "Ambessa",
+        "n": 92,
+        "wins": 46,
+        "losses": 46,
+        "wr": 0.5,
+        "ligas": "LPL(34) LCK(22) LEC(15) CBLOL(15) LCS(6)"
       },
       {
         "champion": "Yorick",
@@ -197,11 +197,11 @@ window.ML_DATA = {
       {
         "champion": "Vi",
         "slug": "Vi",
-        "n": 96,
+        "n": 97,
         "wins": 55,
-        "losses": 41,
-        "wr": 0.573,
-        "ligas": "LPL(30) LCK(27) LEC(19) LCS(13) CBLOL(7)"
+        "losses": 42,
+        "wr": 0.567,
+        "ligas": "LPL(31) LCK(27) LEC(19) LCS(13) CBLOL(7)"
       },
       {
         "champion": "Naafiri",
@@ -287,11 +287,11 @@ window.ML_DATA = {
       {
         "champion": "XinZhao",
         "slug": "XinZhao",
-        "n": 162,
-        "wins": 72,
+        "n": 163,
+        "wins": 73,
         "losses": 90,
-        "wr": 0.444,
-        "ligas": "LCK(51) LPL(46) LEC(30) LCS(18) CBLOL(17)"
+        "wr": 0.448,
+        "ligas": "LCK(51) LPL(47) LEC(30) LCS(18) CBLOL(17)"
       },
       {
         "champion": "Nocturne",
@@ -352,11 +352,11 @@ window.ML_DATA = {
       {
         "champion": "Orianna",
         "slug": "Orianna",
-        "n": 57,
-        "wins": 34,
+        "n": 58,
+        "wins": 35,
         "losses": 23,
-        "wr": 0.596,
-        "ligas": "LCK(18) LPL(16) CBLOL(9) LCS(8) LEC(6)"
+        "wr": 0.603,
+        "ligas": "LCK(18) LPL(17) CBLOL(9) LCS(8) LEC(6)"
       },
       {
         "champion": "Annie",
@@ -469,11 +469,11 @@ window.ML_DATA = {
       {
         "champion": "Viktor",
         "slug": "Viktor",
-        "n": 51,
+        "n": 52,
         "wins": 23,
-        "losses": 28,
-        "wr": 0.451,
-        "ligas": "LEC(18) CBLOL(11) LPL(10) LCS(7) LCK(5)"
+        "losses": 29,
+        "wr": 0.442,
+        "ligas": "LEC(18) LPL(11) CBLOL(11) LCS(7) LCK(5)"
       },
       {
         "champion": "Galio",
@@ -534,11 +534,11 @@ window.ML_DATA = {
       {
         "champion": "Sivir",
         "slug": "Sivir",
-        "n": 45,
-        "wins": 28,
+        "n": 46,
+        "wins": 29,
         "losses": 17,
-        "wr": 0.622,
-        "ligas": "LCK(12) LPL(11) CBLOL(10) LEC(9) LCS(3)"
+        "wr": 0.63,
+        "ligas": "LCK(12) LPL(12) CBLOL(10) LEC(9) LCS(3)"
       },
       {
         "champion": "Ashe",
@@ -615,11 +615,11 @@ window.ML_DATA = {
       {
         "champion": "Corki",
         "slug": "Corki",
-        "n": 103,
+        "n": 104,
         "wins": 47,
-        "losses": 56,
-        "wr": 0.456,
-        "ligas": "LPL(38) LCS(19) LEC(17) CBLOL(15) LCK(14)"
+        "losses": 57,
+        "wr": 0.452,
+        "ligas": "LPL(39) LCS(19) LEC(17) CBLOL(15) LCK(14)"
       },
       {
         "champion": "Ezreal",
@@ -678,22 +678,22 @@ window.ML_DATA = {
         "ligas": "LPL(38) LCK(33) LEC(22) LCS(18) CBLOL(8)"
       },
       {
-        "champion": "Alistar",
-        "slug": "Alistar",
-        "n": 36,
-        "wins": 21,
-        "losses": 15,
-        "wr": 0.583,
-        "ligas": "LPL(10) LCK(9) CBLOL(6) LCS(6) LEC(5)"
-      },
-      {
         "champion": "Bard",
         "slug": "Bard",
-        "n": 131,
-        "wins": 76,
+        "n": 132,
+        "wins": 77,
         "losses": 55,
-        "wr": 0.58,
-        "ligas": "LPL(39) LCK(35) LEC(26) CBLOL(17) LCS(14)"
+        "wr": 0.583,
+        "ligas": "LPL(40) LCK(35) LEC(26) CBLOL(17) LCS(14)"
+      },
+      {
+        "champion": "Alistar",
+        "slug": "Alistar",
+        "n": 37,
+        "wins": 21,
+        "losses": 16,
+        "wr": 0.568,
+        "ligas": "LPL(11) LCK(9) CBLOL(6) LCS(6) LEC(5)"
       },
       {
         "champion": "Rell",

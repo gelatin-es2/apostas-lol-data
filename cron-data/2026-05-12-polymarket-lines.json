@@ -1,11 +1,11 @@
 {
-  "captured_at": "2026-05-12T09:18:55.188Z",
+  "captured_at": "2026-05-12T13:54:55.984Z",
   "range": {
     "from": "2026-05-12",
     "to": "2026-05-13"
   },
   "target_odd": 1.83,
-  "matches_total": 9,
+  "matches_total": 8,
   "matches_with_polymarket_event": 5,
   "matches_with_total_kills": 3,
   "captured": [
@@ -22,30 +22,30 @@
       "games": [
         {
           "game_number": 2,
-          "line": 28.5,
-          "under_price": 0.59,
-          "over_price": 0.41,
-          "under_odd": 1.695,
-          "over_odd": 2.439,
-          "market_id": "2225049",
-          "question": "Total Kills Over/Under 28.5 in Game 2?",
+          "line": 29.5,
+          "under_price": 0.5,
+          "over_price": 0.5,
+          "under_odd": 2,
+          "over_odd": 2,
+          "market_id": "2225051",
+          "question": "Total Kills Over/Under 29.5 in Game 2?",
           "sportsMarketType": "kill_over_under_game",
           "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.135,
+          "distance_to_target": 0.17,
           "alternatives_count": 5
         },
         {
           "game_number": 1,
           "line": 28.5,
-          "under_price": 0.575,
-          "over_price": 0.425,
-          "under_odd": 1.739,
-          "over_odd": 2.353,
+          "under_price": 0.57,
+          "over_price": 0.43,
+          "under_odd": 1.754,
+          "over_odd": 2.326,
           "market_id": "2225056",
           "question": "Total Kills Over/Under 28.5 in Game 1?",
           "sportsMarketType": "kill_over_under_game",
           "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.091,
+          "distance_to_target": 0.076,
           "alternatives_count": 5
         }
       ]
@@ -56,15 +56,6 @@
       "match_date": "2026-05-13",
       "team_a": "DNS",
       "team_b": "DK",
-      "polymarket_event_slug": null,
-      "reason": "event_not_found_on_polymarket"
-    },
-    {
-      "match_id_lolesports": "115615926677896623",
-      "league": "LPL",
-      "match_date": "2026-05-12",
-      "team_a": "IG",
-      "team_b": "BLG",
       "polymarket_event_slug": null,
       "reason": "event_not_found_on_polymarket"
     },
@@ -82,29 +73,29 @@
         {
           "game_number": 2,
           "line": 24.5,
-          "under_price": 0.565,
-          "over_price": 0.435,
-          "under_odd": 1.77,
-          "over_odd": 2.299,
+          "under_price": 0.555,
+          "over_price": 0.445,
+          "under_odd": 1.802,
+          "over_odd": 2.247,
           "market_id": "2225163",
           "question": "Total Kills Over/Under 24.5 in Game 2?",
           "sportsMarketType": "kill_over_under_game",
           "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.06,
+          "distance_to_target": 0.028,
           "alternatives_count": 5
         },
         {
           "game_number": 1,
           "line": 24.5,
-          "under_price": 0.55,
-          "over_price": 0.45,
-          "under_odd": 1.818,
-          "over_odd": 2.222,
+          "under_price": 0.515,
+          "over_price": 0.485,
+          "under_odd": 1.942,
+          "over_odd": 2.062,
           "market_id": "2225160",
           "question": "Total Kills Over/Under 24.5 in Game 1?",
           "sportsMarketType": "kill_over_under_game",
           "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.012,
+          "distance_to_target": 0.112,
           "alternatives_count": 5
         }
       ]
@@ -123,15 +114,15 @@
         {
           "game_number": 1,
           "line": 26.5,
-          "under_price": 0.565,
-          "over_price": 0.435,
-          "under_odd": 1.77,
-          "over_odd": 2.299,
+          "under_price": 0.54,
+          "over_price": 0.46,
+          "under_odd": 1.852,
+          "over_odd": 2.174,
           "market_id": "2225146",
           "question": "Total Kills Over/Under 26.5 in Game 1?",
           "sportsMarketType": "kill_over_under_game",
           "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.06,
+          "distance_to_target": 0.022,
           "alternatives_count": 5
         },
         {
