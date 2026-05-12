@@ -9,7 +9,7 @@ const https = require('https');
 const LOLES = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 const SPLIT2_START = '2026-04-01';
 const PEEL = ['Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio'];
-const STAKE = 100;
+const STAKE = 1000; // CEO 2026-05-12: stake operacional real (era 100 hardcoded, gerava confusão no dashboard)
 const ODD = 1.85;
 // LINE fallback (compat) — se nem Polymarket nem livestats tiver dado
 const FALLBACK_LINE = 29.5;

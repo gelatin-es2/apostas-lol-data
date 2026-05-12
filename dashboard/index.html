@@ -506,8 +506,8 @@
 
   <main class="container tab-pane" data-pane="metodo">
     <div class="method-summary">
-      <h2>Método 2-peel Under · Spring 2026</h2>
-      <div class="desc" id="methodDesc"><strong>SPLIT 2 2026 apenas</strong> · ligas operadas: LCK/LPL/LEC/CBLOL/LFL/LCS · ambos supports peel · linha 29.5 · stake R$1.000 · odd 1.85 · <span id="methodUpdated">carregando…</span></div>
+      <h2>📊 Backtest do método (simulação) — Spring 2026</h2>
+      <div class="desc" id="methodDesc"><strong>SIMULAÇÃO Split 2</strong> de TODOS games das ligas operadas (LCK/LPL/LEC/CBLOL/LFL/LCS) com método válido · stake simulado R$1.000 · odd 1.85 · <em>não são suas bets reais</em> (ver "Suas apostas" abaixo) · <span id="methodUpdated">carregando…</span></div>
       <div class="stats" id="methodStats">
         <div class="stat"><div class="label">Jogos 2-peel</div><div class="value">…</div></div>
         <div class="stat"><div class="label">Hit Under</div><div class="value green">…</div></div>
@@ -1218,11 +1218,11 @@
         `;
         // Cards
         const grid = document.getElementById('methodGrid');
-        const ligaRows = d.ligas.map(l => rowHtml(l.name, '', l.hit, l.n));
-        const supRows = d.supports.map(s => rowHtml(s.name, '', s.hit, s.n));
-        const teamsBons = d.teams.filter(t => t.hit >= 70).map(t => rowHtml(t.name, t.lg, t.hit, t.n));
-        const teamsCuidado = d.teams.filter(t => t.hit < 70).map(t => rowHtml(t.name, t.lg, t.hit, t.n));
-        const champRows = d.champs.map(c => rowHtml(c.champ, c.role === 'bottom' ? 'adc' : (c.role === 'jungle' ? 'jg' : c.role), c.hit, c.n));
+        const ligaRows = (d.ligas || []).map(l => rowHtml(l.name, '', l.hit, l.n));
+        const supRows = (d.supports || []).map(s => rowHtml(s.name, '', s.hit, s.n));
+        // Top 8 melhores e top 8 piores (limitado — antes mostrava lista enorme)
+        const teamsBons = (d.teams || []).filter(t => t.hit >= 70).slice(0, 8).map(t => rowHtml(t.name, t.lg, t.hit, t.n));
+        const teamsCuidado = (d.teams || []).filter(t => t.hit < 50).slice(0, 8).map(t => rowHtml(t.name, t.lg, t.hit, t.n));
 
         // MISSED OPPORTUNITIES — games com método válido onde Elvis NÃO apostou
         let missedCardHtml = '';
@@ -1270,9 +1270,9 @@
           missedCardHtml,
           cardHtml('Ligas', ligaRows),
           cardHtml('Supports peel', supRows),
-          cardHtml('Times — bons pra Under', teamsBons),
-          cardHtml('Times — cuidado / não apostar', teamsCuidado),
-          cardHtml('Bonecos por lane (n≥8)', champRows),
+          cardHtml('Top 8 times bons (≥70%)', teamsBons),
+          cardHtml('Top 8 times ruins (<50%)', teamsCuidado),
+          // Bonecos por lane removido (decisão CEO 2026-05-12: enxugar dashboard, foco essencial)
         ].join('');
       } catch (e) {
         console.warn('Stats fetch failed, mantendo HTML estático:', e);

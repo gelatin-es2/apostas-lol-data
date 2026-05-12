@@ -101,11 +101,16 @@ function pickKind(bet) {
   return 'outro';
 }
 
+// Bets ignoradas (decisão CEO 2026-05-12)
+const IGNORE_BET_IDS = new Set([
+  '1642cfa9-9a05-44d8-b1fc-f183d2dfd2fe', // cashout órfão sem detalhes (intencional, fora da análise)
+]);
+
 (async () => {
   const { supabaseUrl, supabaseKey } = loadConfig();
   const allRaw = await fetchAllBets(supabaseUrl, supabaseKey);
-  // Filtro Split 2: bet_datetime >= SPLIT2_START
-  const all = allRaw.filter(b => b.bet_datetime && b.bet_datetime >= SPLIT2_START);
+  // Filtro Split 2: bet_datetime >= SPLIT2_START + remove ignored
+  const all = allRaw.filter(b => b.bet_datetime && b.bet_datetime >= SPLIT2_START && !IGNORE_BET_IDS.has(b.id));
   const settled = all.filter(b => b.status === 'green' || b.status === 'red');
 
   const by_trigger = { '2peel': [], '1peel+flex': [], 'none': [] };
