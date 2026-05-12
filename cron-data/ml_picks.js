@@ -1,5 +1,5 @@
 window.ML_DATA = {
-  "generated_at": "2026-05-11T14:32:52.785Z",
+  "generated_at": "2026-05-12T09:24:21.628Z",
   "split_label": "2026-04-01 → 2026-05-10",
   "leagues": [
     "LEC",

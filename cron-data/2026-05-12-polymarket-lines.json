@@ -1,0 +1,196 @@
+{
+  "captured_at": "2026-05-12T09:18:55.188Z",
+  "range": {
+    "from": "2026-05-12",
+    "to": "2026-05-13"
+  },
+  "target_odd": 1.83,
+  "matches_total": 9,
+  "matches_with_polymarket_event": 5,
+  "matches_with_total_kills": 3,
+  "captured": [
+    {
+      "match_id_lolesports": "115548128962971907",
+      "league": "LCK",
+      "match_date": "2026-05-13",
+      "match_start_utc": "2026-05-13T08:00:00Z",
+      "team_a": "T1",
+      "team_b": "NS",
+      "polymarket_event_slug": "lol-t1-ns-2026-05-13",
+      "polymarket_event_title": "LoL: T1 vs Nongshim Red Force (BO3) - LCK Rounds 1-2",
+      "total_kills_markets_found": 10,
+      "games": [
+        {
+          "game_number": 2,
+          "line": 28.5,
+          "under_price": 0.59,
+          "over_price": 0.41,
+          "under_odd": 1.695,
+          "over_odd": 2.439,
+          "market_id": "2225049",
+          "question": "Total Kills Over/Under 28.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.135,
+          "alternatives_count": 5
+        },
+        {
+          "game_number": 1,
+          "line": 28.5,
+          "under_price": 0.575,
+          "over_price": 0.425,
+          "under_odd": 1.739,
+          "over_odd": 2.353,
+          "market_id": "2225056",
+          "question": "Total Kills Over/Under 28.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.091,
+          "alternatives_count": 5
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115548128962971951",
+      "league": "LCK",
+      "match_date": "2026-05-13",
+      "team_a": "DNS",
+      "team_b": "DK",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115615926677896623",
+      "league": "LPL",
+      "match_date": "2026-05-12",
+      "team_a": "IG",
+      "team_b": "BLG",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115615924499588635",
+      "league": "LPL",
+      "match_date": "2026-05-13",
+      "match_start_utc": "2026-05-13T09:00:00Z",
+      "team_a": "OMG",
+      "team_b": "EDG",
+      "polymarket_event_slug": "lol-omg-edg-2026-05-13",
+      "polymarket_event_title": "LoL: Oh My God vs EDward Gaming (BO3) - LPL Group Nirvana",
+      "total_kills_markets_found": 10,
+      "games": [
+        {
+          "game_number": 2,
+          "line": 24.5,
+          "under_price": 0.565,
+          "over_price": 0.435,
+          "under_odd": 1.77,
+          "over_odd": 2.299,
+          "market_id": "2225163",
+          "question": "Total Kills Over/Under 24.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.06,
+          "alternatives_count": 5
+        },
+        {
+          "game_number": 1,
+          "line": 24.5,
+          "under_price": 0.55,
+          "over_price": 0.45,
+          "under_odd": 1.818,
+          "over_odd": 2.222,
+          "market_id": "2225160",
+          "question": "Total Kills Over/Under 24.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.012,
+          "alternatives_count": 5
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115615926677831075",
+      "league": "LPL",
+      "match_date": "2026-05-13",
+      "match_start_utc": "2026-05-13T11:00:00Z",
+      "team_a": "WE",
+      "team_b": "AL",
+      "polymarket_event_slug": "lol-we-al-2026-05-13",
+      "polymarket_event_title": "LoL: Team WE vs Anyone's Legend (BO3) - LPL Group Ascend",
+      "total_kills_markets_found": 10,
+      "games": [
+        {
+          "game_number": 1,
+          "line": 26.5,
+          "under_price": 0.565,
+          "over_price": 0.435,
+          "under_odd": 1.77,
+          "over_odd": 2.299,
+          "market_id": "2225146",
+          "question": "Total Kills Over/Under 26.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.06,
+          "alternatives_count": 5
+        },
+        {
+          "game_number": 2,
+          "line": 26.5,
+          "under_price": 0.565,
+          "over_price": 0.435,
+          "under_odd": 1.77,
+          "over_odd": 2.299,
+          "market_id": "2225151",
+          "question": "Total Kills Over/Under 26.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.06,
+          "alternatives_count": 5
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "116316789792721722",
+      "league": "LFL",
+      "match_date": "2026-05-13",
+      "match_start_utc": "2026-05-13T16:00:00Z",
+      "team_a": "IJC",
+      "team_b": "ES",
+      "polymarket_event_slug": "lol-es-ijc-2026-05-13",
+      "polymarket_event_title": "LoL: Esprit Shōnen vs Ici Japon Corp. Esport (BO3) - LFL Playoffs",
+      "total_kills_markets_found": 0,
+      "games": []
+    },
+    {
+      "match_id_lolesports": "116316789792721718",
+      "league": "LFL",
+      "match_date": "2026-05-13",
+      "team_a": "VITB",
+      "team_b": "ZYB",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "116295697480989311",
+      "league": "LES",
+      "match_date": "2026-05-13",
+      "match_start_utc": "2026-05-13T15:00:00Z",
+      "team_a": "BAR",
+      "team_b": "FLK",
+      "polymarket_event_slug": "lol-bar-flk-2026-05-13",
+      "polymarket_event_title": "LoL: Barça eSports vs FALKE Esports (BO3) - LES Regular Season",
+      "total_kills_markets_found": 0,
+      "games": []
+    },
+    {
+      "match_id_lolesports": "116295697480989283",
+      "league": "LES",
+      "match_date": "2026-05-13",
+      "team_a": "MKF",
+      "team_b": "GX",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    }
+  ]
+}
