@@ -1,0 +1,235 @@
+{
+  "captured_at": "2026-05-13T09:25:25.941Z",
+  "range": {
+    "from": "2026-05-13",
+    "to": "2026-05-14"
+  },
+  "target_odd": 1.83,
+  "matches_total": 13,
+  "matches_with_polymarket_event": 6,
+  "matches_with_total_kills": 3,
+  "captured": [
+    {
+      "match_id_lolesports": "115548128962971951",
+      "league": "LCK",
+      "match_date": "2026-05-13",
+      "team_a": "DNS",
+      "team_b": "DK",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115548128962971923",
+      "league": "LCK",
+      "match_date": "2026-05-14",
+      "team_a": "BFX",
+      "team_b": "GEN",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115548128963037555",
+      "league": "LCK",
+      "match_date": "2026-05-14",
+      "team_a": "KRX",
+      "team_b": "KT",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115615926677831075",
+      "league": "LPL",
+      "match_date": "2026-05-13",
+      "match_start_utc": "2026-05-13T11:00:00Z",
+      "team_a": "WE",
+      "team_b": "AL",
+      "polymarket_event_slug": "lol-we-al-2026-05-13",
+      "polymarket_event_title": "LoL: Team WE vs Anyone's Legend (BO3) - LPL Group Ascend",
+      "total_kills_markets_found": 12,
+      "games": [
+        {
+          "game_number": 1,
+          "line": 27.5,
+          "under_price": 0.535,
+          "over_price": 0.465,
+          "under_odd": 1.869,
+          "over_odd": 2.151,
+          "market_id": "2225148",
+          "question": "Total Kills Over/Under 27.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.039,
+          "alternatives_count": 6
+        },
+        {
+          "game_number": 2,
+          "line": 26.5,
+          "under_price": 0.445,
+          "over_price": 0.555,
+          "under_odd": 2.247,
+          "over_odd": 1.802,
+          "market_id": "2225151",
+          "question": "Total Kills Over/Under 26.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.028,
+          "alternatives_count": 6
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115615924499588641",
+      "league": "LPL",
+      "match_date": "2026-05-14",
+      "match_start_utc": "2026-05-14T09:00:00Z",
+      "team_a": "LNG",
+      "team_b": "LGD",
+      "polymarket_event_slug": "lol-lng-lgd-2026-05-14",
+      "polymarket_event_title": "LoL: LNG Esports vs LGD Gaming (BO3) - LPL Group Nirvana",
+      "total_kills_markets_found": 10,
+      "games": [
+        {
+          "game_number": 2,
+          "line": 26.5,
+          "under_price": 0.5,
+          "over_price": 0.5,
+          "under_odd": 2,
+          "over_odd": 2,
+          "market_id": "2225132",
+          "question": "Total Kills Over/Under 26.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.17,
+          "alternatives_count": 5
+        },
+        {
+          "game_number": 1,
+          "line": 24.5,
+          "under_price": 0.51,
+          "over_price": 0.49,
+          "under_odd": 1.961,
+          "over_odd": 2.041,
+          "market_id": "2225137",
+          "question": "Total Kills Over/Under 24.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.131,
+          "alternatives_count": 5
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115615926677896679",
+      "league": "LPL",
+      "match_date": "2026-05-14",
+      "match_start_utc": "2026-05-14T11:00:00Z",
+      "team_a": "WBG",
+      "team_b": "JDG",
+      "polymarket_event_slug": "lol-wb-jdg-2026-05-14",
+      "polymarket_event_title": "LoL: Weibo Gaming vs JD Gaming (BO3) - LPL Group Ascend",
+      "total_kills_markets_found": 10,
+      "games": [
+        {
+          "game_number": 1,
+          "line": 27.5,
+          "under_price": 0.525,
+          "over_price": 0.475,
+          "under_odd": 1.905,
+          "over_odd": 2.105,
+          "market_id": "2225125",
+          "question": "Total Kills Over/Under 27.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.075,
+          "alternatives_count": 5
+        },
+        {
+          "game_number": 2,
+          "line": 26.5,
+          "under_price": 0.5,
+          "over_price": 0.5,
+          "under_odd": 2,
+          "over_odd": 2,
+          "market_id": "2225120",
+          "question": "Total Kills Over/Under 26.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.17,
+          "alternatives_count": 5
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "116316789792721722",
+      "league": "LFL",
+      "match_date": "2026-05-13",
+      "match_start_utc": "2026-05-13T16:00:00Z",
+      "team_a": "IJC",
+      "team_b": "ES",
+      "polymarket_event_slug": "lol-es-ijc-2026-05-13",
+      "polymarket_event_title": "LoL: Esprit Shōnen vs Ici Japon Corp. Esport (BO3) - LFL Playoffs",
+      "total_kills_markets_found": 0,
+      "games": []
+    },
+    {
+      "match_id_lolesports": "116316789792721718",
+      "league": "LFL",
+      "match_date": "2026-05-13",
+      "team_a": "VITB",
+      "team_b": "ZYB",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "116295697480989311",
+      "league": "LES",
+      "match_date": "2026-05-13",
+      "match_start_utc": "2026-05-13T15:00:00Z",
+      "team_a": "BAR",
+      "team_b": "FLK",
+      "polymarket_event_slug": "lol-bar-flk-2026-05-13",
+      "polymarket_event_title": "LoL: Barça eSports vs FALKE Esports (BO3) - LES Regular Season",
+      "total_kills_markets_found": 0,
+      "games": []
+    },
+    {
+      "match_id_lolesports": "116295697480989283",
+      "league": "LES",
+      "match_date": "2026-05-13",
+      "team_a": "MKF",
+      "team_b": "GX",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "116295697481054875",
+      "league": "LES",
+      "match_date": "2026-05-14",
+      "team_a": "UCAM",
+      "team_b": "LUA",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "116295697481054887",
+      "league": "LES",
+      "match_date": "2026-05-14",
+      "team_a": "HRTS",
+      "team_b": "UB",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "116222161720779578",
+      "league": "LIT",
+      "match_date": "2026-05-14",
+      "match_start_utc": "2026-05-14T16:00:00Z",
+      "team_a": "GMB",
+      "team_b": "EKO",
+      "polymarket_event_slug": "lol-eko-gmb-2026-05-14",
+      "polymarket_event_title": "LoL: EKO Esports vs GMBLERS ESPORTS (BO5) - LIT Playoffs",
+      "total_kills_markets_found": 0,
+      "games": []
+    }
+  ]
+}
