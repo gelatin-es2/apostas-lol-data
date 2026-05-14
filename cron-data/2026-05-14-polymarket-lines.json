@@ -1,23 +1,14 @@
 {
-  "captured_at": "2026-05-14T09:15:34.932Z",
+  "captured_at": "2026-05-14T13:45:35.473Z",
   "range": {
     "from": "2026-05-14",
     "to": "2026-05-15"
   },
   "target_odd": 1.83,
-  "matches_total": 10,
-  "matches_with_polymarket_event": 4,
-  "matches_with_total_kills": 3,
+  "matches_total": 8,
+  "matches_with_polymarket_event": 3,
+  "matches_with_total_kills": 2,
   "captured": [
-    {
-      "match_id_lolesports": "115548128963037555",
-      "league": "LCK",
-      "match_date": "2026-05-14",
-      "team_a": "KRX",
-      "team_b": "KT",
-      "polymarket_event_slug": null,
-      "reason": "event_not_found_on_polymarket"
-    },
     {
       "match_id_lolesports": "115548128962971867",
       "league": "LCK",
@@ -37,47 +28,6 @@
       "reason": "event_not_found_on_polymarket"
     },
     {
-      "match_id_lolesports": "115615926677896679",
-      "league": "LPL",
-      "match_date": "2026-05-14",
-      "match_start_utc": "2026-05-14T11:00:00Z",
-      "team_a": "WBG",
-      "team_b": "JDG",
-      "polymarket_event_slug": "lol-wb-jdg-2026-05-14",
-      "polymarket_event_title": "LoL: Weibo Gaming vs JD Gaming (BO3) - LPL Group Ascend",
-      "total_kills_markets_found": 12,
-      "games": [
-        {
-          "game_number": 1,
-          "line": 25.5,
-          "under_price": 0.445,
-          "over_price": 0.555,
-          "under_odd": 2.247,
-          "over_odd": 1.802,
-          "market_id": "2225127",
-          "question": "Total Kills Over/Under 25.5 in Game 1?",
-          "sportsMarketType": "kill_over_under_game",
-          "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.028,
-          "alternatives_count": 6
-        },
-        {
-          "game_number": 2,
-          "line": 28.5,
-          "under_price": 0.55,
-          "over_price": 0.45,
-          "under_odd": 1.818,
-          "over_odd": 2.222,
-          "market_id": "2225124",
-          "question": "Total Kills Over/Under 28.5 in Game 2?",
-          "sportsMarketType": "kill_over_under_game",
-          "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.012,
-          "alternatives_count": 6
-        }
-      ]
-    },
-    {
       "match_id_lolesports": "115615924499588657",
       "league": "LPL",
       "match_date": "2026-05-15",
@@ -90,16 +40,16 @@
       "games": [
         {
           "game_number": 1,
-          "line": 25.5,
-          "under_price": 0.5,
-          "over_price": 0.5,
-          "under_odd": 2,
-          "over_odd": 2,
-          "market_id": "2256004",
-          "question": "Total Kills Over/Under 25.5 in Game 1?",
+          "line": 24.5,
+          "under_price": 0.495,
+          "over_price": 0.505,
+          "under_odd": 2.02,
+          "over_odd": 1.98,
+          "market_id": "2256006",
+          "question": "Total Kills Over/Under 24.5 in Game 1?",
           "sportsMarketType": "kill_over_under_game",
           "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.17,
+          "distance_to_target": 0.15,
           "alternatives_count": 5
         },
         {
@@ -132,29 +82,29 @@
         {
           "game_number": 1,
           "line": 28.5,
-          "under_price": 0.49,
-          "over_price": 0.51,
-          "under_odd": 2.041,
-          "over_odd": 1.961,
+          "under_price": 0.495,
+          "over_price": 0.505,
+          "under_odd": 2.02,
+          "over_odd": 1.98,
           "market_id": "2255993",
           "question": "Total Kills Over/Under 28.5 in Game 1?",
           "sportsMarketType": "kill_over_under_game",
           "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.131,
+          "distance_to_target": 0.15,
           "alternatives_count": 5
         },
         {
           "game_number": 2,
           "line": 29.5,
-          "under_price": 0.555,
-          "over_price": 0.445,
-          "under_odd": 1.802,
-          "over_odd": 2.247,
+          "under_price": 0.56,
+          "over_price": 0.44,
+          "under_odd": 1.786,
+          "over_odd": 2.273,
           "market_id": "2256000",
           "question": "Total Kills Over/Under 29.5 in Game 2?",
           "sportsMarketType": "kill_over_under_game",
           "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.028,
+          "distance_to_target": 0.044,
           "alternatives_count": 5
         }
       ]
