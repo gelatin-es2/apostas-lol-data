@@ -740,6 +740,120 @@
       return `${d}/${m}`;
     };
 
+    // ── Team name aliases → canônico ─────────────────────────────────────────
+    // Quando bet-logger não normaliza na hora de salvar, o dashboard mostra
+    // qualquer variação de nome que foi digitada/colada. Esse mapa corrige na exibição.
+    const TEAM_ALIASES = {
+      // LPL
+      'BLG': 'Bilibili Gaming',
+      'JDG': 'JD Gaming',
+      'WBG': 'Weibo Gaming',
+      'WE': 'Team WE',
+      'AL': "Anyone's Legend",
+      'IG': 'Invictus Gaming',
+      'LGD': 'LGD Gaming',
+      'TES': 'Top Esports',
+      'UP': 'Ultra Prime',
+      'LNG': 'LNG Esports',
+      // LCK
+      'KRX': 'KIWOOM DRX',
+      'DK': 'Dplus KIA',
+      'GEN': 'Gen.G Esports',
+      'KT': 'KT Rolster',
+      'HLE': 'Hanwha Life Esports',
+      'BRO': 'BNK FearX',
+      // LEC
+      'G2': 'G2 Esports',
+      'FNC': 'Fnatic',
+      'FX': 'GIANTX',
+      'GX': 'GIANTX',
+      'KC': 'Karmine Corp',
+      'KOI': 'Movistar KOI',
+      'MKOI': 'Movistar KOI',
+      'VITB': 'Team Vitality',
+      // CBLOL
+      'VKS': 'Vivo Keyd Stars',
+      // LFL
+      'GL': 'Galions',
+      'SLY': 'Solary',
+      'LOS': 'Los Grandes',
+      // LCS
+      'BFX': 'BLK Force X',
+      'ZYB': 'Zombies Are Burning',
+    };
+    const normalizeTeamName = (raw) => TEAM_ALIASES[raw] || raw || '?';
+
+    // ── Market text → legível padronizado ────────────────────────────────────
+    // Bookmakers diferentes produzem ~20 variantes pra "Total Kills Mapa X".
+    // Normaliza pro formato: "Total Kills · Mapa X" (ou "Total Kills · Match").
+    const normalizeMarket = (market, isMapBet, mapNumber) => {
+      if (!market) return '?';
+      // Cashout é literal
+      if (/cashout/i.test(market)) return 'Cashout';
+      if (/moneyline|vencedor|resultado\s*final/i.test(market)) return 'Moneyline';
+
+      // Extrai número do mapa da string do market (muitos formatos)
+      const mapMatch = (market || '').match(/\bmap\s*(\d)\b|\bmapa\s*(\d)\b|(\d)[ºoª]\s*mapa|\b(\d)(?:st|nd|rd|th)\s*map/i);
+      let mapNum = null;
+      if (mapMatch) {
+        mapNum = parseInt(mapMatch[1] || mapMatch[2] || mapMatch[3] || mapMatch[4], 10);
+      }
+      // Fallback: usa campo is_map_bet + map_number da própria bet
+      if (!mapNum && isMapBet && mapNumber) mapNum = mapNumber;
+
+      // Captura qualquer variante de "Total Kills" ou "Total" em market de kills
+      if (/total.*kill|kill.*total|kills\s*totais/i.test(market) || /^total$/i.test(market.trim())) {
+        return mapNum ? `Total Kills · Map ${mapNum}` : 'Total Kills · Match';
+      }
+      // Formato "Primeiro Mapa - Total Kills", "Segundo Mapa - Total Kills", etc.
+      if (/primeiro|first|1º/i.test(market))  return 'Total Kills · Map 1';
+      if (/segundo|second|2º/i.test(market))   return 'Total Kills · Map 2';
+      if (/terceiro|third|3º/i.test(market))   return 'Total Kills · Map 3';
+      if (/quarto|fourth|4º/i.test(market))    return 'Total Kills · Map 4';
+      if (/quinto|fifth|5º/i.test(market))     return 'Total Kills · Map 5';
+      // Formato "Total - Map X" e variantes Pinnacle/Betano
+      if (/^total\s*-?\s*map\s*(\d)/i.test(market)) {
+        const m = market.match(/map\s*(\d)/i);
+        return m ? `Total Kills · Map ${m[1]}` : 'Total Kills';
+      }
+      // Formato "Total Mapa X - Menos X.X" (market inclui pick — artifact de extração)
+      if (/total\s*mapa\s*(\d)/i.test(market)) {
+        const m = market.match(/mapa\s*(\d)/i);
+        return m ? `Total Kills · Map ${m[1]}` : 'Total Kills';
+      }
+
+      return market; // desconhecido: retorna literal
+    };
+
+    // ── Liga → display canônico ───────────────────────────────────────────────
+    // O campo `league` tem 14 variações diferentes (ex: "LPL", "LPL Spring 2026",
+    // "LPL 2026 Split 2", "LPL 2026"). Normaliza para o código curto.
+    const LEAGUE_DISPLAY = {
+      lck: 'LCK', lpl: 'LPL', lec: 'LEC', cblol: 'CBLOL',
+      lcs: 'LCS', msi: 'MSI', worlds: 'Worlds', lfl: 'LFL',
+      lit: 'LIT', eum: 'EUM', ewc: 'EWC',
+    };
+    const normalizeLeague = (league) => {
+      if (!league) return null;
+      // Já é código canônico
+      const knownCodes = ['LCK','LPL','LEC','CBLOL','LCS','MSI','Worlds','LFL','LIT','EUM'];
+      if (knownCodes.includes(league)) return league;
+      // Detecta código no texto
+      const u = league.toUpperCase();
+      if (/EWC|ESPORTS WORLD CUP/.test(u)) return 'EWC';
+      if (/CBLOL|BRASIL/.test(u)) return 'CBLOL';
+      if (/\bLCK\b/.test(u)) return 'LCK';
+      if (/\bLPL\b/.test(u)) return 'LPL';
+      if (/\bLEC\b/.test(u)) return 'LEC';
+      if (/\bLCS\b/.test(u)) return 'LCS';
+      if (/MSI/.test(u)) return 'MSI';
+      if (/WORLDS|CHAMPIONSHIP/.test(u)) return 'Worlds';
+      if (/\bLFL\b|LIGUE FRAN/.test(u)) return 'LFL';
+      if (/\bLIT\b|ITALIAN/.test(u)) return 'LIT';
+      if (/EMEA MASTERS|\bEUM\b/.test(u)) return 'EUM';
+      return league; // desconhecido: retorna literal
+    };
+
     let allBets = [];
     let currentFilter = 'all';
     let currentDayFilter = null; // 'YYYY-MM-DD' ou null
@@ -914,6 +1028,74 @@
       });
     }
 
+    // ── normalizeComp: constrói objeto compatível com renderComp a partir de
+    // qualquer formato armazenado (compositions legado OU match_context novo)
+    function normalizeComp(b) {
+      // Formato canônico (bets antigas enriquecidas via enrich-match-context.cjs)
+      const comps = b.raw_extraction?.compositions;
+      if (comps?.team_a && comps?.team_b) return comps;
+
+      // Formato novo: settle-pending-bets.cjs grava picks em match_context diretamente
+      // (blue_picks / red_picks) mas NÃO cria raw_extraction.compositions.
+      const mc = b.raw_extraction?.match_context;
+      if (!mc?.blue_picks?.support && !mc?.red_picks?.support) return null;
+
+      // Mapeamos blue/red → team_a/team_b usando mc.teams[] se disponível,
+      // senão usamos os nomes literais da bet.
+      const teamsArr = mc.teams || [];
+      const normStr = s => (s || '').toLowerCase().replace(/[\s.\-']/g, '');
+      const findTeamEntry = (q) => {
+        if (!q) return null;
+        const nq = normStr(q);
+        return teamsArr.find(t => normStr(t.code) === nq || normStr(t.name) === nq) || null;
+      };
+      const entryA = findTeamEntry(b.team_a);
+      const entryB = findTeamEntry(b.team_b);
+
+      // Descobre qual side (blue/red) cada time jogou nessa partida
+      const blueId = String(mc.blue_team_id || '');
+      const redId  = String(mc.red_team_id  || '');
+      const sideOf = (entry) => {
+        if (!entry) return null;
+        const eid = String(entry.id || entry.esportsTeamId || '');
+        if (eid && eid === blueId) return 'blue';
+        if (eid && eid === redId)  return 'red';
+        return null;
+      };
+
+      const sideA = sideOf(entryA);
+      const sideB = sideOf(entryB);
+
+      const picksFor = (side) => side === 'blue' ? mc.blue_picks : mc.red_picks;
+
+      // Se temos mapeamento limpo, usa; senão apresenta picks em ordem blue/red
+      if (sideA && sideB) {
+        return {
+          source: 'match_context_fallback',
+          team_a: { name: entryA?.name || b.team_a, side: sideA, picks: picksFor(sideA) },
+          team_b: { name: entryB?.name || b.team_b, side: sideB, picks: picksFor(sideB) },
+        };
+      }
+
+      // Último recurso: blue→team_a, red→team_b (pode estar invertido, mas melhor que nada)
+      return {
+        source: 'match_context_fallback_unordered',
+        team_a: { name: b.team_a, side: 'blue', picks: mc.blue_picks },
+        team_b: { name: b.team_b, side: 'red',  picks: mc.red_picks  },
+      };
+    }
+
+    const renderComp = (comp) => {
+      if (!comp || !comp.team_a || !comp.team_b) return '';
+      const fmtSide = (t) => {
+        if (!t?.picks) return '';
+        const p = t.picks;
+        return `<div class="side"><b>${t.name ?? '?'}</b>${t.side ? ` <span style="opacity:.6">(${t.side})</span>` : ''}<br>
+          ${p.top ?? '?'} · ${p.jungle ?? '?'} · ${p.mid ?? '?'} · ${p.adc ?? '?'} · <span class="sup">${p.support ?? '?'}</span></div>`;
+      };
+      return `<div class="comp">${fmtSide(comp.team_a)}${fmtSide(comp.team_b)}</div>`;
+    };
+
     function renderBets(bets) {
       let filtered = currentFilter === 'all' ? bets : bets.filter((b) => b.status === currentFilter);
       if (currentMonthFilter) {
@@ -935,17 +1117,6 @@
         return;
       }
 
-      const renderComp = (comp) => {
-        if (!comp || !comp.team_a || !comp.team_b) return '';
-        const fmtSide = (t) => {
-          if (!t?.picks) return '';
-          const p = t.picks;
-          return `<div class="side"><b>${t.name ?? '?'}</b>${t.side ? ` <span style="opacity:.6">(${t.side})</span>` : ''}<br>
-            ${p.top ?? '?'} · ${p.jungle ?? '?'} · ${p.mid ?? '?'} · ${p.adc ?? '?'} · <span class="sup">${p.support ?? '?'}</span></div>`;
-        };
-        return `<div class="comp">${fmtSide(comp.team_a)}${fmtSide(comp.team_b)}</div>`;
-      };
-
       const html = filtered
         .map((b) => {
           const profit = b.profit;
@@ -954,19 +1125,24 @@
           const profitCls = profit == null ? 'muted' : profit >= 0 ? 'green' : 'red';
           const isHedge = b.raw_extraction?.strategy === 'hedge';
           const mapInfo = b.is_map_bet ? ` · M${b.map_number ?? '?'}` : '';
-          const compHtml = renderComp(b.raw_extraction?.compositions);
+          const compHtml = renderComp(normalizeComp(b));
+
+          const teamADisplay  = normalizeTeamName(b.team_a);
+          const teamBDisplay  = normalizeTeamName(b.team_b);
+          const marketDisplay = normalizeMarket(b.market, b.is_map_bet, b.map_number);
+          const leagueDisplay = normalizeLeague(b.league);
 
           return `
             <div class="bet">
               <div>
                 <div class="head">
-                  <span class="teams">${b.team_a ?? '?'} <span style="color:var(--muted);font-weight:500">vs</span> ${b.team_b ?? '?'}</span>
-                  ${b.league ? `<span class="league">· ${b.league}</span>` : ''}
+                  <span class="teams">${teamADisplay} <span style="color:var(--muted);font-weight:500">vs</span> ${teamBDisplay}</span>
+                  ${leagueDisplay ? `<span class="league">· ${leagueDisplay}</span>` : ''}
                   <span class="badge ${b.status}">${b.status}</span>
                   ${isHedge ? '<span class="badge hedge">hedge</span>' : ''}
                 </div>
                 <div class="market">
-                  ${b.market ?? '?'} → <strong>${b.pick ?? '?'}</strong>${mapInfo}
+                  ${marketDisplay} → <strong>${b.pick ?? '?'}</strong>${mapInfo}
                 </div>
                 <div class="meta">
                   ${fmtDate(b.bet_datetime || b.created_at)} · ${b.bookmaker ?? '?'} · Odd ${(Number(b.odd) || 0).toFixed(2)} · Stake R$ ${fmtMoney(b.stake)}
@@ -985,12 +1161,12 @@
 
     function renderBySupport(bets) {
       const underBets = bets.filter(
-        (b) => /under|menos/i.test(b.pick ?? '') && b.raw_extraction?.compositions
+        (b) => /under|menos/i.test(b.pick ?? '') && normalizeComp(b)
       );
       const bySup = {};
 
       underBets.forEach((b) => {
-        const comps = b.raw_extraction.compositions;
+        const comps = normalizeComp(b);
         [comps.team_a, comps.team_b].forEach((t) => {
           const sup = t?.picks?.support;
           if (!sup) return;

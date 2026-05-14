@@ -324,7 +324,7 @@ function flagLeague(lg, leagueHitMap) {
     const hh = String(brt.getUTCHours()).padStart(2,'0');
     const mm = String(brt.getUTCMinutes()).padStart(2,'0');
     const horaBrt = `${hh}:${mm}`;
-    const jogo = `${m.team_a} vs ${m.team_b}`;
+    const jogo = `${m.team_a_name || m.team_a} vs ${m.team_b_name || m.team_b}`;
     const lg = m.league;
 
     // Fair line: EWC já vem com fair calculada; outros: Polymarket → cron
