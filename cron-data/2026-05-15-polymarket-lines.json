@@ -1,0 +1,216 @@
+{
+  "captured_at": "2026-05-15T09:30:05.329Z",
+  "range": {
+    "from": "2026-05-15",
+    "to": "2026-05-16"
+  },
+  "target_odd": 1.83,
+  "matches_total": 8,
+  "matches_with_polymarket_event": 5,
+  "matches_with_total_kills": 4,
+  "captured": [
+    {
+      "match_id_lolesports": "115548128962971943",
+      "league": "LCK",
+      "match_date": "2026-05-15",
+      "team_a": "BRO",
+      "team_b": "DNS",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115548128962971895",
+      "league": "LCK",
+      "match_date": "2026-05-16",
+      "match_start_utc": "2026-05-16T08:00:00Z",
+      "team_a": "GEN",
+      "team_b": "T1",
+      "polymarket_event_slug": "lol-gen-t1-2026-05-16",
+      "polymarket_event_title": "LoL: Gen.G vs T1 (BO3) - LCK Rounds 1-2",
+      "total_kills_markets_found": 10,
+      "games": [
+        {
+          "game_number": 1,
+          "line": 27.5,
+          "under_price": 0.5,
+          "over_price": 0.5,
+          "under_odd": 2,
+          "over_odd": 2,
+          "market_id": "2263762",
+          "question": "Total Kills Over/Under 27.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.17,
+          "alternatives_count": 5
+        },
+        {
+          "game_number": 2,
+          "line": 26.5,
+          "under_price": 0.5,
+          "over_price": 0.5,
+          "under_odd": 2,
+          "over_odd": 2,
+          "market_id": "2263763",
+          "question": "Total Kills Over/Under 26.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.17,
+          "alternatives_count": 5
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115548128962971935",
+      "league": "LCK",
+      "match_date": "2026-05-16",
+      "team_a": "BFX",
+      "team_b": "NS",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115615926677896639",
+      "league": "LPL",
+      "match_date": "2026-05-15",
+      "match_start_utc": "2026-05-15T11:00:00Z",
+      "team_a": "TES",
+      "team_b": "BLG",
+      "polymarket_event_slug": "lol-tes-blg-2026-05-15",
+      "polymarket_event_title": "LoL: Top Esports vs Bilibili Gaming (BO3) - LPL Group Ascend",
+      "total_kills_markets_found": 12,
+      "games": [
+        {
+          "game_number": 1,
+          "line": 28.5,
+          "under_price": 0.455,
+          "over_price": 0.545,
+          "under_odd": 2.198,
+          "over_odd": 1.835,
+          "market_id": "2255993",
+          "question": "Total Kills Over/Under 28.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.005,
+          "alternatives_count": 6
+        },
+        {
+          "game_number": 2,
+          "line": 31.5,
+          "under_price": 0.58,
+          "over_price": 0.42,
+          "under_odd": 1.724,
+          "over_odd": 2.381,
+          "market_id": "2255998",
+          "question": "Total Kills Over/Under 31.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.106,
+          "alternatives_count": 6
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115615924499588637",
+      "league": "LPL",
+      "match_date": "2026-05-16",
+      "match_start_utc": "2026-05-16T09:00:00Z",
+      "team_a": "TT",
+      "team_b": "EDG",
+      "polymarket_event_slug": "lol-tt-edg-2026-05-16",
+      "polymarket_event_title": "LoL: ThunderTalk Gaming vs EDward Gaming (BO3) - LPL Group Nirvana",
+      "total_kills_markets_found": 10,
+      "games": [
+        {
+          "game_number": 2,
+          "line": 24.5,
+          "under_price": 0.455,
+          "over_price": 0.545,
+          "under_odd": 2.198,
+          "over_odd": 1.835,
+          "market_id": "2255964",
+          "question": "Total Kills Over/Under 24.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.005,
+          "alternatives_count": 5
+        },
+        {
+          "game_number": 1,
+          "line": 24.5,
+          "under_price": 0.425,
+          "over_price": 0.575,
+          "under_odd": 2.353,
+          "over_odd": 1.739,
+          "market_id": "2255969",
+          "question": "Total Kills Over/Under 24.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.091,
+          "alternatives_count": 5
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115615926677896683",
+      "league": "LPL",
+      "match_date": "2026-05-16",
+      "match_start_utc": "2026-05-16T11:00:00Z",
+      "team_a": "WE",
+      "team_b": "NIP",
+      "polymarket_event_slug": "lol-we-nip-2026-05-16",
+      "polymarket_event_title": "LoL: Team WE vs Ninjas in Pyjamas (BO3) - LPL Group Ascend",
+      "total_kills_markets_found": 10,
+      "games": [
+        {
+          "game_number": 1,
+          "line": 28.5,
+          "under_price": 0.505,
+          "over_price": 0.495,
+          "under_odd": 1.98,
+          "over_odd": 2.02,
+          "market_id": "2255959",
+          "question": "Total Kills Over/Under 28.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.15,
+          "alternatives_count": 5
+        },
+        {
+          "game_number": 2,
+          "line": 28.5,
+          "under_price": 0.52,
+          "over_price": 0.48,
+          "under_odd": 1.923,
+          "over_odd": 2.083,
+          "market_id": "2255960",
+          "question": "Total Kills Over/Under 28.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.093,
+          "alternatives_count": 5
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115565670260181839",
+      "league": "CBLOL",
+      "match_date": "2026-05-16",
+      "team_a": "RED",
+      "team_b": "FX",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "116222161720779584",
+      "league": "LIT",
+      "match_date": "2026-05-15",
+      "match_start_utc": "2026-05-15T16:00:00Z",
+      "team_a": "GMB",
+      "team_b": "CG",
+      "polymarket_event_slug": "lol-cg-gmb-2026-05-15",
+      "polymarket_event_title": "LoL: Colossal Gaming vs GMBLERS ESPORTS (BO5) - LIT Playoffs",
+      "total_kills_markets_found": 0,
+      "games": []
+    }
+  ]
+}
