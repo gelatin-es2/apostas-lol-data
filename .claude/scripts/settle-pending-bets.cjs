@@ -127,13 +127,39 @@ async function fetchGameWindow(gameId, matchStart) {
   return fetchJson('feed.lolesports.com', `/livestats/v1/window/${gameId}?startingTime=${startingTime}`);
 }
 
+// Fix 2+3: detecta frame suspeito (CDN stale ou snapshot do início do jogo).
+// Retorna true se o frame NÃO pode ser considerado definitivo.
+// Condição: gameState !== 'finished' E (gameTime < 600s OU total_kills < 5).
+// Se gameState === 'finished', o frame é autorizado pelo próprio feed — não recusa.
+function isFrameSuspect(frame) {
+  if (!frame) return true;
+  if (frame.gameState === 'finished') return false; // feed confirmou: aceita
+  const gameTimeSecs = (frame.gameTime ?? 0) / 1000; // gameTime vem em ms no feed
+  const totalKills = (frame.blueTeam?.totalKills ?? 0) + (frame.redTeam?.totalKills ?? 0);
+  return gameTimeSecs < 600 || totalKills < 5;
+}
+
 function extractGameData(window, trustCompleted) {
   const meta = window?.gameMetadata;
   if (!meta || !window.frames?.length) return null;
   const lastFrame = window.frames[window.frames.length - 1];
+
+  // Fix 2+3: mesmo com trustCompleted=true (eventDetails diz 'completed'),
+  // o frame pode ser stale do CDN. Verifica se é suspeito antes de aceitar.
+  // Se suspeito → retorna sinal especial pra forçar retry na próxima execução.
+  if (trustCompleted && isFrameSuspect(lastFrame)) {
+    const gameTimeSecs = ((lastFrame.gameTime ?? 0) / 1000).toFixed(0);
+    const totalKills = (lastFrame.blueTeam?.totalKills ?? 0) + (lastFrame.redTeam?.totalKills ?? 0);
+    return {
+      gameState: lastFrame.gameState,
+      suspect: true,
+      suspect_reason: `gameState=${lastFrame.gameState} gameTime=${gameTimeSecs}s kills=${totalKills} (stale CDN suspected)`,
+    };
+  }
+
   // Riot API às vezes nunca publica frame com gameState='finished' mesmo quando
   // eventDetails marca o game como completed. Se trustCompleted=true (eventDetails
-  // confirmou completed), usar último frame disponível pra extrair dados.
+  // confirmou completed) e frame não é suspeito, usar último frame disponível.
   if (!trustCompleted && lastFrame.gameState !== 'finished') return { gameState: lastFrame.gameState };
 
   const picks = (md) => {
@@ -187,7 +213,10 @@ function decideOutcome(bet, gameData) {
   return { skip_reason: 'pick_kind_unknown', parsed };
 }
 
-async function settleBet(supabaseUrl, supabaseKey, bet) {
+// Fix 1: gameWindowCache compartilhado entre chamadas da mesma execução do script.
+// Evita que 2+ bets do mesmo lolesports_game_id façam requests duplicados ao CDN,
+// o que poderia resultar em snapshots stale diferentes pra cada bet.
+async function settleBet(supabaseUrl, supabaseKey, bet, gameWindowCache) {
   const matchId = bet.raw_extraction?.match_context?.lolesports_match_id;
   if (!matchId) return { bet_id: bet.id, status: 'skipped', reason: 'no_match_id_in_raw_extraction' };
 
@@ -211,20 +240,37 @@ async function settleBet(supabaseUrl, supabaseKey, bet) {
   if (!game) return { bet_id: bet.id, status: 'skipped', reason: `no_game_for_map_${bet.map_number}` };
   if (game.state !== 'completed') return { bet_id: bet.id, status: 'skipped', reason: `game_state_${game.state}` };
 
-  // 3. window livestats
+  // 3. window livestats — Fix 1: cache por game_id pra evitar requests duplicados
   const matchStart = detail?.data?.event?.startTime || bet.bet_datetime;
   let win;
-  try {
-    win = await fetchGameWindow(game.id, matchStart);
-  } catch (e) {
-    return { bet_id: bet.id, status: 'error', reason: `livestats: ${e.message}` };
+  const cacheKey = String(game.id);
+  if (gameWindowCache.has(cacheKey)) {
+    win = gameWindowCache.get(cacheKey);
+    // log só em dry-run pra não poluir output normal
+    if (DRY_RUN) process.stderr.write(`[cache hit] game_id=${cacheKey} reusado sem novo request\n`);
+  } else {
+    try {
+      win = await fetchGameWindow(game.id, matchStart);
+      gameWindowCache.set(cacheKey, win); // armazena pra demais bets do mesmo game
+    } catch (e) {
+      return { bet_id: bet.id, status: 'error', reason: `livestats: ${e.message}` };
+    }
   }
+
   // game.state === 'completed' no eventDetails é a fonte autoritativa do "jogo terminou".
   // Passamos trustCompleted=true pra extractGameData usar último frame disponível mesmo
   // que gameState do frame esteja 'in_game' (Riot às vezes não publica frame final).
-  const gd = extractGameData(win, game.state === 'completed');
+  const trustCompleted = game.state === 'completed';
+  const gd = extractGameData(win, trustCompleted);
   if (!gd) return { bet_id: bet.id, status: 'error', reason: 'livestats_no_data' };
-  if (gd.gameState && gd.gameState !== 'finished' && game.state !== 'completed') {
+
+  // Fix 2+3: frame suspeito (CDN stale) → skip pra retry na próxima execução
+  if (gd.suspect) {
+    process.stderr.write(`[WARN] bet=${bet.id} game=${cacheKey} frame suspeito: ${gd.suspect_reason}\n`);
+    return { bet_id: bet.id, status: 'skipped', reason: `suspect_frame: ${gd.suspect_reason}` };
+  }
+
+  if (gd.gameState && gd.gameState !== 'finished' && !trustCompleted) {
     return { bet_id: bet.id, status: 'skipped', reason: `game_window_state_${gd.gameState}` };
   }
 
@@ -308,9 +354,13 @@ async function settleBet(supabaseUrl, supabaseKey, bet) {
 
   const summary = { checked: pending.length, settled: 0, skipped: 0, errors: 0, dry_run: DRY_RUN, results: [] };
 
+  // Fix 1: cache compartilhado por execução — 1 request por game_id, independente
+  // de quantas bets apontem pro mesmo lolesports_game_id nessa rodada.
+  const gameWindowCache = new Map();
+
   for (const bet of pending) {
     if (bet.status !== 'pending' && !SPECIFIC_BET_ID) continue;
-    const result = await settleBet(supabaseUrl, supabaseKey, bet);
+    const result = await settleBet(supabaseUrl, supabaseKey, bet, gameWindowCache);
     summary.results.push(result);
     if (result.status === 'settled') summary.settled++;
     else if (result.status === 'error') summary.errors++;
