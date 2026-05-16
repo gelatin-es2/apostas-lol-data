@@ -1,0 +1,190 @@
+{
+  "captured_at": "2026-05-16T08:23:28.693Z",
+  "range": {
+    "from": "2026-05-16",
+    "to": "2026-05-17"
+  },
+  "target_odd": 1.83,
+  "matches_total": 9,
+  "matches_with_polymarket_event": 3,
+  "matches_with_total_kills": 3,
+  "captured": [
+    {
+      "match_id_lolesports": "115548128962971935",
+      "league": "LCK",
+      "match_date": "2026-05-16",
+      "team_a": "BFX",
+      "team_b": "NS",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115548128962971871",
+      "league": "LCK",
+      "match_date": "2026-05-17",
+      "team_a": "HLE",
+      "team_b": "KT",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115548128963037519",
+      "league": "LCK",
+      "match_date": "2026-05-17",
+      "team_a": "KRX",
+      "team_b": "BRO",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115615924499588637",
+      "league": "LPL",
+      "match_date": "2026-05-16",
+      "match_start_utc": "2026-05-16T09:00:00Z",
+      "team_a": "TT",
+      "team_b": "EDG",
+      "polymarket_event_slug": "lol-tt-edg-2026-05-16",
+      "polymarket_event_title": "LoL: ThunderTalk Gaming vs EDward Gaming (BO3) - LPL Group Nirvana",
+      "total_kills_markets_found": 12,
+      "games": [
+        {
+          "game_number": 1,
+          "line": 25.5,
+          "under_price": 0.54,
+          "over_price": 0.46,
+          "under_odd": 1.852,
+          "over_odd": 2.174,
+          "market_id": "2255971",
+          "question": "Total Kills Over/Under 25.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.022,
+          "alternatives_count": 6
+        },
+        {
+          "game_number": 2,
+          "line": 24.5,
+          "under_price": 0.425,
+          "over_price": 0.575,
+          "under_odd": 2.353,
+          "over_odd": 1.739,
+          "market_id": "2255964",
+          "question": "Total Kills Over/Under 24.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.091,
+          "alternatives_count": 6
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115615926677896683",
+      "league": "LPL",
+      "match_date": "2026-05-16",
+      "match_start_utc": "2026-05-16T11:00:00Z",
+      "team_a": "WE",
+      "team_b": "NIP",
+      "polymarket_event_slug": "lol-we-nip-2026-05-16",
+      "polymarket_event_title": "LoL: Team WE vs Ninjas in Pyjamas (BO3) - LPL Group Ascend",
+      "total_kills_markets_found": 12,
+      "games": [
+        {
+          "game_number": 2,
+          "line": 28.5,
+          "under_price": 0.545,
+          "over_price": 0.455,
+          "under_odd": 1.835,
+          "over_odd": 2.198,
+          "market_id": "2255960",
+          "question": "Total Kills Over/Under 28.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.005,
+          "alternatives_count": 6
+        },
+        {
+          "game_number": 1,
+          "line": 26.5,
+          "under_price": 0.43,
+          "over_price": 0.57,
+          "under_odd": 2.326,
+          "over_odd": 1.754,
+          "market_id": "2255957",
+          "question": "Total Kills Over/Under 26.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.076,
+          "alternatives_count": 6
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115615926677896647",
+      "league": "LPL",
+      "match_date": "2026-05-17",
+      "team_a": "JDG",
+      "team_b": "IG",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115615926677568915",
+      "league": "LPL",
+      "match_date": "2026-05-17",
+      "match_start_utc": "2026-05-17T11:00:00Z",
+      "team_a": "BLG",
+      "team_b": "AL",
+      "polymarket_event_slug": "lol-blg-al-2026-05-17",
+      "polymarket_event_title": "LoL: Bilibili Gaming vs Anyone's Legend (BO3) - LPL Group Ascend",
+      "total_kills_markets_found": 10,
+      "games": [
+        {
+          "game_number": 1,
+          "line": 25.5,
+          "under_price": 0.5,
+          "over_price": 0.5,
+          "under_odd": 2,
+          "over_odd": 2,
+          "market_id": "2256017",
+          "question": "Total Kills Over/Under 25.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.17,
+          "alternatives_count": 5
+        },
+        {
+          "game_number": 2,
+          "line": 25.5,
+          "under_price": 0.5,
+          "over_price": 0.5,
+          "under_odd": 2,
+          "over_odd": 2,
+          "market_id": "2256018",
+          "question": "Total Kills Over/Under 25.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.17,
+          "alternatives_count": 5
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115565670260181839",
+      "league": "CBLOL",
+      "match_date": "2026-05-16",
+      "team_a": "RED",
+      "team_b": "FX",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115565670260181833",
+      "league": "CBLOL",
+      "match_date": "2026-05-17",
+      "team_a": "FUR",
+      "team_b": "LOUD",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    }
+  ]
+}
