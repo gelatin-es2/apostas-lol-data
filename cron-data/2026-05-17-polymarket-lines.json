@@ -1,0 +1,81 @@
+{
+  "captured_at": "2026-05-17T08:37:07.205Z",
+  "range": {
+    "from": "2026-05-17",
+    "to": "2026-05-18"
+  },
+  "target_odd": 1.83,
+  "matches_total": 4,
+  "matches_with_polymarket_event": 1,
+  "matches_with_total_kills": 1,
+  "captured": [
+    {
+      "match_id_lolesports": "115548128963037519",
+      "league": "LCK",
+      "match_date": "2026-05-17",
+      "team_a": "KRX",
+      "team_b": "BRO",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115615926677896647",
+      "league": "LPL",
+      "match_date": "2026-05-17",
+      "team_a": "JDG",
+      "team_b": "IG",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115615926677568915",
+      "league": "LPL",
+      "match_date": "2026-05-17",
+      "match_start_utc": "2026-05-17T11:00:00Z",
+      "team_a": "BLG",
+      "team_b": "AL",
+      "polymarket_event_slug": "lol-blg-al-2026-05-17",
+      "polymarket_event_title": "LoL: Bilibili Gaming vs Anyone's Legend (BO3) - LPL Group Ascend",
+      "total_kills_markets_found": 12,
+      "games": [
+        {
+          "game_number": 2,
+          "line": 27.5,
+          "under_price": 0.465,
+          "over_price": 0.535,
+          "under_odd": 2.151,
+          "over_odd": 1.869,
+          "market_id": "2256020",
+          "question": "Total Kills Over/Under 27.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.039,
+          "alternatives_count": 6
+        },
+        {
+          "game_number": 1,
+          "line": 26.5,
+          "under_price": 0.45,
+          "over_price": 0.55,
+          "under_odd": 2.222,
+          "over_odd": 1.818,
+          "market_id": "2256025",
+          "question": "Total Kills Over/Under 26.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.012,
+          "alternatives_count": 6
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "115565670260181833",
+      "league": "CBLOL",
+      "match_date": "2026-05-17",
+      "team_a": "FUR",
+      "team_b": "LOUD",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    }
+  ]
+}
