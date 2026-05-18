@@ -117,7 +117,7 @@ function loadTeamAvgKills() {
   try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch { return null; }
 }
 
-// Calcula fair line pro EWC: avg(team_a) + avg(team_b) − 1, round pra .5.
+// Calcula fair line pro EWC: (avg_total_a + avg_total_b) / 2, round pra .5.
 // Fallback hierárquico: avg do time → avg da liga proxy (LCK/LEC/LPL) → 29.5.
 function fairForEwcMatch(teamA, teamB, leagueProxy, teamAvgData) {
   if (!teamAvgData) return { line: 29.5, source: 'fallback_no_data' };
@@ -126,13 +126,14 @@ function fairForEwcMatch(teamA, teamB, leagueProxy, teamAvgData) {
   const a = t[teamA]?.avg_kills ?? lAvg;
   const b = t[teamB]?.avg_kills ?? lAvg;
   if (a == null || b == null) return { line: 29.5, source: 'fallback_29.5' };
-  const adjusted = a + b + (teamAvgData.fair_adjustment ?? -1);
+  // fix 2026-05-17: avg_kills agora é total_kills → fair = (a+b)/2
+  const adjusted = (a + b) / 2;
   const line = Math.round(adjusted - 0.5) + 0.5;
   const usedLgFor = [];
   if (t[teamA]?.avg_kills == null) usedLgFor.push('A');
   if (t[teamB]?.avg_kills == null) usedLgFor.push('B');
   return {
-    line, source: usedLgFor.length ? `team_avg(${usedLgFor.join('+')}=lg)-1` : 'team_avg(team+team)-1',
+    line, source: usedLgFor.length ? `team_avg(${usedLgFor.join('+')}=lg)/2` : 'team_avg(team+team)/2',
     avgA: a, avgB: b,
   };
 }
@@ -331,7 +332,7 @@ function flagLeague(lg, leagueHitMap) {
     let fairStr = '—';
     if (m.ewc_fair) {
       const f = m.ewc_fair;
-      const tag = f.source.startsWith('fallback') ? '(fallback)' : '(team_avg-1)';
+      const tag = f.source.startsWith('fallback') ? '(fallback)' : '(team_avg/2)';
       fairStr = `**${f.line}** ${tag}`;
     } else {
       const pm = pmLines.get(String(m.match_id));

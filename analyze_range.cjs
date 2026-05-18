@@ -86,6 +86,7 @@ const LEAGUE_IDS = {
   LPL:   '98767991314006698',
   LEC:   '98767991302996019',
   CBLOL: '98767991332355509',
+  LCS:   '98767991299243165', // fix 2026-05-17: LCS ausente causava games LCS sem análise
 };
 
 const PEEL_PURE   = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
@@ -272,13 +273,14 @@ async function analyzeGame(g) {
   console.error(`       ${finished.length} games com kills extraídos (${analyzed.length - finished.length} falharam)`);
 
   // 3. constrói avgs de time + liga (usa histórico + range alvo, mas EXCLUI o próprio jogo do cálculo do avg)
-  const teamHist = new Map();   // team_code → kills_próprios[]
+  const teamHist = new Map();   // team_code → total_kills_por_jogo[] (fix 2026-05-17: total, não kills próprios)
   const leagueHist = new Map(); // liga → kills_por_time[]
   for (const g of finished) {
     if (!teamHist.has(g.team_blue)) teamHist.set(g.team_blue, []);
     if (!teamHist.has(g.team_red))  teamHist.set(g.team_red, []);
-    teamHist.get(g.team_blue).push(g.kills_blue);
-    teamHist.get(g.team_red).push(g.kills_red);
+    const totalKills = g.kills_blue + g.kills_red;
+    teamHist.get(g.team_blue).push(totalKills);
+    teamHist.get(g.team_red).push(totalKills);
     if (!leagueHist.has(g.league)) leagueHist.set(g.league, []);
     leagueHist.get(g.league).push(g.kills_blue, g.kills_red);
   }
@@ -319,41 +321,46 @@ async function analyzeGame(g) {
         // mantém campos calculados pra contexto/comparação (nem todos preenchidos qdo PM existe)
         blue_avg: null, red_avg: null,
         blue_sample_n: null, red_sample_n: null,
-        league_baseline: leagueAvg.has(g.league) ? +(leagueAvg.get(g.league)*2).toFixed(2) : null,
+        league_baseline: leagueAvg.has(g.league) ? +(leagueAvg.get(g.league)*2).toFixed(2) : null, // *2: per-side → total
         vs_league: null,
       };
     }
-    // 2) fórmula calculada (avg_a + avg_b - 1)
+    // 2) fórmula calculada (avg_total_kills_a + avg_total_kills_b) / 2
+    // teamHist[team] = [total_kills_jogo1, total_kills_jogo2, ...]
     const blueKills = teamHist.get(g.team_blue) || [];
     const redKills  = teamHist.get(g.team_red)  || [];
+    const totalKillsGame = g.kills_blue + g.kills_red;
+    // exclui o próprio jogo do avg (leave-one-out)
     const blueAvgEx = blueKills.length > 1
-      ? (blueKills.reduce((a,b)=>a+b,0) - g.kills_blue) / (blueKills.length - 1)
+      ? (blueKills.reduce((a,b)=>a+b,0) - totalKillsGame) / (blueKills.length - 1)
       : null;
     const redAvgEx  = redKills.length > 1
-      ? (redKills.reduce((a,b)=>a+b,0) - g.kills_red)  / (redKills.length - 1)
+      ? (redKills.reduce((a,b)=>a+b,0) - totalKillsGame)  / (redKills.length - 1)
       : null;
 
-    const lAvg = leagueAvg.get(g.league) ?? 14.5; // fallback p/ time sem sample
-    const blueAvg = (blueKills.length - 1 >= MIN_SAMPLE_TEAM) ? blueAvgEx : lAvg;
-    const redAvg  = (redKills.length - 1 >= MIN_SAMPLE_TEAM) ? redAvgEx  : lAvg;
+    // fallback de liga: leagueAvg é por-side → *2 pra total_kills
+    const lAvgPerSide = leagueAvg.get(g.league) ?? 14.5;
+    const lAvgTotal = lAvgPerSide * 2;
+    const blueAvg = (blueKills.length - 1 >= MIN_SAMPLE_TEAM) ? blueAvgEx : lAvgTotal;
+    const redAvg  = (redKills.length - 1 >= MIN_SAMPLE_TEAM) ? redAvgEx  : lAvgTotal;
     const blueSrc = (blueKills.length - 1 >= MIN_SAMPLE_TEAM) ? 'team' : 'league';
     const redSrc  = (redKills.length  - 1 >= MIN_SAMPLE_TEAM) ? 'team' : 'league';
 
     const raw = blueAvg + redAvg;
-    const adjusted = raw - 1; // -1 fixo (ajuste CEO)
+    const adjusted = raw / 2; // fair = média das distribuições de total_kills dos dois times
     // round pra .5 mais próximo
     const fair = Math.round(adjusted - 0.5) + 0.5;
 
-    const leagueBaseline = +(lAvg * 2).toFixed(2); // referência: dois times médios da liga
+    const leagueBaseline = +lAvgTotal.toFixed(2); // total_kills médio da liga por jogo
     return {
       fair,
       fair_raw: +raw.toFixed(2),
       fair_adjusted: +adjusted.toFixed(2),
-      fair_source: `livestats_team_avg(${blueSrc}+${redSrc})-1`,
+      fair_source: `livestats_team_avg(${blueSrc}+${redSrc})/2`,
       blue_avg: +blueAvg.toFixed(2), red_avg: +redAvg.toFixed(2),
       blue_sample_n: blueKills.length - 1, red_sample_n: redKills.length - 1,
-      league_baseline: leagueBaseline, // contexto: pura referência, não entra no cálculo
-      vs_league: +(raw - leagueBaseline).toFixed(2), // confronto x liga (positivo = jogo + agressivo que média da liga)
+      league_baseline: leagueBaseline, // contexto: total_kills médio da liga, não entra no cálculo
+      vs_league: +(adjusted - leagueBaseline).toFixed(2), // fair vs média da liga (positivo = mais kills que usual)
     };
   }
 

@@ -1,11 +1,12 @@
 {
   "date": "2026-05-12",
-  "analyzed_at": "2026-05-13T14:08:16.275Z",
+  "analyzed_at": "2026-05-18T02:01:14.791Z",
   "ligas": [
     "LCK",
     "LPL",
     "LEC",
-    "CBLOL"
+    "CBLOL",
+    "LCS"
   ],
   "count": 6,
   "results": [
@@ -33,7 +34,7 @@
       "red_avg": null,
       "blue_sample_n": null,
       "red_sample_n": null,
-      "league_baseline": 27.41,
+      "league_baseline": 27.73,
       "vs_league": null,
       "under_hit": true
     },
@@ -61,7 +62,7 @@
       "red_avg": null,
       "blue_sample_n": null,
       "red_sample_n": null,
-      "league_baseline": 27.41,
+      "league_baseline": 27.73,
       "vs_league": null,
       "under_hit": true
     },
@@ -89,7 +90,7 @@
       "red_avg": null,
       "blue_sample_n": null,
       "red_sample_n": null,
-      "league_baseline": 27.41,
+      "league_baseline": 27.73,
       "vs_league": null,
       "under_hit": false
     },
@@ -109,16 +110,16 @@
       "peel_bucket": "2peel",
       "flex_engages": [],
       "trigger_type": "2peel",
-      "matchup_fair": 29.5,
-      "fair_source": "livestats_team_avg(team+team)-1",
-      "fair_raw": 30.56,
-      "fair_adjusted": 29.56,
-      "blue_avg": 17.31,
-      "red_avg": 13.25,
-      "blue_sample_n": 13,
-      "red_sample_n": 16,
-      "league_baseline": 27.41,
-      "vs_league": 3.15,
+      "matchup_fair": 31.5,
+      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair_raw": 62.65,
+      "fair_adjusted": 31.33,
+      "blue_avg": 32.77,
+      "red_avg": 29.88,
+      "blue_sample_n": 31,
+      "red_sample_n": 33,
+      "league_baseline": 27.73,
+      "vs_league": 3.6,
       "under_hit": false
     },
     {
@@ -140,16 +141,16 @@
         "Bard"
       ],
       "trigger_type": null,
-      "matchup_fair": 28.5,
-      "fair_source": "livestats_team_avg(team+team)-1",
-      "fair_raw": 29.98,
-      "fair_adjusted": 28.98,
-      "blue_avg": 17.54,
-      "red_avg": 12.44,
-      "blue_sample_n": 13,
-      "red_sample_n": 16,
-      "league_baseline": 27.41,
-      "vs_league": 2.57,
+      "matchup_fair": 31.5,
+      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair_raw": 62.03,
+      "fair_adjusted": 31.01,
+      "blue_avg": 32.45,
+      "red_avg": 29.58,
+      "blue_sample_n": 31,
+      "red_sample_n": 33,
+      "league_baseline": 27.73,
+      "vs_league": 3.28,
       "under_hit": false
     },
     {
@@ -168,17 +169,17 @@
       "peel_bucket": "1peel",
       "flex_engages": [],
       "trigger_type": null,
-      "matchup_fair": 29.5,
-      "fair_source": "livestats_team_avg(team+team)-1",
-      "fair_raw": 30.49,
-      "fair_adjusted": 29.49,
-      "blue_avg": 16.62,
-      "red_avg": 13.88,
-      "blue_sample_n": 13,
-      "red_sample_n": 16,
-      "league_baseline": 27.41,
-      "vs_league": 3.08,
-      "under_hit": false
+      "matchup_fair": 31.5,
+      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair_raw": 62.72,
+      "fair_adjusted": 31.36,
+      "blue_avg": 32.81,
+      "red_avg": 29.91,
+      "blue_sample_n": 31,
+      "red_sample_n": 33,
+      "league_baseline": 27.73,
+      "vs_league": 3.63,
+      "under_hit": true
     }
   ]
 }

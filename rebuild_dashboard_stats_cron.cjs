@@ -14,7 +14,7 @@ const ODD = 1.85;
 // LINE fallback (compat) — se nem Polymarket nem livestats tiver dado
 const FALLBACK_LINE = 29.5;
 const MIN_SAMPLE_TEAM = 5;
-const FAIR_ADJUSTMENT = -1; // CEO 2026-05-06
+const FAIR_ADJUSTMENT = 0; // fix 2026-05-17: total_kills avg → não precisa mais de -1
 
 const LEAGUES = [
   { id: '98767991302996019', name: 'LEC' },
@@ -265,8 +265,9 @@ async function fetchUserBets() {
     const redName = teamName(g, 'red');
     if (!teamKillsList.has(blueName)) teamKillsList.set(blueName, []);
     if (!teamKillsList.has(redName))  teamKillsList.set(redName, []);
-    teamKillsList.get(blueName).push(g.kBlue);
-    teamKillsList.get(redName).push(g.kRed);
+    const totalKills = g.kBlue + g.kRed;
+    teamKillsList.get(blueName).push(totalKills);
+    teamKillsList.get(redName).push(totalKills);
     if (!leagueKillsList.has(g.lg)) leagueKillsList.set(g.lg, []);
     leagueKillsList.get(g.lg).push(g.kBlue, g.kRed);
   }
@@ -293,18 +294,23 @@ async function fetchUserBets() {
       const line = specific?.line ?? pmEntry.line;
       if (line != null) return { line, source: specific ? `polymarket_game${g.mapNum}` : pmEntry.source };
     }
-    // 2) calculado (avg_a + avg_b - 1)
+    // 2) calculado: fair = (avg_total_kills_blue + avg_total_kills_red) / 2
+    // teamKillsList[team] = [total_kills_jogo1, total_kills_jogo2, ...]
     const blueArr = teamKillsList.get(teamName(g,'blue')) || [];
     const redArr  = teamKillsList.get(teamName(g,'red')) || [];
-    const blueAvgEx = blueArr.length > 1 ? (blueArr.reduce((a,b)=>a+b,0) - g.kBlue) / (blueArr.length - 1) : null;
-    const redAvgEx  = redArr.length  > 1 ? (redArr.reduce((a,b)=>a+b,0) - g.kRed) / (redArr.length - 1) : null;
-    const lAvg = leagueAvg.get(g.lg) ?? null;
-    const blueAvg = (blueArr.length - 1 >= MIN_SAMPLE_TEAM) ? blueAvgEx : lAvg;
-    const redAvg  = (redArr.length  - 1 >= MIN_SAMPLE_TEAM) ? redAvgEx  : lAvg;
+    const totalKillsGame = g.kBlue + g.kRed;
+    // leave-one-out: exclui o próprio jogo do avg (evita data leakage)
+    const blueAvgEx = blueArr.length > 1 ? (blueArr.reduce((a,b)=>a+b,0) - totalKillsGame) / (blueArr.length - 1) : null;
+    const redAvgEx  = redArr.length  > 1 ? (redArr.reduce((a,b)=>a+b,0) - totalKillsGame) / (redArr.length - 1) : null;
+    // leagueAvg é per-side → *2 pra total_kills
+    const lAvgPerSide = leagueAvg.get(g.lg) ?? null;
+    const lAvgTotal = lAvgPerSide != null ? lAvgPerSide * 2 : null;
+    const blueAvg = (blueArr.length - 1 >= MIN_SAMPLE_TEAM) ? blueAvgEx : lAvgTotal;
+    const redAvg  = (redArr.length  - 1 >= MIN_SAMPLE_TEAM) ? redAvgEx  : lAvgTotal;
     if (blueAvg == null || redAvg == null) return { line: FALLBACK_LINE, source: 'fallback_29.5' };
-    const adjusted = blueAvg + redAvg + FAIR_ADJUSTMENT;
+    const adjusted = (blueAvg + redAvg) / 2; // média das distribuições de total_kills
     const line = Math.round(adjusted - 0.5) + 0.5;
-    return { line, source: 'livestats_team_avg(team+team)-1' };
+    return { line, source: 'livestats_team_avg(total+total)/2' };
   }
   for (const g of games) {
     const f = fairForGame(g);

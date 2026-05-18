@@ -1,11 +1,12 @@
 {
   "date": "2026-05-07",
-  "analyzed_at": "2026-05-08T13:10:23.331Z",
+  "analyzed_at": "2026-05-18T02:01:14.781Z",
   "ligas": [
     "LCK",
     "LPL",
     "LEC",
-    "CBLOL"
+    "CBLOL",
+    "LCS"
   ],
   "count": 8,
   "results": [
@@ -35,7 +36,7 @@
       "red_avg": null,
       "blue_sample_n": null,
       "red_sample_n": null,
-      "league_baseline": 29.57,
+      "league_baseline": 29.46,
       "vs_league": null,
       "under_hit": true
     },
@@ -63,7 +64,7 @@
       "red_avg": null,
       "blue_sample_n": null,
       "red_sample_n": null,
-      "league_baseline": 29.57,
+      "league_baseline": 29.46,
       "vs_league": null,
       "under_hit": false
     },
@@ -85,16 +86,16 @@
         "Bard"
       ],
       "trigger_type": null,
-      "matchup_fair": 31.5,
-      "fair_source": "livestats_team_avg(team+team)-1",
-      "fair_raw": 32.75,
-      "fair_adjusted": 31.75,
-      "blue_avg": 15.82,
-      "red_avg": 16.93,
-      "blue_sample_n": 11,
-      "red_sample_n": 14,
-      "league_baseline": 29.57,
-      "vs_league": 3.18,
+      "matchup_fair": 29.5,
+      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair_raw": 58.13,
+      "fair_adjusted": 29.07,
+      "blue_avg": 29.79,
+      "red_avg": 28.34,
+      "blue_sample_n": 28,
+      "red_sample_n": 29,
+      "league_baseline": 29.46,
+      "vs_league": -0.39,
       "under_hit": true
     },
     {
@@ -113,16 +114,16 @@
       "peel_bucket": "2peel",
       "flex_engages": [],
       "trigger_type": "2peel",
-      "matchup_fair": 30.5,
-      "fair_source": "livestats_team_avg(team+team)-1",
-      "fair_raw": 31.92,
-      "fair_adjusted": 30.92,
-      "blue_avg": 14.64,
-      "red_avg": 17.29,
-      "blue_sample_n": 11,
-      "red_sample_n": 14,
-      "league_baseline": 29.57,
-      "vs_league": 2.35,
+      "matchup_fair": 28.5,
+      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair_raw": 57.57,
+      "fair_adjusted": 28.78,
+      "blue_avg": 29.5,
+      "red_avg": 28.07,
+      "blue_sample_n": 28,
+      "red_sample_n": 29,
+      "league_baseline": 29.46,
+      "vs_league": -0.68,
       "under_hit": false
     },
     {
@@ -151,7 +152,7 @@
       "red_avg": null,
       "blue_sample_n": null,
       "red_sample_n": null,
-      "league_baseline": 27.35,
+      "league_baseline": 27.73,
       "vs_league": null,
       "under_hit": true
     },
@@ -179,7 +180,7 @@
       "red_avg": null,
       "blue_sample_n": null,
       "red_sample_n": null,
-      "league_baseline": 27.35,
+      "league_baseline": 27.73,
       "vs_league": null,
       "under_hit": true
     },
@@ -209,7 +210,7 @@
       "red_avg": null,
       "blue_sample_n": null,
       "red_sample_n": null,
-      "league_baseline": 27.35,
+      "league_baseline": 27.73,
       "vs_league": null,
       "under_hit": true
     },
@@ -237,7 +238,7 @@
       "red_avg": null,
       "blue_sample_n": null,
       "red_sample_n": null,
-      "league_baseline": 27.35,
+      "league_baseline": 27.73,
       "vs_league": null,
       "under_hit": true
     }
