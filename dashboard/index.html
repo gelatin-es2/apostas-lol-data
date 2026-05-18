@@ -857,6 +857,19 @@
       return league; // desconhecido: retorna literal
     };
 
+    // Variante granular: preserva EWC por região (EWC-LCK, EWC-LEC, EWC-LPL)
+    // usada exclusivamente na seção "Lucro por Liga"
+    const normalizeLeagueGranular = (league) => {
+      if (!league) return null;
+      const u = league.toUpperCase();
+      // EWC com região → preserva como está (ex: EWC-LCK, EWC-LEC, EWC-LPL)
+      if (/^EWC-/.test(u)) return league.toUpperCase();
+      // EWC genérico sem região → mantém EWC
+      if (/EWC|ESPORTS WORLD CUP/.test(u)) return 'EWC';
+      // Para todo o resto, delega pra normalizeLeague padrão
+      return normalizeLeague(league);
+    };
+
     let allBets = [];
     let currentFilter = 'all';
     let currentDayFilter = null; // 'YYYY-MM-DD' ou null
@@ -1207,7 +1220,7 @@
     function renderByLeague(bets) {
       const byLeague = {};
       bets.forEach((b) => {
-        const league = normalizeLeague(b.league);
+        const league = normalizeLeagueGranular(b.league);
         if (!league) return;
         if (!byLeague[league]) byLeague[league] = { name: league, total: 0, wins: 0, losses: 0, pending: 0, profit: 0 };
         byLeague[league].total++;
