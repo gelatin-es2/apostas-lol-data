@@ -492,6 +492,9 @@
     <div class="section-title">Lucro por suporte (apostas Under)</div>
     <div id="bySupport" class="days"></div>
 
+    <div class="section-title">Lucro por liga</div>
+    <div id="byLeague" class="days"></div>
+
     <div class="section-title">Apostas</div>
     <div class="filters">
       <span class="chip active" data-filter="all">Todas</span>
@@ -1201,6 +1204,46 @@
         html || '<div class="empty">Sem dados ainda — comps começarão a aparecer quando bets fecharem.</div>';
     }
 
+    function renderByLeague(bets) {
+      const byLeague = {};
+      bets.forEach((b) => {
+        const league = normalizeLeague(b.league);
+        if (!league) return;
+        if (!byLeague[league]) byLeague[league] = { name: league, total: 0, wins: 0, losses: 0, pending: 0, profit: 0 };
+        byLeague[league].total++;
+        if (b.status === 'green') {
+          byLeague[league].wins++;
+          byLeague[league].profit += Number(b.profit) || 0;
+        } else if (b.status === 'red') {
+          byLeague[league].losses++;
+          byLeague[league].profit += Number(b.profit) || 0;
+        } else if (b.status === 'pending') {
+          byLeague[league].pending++;
+        } else {
+          // cashout / void: soma profit mas sem contar em wins/losses
+          byLeague[league].profit += Number(b.profit) || 0;
+        }
+      });
+
+      const sorted = Object.values(byLeague).sort((a, b) => b.profit - a.profit);
+      const html = sorted
+        .map((l) => {
+          const cls = l.profit >= 0 ? 'green' : 'red';
+          return `
+            <div class="day">
+              <div>
+                <div class="date">${l.name}</div>
+                <div class="stats">${l.total} aposta${l.total !== 1 ? 's' : ''} · ${l.wins}W ${l.losses}L${l.pending ? ` · ${l.pending} pend` : ''}</div>
+              </div>
+              <div class="profit ${cls}">${l.profit >= 0 ? '+' : ''}${fmtMoney(l.profit)}</div>
+            </div>
+          `;
+        })
+        .join('');
+      document.getElementById('byLeague').innerHTML =
+        html || '<div class="empty">Sem dados de liga.</div>';
+    }
+
     function betsForView() {
       let v = allBets;
       if (currentMonthFilter) {
@@ -1232,6 +1275,7 @@
       renderMonths(allBets);
       renderDays(betsForDays());
       renderBySupport(view);
+      renderByLeague(view);
       renderBets(allBets);
 
       const lastBet = allBets[0];
