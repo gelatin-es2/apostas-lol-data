@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-05-19T10:23:45.278Z",
+  "captured_at": "2026-05-19T14:36:52.914Z",
   "range": {
     "from": "2026-05-19",
     "to": "2026-05-20"
@@ -27,35 +27,35 @@
       "team_b": "KT",
       "polymarket_event_slug": "lol-ns-kt-2026-05-20",
       "polymarket_event_title": "LoL: Nongshim Red Force vs KT Rolster (BO3) - LCK Rounds 1-2",
-      "total_kills_markets_found": 10,
+      "total_kills_markets_found": 12,
       "games": [
         {
           "game_number": 1,
           "line": 28.5,
-          "under_price": 0.51,
-          "over_price": 0.49,
-          "under_odd": 1.961,
-          "over_odd": 2.041,
+          "under_price": 0.45,
+          "over_price": 0.55,
+          "under_odd": 2.222,
+          "over_odd": 1.818,
           "market_id": "2288183",
           "question": "Total Kills Over/Under 28.5 in Game 1?",
           "sportsMarketType": "kill_over_under_game",
           "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.131,
-          "alternatives_count": 5
+          "distance_to_target": 0.012,
+          "alternatives_count": 6
         },
         {
           "game_number": 2,
-          "line": 27.5,
-          "under_price": 0.5,
-          "over_price": 0.5,
-          "under_odd": 2,
-          "over_odd": 2,
-          "market_id": "2288180",
-          "question": "Total Kills Over/Under 27.5 in Game 2?",
+          "line": 31.5,
+          "under_price": 0.535,
+          "over_price": 0.465,
+          "under_odd": 1.869,
+          "over_odd": 2.151,
+          "market_id": "2288182",
+          "question": "Total Kills Over/Under 31.5 in Game 2?",
           "sportsMarketType": "kill_over_under_game",
           "selected_via": "closest_to_1.83_odd",
-          "distance_to_target": 0.17,
-          "alternatives_count": 5
+          "distance_to_target": 0.039,
+          "alternatives_count": 6
         }
       ]
     },
