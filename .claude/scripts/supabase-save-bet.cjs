@@ -78,6 +78,25 @@ function postJson(supabaseUrl, supabaseKey, urlPath, body) {
     process.exit(1);
   }
 
+  // Guard 2026-05-20: bet_datetime deve estar consistente com match start_time.
+  // Erro recorrente: agente passa "hoje" interpretando data errada e bet fica
+  // pending eterna porque settle não encontra na janela bet_datetime+6h.
+  // Regra: bet_datetime entre [start_time - 24h, start_time + 12h]. Fora disso = erro humano.
+  // (24h cobre bet placed na noite anterior; mais que isso é raro pra Total Kills e
+  // quase sempre indica confusão de data — bug KCB 2026-05-20 teve diff -40h.)
+  const matchStartIso = bet.raw_extraction?.match_context?.start_time;
+  if (bet.bet_datetime && matchStartIso) {
+    const betMs = new Date(bet.bet_datetime).getTime();
+    const matchMs = new Date(matchStartIso).getTime();
+    if (Number.isFinite(betMs) && Number.isFinite(matchMs)) {
+      const diffH = (betMs - matchMs) / 3600000;
+      if (diffH < -24 || diffH > 12) {
+        console.error(`bet_datetime fora de janela: bet=${bet.bet_datetime} match_start=${matchStartIso} diff=${diffH.toFixed(1)}h. Esperado entre -24h e +12h. Provável erro de data — REVISE antes de salvar.`);
+        process.exit(2);
+      }
+    }
+  }
+
   try {
     const result = await postJson(supabaseUrl, supabaseKey, '/rest/v1/bets', [bet]);
     const row = Array.isArray(result) ? result[0] : result;

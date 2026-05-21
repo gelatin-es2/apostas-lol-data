@@ -53,7 +53,7 @@ function fetchJson(host, urlPath) {
 }
 
 // Liquipedia API requer gzip + User-Agent identificável (api-terms-of-use)
-function fetchLiquipediaJson(urlPath) {
+function fetchLiquipediaJsonRaw(urlPath) {
   return new Promise((resolve, reject) => {
     https.get({
       host: 'liquipedia.net', path: urlPath,
@@ -74,6 +74,20 @@ function fetchLiquipediaJson(urlPath) {
       });
     }).on('error', reject);
   });
+}
+
+// Liquipedia rate-limits aggressively (HTTP 429). Retry 3x com 35s backoff
+// pra dar chance do cache liberar. Fix 2026-05-20: antes só falhava silencioso,
+// Elvis perdeu jogos do EWC LPL porque assumi "sem jogo" baseado em 429.
+async function fetchLiquipediaJson(urlPath) {
+  const delays = [0, 35000, 65000];
+  let lastErr;
+  for (const d of delays) {
+    if (d > 0) await new Promise(r => setTimeout(r, d));
+    try { return await fetchLiquipediaJsonRaw(urlPath); }
+    catch (e) { lastErr = e; if (!/HTTP 429/.test(e.message)) throw e; }
+  }
+  throw lastErr;
 }
 
 // EWC 2026 qualifiers — páginas Liquipedia + mapping team_code → nome canônico
@@ -173,11 +187,18 @@ function localToUtcEpoch(localStr, tzOffsetH) {
   return localAsUtc - tzOffsetH * 3600 * 1000;
 }
 
+// Lista global de falhas Liquipedia pra surfacing no output principal
+const EWC_FETCH_FAILURES = [];
+
 async function fetchEwcQualifierMatches(qualifier, targetDateUtc, teamAvgData) {
   const urlPath = `/leagueoflegends/api.php?action=parse&page=${encodeURIComponent(qualifier.page)}&format=json&prop=wikitext`;
   let r;
   try { r = await fetchLiquipediaJson(urlPath); }
-  catch (e) { console.error(`# ${qualifier.key} liquipedia falhou: ${e.message}`); return []; }
+  catch (e) {
+    console.error(`# ${qualifier.key} liquipedia falhou: ${e.message}`);
+    EWC_FETCH_FAILURES.push({ key: qualifier.key, error: e.message, page: qualifier.page });
+    return [];
+  }
   const wt = r.parse?.wikitext?.['*'] || '';
   const parsed = parseLiquipediaMatches(wt);
   const out = [];
@@ -374,5 +395,15 @@ function flagLeague(lg, leagueHitMap) {
       const e = leagueHits.get(lg);
       if (e) console.log(`- **${lg}**: ${e.hit}% hit (n=${e.n})`);
     }
+  }
+
+  // Fix 2026-05-20: surface falhas de fetch EWC pra Elvis decidir checar manual.
+  // Antes era só console.error (silencioso pro usuário) — bug do EWC LPL não avisado.
+  if (EWC_FETCH_FAILURES.length > 0) {
+    console.log('\n⚠️  **EWC QUALIFIERS NÃO CARREGARAM** — verificar manual:');
+    for (const f of EWC_FETCH_FAILURES) {
+      console.log(`  - ${f.key} (${f.error}) → https://lol.fandom.com/wiki/${f.page.replace(/_/g, '_')}`);
+    }
+    console.log('  Liquipedia rate-limita agressivo. Fonte alternativa: lol.fandom.com (Leaguepedia).');
   }
 })().catch(e => { console.error('ERRO:', e.message, e.stack); process.exit(1); });

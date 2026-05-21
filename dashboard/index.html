@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -475,9 +475,6 @@
 
   <nav class="tabs">
     <div class="tab active" data-tab="tracker">Tracker</div>
-    <div class="tab" data-tab="metodo">Método 2-peel</div>
-    <div class="tab" data-tab="lfl">LFL · tier 2</div>
-    <div class="tab" data-tab="ml">Método ML</div>
   </nav>
 
   <main class="container tab-pane active" data-pane="tracker">
@@ -495,6 +492,14 @@
     <div class="section-title">Lucro por liga</div>
     <div id="byLeague" class="days"></div>
 
+    <div class="section-title">Lucro por time</div>
+    <div id="byTeam" class="days"></div>
+
+    <div class="section-title">Hit do método por liga (backtest Split 2, simulação)</div>
+    <div id="methodByLeague" class="days">
+      <div class="loading">Carregando…</div>
+    </div>
+
     <div class="section-title">Apostas</div>
     <div class="filters">
       <span class="chip active" data-filter="all">Todas</span>
@@ -507,210 +512,6 @@
     </div>
   </main>
 
-  <main class="container tab-pane" data-pane="metodo">
-    <div class="method-summary">
-      <h2>📊 Backtest do método (simulação) — Spring 2026</h2>
-      <div class="desc" id="methodDesc"><strong>SIMULAÇÃO Split 2</strong> de TODOS games das ligas operadas (LCK/LPL/LEC/CBLOL/LFL/LCS) com método válido · stake simulado R$1.000 · odd 1.85 · <em>não são suas bets reais</em> (ver "Suas apostas" abaixo) · <span id="methodUpdated">carregando…</span></div>
-      <div class="stats" id="methodStats">
-        <div class="stat"><div class="label">Jogos 2-peel</div><div class="value">…</div></div>
-        <div class="stat"><div class="label">Hit Under</div><div class="value green">…</div></div>
-        <div class="stat"><div class="label">Lucro líq.</div><div class="value green">…</div></div>
-        <div class="stat"><div class="label">ROI</div><div class="value green">…</div></div>
-        <div class="stat"><div class="label">Breakeven</div><div class="value">54,1%</div></div>
-      </div>
-    </div>
-
-    <div class="method-grid" id="methodGrid">
-
-      <div class="method-card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(234,179,8,0.06)); border: 1px solid rgba(255,255,255,0.08);">
-        <h3>📌 Regra de stake por gatilho × liga (decisão 2026-05-08)</h3>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span><strong>2peel puro</strong> (qualquer liga operada)</span><span><span class="pct green">R$ 1.000</span><span class="n">stake normal</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span><strong>Bard + peel</strong> · LEC</span><span><span class="pct green">R$ 1.000</span><span class="n">stake normal</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span><strong>Bard + peel</strong> · LFL</span><span><span class="pct yellow">R$ 500</span><span class="n">meia u</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span><strong>Bard + peel</strong> · LCK</span><span><span class="pct yellow">R$ 500</span><span class="n">meia u</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot red"></span><strong>Bard + peel</strong> · LPL</span><span><span class="pct red">SUSPENDER</span><span class="n">hit ~58% colado no BE</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot red"></span><strong>Bard + peel</strong> · CBLOL</span><span><span class="pct red">SUSPENDER</span><span class="n">n insuficiente</span></span></div>
-        <div class="method-row" style="font-size:11px;color:var(--muted);margin-top:8px;border-top:1px solid rgba(255,255,255,0.05);padding-top:8px"><span class="name">⚠️ NUNCA subir a linha (line+0.5/+1) — odd cai mais rápido que hit, mata EV</span><span></span></div>
-        <div class="method-row" style="font-size:11px;color:var(--muted)"><span class="name">Conservadorismo via stake (meia u), não via linha. Reavaliar quando LEC chegar n≥20, LCK/LFL n≥25.</span><span></span></div>
-      </div>
-
-      <div class="method-card">
-        <h3>Ligas</h3>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>LEC</span><span><span class="pct green">79%</span><span class="n">n=38</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>CBLOL</span><span><span class="pct green">72%</span><span class="n">n=18</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>LCK</span><span><span class="pct green">69%</span><span class="n">n=26</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>LPL</span><span><span class="pct green">67%</span><span class="n">n=51</span></span></div>
-      </div>
-
-      <div class="method-card">
-        <h3>Supports peel</h3>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Bard <span class="liga">só LEC</span></span><span><span class="pct green">92%</span><span class="n">n=13</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Milio</span><span><span class="pct green">82%</span><span class="n">n=33</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Karma</span><span><span class="pct green">72%</span><span class="n">n=32</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Lulu</span><span><span class="pct green">71%</span><span class="n">n=52</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Nami</span><span><span class="pct green">70%</span><span class="n">n=47</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Seraphine</span><span><span class="pct yellow">68%</span><span class="n">n=44</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Renata</span><span><span class="pct yellow">60%</span><span class="n">n=5</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Bard <span class="liga">fora LEC</span></span><span><span class="pct yellow">57%</span><span class="n">n=35</span></span></div>
-      </div>
-
-      <div class="method-card">
-        <h3>Times — bons pra Under</h3>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Heretics <span class="liga">LEC</span></span><span><span class="pct green">100%</span><span class="n">n=7</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>GIANTX <span class="liga">LEC</span></span><span><span class="pct green">100%</span><span class="n">n=6</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Dplus KIA <span class="liga">LCK</span></span><span><span class="pct green">100%</span><span class="n">n=4</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>OK Brion <span class="liga">LCK</span></span><span><span class="pct green">100%</span><span class="n">n=4</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>DN Freecs <span class="liga">LCK</span></span><span><span class="pct green">100%</span><span class="n">n=5</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>EDward Gaming <span class="liga">LPL</span></span><span><span class="pct green">100%</span><span class="n">n=4</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Oh My God <span class="liga">LPL</span></span><span><span class="pct green">100%</span><span class="n">n=6</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>LGD Gaming <span class="liga">LPL</span></span><span><span class="pct green">100%</span><span class="n">n=7</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>ThunderTalk <span class="liga">LPL</span></span><span><span class="pct green">100%</span><span class="n">n=5</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Fluxo <span class="liga">CBLOL</span></span><span><span class="pct green">100%</span><span class="n">n=5</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Vivo Keyd <span class="liga">CBLOL</span></span><span><span class="pct green">83%</span><span class="n">n=6</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Shifters <span class="liga">LEC</span></span><span><span class="pct green">80%</span><span class="n">n=10</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Natus Vincere <span class="liga">LEC</span></span><span><span class="pct green">80%</span><span class="n">n=10</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Fnatic <span class="liga">LEC</span></span><span><span class="pct green">78%</span><span class="n">n=9</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Vitality <span class="liga">LEC</span></span><span><span class="pct green">75%</span><span class="n">n=8</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Movistar KOI <span class="liga">LEC</span></span><span><span class="pct green">75%</span><span class="n">n=4</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>KIWOOM DRX <span class="liga">LCK</span></span><span><span class="pct green">75%</span><span class="n">n=4</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>JD Gaming <span class="liga">LPL</span></span><span><span class="pct green">75%</span><span class="n">n=8</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Anyone's Legend <span class="liga">LPL</span></span><span><span class="pct green">75%</span><span class="n">n=8</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>G2 Esports <span class="liga">LEC</span></span><span><span class="pct green">71%</span><span class="n">n=7</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Gen.G <span class="liga">LCK</span></span><span><span class="pct green">71%</span><span class="n">n=7</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Karmine Corp <span class="liga">LEC</span></span><span><span class="pct green">70%</span><span class="n">n=10</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Invictus Gaming <span class="liga">LPL</span></span><span><span class="pct green">70%</span><span class="n">n=10</span></span></div>
-      </div>
-
-      <div class="method-card">
-        <h3>Times — cuidado / não apostar</h3>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>BNK FearX <span class="liga">LCK</span></span><span><span class="pct yellow">67%</span><span class="n">n=6</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>KT Rolster <span class="liga">LCK</span></span><span><span class="pct yellow">67%</span><span class="n">n=6</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Weibo Gaming <span class="liga">LPL</span></span><span><span class="pct yellow">67%</span><span class="n">n=12</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>LOUD <span class="liga">CBLOL</span></span><span><span class="pct yellow">67%</span><span class="n">n=6</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>FURIA <span class="liga">CBLOL</span></span><span><span class="pct yellow">67%</span><span class="n">n=6</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>SK Gaming <span class="liga">LEC</span></span><span><span class="pct yellow">60%</span><span class="n">n=5</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>T1 <span class="liga">LCK</span></span><span><span class="pct yellow">60%</span><span class="n">n=5</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>paiN Gaming <span class="liga">CBLOL</span></span><span><span class="pct yellow">60%</span><span class="n">n=5</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Team WE <span class="liga">LPL</span></span><span><span class="pct yellow">57%</span><span class="n">n=7</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot red"></span>HLE <span class="liga">LCK</span></span><span><span class="pct red">40%</span><span class="n">n=5</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot red"></span>NIP <span class="liga">LPL</span></span><span><span class="pct red">40%</span><span class="n">n=10</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot red"></span>Nongshim <span class="liga">LCK</span></span><span><span class="pct red">33%</span><span class="n">n=6</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot red"></span>Bilibili Gaming <span class="liga">LPL</span></span><span><span class="pct red">30%</span><span class="n">n=10</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot red"></span>Top Esports <span class="liga">LPL</span></span><span><span class="pct red">22%</span><span class="n">n=9</span></span></div>
-      </div>
-
-      <div class="method-card">
-        <h3>Bonecos por lane (n≥8)</h3>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Lee Sin <span class="liga">jg</span></span><span><span class="pct green">90%</span><span class="n">n=10</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Syndra <span class="liga">mid</span></span><span><span class="pct green">88%</span><span class="n">n=8</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Aurora <span class="liga">mid</span></span><span><span class="pct green">86%</span><span class="n">n=28</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Renekton <span class="liga">top</span></span><span><span class="pct green">83%</span><span class="n">n=24</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Lucian <span class="liga">adc</span></span><span><span class="pct green">82%</span><span class="n">n=34</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Orianna <span class="liga">mid</span></span><span><span class="pct green">82%</span><span class="n">n=11</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Skarner <span class="liga">jg</span></span><span><span class="pct green">79%</span><span class="n">n=14</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Wukong <span class="liga">jg</span></span><span><span class="pct green">79%</span><span class="n">n=14</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Yunara <span class="liga">adc</span></span><span><span class="pct green">77%</span><span class="n">n=47</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Jayce <span class="liga">top</span></span><span><span class="pct green">76%</span><span class="n">n=21</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Gnar <span class="liga">top</span></span><span><span class="pct green">76%</span><span class="n">n=42</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Mel <span class="liga">mid</span></span><span><span class="pct green">75%</span><span class="n">n=12</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Caitlyn <span class="liga">adc</span></span><span><span class="pct green">75%</span><span class="n">n=20</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Twisted Fate <span class="liga">mid</span></span><span><span class="pct green">75%</span><span class="n">n=8</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Viktor <span class="liga">mid</span></span><span><span class="pct green">73%</span><span class="n">n=15</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Naafiri <span class="liga">jg</span></span><span><span class="pct green">73%</span><span class="n">n=11</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Anivia <span class="liga">mid</span></span><span><span class="pct green">73%</span><span class="n">n=11</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Xin Zhao <span class="liga">jg</span></span><span><span class="pct green">72%</span><span class="n">n=54</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Ambessa <span class="liga">top</span></span><span><span class="pct green">71%</span><span class="n">n=35</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Corki <span class="liga">adc</span></span><span><span class="pct green">71%</span><span class="n">n=41</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot green"></span>Ahri <span class="liga">mid</span></span><span><span class="pct green">70%</span><span class="n">n=23</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Vi <span class="liga">jg</span></span><span><span class="pct yellow">68%</span><span class="n">n=19</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Nocturne <span class="liga">jg</span></span><span><span class="pct yellow">68%</span><span class="n">n=19</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Sion <span class="liga">top</span></span><span><span class="pct yellow">68%</span><span class="n">n=28</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Pantheon <span class="liga">jg</span></span><span><span class="pct yellow">68%</span><span class="n">n=37</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Ashe <span class="liga">adc</span></span><span><span class="pct yellow">68%</span><span class="n">n=40</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Ezreal <span class="liga">adc</span></span><span><span class="pct yellow">67%</span><span class="n">n=43</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Ryze <span class="liga">mid</span></span><span><span class="pct yellow">67%</span><span class="n">n=33</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>K'Sante <span class="liga">top</span></span><span><span class="pct yellow">67%</span><span class="n">n=30</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Azir <span class="liga">mid</span></span><span><span class="pct yellow">67%</span><span class="n">n=30</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Jarvan IV <span class="liga">jg</span></span><span><span class="pct yellow">66%</span><span class="n">n=44</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Sivir <span class="liga">adc</span></span><span><span class="pct yellow">63%</span><span class="n">n=8</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Rumble <span class="liga">top</span></span><span><span class="pct yellow">62%</span><span class="n">n=29</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Annie <span class="liga">mid</span></span><span><span class="pct yellow">61%</span><span class="n">n=33</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Akali <span class="liga">mid</span></span><span><span class="pct yellow">60%</span><span class="n">n=15</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Jhin <span class="liga">adc</span></span><span><span class="pct yellow">56%</span><span class="n">n=16</span></span></div>
-        <div class="method-row"><span class="name"><span class="method-dot yellow"></span>Aatrox <span class="liga">jg</span></span><span><span class="pct yellow">56%</span><span class="n">n=9</span></span></div>
-      </div>
-
-    </div>
-
-    <div class="legend">
-      <strong>🟢 verde</strong> = lucra com folga (hit &gt; 65%) ·
-      <strong>🟡 amarelo</strong> = lucra mas no fio (54-65%, stake reduzido) ·
-      <strong>🔴 vermelho</strong> = perde dinheiro (&lt; 54%, NÃO apostar)<br>
-      <strong>Lista peel</strong>: Soraka, Sona, Janna, Lulu, Yuumi, Karma, Seraphine, Renata Glasc, Nami, Milio (Bard só LEC).<br>
-      <strong>Casas</strong>: EstrelaBet · Pinnacle · Parimatch · Betano. Nunca Bet365.<br>
-      <strong>Atualizado</strong>: 2026-05-02 · base <strong>133 mapas 2-peel Split 2 2026</strong> (datas ≥ 01/04/2026, LEC/LCK/LPL/CBLOL). Filtro de data aplicado, sem mistura com Split 1.
-    </div>
-
-    <!-- ============= MINHAS BETS REAIS (auto-atualiza) ============= -->
-    <div class="method-summary" id="myBetsSummary" style="margin-top:32px">
-      <h2>Suas apostas seguindo o método (real)</h2>
-      <div class="desc" id="myBetsDesc">
-        Bets settled aplicando regras do método: <strong>2peel puro</strong> ou <strong>1peel + flex</strong> (Bard só LEC, Rakan/Alistar qualquer liga). <span id="myBetsUpdated">carregando…</span>
-      </div>
-      <div class="stats" id="myBetsStats">
-        <div class="stat"><div class="label">Bets método</div><div class="value">…</div></div>
-        <div class="stat"><div class="label">Hit Under</div><div class="value green">…</div></div>
-        <div class="stat"><div class="label">Lucro líq.</div><div class="value green">…</div></div>
-        <div class="stat"><div class="label">ROI</div><div class="value green">…</div></div>
-        <div class="stat"><div class="label">Stake total</div><div class="value">…</div></div>
-      </div>
-    </div>
-
-    <div class="method-grid" id="myBetsGrid"></div>
-
-    <!-- ============= DISCIPLINA vs MÉTODO ============= -->
-    <div class="method-summary" id="disciplineSummary" style="margin-top:32px">
-      <h2>Disciplina — quando seguiu o método vs quando não seguiu</h2>
-      <div class="desc">
-        Comparação direta. <strong>Seguiu</strong> = bet com trigger 2peel ou 1peel+flex válido. <strong>Não seguiu</strong> = qualquer bet sem esses triggers (Under sem trigger, Over, Moneyline). <span id="disciplineUpdated"></span>
-      </div>
-      <div class="stats" id="disciplineStats"></div>
-    </div>
-
-    <div class="method-grid" id="disciplineGrid"></div>
-  </main>
-
-  <main class="container tab-pane" data-pane="lfl">
-    <div class="method-summary">
-      <h2>LFL · Ligue Française · Spring 2026</h2>
-      <div class="desc" id="lflDesc"><strong>Tier 2 EU · Split 2 2026</strong> · método 2-peel Under · fair line dinâmica (avg+avg-1 por jogo) · stake R$100 · odd 1.85 · <span id="lflUpdated">carregando…</span></div>
-      <div class="stats" id="lflStats">
-        <div class="stat"><div class="label">Jogos 2-peel</div><div class="value">…</div></div>
-        <div class="stat"><div class="label">Hit Under</div><div class="value green">…</div></div>
-        <div class="stat"><div class="label">Lucro líq.</div><div class="value green">…</div></div>
-        <div class="stat"><div class="label">ROI</div><div class="value green">…</div></div>
-        <div class="stat"><div class="label">Breakeven</div><div class="value">54,1%</div></div>
-      </div>
-    </div>
-
-    <div class="method-grid" id="lflGrid">
-      <div class="loading">Carregando dados LFL…</div>
-    </div>
-
-    <div class="legend">
-      <strong>🟢 verde</strong> = lucra com folga (hit ≥ 70%) ·
-      <strong>🟡 amarelo</strong> = lucra mas no fio (55-70%, stake reduzido) ·
-      <strong>🔴 vermelho</strong> = perde dinheiro (&lt; 55%, NÃO apostar)<br>
-      <strong>Fonte</strong>: backtest dinâmico Split 2 (>= 01/04/2026), fair line por jogo via livestats team avg.<br>
-      <strong>Por que só LFL aqui</strong>: das 3 ligas tier 2 EU operadas (LFL/LES/LIT), LFL é a única lucrativa em fair dinâmica com odd real ~1,75 (LES sangra com hit 43,5%, LIT marginal).
-    </div>
-  </main>
-
-  <main class="container tab-pane" data-pane="ml">
-    <div class="loading">Carregando dados ML…</div>
-  </main>
-
-  <script src="../cron-data/ml_picks.js"></script>
   <script type="module">
     import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
 
@@ -1257,6 +1058,38 @@
         html || '<div class="empty">Sem dados de liga.</div>';
     }
 
+    function renderByTeam(bets) {
+      const byTeam = {};
+      bets.forEach((b) => {
+        [b.team_a, b.team_b].forEach((team) => {
+          if (!team) return;
+          if (!byTeam[team]) byTeam[team] = { name: team, total: 0, wins: 0, losses: 0, pending: 0, profit: 0 };
+          byTeam[team].total++;
+          if (b.status === 'green') { byTeam[team].wins++; byTeam[team].profit += Number(b.profit) || 0; }
+          else if (b.status === 'red') { byTeam[team].losses++; byTeam[team].profit += Number(b.profit) || 0; }
+          else if (b.status === 'pending') { byTeam[team].pending++; }
+          else { byTeam[team].profit += Number(b.profit) || 0; }
+        });
+      });
+      const sorted = Object.values(byTeam).sort((a, b) => b.profit - a.profit);
+      const html = sorted
+        .map((t) => {
+          const cls = t.profit >= 0 ? 'green' : 'red';
+          return `
+            <div class="day">
+              <div>
+                <div class="date">${t.name}</div>
+                <div class="stats">${t.total} aposta${t.total !== 1 ? 's' : ''} · ${t.wins}W ${t.losses}L${t.pending ? ` · ${t.pending} pend` : ''}</div>
+              </div>
+              <div class="profit ${cls}">${t.profit >= 0 ? '+' : ''}${fmtMoney(t.profit)}</div>
+            </div>
+          `;
+        })
+        .join('');
+      document.getElementById('byTeam').innerHTML =
+        html || '<div class="empty">Sem dados de time.</div>';
+    }
+
     function betsForView() {
       let v = allBets;
       if (currentMonthFilter) {
@@ -1289,6 +1122,7 @@
       renderDays(betsForDays());
       renderBySupport(view);
       renderByLeague(view);
+      renderByTeam(view);
       renderBets(allBets);
 
       const lastBet = allBets[0];
@@ -1327,335 +1161,44 @@
       });
     });
 
-    // ===== ML tab render =====
-    const ML_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/ml_picks.json';
-    async function loadMlData() {
+    // ===== Hit do método por liga — mescla tier1 + tier2 =====
+    const TIER1_STATS_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/dashboard_stats.json';
+    const TIER2_STATS_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/tier2_dashboard_stats.json';
+    async function loadMethodByLeague() {
       try {
-        const res = await fetch(ML_URL + '?v=' + Date.now(), { cache: 'no-store' });
-        if (res.ok) window.ML_DATA = await res.json();
-      } catch (e) { console.warn('ML fetch failed, mantendo fallback estático:', e); }
-      renderMlTab();
-    }
-    function renderMlTab() {
-      const data = window.ML_DATA;
-      const root = document.querySelector('[data-pane="ml"]');
-      if (!data) {
-        root.innerHTML = '<div class="loading">Dados ML carregando…</div>';
-        return;
-      }
-
-      const POS_LABELS = { top: 'Top', jng: 'Jungle', mid: 'Mid', bot: 'Bot (ADC)', sup: 'Support' };
-      const ddv = data.ddragon_version;
-      // Data Dragon (oficial Riot) às vezes está atrasado pra champions novos (ex: Zaahen, Yunara).
-      // Fallback: CommunityDragon (CDN comunidade, atualiza rápido).
-      function ddragonUrl(slug) { return `https://ddragon.leagueoflegends.com/cdn/${ddv}/img/champion/${slug}.png`; }
-      function communityDragonUrl(slug) { return `https://cdn.communitydragon.org/latest/champion/${slug}/square`; }
-      function imgFallback(slug) {
-        // Inline string usado em onerror — escapa aspas pra encaixar em atributo
-        const cdUrl = communityDragonUrl(slug);
-        return `if(!this.dataset.tried){this.dataset.tried='1';this.src='${cdUrl}';}else{this.style.opacity='0.2';}`;
-      }
-      function wrClass(wr) { if (wr >= 0.60) return 'green'; if (wr <= 0.40) return 'red'; return 'yellow'; }
-      function pctFmt(v, d=0) { return (v*100).toFixed(d) + '%'; }
-
-      function cardHtml(c) {
-        const cls = c.wr >= 0.60 ? 'win' : (c.wr <= 0.40 ? 'loss' : 'neutral');
-        return `
-          <div class="ml-card ${cls}">
-            <img src="${ddragonUrl(c.slug)}" alt="${c.champion}" loading="lazy" onerror="${imgFallback(c.slug)}">
-            <div class="info">
-              <div class="name">${c.champion}</div>
-              <div class="stats-line">n=${c.n} · ${c.wins}W-${c.losses}L · PR ${pctFmt(c.pr,1)}</div>
-              <div class="ligas">${c.ligas.join(' · ')}</div>
-            </div>
-            <div class="wr ${wrClass(c.wr)}">${pctFmt(c.wr)}</div>
-          </div>
-        `;
-      }
-
-      function sectionHtml(pos) {
-        const arr = data.by_position[pos] || [];
-        const wins = arr.filter(c => c.wr >= 0.60);
-        const neutrals = arr.filter(c => c.wr > 0.40 && c.wr < 0.60);
-        const losses = arr.filter(c => c.wr <= 0.40);
-        const total = data.total_maps_per_pos[pos] || 0;
-        return `
-          <div class="ml-section" data-section="${pos}">
-            <div class="meta" style="color:var(--muted);font-size:12px;margin-bottom:6px">${arr.length} picks com n≥${data.min_games} · ${total} mapas totais nessa posição</div>
-            <h3>✅ Vencedores (WR ≥60%) — ${wins.length}</h3>
-            <div class="ml-grid">${wins.map(cardHtml).join('') || '<div style="color:var(--muted);font-size:12px">nenhum</div>'}</div>
-            <h3>➖ Neutros (40% &lt; WR &lt; 60%) — ${neutrals.length}</h3>
-            <div class="ml-grid">${neutrals.map(cardHtml).join('') || '<div style="color:var(--muted);font-size:12px">nenhum</div>'}</div>
-            <h3>❌ Perdedores (WR ≤40%) — ${losses.length}</h3>
-            <div class="ml-grid">${losses.map(cardHtml).join('') || '<div style="color:var(--muted);font-size:12px">nenhum</div>'}</div>
-          </div>
-        `;
-      }
-
-      root.innerHTML = `
-        <div class="ml-header">
-          <h2>Método ML — Champion Winrate</h2>
-          <div class="meta">5 majors (LPL · LCK · LEC · CBLOL · LCS) · Split atual: ${data.split_label} · Filtro: n≥${data.min_games} · Fonte: Oracle's Elixir</div>
-        </div>
-        <div class="ml-pos-nav">
-          ${['top','jng','mid','bot','sup'].map((p, i) => `<div class="ml-pos ${i===0?'active':''}" data-pos="${p}">${POS_LABELS[p]}</div>`).join('')}
-        </div>
-        ${['top','jng','mid','bot','sup'].map((p, i) => sectionHtml(p).replace('ml-section', i===0 ? 'ml-section active' : 'ml-section')).join('')}
-      `;
-
-      // Position nav
-      root.querySelectorAll('.ml-pos').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const pos = btn.dataset.pos;
-          root.querySelectorAll('.ml-pos').forEach(b => b.classList.toggle('active', b === btn));
-          root.querySelectorAll('.ml-section').forEach(s => s.classList.toggle('active', s.dataset.section === pos));
-        });
-      });
-    }
-    loadMlData();
-
-    // ===== Método tab — fetch dynamic stats from cron output =====
-    const STATS_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/dashboard_stats.json';
-    function dotClassByHit(hit) {
-      if (hit >= 70) return 'green';
-      if (hit >= 55) return 'yellow';
-      return 'red';
-    }
-    function rowHtml(label, sub, hit, n) {
-      const dot = dotClassByHit(hit);
-      const subHtml = sub ? `<span class="liga">${sub}</span>` : '';
-      return `<div class="method-row"><span class="name"><span class="method-dot ${dot}"></span>${label} ${subHtml}</span><span><span class="pct ${dot}">${hit}%</span><span class="n">n=${n}</span></span></div>`;
-    }
-    function cardHtml(title, rows) {
-      return `<div class="method-card"><h3>${title}</h3>${rows.join('')}</div>`;
-    }
-    async function loadMethodStats() {
-      try {
-        const res = await fetch(STATS_URL + '?v=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) throw new Error('fetch failed');
-        const d = await res.json();
-        // Header
-        const upd = new Date(d.generated_at);
-        const updStr = upd.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-        const updEl = document.getElementById('methodUpdated');
-        if (updEl) updEl.textContent = `Atualizado ${updStr} (auto)`;
-        // Stats
-        const statsEl = document.getElementById('methodStats');
-        const profitFmt = d.backtest.profit.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-        statsEl.innerHTML = `
-          <div class="stat"><div class="label">Jogos 2-peel</div><div class="value">${d.backtest.n}</div></div>
-          <div class="stat"><div class="label">Hit Under</div><div class="value green">${d.backtest.hit.toFixed(1).replace('.',',')}%</div></div>
-          <div class="stat"><div class="label">Lucro líq.</div><div class="value green">R$ ${profitFmt}</div></div>
-          <div class="stat"><div class="label">ROI</div><div class="value green">+${d.backtest.roi.toFixed(1).replace('.',',')}%</div></div>
-          <div class="stat"><div class="label">Breakeven</div><div class="value">${d.backtest.breakeven.toFixed(1).replace('.',',')}%</div></div>
-        `;
-        // Cards
-        const grid = document.getElementById('methodGrid');
-        const ligaRows = (d.ligas || []).map(l => rowHtml(l.name, '', l.hit, l.n));
-        const supRows = (d.supports || []).map(s => rowHtml(s.name, '', s.hit, s.n));
-        // Top 8 melhores e top 8 piores (limitado — antes mostrava lista enorme)
-        const teamsBons = (d.teams || []).filter(t => t.hit >= 70).slice(0, 8).map(t => rowHtml(t.name, t.lg, t.hit, t.n));
-        const teamsCuidado = (d.teams || []).filter(t => t.hit < 50).slice(0, 8).map(t => rowHtml(t.name, t.lg, t.hit, t.n));
-
-        // MISSED OPPORTUNITIES — games com método válido onde Elvis NÃO apostou
-        let missedCardHtml = '';
-        const mo = d.missed_opportunities;
-        if (mo && mo.count > 0) {
-          const profitFmt = mo.profit_simulated.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-          const profitClass = mo.profit_simulated >= 0 ? 'green' : 'red';
-          const last10 = (mo.list || []).slice(0, 10).map(m => {
-            const cls = m.hit_simulated ? 'green' : 'red';
-            const sign = m.hit_simulated ? '✓' : '✗';
-            const teams = m.teams.join(' vs ').slice(0, 28);
-            return `<div class="method-row" style="font-size:12px"><span class="name"><span class="method-dot ${cls}"></span>${m.date} · ${teams} · M${m.map}</span><span><span class="pct ${cls}">${sign} ${m.kills}/${m.line}</span><span class="n">${m.trigger}</span></span></div>`;
-          });
-          missedCardHtml = `
-            <div class="method-card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(234,179,8,0.06), rgba(239,68,68,0.04)); border: 1px solid rgba(255,255,255,0.08);">
-              <h3>⚠️ Oportunidades perdidas (método disparou, você não apostou)</h3>
-              <div class="method-row"><span class="name"><strong>Total games</strong> com método válido sem bet</span><span><span class="pct yellow">${mo.count}</span></span></div>
-              <div class="method-row"><span class="name">Teriam batido (hit Under)</span><span><span class="pct green">${mo.would_hit}</span><span class="n">${mo.hit_pct.toFixed(1)}%</span></span></div>
-              <div class="method-row"><span class="name">Teriam errado</span><span><span class="pct red">${mo.would_miss}</span></span></div>
-              <div class="method-row"><span class="name">Profit simulado se tivesse apostado todas (stake unit ${d.stake})</span><span><span class="pct ${profitClass}">R$ ${profitFmt}</span></span></div>
-              <div class="method-row" style="font-size:11px;color:var(--muted);margin-top:6px;border-top:1px solid rgba(255,255,255,0.05);padding-top:6px"><span class="name">Últimos 10 games (mais recentes primeiro):</span><span></span></div>
-              ${last10.join('')}
-            </div>`;
-        }
-
-        // Card destaque de regra de stake (decisão 2026-05-08, persistente)
-        const stakeRuleCard = `
-          <div class="method-card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(234,179,8,0.06)); border: 1px solid rgba(255,255,255,0.08);">
-            <h3>📌 Regra de stake por gatilho × liga (decisão 2026-05-08)</h3>
-            <div class="method-row"><span class="name"><span class="method-dot green"></span><strong>2peel puro</strong> (qualquer liga operada)</span><span><span class="pct green">R$ 1.000</span><span class="n">stake normal</span></span></div>
-            <div class="method-row"><span class="name"><span class="method-dot green"></span><strong>Bard + peel</strong> · LEC</span><span><span class="pct green">R$ 1.000</span><span class="n">stake normal</span></span></div>
-            <div class="method-row"><span class="name"><span class="method-dot yellow"></span><strong>Bard + peel</strong> · LFL</span><span><span class="pct yellow">R$ 500</span><span class="n">meia u</span></span></div>
-            <div class="method-row"><span class="name"><span class="method-dot yellow"></span><strong>Bard + peel</strong> · LCK</span><span><span class="pct yellow">R$ 500</span><span class="n">meia u</span></span></div>
-            <div class="method-row"><span class="name"><span class="method-dot red"></span><strong>Bard + peel</strong> · LPL</span><span><span class="pct red">SUSPENDER</span><span class="n">hit colado no BE</span></span></div>
-            <div class="method-row"><span class="name"><span class="method-dot red"></span><strong>Bard + peel</strong> · CBLOL</span><span><span class="pct red">SUSPENDER</span><span class="n">n insuficiente</span></span></div>
-            <div class="method-row" style="font-size:11px;color:var(--muted);margin-top:8px;border-top:1px solid rgba(255,255,255,0.05);padding-top:8px"><span class="name">🆕 <strong>LCS</strong> adicionada 2026-05-10 — operar por time:</span><span></span></div>
-            <div class="method-row"><span class="name"><span class="method-dot green"></span>LCS · Cloud9 Kia / Team Liquid / Dignitas</span><span><span class="pct green">R$ 1.000</span><span class="n">stake normal</span></span></div>
-            <div class="method-row"><span class="name"><span class="method-dot yellow"></span>LCS · FlyQuest / Sentinels / Disguised</span><span><span class="pct yellow">R$ 500</span><span class="n">meia u</span></span></div>
-            <div class="method-row"><span class="name"><span class="method-dot red"></span>LCS · LYON / Shopify Rebellion</span><span><span class="pct red">EVITAR</span><span class="n">hit ≤43%</span></span></div>
-            <div class="method-row" style="font-size:11px;color:var(--muted);margin-top:8px;border-top:1px solid rgba(255,255,255,0.05);padding-top:8px"><span class="name">⚠️ NUNCA subir a linha (line+0.5/+1) — odd cai mais rápido que hit, mata EV</span><span></span></div>
-          </div>`;
-
-        grid.innerHTML = [
-          stakeRuleCard,
-          missedCardHtml,
-          cardHtml('Ligas', ligaRows),
-          cardHtml('Supports peel', supRows),
-          cardHtml('Top 8 times bons (≥70%)', teamsBons),
-          cardHtml('Top 8 times ruins (<50%)', teamsCuidado),
-          // Bonecos por lane removido (decisão CEO 2026-05-12: enxugar dashboard, foco essencial)
-        ].join('');
-      } catch (e) {
-        console.warn('Stats fetch failed, mantendo HTML estático:', e);
-      }
-    }
-    loadMethodStats();
-
-    // ===== LFL tab — fetch tier 2 stats =====
-    const LFL_STATS_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/lfl_dashboard_stats.json';
-    async function loadLflStats() {
-      try {
-        const res = await fetch(LFL_STATS_URL + '?v=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) throw new Error('fetch failed');
-        const d = await res.json();
-        const upd = new Date(d.generated_at);
-        const updStr = upd.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-        const updEl = document.getElementById('lflUpdated');
-        if (updEl) updEl.textContent = `Atualizado ${updStr} (auto)`;
-        const bt = d.backtest_2peel;
-        const statsEl = document.getElementById('lflStats');
-        const profitFmt = bt.profit.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-        const profitClass = bt.profit >= 0 ? 'green' : 'red';
-        const roiClass = bt.roi >= 0 ? 'green' : 'red';
-        const hitClass = bt.hit >= 54.1 ? 'green' : 'red';
-        statsEl.innerHTML = `
-          <div class="stat"><div class="label">Jogos 2-peel</div><div class="value">${bt.n}</div></div>
-          <div class="stat"><div class="label">Hit Under</div><div class="value ${hitClass}">${bt.hit.toFixed(1).replace('.',',')}%</div></div>
-          <div class="stat"><div class="label">Lucro líq.</div><div class="value ${profitClass}">R$ ${profitFmt}</div></div>
-          <div class="stat"><div class="label">ROI</div><div class="value ${roiClass}">${bt.roi >= 0 ? '+' : ''}${bt.roi.toFixed(1).replace('.',',')}%</div></div>
-          <div class="stat"><div class="label">Breakeven</div><div class="value">54,1%</div></div>
-        `;
-        const grid = document.getElementById('lflGrid');
-        const supRows = (d.supports_all || []).map(s => rowHtml(s.name, '', s.hit, s.n));
-        const teamsBons = (d.teams_all || []).filter(t => t.hit >= 70).map(t => rowHtml(t.name, '', t.hit, t.n));
-        const teamsCuidado = (d.teams_all || []).filter(t => t.hit < 70).map(t => rowHtml(t.name, '', t.hit, t.n));
-        const champRows = (d.champs_all || []).map(c => rowHtml(c.champ, c.role === 'bottom' ? 'adc' : (c.role === 'jungle' ? 'jg' : c.role), c.hit, c.n));
-        grid.innerHTML = [
-          cardHtml('Supports peel + flex', supRows),
-          cardHtml('Times — bons pra Under', teamsBons),
-          cardHtml('Times — cuidado / não apostar', teamsCuidado),
-          cardHtml('Bonecos por lane (n≥4)', champRows),
-        ].join('');
-      } catch (e) {
-        console.warn('LFL stats fetch failed:', e);
-        const grid = document.getElementById('lflGrid');
-        if (grid) grid.innerHTML = '<div class="loading">Falha ao carregar dados LFL.</div>';
-      }
-    }
-    loadLflStats();
-
-    // ===== Minhas bets reais — fetch real_bets_method.json =====
-    const REAL_BETS_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/real_bets_method.json';
-    function fmtBRL(n) {
-      const sign = n >= 0 ? '+' : '−';
-      return `${sign}R$ ${Math.abs(n).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
-    }
-    function valueClass(n) { return n > 0 ? 'green' : (n < 0 ? 'red' : ''); }
-    async function loadMyBets() {
-      try {
-        const res = await fetch(REAL_BETS_URL + '?v=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) throw new Error('fetch failed');
-        const d = await res.json();
-        const total = d.by_trigger.method_total;
-        const peel2 = d.by_trigger['2peel'];
-        const peel1f = d.by_trigger['1peel+flex'];
-
-        // Header
-        const updEl = document.getElementById('myBetsUpdated');
-        if (updEl) {
-          const upd = new Date(d.generated_at);
-          const updStr = upd.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-          updEl.textContent = `Atualizado ${updStr} (auto)`;
-        }
-
-        // KPIs
-        const profitCls = valueClass(total.profit);
-        const roiCls = valueClass(total.roi);
-        document.getElementById('myBetsStats').innerHTML = `
-          <div class="stat"><div class="label">Bets método</div><div class="value">${total.n}</div></div>
-          <div class="stat"><div class="label">Hit Under</div><div class="value ${valueClass(total.hit - 54.1)}">${total.hit.toFixed(1).replace('.',',')}%</div></div>
-          <div class="stat"><div class="label">Lucro líq.</div><div class="value ${profitCls}">${fmtBRL(total.profit)}</div></div>
-          <div class="stat"><div class="label">ROI</div><div class="value ${roiCls}">${total.roi >= 0 ? '+' : ''}${total.roi.toFixed(1).replace('.',',')}%</div></div>
-          <div class="stat"><div class="label">Stake total</div><div class="value">R$ ${total.stake.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</div></div>
-        `;
-
-        // Cards: por trigger, por flex, por liga
-        const triggerCard = `
-          <div class="method-card">
-            <h3>Por trigger</h3>
-            <div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(peel2.hit)}"></span>2peel puro</span><span><span class="pct ${dotClassByHit(peel2.hit)}">${peel2.hit.toFixed(1).replace('.',',')}%</span><span class="n">n=${peel2.n}</span></span></div>
-            <div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(peel1f.hit)}"></span>1peel+flex</span><span><span class="pct ${dotClassByHit(peel1f.hit)}">${peel1f.hit.toFixed(1).replace('.',',')}%</span><span class="n">n=${peel1f.n}</span></span></div>
-            <div class="method-row" style="border-top:1px solid var(--border-soft); margin-top:6px; padding-top:8px"><span class="name" style="font-weight:700"><span class="method-dot ${dotClassByHit(total.hit)}"></span>Total método</span><span><span class="pct ${dotClassByHit(total.hit)}">${total.hit.toFixed(1).replace('.',',')}%</span><span class="n">n=${total.n}</span></span></div>
-            <div class="method-row" style="font-size:12px; color:var(--muted)"><span class="name">Lucro 2peel</span><span><span class="pct ${valueClass(peel2.profit)}">${fmtBRL(peel2.profit)}</span></span></div>
-            <div class="method-row" style="font-size:12px; color:var(--muted)"><span class="name">Lucro 1peel+flex</span><span><span class="pct ${valueClass(peel1f.profit)}">${fmtBRL(peel1f.profit)}</span></span></div>
-          </div>
-        `;
-        const flexRows = Object.entries(d.flex_breakdown || {}).sort((a,b)=>b[1].n-a[1].n).map(([name, s]) =>
-          `<div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(s.hit)}"></span>${name}</span><span><span class="pct ${dotClassByHit(s.hit)}">${s.hit.toFixed(1).replace('.',',')}%</span><span class="n">n=${s.n}</span></span></div>`
-        ).join('');
-        const flexCard = flexRows ? `<div class="method-card"><h3>1peel+flex — por flex</h3>${flexRows}<div class="method-row" style="font-size:11px; color:var(--muted); margin-top:6px"><span>Bard só conta em LEC (regra do método)</span></div></div>` : '';
-
-        const ligaRows = Object.entries(d.by_league || {}).sort((a,b)=>b[1].profit-a[1].profit).map(([lg, s]) =>
-          `<div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(s.hit)}"></span>${lg}</span><span><span class="pct ${valueClass(s.profit)}">${fmtBRL(s.profit)}</span><span class="n">n=${s.n}</span></span></div>`
-        ).join('');
-        const ligaCard = ligaRows ? `<div class="method-card"><h3>Por liga (lucro)</h3>${ligaRows}</div>` : '';
-
-        document.getElementById('myBetsGrid').innerHTML = triggerCard + flexCard + ligaCard;
-
-        // === Disciplina vs Método ===
-        if (d.discipline) {
-          const disc = d.discipline;
-          const fol = disc.following_method;
-          const off = disc.not_following_method;
-          document.getElementById('disciplineUpdated').textContent = `(diff: ${fmtBRL(disc.diff_profit)} entre seguir e não seguir)`;
-          document.getElementById('disciplineStats').innerHTML = `
-            <div class="stat"><div class="label">✅ Seguiu método</div><div class="value">${fol.n} bets</div></div>
-            <div class="stat"><div class="label">→ Lucro</div><div class="value ${valueClass(fol.profit)}">${fmtBRL(fol.profit)}</div></div>
-            <div class="stat"><div class="label">❌ Não seguiu</div><div class="value">${off.n} bets</div></div>
-            <div class="stat"><div class="label">→ Lucro</div><div class="value ${valueClass(off.profit)}">${fmtBRL(off.profit)}</div></div>
-            <div class="stat"><div class="label">Diferença</div><div class="value ${valueClass(disc.diff_profit)}">${fmtBRL(disc.diff_profit)}</div></div>
-          `;
-
-          // Breakdown card
-          const br = disc.not_following_breakdown || {};
-          const offRows = [];
-          if (br.under?.n > 0) offRows.push(`<div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(br.under.hit)}"></span>Under fora método</span><span><span class="pct ${valueClass(br.under.profit)}">${fmtBRL(br.under.profit)}</span><span class="n">n=${br.under.n}</span></span></div>`);
-          if (br.over?.n > 0)  offRows.push(`<div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(br.over.hit)}"></span>Over fora método</span><span><span class="pct ${valueClass(br.over.profit)}">${fmtBRL(br.over.profit)}</span><span class="n">n=${br.over.n}</span></span></div>`);
-          if (br.moneyline?.n > 0) offRows.push(`<div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(br.moneyline.hit)}"></span>Moneyline</span><span><span class="pct ${valueClass(br.moneyline.profit)}">${fmtBRL(br.moneyline.profit)}</span><span class="n">n=${br.moneyline.n}</span></span></div>`);
-
-          const compareCard = `
-            <div class="method-card">
-              <h3>Seguir vs não seguir</h3>
-              <div class="method-row"><span class="name"><span class="method-dot green"></span>Seguindo método</span><span><span class="pct green">${fol.hit.toFixed(1).replace('.',',')}%</span><span class="n">n=${fol.n}</span></span></div>
-              <div class="method-row"><span class="name"><span class="method-dot ${dotClassByHit(off.hit)}"></span>Fora do método</span><span><span class="pct ${dotClassByHit(off.hit)}">${off.hit.toFixed(1).replace('.',',')}%</span><span class="n">n=${off.n}</span></span></div>
-              <div class="method-row" style="border-top:1px solid var(--border-soft); margin-top:6px; padding-top:8px"><span class="name" style="font-weight:700">Lucro seguindo</span><span><span class="pct green">${fmtBRL(fol.profit)}</span></span></div>
-              <div class="method-row"><span class="name" style="font-weight:700">Lucro fora</span><span><span class="pct ${valueClass(off.profit)}">${fmtBRL(off.profit)}</span></span></div>
-              <div class="method-row" style="border-top:1px solid var(--border-soft); margin-top:6px; padding-top:8px; font-size:13px"><span class="name" style="font-weight:700">💸 Custo da indisciplina</span><span><span class="pct ${valueClass(disc.diff_profit)}" style="font-size:14px">${fmtBRL(disc.diff_profit)}</span></span></div>
+        const [r1, r2] = await Promise.all([
+          fetch(TIER1_STATS_URL + '?v=' + Date.now(), { cache: 'no-store' }),
+          fetch(TIER2_STATS_URL + '?v=' + Date.now(), { cache: 'no-store' }),
+        ]);
+        const d1 = r1.ok ? await r1.json() : { by_trigger: { '2peel': { ligas: [] } } };
+        const d2 = r2.ok ? await r2.json() : { by_trigger: { '2peel': { ligas: [] } } };
+        const ligas = [
+          ...(d1.by_trigger?.['2peel']?.ligas || []),
+          ...(d2.by_trigger?.['2peel']?.ligas || []),
+        ].sort((a, b) => b.hit - a.hit);
+        const html = ligas.map(l => {
+          const cls = l.hit >= 60 ? 'green' : (l.hit >= 50 ? '' : 'red');
+          const sign = l.hit >= 60 ? '+' : '';
+          return `
+            <div class="day">
+              <div>
+                <div class="date">${l.name}</div>
+                <div class="stats">n=${l.n} · gatilho 2peel</div>
+              </div>
+              <div class="profit ${cls}">${sign}${l.hit.toFixed(1).replace('.',',')}%</div>
             </div>
           `;
-          const breakdownCard = offRows.length > 0 ? `<div class="method-card"><h3>Bets fora do método</h3>${offRows.join('')}</div>` : '';
-
-          document.getElementById('disciplineGrid').innerHTML = compareCard + breakdownCard;
-        }
+        }).join('');
+        document.getElementById('methodByLeague').innerHTML =
+          html || '<div class="empty">Sem dados de backtest.</div>';
       } catch (e) {
-        console.warn('My bets fetch failed:', e);
-        const desc = document.getElementById('myBetsUpdated');
-        if (desc) desc.textContent = '(falhou ao carregar — talvez ainda não tenha rodado o cron)';
+        console.warn('methodByLeague fetch:', e);
+        document.getElementById('methodByLeague').innerHTML =
+          '<div class="empty">Falha ao carregar backtest.</div>';
       }
     }
-    loadMyBets();
+    loadMethodByLeague();
+
   </script>
 </body>
 </html>
