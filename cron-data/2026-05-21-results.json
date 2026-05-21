@@ -1,0 +1,42 @@
+{
+  "date": "2026-05-21",
+  "analyzed_at": "2026-05-21T10:12:14.270Z",
+  "ligas": [
+    "LCK",
+    "LPL",
+    "LEC",
+    "CBLOL",
+    "LCS"
+  ],
+  "count": 1,
+  "results": [
+    {
+      "league": "LCK",
+      "match_id": "115548128962906315",
+      "game_id": "115548128962906317",
+      "map_number": 2,
+      "team_blue": "BFX",
+      "team_red": "HLE",
+      "kills_blue": 13,
+      "kills_red": 8,
+      "total_kills": 21,
+      "sup_blue": "Seraphine",
+      "sup_red": "Milio",
+      "peel_count": 2,
+      "peel_bucket": "2peel",
+      "flex_engages": [],
+      "trigger_type": "2peel",
+      "matchup_fair": 30.5,
+      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair_raw": 60.03,
+      "fair_adjusted": 30.02,
+      "blue_avg": 27.42,
+      "red_avg": 32.62,
+      "blue_sample_n": 12,
+      "red_sample_n": 13,
+      "league_baseline": 29.49,
+      "vs_league": 0.53,
+      "under_hit": true
+    }
+  ]
+}

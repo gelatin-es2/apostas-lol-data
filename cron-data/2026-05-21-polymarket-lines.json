@@ -1,0 +1,99 @@
+{
+  "captured_at": "2026-05-21T10:10:10.101Z",
+  "range": {
+    "from": "2026-05-21",
+    "to": "2026-05-22"
+  },
+  "target_odd": 1.83,
+  "matches_total": 6,
+  "matches_with_polymarket_event": 1,
+  "matches_with_total_kills": 1,
+  "captured": [
+    {
+      "match_id_lolesports": "115548128962971963",
+      "league": "LCK",
+      "match_date": "2026-05-22",
+      "team_a": "DNS",
+      "team_b": "KRX",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "115548128963037527",
+      "league": "LCK",
+      "match_date": "2026-05-22",
+      "match_start_utc": "2026-05-22T10:00:00Z",
+      "team_a": "KT",
+      "team_b": "GEN",
+      "polymarket_event_slug": "lol-kt-gen-2026-05-22",
+      "polymarket_event_title": "LoL: KT Rolster vs Gen.G (BO3) - LCK Rounds 1-2",
+      "total_kills_markets_found": 10,
+      "games": [
+        {
+          "game_number": 1,
+          "line": 26.5,
+          "under_price": 0.5,
+          "over_price": 0.5,
+          "under_odd": 2,
+          "over_odd": 2,
+          "market_id": "2288143",
+          "question": "Total Kills Over/Under 26.5 in Game 1?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.17,
+          "alternatives_count": 5
+        },
+        {
+          "game_number": 2,
+          "line": 29.5,
+          "under_price": 0.5,
+          "over_price": 0.5,
+          "under_odd": 2,
+          "over_odd": 2,
+          "market_id": "2288146",
+          "question": "Total Kills Over/Under 29.5 in Game 2?",
+          "sportsMarketType": "kill_over_under_game",
+          "selected_via": "closest_to_1.83_odd",
+          "distance_to_target": 0.17,
+          "alternatives_count": 5
+        }
+      ]
+    },
+    {
+      "match_id_lolesports": "116316789792721736",
+      "league": "LFL",
+      "match_date": "2026-05-21",
+      "team_a": "GL",
+      "team_b": "ES",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "116316789792721732",
+      "league": "LFL",
+      "match_date": "2026-05-21",
+      "team_a": "TLNP",
+      "team_b": "VITB",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "116295697480989307",
+      "league": "LES",
+      "match_date": "2026-05-21",
+      "team_a": "GX",
+      "team_b": "FLK",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    },
+    {
+      "match_id_lolesports": "116295697480923739",
+      "league": "LES",
+      "match_date": "2026-05-21",
+      "team_a": "UCAM",
+      "team_b": "MKF",
+      "polymarket_event_slug": null,
+      "reason": "event_not_found_on_polymarket"
+    }
+  ]
+}
