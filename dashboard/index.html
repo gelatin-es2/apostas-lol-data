@@ -477,6 +477,7 @@
     <div class="tab active" data-tab="tracker">Tracker</div>
     <div class="tab" data-tab="analise">Banco de dados (Split 2)</div>
     <div class="tab" data-tab="milio">Método Milio</div>
+    <div class="tab" data-tab="split1">Split 1 + First Stand</div>
   </nav>
 
   <main class="container tab-pane active" data-pane="tracker">
@@ -607,6 +608,26 @@
 
     <div class="section-title">Hit por mapa</div>
     <div id="miByMap" class="days"></div>
+  </main>
+
+  <main class="container tab-pane" data-pane="split1">
+    <div style="background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(139,92,246,0.06)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
+      <div style="font-weight:700; font-size:14px; color:#a78bfa">📜 Split 1 + First Stand 2026 (jan-mar)</div>
+      <div style="font-size:12px; color:var(--muted); margin-top:6px">
+        Backtest histórico do método em LCK/LPL/LEC/CBLOL/LCS + First Stand internacional (jan-fev 2026). CEO estava off neste período — análise puramente simulada pra entender se método já performava antes.
+      </div>
+    </div>
+
+    <div id="s1Backtest" class="kpis"></div>
+
+    <div class="section-title">Por liga (Split 1)</div>
+    <div id="s1ByLeague" class="days"></div>
+
+    <div class="section-title">Top times por hit (n≥4)</div>
+    <div id="s1Teams" class="days"></div>
+
+    <div class="section-title">Por suporte</div>
+    <div id="s1Supports" class="days"></div>
   </main>
 
   <script type="module">
@@ -1522,6 +1543,40 @@
       renderMilioTab();
     }
     ensureBetsLoaded();
+
+    // ===== Aba "Split 1 + First Stand" =====
+    const SPLIT1_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/split1_dashboard_stats.json';
+    async function loadSplit1Tab() {
+      try {
+        const res = await fetch(SPLIT1_URL + '?v=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) {
+          document.getElementById('s1Backtest').innerHTML = '<div class="empty">Dados ainda não disponíveis (cron rodando ou arquivo não publicado)</div>';
+          return;
+        }
+        const d = await res.json();
+        const bt = d.backtest || {};
+        document.getElementById('s1Backtest').innerHTML = `
+          <div class="kpi"><div class="label">Games método</div><div class="value">${bt.n || 0}</div></div>
+          <div class="kpi"><div class="label">Hit</div><div class="value ${bt.hit >= 54 ? 'green' : 'red'}">${(bt.hit || 0).toFixed(1).replace('.',',')}%</div></div>
+          <div class="kpi"><div class="label">Profit (stake R$${d.stake || 1000})</div><div class="value ${(bt.profit||0) >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(bt.profit || 0)}</div></div>
+          <div class="kpi"><div class="label">ROI</div><div class="value ${(bt.roi||0) >= 0 ? 'green' : 'red'}">${(bt.roi||0).toFixed(1).replace('.',',')}%</div></div>
+        `;
+        function listRows(arr, label) {
+          if (!arr?.length) return `<div class="empty">Sem dados de ${label}</div>`;
+          return arr.map(x => {
+            const cls = x.hit >= 60 ? 'green' : (x.hit >= 50 ? '' : 'red');
+            return `<div class="day"><div><div class="date">${x.name}${x.lg ? ' · <span style="color:var(--muted)">'+x.lg+'</span>' : ''}</div><div class="stats">n=${x.n}</div></div><div class="profit ${cls}">${x.hit.toFixed(1).replace('.',',')}%</div></div>`;
+          }).join('');
+        }
+        document.getElementById('s1ByLeague').innerHTML = listRows(d.ligas, 'liga');
+        document.getElementById('s1Teams').innerHTML = listRows((d.teams || []).filter(t => t.n >= 4).slice(0, 30), 'time');
+        document.getElementById('s1Supports').innerHTML = listRows(d.supports, 'sup');
+      } catch (e) {
+        console.warn('split1 fetch:', e);
+        document.getElementById('s1Backtest').innerHTML = '<div class="empty">Erro ao carregar — tenta refresh</div>';
+      }
+    }
+    loadSplit1Tab();
 
   </script>
 </body>
