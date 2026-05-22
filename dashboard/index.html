@@ -1385,7 +1385,20 @@
           .order('bet_datetime', { ascending: false })
           .limit(2000);
         if (error) { console.warn('analise fetch:', error); return; }
-        analiseRawBets = data || [];
+        // DEDUP DEFENSIVA: se um gameId tem bet real, remove TODAS SIMULATED do mesmo game
+        // Garante "1 game = 1 entrada" no agregador (real tem prioridade)
+        const realGids = new Set();
+        for (const b of (data || [])) {
+          if (b.bookmaker !== 'SIMULATED') {
+            const gid = b.raw_extraction?.match_context?.lolesports_game_id;
+            if (gid) realGids.add(String(gid));
+          }
+        }
+        analiseRawBets = (data || []).filter(b => {
+          if (b.bookmaker !== 'SIMULATED') return true;
+          const gid = b.raw_extraction?.match_context?.lolesports_game_id;
+          return !gid || !realGids.has(String(gid));
+        });
         populateAnaliseDropdowns();
       }
       renderAnaliseTab();
