@@ -1376,6 +1376,25 @@
     // ===== Aba "Banco de dados (Split 2)" — adaptável =====
     let analiseRawBets = null;
 
+    // Normaliza nome de time: case-insensitive + remove punctuation pra agrupar dups
+    // (ex: "BILIBILI GAMING" + "Bilibili Gaming" → "Bilibili Gaming")
+    // Escopo módulo pra ser compartilhado entre renderAnaliseTab e renderMilioTab.
+    const teamNormCache = {};
+    const teamScoreCache = {};
+    function normTeamName(name) {
+      if (!name) return null;
+      const key = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const hasLower = /[a-z]/.test(name);
+      const hasUpper = /[A-Z]/.test(name);
+      // Prefere mixed-case sobre all-upper sobre all-lower
+      const score = (hasLower && hasUpper) ? 3 : (hasLower ? 2 : 1);
+      if (!teamNormCache[key] || teamScoreCache[key] < score) {
+        teamNormCache[key] = name;
+        teamScoreCache[key] = score;
+      }
+      return teamNormCache[key];
+    }
+
     async function loadAnaliseTab() {
       if (!analiseRawBets) {
         const { data, error } = await sb
@@ -1485,7 +1504,8 @@
         const simLine = baseLine + delta;
         const kills = mc.total_kills;
         if (kills == null) return null;
-        const won = kills < simLine;
+        const isOver = /over|mais de/i.test(b.pick || '');
+        const won = isOver ? (kills > simLine) : (kills < simLine);
         return { won, simLine, kills };
       }
 
@@ -1558,25 +1578,7 @@
         'Bard','Rakan','Alistar'
       ]);
 
-      // Normaliza nome de time: case-insensitive + remove punctuation pra agrupar dups
-      // (ex: "BILIBILI GAMING" + "Bilibili Gaming" → "Bilibili Gaming")
-      const teamNormCache = {};
-      function normTeamName(name) {
-        if (!name) return null;
-        const key = name.toLowerCase().replace(/[^a-z0-9]/g, '');
-        if (teamNormCache[key]) return teamNormCache[key];
-        // Usa o primeiro display name encontrado (escolhe versão "Title Case" se houver mix)
-        const hasLower = /[a-z]/.test(name);
-        const hasUpper = /[A-Z]/.test(name);
-        // Prefere mixed-case sobre all-upper sobre all-lower
-        const score = (hasLower && hasUpper) ? 3 : (hasLower ? 2 : 1);
-        if (!teamNormCache[key] || teamNormCache[key]._score < score) {
-          teamNormCache[key] = name;
-          teamNormCache[key + '_score'] = score;
-        }
-        return teamNormCache[key];
-      }
-      // Pré-popula cache uma passada com todos os times
+      // Pré-popula cache uma passada com todos os times (normTeamName está no escopo módulo)
       for (const b of bets) { normTeamName(b.team_a); normTeamName(b.team_b); }
 
       renderList('anByLeague', aggBy(b => [normalizeLeague(b.league)]), 'dados de liga');
@@ -1639,7 +1641,9 @@
         if (baseLine == null) return null;
         const kills = mc.total_kills;
         if (kills == null) return null;
-        return { won: kills < baseLine + delta };
+        const simLine = baseLine + delta;
+        const isOver = /over|mais de/i.test(b.pick || '');
+        return { won: isOver ? (kills > simLine) : (kills < simLine) };
       }
 
       const simulated = milioBets.map(b => ({ b, sim: getBetSim(b) })).filter(x => x.sim);
@@ -1653,9 +1657,20 @@
       const realCount = simulated.filter(x => x.b.bookmaker !== 'SIMULATED').length;
       const simCount = simulated.filter(x => x.b.bookmaker === 'SIMULATED').length;
 
+      // Games únicos + hit por game (controle de amplificação por ladder)
+      const gamesMap = new Map();
+      for (const x of simulated) {
+        const mc = x.b.raw_extraction?.match_context || {};
+        const k = String(mc.lolesports_game_id || `${mc.lolesports_match_id}|${x.b.map_number}` || x.b.id);
+        if (!gamesMap.has(k)) gamesMap.set(k, x.sim.won); // primeira bet do game decide
+      }
+      const uniqGames = gamesMap.size;
+      const uniqGreen = [...gamesMap.values()].filter(v => v).length;
+      const uniqHit = uniqGames ? (100 * uniqGreen / uniqGames) : 0;
+
       document.getElementById('miKpis').innerHTML = `
-        <div class="kpi"><div class="label">Bets c/ Milio sup</div><div class="value">${total}</div><div class="sub">${realCount} reais · ${simCount} simuladas</div></div>
-        <div class="kpi"><div class="label">Hit (Δ${delta >= 0 ? '+' : ''}${delta})</div><div class="value ${hitPct >= parseFloat(breakeven) ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div><div class="sub">BE ${breakeven}%</div></div>
+        <div class="kpi"><div class="label">Bets c/ Milio sup</div><div class="value">${total}</div><div class="sub">${uniqGames} games · ${realCount}r · ${simCount}s</div></div>
+        <div class="kpi"><div class="label">Hit (Δ${delta >= 0 ? '+' : ''}${delta})</div><div class="value ${hitPct >= parseFloat(breakeven) ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div><div class="sub">BE ${breakeven}% · 1/game ${uniqHit.toFixed(1).replace('.',',')}%</div></div>
         <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profit >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profit)}</div></div>
         <div class="kpi"><div class="label">ROI</div><div class="value ${roi >= 0 ? 'green' : 'red'}">${roi >= 0 ? '+' : ''}${roi.toFixed(1).replace('.',',')}%</div></div>
       `;
@@ -1683,8 +1698,11 @@
         document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
       }
 
+      // Pré-popula cache de nomes (caso aba Milio renderize antes da Banco de dados)
+      for (const b of milioBets) { normTeamName(b.team_a); normTeamName(b.team_b); }
+
       renderList('miByLeague', aggBy(b => [normalizeLeague(b.league)]), 'dados de liga');
-      renderList('miByTeam', aggBy(b => [b.team_a, b.team_b]), 'dados de time');
+      renderList('miByTeam', aggBy(b => [normTeamName(b.team_a), normTeamName(b.team_b)]), 'dados de time');
       // Sup adversário: o OUTRO sup do jogo (não Milio)
       renderList('miByOpponentSup', aggBy(b => {
         const mc = b.raw_extraction?.match_context || {};

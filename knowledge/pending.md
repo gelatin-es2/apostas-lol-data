@@ -78,11 +78,7 @@ function normTeamName(name) {
 1. **1 bet com `league = null bookmaker = null`**: id `1642cfa9` (cashout solto 29/04 -R$80 sem detalhes). Vai sujar GROUP BY league. Considerar deletar ou setar campos.
 2. **35 bets EWC sem `total_kills`** — backfill manual via Liquipedia/Fandom (rate-limited)
 3. **15 bets "CBLOL Split 1 finals"** (datas 25-26/04, já renomeadas pra "CBLOL") — decisão: manter ou deletar
-4. **Memória `project_stake_por_gatilho` desatualizada** — discutimos:
-   - Premium R$2k (2peel + ambos verdes ≥60% + sem champ ruim + sem blacklist)
-   - Normal R$1k
-   - Meia u R$500
-   - Blacklist Movistar KOI Fénix em LES
+4. ~~**Memória `project_stake_por_gatilho` desatualizada**~~ — ✅ resolvida 2026-05-23 (tier Premium R$2k adicionado + critérios + blacklist consolidada)
 5. **Backfill Top 5 campos extras** nas bets antigas (`game_duration_secs`, `first_blood_team`, `kills_at_15min`, `dragons/barons`, `bans`, `series_score_at_bet`) — settle novo já preenche, mas pré-22/05 não tem
 6. **Alerta automático de meta shift** — se hit de alguma liga cair <55% no dashboard, notificar via hook
 7. **IC95 nas estatísticas do dashboard** — Wilson score interval em `aggBy` pra cortar conclusões ruidosas (n<15)
