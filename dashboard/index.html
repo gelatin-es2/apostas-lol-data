@@ -476,6 +476,7 @@
   <nav class="tabs">
     <div class="tab active" data-tab="tracker">Tracker</div>
     <div class="tab" data-tab="analise">Banco de dados (Split 2)</div>
+    <div class="tab" data-tab="milio">Método Milio</div>
   </nav>
 
   <main class="container tab-pane active" data-pane="tracker">
@@ -565,6 +566,47 @@
 
     <div class="section-title">Hit por boneco — todas as lanes (real + simulado)</div>
     <div id="anByChamp" class="days"></div>
+  </main>
+
+  <main class="container tab-pane" data-pane="milio">
+    <div style="background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(16,185,129,0.06)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
+      <div style="font-weight:700; font-size:14px; color:var(--green)">🌟 Método Milio — sub-método dedicado</div>
+      <div style="font-size:12px; color:var(--muted); margin-top:6px">
+        Filtra bets reais + simuladas onde <strong>Milio aparece como support (qualquer lado)</strong>. Milio é outlier consistente no Split 2: hit muito acima da média em qualquer cenário. Candidato a operar com <strong>stake maior</strong>. Mesmos controles Δ/odd/stake da aba Banco de dados.
+      </div>
+      <div style="display:flex;gap:16px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border-soft);flex-wrap:wrap">
+        <label style="font-size:12px;color:var(--muted);font-weight:600">Δ FAIR LINE:</label>
+        <select id="miFairDelta" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="-4">−4</option><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option>
+          <option value="0" selected>0 (fair)</option>
+          <option value="+1">+1</option><option value="+2">+2</option><option value="+3">+3</option><option value="+4">+4</option>
+        </select>
+        <label style="font-size:12px;color:var(--muted);font-weight:600">ODD:</label>
+        <select id="miOdd" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="2.10">2.10</option><option value="2.00">2.00</option><option value="1.90">1.90</option>
+          <option value="1.85">1.85</option><option value="1.83">1.83 (fair)</option><option value="1.80">1.80</option>
+          <option value="1.77">1.77</option><option value="1.74">1.74</option>
+          <option value="1.72" selected>1.72</option>
+          <option value="1.70">1.70</option><option value="1.65">1.65</option><option value="1.60">1.60</option>
+        </select>
+        <label style="font-size:12px;color:var(--muted);font-weight:600">STAKE:</label>
+        <input id="miStake" type="number" value="2000" min="100" max="10000" step="100" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;width:90px;font-weight:600" />
+      </div>
+    </div>
+
+    <div id="miKpis" class="kpis"></div>
+
+    <div class="section-title">Hit por liga (Milio sup)</div>
+    <div id="miByLeague" class="days"></div>
+
+    <div class="section-title">Hit por time (com ou contra Milio)</div>
+    <div id="miByTeam" class="days"></div>
+
+    <div class="section-title">Hit por sup adversário (parceiro de bracket — qual sup contra Milio bate Under?)</div>
+    <div id="miByOpponentSup" class="days"></div>
+
+    <div class="section-title">Hit por mapa</div>
+    <div id="miByMap" class="days"></div>
   </main>
 
   <script type="module">
@@ -1349,11 +1391,23 @@
         document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
       }
 
+      // Lista canônica de suports válidos do método (peel_pure + flex_engage)
+      const VALID_SUPPORTS = new Set([
+        'Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio',
+        'Bard','Rakan','Alistar'
+      ]);
+
       renderList('anByLeague', aggBy(b => [normalizeLeague(b.league)]), 'dados de liga');
       renderList('anByTeam', aggBy(b => [b.team_a, b.team_b]), 'dados de time');
       renderList('anBySupport', aggBy(b => {
         const mc = b.raw_extraction?.match_context || {};
-        return [mc.blue_picks?.support, mc.red_picks?.support];
+        // Filtra: só conta suports válidos do método (exclui Neeko, Pantheon, etc que jogam sup mas não são peel/flex)
+        const sB = mc.blue_picks?.support;
+        const sR = mc.red_picks?.support;
+        return [
+          VALID_SUPPORTS.has(sB) ? sB : null,
+          VALID_SUPPORTS.has(sR) ? sR : null,
+        ];
       }), 'dados de suporte');
       renderList('anByChamp', aggBy(b => {
         const mc = b.raw_extraction?.match_context || {};
@@ -1374,6 +1428,100 @@
     document.getElementById('anStake').addEventListener('input', renderAnaliseTab);
 
     loadAnaliseTab();
+
+    // ===== Aba "Método Milio" =====
+    function renderMilioTab() {
+      if (!analiseRawBets) return;
+      const delta = parseInt(document.getElementById('miFairDelta').value);
+      const odd = parseFloat(document.getElementById('miOdd').value);
+      const stake = parseFloat(document.getElementById('miStake').value) || 2000;
+
+      // Filtra: só bets onde Milio é support em algum lado
+      const milioBets = analiseRawBets.filter(b => {
+        const mc = b.raw_extraction?.match_context || {};
+        return mc.blue_picks?.support === 'Milio' || mc.red_picks?.support === 'Milio';
+      });
+
+      function getBetSim(b) {
+        const mc = b.raw_extraction?.match_context || {};
+        let baseLine = null;
+        if (b.bookmaker === 'SIMULATED') baseLine = mc.fair_line_calculated;
+        else {
+          const m = (b.pick || '').match(/(\d+(?:[.,]\d+)?)/);
+          if (m) baseLine = parseFloat(m[1].replace(',','.'));
+          const realOdd = parseFloat(b.odd);
+          if (!isNaN(realOdd) && realOdd < 1.72) baseLine = baseLine - 1;
+        }
+        if (baseLine == null) return null;
+        const kills = mc.total_kills;
+        if (kills == null) return null;
+        return { won: kills < baseLine + delta };
+      }
+
+      const simulated = milioBets.map(b => ({ b, sim: getBetSim(b) })).filter(x => x.sim);
+      const total = simulated.length;
+      const green = simulated.filter(x => x.sim.won).length;
+      const profit = simulated.reduce((s, x) => s + (x.sim.won ? stake * (odd - 1) : -stake), 0);
+      const stakeSum = total * stake;
+      const hitPct = total ? (100 * green / total) : 0;
+      const roi = stakeSum ? (100 * profit / stakeSum) : 0;
+      const breakeven = (100 / odd).toFixed(1);
+      const realCount = simulated.filter(x => x.b.bookmaker !== 'SIMULATED').length;
+      const simCount = simulated.filter(x => x.b.bookmaker === 'SIMULATED').length;
+
+      document.getElementById('miKpis').innerHTML = `
+        <div class="kpi"><div class="label">Bets c/ Milio sup</div><div class="value">${total}</div><div class="sub">${realCount} reais · ${simCount} simuladas</div></div>
+        <div class="kpi"><div class="label">Hit (Δ${delta >= 0 ? '+' : ''}${delta})</div><div class="value ${hitPct >= parseFloat(breakeven) ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div><div class="sub">BE ${breakeven}%</div></div>
+        <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profit >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profit)}</div></div>
+        <div class="kpi"><div class="label">ROI</div><div class="value ${roi >= 0 ? 'green' : 'red'}">${roi >= 0 ? '+' : ''}${roi.toFixed(1).replace('.',',')}%</div></div>
+      `;
+
+      function aggBy(keyFn) {
+        const m = {};
+        for (const { b, sim } of simulated) {
+          const keys = keyFn(b);
+          for (const k of keys) {
+            if (!k) continue;
+            if (!m[k]) m[k] = { name: k, n: 0, w: 0, profit: 0 };
+            m[k].n++;
+            if (sim.won) { m[k].w++; m[k].profit += stake * (odd - 1); }
+            else m[k].profit -= stake;
+          }
+        }
+        return Object.values(m).filter(x => x.n >= 3).map(x => ({...x, hit: 100*x.w/x.n})).sort((a,b) => b.hit - a.hit);
+      }
+
+      function renderList(target, rows, label) {
+        const html = rows.map(r => {
+          const cls = r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red');
+          return `<div class="day"><div><div class="date">${r.name}</div><div class="stats">n=${r.n} · R$ ${fmtMoney(r.profit)}</div></div><div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div></div>`;
+        }).join('');
+        document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
+      }
+
+      renderList('miByLeague', aggBy(b => [normalizeLeague(b.league)]), 'dados de liga');
+      renderList('miByTeam', aggBy(b => [b.team_a, b.team_b]), 'dados de time');
+      // Sup adversário: o OUTRO sup do jogo (não Milio)
+      renderList('miByOpponentSup', aggBy(b => {
+        const mc = b.raw_extraction?.match_context || {};
+        const sB = mc.blue_picks?.support, sR = mc.red_picks?.support;
+        if (sB === 'Milio') return [sR];
+        if (sR === 'Milio') return [sB];
+        return [];
+      }), 'dados de sup adversário');
+      renderList('miByMap', aggBy(b => ['Map ' + (b.map_number || '?')]), 'dados de mapa');
+    }
+
+    document.getElementById('miFairDelta').addEventListener('change', renderMilioTab);
+    document.getElementById('miOdd').addEventListener('change', renderMilioTab);
+    document.getElementById('miStake').addEventListener('input', renderMilioTab);
+
+    // Renderiza a aba Milio quando dados carregados (usa o mesmo fetch da analise)
+    async function ensureBetsLoaded() {
+      if (!analiseRawBets) await loadAnaliseTab();
+      renderMilioTab();
+    }
+    ensureBetsLoaded();
 
   </script>
 </body>
