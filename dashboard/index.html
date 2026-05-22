@@ -475,7 +475,7 @@
 
   <nav class="tabs">
     <div class="tab active" data-tab="tracker">Tracker</div>
-    <div class="tab" data-tab="analise">Análise (real + sim)</div>
+    <div class="tab" data-tab="analise">Banco de dados (Split 2)</div>
   </nav>
 
   <main class="container tab-pane active" data-pane="tracker">
@@ -515,9 +515,9 @@
 
   <main class="container tab-pane" data-pane="analise">
     <div style="background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(99,102,241,0.04)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
-      <div style="font-weight:700; font-size:14px; color:var(--accent-2)">Análise estatística — bets reais + simuladas</div>
+      <div style="font-weight:700; font-size:14px; color:var(--accent-2)">Banco de dados Split 2 — bets reais + simuladas worst-case</div>
       <div style="font-size:12px; color:var(--muted); margin-top:6px">
-        Inclui bets reais do CEO + missed opportunities simuladas (jogos do método sem bet, com linha = fair+1, odd 1.74, stake R$1k). Apenas pra entender hit por liga/time/suporte/boneco com mais amostra. <strong>Não é PnL real.</strong>
+        Inclui bets reais do CEO + missed opportunities simuladas em <strong>worst-case (linha = fair − 2, odd 2.10, stake R$1k)</strong>. Hit aqui é piso pessimista — se passa do breakeven aqui, método é robusto. Usado pra identificar time bom/ruim, boneco bom/ruim, liga boa/ruim com margem de segurança. <strong>Não é PnL real.</strong>
       </div>
     </div>
 
