@@ -178,6 +178,30 @@ function extractGameData(window, trustCompleted) {
   let winnerSide = null;
   if (blueInh !== redInh) winnerSide = blueInh > redInh ? 'blue' : 'red';
 
+  // Top 5 campos extras (fix 2026-05-22 — CEO request "tem acesso a isso tmb")
+  // Extraction defensiva: cada campo cai pra null se não existir
+  const gameDurationSecs = lastFrame.gameTime != null ? Math.round(lastFrame.gameTime / 1000) : null;
+  const safe = (v) => v != null ? v : null;
+
+  // Procura frame ~15min (900000ms) pra kills_at_15min e gold_diff_at_15min
+  let frame15 = null;
+  for (const f of window.frames) {
+    if (f.gameTime != null && f.gameTime >= 900000) { frame15 = f; break; }
+  }
+  const kills15 = frame15 ? (frame15.blueTeam?.totalKills ?? 0) + (frame15.redTeam?.totalKills ?? 0) : null;
+  const goldDiff15 = frame15 ? ((frame15.blueTeam?.totalGold ?? 0) - (frame15.redTeam?.totalGold ?? 0)) : null;
+
+  // First blood: primeiro frame com kills > 0 (qualquer lado)
+  let firstBloodTeam = null;
+  for (const f of window.frames) {
+    const kB = f.blueTeam?.totalKills ?? 0;
+    const kR = f.redTeam?.totalKills ?? 0;
+    if (kB > 0 || kR > 0) {
+      firstBloodTeam = kB >= kR ? 'blue' : 'red';
+      break;
+    }
+  }
+
   return {
     gameState: 'finished',
     kBlue: lastFrame.blueTeam?.totalKills ?? 0,
@@ -188,6 +212,21 @@ function extractGameData(window, trustCompleted) {
     winnerSide,
     blueTeamId: blueMeta.esportsTeamId,
     redTeamId: redMeta.esportsTeamId,
+    // === Top 5 extras ===
+    gameDurationSecs,
+    firstBloodTeam,
+    killsAt15min: kills15,
+    goldDiffAt15min: goldDiff15,
+    blueDragons: Array.isArray(lastFrame.blueTeam?.dragons) ? lastFrame.blueTeam.dragons.length : safe(lastFrame.blueTeam?.dragons),
+    redDragons: Array.isArray(lastFrame.redTeam?.dragons) ? lastFrame.redTeam.dragons.length : safe(lastFrame.redTeam?.dragons),
+    blueBarons: safe(lastFrame.blueTeam?.barons),
+    redBarons: safe(lastFrame.redTeam?.barons),
+    blueTowers: safe(lastFrame.blueTeam?.towers),
+    redTowers: safe(lastFrame.redTeam?.towers),
+    blueTotalGold: safe(lastFrame.blueTeam?.totalGold),
+    redTotalGold: safe(lastFrame.redTeam?.totalGold),
+    blueBans: Array.isArray(blueMeta.bans) ? blueMeta.bans : null,
+    redBans: Array.isArray(redMeta.bans) ? redMeta.bans : null,
   };
 }
 
@@ -287,6 +326,19 @@ async function settleBet(supabaseUrl, supabaseKey, bet, gameWindowCache) {
   const profit = outcome.won ? +(stake * (odd - 1)).toFixed(2) : -stake;
   const status = outcome.won ? 'green' : 'red';
 
+  // Series score at bet: conta quantos games estavam completed antes desse map
+  let seriesScoreAtBet = null;
+  if (bet.map_number && bet.map_number > 1) {
+    let blueWins = 0, redWins = 0;
+    for (const g of games) {
+      if (g.number >= bet.map_number) break;
+      // Pra contar wins precisaria dos resultados — usamos game.state + cap simples
+      // (deixa só "X mapas já jogados antes" como aproximação)
+    }
+    const mapsPlayedBefore = games.filter(g => g.number < bet.map_number && g.state === 'completed').length;
+    seriesScoreAtBet = { maps_completed_before: mapsPlayedBefore, current_map: bet.map_number };
+  }
+
   const newRawExtraction = JSON.parse(JSON.stringify(bet.raw_extraction || {}));
   newRawExtraction.match_context = {
     ...(newRawExtraction.match_context || {}),
@@ -302,6 +354,22 @@ async function settleBet(supabaseUrl, supabaseKey, bet, gameWindowCache) {
     trigger_type: triggerType,
     under_hit: outcome.under_hit,
     settled_at: new Date().toISOString(),
+    // === Top 5 extras (fix 2026-05-22) ===
+    game_duration_secs: gd.gameDurationSecs,
+    first_blood_team: gd.firstBloodTeam,
+    kills_at_15min: gd.killsAt15min,
+    gold_diff_at_15min: gd.goldDiffAt15min,
+    blue_dragons: gd.blueDragons,
+    red_dragons: gd.redDragons,
+    blue_barons: gd.blueBarons,
+    red_barons: gd.redBarons,
+    blue_towers: gd.blueTowers,
+    red_towers: gd.redTowers,
+    blue_total_gold: gd.blueTotalGold,
+    red_total_gold: gd.redTotalGold,
+    blue_bans: gd.blueBans,
+    red_bans: gd.redBans,
+    series_score_at_bet: seriesScoreAtBet,
   };
 
   // Schema da tabela bets NÃO tem coluna under_hit (essa é da method_reports).
