@@ -109,8 +109,9 @@ const IGNORE_BET_IDS = new Set([
 (async () => {
   const { supabaseUrl, supabaseKey } = loadConfig();
   const allRaw = await fetchAllBets(supabaseUrl, supabaseKey);
-  // Filtro Split 2: bet_datetime >= SPLIT2_START + remove ignored
-  const all = allRaw.filter(b => b.bet_datetime && b.bet_datetime >= SPLIT2_START && !IGNORE_BET_IDS.has(b.id));
+  // Filtro Split 2: bet_datetime >= SPLIT2_START + remove ignored + exclui bets SIMULATED
+  // (SIMULATED = missed opportunities inseridas pra análise estatística, NÃO contam no PnL real)
+  const all = allRaw.filter(b => b.bet_datetime && b.bet_datetime >= SPLIT2_START && !IGNORE_BET_IDS.has(b.id) && b.bookmaker !== 'SIMULATED');
   const settled = all.filter(b => b.status === 'green' || b.status === 'red');
 
   const by_trigger = { '2peel': [], '1peel+flex': [], 'none': [] };

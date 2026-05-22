@@ -475,6 +475,7 @@
 
   <nav class="tabs">
     <div class="tab active" data-tab="tracker">Tracker</div>
+    <div class="tab" data-tab="analise">Análise (real + sim)</div>
   </nav>
 
   <main class="container tab-pane active" data-pane="tracker">
@@ -510,6 +511,29 @@
     <div id="bets" class="bets">
       <div class="loading">Carregando apostas</div>
     </div>
+  </main>
+
+  <main class="container tab-pane" data-pane="analise">
+    <div style="background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(99,102,241,0.04)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
+      <div style="font-weight:700; font-size:14px; color:var(--accent-2)">Análise estatística — bets reais + simuladas</div>
+      <div style="font-size:12px; color:var(--muted); margin-top:6px">
+        Inclui bets reais do CEO + missed opportunities simuladas (jogos do método sem bet, com linha = fair+1, odd 1.74, stake R$1k). Apenas pra entender hit por liga/time/suporte/boneco com mais amostra. <strong>Não é PnL real.</strong>
+      </div>
+    </div>
+
+    <div id="anKpis" class="kpis"></div>
+
+    <div class="section-title">Hit por liga (real + simulado)</div>
+    <div id="anByLeague" class="days"></div>
+
+    <div class="section-title">Hit por time (real + simulado)</div>
+    <div id="anByTeam" class="days"></div>
+
+    <div class="section-title">Hit por suporte (real + simulado)</div>
+    <div id="anBySupport" class="days"></div>
+
+    <div class="section-title">Hit por boneco — todas as lanes (real + simulado)</div>
+    <div id="anByChamp" class="days"></div>
   </main>
 
   <script type="module">
@@ -680,6 +704,7 @@
       const { data, error } = await sb
         .from('bets')
         .select('*')
+        .neq('bookmaker', 'SIMULATED')  // Tracker = só bets reais. Simuladas vão pra aba Análise.
         .order('bet_datetime', { ascending: false })
         .limit(500);
 
@@ -1198,6 +1223,91 @@
       }
     }
     loadMethodByLeague();
+
+    // ===== Aba "Análise" — bets reais + SIMULATED =====
+    async function loadAnaliseTab() {
+      const { data, error } = await sb
+        .from('bets')
+        .select('*')
+        .in('status', ['green', 'red'])
+        .order('bet_datetime', { ascending: false })
+        .limit(2000);
+      if (error) { console.warn('analise fetch:', error); return; }
+      const bets = data || [];
+
+      // KPIs gerais
+      const total = bets.length;
+      const green = bets.filter(b => b.status === 'green').length;
+      const red = total - green;
+      const profitSum = bets.reduce((s, b) => s + (Number(b.profit) || 0), 0);
+      const stakeSum = bets.reduce((s, b) => s + (Number(b.stake) || 0), 0);
+      const hitPct = total ? (100 * green / total) : 0;
+      const roi = stakeSum ? (100 * profitSum / stakeSum) : 0;
+      const realCount = bets.filter(b => b.bookmaker !== 'SIMULATED').length;
+      const simCount = bets.filter(b => b.bookmaker === 'SIMULATED').length;
+      document.getElementById('anKpis').innerHTML = `
+        <div class="kpi"><div class="label">Bets totais</div><div class="value">${total}</div><div class="sub">${realCount} reais · ${simCount} simuladas</div></div>
+        <div class="kpi"><div class="label">Hit</div><div class="value ${hitPct >= 54 ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div></div>
+        <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profitSum >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profitSum)}</div></div>
+        <div class="kpi"><div class="label">ROI</div><div class="value ${roi >= 0 ? 'green' : 'red'}">${roi >= 0 ? '+' : ''}${roi.toFixed(1).replace('.',',')}%</div></div>
+      `;
+
+      // Helper agregador
+      function aggBy(keyFn) {
+        const m = {};
+        for (const b of bets) {
+          const keys = keyFn(b);
+          for (const k of keys) {
+            if (!k) continue;
+            if (!m[k]) m[k] = { name: k, n: 0, w: 0, profit: 0 };
+            m[k].n++;
+            if (b.status === 'green') m[k].w++;
+            m[k].profit += Number(b.profit) || 0;
+          }
+        }
+        return Object.values(m)
+          .filter(x => x.n >= 4) // cutoff anti-ruído
+          .map(x => ({...x, hit: 100 * x.w / x.n}))
+          .sort((a, b) => b.hit - a.hit);
+      }
+
+      function renderList(target, rows, label) {
+        const html = rows.map(r => {
+          const cls = r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red');
+          return `
+            <div class="day">
+              <div>
+                <div class="date">${r.name}</div>
+                <div class="stats">n=${r.n} · R$ ${fmtMoney(r.profit)}</div>
+              </div>
+              <div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div>
+            </div>
+          `;
+        }).join('');
+        document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
+      }
+
+      renderList('anByLeague', aggBy(b => [b.league]), 'dados de liga');
+      renderList('anByTeam', aggBy(b => [b.team_a, b.team_b]), 'dados de time');
+      // Suporte: pega blue_picks.support e red_picks.support do raw_extraction
+      renderList('anBySupport', aggBy(b => {
+        const mc = b.raw_extraction?.match_context || {};
+        return [mc.blue_picks?.support, mc.red_picks?.support];
+      }), 'dados de suporte');
+      // Boneco (todas as lanes)
+      renderList('anByChamp', aggBy(b => {
+        const mc = b.raw_extraction?.match_context || {};
+        const out = [];
+        for (const side of ['blue_picks', 'red_picks']) {
+          const p = mc[side] || {};
+          for (const role of ['top','jungle','mid','adc','support']) {
+            if (p[role]) out.push(p[role]);
+          }
+        }
+        return out;
+      }), 'dados de boneco');
+    }
+    loadAnaliseTab();
 
   </script>
 </body>

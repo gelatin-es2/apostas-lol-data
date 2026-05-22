@@ -76,18 +76,20 @@ function fetchJson(url) {
 const norm = s => s ? s.toLowerCase().replace(/[\s.\-']/g, '') : '';
 
 // Match estrito: q deve bater exato com algum item da list (case-insensitive).
-// Substring match só se q tem >= 4 chars E é prefix exato (evita "WE" bater em "WBG").
+// Substring match só se q tem >= 4 chars E é prefix do item (evita "WE" bater em "WBG").
 function strictTeamMatch(q, list) {
   const nq = norm(q);
   for (const item of list) {
     const ni = norm(item);
     if (ni === nq) return true;
   }
-  // Fallback: se query >= 4 chars, aceita match exato como prefix (ex "Fnatic" bate "Fnatic")
+  // Fallback prefix real (fix 2026-05-21): se query >= 4 chars, aceita quando query
+  // é PREFIXO do item normalizado (ex "Falke" → "Falkeesports", "Giantx" → "Giantxitero").
+  // Era bug antes: o fallback declarava prefix mas implementava igualdade exata redundante.
   if (nq.length >= 4) {
     for (const item of list) {
       const ni = norm(item);
-      if (ni === nq) return true;
+      if (ni.startsWith(nq) || nq.startsWith(ni)) return true;
     }
   }
   return false;

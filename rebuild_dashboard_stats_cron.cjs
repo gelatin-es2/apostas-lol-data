@@ -181,7 +181,8 @@ async function fetchUserBets() {
     return new Map();
   }
   return new Promise((resolve) => {
-    const u = new URL(`${supabaseUrl}/rest/v1/bets?select=id,pick,odd,status,map_number,raw_extraction&bet_datetime=gte.${SPLIT2_START}&status=in.(green,red)&limit=2000`);
+    // Exclui SIMULATED (missed opportunities sintéticas): a pickLine delas é fair+1 e contaminaria o override de fair_line aqui
+    const u = new URL(`${supabaseUrl}/rest/v1/bets?select=id,pick,odd,status,map_number,raw_extraction&bet_datetime=gte.${SPLIT2_START}&status=in.(green,red)&bookmaker=neq.SIMULATED&limit=2000`);
     https.get({ host: u.hostname, path: u.pathname + u.search, headers: { apikey: supabaseKey, Authorization: 'Bearer ' + supabaseKey } }, r => {
       let body = ''; r.on('data', c => body += c);
       r.on('end', () => {
