@@ -1287,7 +1287,7 @@
         document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
       }
 
-      renderList('anByLeague', aggBy(b => [b.league]), 'dados de liga');
+      renderList('anByLeague', aggBy(b => [normalizeLeague(b.league)]), 'dados de liga');
       renderList('anByTeam', aggBy(b => [b.team_a, b.team_b]), 'dados de time');
       // Suporte: pega blue_picks.support e red_picks.support do raw_extraction
       renderList('anBySupport', aggBy(b => {
