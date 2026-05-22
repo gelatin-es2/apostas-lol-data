@@ -1545,8 +1545,29 @@
         'Bard','Rakan','Alistar'
       ]);
 
+      // Normaliza nome de time: case-insensitive + remove punctuation pra agrupar dups
+      // (ex: "BILIBILI GAMING" + "Bilibili Gaming" → "Bilibili Gaming")
+      const teamNormCache = {};
+      function normTeamName(name) {
+        if (!name) return null;
+        const key = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (teamNormCache[key]) return teamNormCache[key];
+        // Usa o primeiro display name encontrado (escolhe versão "Title Case" se houver mix)
+        const hasLower = /[a-z]/.test(name);
+        const hasUpper = /[A-Z]/.test(name);
+        // Prefere mixed-case sobre all-upper sobre all-lower
+        const score = (hasLower && hasUpper) ? 3 : (hasLower ? 2 : 1);
+        if (!teamNormCache[key] || teamNormCache[key]._score < score) {
+          teamNormCache[key] = name;
+          teamNormCache[key + '_score'] = score;
+        }
+        return teamNormCache[key];
+      }
+      // Pré-popula cache uma passada com todos os times
+      for (const b of bets) { normTeamName(b.team_a); normTeamName(b.team_b); }
+
       renderList('anByLeague', aggBy(b => [normalizeLeague(b.league)]), 'dados de liga');
-      renderList('anByTeam', aggBy(b => [b.team_a, b.team_b]), 'dados de time');
+      renderList('anByTeam', aggBy(b => [normTeamName(b.team_a), normTeamName(b.team_b)]), 'dados de time');
       renderList('anBySupport', aggBy(b => {
         const mc = b.raw_extraction?.match_context || {};
         // Filtra: só conta suports válidos do método (exclui Neeko, Pantheon, etc que jogam sup mas não são peel/flex)
