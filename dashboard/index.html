@@ -524,23 +524,17 @@
         <select id="anFairDelta" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
           <option value="-4">−4 (linha 4 abaixo)</option>
           <option value="-3">−3</option>
-          <option value="-2">−2 (worst-true)</option>
+          <option value="-2">−2</option>
           <option value="-1">−1</option>
           <option value="0" selected>0 (fair calculada)</option>
-          <option value="+1">+1 (CEO opera)</option>
+          <option value="+1">+1</option>
           <option value="+2">+2</option>
           <option value="+3">+3</option>
-          <option value="+4">+4 (linha 4 acima)</option>
+          <option value="+4">+4</option>
         </select>
-        <label style="font-size:12px;color:var(--muted);font-weight:600">ODD:</label>
-        <select id="anOdd" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-          <option value="2.10">2.10 (linha 2 abaixo)</option>
-          <option value="1.95">1.95 (linha 1 abaixo)</option>
-          <option value="1.83" selected>1.83 (fair)</option>
-          <option value="1.74">1.74 (linha 1 acima)</option>
-          <option value="1.64">1.64 (linha 2 acima)</option>
-          <option value="1.55">1.55 (linha 3 acima)</option>
-        </select>
+        <label style="font-size:12px;color:var(--muted);font-weight:600">ODD fixa:</label>
+        <span style="background:var(--card);color:var(--accent-2);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:700">1.74</span>
+        <span style="font-size:11px;color:var(--muted)">(sua média de operação)</span>
         <label style="font-size:12px;color:var(--muted);font-weight:600">STAKE:</label>
         <input id="anStake" type="number" value="1000" min="100" max="10000" step="100" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;width:90px;font-weight:600" />
       </div>
@@ -1268,7 +1262,7 @@
 
     function renderAnaliseTab() {
       const delta = parseInt(document.getElementById('anFairDelta').value);
-      const odd = parseFloat(document.getElementById('anOdd').value);
+      const odd = 1.74;  // fixa: média de operação do CEO
       const stake = parseFloat(document.getElementById('anStake').value) || 1000;
       const bets = analiseRawBets;
 
