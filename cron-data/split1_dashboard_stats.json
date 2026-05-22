@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-05-22T20:14:55.566Z",
+  "generated_at": "2026-05-22T20:26:11.655Z",
   "split_start": "2026-01-01",
   "line_fallback": 29.5,
   "line_sources": {
     "livestats_team_avg(total+total)/2": 636
   },
   "stake": 1000,
-  "odd": 1.85,
+  "odd": 1.72,
   "backtest": {
     "n": 99,
     "hit": 55.6,
-    "profit": 2750,
-    "roi": 2.8,
-    "breakeven": 54.1
+    "profit": -4400,
+    "roi": -4.4,
+    "breakeven": 58.1
   },
   "ligas": [
     {
@@ -458,9 +458,9 @@
       "backtest": {
         "n": 99,
         "hit": 55.6,
-        "profit": 2750,
-        "roi": 2.8,
-        "breakeven": 54.1
+        "profit": -4400,
+        "roi": -4.4,
+        "breakeven": 58.1
       },
       "ligas": [
         {
@@ -906,9 +906,9 @@
       "backtest": {
         "n": 70,
         "hit": 62.9,
-        "profit": 11400,
-        "roi": 16.3,
-        "breakeven": 54.1
+        "profit": 5680,
+        "roi": 8.1,
+        "breakeven": 58.1
       },
       "ligas": [
         {
@@ -1230,9 +1230,9 @@
       "backtest": {
         "n": 169,
         "hit": 58.6,
-        "profit": 14150,
-        "roi": 8.4,
-        "breakeven": 54.1
+        "profit": 1280,
+        "roi": 0.8,
+        "breakeven": 58.1
       },
       "ligas": [
         {
@@ -1905,7 +1905,7 @@
     "would_hit": 99,
     "would_miss": 70,
     "hit_pct": 58.6,
-    "profit_simulated": 14150,
+    "profit_simulated": 1280,
     "list": [
       {
         "gameId": "115548668059523685",
@@ -1921,7 +1921,7 @@
         "line": 29.5,
         "kills": 27,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "XinZhao",
@@ -1951,7 +1951,7 @@
         "line": 29.5,
         "kills": 23,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Anivia",
           "jungle": "Zaahen",
@@ -1981,7 +1981,7 @@
         "line": 26.5,
         "kills": 20,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Renekton",
           "jungle": "Pantheon",
@@ -2011,7 +2011,7 @@
         "line": 26.5,
         "kills": 19,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "MonkeyKing",
@@ -2041,7 +2041,7 @@
         "line": 27.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "Vi",
@@ -2131,7 +2131,7 @@
         "line": 28.5,
         "kills": 25,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "Vi",
@@ -2191,7 +2191,7 @@
         "line": 25.5,
         "kills": 20,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Ambessa",
           "jungle": "XinZhao",
@@ -2221,7 +2221,7 @@
         "line": 25.5,
         "kills": 25,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "DrMundo",
@@ -2311,7 +2311,7 @@
         "line": 30.5,
         "kills": 21,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "Aatrox",
@@ -2341,7 +2341,7 @@
         "line": 26.5,
         "kills": 18,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Sion",
           "jungle": "Skarner",
@@ -2371,7 +2371,7 @@
         "line": 27.5,
         "kills": 26,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Renekton",
           "jungle": "Aatrox",
@@ -2431,7 +2431,7 @@
         "line": 29.5,
         "kills": 22,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Jax",
           "jungle": "XinZhao",
@@ -2521,7 +2521,7 @@
         "line": 25.5,
         "kills": 20,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "XinZhao",
@@ -2551,7 +2551,7 @@
         "line": 27.5,
         "kills": 17,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "Vi",
@@ -2581,7 +2581,7 @@
         "line": 26.5,
         "kills": 26,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Jax",
           "jungle": "Poppy",
@@ -2701,7 +2701,7 @@
         "line": 26.5,
         "kills": 19,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Ornn",
           "jungle": "XinZhao",
@@ -2731,7 +2731,7 @@
         "line": 26.5,
         "kills": 23,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "Vi",
@@ -2761,7 +2761,7 @@
         "line": 26.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Ambessa",
           "jungle": "Nocturne",
@@ -2791,7 +2791,7 @@
         "line": 26.5,
         "kills": 20,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Jax",
           "jungle": "XinZhao",
@@ -2821,7 +2821,7 @@
         "line": 31.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Sion",
           "jungle": "Pantheon",
@@ -2881,7 +2881,7 @@
         "line": 31.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "Trundle",
@@ -2941,7 +2941,7 @@
         "line": 27.5,
         "kills": 21,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Renekton",
           "jungle": "Trundle",
@@ -2971,7 +2971,7 @@
         "line": 27.5,
         "kills": 23,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Zaahen",
           "jungle": "MonkeyKing",
@@ -3001,7 +3001,7 @@
         "line": 28.5,
         "kills": 27,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Yorick",
           "jungle": "MonkeyKing",
@@ -3091,7 +3091,7 @@
         "line": 32.5,
         "kills": 32,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "Nocturne",
@@ -3151,7 +3151,7 @@
         "line": 27.5,
         "kills": 20,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Yasuo",
           "jungle": "DrMundo",
@@ -3181,7 +3181,7 @@
         "line": 30.5,
         "kills": 16,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Zaahen",
           "jungle": "Ambessa",
@@ -3271,7 +3271,7 @@
         "line": 27.5,
         "kills": 22,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Shen",
           "jungle": "Aatrox",
@@ -3301,7 +3301,7 @@
         "line": 27.5,
         "kills": 27,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Renekton",
           "jungle": "XinZhao",
@@ -3331,7 +3331,7 @@
         "line": 25.5,
         "kills": 19,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Zaahen",
           "jungle": "XinZhao",
@@ -3361,7 +3361,7 @@
         "line": 25.5,
         "kills": 19,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "Gwen",
@@ -3391,7 +3391,7 @@
         "line": 31.5,
         "kills": 27,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Sion",
           "jungle": "XinZhao",
@@ -3451,7 +3451,7 @@
         "line": 26.5,
         "kills": 14,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "JarvanIV",
@@ -3481,7 +3481,7 @@
         "line": 28.5,
         "kills": 28,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Ambessa",
           "jungle": "Vi",
@@ -3511,7 +3511,7 @@
         "line": 30.5,
         "kills": 23,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Sion",
           "jungle": "Naafiri",
@@ -3541,7 +3541,7 @@
         "line": 23.5,
         "kills": 18,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Vayne",
           "jungle": "Ornn",
@@ -3601,7 +3601,7 @@
         "line": 23.5,
         "kills": 15,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "JarvanIV",
@@ -3661,7 +3661,7 @@
         "line": 26.5,
         "kills": 16,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Jax",
           "jungle": "Vi",
@@ -3781,7 +3781,7 @@
         "line": 28.5,
         "kills": 26,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Ambessa",
           "jungle": "Pantheon",
@@ -3841,7 +3841,7 @@
         "line": 30.5,
         "kills": 21,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Sion",
           "jungle": "Pantheon",
@@ -3901,7 +3901,7 @@
         "line": 29.5,
         "kills": 22,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gangplank",
           "jungle": "MonkeyKing",
@@ -4051,7 +4051,7 @@
         "line": 32.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Renekton",
           "jungle": "Khazix",
@@ -4081,7 +4081,7 @@
         "line": 26.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "Vi",
@@ -4111,7 +4111,7 @@
         "line": 24.5,
         "kills": 23,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Renekton",
           "jungle": "Ambessa",
@@ -4141,7 +4141,7 @@
         "line": 27.5,
         "kills": 26,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "XinZhao",
@@ -4201,7 +4201,7 @@
         "line": 30.5,
         "kills": 22,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "Aatrox",
@@ -4321,7 +4321,7 @@
         "line": 30.5,
         "kills": 21,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Sion",
           "jungle": "JarvanIV",
@@ -4381,7 +4381,7 @@
         "line": 30.5,
         "kills": 26,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "JarvanIV",
@@ -4411,7 +4411,7 @@
         "line": 26.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "Pantheon",
@@ -4441,7 +4441,7 @@
         "line": 25.5,
         "kills": 20,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "Vi",
@@ -4501,7 +4501,7 @@
         "line": 25.5,
         "kills": 17,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Renekton",
           "jungle": "Vi",
@@ -4531,7 +4531,7 @@
         "line": 32.5,
         "kills": 26,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Kennen",
           "jungle": "MonkeyKing",
@@ -4651,7 +4651,7 @@
         "line": 29.5,
         "kills": 26,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Jax",
           "jungle": "DrMundo",
@@ -4741,7 +4741,7 @@
         "line": 32.5,
         "kills": 15,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Jax",
           "jungle": "Vi",
@@ -4831,7 +4831,7 @@
         "line": 28.5,
         "kills": 18,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "MonkeyKing",
@@ -4891,7 +4891,7 @@
         "line": 28.5,
         "kills": 18,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Malphite",
           "jungle": "Jayce",
@@ -4921,7 +4921,7 @@
         "line": 25.5,
         "kills": 19,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "Nidalee",
@@ -5011,7 +5011,7 @@
         "line": 32.5,
         "kills": 30,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "XinZhao",
@@ -5041,7 +5041,7 @@
         "line": 26.5,
         "kills": 26,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "Jayce",
@@ -5071,7 +5071,7 @@
         "line": 25.5,
         "kills": 20,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "XinZhao",
@@ -5101,7 +5101,7 @@
         "line": 30.5,
         "kills": 29,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Poppy",
           "jungle": "XinZhao",
@@ -5161,7 +5161,7 @@
         "line": 28.5,
         "kills": 28,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Sion",
           "jungle": "DrMundo",
@@ -5221,7 +5221,7 @@
         "line": 31.5,
         "kills": 28,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "Vi",
@@ -5251,7 +5251,7 @@
         "line": 31.5,
         "kills": 25,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Aatrox",
           "jungle": "MonkeyKing",
@@ -5281,7 +5281,7 @@
         "line": 29.5,
         "kills": 0,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "Aatrox",
@@ -5401,7 +5401,7 @@
         "line": 30.5,
         "kills": 28,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "RekSai",
           "jungle": "Vi",
@@ -5461,7 +5461,7 @@
         "line": 28.5,
         "kills": 23,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Renekton",
           "jungle": "Aatrox",
@@ -5491,7 +5491,7 @@
         "line": 28.5,
         "kills": 16,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Ambessa",
           "jungle": "JarvanIV",
@@ -5521,7 +5521,7 @@
         "line": 26.5,
         "kills": 23,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "Pantheon",
@@ -5551,7 +5551,7 @@
         "line": 27.5,
         "kills": 16,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "Aatrox",
@@ -5581,7 +5581,7 @@
         "line": 26.5,
         "kills": 25,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "JarvanIV",
@@ -5641,7 +5641,7 @@
         "line": 28.5,
         "kills": 16,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "MonkeyKing",
@@ -5671,7 +5671,7 @@
         "line": 26.5,
         "kills": 23,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "XinZhao",
@@ -5701,7 +5701,7 @@
         "line": 24.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Poppy",
           "jungle": "DrMundo",
@@ -5731,7 +5731,7 @@
         "line": 23.5,
         "kills": 21,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Renekton",
           "jungle": "Nocturne",
@@ -5791,7 +5791,7 @@
         "line": 27.5,
         "kills": 21,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "Jayce",
@@ -5821,7 +5821,7 @@
         "line": 29.5,
         "kills": 26,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "XinZhao",
@@ -5851,7 +5851,7 @@
         "line": 25.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "JarvanIV",
@@ -5941,7 +5941,7 @@
         "line": 28.5,
         "kills": 25,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Renekton",
           "jungle": "Pantheon",
@@ -5971,7 +5971,7 @@
         "line": 27.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "Trundle",
@@ -6031,7 +6031,7 @@
         "line": 28.5,
         "kills": 18,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "Nocturne",
@@ -6061,7 +6061,7 @@
         "line": 26.5,
         "kills": 19,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "JarvanIV",
@@ -6121,7 +6121,7 @@
         "line": 25.5,
         "kills": 16,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "XinZhao",
@@ -6241,7 +6241,7 @@
         "line": 29.5,
         "kills": 27,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "MonkeyKing",
@@ -6301,7 +6301,7 @@
         "line": 29.5,
         "kills": 25,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Ambessa",
           "jungle": "JarvanIV",
@@ -6331,7 +6331,7 @@
         "line": 24.5,
         "kills": 0,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Sion",
           "jungle": "XinZhao",
@@ -6421,7 +6421,7 @@
         "line": 30.5,
         "kills": 26,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "RekSai",
           "jungle": "XinZhao",
@@ -6511,7 +6511,7 @@
         "line": 26.5,
         "kills": 19,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "XinZhao",
@@ -6541,7 +6541,7 @@
         "line": 26.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Sion",
           "jungle": "MonkeyKing",
@@ -6601,7 +6601,7 @@
         "line": 30.5,
         "kills": 29,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Sion",
           "jungle": "MonkeyKing",
@@ -6661,7 +6661,7 @@
         "line": 25.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Rumble",
           "jungle": "XinZhao",
@@ -6691,7 +6691,7 @@
         "line": 26.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gwen",
           "jungle": "XinZhao",
@@ -6751,7 +6751,7 @@
         "line": 27.5,
         "kills": 25,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "MonkeyKing",
@@ -6781,7 +6781,7 @@
         "line": 30.5,
         "kills": 20,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "Ambessa",
@@ -6811,7 +6811,7 @@
         "line": 32.5,
         "kills": 29,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Ambessa",
           "jungle": "Pantheon",
@@ -6841,7 +6841,7 @@
         "line": 32.5,
         "kills": 28,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Gnar",
           "jungle": "MonkeyKing",
@@ -6871,7 +6871,7 @@
         "line": 27.5,
         "kills": 23,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "KSante",
           "jungle": "Malphite",
@@ -6931,7 +6931,7 @@
         "line": 30.5,
         "kills": 23,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Kennen",
           "jungle": "XinZhao",
@@ -6961,7 +6961,7 @@
         "line": 24.5,
         "kills": 24,
         "hit_simulated": true,
-        "profit_simulated": 850,
+        "profit_simulated": 720,
         "blue_picks": {
           "top": "Renekton",
           "jungle": "Malphite",

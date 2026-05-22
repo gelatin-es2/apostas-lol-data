@@ -9,8 +9,8 @@ const https = require('https');
 const LOLES = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 const SPLIT1_START = '2026-01-01'; const SPLIT1_END = '2026-03-31';
 const PEEL = ['Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio'];
-const STAKE = 1000; // CEO 2026-05-12: stake operacional real (era 100 hardcoded, gerava confusão no dashboard)
-const ODD = 1.85;
+const STAKE = 1000;
+const ODD = 1.72; // CEO 2026-05-22: usar odd conservadora consistente com aba Banco de dados
 // LINE fallback (compat) — se nem Polymarket nem livestats tiver dado
 const FALLBACK_LINE = 29.5;
 const MIN_SAMPLE_TEAM = 5;
