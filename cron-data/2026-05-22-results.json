@@ -1,0 +1,72 @@
+{
+  "date": "2026-05-22",
+  "analyzed_at": "2026-05-22T09:58:37.984Z",
+  "ligas": [
+    "LCK",
+    "LPL",
+    "LEC",
+    "CBLOL",
+    "LCS"
+  ],
+  "count": 2,
+  "results": [
+    {
+      "league": "LCK",
+      "match_id": "115548128962971963",
+      "game_id": "115548128962971964",
+      "map_number": 1,
+      "team_blue": "DNS",
+      "team_red": "KRX",
+      "kills_blue": 5,
+      "kills_red": 17,
+      "total_kills": 22,
+      "sup_blue": "Milio",
+      "sup_red": "Bard",
+      "peel_count": 1,
+      "peel_bucket": "1peel",
+      "flex_engages": [
+        "Bard"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 29.5,
+      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair_raw": 58.28,
+      "fair_adjusted": 29.14,
+      "blue_avg": 25.85,
+      "red_avg": 32.44,
+      "blue_sample_n": 13,
+      "red_sample_n": 16,
+      "league_baseline": 29.19,
+      "vs_league": -0.05,
+      "under_hit": true
+    },
+    {
+      "league": "LCK",
+      "match_id": "115548128962971963",
+      "game_id": "115548128962971965",
+      "map_number": 2,
+      "team_blue": "DNS",
+      "team_red": "KRX",
+      "kills_blue": 22,
+      "kills_red": 6,
+      "total_kills": 28,
+      "sup_blue": "Karma",
+      "sup_red": "Nautilus",
+      "peel_count": 1,
+      "peel_bucket": "1peel",
+      "flex_engages": [],
+      "trigger_type": null,
+      "matchup_fair": 28.5,
+      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair_raw": 57.45,
+      "fair_adjusted": 28.72,
+      "blue_avg": 25.38,
+      "red_avg": 32.06,
+      "blue_sample_n": 13,
+      "red_sample_n": 16,
+      "league_baseline": 29.19,
+      "vs_league": -0.47,
+      "under_hit": true
+    }
+  ]
+}
