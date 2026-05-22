@@ -515,9 +515,34 @@
 
   <main class="container tab-pane" data-pane="analise">
     <div style="background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(99,102,241,0.04)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
-      <div style="font-weight:700; font-size:14px; color:var(--accent-2)">Banco de dados Split 2 — bets reais + simuladas worst-case</div>
+      <div style="font-weight:700; font-size:14px; color:var(--accent-2)">Banco de dados Split 2 — simulação adaptável</div>
       <div style="font-size:12px; color:var(--muted); margin-top:6px">
-        Inclui bets reais do CEO + missed opportunities simuladas em <strong>worst-case (linha = fair − 2, odd 2.10, stake R$1k)</strong>. Hit aqui é piso pessimista — se passa do breakeven aqui, método é robusto. Usado pra identificar time bom/ruim, boneco bom/ruim, liga boa/ruim com margem de segurança. <strong>Não é PnL real.</strong>
+        Bets reais do CEO + missed opportunities simuladas. <strong>Ajuste a linha simulada</strong> abaixo pra ver como cada time/champ/sup performa em cenários diferentes. Útil pra identificar quem aguenta cenários adversos. <strong>Não é PnL real.</strong>
+      </div>
+      <div style="display:flex;gap:16px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border-soft);flex-wrap:wrap">
+        <label style="font-size:12px;color:var(--muted);font-weight:600">Δ FAIR LINE:</label>
+        <select id="anFairDelta" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="-4">−4 (linha 4 abaixo)</option>
+          <option value="-3">−3</option>
+          <option value="-2">−2 (worst-true)</option>
+          <option value="-1">−1</option>
+          <option value="0" selected>0 (fair calculada)</option>
+          <option value="+1">+1 (CEO opera)</option>
+          <option value="+2">+2</option>
+          <option value="+3">+3</option>
+          <option value="+4">+4 (linha 4 acima)</option>
+        </select>
+        <label style="font-size:12px;color:var(--muted);font-weight:600">ODD:</label>
+        <select id="anOdd" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="2.10">2.10 (linha 2 abaixo)</option>
+          <option value="1.95">1.95 (linha 1 abaixo)</option>
+          <option value="1.83" selected>1.83 (fair)</option>
+          <option value="1.74">1.74 (linha 1 acima)</option>
+          <option value="1.64">1.64 (linha 2 acima)</option>
+          <option value="1.55">1.55 (linha 3 acima)</option>
+        </select>
+        <label style="font-size:12px;color:var(--muted);font-weight:600">STAKE:</label>
+        <input id="anStake" type="number" value="1000" min="100" max="10000" step="100" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;width:90px;font-weight:600" />
       </div>
     </div>
 
@@ -1224,49 +1249,88 @@
     }
     loadMethodByLeague();
 
-    // ===== Aba "Análise" — bets reais + SIMULATED =====
-    async function loadAnaliseTab() {
-      const { data, error } = await sb
-        .from('bets')
-        .select('*')
-        .in('status', ['green', 'red'])
-        .order('bet_datetime', { ascending: false })
-        .limit(2000);
-      if (error) { console.warn('analise fetch:', error); return; }
-      const bets = data || [];
+    // ===== Aba "Banco de dados (Split 2)" — adaptável =====
+    let analiseRawBets = null;
 
-      // KPIs gerais
-      const total = bets.length;
-      const green = bets.filter(b => b.status === 'green').length;
-      const red = total - green;
-      const profitSum = bets.reduce((s, b) => s + (Number(b.profit) || 0), 0);
-      const stakeSum = bets.reduce((s, b) => s + (Number(b.stake) || 0), 0);
+    async function loadAnaliseTab() {
+      if (!analiseRawBets) {
+        const { data, error } = await sb
+          .from('bets')
+          .select('*')
+          .in('status', ['green', 'red'])
+          .order('bet_datetime', { ascending: false })
+          .limit(2000);
+        if (error) { console.warn('analise fetch:', error); return; }
+        analiseRawBets = data || [];
+      }
+      renderAnaliseTab();
+    }
+
+    function renderAnaliseTab() {
+      const delta = parseInt(document.getElementById('anFairDelta').value);
+      const odd = parseFloat(document.getElementById('anOdd').value);
+      const stake = parseFloat(document.getElementById('anStake').value) || 1000;
+      const bets = analiseRawBets;
+
+      // Pra cada bet, recomputa green/red baseado em (fair + delta) e (kills < linha simulada)
+      // Reais: usa pick line da bet + delta (interpreta como "se eu pegasse linha+delta na real")
+      // SIMULATED: usa raw_extraction.match_context.fair_line_calculated + delta
+      function getBetSimulation(b) {
+        const mc = b.raw_extraction?.match_context || {};
+        let baseLine = null;
+        if (b.bookmaker === 'SIMULATED') {
+          baseLine = mc.fair_line_calculated;
+        } else {
+          // Reais: extrai linha do pick
+          const match = (b.pick || '').match(/(\d+(?:[.,]\d+)?)/);
+          if (match) baseLine = parseFloat(match[1].replace(',','.'));
+          // Subtrai delta porque a linha real JÁ tem delta embutido (ex CEO opera fair+1, então pickLine = fair+1, fair = pickLine-1)
+          // Pra simulação justa, voltamos pra fair primeiro
+          // Mas só temos pickLine. Aproximação: se odd<1.72, pickLine = fair+1 → fair = pickLine - 1
+          // Senão, pickLine = fair direto
+          const realOdd = parseFloat(b.odd);
+          if (!isNaN(realOdd) && realOdd < 1.72) baseLine = baseLine - 1;
+        }
+        if (baseLine == null) return null;
+        const simLine = baseLine + delta;
+        const kills = mc.total_kills;
+        if (kills == null) return null;
+        const won = kills < simLine;
+        return { won, simLine, kills };
+      }
+
+      const simulated = bets.map(b => ({ b, sim: getBetSimulation(b) })).filter(x => x.sim);
+      const total = simulated.length;
+      const green = simulated.filter(x => x.sim.won).length;
+      const profit = simulated.reduce((s, x) => s + (x.sim.won ? stake * (odd - 1) : -stake), 0);
+      const stakeSum = total * stake;
       const hitPct = total ? (100 * green / total) : 0;
-      const roi = stakeSum ? (100 * profitSum / stakeSum) : 0;
-      const realCount = bets.filter(b => b.bookmaker !== 'SIMULATED').length;
-      const simCount = bets.filter(b => b.bookmaker === 'SIMULATED').length;
+      const roi = stakeSum ? (100 * profit / stakeSum) : 0;
+      const breakeven = (100 / odd).toFixed(1);
+      const realCount = simulated.filter(x => x.b.bookmaker !== 'SIMULATED').length;
+      const simCount = simulated.filter(x => x.b.bookmaker === 'SIMULATED').length;
+
       document.getElementById('anKpis').innerHTML = `
         <div class="kpi"><div class="label">Bets totais</div><div class="value">${total}</div><div class="sub">${realCount} reais · ${simCount} simuladas</div></div>
-        <div class="kpi"><div class="label">Hit</div><div class="value ${hitPct >= 54 ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div></div>
-        <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profitSum >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profitSum)}</div></div>
+        <div class="kpi"><div class="label">Hit (Δ${delta >= 0 ? '+' : ''}${delta})</div><div class="value ${hitPct >= parseFloat(breakeven) ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div><div class="sub">BE ${breakeven}%</div></div>
+        <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profit >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profit)}</div></div>
         <div class="kpi"><div class="label">ROI</div><div class="value ${roi >= 0 ? 'green' : 'red'}">${roi >= 0 ? '+' : ''}${roi.toFixed(1).replace('.',',')}%</div></div>
       `;
 
-      // Helper agregador
       function aggBy(keyFn) {
         const m = {};
-        for (const b of bets) {
+        for (const { b, sim } of simulated) {
           const keys = keyFn(b);
           for (const k of keys) {
             if (!k) continue;
             if (!m[k]) m[k] = { name: k, n: 0, w: 0, profit: 0 };
             m[k].n++;
-            if (b.status === 'green') m[k].w++;
-            m[k].profit += Number(b.profit) || 0;
+            if (sim.won) { m[k].w++; m[k].profit += stake * (odd - 1); }
+            else { m[k].profit -= stake; }
           }
         }
         return Object.values(m)
-          .filter(x => x.n >= 4) // cutoff anti-ruído
+          .filter(x => x.n >= 4)
           .map(x => ({...x, hit: 100 * x.w / x.n}))
           .sort((a, b) => b.hit - a.hit);
       }
@@ -1274,27 +1338,17 @@
       function renderList(target, rows, label) {
         const html = rows.map(r => {
           const cls = r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red');
-          return `
-            <div class="day">
-              <div>
-                <div class="date">${r.name}</div>
-                <div class="stats">n=${r.n} · R$ ${fmtMoney(r.profit)}</div>
-              </div>
-              <div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div>
-            </div>
-          `;
+          return `<div class="day"><div><div class="date">${r.name}</div><div class="stats">n=${r.n} · R$ ${fmtMoney(r.profit)}</div></div><div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div></div>`;
         }).join('');
         document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
       }
 
       renderList('anByLeague', aggBy(b => [normalizeLeague(b.league)]), 'dados de liga');
       renderList('anByTeam', aggBy(b => [b.team_a, b.team_b]), 'dados de time');
-      // Suporte: pega blue_picks.support e red_picks.support do raw_extraction
       renderList('anBySupport', aggBy(b => {
         const mc = b.raw_extraction?.match_context || {};
         return [mc.blue_picks?.support, mc.red_picks?.support];
       }), 'dados de suporte');
-      // Boneco (todas as lanes)
       renderList('anByChamp', aggBy(b => {
         const mc = b.raw_extraction?.match_context || {};
         const out = [];
@@ -1307,6 +1361,12 @@
         return out;
       }), 'dados de boneco');
     }
+
+    // Listeners pros controles
+    document.getElementById('anFairDelta').addEventListener('change', renderAnaliseTab);
+    document.getElementById('anOdd').addEventListener('change', renderAnaliseTab);
+    document.getElementById('anStake').addEventListener('input', renderAnaliseTab);
+
     loadAnaliseTab();
 
   </script>
