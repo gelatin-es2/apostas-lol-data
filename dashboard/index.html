@@ -551,10 +551,27 @@
         </select>
         <label style="font-size:12px;color:var(--muted);font-weight:600">STAKE:</label>
         <input id="anStake" type="number" value="1000" min="100" max="10000" step="100" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;width:90px;font-weight:600" />
+        <label style="font-size:12px;color:var(--muted);font-weight:600">TRIGGER:</label>
+        <select id="anTrigger" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="all" selected>todos</option>
+          <option value="2peel">só 2peel</option>
+          <option value="1peel+flex">só 1peel+flex</option>
+        </select>
+        <label style="font-size:12px;color:var(--muted);font-weight:600">LIGA:</label>
+        <select id="anLeague" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="all" selected>todas</option>
+        </select>
+        <label style="font-size:12px;color:var(--muted);font-weight:600">CAMPEÃO:</label>
+        <select id="anChampion" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer;max-width:180px">
+          <option value="all" selected>todos</option>
+        </select>
       </div>
     </div>
 
     <div id="anKpis" class="kpis"></div>
+
+    <div class="section-title">Backtest por trigger (sob current Δ/odd)</div>
+    <div id="anByTrigger" class="days"></div>
 
     <div class="section-title">Hit por liga (real + simulado)</div>
     <div id="anByLeague" class="days"></div>
@@ -638,6 +655,14 @@
           <option value="all" selected>todos</option>
           <option value="2peel">só 2peel</option>
           <option value="1peel+flex">só 1peel+flex</option>
+        </select>
+        <label style="font-size:12px;color:var(--muted);font-weight:600">LIGA:</label>
+        <select id="s1League" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="all" selected>todas</option>
+        </select>
+        <label style="font-size:12px;color:var(--muted);font-weight:600">CAMPEÃO:</label>
+        <select id="s1Champion" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer;max-width:180px">
+          <option value="all" selected>todos</option>
         </select>
       </div>
     </div>
@@ -1361,15 +1386,68 @@
           .limit(2000);
         if (error) { console.warn('analise fetch:', error); return; }
         analiseRawBets = data || [];
+        populateAnaliseDropdowns();
       }
       renderAnaliseTab();
+    }
+
+    function populateAnaliseDropdowns() {
+      // Liga: lista única canonizada
+      const ligaSet = new Set();
+      for (const b of analiseRawBets) {
+        const lg = normalizeLeague(b.league);
+        if (lg) ligaSet.add(lg);
+      }
+      const ligaSel = document.getElementById('anLeague');
+      for (const lg of [...ligaSet].sort()) {
+        const opt = document.createElement('option');
+        opt.value = lg; opt.textContent = lg;
+        ligaSel.appendChild(opt);
+      }
+      // Champion: lista única
+      const champSet = new Set();
+      for (const b of analiseRawBets) {
+        const mc = b.raw_extraction?.match_context || {};
+        for (const side of ['blue_picks', 'red_picks']) {
+          const p = mc[side] || {};
+          for (const role of ['top','jungle','mid','adc','support']) {
+            if (p[role]) champSet.add(p[role]);
+          }
+        }
+      }
+      const champSel = document.getElementById('anChampion');
+      for (const c of [...champSet].sort()) {
+        const opt = document.createElement('option');
+        opt.value = c; opt.textContent = c;
+        champSel.appendChild(opt);
+      }
     }
 
     function renderAnaliseTab() {
       const delta = parseInt(document.getElementById('anFairDelta').value);
       const odd = parseFloat(document.getElementById('anOdd').value);
       const stake = parseFloat(document.getElementById('anStake').value) || 1000;
-      const bets = analiseRawBets;
+      const triggerFilter = document.getElementById('anTrigger').value;
+      const leagueFilter = document.getElementById('anLeague').value;
+      const champFilter = document.getElementById('anChampion').value;
+      const allBetsRaw = analiseRawBets;
+      const bets = allBetsRaw.filter(b => {
+        if (triggerFilter !== 'all' && (b.raw_extraction?.match_context?.trigger_type) !== triggerFilter) return false;
+        if (leagueFilter !== 'all' && normalizeLeague(b.league) !== leagueFilter) return false;
+        if (champFilter !== 'all') {
+          const mc = b.raw_extraction?.match_context || {};
+          let found = false;
+          for (const side of ['blue_picks', 'red_picks']) {
+            const p = mc[side] || {};
+            for (const role of ['top','jungle','mid','adc','support']) {
+              if (p[role] === champFilter) { found = true; break; }
+            }
+            if (found) break;
+          }
+          if (!found) return false;
+        }
+        return true;
+      });
 
       // Pra cada bet, recomputa green/red baseado em (fair + delta) e (kills < linha simulada)
       // Reais: usa pick line da bet + delta (interpreta como "se eu pegasse linha+delta na real")
@@ -1415,6 +1493,25 @@
         <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profit >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profit)}</div></div>
         <div class="kpi"><div class="label">ROI</div><div class="value ${roi >= 0 ? 'green' : 'red'}">${roi >= 0 ? '+' : ''}${roi.toFixed(1).replace('.',',')}%</div></div>
       `;
+
+      // Side-by-side por trigger (sempre mostra os 2)
+      function statsForTrigger(trig) {
+        const filtered = allBetsRaw.filter(b => (b.raw_extraction?.match_context?.trigger_type) === trig);
+        const sims = filtered.map(b => ({ b, sim: getBetSimulation(b) })).filter(x => x.sim);
+        if (!sims.length) return null;
+        const g = sims.filter(x => x.sim.won).length;
+        const r = sims.length - g;
+        const p = g*stake*(odd-1) - r*stake;
+        return { n: sims.length, hit: 100*g/sims.length, profit: p, roi: 100*p/(sims.length*stake) };
+      }
+      const t2 = statsForTrigger('2peel');
+      const t1f = statsForTrigger('1peel+flex');
+      function trigCard(label, s) {
+        if (!s) return `<div class="day"><div><div class="date">${label}</div><div class="stats">sem dados</div></div></div>`;
+        const cls = s.roi >= 0 ? 'green' : 'red';
+        return `<div class="day"><div><div class="date">${label}</div><div class="stats">n=${s.n} · hit ${s.hit.toFixed(1)}%</div></div><div class="profit ${cls}">${s.roi >= 0 ? '+' : ''}${s.roi.toFixed(1).replace('.',',')}%<br><span style="font-size:11px;font-weight:600">R$ ${fmtMoney(s.profit)}</span></div></div>`;
+      }
+      document.getElementById('anByTrigger').innerHTML = trigCard('2peel puro', t2) + trigCard('1peel+flex', t1f);
 
       function aggBy(keyFn) {
         const m = {};
@@ -1474,9 +1571,11 @@
     }
 
     // Listeners pros controles
-    document.getElementById('anFairDelta').addEventListener('change', renderAnaliseTab);
-    document.getElementById('anOdd').addEventListener('change', renderAnaliseTab);
-    document.getElementById('anStake').addEventListener('input', renderAnaliseTab);
+    for (const id of ['anFairDelta','anOdd','anStake','anTrigger','anLeague','anChampion']) {
+      const el = document.getElementById(id);
+      el.addEventListener('change', renderAnaliseTab);
+      el.addEventListener('input', renderAnaliseTab);
+    }
 
     loadAnaliseTab();
 
@@ -1584,6 +1683,19 @@
         if (!res.ok) { document.getElementById('s1Backtest').innerHTML = '<div class="empty">Dados ainda não publicados</div>'; return; }
         const d = await res.json();
         split1Games = d.missed_opportunities?.list || [];
+        // Popular dropdowns
+        const ligaSet = new Set(), champSet = new Set();
+        for (const g of split1Games) {
+          if (g.league) ligaSet.add(g.league);
+          for (const side of ['blue_picks','red_picks']) {
+            const p = g[side] || {};
+            for (const role of ['top','jungle','mid','adc','support']) if (p[role]) champSet.add(p[role]);
+          }
+        }
+        const ligaSel = document.getElementById('s1League');
+        for (const lg of [...ligaSet].sort()) { const o = document.createElement('option'); o.value = lg; o.textContent = lg; ligaSel.appendChild(o); }
+        const champSel = document.getElementById('s1Champion');
+        for (const c of [...champSet].sort()) { const o = document.createElement('option'); o.value = c; o.textContent = c; champSel.appendChild(o); }
         renderSplit1();
       } catch (e) {
         console.warn('split1 fetch:', e);
@@ -1597,8 +1709,25 @@
       const odd = parseFloat(document.getElementById('s1Odd').value);
       const stake = parseFloat(document.getElementById('s1Stake').value) || 1000;
       const triggerFilter = document.getElementById('s1Trigger').value;
+      const leagueFilter = document.getElementById('s1League').value;
+      const champFilter = document.getElementById('s1Champion').value;
       const breakeven = (100 / odd).toFixed(1);
-      const games = triggerFilter === 'all' ? split1Games : split1Games.filter(g => g.trigger === triggerFilter);
+      const games = split1Games.filter(g => {
+        if (triggerFilter !== 'all' && g.trigger !== triggerFilter) return false;
+        if (leagueFilter !== 'all' && g.league !== leagueFilter) return false;
+        if (champFilter !== 'all') {
+          let found = false;
+          for (const side of ['blue_picks','red_picks']) {
+            const p = g[side] || {};
+            for (const role of ['top','jungle','mid','adc','support']) {
+              if (p[role] === champFilter) { found = true; break; }
+            }
+            if (found) break;
+          }
+          if (!found) return false;
+        }
+        return true;
+      });
 
       function simHit(g) { return g.kills < g.line + delta; }
       const total = games.length;
@@ -1672,7 +1801,7 @@
       }, 6).slice(0, 40), 'boneco');
     }
 
-    for (const id of ['s1FairDelta','s1Odd','s1Stake','s1Trigger']) {
+    for (const id of ['s1FairDelta','s1Odd','s1Stake','s1Trigger','s1League','s1Champion']) {
       document.getElementById(id).addEventListener('change', renderSplit1);
       document.getElementById(id).addEventListener('input', renderSplit1);
     }
