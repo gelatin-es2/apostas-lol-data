@@ -431,6 +431,10 @@ async function processBet(supabaseUrl, supabaseKey, cache, bet) {
   });
 
   const target = FORCE ? all : all.filter(b => {
+    // FIX 2026-05-22: pular SIMULATED bets — elas têm campos custom (fair_line_calculated,
+    // simulated_line, simulation_v3 etc) que NÃO devem ser sobrescritos pelo enrich.
+    // O enrich destrutivo já causou bug uma vez (217 de 224 SIMULATED perderam fair_line_calculated).
+    if (b.bookmaker === 'SIMULATED') return false;
     const mc = b.raw_extraction?.match_context;
     const hasComp = !!b.raw_extraction?.compositions?.team_a?.picks?.support;
     // Já totalmente enriquecida
