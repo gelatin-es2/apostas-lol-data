@@ -614,13 +614,40 @@
     <div style="background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(139,92,246,0.06)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
       <div style="font-weight:700; font-size:14px; color:#a78bfa">📜 Split 1 + First Stand 2026 (jan-mar)</div>
       <div style="font-size:12px; color:var(--muted); margin-top:6px">
-        Backtest histórico do método em LCK/LPL/LEC/CBLOL/LCS + First Stand internacional (jan-fev 2026). CEO estava off neste período — análise puramente simulada pra entender se método já performava antes.
+        Backtest histórico em LCK/LPL/LEC/CBLOL/LCS + First Stand. CEO estava off. Ajuste os controles pra ver como o método teria performado com sua linha/odd/stake.
+      </div>
+      <div style="display:flex;gap:16px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border-soft);flex-wrap:wrap">
+        <label style="font-size:12px;color:var(--muted);font-weight:600">Δ FAIR LINE:</label>
+        <select id="s1FairDelta" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="-4">−4</option><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option>
+          <option value="0" selected>0 (fair)</option>
+          <option value="+1">+1</option><option value="+2">+2</option><option value="+3">+3</option><option value="+4">+4</option>
+        </select>
+        <label style="font-size:12px;color:var(--muted);font-weight:600">ODD:</label>
+        <select id="s1Odd" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="2.10">2.10</option><option value="2.00">2.00</option><option value="1.90">1.90</option>
+          <option value="1.85">1.85</option><option value="1.83">1.83 (fair)</option><option value="1.80">1.80</option>
+          <option value="1.77">1.77</option><option value="1.74">1.74</option>
+          <option value="1.72" selected>1.72</option>
+          <option value="1.70">1.70</option><option value="1.65">1.65</option><option value="1.60">1.60</option>
+        </select>
+        <label style="font-size:12px;color:var(--muted);font-weight:600">STAKE:</label>
+        <input id="s1Stake" type="number" value="1000" min="100" max="10000" step="100" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;width:90px;font-weight:600" />
+        <label style="font-size:12px;color:var(--muted);font-weight:600">TRIGGER:</label>
+        <select id="s1Trigger" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="all" selected>todos</option>
+          <option value="2peel">só 2peel</option>
+          <option value="1peel+flex">só 1peel+flex</option>
+        </select>
       </div>
     </div>
 
     <div id="s1Backtest" class="kpis"></div>
 
-    <div class="section-title">Por liga (Split 1)</div>
+    <div class="section-title">Backtest por trigger (lado a lado)</div>
+    <div id="s1ByTrigger" class="days"></div>
+
+    <div class="section-title">Por liga</div>
     <div id="s1ByLeague" class="days"></div>
 
     <div class="section-title">Top times por hit (n≥4)</div>
@@ -628,6 +655,9 @@
 
     <div class="section-title">Por suporte</div>
     <div id="s1Supports" class="days"></div>
+
+    <div class="section-title">Por boneco (todas lanes, n≥6)</div>
+    <div id="s1Champs" class="days"></div>
   </main>
 
   <script type="module">
@@ -1544,39 +1574,109 @@
     }
     ensureBetsLoaded();
 
-    // ===== Aba "Split 1 + First Stand" =====
+    // ===== Aba "Split 1 + First Stand" — interativo =====
     const SPLIT1_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/split1_dashboard_stats.json';
-    async function loadSplit1Tab() {
+    let split1Games = null;
+
+    async function loadSplit1Data() {
       try {
         const res = await fetch(SPLIT1_URL + '?v=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) {
-          document.getElementById('s1Backtest').innerHTML = '<div class="empty">Dados ainda não disponíveis (cron rodando ou arquivo não publicado)</div>';
-          return;
-        }
+        if (!res.ok) { document.getElementById('s1Backtest').innerHTML = '<div class="empty">Dados ainda não publicados</div>'; return; }
         const d = await res.json();
-        const bt = d.backtest || {};
-        document.getElementById('s1Backtest').innerHTML = `
-          <div class="kpi"><div class="label">Games método</div><div class="value">${bt.n || 0}</div></div>
-          <div class="kpi"><div class="label">Hit</div><div class="value ${bt.hit >= 54 ? 'green' : 'red'}">${(bt.hit || 0).toFixed(1).replace('.',',')}%</div></div>
-          <div class="kpi"><div class="label">Profit (stake R$${d.stake || 1000})</div><div class="value ${(bt.profit||0) >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(bt.profit || 0)}</div></div>
-          <div class="kpi"><div class="label">ROI</div><div class="value ${(bt.roi||0) >= 0 ? 'green' : 'red'}">${(bt.roi||0).toFixed(1).replace('.',',')}%</div></div>
-        `;
-        function listRows(arr, label) {
-          if (!arr?.length) return `<div class="empty">Sem dados de ${label}</div>`;
-          return arr.map(x => {
-            const cls = x.hit >= 60 ? 'green' : (x.hit >= 50 ? '' : 'red');
-            return `<div class="day"><div><div class="date">${x.name}${x.lg ? ' · <span style="color:var(--muted)">'+x.lg+'</span>' : ''}</div><div class="stats">n=${x.n}</div></div><div class="profit ${cls}">${x.hit.toFixed(1).replace('.',',')}%</div></div>`;
-          }).join('');
-        }
-        document.getElementById('s1ByLeague').innerHTML = listRows(d.ligas, 'liga');
-        document.getElementById('s1Teams').innerHTML = listRows((d.teams || []).filter(t => t.n >= 4).slice(0, 30), 'time');
-        document.getElementById('s1Supports').innerHTML = listRows(d.supports, 'sup');
+        split1Games = d.missed_opportunities?.list || [];
+        renderSplit1();
       } catch (e) {
         console.warn('split1 fetch:', e);
-        document.getElementById('s1Backtest').innerHTML = '<div class="empty">Erro ao carregar — tenta refresh</div>';
+        document.getElementById('s1Backtest').innerHTML = '<div class="empty">Erro — tenta refresh</div>';
       }
     }
-    loadSplit1Tab();
+
+    function renderSplit1() {
+      if (!split1Games) return;
+      const delta = parseInt(document.getElementById('s1FairDelta').value);
+      const odd = parseFloat(document.getElementById('s1Odd').value);
+      const stake = parseFloat(document.getElementById('s1Stake').value) || 1000;
+      const triggerFilter = document.getElementById('s1Trigger').value;
+      const breakeven = (100 / odd).toFixed(1);
+      const games = triggerFilter === 'all' ? split1Games : split1Games.filter(g => g.trigger === triggerFilter);
+
+      function simHit(g) { return g.kills < g.line + delta; }
+      const total = games.length;
+      const green = games.filter(simHit).length;
+      const profit = games.reduce((s,g) => s + (simHit(g) ? stake*(odd-1) : -stake), 0);
+      const hitPct = total ? (100 * green / total) : 0;
+      const roi = total ? (100 * profit / (total * stake)) : 0;
+
+      document.getElementById('s1Backtest').innerHTML = `
+        <div class="kpi"><div class="label">Games (filtro)</div><div class="value">${total}</div></div>
+        <div class="kpi"><div class="label">Hit (Δ${delta>=0?'+':''}${delta})</div><div class="value ${hitPct >= parseFloat(breakeven) ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div><div class="sub">BE ${breakeven}%</div></div>
+        <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profit >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profit)}</div></div>
+        <div class="kpi"><div class="label">ROI</div><div class="value ${roi >= 0 ? 'green' : 'red'}">${roi >= 0 ? '+' : ''}${roi.toFixed(1).replace('.',',')}%</div></div>
+      `;
+
+      // Lado a lado por trigger (sempre mostra os 2 pra comparação rápida)
+      function statsForTrigger(trig) {
+        const filtered = split1Games.filter(g => g.trigger === trig);
+        if (!filtered.length) return null;
+        const g = filtered.filter(simHit).length;
+        const r = filtered.length - g;
+        const p = g*stake*(odd-1) - r*stake;
+        return { n: filtered.length, hit: 100*g/filtered.length, profit: p, roi: 100*p/(filtered.length*stake) };
+      }
+      const t2 = statsForTrigger('2peel');
+      const t1f = statsForTrigger('1peel+flex');
+      function trigCard(label, s) {
+        if (!s) return `<div class="day"><div><div class="date">${label}</div><div class="stats">sem dados</div></div></div>`;
+        const cls = s.roi >= 0 ? 'green' : 'red';
+        return `<div class="day"><div><div class="date">${label}</div><div class="stats">n=${s.n} · hit ${s.hit.toFixed(1)}%</div></div><div class="profit ${cls}">${s.roi >= 0 ? '+' : ''}${s.roi.toFixed(1).replace('.',',')}%<br><span style="font-size:11px;font-weight:600">R$ ${fmtMoney(s.profit)}</span></div></div>`;
+      }
+      document.getElementById('s1ByTrigger').innerHTML = trigCard('2peel puro', t2) + trigCard('1peel+flex', t1f);
+
+      // Agregadores
+      function aggBy(keyFn, minN=4) {
+        const m = {};
+        for (const g of games) {
+          const keys = keyFn(g);
+          for (const k of keys) {
+            if (!k) continue;
+            if (!m[k]) m[k] = { name:k, n:0, w:0, profit:0 };
+            m[k].n++;
+            if (simHit(g)) { m[k].w++; m[k].profit += stake*(odd-1); } else m[k].profit -= stake;
+          }
+        }
+        return Object.values(m).filter(x => x.n >= minN).map(x => ({...x, hit:100*x.w/x.n})).sort((a,b) => b.hit - a.hit);
+      }
+
+      function renderList(target, rows, label) {
+        const html = rows.map(r => {
+          const cls = r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red');
+          return `<div class="day"><div><div class="date">${r.name}</div><div class="stats">n=${r.n} · R$ ${fmtMoney(r.profit)}</div></div><div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div></div>`;
+        }).join('');
+        document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
+      }
+
+      const VALID_SUPS = new Set(['Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio','Bard','Rakan','Alistar']);
+      renderList('s1ByLeague', aggBy(g => [g.league]), 'liga');
+      renderList('s1Teams', aggBy(g => g.teams || [], 4).slice(0, 30), 'time');
+      renderList('s1Supports', aggBy(g => {
+        const sB = g.blue_picks?.support, sR = g.red_picks?.support;
+        return [VALID_SUPS.has(sB) ? sB : null, VALID_SUPS.has(sR) ? sR : null];
+      }, 4), 'sup');
+      renderList('s1Champs', aggBy(g => {
+        const out = [];
+        for (const side of ['blue_picks', 'red_picks']) {
+          const p = g[side] || {};
+          for (const role of ['top','jungle','mid','adc','support']) if (p[role]) out.push(p[role]);
+        }
+        return out;
+      }, 6).slice(0, 40), 'boneco');
+    }
+
+    for (const id of ['s1FairDelta','s1Odd','s1Stake','s1Trigger']) {
+      document.getElementById(id).addEventListener('change', renderSplit1);
+      document.getElementById(id).addEventListener('input', renderSplit1);
+    }
+    loadSplit1Data();
 
   </script>
 </body>
