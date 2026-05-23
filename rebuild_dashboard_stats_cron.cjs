@@ -5,6 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { loadFairPinnacle } = require('./lib/loadFairPinnacle.cjs');
 
 const LOLES = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 const SPLIT2_START = '2026-04-01';
@@ -112,35 +113,6 @@ async function fetchGameMeta(gameId) {
   } catch { return null; }
 }
 
-// === Polymarket index (lê todos os arquivos polymarket-lines em cron-data) ===
-function loadPolymarketIndex() {
-  const idx = { byMatchId: new Map(), byTeamsDate: new Map() };
-  const dir = path.join(__dirname, 'cron-data');
-  if (!fs.existsSync(dir)) return idx;
-  for (const f of fs.readdirSync(dir)) {
-    if (!f.endsWith('-polymarket-lines.json')) continue;
-    let j;
-    try { j = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); }
-    catch { continue; }
-    for (const cap of (j.captured || [])) {
-      if (!cap.games || cap.games.length === 0) continue;
-      const matchLevel = cap.games.find(g => g.game_number == null);
-      const game1 = cap.games.find(g => g.game_number === 1);
-      const principal = matchLevel || game1 || cap.games[0];
-      const entry = {
-        line: principal.line,
-        source: matchLevel ? 'polymarket_match_level' : `polymarket_game${principal.game_number}`,
-        event_slug: cap.polymarket_event_slug,
-        games: cap.games,
-      };
-      if (cap.match_id_lolesports) idx.byMatchId.set(String(cap.match_id_lolesports), entry);
-      const tkey = [cap.team_a, cap.team_b, cap.match_date].sort().join('|');
-      idx.byTeamsDate.set(tkey, entry);
-    }
-  }
-  return idx;
-}
-
 // Champion name → Data Dragon slug (overrides for special-case names)
 const DDRAGON_OVERRIDE = {
   'Wukong': 'MonkeyKing', 'Renata Glasc': 'Renata',
@@ -242,21 +214,18 @@ async function fetchUserBets() {
   }
   console.error(`  ${games.length} games fetched`);
 
-  // === Fair line dinâmica (CEO 2026-05-09):
-  // 0) Bet do Elvis no game → linha = pickLine (ajusta -1 se odd<1.72)
-  // 1) polymarket
-  // 2) calculado (team_avg + team_avg + FAIR_ADJUSTMENT)
-  // 3) fallback 29.5
+  // Fair line hierarquia (2026-05-23):
+  // 0) Bet do Elvis → pickLine (ajusta -1 se odd<1.72)
+  // 1) Pinnacle manual (cron-data/YYYY-MM-DD-fair-pinnacle.json)
+  // 2) Fórmula: (avg_total_kills_blue + avg_total_kills_red) / 2, round .5 — L280-315 canônico
+  // 3) Fallback 29.5
   console.error('[4/5] Fetching user bets from Supabase...');
   const userBets = await fetchUserBets();
 
   console.error('[5/5] Computing per-game fair lines...');
-  const polymarketIdx = loadPolymarketIndex();
-  console.error(`  polymarket index: ${polymarketIdx.byMatchId.size} matches`);
 
-  // Avg de kills por team (todos os games coletados; exclui o próprio jogo no cálculo)
-  const teamKillsList = new Map(); // teamName → [kills_próprios]
-  const leagueKillsList = new Map(); // liga → [kills_por_time]
+  const teamKillsList = new Map();
+  const leagueKillsList = new Map();
   function teamName(g, side) {
     const tid = side === 'blue' ? g.blueTeamId : g.redTeamId;
     return teamsMap.get(tid) || tid;
@@ -277,6 +246,12 @@ async function fetchUserBets() {
     leagueAvg.set(l, arr.reduce((a,b)=>a+b,0)/arr.length);
   }
 
+  const pinnacleCache = new Map();
+  function getPinnacle(date) {
+    if (!pinnacleCache.has(date)) pinnacleCache.set(date, loadFairPinnacle(date));
+    return pinnacleCache.get(date);
+  }
+
   function fairForGame(g) {
     // 0) Bet do Elvis tem prioridade (decisão 2026-05-09)
     let userBet = userBets.get(String(g.gameId));
@@ -284,41 +259,41 @@ async function fetchUserBets() {
     if (userBet) {
       const adjusted = userBet.odd < 1.72;
       const line = adjusted ? userBet.pickLine - 1 : userBet.pickLine;
-      return { line, source: `user_bet@${userBet.odd.toFixed(2)}${adjusted ? '_minus1' : ''}` };
+      return { line, fair_pinnacle: null, fair_formula: null, source: `user_bet@${userBet.odd.toFixed(2)}${adjusted ? '_minus1' : ''}` };
     }
-    // 1) polymarket
-    const pmEntry = polymarketIdx.byMatchId.get(String(g.matchId)) ||
-      polymarketIdx.byTeamsDate.get([teamName(g,'blue'), teamName(g,'red'), g.date].sort().join('|'));
-    if (pmEntry) {
-      const specific = pmEntry.games?.find(x => x.game_number === g.mapNum);
-      const principal = specific || (pmEntry.games?.find(x => x.game_number == null)) || pmEntry;
-      const line = specific?.line ?? pmEntry.line;
-      if (line != null) return { line, source: specific ? `polymarket_game${g.mapNum}` : pmEntry.source };
-    }
-    // 2) calculado: fair = (avg_total_kills_blue + avg_total_kills_red) / 2
-    // teamKillsList[team] = [total_kills_jogo1, total_kills_jogo2, ...]
+    // 1) Pinnacle manual
+    const pin = getPinnacle(g.date);
+    const fairPinnacle = pin.byMatchId.get(String(g.matchId)) ?? null;
+
+    // 2) Fórmula: (blueAvgTotal + redAvgTotal) / 2, round .5
     const blueArr = teamKillsList.get(teamName(g,'blue')) || [];
     const redArr  = teamKillsList.get(teamName(g,'red')) || [];
     const totalKillsGame = g.kBlue + g.kRed;
     // leave-one-out: exclui o próprio jogo do avg (evita data leakage)
     const blueAvgEx = blueArr.length > 1 ? (blueArr.reduce((a,b)=>a+b,0) - totalKillsGame) / (blueArr.length - 1) : null;
     const redAvgEx  = redArr.length  > 1 ? (redArr.reduce((a,b)=>a+b,0) - totalKillsGame) / (redArr.length - 1) : null;
-    // leagueAvg é per-side → *2 pra total_kills
     const lAvgPerSide = leagueAvg.get(g.lg) ?? null;
     const lAvgTotal = lAvgPerSide != null ? lAvgPerSide * 2 : null;
     const blueAvg = (blueArr.length - 1 >= MIN_SAMPLE_TEAM) ? blueAvgEx : lAvgTotal;
     const redAvg  = (redArr.length  - 1 >= MIN_SAMPLE_TEAM) ? redAvgEx  : lAvgTotal;
-    if (blueAvg == null || redAvg == null) return { line: FALLBACK_LINE, source: 'fallback_29.5' };
-    const adjusted = (blueAvg + redAvg) / 2; // média das distribuições de total_kills
-    const line = Math.round(adjusted - 0.5) + 0.5;
-    return { line, source: 'livestats_team_avg(total+total)/2' };
+    let fairFormula = null;
+    if (blueAvg != null && redAvg != null) {
+      fairFormula = Math.round((blueAvg + redAvg) / 2 - 0.5) + 0.5;
+    }
+
+    const fairFinal = fairPinnacle ?? fairFormula ?? FALLBACK_LINE;
+    const source = fairPinnacle != null ? 'pinnacle_manual'
+      : fairFormula != null ? 'livestats_team_avg(total+total)/2'
+      : 'fallback_29.5';
+    return { line: fairFinal, fair_pinnacle: fairPinnacle, fair_formula: fairFormula, source };
   }
   for (const g of games) {
     const f = fairForGame(g);
     g.line = f.line;
     g.fairSource = f.source;
+    g.fairPinnacle = f.fair_pinnacle;
+    g.fairFormula = f.fair_formula;
   }
-  // Telemetria de proveniência
   const sourceTally = {};
   for (const g of games) sourceTally[g.fairSource] = (sourceTally[g.fairSource] || 0) + 1;
   console.error(`  fair sources:`, JSON.stringify(sourceTally));
@@ -327,11 +302,10 @@ async function fetchUserBets() {
 
   const FLEX = ['Bard', 'Rakan', 'Alistar'];
 
-  // Filtros por trigger type
   const peel2 = games.filter(g => PEEL.includes(g.bluePicks.support) && PEEL.includes(g.redPicks.support));
   const peel1Flex = games.filter(g => {
     const sB = g.bluePicks.support, sR = g.redPicks.support;
-    if (PEEL.includes(sB) && PEEL.includes(sR)) return false; // já é 2peel
+    if (PEEL.includes(sB) && PEEL.includes(sR)) return false;
     const bluePeel = PEEL.includes(sB), redPeel = PEEL.includes(sR);
     const blueFlex = FLEX.includes(sB), redFlex = FLEX.includes(sR);
     return (bluePeel && redFlex) || (redPeel && blueFlex);
@@ -340,9 +314,7 @@ async function fetchUserBets() {
 
   console.error(`  triggers: 2peel=${peel2.length} | 1peel+flex=${peel1Flex.length} | all=${allTriggers.length}`);
 
-  // Agrega backtest + ligas + supports + teams + champs pra um subset de games
   function computeStats(subset) {
-    // BACKTEST — agora cada game usa SUA OWN line (polymarket > calculado > fallback)
     let green = 0, red = 0;
     for (const g of subset) { if (g.kills < g.line) green++; else red++; }
     const profit = green * STAKE * (ODD - 1) - red * STAKE;
