@@ -504,6 +504,18 @@
     </div>
 
     <div class="section-title">Apostas</div>
+    <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+      <label style="font-size:12px;color:var(--muted);font-weight:600">TRIGGER:</label>
+      <select id="trkTrigger" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+        <option value="all" selected>todos</option>
+        <option value="2peel">só 2peel</option>
+        <option value="1peel+flex">só 1peel+flex</option>
+      </select>
+      <label style="font-size:12px;color:var(--muted);font-weight:600">LIGA:</label>
+      <select id="trkLeague" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+        <option value="all" selected>todas</option>
+      </select>
+    </div>
     <div class="filters">
       <span class="chip active" data-filter="all">Todas</span>
       <span class="chip" data-filter="pending">Pendentes</span>
@@ -848,6 +860,20 @@
     let currentFilter = 'all';
     let currentDayFilter = null; // 'YYYY-MM-DD' ou null
     let currentMonthFilter = null; // 'YYYY-MM' ou null
+    let trkTriggerFilter = 'all';
+    let trkLeagueFilter = 'all';
+
+    // Aplica filtros de trigger e liga sobre um array de bets do Tracker
+    function applyTrkFilters(bets) {
+      let v = bets;
+      if (trkTriggerFilter !== 'all') {
+        v = v.filter(b => (b.raw_extraction?.match_context?.trigger_type) === trkTriggerFilter);
+      }
+      if (trkLeagueFilter !== 'all') {
+        v = v.filter(b => normalizeLeague(b.league) === trkLeagueFilter);
+      }
+      return v;
+    }
 
     async function load() {
       const { data, error } = await sb
@@ -864,6 +890,22 @@
       }
 
       allBets = data || [];
+      // Popula dropdown de liga do Tracker com ligas presentes nas bets reais
+      const trkLigaSel = document.getElementById('trkLeague');
+      const currentTrkLeague = trkLigaSel.value;
+      const ligaSet = new Set();
+      for (const b of allBets) {
+        const lg = normalizeLeague(b.league);
+        if (lg) ligaSet.add(lg);
+      }
+      // Preserva opção "todas" + recria as demais (mantém seleção se ainda existir)
+      trkLigaSel.innerHTML = '<option value="all">todas</option>';
+      for (const lg of [...ligaSet].sort()) {
+        const opt = document.createElement('option');
+        opt.value = lg; opt.textContent = lg;
+        if (lg === currentTrkLeague) opt.selected = true;
+        trkLigaSel.appendChild(opt);
+      }
       render();
     }
 
@@ -1265,7 +1307,7 @@
     }
 
     function betsForView() {
-      let v = allBets;
+      let v = applyTrkFilters(allBets);
       if (currentMonthFilter) {
         v = v.filter(b => {
           const dt = b.bet_datetime || b.created_at;
@@ -1282,8 +1324,9 @@
     }
     // Bets a serem mostradas em "Por dia" (filtra pelo mês mas não pelo dia)
     function betsForDays() {
-      if (!currentMonthFilter) return allBets;
-      return allBets.filter(b => {
+      const base = applyTrkFilters(allBets);
+      if (!currentMonthFilter) return base;
+      return base.filter(b => {
         const dt = b.bet_datetime || b.created_at;
         return dt && dayKeyBRT(dt).slice(0, 7) === currentMonthFilter;
       });
@@ -1292,12 +1335,12 @@
       const view = betsForView();
       const k = computeKPIs(view);
       renderKPIs(k);
-      renderMonths(allBets);
+      renderMonths(applyTrkFilters(allBets));
       renderDays(betsForDays());
       renderBySupport(view);
       renderByLeague(view);
       renderByTeam(view);
-      renderBets(allBets);
+      renderBets(applyTrkFilters(allBets));
 
       const lastBet = allBets[0];
       const lastDt = lastBet ? fmtDate(lastBet.bet_datetime || lastBet.created_at) : '—';
@@ -1317,8 +1360,18 @@
         document.querySelectorAll('.chip').forEach((c) => c.classList.remove('active'));
         chip.classList.add('active');
         currentFilter = chip.dataset.filter;
-        renderBets(allBets);
+        renderBets(applyTrkFilters(allBets));
       });
+    });
+
+    // Dropdowns TRIGGER + LIGA do Tracker
+    document.getElementById('trkTrigger').addEventListener('change', function() {
+      trkTriggerFilter = this.value;
+      render();
+    });
+    document.getElementById('trkLeague').addEventListener('change', function() {
+      trkLeagueFilter = this.value;
+      render();
     });
 
     load();
