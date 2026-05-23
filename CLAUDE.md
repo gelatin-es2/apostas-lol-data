@@ -82,7 +82,7 @@ apostas-lol-data/
 │       └── daily_briefing.cjs       # tabela markdown dos jogos do dia
 ├── analyze_yesterday.cjs            # 2: detecta trigger por jogo
 ├── analyze_range.cjs                # variação que aceita --from/--to
-├── capture_fair_lines.cjs           # 1: schedule + Polymarket
+├── capture_fair_lines.cjs           # 1: schedule + fair fórmula
 ├── save_report_to_db.cjs            # 3: upsert method_reports
 ├── rebuild_dashboard_stats_cron.cjs # 4: regenera dashboard_stats.json + team_avg_kills.json + ml_picks.json
 ├── rebuild_tier2_dashboard_stats.cjs    # adicional: tier 2 EU

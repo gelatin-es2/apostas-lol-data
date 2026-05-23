@@ -12,7 +12,7 @@ const SPLIT2_START = '2026-04-01';
 const PEEL = ['Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio'];
 const STAKE = 1000; // CEO 2026-05-12: stake operacional real (era 100 hardcoded, gerava confusão no dashboard)
 const ODD = 1.85;
-// LINE fallback (compat) — se nem Polymarket nem livestats tiver dado
+// LINE fallback — se nem Pinnacle nem livestats tiver dado
 const FALLBACK_LINE = 29.5;
 const MIN_SAMPLE_TEAM = 5;
 const FAIR_ADJUSTMENT = 0; // fix 2026-05-17: total_kills avg → não precisa mais de -1
@@ -137,7 +137,7 @@ async function fetchLatestDdragonVersion() {
 // Fetch bets settled do Elvis (Split 2). Retorna Map indexado por gameId E (matchId|mapNum) — fail-soft.
 // Regra fair_line override (decisão CEO 2026-05-09):
 //  - Se game tem bet do Elvis: fair_line = pickLine da bet (ajusta -1 se odd < 1.72)
-//  - Senão: lógica normal (polymarket > team-avg-1 > fallback)
+//  - Senão: lógica normal (pinnacle > formula > fallback)
 async function fetchUserBets() {
   let supabaseUrl = process.env.SUPABASE_URL;
   let supabaseKey = process.env.SUPABASE_SECRET_KEY;

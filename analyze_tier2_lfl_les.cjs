@@ -134,7 +134,7 @@ async function fetchLatestDdragonVersion() {
 // Fetch bets settled do Elvis (Split 2). Retorna Map indexado por gameId E (matchId|mapNum) — fail-soft.
 // Regra fair_line override (decisão CEO 2026-05-09):
 //  - Se game tem bet do Elvis: fair_line = pickLine da bet (ajusta -1 se odd < 1.72)
-//  - Senão: lógica normal (polymarket > team-avg-1 > fallback)
+//  - Senão: lógica normal (pinnacle > formula > fallback)
 async function fetchUserBets() {
   let supabaseUrl = process.env.SUPABASE_URL;
   let supabaseKey = process.env.SUPABASE_SECRET_KEY;

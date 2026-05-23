@@ -12,7 +12,7 @@ const SPLIT1_START = '2026-01-01'; const SPLIT1_END = '2026-03-31';
 const PEEL = ['Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio'];
 const STAKE = 1000;
 const ODD = 1.72; // CEO 2026-05-22: usar odd conservadora consistente com aba Banco de dados
-// LINE fallback (compat) — se nem Polymarket nem livestats tiver dado
+// LINE fallback — se nem Pinnacle nem livestats tiver dado
 const FALLBACK_LINE = 29.5;
 const MIN_SAMPLE_TEAM = 5;
 const FAIR_ADJUSTMENT = 0; // fix 2026-05-17: total_kills avg → não precisa mais de -1
@@ -138,7 +138,7 @@ async function fetchLatestDdragonVersion() {
 // Fetch bets settled do Elvis (Split 2). Retorna Map indexado por gameId E (matchId|mapNum) — fail-soft.
 // Regra fair_line override (decisão CEO 2026-05-09):
 //  - Se game tem bet do Elvis: fair_line = pickLine da bet (ajusta -1 se odd < 1.72)
-//  - Senão: lógica normal (polymarket > team-avg-1 > fallback)
+//  - Senão: lógica normal (pinnacle > formula > fallback)
 async function fetchUserBets() {
   let supabaseUrl = process.env.SUPABASE_URL;
   let supabaseKey = process.env.SUPABASE_SECRET_KEY;
@@ -320,7 +320,7 @@ async function fetchUserBets() {
 
   // Agrega backtest + ligas + supports + teams + champs pra um subset de games
   function computeStats(subset) {
-    // BACKTEST — agora cada game usa SUA OWN line (polymarket > calculado > fallback)
+    // BACKTEST — cada game usa SUA OWN line (pinnacle > formula > fallback)
     let green = 0, red = 0;
     for (const g of subset) { if (g.kills < g.line) green++; else red++; }
     const profit = green * STAKE * (ODD - 1) - red * STAKE;
