@@ -1,6 +1,11 @@
 // Analisa intervalo de dias nas 4 majors (LCK, LPL, LEC, CBLOL).
-// Fair line é calculada DINAMICAMENTE via livestats: avg de kills próprios
-// dos últimos 21 dias por time, com fallback pra média da liga se sample < 5.
+// Fair line: Pinnacle manual (primário, se disponível) + fórmula (blueAvgTotal+redAvgTotal)/2
+// sempre calculada em paralelo. Ambas persistidas no output.
+//
+// Hierarquia pra matchup_fair:
+//   1) Pinnacle manual (cron-data/YYYY-MM-DD-fair-pinnacle.json)
+//   2) Fórmula: (avg_total_kills_blue + avg_total_kills_red) / 2, round .5
+//   3) Fallback 29.5
 //
 // Uso:
 //   node analyze_range.cjs --from YYYY-MM-DD --to YYYY-MM-DD
@@ -12,74 +17,10 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { loadFairPinnacle } = require('./lib/loadFairPinnacle.cjs');
 
 const OUT_DIR = path.join(__dirname, 'cron-data');
 const LOLES_KEY = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
-
-// Carrega TODOS os arquivos polymarket-lines disponíveis em cron-data e indexa por
-// match_id_lolesports (e fallback por team_a/team_b/match_date). Usado pra hierarquia
-// fair = polymarket > calculado > 29.5.
-function loadPolymarketIndex() {
-  const idx = { byMatchId: new Map(), byTeamsDate: new Map() };
-  if (!fs.existsSync(OUT_DIR)) return idx;
-  for (const f of fs.readdirSync(OUT_DIR)) {
-    if (!f.endsWith('-polymarket-lines.json')) continue;
-    let j;
-    try { j = JSON.parse(fs.readFileSync(path.join(OUT_DIR, f), 'utf8')); }
-    catch { continue; }
-    for (const cap of (j.captured || [])) {
-      if (!cap.games || cap.games.length === 0) continue;
-      // resolve linha "principal" pro match: prefere match-level (game_number=null),
-      // senão pega game 1 como representante. Salva também todos os games separados.
-      const matchLevel = cap.games.find(g => g.game_number == null);
-      const game1 = cap.games.find(g => g.game_number === 1);
-      const principal = matchLevel || game1 || cap.games[0];
-      const entry = {
-        polymarket_line: principal.line,
-        polymarket_under_odd: principal.under_odd,
-        polymarket_over_odd: principal.over_odd,
-        polymarket_event_slug: cap.polymarket_event_slug,
-        polymarket_selected_via: principal.selected_via,
-        polymarket_games: cap.games, // pra acesso por game_number
-        captured_at: j.captured_at,
-      };
-      if (cap.match_id_lolesports) idx.byMatchId.set(String(cap.match_id_lolesports), entry);
-      const tkey = [cap.team_a, cap.team_b, cap.match_date].sort().join('|');
-      idx.byTeamsDate.set(tkey, entry);
-    }
-  }
-  return idx;
-}
-
-function lookupPolymarketLine(idx, game) {
-  // tenta match_id primeiro
-  let entry = idx.byMatchId.get(String(game.match_id));
-  if (!entry) {
-    const tkey = [game.team_blue, game.team_red, game.match_date].sort().join('|');
-    entry = idx.byTeamsDate.get(tkey);
-  }
-  if (!entry) return null;
-  // se a bet é de mapa específico, prefere a linha desse game
-  if (game.game_number && entry.polymarket_games) {
-    const specific = entry.polymarket_games.find(g => g.game_number === game.game_number);
-    if (specific) {
-      return {
-        line: specific.line,
-        under_odd: specific.under_odd,
-        over_odd: specific.over_odd,
-        source: `polymarket_game${game.game_number}`,
-        event_slug: entry.polymarket_event_slug,
-      };
-    }
-  }
-  return {
-    line: entry.polymarket_line,
-    under_odd: entry.polymarket_under_odd,
-    over_odd: entry.polymarket_over_odd,
-    source: 'polymarket_match_level',
-    event_slug: entry.polymarket_event_slug,
-  };
-}
 
 const LEAGUE_IDS = {
   LCK:   '98767991310872058',
@@ -297,70 +238,74 @@ async function analyzeGame(g) {
     console.error(`       ${l}: avg=${v.toFixed(2)} kills/time → fair_baseline=${(v*2).toFixed(2)}`);
   }
 
-  // 4. para cada jogo NO RANGE alvo, calcula fair (excluindo o jogo do próprio avg)
-  // Hierarquia (CEO 2026-05-06):
-  //   1) Polymarket Total Kills line (se capturada pré-jogo, regra odd≈1.83)
-  //   2) calculado: avg_a + avg_b - 1
-  //   3) fallback 29.5 (não deve ser atingido na prática)
-  // Média da liga é mostrada SEPARADAMENTE como contexto, não entra na fair.
-  const polymarketIdx = loadPolymarketIndex();
-  console.error(`[3/4] polymarket index: ${polymarketIdx.byMatchId.size} matches indexados`);
+  // 4. para cada jogo NO RANGE alvo, calcula fair
+  // Hierarquia (2026-05-23):
+  //   1) Pinnacle manual (cron-data/YYYY-MM-DD-fair-pinnacle.json, via /log-fair)
+  //   2) Fórmula: (avg_total_kills_blue + avg_total_kills_red) / 2, round .5
+  //   3) Fallback 29.5
+  // Ambas (pinnacle + formula) são persistidas no output pra A/B futuro.
+
+  // Pré-carrega pinnacle por data (cache em Map para não reler o mesmo arquivo)
+  const pinnacleCache = new Map(); // date → { byMatchId, byAnchor }
+  function getPinnacle(date) {
+    if (!pinnacleCache.has(date)) pinnacleCache.set(date, loadFairPinnacle(date));
+    return pinnacleCache.get(date);
+  }
 
   function fairForGame(g) {
-    // 1) Polymarket primeiro
-    const pm = lookupPolymarketLine(polymarketIdx, g);
-    if (pm && pm.line != null) {
-      return {
-        fair: pm.line,
-        fair_raw: pm.line,
-        fair_adjusted: pm.line,
-        fair_source: pm.source,
-        polymarket_event_slug: pm.event_slug,
-        polymarket_under_odd: pm.under_odd,
-        polymarket_over_odd: pm.over_odd,
-        // mantém campos calculados pra contexto/comparação (nem todos preenchidos qdo PM existe)
-        blue_avg: null, red_avg: null,
-        blue_sample_n: null, red_sample_n: null,
-        league_baseline: leagueAvg.has(g.league) ? +(leagueAvg.get(g.league)*2).toFixed(2) : null, // *2: per-side → total
-        vs_league: null,
-      };
-    }
-    // 2) fórmula calculada (avg_total_kills_a + avg_total_kills_b) / 2
-    // teamHist[team] = [total_kills_jogo1, total_kills_jogo2, ...]
+    // 1) Pinnacle manual
+    const pin = getPinnacle(g.match_date);
+    const fairPinnacle = pin.byMatchId.get(String(g.match_id)) ?? null;
+
+    // 2) Fórmula: (blueAvgTotal + redAvgTotal) / 2
     const blueKills = teamHist.get(g.team_blue) || [];
     const redKills  = teamHist.get(g.team_red)  || [];
     const totalKillsGame = g.kills_blue + g.kills_red;
-    // exclui o próprio jogo do avg (leave-one-out)
+    // leave-one-out: exclui o próprio jogo
     const blueAvgEx = blueKills.length > 1
       ? (blueKills.reduce((a,b)=>a+b,0) - totalKillsGame) / (blueKills.length - 1)
       : null;
     const redAvgEx  = redKills.length > 1
       ? (redKills.reduce((a,b)=>a+b,0) - totalKillsGame)  / (redKills.length - 1)
       : null;
-
-    // fallback de liga: leagueAvg é por-side → *2 pra total_kills
     const lAvgPerSide = leagueAvg.get(g.league) ?? 14.5;
     const lAvgTotal = lAvgPerSide * 2;
     const blueAvg = (blueKills.length - 1 >= MIN_SAMPLE_TEAM) ? blueAvgEx : lAvgTotal;
-    const redAvg  = (redKills.length - 1 >= MIN_SAMPLE_TEAM) ? redAvgEx  : lAvgTotal;
+    const redAvg  = (redKills.length  - 1 >= MIN_SAMPLE_TEAM) ? redAvgEx  : lAvgTotal;
     const blueSrc = (blueKills.length - 1 >= MIN_SAMPLE_TEAM) ? 'team' : 'league';
     const redSrc  = (redKills.length  - 1 >= MIN_SAMPLE_TEAM) ? 'team' : 'league';
 
-    const raw = blueAvg + redAvg;
-    const adjusted = raw / 2; // fair = média das distribuições de total_kills dos dois times
-    // round pra .5 mais próximo
-    const fair = Math.round(adjusted - 0.5) + 0.5;
+    let fairFormula = null;
+    let fairFormulaRaw = null;
+    if (blueAvg != null && redAvg != null) {
+      const raw = blueAvg + redAvg;
+      fairFormula = Math.round(raw / 2 - 0.5) + 0.5;
+      fairFormulaRaw = +raw.toFixed(2);
+    }
 
-    const leagueBaseline = +lAvgTotal.toFixed(2); // total_kills médio da liga por jogo
+    // Qual fonte usar no método
+    const fairFinal = fairPinnacle ?? fairFormula ?? 29.5;
+    const fairSource = fairPinnacle != null
+      ? 'pinnacle_manual'
+      : fairFormula != null
+        ? `formula(${blueSrc}+${redSrc})/2`
+        : 'fallback_29.5';
+
+    const leagueBaseline = +(lAvgTotal).toFixed(2);
     return {
-      fair,
-      fair_raw: +raw.toFixed(2),
-      fair_adjusted: +adjusted.toFixed(2),
-      fair_source: `livestats_team_avg(${blueSrc}+${redSrc})/2`,
-      blue_avg: +blueAvg.toFixed(2), red_avg: +redAvg.toFixed(2),
-      blue_sample_n: blueKills.length - 1, red_sample_n: redKills.length - 1,
-      league_baseline: leagueBaseline, // contexto: total_kills médio da liga, não entra no cálculo
-      vs_league: +(adjusted - leagueBaseline).toFixed(2), // fair vs média da liga (positivo = mais kills que usual)
+      fair: fairFinal,
+      fair_pinnacle: fairPinnacle,
+      fair_formula: fairFormula,
+      fair_source: fairSource,       // qual foi usada
+      fair_source_used: fairSource,
+      fair_raw: fairFormulaRaw,
+      fair_adjusted: fairFormula,
+      blue_avg: blueAvg != null ? +blueAvg.toFixed(2) : null,
+      red_avg: redAvg != null ? +redAvg.toFixed(2) : null,
+      blue_sample_n: blueKills.length - 1,
+      red_sample_n: redKills.length - 1,
+      league_baseline: leagueBaseline,
+      vs_league: fairFormula != null ? +(fairFormula - leagueBaseline).toFixed(2) : null,
     };
   }
 
@@ -390,6 +335,8 @@ async function analyzeGame(g) {
       flex_engages: flexEngages,
       trigger_type: triggerType,
       matchup_fair: f.fair,
+      fair_pinnacle: f.fair_pinnacle,
+      fair_formula: f.fair_formula,
       fair_source: f.fair_source,
       fair_raw: f.fair_raw,
       fair_adjusted: f.fair_adjusted,
