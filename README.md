@@ -10,14 +10,13 @@ Sistema completo de operação de apostas em LoL: captura schedule + odds, anali
 
 ### 1. Cron diário (GitHub Actions)
 
-Roda 2x/dia sem PC ligado, sem VPS. Workflow idempotente.
+Roda 1x/dia sem PC ligado, sem VPS. Workflow idempotente.
 
-| Cron | UTC | BRT | Captura pré-jogo |
-|------|-----|-----|------------------|
-| `30 6 * * *` | 06:30 | 03:30 | LCK + LPL |
-| `0 14 * * *` | 14:00 | 11:00 | LEC + CBLOL |
+| Cron | UTC | BRT | O que faz |
+|------|-----|-----|-----------|
+| `0 12 * * *` | 12:00 | 09:00 | Captura fair fórmula (LCK+LPL+LEC+CBLOL), analisa ontem+hoje, rebuilda dashboard stats |
 
-Em ambos: analisa jogos de ontem + hoje, salva no Supabase, rebuilda dashboard stats.
+Fair Pinnacle manual é entregue pelo Elvis via `/log-fair` antes dos jogos. Cron 03:30 BRT e Polymarket descontinuados em 2026-05-23.
 
 ### 2. Bet Logger (automático via Claude Code)
 
@@ -53,14 +52,15 @@ Vercel deploya automático em cada push pro `main` (Root Directory = `dashboard/
 
 | Arquivo | Quem gera | Conteúdo |
 |---------|-----------|----------|
-| `YYYY-MM-DD-fair-pre.json` | `capture_fair_lines.cjs` | Fair lines pré-jogo dos jogos do dia |
+| `YYYY-MM-DD-fair-pre.json` | `capture_fair_lines.cjs` | Fair fórmula pré-jogo (cron diário) |
+| `YYYY-MM-DD-fair-pinnacle.json` | Elvis via `/log-fair` | Fair Pinnacle manual (fonte primária) |
 | `YYYY-MM-DD-results.json` | `analyze_yesterday.cjs` | Análise pós-jogo (kills, supports, trigger) |
 | `dashboard_stats.json` | `rebuild_dashboard_stats_cron.cjs` | Backtest 4 majors agregado |
 | `team_avg_kills.json` | mesmo | Avg kills por time (calibra fair dinâmica) |
 | `ml_picks.json` / `.js` | mesmo | Winrate por champion × posição |
 | `tier2_dashboard_stats.json` | `rebuild_tier2_dashboard_stats.cjs` | Backtest 3 ligas tier 2 EU |
 | `lfl_dashboard_stats.json` | `rebuild_lfl_dashboard_stats.cjs` | LFL only com breakdown rico |
-| `*-polymarket-lines.json` | (capture, opcional) | Odds Polymarket capturadas |
+| `*-polymarket-lines.json` | (histórico, imutável) | Odds Polymarket — descontinuado 2026-05-23 |
 
 Tudo commitado no próprio repo. Stats puxam via `raw.githubusercontent.com` (URL absoluta — repo precisa ser **público**).
 
@@ -81,7 +81,7 @@ FLEX_ENGAGE = ['bard','rakan','alistar']
 | `1peel+flex` | 1 peel + 1 flex_engage entre os 2 times |
 
 Backtest: stake R$100, odd 1.85 (breakeven 54.1%). **Odd real média do CEO: 1.75 (breakeven 57.1%)**.
-Fair line: dinâmica por jogo (`avg_blue_kills + avg_red_kills − 1`, round `.5`). Fallback `29.5`.
+Fair line: Pinnacle manual (Elvis via `/log-fair`) primária. Fórmula `(blueAvgTotal+redAvgTotal)/2` round `.5` sempre calculada em paralelo (A/B futuro). Fallback `29.5`.
 Filtro: `SPLIT2_START = 2026-04-01`.
 
 ---
@@ -101,7 +101,7 @@ Filtro: `SPLIT2_START = 2026-04-01`.
 | `esports-api.lolesports.com/persisted/gw/getSchedule` | Schedule por liga (key pública) |
 | `esports-api.lolesports.com/persisted/gw/getEventDetails` | Games dentro de um match |
 | `feed.lolesports.com/livestats/v1/window/{gameId}` | Kills, comps, winner |
-| `gamma-api.polymarket.com/events` | Odds reais (DoH bypass — ISP BR bloqueia DNS direto) |
+| ~~`gamma-api.polymarket.com/events`~~ | Descontinuado 2026-05-23. Histórico em `cron-data/*-polymarket-lines.json`. |
 | `liquipedia.net/leagueoflegends/api.php` | EWC qualifiers (gzip + UA identificável obrigatórios) |
 | `ddragon.leagueoflegends.com` | Slugs de champions |
 
