@@ -10,7 +10,9 @@
 
 const fs = require('fs');
 const https = require('https');
+const path = require('path');
 const { loadConfig } = require('./_load-config.cjs');
+const { loadFairPinnacle } = require('../../lib/loadFairPinnacle.cjs');
 
 const REQUIRED = ['bookmaker', 'team_a', 'team_b', 'market', 'pick', 'odd', 'stake'];
 
@@ -67,6 +69,21 @@ function postJson(supabaseUrl, supabaseKey, urlPath, body) {
   // Defaults
   if (!bet.status) bet.status = 'pending';
   if (typeof bet.is_map_bet !== 'boolean') bet.is_map_bet = false;
+
+  // Tenta popular fair_pinnacle/fair_formula/fair_line_source já na inserção.
+  // Se Pinnacle ainda não foi logado (caso comum — bet antes de /log-fair),
+  // fica NULL e settle popula depois quando Elvis já rodou /log-fair.
+  if (bet.fair_pinnacle === undefined && bet.bet_datetime) {
+    const betDate = bet.bet_datetime.slice(0, 10); // YYYY-MM-DD
+    const matchId = bet.raw_extraction?.match_context?.lolesports_match_id;
+    const pinnacle = loadFairPinnacle(betDate);
+    const pinnacleVal = matchId ? (pinnacle.byMatchId.get(String(matchId)) ?? null) : null;
+    bet.fair_pinnacle = pinnacleVal;
+    // fair_formula só é conhecida pelo analyze — não calcula aqui (requer histórico 21d)
+    // settle vai preencher fair_formula quando tiver o results.json disponível
+    bet.fair_formula = bet.fair_formula ?? null;
+    bet.fair_line_source = pinnacleVal != null ? 'pinnacle_manual' : null;
+  }
 
   // Coerção numérica
   bet.odd = Number(bet.odd);
