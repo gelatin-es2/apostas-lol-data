@@ -25,6 +25,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const { loadConfig } = require('./_load-config.cjs');
+const { loadFairPinnacle } = require('../../lib/loadFairPinnacle.cjs');
 
 const STATS_PATH = path.join(__dirname, '..', '..', 'cron-data', 'dashboard_stats.json');
 const STAKE = 1000;
@@ -87,6 +88,13 @@ function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
   let errors = 0;
   const batch = [];
 
+  // Cache Pinnacle por data (evita reler o mesmo arquivo pra cada bet do mesmo dia)
+  const pinnacleCache = new Map();
+  function getPinnacle(date) {
+    if (!pinnacleCache.has(date)) pinnacleCache.set(date, loadFairPinnacle(date));
+    return pinnacleCache.get(date);
+  }
+
   for (const m of missed) {
     if (existingGameIds.has(String(m.gameId))) { skipped++; continue; }
     const simulatedLine = m.line + 1;  // CEO opera linha+1
@@ -94,6 +102,16 @@ function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
     const profit = won ? +(STAKE * (ODD - 1)).toFixed(2) : -STAKE;
     const status = won ? 'green' : 'red';
     const betDatetime = `${m.date}T12:00:00Z`; // mid-day pra estar dentro do guard
+
+    // Determina fair_pinnacle/fair_formula/fair_line_source a partir dos dados do missed opportunity
+    const pinMap = getPinnacle(m.date);
+    const fairPinnacle = m.matchId ? (pinMap.byMatchId.get(String(m.matchId)) ?? null) : null;
+    const fairFormula = m.line != null ? m.line : null; // linha do método já é a formula calculada
+    const fairLineSource = fairPinnacle != null
+      ? 'pinnacle_manual'
+      : fairFormula != null
+        ? 'formula'
+        : 'fallback_29.5';
 
     const teamA = m.teams?.[0] || '?';
     const teamB = m.teams?.[1] || '?';
@@ -114,6 +132,9 @@ function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
       profit,
       settled_at: new Date().toISOString(),
       settle_source: `SIMULATED — fair line ${m.line} + 1 = ${simulatedLine}, ${m.kills} kills, ${m.trigger}`,
+      fair_pinnacle: fairPinnacle,
+      fair_formula: fairFormula,
+      fair_line_source: fairLineSource,
       raw_extraction: {
         simulated: true,
         missed_opportunity: true,
