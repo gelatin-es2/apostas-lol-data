@@ -255,10 +255,10 @@ function loadFormulaFair(date) {
   return out;
 }
 
-// Stats por time vem das bets SIMULATED do banco (fair line + odd 1.72).
-// Decisão CEO 2026-05-23: SIMULATED tem n grande e zero viés (todo jogo
-// qualificado pelo método vira SIMULATED, independente do que CEO apostou).
-// BE com odd 1.72 = 58.1%. Threshold de cor: <50% vermelho, ≥60% verde, resto branco.
+// Stats por time: combina bets reais settled + SIMULATED (full sample).
+// Query sem filtro de bookmaker → pega tudo com status green/red, limit 5000.
+// Melhoria 2026-05-23: era só SIMULATED (282 bets). Full sample → ~640 bets,
+// mais confiável especialmente pra CBLOL (times com n<5 passavam sem flag).
 async function buildTeamHitMap() {
   const m = new Map();
   let cfg;
@@ -266,31 +266,31 @@ async function buildTeamHitMap() {
     const { loadConfig } = require(path.join(__dirname, '_load-config.cjs'));
     cfg = loadConfig();
   } catch (e) {
-    console.error(`# [SIMULATED] loadConfig falhou: ${e.message} — continuando sem stats por time`);
+    console.error(`# [full-sample] loadConfig falhou: ${e.message} — continuando sem stats por time`);
     return m;
   }
   const url = new URL(cfg.supabaseUrl);
   const raw = await new Promise((resolve) => {
     https.get({
       host: url.hostname,
-      path: '/rest/v1/bets?select=team_a,team_b,league,status&bookmaker=eq.SIMULATED&status=in.(green,red)&limit=2000',
+      path: '/rest/v1/bets?select=team_a,team_b,league,status&status=in.(green,red)&limit=5000',
       headers: { 'apikey': cfg.supabaseKey, 'Authorization': 'Bearer ' + cfg.supabaseKey },
     }, res => {
       let b = '';
       res.on('data', c => b += c);
       res.on('end', () => resolve({ status: res.statusCode, body: b }));
     }).on('error', e => {
-      console.error(`# [SIMULATED] Supabase request falhou: ${e.message}`);
+      console.error(`# [full-sample] Supabase request falhou: ${e.message}`);
       resolve(null);
     });
   });
   if (!raw || raw.status >= 400) {
-    console.error(`# [SIMULATED] Supabase retornou ${raw?.status}`);
+    console.error(`# [full-sample] Supabase retornou ${raw?.status}`);
     return m;
   }
   let rows;
   try { rows = JSON.parse(raw.body); } catch (e) {
-    console.error(`# [SIMULATED] JSON inválido: ${e.message}`);
+    console.error(`# [full-sample] JSON inválido: ${e.message}`);
     return m;
   }
   const acc = {}; // name_lower → { hits, n, lg, displayName }
@@ -335,19 +335,22 @@ function lookupTeam(name, map) {
   return null;
 }
 
-// Sempre retorna uma flag (verde/vermelho/branco) — decisão CEO 2026-05-23:
-// "sempre é pra mandar a bola dos 2 time vermelha branca ou verde".
-// Branco = neutro / sem amostra. Verde ≥60% (acima do BE 58.1% com odd 1.72).
-// Vermelho <50% com n≥5 (sinal claro). Resto = branco.
-function flagTeam(name, teamHitMap) {
+// Retorna célula de time pra tabela: bolinha + nome + hit%(n) ou "(s/ amostra)".
+// Threshold baixado pra n≥3 (2026-05-23): n=3 ou 4 já dá sinal útil, especialmente
+// CBLOL onde times novos ficavam "s/ amostra" injustamente.
+// Verde ≥60%, vermelho <50%, branco = neutro/insuficiente.
+function formatTeamCell(name, teamHitMap) {
   const stats = lookupTeam(name, teamHitMap);
-  if (!stats || stats.n < 5) {
-    return `⚪ ${name} (s/ amostra)`;
+  if (!stats || stats.n < 3) {
+    return `⚪ ${name} _(s/ amostra)_`;
   }
   if (stats.hit < 50) return `🔴 ${name} (${stats.hit}% n=${stats.n})`;
   if (stats.hit >= 60) return `🟢 ${name} (${stats.hit}% n=${stats.n})`;
   return `⚪ ${name} (${stats.hit}% n=${stats.n})`;
 }
+
+// Mantida por compatibilidade com código EWC que a chama — alias para formatTeamCell.
+function flagTeam(name, teamHitMap) { return formatTeamCell(name, teamHitMap); }
 
 function flagLeague(lg, leagueHitMap) {
   const e = leagueHitMap.get(lg);
@@ -358,13 +361,36 @@ function flagLeague(lg, leagueHitMap) {
   return null;
 }
 
+// Célula de Liga pra tabela: bolinha colorida + nome + hit%(n).
+// n≥10 pra colorir (sample mínimo razoável de liga). Entre 50-59% → ⚪.
+function formatLeagueCell(lg, leagueHitMap) {
+  const e = leagueHitMap.get(lg);
+  if (!e || e.n < 10) return lg; // sem dados suficientes, só nome
+  if (e.hit >= 60) return `🟢 ${lg} (${e.hit}% n=${e.n})`;
+  if (e.hit < 50) return `🔴 ${lg} (${e.hit}% n=${e.n})`;
+  return `⚪ ${lg} (${e.hit}% n=${e.n})`; // 50-59%
+}
+
+// Calcula fair fórmula direto de team_avg_kills.json: (avgA + avgB) / 2 round .5.
+// Funciona pra qualquer jogo do calendário, independente do fair-pre.json do dia.
+// Retorna number|null (null se ambos os times sem avg).
+function calcFormulaFair(teamAName, teamBName, teamAvgData) {
+  if (!teamAvgData) return null;
+  const t = teamAvgData.teams || {};
+  const a = t[teamAName]?.avg_kills ?? null;
+  const b = t[teamBName]?.avg_kills ?? null;
+  if (a == null || b == null) return null;
+  const mid = (a + b) / 2;
+  return Math.round(mid - 0.5) + 0.5; // round pra .5 mais próximo
+}
+
 (async () => {
   const dashboard = loadDashboardStats();
   const tier2 = loadTier2Stats();
   const pinnacle = loadFairPinnacle(TARGET);
   const formulaFair = loadFormulaFair(TARGET);
   const teamAvgData = loadTeamAvgKills();
-  const teamHits = await buildTeamHitMap(); // SIMULATED-based (CEO 2026-05-23)
+  const teamHits = await buildTeamHitMap(); // full sample: SIMULATED + reais
   const leagueHits = buildLeagueHitMap(dashboard, tier2);
 
   const allMatches = [];
@@ -405,72 +431,63 @@ function flagLeague(lg, leagueHitMap) {
     return;
   }
 
-  // Tabela principal
-  console.log('| Liga | Hora BRT | Jogo | Fair line | Flags |');
-  console.log('|---|---|---|---|---|');
+  // Tabela principal — nova estrutura (2026-05-23):
+  // Liga (bolinha+hit%) | Hora BRT | Time A (bolinha+hit%) | Time B (bolinha+hit%) | Fair Pin | Fórmula | Diff
+  console.log('| Liga | Hora BRT | Time A | Time B | Fair Pin | Fórmula | Diff |');
+  console.log('|---|---|---|---|---|---|---|');
   for (const m of allMatches) {
     const dt = new Date(m.start_time);
     const brt = new Date(dt.getTime() - 3*3600*1000);
     const hh = String(brt.getUTCHours()).padStart(2,'0');
     const mm = String(brt.getUTCMinutes()).padStart(2,'0');
     const horaBrt = `${hh}:${mm}`;
-    const jogo = `${m.team_a_name || m.team_a} vs ${m.team_b_name || m.team_b}`;
     const lg = m.league;
+    const isEwc = lg.startsWith('EWC-');
+    const lgForStats = isEwc ? lg.split('-')[1] : lg;
 
-    // Fair line: EWC já vem com fair calculada; outros: Pinnacle manual (se disponível) → fórmula → cron pendente
-    let fairStr = '—';
+    // Coluna Liga
+    const lgCell = formatLeagueCell(lgForStats, leagueHits) + (isEwc ? ' _(EWC Bo5)_' : '');
+
+    // Colunas Time A / Time B
+    const nameA = m.team_a_name || m.team_a;
+    const nameB = m.team_b_name || m.team_b;
+    const cellA = formatTeamCell(nameA, teamHits) + (m.state !== 'unstarted' ? ` _(${m.state})_` : '');
+    const cellB = formatTeamCell(nameB, teamHits);
+
+    // Colunas Fair Pin | Fórmula | Diff
+    let pinLine = null;
+    let frmLine = null;
+
     if (m.ewc_fair) {
-      const f = m.ewc_fair;
-      const tag = f.source.startsWith('fallback') ? '(fallback)' : '(team_avg/2)';
-      fairStr = `**${f.line}** ${tag}`;
+      // EWC: fair calculada pelo fairForEwcMatch (team_avg/2)
+      frmLine = m.ewc_fair.line;
+      // Pinnacle não existe pra EWC qualifiers
     } else {
       const teamAKey = (m.team_a || '').toLowerCase().replace(/\s+/g, '');
       const teamBKey = (m.team_b || '').toLowerCase().replace(/\s+/g, '');
-      const pinLine = pinnacle.byMatchId.get(String(m.match_id))
+      pinLine = pinnacle.byMatchId.get(String(m.match_id))
         ?? pinnacle.byAnchor.get(teamAKey)?.fair_line
         ?? pinnacle.byAnchor.get(teamBKey)?.fair_line
         ?? null;
-      const frmLine = formulaFair.get(String(m.match_id)) ?? null;
-      if (pinLine != null) {
-        fairStr = `**${pinLine}** (Pinnacle)`;
-        if (frmLine != null) fairStr += ` / ${frmLine} (fórmula)`;
-      } else if (frmLine != null) {
-        fairStr = `**${frmLine}** (fórmula)`;
-      } else {
-        fairStr = '_Pinnacle pendente_';
-      }
+      // Fórmula: tenta fair-pre.json do cron, fallback pra cálculo direto de team_avg_kills
+      const cronFrm = formulaFair.get(String(m.match_id)) ?? null;
+      frmLine = cronFrm ?? calcFormulaFair(nameA, nameB, teamAvgData);
     }
 
-    const flags = [];
-    // EWC: marca como Bo5 e usa LCK/LEC/LPL como liga proxy pros stats
-    const isEwc = lg.startsWith('EWC-');
-    if (isEwc) flags.push('Bo5 EWC qualifier');
-    const lgForStats = isEwc ? lg.split('-')[1] : lg;
-    const lgFlag = flagLeague(lgForStats, leagueHits);
-    if (lgFlag) flags.push(lgFlag);
-    // Sempre incluir bolinha dos 2 times (decisão CEO 2026-05-23)
-    flags.push(flagTeam(m.team_a_name, teamHits));
-    flags.push(flagTeam(m.team_b_name, teamHits));
-    if (m.state !== 'unstarted') flags.push(`(${m.state})`);
+    const fairPinCell = pinLine != null ? `**${pinLine}**` : '—';
+    const fairFrmCell = frmLine != null ? `**${frmLine}**` : '—';
 
-    console.log(`| ${lg} | ${horaBrt} | ${jogo} | ${fairStr} | ${flags.join(' · ') || '—'} |`);
+    let diffCell = '—';
+    if (pinLine != null && frmLine != null) {
+      const d = +(pinLine - frmLine).toFixed(1);
+      diffCell = d > 0 ? `+${d}` : `${d}`;
+    }
+
+    console.log(`| ${lgCell} | ${horaBrt} | ${cellA} | ${cellB} | ${fairPinCell} | ${fairFrmCell} | ${diffCell} |`);
   }
 
-  // Análise resumida
+  // Resumo
   console.log(`\n**${allMatches.length} jogos no total.** Ligas: ${[...new Set(allMatches.map(m => m.league))].join(', ')}.`);
-
-  // Quick stats das ligas do dia
-  const ligasDoDia = [...new Set(allMatches.map(m => m.league))];
-  const hint = ligasDoDia
-    .map(lg => leagueHits.get(lg))
-    .filter(Boolean);
-  if (hint.length > 0) {
-    console.log('\nPerformance histórica método nas ligas do dia (Split 2):');
-    for (const lg of ligasDoDia) {
-      const e = leagueHits.get(lg);
-      if (e) console.log(`- **${lg}**: ${e.hit}% hit (n=${e.n})`);
-    }
-  }
 
   // Fix 2026-05-20: surface falhas de fetch EWC pra Elvis decidir checar manual.
   // Antes era só console.error (silencioso pro usuário) — bug do EWC LPL não avisado.
