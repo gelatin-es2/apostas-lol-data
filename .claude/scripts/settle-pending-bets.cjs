@@ -15,7 +15,85 @@
 //   5. PATCH bet com status, profit, settled_at, settle_source, raw_extraction enriquecido
 
 const https = require('https');
+const fs = require('fs');
+const path = require('path');
 const { loadConfig } = require('./_load-config.cjs');
+const { loadFairPinnacle } = require('../../lib/loadFairPinnacle.cjs');
+
+const CRON_DIR = path.resolve(__dirname, '..', '..', 'cron-data');
+const PEEL_PURE_SETTLE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
+const MIN_SAMPLE_SETTLE = 5;
+
+// Carrega avgs de time a partir do results.json do dia, pra calcular fair_formula no settle.
+// Lê todos os results.json disponíveis no cron-data pra montar histórico 21d.
+function buildTeamAvgsFromResults(targetDate) {
+  const cutoff = new Date(targetDate + 'T00:00:00Z');
+  cutoff.setDate(cutoff.getDate() - 21);
+  const since = cutoff.toISOString().slice(0, 10);
+
+  const teamHist = new Map();
+  const leagueHist = new Map();
+
+  const files = fs.existsSync(CRON_DIR)
+    ? fs.readdirSync(CRON_DIR).filter(f => f.endsWith('-results.json'))
+    : [];
+
+  for (const file of files) {
+    const dateStr = file.slice(0, 10);
+    if (dateStr < since || dateStr > targetDate) continue;
+    try {
+      const data = JSON.parse(fs.readFileSync(path.join(CRON_DIR, file), 'utf8'));
+      for (const r of data.results || []) {
+        if (r.total_kills == null) continue;
+        for (const team of [r.team_blue, r.team_red]) {
+          if (!team) continue;
+          if (!teamHist.has(team)) teamHist.set(team, []);
+          teamHist.get(team).push(r.total_kills);
+        }
+        const lg = r.league;
+        if (lg) {
+          if (!leagueHist.has(lg)) leagueHist.set(lg, []);
+          leagueHist.get(lg).push(r.kills_blue ?? 0, r.kills_red ?? 0);
+        }
+      }
+    } catch { /* arquivo corrompido: pula */ }
+  }
+
+  const teamAvg = new Map();
+  for (const [t, arr] of teamHist) {
+    teamAvg.set(t, arr.reduce((a, b) => a + b, 0) / arr.length);
+  }
+  const leagueAvg = new Map();
+  for (const [l, arr] of leagueHist) {
+    leagueAvg.set(l, arr.reduce((a, b) => a + b, 0) / arr.length);
+  }
+  return { teamAvg, teamHist, leagueAvg };
+}
+
+// Calcula fair_formula para um bet usando histório de times.
+function calcFairFormula(bet, teamHist, leagueAvg) {
+  const mc = bet.raw_extraction?.match_context || {};
+  const teamA = mc.teams?.[0]?.name || bet.team_a;
+  const teamB = mc.teams?.[1]?.name || bet.team_b;
+  const lg = (bet.league || '').toUpperCase().replace(/\s+/g,'');
+  const lgKey = ['LCK','LPL','LEC','CBLOL','LFL','LCS'].find(k => lg.includes(k)) || null;
+
+  const aHist = teamHist.get(teamA) || [];
+  const bHist = teamHist.get(teamB) || [];
+  const lAvgPerSide = leagueAvg.get(lgKey) ?? 14.5;
+  const lAvgTotal = lAvgPerSide * 2;
+
+  const aAvg = aHist.length >= MIN_SAMPLE_SETTLE
+    ? aHist.reduce((a, b) => a + b, 0) / aHist.length
+    : lAvgTotal;
+  const bAvg = bHist.length >= MIN_SAMPLE_SETTLE
+    ? bHist.reduce((a, b) => a + b, 0) / bHist.length
+    : lAvgTotal;
+
+  const raw = aAvg + bAvg;
+  const formula = Math.round(raw / 2 - 0.5) + 0.5;
+  return +formula.toFixed(1);
+}
 
 const LOLES_KEY = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 
@@ -372,6 +450,24 @@ async function settleBet(supabaseUrl, supabaseKey, bet, gameWindowCache) {
     series_score_at_bet: seriesScoreAtBet,
   };
 
+  // Calcula fair_pinnacle/fair_formula pra popular as colunas dedicadas no settle.
+  // Essa é a janela onde Pinnacle já foi logado (Elvis roda /log-fair antes do jogo).
+  const betDateStr = (bet.bet_datetime || '').slice(0, 10);
+  const pinnacleMap = betDateStr ? loadFairPinnacle(betDateStr) : { byMatchId: new Map() };
+  const matchIdStr = bet.raw_extraction?.match_context?.lolesports_match_id;
+  const fairPinnacleSettle = matchIdStr
+    ? (pinnacleMap.byMatchId.get(String(matchIdStr)) ?? null)
+    : null;
+
+  const { teamHist: tHist, leagueAvg: lAvg } = buildTeamAvgsFromResults(betDateStr || new Date().toISOString().slice(0, 10));
+  const fairFormulaSettle = calcFairFormula(bet, tHist, lAvg);
+
+  const fairLineSourceSettle = fairPinnacleSettle != null
+    ? 'pinnacle_manual'
+    : fairFormulaSettle != null
+      ? 'formula'
+      : 'fallback_29.5';
+
   // Schema da tabela bets NÃO tem coluna under_hit (essa é da method_reports).
   // under_hit fica em raw_extraction.match_context (JSONB) acima.
   const update = {
@@ -380,6 +476,10 @@ async function settleBet(supabaseUrl, supabaseKey, bet, gameWindowCache) {
     settled_at: new Date().toISOString(),
     settle_source: `lolesports api - ${gd.totalKills} kills`,
     raw_extraction: newRawExtraction,
+    // Popula colunas de fair só se ainda NULL no banco (bet não sobrescreve valor já presente)
+    ...(bet.fair_pinnacle == null && fairPinnacleSettle != null ? { fair_pinnacle: fairPinnacleSettle } : {}),
+    ...(bet.fair_formula == null && fairFormulaSettle != null ? { fair_formula: fairFormulaSettle } : {}),
+    ...(bet.fair_line_source == null ? { fair_line_source: fairLineSourceSettle } : {}),
   };
 
   if (DRY_RUN) {
