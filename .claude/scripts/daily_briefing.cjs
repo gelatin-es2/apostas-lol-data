@@ -359,7 +359,12 @@ function flagLeague(lg, leagueHitMap) {
       const tag = f.source.startsWith('fallback') ? '(fallback)' : '(team_avg/2)';
       fairStr = `**${f.line}** ${tag}`;
     } else {
-      const pinLine = pinnacle.byMatchId.get(String(m.match_id)) ?? null;
+      const teamAKey = (m.team_a || '').toLowerCase().replace(/\s+/g, '');
+      const teamBKey = (m.team_b || '').toLowerCase().replace(/\s+/g, '');
+      const pinLine = pinnacle.byMatchId.get(String(m.match_id))
+        ?? pinnacle.byAnchor.get(teamAKey)?.fair_line
+        ?? pinnacle.byAnchor.get(teamBKey)?.fair_line
+        ?? null;
       const frmLine = formulaFair.get(String(m.match_id)) ?? null;
       if (pinLine != null) {
         fairStr = `**${pinLine}** (Pinnacle)`;
