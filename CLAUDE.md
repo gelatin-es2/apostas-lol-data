@@ -17,11 +17,12 @@ Roda em GitHub Actions 2x/dia (cron) + Hook Claude Code a cada msg do CEO (settl
 | Camada | Tecnologia |
 |--------|------------|
 | Runtime | Node.js 20+, `package.json` com `engines.node>=20` (private). Scripts usam só built-ins (`fs`, `path`, `https`, `zlib`). |
-| Orquestração cron | GitHub Actions (`.github/workflows/daily-cron.yml`), 2x/dia |
-| Cron horários | **`06:30 UTC = 03:30 BRT`** + **`14:00 UTC = 11:00 BRT`** |
+| Orquestração cron | GitHub Actions (`.github/workflows/daily-cron.yml`), 1x/dia desde 2026-05-23 |
+| Cron horários | **`12:00 UTC = 09:00 BRT`** (único cron diário; slot 06:30 UTC descontinuado junto com Polymarket) |
 | Persistência | Supabase 2 tabelas: `bets` (apostas reais do CEO, ~120+ rows) + `method_reports` (backtest method, PK `(game_id, map_number)`) |
 | Frontend | **HTML estático** (não Next.js!) em `dashboard/index.html`, deployado no **Vercel** (`apostas-lol-dashboard.vercel.app`). Vercel conectado a este repo desde 2026-05-07, Root=`dashboard/`, push=auto-deploy. |
-| Dados externos | Polymarket (DoH bypass) + lolesports key pública + Liquipedia (gzip + UA) |
+| Dados externos | lolesports key pública + Liquipedia (gzip + UA). **Polymarket descontinuado 2026-05-23.** |
+| Fair line | Pinnacle manual (Elvis via `/log-fair`) como primária + fórmula `(blueAvg+redAvg)/2` sempre calculada em paralelo. Arquivos `cron-data/YYYY-MM-DD-fair-pinnacle.json`. |
 
 ---
 
@@ -40,12 +41,12 @@ FLEX_ENGAGE = ['bard','rakan','alistar']
 | `1peel+flex` | 1 suporte PEEL_PURE + 1 dos 3 FLEX_ENGAGE entre os 2 times |
 
 **Constantes do backtest** (`rebuild_dashboard_stats_cron.cjs`):
-- Linha fallback: `29.5` quando não há fair dinâmica nem Polymarket
+- Linha fallback: `29.5` quando não há fair dinâmica
 - Stake: `R$100`
 - Odd assumida no backtest: `1.85` (breakeven 54.1%)
 - **Odd real média do CEO: `1.75` (breakeven 57.1%)** — diferença importante: backtest superestima a margem em 3pp.
 - Filtro: `SPLIT2_START = 2026-04-01`
-- Fair line dinâmica: `avg_blue_kills + avg_red_kills − 1`, arredondada pra `.5`. Calibração `−1` de 2026-05-06. Janela: split inteiro (não 21d). Fallback hierárquico: Polymarket > team_avg > 29.5.
+- Fair line: Pinnacle manual (primário, `cron-data/YYYY-MM-DD-fair-pinnacle.json` via `/log-fair`) > fórmula `(blueAvgTotal+redAvgTotal)/2` round `.5` (sempre calculada em paralelo) > fallback 29.5. Polymarket descontinuado 2026-05-23.
 
 ---
 
@@ -53,6 +54,8 @@ FLEX_ENGAGE = ['bard','rakan','alistar']
 
 ```
 apostas-lol-data/
+├── lib/                             # helpers compartilhados
+│   └── loadFairPinnacle.cjs         # carrega fair-pinnacle.json → Map<matchId, line>
 ├── dashboard/                       # ← FRONTEND. NÃO É REPO SEPARADO.
 │   └── index.html                   # HTML estático, deploya pro Vercel via push
 ├── cron-data/                       # JSONs gerados pelo cron — NUNCA editar manual
@@ -61,12 +64,14 @@ apostas-lol-data/
 │   ├── lfl_dashboard_stats.json     # LFL only com breakdown rico
 │   ├── team_avg_kills.json          # avg de kills por time (pra fair dinâmica EWC)
 │   ├── ml_picks.json/.js            # winrate por champion x posição
-│   ├── YYYY-MM-DD-fair-pre.json     # fair lines pré-jogo do dia (capture)
+│   ├── YYYY-MM-DD-fair-pre.json     # fair fórmula pré-jogo do dia (cron)
+│   ├── YYYY-MM-DD-fair-pinnacle.json # fair Pinnacle manual (Elvis via /log-fair)
 │   ├── YYYY-MM-DD-results.json      # análise pós-jogo (kills + supports + trigger)
-│   └── *-polymarket-lines.json      # odds Polymarket capturadas
+│   └── *-polymarket-lines.json      # histórico Polymarket (imutável, descontinuado 2026-05-23)
 ├── .claude/
 │   ├── agents/bet-logger.md         # subagent que registra bet de print
 │   ├── commands/log-bet.md          # slash command /log-bet
+│   ├── commands/log-fair.md         # slash command /log-fair (Pinnacle manual)
 │   └── scripts/                     # scripts standalone usados por agent/hook
 │       ├── _load-config.cjs         # carrega .env (Supabase creds)
 │       ├── lolesports-find-match.cjs   # linka teams+data → match_id
@@ -77,7 +82,7 @@ apostas-lol-data/
 │       └── daily_briefing.cjs       # tabela markdown dos jogos do dia
 ├── analyze_yesterday.cjs            # 2: detecta trigger por jogo
 ├── analyze_range.cjs                # variação que aceita --from/--to
-├── capture_fair_lines.cjs           # 1: schedule + Polymarket
+├── capture_fair_lines.cjs           # 1: schedule + fair fórmula
 ├── save_report_to_db.cjs            # 3: upsert method_reports
 ├── rebuild_dashboard_stats_cron.cjs # 4: regenera dashboard_stats.json + team_avg_kills.json + ml_picks.json
 ├── rebuild_tier2_dashboard_stats.cjs    # adicional: tier 2 EU
@@ -128,7 +133,7 @@ Globais (`~/.claude/`) que servem este projeto:
 | `esports-api.lolesports.com/persisted/gw/getEventDetails?id=X` | Games de um match | Mesma key |
 | `esports-api.lolesports.com/persisted/gw/getTeams?hl=en-US` | esportsTeamId → nome canônico | Sempre fazer mapping antes de exibir, NUNCA assumir blue=team_a |
 | `feed.lolesports.com/livestats/v1/window/{gameId}?startingTime=X` | kills + comps + winner | TS múltiplo de 10s. Body pode vir vazio se TS muito recente. **Riot às vezes nunca publica frame `gameState='finished'` mesmo após eventDetails dar `state='completed'`** — settle confia no eventDetails (`trustCompleted=true`). |
-| `gamma-api.polymarket.com/events` | Odds reais Total Kills | Acesso via DoH bypass (Cloudflare 1.1.1.1) — ISP BR bloqueia DNS direto |
+| ~~`gamma-api.polymarket.com/events`~~ | ~~Odds Polymarket~~ | **Descontinuado 2026-05-23. Histórico em `cron-data/*-polymarket-lines.json` (imutável).** |
 | `liquipedia.net/leagueoflegends/api.php` | EWC qualifiers (Korea/EMEA/China — fora da Riot API) | **Requer `Accept-Encoding: gzip` + User-Agent identificável** (api-terms-of-use). Rate limit 1 req/2s. |
 | `ddragon.leagueoflegends.com` | Slugs de champions | Riot oficial, sem auth |
 
