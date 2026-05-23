@@ -72,7 +72,7 @@ Tudo commitado no próprio repo. Stats puxam via `raw.githubusercontent.com` (UR
 
 ```js
 PEEL_PURE   = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','nami','milio']
-FLEX_ENGAGE = ['bard','rakan','alistar']
+FLEX_ENGAGE = ['bard','rakan','alistar','lux','anivia']  // expandido 2026-05-23: Lux + Anivia
 ```
 
 | Trigger | Condição |

@@ -1626,10 +1626,11 @@
         document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
       }
 
-      // Lista canônica de suports válidos do método (peel_pure + flex_engage)
+      // Lista canônica de suports válidos do método (peel_pure + flex)
+      // Expandido 2026-05-23: Lux + Anivia adicionados como flex
       const VALID_SUPPORTS = new Set([
         'Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio',
-        'Bard','Rakan','Alistar'
+        'Bard','Rakan','Alistar','Lux','Anivia'
       ]);
 
       // Pré-popula cache uma passada com todos os times (normTeamName está no escopo módulo)

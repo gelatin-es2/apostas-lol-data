@@ -99,7 +99,8 @@ const LOLES_KEY = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 
 // Manter sincronizado com analyze_yesterday.cjs:20-21
 const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
-const FLEX_ENGAGE = ['bard','rakan','alistar'];
+// FLEX expandido 2026-05-23 (CEO): Lux + Anivia
+const FLEX_ENGAGE = ['bard','rakan','alistar','lux','anivia'];
 
 const argv = process.argv.slice(2);
 const DRY_RUN = argv.includes('--dry-run');

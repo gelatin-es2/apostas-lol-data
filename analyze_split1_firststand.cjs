@@ -303,7 +303,7 @@ async function fetchUserBets() {
 
   console.error('[5/5] Computing stats...');
 
-  const FLEX = ['Bard', 'Rakan', 'Alistar'];
+  const FLEX = ['Bard', 'Rakan', 'Alistar', 'Lux', 'Anivia']; // expandido 2026-05-23
 
   // Filtros por trigger type
   const peel2 = games.filter(g => PEEL.includes(g.bluePicks.support) && PEEL.includes(g.redPicks.support));

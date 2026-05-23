@@ -32,13 +32,13 @@ Roda em GitHub Actions 2x/dia (cron) + Hook Claude Code a cada msg do CEO (settl
 
 ```js
 PEEL_PURE   = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','nami','milio']
-FLEX_ENGAGE = ['bard','rakan','alistar']
+FLEX_ENGAGE = ['bard','rakan','alistar','lux','anivia']  // expandido 2026-05-23: Lux + Anivia
 ```
 
 | Trigger | Condição |
 |---------|----------|
 | `2peel` | AMBOS suportes (blue + red) na lista PEEL_PURE |
-| `1peel+flex` | 1 suporte PEEL_PURE + 1 dos 3 FLEX_ENGAGE entre os 2 times |
+| `1peel+flex` | 1 suporte PEEL_PURE + 1 FLEX_ENGAGE entre os 2 times |
 
 **Constantes do backtest** (`rebuild_dashboard_stats_cron.cjs`):
 - Linha fallback: `29.5` quando não há fair dinâmica

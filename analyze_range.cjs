@@ -31,7 +31,8 @@ const LEAGUE_IDS = {
 };
 
 const PEEL_PURE   = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
-const FLEX_ENGAGE = ['bard','rakan','alistar'];
+// FLEX expandido 2026-05-23 (CEO): Lux + Anivia
+const FLEX_ENGAGE = ['bard','rakan','alistar','lux','anivia'];
 
 const HISTORY_DAYS = 21;        // janela pra construir avg dos times
 const MIN_SAMPLE_TEAM = 5;       // abaixo disso → fallback liga

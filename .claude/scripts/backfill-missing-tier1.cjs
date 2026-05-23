@@ -23,7 +23,8 @@ const LEAGUE_IDS = {
 };
 
 const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
-const FLEX_ENGAGE = ['bard','rakan','alistar'];
+// FLEX expandido 2026-05-23 (CEO): Lux + Anivia
+const FLEX_ENGAGE = ['bard','rakan','alistar','lux','anivia'];
 const norm = s => s ? s.toLowerCase().replace(/[\s.\-'’]/g, '') : '';
 
 function get(host, p, useApiKey) {
