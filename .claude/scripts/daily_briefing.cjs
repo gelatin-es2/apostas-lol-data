@@ -15,6 +15,7 @@ const zlib = require('zlib');
 
 const REPO = path.resolve(__dirname, '..', '..');
 const LOLES = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
+const { loadFairPinnacle } = require(path.join(REPO, 'lib', 'loadFairPinnacle.cjs'));
 
 // Ligas operadas pelo Elvis (decisão 2026-05-10): LCK, LPL, LEC, CBLOL, LFL, LCS.
 // LIT e LES removidas do briefing — Elvis não opera essas.
@@ -225,7 +226,7 @@ async function fetchEwcQualifierMatches(qualifier, targetDateUtc, teamAvgData) {
   return out;
 }
 
-// Carrega dados auxiliares (dashboard_stats + polymarket-lines + tier2_eu)
+// Carrega dados auxiliares (dashboard_stats + tier2_eu + fair-pre)
 function loadDashboardStats() {
   const f = path.join(REPO, 'cron-data', 'dashboard_stats.json');
   if (!fs.existsSync(f)) return null;
@@ -236,17 +237,18 @@ function loadTier2Stats() {
   if (!fs.existsSync(f)) return null;
   try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch { return null; }
 }
-function loadPolymarketLines() {
-  const dir = path.join(REPO, 'cron-data');
-  const out = new Map(); // match_id_lolesports → entry
-  if (!fs.existsSync(dir)) return out;
-  for (const f of fs.readdirSync(dir)) {
-    if (!f.endsWith('-polymarket-lines.json')) continue;
-    let j;
-    try { j = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); } catch { continue; }
-    for (const cap of (j.captured || [])) {
-      if (cap.match_id_lolesports && cap.games?.length > 0) {
-        out.set(String(cap.match_id_lolesports), cap);
+
+// Carrega fair-pre.json do dia pra obter fair_formula calculada pelo cron
+function loadFormulaFair(date) {
+  const f = path.join(REPO, 'cron-data', `${date}-fair-pre.json`);
+  const out = new Map(); // match_id → fair_formula
+  if (!fs.existsSync(f)) return out;
+  let j;
+  try { j = JSON.parse(fs.readFileSync(f, 'utf8')); } catch { return out; }
+  for (const capture of (j.captures || [])) {
+    for (const fl of (capture.fair_lines || [])) {
+      if (fl.event_id && fl.fair_formula != null) {
+        out.set(String(fl.event_id), fl.fair_formula);
       }
     }
   }
@@ -294,7 +296,8 @@ function flagLeague(lg, leagueHitMap) {
 (async () => {
   const dashboard = loadDashboardStats();
   const tier2 = loadTier2Stats();
-  const pmLines = loadPolymarketLines();
+  const pinnacle = loadFairPinnacle(TARGET);
+  const formulaFair = loadFormulaFair(TARGET);
   const teamAvgData = loadTeamAvgKills();
   const teamHits = buildTeamHitMap(dashboard);
   const leagueHits = buildLeagueHitMap(dashboard, tier2);
@@ -349,19 +352,22 @@ function flagLeague(lg, leagueHitMap) {
     const jogo = `${m.team_a_name || m.team_a} vs ${m.team_b_name || m.team_b}`;
     const lg = m.league;
 
-    // Fair line: EWC já vem com fair calculada; outros: Polymarket → cron
+    // Fair line: EWC já vem com fair calculada; outros: Pinnacle manual (se disponível) → fórmula → cron pendente
     let fairStr = '—';
     if (m.ewc_fair) {
       const f = m.ewc_fair;
       const tag = f.source.startsWith('fallback') ? '(fallback)' : '(team_avg/2)';
       fairStr = `**${f.line}** ${tag}`;
     } else {
-      const pm = pmLines.get(String(m.match_id));
-      if (pm && pm.games?.length > 0) {
-        const g1 = pm.games.find(g => g.game_number === 1) || pm.games[0];
-        fairStr = `**${g1.line}** (PM @${g1.under_odd?.toFixed(2) || '?'})`;
+      const pinLine = pinnacle.byMatchId.get(String(m.match_id)) ?? null;
+      const frmLine = formulaFair.get(String(m.match_id)) ?? null;
+      if (pinLine != null) {
+        fairStr = `**${pinLine}** (Pinnacle)`;
+        if (frmLine != null) fairStr += ` / ${frmLine} (fórmula)`;
+      } else if (frmLine != null) {
+        fairStr = `**${frmLine}** (fórmula)`;
       } else {
-        fairStr = '_calc após cron_';
+        fairStr = '_Pinnacle pendente_';
       }
     }
 
