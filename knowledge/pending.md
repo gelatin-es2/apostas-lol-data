@@ -1,5 +1,20 @@
 # Pendências — atualizada 2026-05-22 fim da sessão
 
+## 🟢 Auditoria fair_line — 2026-05-23 (SIMULATED 100% OK)
+
+**Relatório completo:** `knowledge/audits/fair-line-audit-2026-05-23.md`
+
+Banco está consistente com método atual: 269/269 SIMULATED batem **exato** (diff 0.000 kills) com `cron-data/dashboard_stats.json` + `cron-data/tier2_lfl_les_stats.json`. NÃO regenerar. Fórmula vigente é `(blueAvgTotal+redAvgTotal)/2` round `.5`, **FAIR_ADJUSTMENT=0** (sem `-1`). Reintrodução do `-1` foi confirmada como removida em `9ef5f40` (2026-05-17), SIMULATED criadas em 22/05 já estão com método novo.
+
+### Bugs/dívida descobertos na auditoria (atacar próxima sessão)
+
+- **E1 (CRÍTICO):** `analyze_tier2_eu.cjs:26` usa `LINE = 29.5` FIXA. Este script **ROTA NO CRON DIÁRIO** (workflow `daily-cron.yml`). Não afeta SIMULATED no banco (não persiste bets), mas o JSON `tier2_eu_split2_analysis.json` está com fair velha. Trocar pela fórmula dinâmica de `rebuild_dashboard_stats_cron.cjs:280-315`.
+- **E2 (DÍVIDA):** `rebuild_tier2_dashboard_stats.cjs:153-165` e `rebuild_lfl_dashboard_stats.cjs:137-146` ainda com fórmula VELHA (`a+b-1` own-side). NÃO rodam no cron, mas se alguém rodar manualmente vai poluir. Deletar ou migrar.
+- **E3 (DOCS):** `knowledge/decisions/2026-05-06-fair-line-livestats-team-avg.md` ainda marcada "Vigente" mas descreve fórmula velha. Marcar como "Substituída" + nova decision doc da fórmula atual.
+- **E4 (RISCO):** `enrich-match-context.cjs` já apagou 217/224 `fair_line_calculated` em 2026-05-22; commit `2777353` adicionou skip de SIMULATED. Guard é uma linha só. Adicionar assertion defensiva antes do PATCH no Supabase.
+
+---
+
 ## 🔴 Bugs auditados — validados pelo CEO + Claude (atacar próxima sessão)
 
 ### Bug 1: Over bets invertidas na simulação adaptável (ALTA)
@@ -76,7 +91,7 @@ function normTeamName(name) {
 ## 🟢 Pendências menores antigas
 
 1. **1 bet com `league = null bookmaker = null`**: id `1642cfa9` (cashout solto 29/04 -R$80 sem detalhes). Vai sujar GROUP BY league. Considerar deletar ou setar campos.
-2. **35 bets EWC sem `total_kills`** — backfill manual via Liquipedia/Fandom (rate-limited)
+2. ~~**35 bets EWC sem `total_kills`**~~ — descartado 2026-05-23: Elvis não opera EWC, sem simulação nem backfill
 3. **15 bets "CBLOL Split 1 finals"** (datas 25-26/04, já renomeadas pra "CBLOL") — decisão: manter ou deletar
 4. ~~**Memória `project_stake_por_gatilho` desatualizada**~~ — ✅ resolvida 2026-05-23 (tier Premium R$2k adicionado + critérios + blacklist consolidada)
 5. **Backfill Top 5 campos extras** nas bets antigas (`game_duration_secs`, `first_blood_team`, `kills_at_15min`, `dragons/barons`, `bans`, `series_score_at_bet`) — settle novo já preenche, mas pré-22/05 não tem
