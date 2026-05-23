@@ -174,9 +174,11 @@ function detectTrigger(supBlue, supRed) {
 }
 
 // Parser do pick: "Menos de 27.5" / "Under 27.5" / "Mais de 27.5" / "Over 27.5" / nome de time
+// Fix 2026-05-23: usa o ÚLTIMO número da string (evita capturar "Mapa 4" em "Total. Mapa 4 Menos de 27.5")
 function parsePick(pickRaw, market) {
   const lower = (pickRaw || '').toLowerCase();
-  const numMatch = lower.match(/(\d+(?:[.,]\d+)?)/);
+  const allMatches = Array.from(lower.matchAll(/(\d+(?:[.,]\d+)?)/g));
+  const numMatch = allMatches.length ? allMatches[allMatches.length - 1] : null;
   const line = numMatch ? parseFloat(numMatch[1].replace(',', '.')) : null;
 
   if (/menos\s*de|under/i.test(pickRaw || '')) {
