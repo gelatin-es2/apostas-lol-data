@@ -256,10 +256,87 @@ function loadFormulaFair(date) {
 }
 
 function buildTeamHitMap(dashboard) {
-  // teamName → hit% (do backtest 2peel agregado)
+  // Agrega backtest dos buckets 2peel + 1peel+flex, ponderando por n.
+  // Fix 2026-05-23: antes lia só 2peel.teams — NRF tinha n=6 50% ali,
+  // mas n=7 28.6% em 1peel+flex. Agregado: n=13 ~40% → vermelho correto.
+  const acc = {}; // key_lower → { hits, n, lg, displayName }
+  for (const trigger of ['2peel', '1peel+flex']) {
+    const teams = dashboard?.by_trigger?.[trigger]?.teams || [];
+    for (const t of teams) {
+      const k = t.name.toLowerCase();
+      if (!acc[k]) acc[k] = { hits: 0, n: 0, lg: t.lg, displayName: t.name };
+      // t.hit é % (0-100). Reconstitui contagem absoluta de hits.
+      acc[k].hits += Math.round((t.hit / 100) * t.n);
+      acc[k].n += t.n;
+    }
+  }
   const m = new Map();
-  if (!dashboard?.by_trigger?.['2peel']?.teams) return m;
-  for (const t of dashboard.by_trigger['2peel'].teams) m.set(t.name.toLowerCase(), { hit: t.hit, n: t.n, lg: t.lg });
+  for (const k of Object.keys(acc)) {
+    const a = acc[k];
+    m.set(k, { hit: +(100 * a.hits / a.n).toFixed(1), n: a.n, lg: a.lg, name: a.displayName });
+  }
+  return m;
+}
+
+// Consulta Supabase: PnL real por time (bets settled green/red, não-SIMULATED).
+// Defensivo: se falhar retorna Map vazio sem travar o briefing.
+async function buildTeamRealPnLMap() {
+  const m = new Map();
+  let cfg;
+  try {
+    const { loadConfig } = require(path.join(__dirname, '_load-config.cjs'));
+    cfg = loadConfig();
+  } catch (e) {
+    console.error(`# [PnL real] loadConfig falhou: ${e.message} — continuando sem PnL`);
+    return m;
+  }
+  const https = require('https');
+  const url = new URL(cfg.supabaseUrl);
+  const raw = await new Promise((resolve) => {
+    https.get({
+      host: url.hostname,
+      path: '/rest/v1/bets?select=team_a,team_b,status,stake,odd,profit&bookmaker=neq.SIMULATED&status=in.(green,red)&limit=2000',
+      headers: { 'apikey': cfg.supabaseKey, 'Authorization': 'Bearer ' + cfg.supabaseKey },
+    }, res => {
+      let b = '';
+      res.on('data', c => b += c);
+      res.on('end', () => resolve({ status: res.statusCode, body: b }));
+    }).on('error', e => {
+      console.error(`# [PnL real] Supabase request falhou: ${e.message} — continuando sem PnL`);
+      resolve(null);
+    });
+  });
+  if (!raw || raw.status >= 400) {
+    console.error(`# [PnL real] Supabase retornou ${raw?.status} — continuando sem PnL`);
+    return m;
+  }
+  let rows;
+  try { rows = JSON.parse(raw.body); } catch (e) {
+    console.error(`# [PnL real] JSON inválido: ${e.message} — continuando sem PnL`);
+    return m;
+  }
+  const acc = {}; // name_lower → { profit, n, hits }
+  for (const r of rows) {
+    const profit = typeof r.profit === 'number' ? r.profit : (r.status === 'green' ? r.stake * (r.odd - 1) : -r.stake);
+    for (const teamName of [r.team_a, r.team_b]) {
+      if (!teamName) continue;
+      const k = teamName.toLowerCase();
+      if (!acc[k]) acc[k] = { profit: 0, n: 0, hits: 0, displayName: teamName };
+      acc[k].profit += profit;
+      acc[k].n += 1;
+      if (r.status === 'green') acc[k].hits += 1;
+    }
+  }
+  for (const k of Object.keys(acc)) {
+    const a = acc[k];
+    m.set(k, {
+      profit: +a.profit.toFixed(0),
+      n_real: a.n,
+      hits: a.hits,
+      hit_real: +(100 * a.hits / a.n).toFixed(1),
+      displayName: a.displayName,
+    });
+  }
   return m;
 }
 function buildLeagueHitMap(dashboard, tier2) {
@@ -275,12 +352,37 @@ function buildLeagueHitMap(dashboard, tier2) {
   return m;
 }
 
-function flagTeam(name, teamHitMap) {
-  const e = teamHitMap.get((name || '').toLowerCase());
-  if (!e || e.n < 4) return null;
-  if (e.hit < 50) return `🔴 ${name} ruim (${e.hit}% n=${e.n})`;
-  if (e.hit < 60) return `🟡 ${name} marginal (${e.hit}% n=${e.n})`;
-  if (e.hit >= 70) return `🟢 ${name} bom (${e.hit}% n=${e.n})`;
+// Lookup tolerante: tenta exact match, depois sem espaços, depois por substring.
+// Necessário porque dashboard usa "NONGSHIM RED FORCE" e LoLEsports API usa "Nongshim RedForce".
+function lookupTeam(name, map) {
+  if (!name) return null;
+  const kExact = name.toLowerCase();
+  if (map.has(kExact)) return map.get(kExact);
+  const kNoSpace = kExact.replace(/\s+/g, '');
+  for (const [k, v] of map) {
+    if (k.replace(/\s+/g, '') === kNoSpace) return v;
+  }
+  return null;
+}
+
+function flagTeam(name, teamHitMap, teamPnLMap) {
+  const stats = lookupTeam(name, teamHitMap);
+  const pnl   = teamPnLMap ? lookupTeam(name, teamPnLMap) : null;
+
+  // Sinal de PnL real tem prioridade absoluta sobre backtest.
+  // -R$2k+ é alerta máximo independente de qualquer outra coisa.
+  if (pnl && pnl.profit <= -2000) {
+    return `🔴🔴 ⚠️ PERDA REAL ${name}: R$${Math.round(pnl.profit)} em ${pnl.n_real} bets reais (backtest ${stats?.hit ?? '?'}% n=${stats?.n ?? '?'})`;
+  }
+  if (pnl && pnl.profit <= -500 && pnl.n_real >= 3) {
+    return `🔴 ${name} PnL real -R$${Math.round(Math.abs(pnl.profit))} (n_real=${pnl.n_real}, backtest ${stats?.hit ?? '?'}%)`;
+  }
+
+  // Backtest: n_min sobe de 4 → 8 (amostra insuficiente não gera flag)
+  if (!stats || stats.n < 8) return null;
+  if (stats.hit < 50) return `🔴 ${name} ruim (${stats.hit}% n=${stats.n})`;
+  if (stats.hit < 60) return `🟡 ${name} marginal (${stats.hit}% n=${stats.n})`;
+  if (stats.hit >= 70) return `🟢 ${name} bom (${stats.hit}% n=${stats.n})`;
   return null;
 }
 
@@ -300,6 +402,7 @@ function flagLeague(lg, leagueHitMap) {
   const formulaFair = loadFormulaFair(TARGET);
   const teamAvgData = loadTeamAvgKills();
   const teamHits = buildTeamHitMap(dashboard);
+  const teamPnLs = await buildTeamRealPnLMap();
   const leagueHits = buildLeagueHitMap(dashboard, tier2);
 
   const allMatches = [];
@@ -383,9 +486,9 @@ function flagLeague(lg, leagueHitMap) {
     const lgForStats = isEwc ? lg.split('-')[1] : lg;
     const lgFlag = flagLeague(lgForStats, leagueHits);
     if (lgFlag) flags.push(lgFlag);
-    const t1Flag = flagTeam(m.team_a_name, teamHits);
+    const t1Flag = flagTeam(m.team_a_name, teamHits, teamPnLs);
     if (t1Flag) flags.push(t1Flag);
-    const t2Flag = flagTeam(m.team_b_name, teamHits);
+    const t2Flag = flagTeam(m.team_b_name, teamHits, teamPnLs);
     if (t2Flag) flags.push(t2Flag);
     if (m.state !== 'unstarted') flags.push(`(${m.state})`);
 
