@@ -481,6 +481,19 @@
   </nav>
 
   <main class="container tab-pane active" data-pane="tracker">
+    <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+      <label style="font-size:12px;color:var(--muted);font-weight:600">TRIGGER:</label>
+      <select id="trkTrigger" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+        <option value="all" selected>todos</option>
+        <option value="2peel">só 2peel</option>
+        <option value="1peel+flex">só 1peel+flex</option>
+      </select>
+      <label style="font-size:12px;color:var(--muted);font-weight:600">LIGA:</label>
+      <select id="trkLeague" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+        <option value="all" selected>todas</option>
+      </select>
+    </div>
+
     <div id="kpis" class="kpis"></div>
 
     <div class="section-title">Por mês</div>
@@ -504,18 +517,6 @@
     </div>
 
     <div class="section-title">Apostas</div>
-    <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
-      <label style="font-size:12px;color:var(--muted);font-weight:600">TRIGGER:</label>
-      <select id="trkTrigger" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-        <option value="all" selected>todos</option>
-        <option value="2peel">só 2peel</option>
-        <option value="1peel+flex">só 1peel+flex</option>
-      </select>
-      <label style="font-size:12px;color:var(--muted);font-weight:600">LIGA:</label>
-      <select id="trkLeague" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-        <option value="all" selected>todas</option>
-      </select>
-    </div>
     <div class="filters">
       <span class="chip active" data-filter="all">Todas</span>
       <span class="chip" data-filter="pending">Pendentes</span>
