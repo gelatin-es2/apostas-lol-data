@@ -1810,7 +1810,13 @@
         const mc = b.raw_extraction?.match_context || {};
         let baseLine = null;
         if (b.bookmaker === 'SIMULATED') {
-          baseLine = mc.fair_line_calculated;
+          baseLine = mc.fair_line_calculated ?? null;
+          if (baseLine == null) {
+            // Fallback: extrai linha do pick (ex "Under 25.5")
+            const match = (b.pick || '').match(/(\d+(?:[.,]\d+)?)/);
+            if (match) baseLine = parseFloat(match[1].replace(',','.'));
+            // NÃO subtrair 1 — SIMULATED salva linha direta, sem delta de fair+1
+          }
         } else {
           // Reais: extrai linha do pick
           const match = (b.pick || '').match(/(\d+(?:[.,]\d+)?)/);
@@ -1957,8 +1963,14 @@
       function getBetSim(b) {
         const mc = b.raw_extraction?.match_context || {};
         let baseLine = null;
-        if (b.bookmaker === 'SIMULATED') baseLine = mc.fair_line_calculated;
-        else {
+        if (b.bookmaker === 'SIMULATED') {
+          baseLine = mc.fair_line_calculated ?? null;
+          if (baseLine == null) {
+            const m = (b.pick || '').match(/(\d+(?:[.,]\d+)?)/);
+            if (m) baseLine = parseFloat(m[1].replace(',','.'));
+            // NÃO subtrair 1 — SIMULATED salva linha direta
+          }
+        } else {
           const m = (b.pick || '').match(/(\d+(?:[.,]\d+)?)/);
           if (m) baseLine = parseFloat(m[1].replace(',','.'));
           const realOdd = parseFloat(b.odd);

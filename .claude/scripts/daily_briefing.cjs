@@ -449,14 +449,14 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData) {
   if (liveTeams.length > 0) {
     console.error('\n  TOP TIMES (hit% decrescente):');
     for (const t of liveTeams.slice(0, 10)) {
-      const cor = t.hit >= 60 ? '🟢' : (t.hit >= 50 ? '⚪' : '🔴');
+      const cor = t.n < 4 ? '⚪' : (t.hit >= 60 ? '🟢' : (t.hit >= 50 ? '⚪' : '🔴'));
       console.error(`    ${cor} ${t.name}: ${t.hit}% n=${t.n}`);
     }
   }
   if (visibleLeagues.length > 0) {
     console.error('\n  LIGAS:');
     for (const l of visibleLeagues) {
-      const cor = l.hit >= 60 ? '🟢' : (l.hit >= 50 ? '⚪' : '🔴');
+      const cor = l.n < 4 ? '⚪' : (l.hit >= 60 ? '🟢' : (l.hit >= 50 ? '⚪' : '🔴'));
       console.error(`    ${cor} ${l.name}: ${l.hit}% n=${l.n}`);
     }
   }
