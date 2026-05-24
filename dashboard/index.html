@@ -1883,14 +1883,15 @@
           }
         }
         return Object.values(m)
-          .filter(x => x.n >= 4)
-          .map(x => ({...x, hit: 100 * x.w / x.n}))
+          .filter(x => x.n >= 1)
+          .map(x => ({...x, hit: 100 * x.w / x.n, small_sample: x.n < 4}))
           .sort((a, b) => b.hit - a.hit);
       }
 
       function renderList(target, rows, label) {
         const html = rows.map(r => {
-          const cls = r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red');
+          // n < 4 = amostra pequena → cor neutra (sem verde/vermelho)
+          const cls = r.small_sample ? '' : (r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red'));
           return `<div class="day"><div><div class="date">${r.name}</div><div class="stats">n=${r.n} · R$ ${fmtMoney(r.profit)}</div></div><div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div></div>`;
         }).join('');
         document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;

@@ -47,7 +47,7 @@ async function main() {
   console.error(`  query: ${meta.query}`);
   console.error(`  raw=${meta.raw} → dedup=${meta.deduped} → filtered=${meta.filtered} → simulated=${meta.simulated}`);
   console.error(`  params: delta=${meta.params.delta} odd=${meta.params.odd} stake=${meta.params.stake} trigger=${meta.params.trigger}`);
-  console.error(`  times com n>=4: ${teams.length} | ligas com n>=4: ${leagues.length}`);
+  console.error(`  times com n>=1: ${teams.length} | ligas com n>=1: ${leagues.length}`);
 
   // TOP TIMES + LIGAS printados pelo briefing (com filtro por agenda do dia)
   // Validator mantém só smoke-check silencioso.

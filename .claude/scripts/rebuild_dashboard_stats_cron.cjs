@@ -361,7 +361,8 @@ async function fetchUserBets() {
         if (g.kills < g.line) teamAgg[tname].h++;
       }
     }
-    const teams = Object.entries(teamAgg).filter(([_, s]) => s.n >= 4).map(([name, s]) => ({ name, lg: s.lg, n: s.n, hit: +(100 * s.h / s.n).toFixed(1) })).sort((a, b) => b.hit - a.hit);
+    // n >= 1: mostra todos (small_sample=true se n<4, cor neutra na UI)
+    const teams = Object.entries(teamAgg).filter(([_, s]) => s.n >= 1).map(([name, s]) => ({ name, lg: s.lg, n: s.n, hit: +(100 * s.h / s.n).toFixed(1), small_sample: s.n < 4 })).sort((a, b) => b.hit - a.hit);
 
     // CHAMPS POR LANE
     const champAgg = {};

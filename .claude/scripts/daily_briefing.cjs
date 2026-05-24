@@ -107,22 +107,23 @@ const EWC_QUALIFIERS = [
 
 // Mapping team_code (Liquipedia) → nome canônico (lolesports). Se faltar,
 // fallback é uppercase do code. Cobre os principais times dos 3 qualifiers.
+// Mapping team_code → canonical (usa nomes curtos, alinhados com banco 2026-05-24)
 const TEAM_CODE_TO_CANONICAL = {
   // LCK
-  t1: 'T1', hle: 'Hanwha Life Esports', kt: 'kt Rolster', dk: 'Dplus KIA',
-  ns: 'Nongshim RedForce', bro: 'BRION', bfx: 'BNK FEARX', drx: 'DRX',
+  t1: 'T1', hle: 'Hanwha', kt: 'KT', dk: 'Dplus',
+  ns: 'Nongshim', bro: 'BRO', bfx: 'FEARX', drx: 'DRX',
   soop: 'DN SOOPers', dns: 'DN SOOPers',
   // LEC
-  g2: 'G2 Esports', kc: 'Karmine Corp', mkoi: 'Movistar KOI', gx: 'GIANTX',
-  nvc: 'Natus Vincere', vit: 'Team Vitality', th: 'Team Heretics',
+  g2: 'G2 Esports', kc: 'Karmine', mkoi: 'KOI', gx: 'GIANTX',
+  nvc: 'NAVI', vit: 'Vitality', th: 'Team Heretics',
   fnc: 'Fnatic', shf: 'Shifters', sk: 'SK Gaming',
   sly: 'Solary', gln: 'Galions',
   // LPL
-  blg: 'Bilibili Gaming', jdg: 'Beijing JDG Esports', wbg: 'WeiboGaming',
-  al: "Anyone's Legend", ig: 'Invictus Gaming', tes: 'TOP ESPORTS',
-  nip: 'Shenzhen NINJAS IN PYJAMAS', we: "Xi'an Team WE", omg: 'Oh My God',
-  lng: 'LNG Esports', edg: 'EDward Gaming', ttg: 'ThunderTalk Gaming',
-  lgd: 'LGD GAMING', up: 'Ultra Prime',
+  blg: 'BLG', jdg: 'JDG', wbg: 'Weibo',
+  al: 'AL', ig: 'IG', tes: 'TES',
+  nip: 'NIP', we: 'WE', omg: 'Oh My God',
+  lng: 'LNG', edg: 'EDG', ttg: 'THUNDER TALK GAMING',
+  lgd: 'LGD GAMING', up: 'UP',
 };
 
 // Resolve team code → nome canônico (pra lookup em team_avg_kills.json)
@@ -279,13 +280,16 @@ function lookupTeam(name, map) {
 }
 
 // Retorna célula de time pra tabela: bolinha + nome + hit%(n) ou "(s/ amostra)".
-// Threshold baixado pra n≥3 (2026-05-23): n=3 ou 4 já dá sinal útil, especialmente
-// CBLOL onde times novos ficavam "s/ amostra" injustamente.
-// Verde ≥60%, vermelho <50%, branco = neutro/insuficiente.
+// n >= 1: mostra todos. n < 4 = amostra pequena → cor neutra ⚪ (sem verde/vermelho).
+// Verde ≥60%, vermelho <50%, ⚪ = 50-59% ou amostra insuficiente (n<4).
 function formatTeamCell(name, teamHitMap) {
   const stats = lookupTeam(name, teamHitMap);
-  if (!stats || stats.n < 3) {
+  if (!stats || stats.n < 1) {
     return `⚪ ${name} _(s/ amostra)_`;
+  }
+  if (stats.n < 4) {
+    // Amostra pequena: mostra hit mas sem cor (neutra)
+    return `⚪ ${name} (${stats.hit}% n=${stats.n})`;
   }
   if (stats.hit < 50) return `🔴 ${name} (${stats.hit}% n=${stats.n})`;
   if (stats.hit >= 60) return `🟢 ${name} (${stats.hit}% n=${stats.n})`;
@@ -355,7 +359,7 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData) {
     `# [stats-live] query=${analiseMeta.query}` +
     `\n# [stats-live] raw=${analiseMeta.raw} → dedup=${analiseMeta.deduped} → filtered=${analiseMeta.filtered} → simulated=${analiseMeta.simulated}` +
     `\n# [stats-live] params: delta=${analiseMeta.params.delta} odd=${analiseMeta.params.odd} stake=${analiseMeta.params.stake} trigger=${analiseMeta.params.trigger}` +
-    `\n# [stats-live] times n>=4: ${liveTeams.length} | ligas n>=4: ${liveLeagues.length}`
+    `\n# [stats-live] times n>=1: ${liveTeams.length} | ligas n>=1: ${liveLeagues.length}`
   );
 
   // Monta Maps para lookup rápido (mesmo contrato das funções antigas)
