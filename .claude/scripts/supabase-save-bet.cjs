@@ -16,6 +16,21 @@ const { loadFairPinnacle } = require('../../lib/loadFairPinnacle.cjs');
 
 const REQUIRED = ['bookmaker', 'team_a', 'team_b', 'market', 'pick', 'odd', 'stake'];
 
+// Lista canônica de bookmakers (lowercase). Qualquer valor fora dessa lista é rejeitado.
+// Sincronizar com normalize-bookmakers.cjs quando adicionar nova casa.
+const VALID_BOOKMAKERS = [
+  'pinnacle', 'estrelabet', 'parimatch', 'betano',
+  'thunderpick', 'novibet', 'polymarket', 'simulated',
+];
+
+// Flag de bypass pra casos legítimos (ex: teste, casa nova ainda não na lista).
+// Uso: ALLOW_UNKNOWN_BOOKMAKER=1 node supabase-save-bet.cjs <file>
+const ALLOW_UNKNOWN_BOOKMAKER = process.env.ALLOW_UNKNOWN_BOOKMAKER === '1';
+
+// Flag de bypass pra bets sem lolesports_match_id (ex: EWC, ligas não cobertas).
+// Uso: ALLOW_MISSING_MATCH_ID=1 node supabase-save-bet.cjs <file>
+const ALLOW_MISSING_MATCH_ID = process.env.ALLOW_MISSING_MATCH_ID === '1';
+
 function postJson(supabaseUrl, supabaseKey, urlPath, body) {
   return new Promise((resolve, reject) => {
     const u = new URL(supabaseUrl + urlPath);
@@ -64,6 +79,35 @@ function postJson(supabaseUrl, supabaseKey, urlPath, body) {
   if (missing.length > 0) {
     console.error(`Campos obrigatórios faltando: ${missing.join(', ')}`);
     process.exit(1);
+  }
+
+  // Validação: bookmaker deve estar na lista canônica (lowercase).
+  // Bypass: ALLOW_UNKNOWN_BOOKMAKER=1 (ex: casa nova ainda não cadastrada)
+  const bookmakerNorm = (bet.bookmaker || '').toLowerCase().trim();
+  if (!VALID_BOOKMAKERS.includes(bookmakerNorm)) {
+    if (ALLOW_UNKNOWN_BOOKMAKER) {
+      console.error(`[AVISO] bookmaker "${bet.bookmaker}" não está na lista canônica. Prosseguindo (ALLOW_UNKNOWN_BOOKMAKER=1).`);
+    } else {
+      console.error(`bookmaker "${bet.bookmaker}" não é canônico. Lista válida: ${VALID_BOOKMAKERS.join(', ')}`);
+      console.error('Para forçar: ALLOW_UNKNOWN_BOOKMAKER=1 node supabase-save-bet.cjs <file>');
+      process.exit(1);
+    }
+  }
+  // Normaliza case antes de salvar (independente de bypass)
+  bet.bookmaker = bookmakerNorm;
+
+  // Validação: lolesports_match_id é obrigatório em bets de ligas cobertas pelo lolesports.
+  // Bets de EWC/ligas externas são isentas (settle usa fallback por design).
+  // Bypass: ALLOW_MISSING_MATCH_ID=1 (ex: EWC, ligas externas ao lolesports)
+  const matchId = bet.raw_extraction?.match_context?.lolesports_match_id;
+  if (!matchId) {
+    if (ALLOW_MISSING_MATCH_ID) {
+      console.error(`[AVISO] lolesports_match_id ausente. Prosseguindo (ALLOW_MISSING_MATCH_ID=1). Settle usará fallback por league+teams+date.`);
+    } else {
+      console.error(`lolesports_match_id ausente em raw_extraction.match_context. Campo obrigatório pra settle correto.`);
+      console.error('Para bets de EWC ou ligas externas: ALLOW_MISSING_MATCH_ID=1 node supabase-save-bet.cjs <file>');
+      process.exit(1);
+    }
   }
 
   // Defaults
