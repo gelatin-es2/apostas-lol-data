@@ -49,21 +49,8 @@ async function main() {
   console.error(`  params: delta=${meta.params.delta} odd=${meta.params.odd} stake=${meta.params.stake} trigger=${meta.params.trigger}`);
   console.error(`  times com n>=4: ${teams.length} | ligas com n>=4: ${leagues.length}`);
 
-  if (teams.length > 0) {
-    console.error('\n  TOP TIMES (hit% decrescente):');
-    for (const t of teams.slice(0, 10)) {
-      const cor = t.hit >= 60 ? '🟢' : (t.hit >= 50 ? '⚪' : '🔴');
-      console.error(`    ${cor} ${t.name}: ${t.hit}% n=${t.n}`);
-    }
-  }
-
-  if (leagues.length > 0) {
-    console.error('\n  LIGAS:');
-    for (const l of leagues) {
-      const cor = l.hit >= 60 ? '🟢' : (l.hit >= 50 ? '⚪' : '🔴');
-      console.error(`    ${cor} ${l.name}: ${l.hit}% n=${l.n}`);
-    }
-  }
+  // TOP TIMES + LIGAS printados pelo briefing (com filtro por agenda do dia)
+  // Validator mantém só smoke-check silencioso.
 
   process.exit(0);
 }

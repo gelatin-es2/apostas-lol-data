@@ -414,6 +414,28 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData) {
 
   allMatches.sort((a, b) => a.start_time.localeCompare(b.start_time));
 
+  // TOP TIMES + LIGAS (filtra ligas sem jogo na agenda; mantém core sempre)
+  const agendaLeagues = new Set(
+    allMatches.map(m => m.league.startsWith('EWC-') ? m.league.split('-')[1] : m.league)
+  );
+  const CORE_LEAGUES = new Set(['LCK','LPL','LEC','CBLOL','LCS']);
+  const visibleLeagues = liveLeagues.filter(l => CORE_LEAGUES.has(l.name) || agendaLeagues.has(l.name));
+
+  if (liveTeams.length > 0) {
+    console.error('\n  TOP TIMES (hit% decrescente):');
+    for (const t of liveTeams.slice(0, 10)) {
+      const cor = t.hit >= 60 ? '🟢' : (t.hit >= 50 ? '⚪' : '🔴');
+      console.error(`    ${cor} ${t.name}: ${t.hit}% n=${t.n}`);
+    }
+  }
+  if (visibleLeagues.length > 0) {
+    console.error('\n  LIGAS:');
+    for (const l of visibleLeagues) {
+      const cor = l.hit >= 60 ? '🟢' : (l.hit >= 50 ? '⚪' : '🔴');
+      console.error(`    ${cor} ${l.name}: ${l.hit}% n=${l.n}`);
+    }
+  }
+
   // Header
   console.log(`# Jogos de ${TARGET} — briefing método 2peel\n`);
   if (allMatches.length === 0) {
