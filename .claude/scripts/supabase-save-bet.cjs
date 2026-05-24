@@ -14,6 +14,43 @@ const path = require('path');
 const { loadConfig } = require('./_load-config.cjs');
 const { loadFairPinnacle } = require('../../lib/loadFairPinnacle.cjs');
 
+// ─── Normalização de nomes de time ──────────────────────────────────────────
+// Carrega alias map de lib/team-aliases.json. Fallback seguro: se falhar,
+// salva sem normalizar (não bloqueia o fluxo do save).
+let TEAM_ALIASES = null;
+let ISOLATED_TEAMS = new Set();
+try {
+  const aliasPath = path.resolve(__dirname, '../../lib/team-aliases.json');
+  const aliasRaw = JSON.parse(fs.readFileSync(aliasPath, 'utf8'));
+  TEAM_ALIASES = aliasRaw.aliases || {};
+  ISOLATED_TEAMS = new Set(aliasRaw.isolated_real_teams?.list || []);
+} catch (e) {
+  console.error(`[AVISO] team-aliases.json não carregado: ${e.message}. Salvando sem normalizar nomes.`);
+}
+
+/**
+ * normalizeTeam: resolve alias → canônico.
+ * Regras (em ordem):
+ *  1. nome está em isolated_real_teams → retorna original (academy/sub-roster, não toca)
+ *  2. nome está em aliases → retorna canônico
+ *  3. caso contrário → retorna original e loga aviso (audit trail)
+ */
+function normalizeTeam(name) {
+  if (!name || !TEAM_ALIASES) return name;
+  // Regra 1: isolated (ex: Karmine Corp Blue, Vitality.Bee) — nunca unificar
+  if (ISOLATED_TEAMS.has(name)) return name;
+  // Regra 2: alias map
+  if (TEAM_ALIASES[name]) {
+    if (TEAM_ALIASES[name] !== name) {
+      console.error(`[NORM] ${name} → ${TEAM_ALIASES[name]}`);
+    }
+    return TEAM_ALIASES[name];
+  }
+  // Regra 3: nome desconhecido — loga pra audit trail, salva original
+  console.error(`[AVISO] time não encontrado no alias_map: "${name}". Salvando original. Considere adicionar em lib/team-aliases.json.`);
+  return name;
+}
+
 const REQUIRED = ['bookmaker', 'team_a', 'team_b', 'market', 'pick', 'odd', 'stake'];
 
 // Lista canônica de bookmakers (lowercase). Qualquer valor fora dessa lista é rejeitado.
@@ -139,6 +176,16 @@ function postJson(supabaseUrl, supabaseKey, urlPath, body) {
     process.exit(1);
   }
 
+  // Normaliza nomes de time: alias → canônico (ex: FX → Fluxo, WBG → WeiboGaming)
+  // Aplica em team_a, team_b e raw_extraction.match_context.team_a/team_b
+  bet.team_a = normalizeTeam(bet.team_a);
+  bet.team_b = normalizeTeam(bet.team_b);
+  if (bet.raw_extraction?.match_context) {
+    const mc = bet.raw_extraction.match_context;
+    if (mc.team_a) mc.team_a = normalizeTeam(mc.team_a);
+    if (mc.team_b) mc.team_b = normalizeTeam(mc.team_b);
+  }
+
   // Guard 2026-05-20: bet_datetime deve estar consistente com match start_time.
   // Erro recorrente: agente passa "hoje" interpretando data errada e bet fica
   // pending eterna porque settle não encontra na janela bet_datetime+6h.
@@ -156,6 +203,16 @@ function postJson(supabaseUrl, supabaseKey, urlPath, body) {
         process.exit(2);
       }
     }
+  }
+
+  // Auto-settle quando a casa já confirmou resultado no print (Win/Lose visível)
+  const nativeWL = bet.raw_extraction?.bookmaker_native?.settled_win_loss;
+  if ((bet.status === 'green' || bet.status === 'red') && nativeWL != null && bet.profit == null) {
+    bet.profit = bet.status === 'green'
+      ? +((bet.stake * (bet.odd - 1)).toFixed(2))
+      : -bet.stake;
+    bet.settled_at = new Date().toISOString();
+    bet.settle_source = 'bookmaker_native_print';
   }
 
   try {
