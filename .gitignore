@@ -36,6 +36,10 @@ _change-log.md
 # Bet screenshots (Bet Logger) — fica local, não commita
 cron-data/bet-screenshots/
 
+# Gerado por rebuild_dashboard_stats_cron.cjs — não versionar
+cron-data/ml_picks.js
+cron-data/ml_picks.json
+
 # Temp files — gerados por scripts de análise ad-hoc
 .claude/scripts/tmp_*.json
 .claude/scripts/_tmp_*.json
