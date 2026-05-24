@@ -35,3 +35,14 @@ _change-log.md
 
 # Bet screenshots (Bet Logger) — fica local, não commita
 cron-data/bet-screenshots/
+
+# Temp files — gerados por scripts de análise ad-hoc
+.claude/scripts/tmp_*.json
+.claude/scripts/_tmp_*.json
+.claude/tmp_*.json
+.claude/tmp/
+_audit_*.cjs
+_audit_*.json
+
+# Logs locais
+.claude/logs/

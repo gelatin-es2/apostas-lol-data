@@ -6,13 +6,17 @@
 //   - injetado em dashboard_stats.json no campo `real_bets_method` (rebuild_dashboard chama)
 //
 // Uso:
-//   node compute_real_bets_method.cjs              → escreve cron-data/real_bets_method.json
-//   node compute_real_bets_method.cjs --stdout     → imprime JSON no stdout sem escrever arquivo
+//   node .claude/scripts/compute_real_bets_method.cjs              → escreve cron-data/real_bets_method.json
+//   node .claude/scripts/compute_real_bets_method.cjs --stdout     → imprime JSON no stdout sem escrever arquivo
 
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
-const { loadConfig } = require('./.claude/scripts/_load-config.cjs');
+
+// ROOT aponta pra raiz do repositório (sobe 2 níveis de .claude/scripts/)
+const ROOT = path.resolve(__dirname, '../..');
+
+const { loadConfig } = require('./_load-config.cjs');
 
 const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
 // FLEX expandido 2026-05-23 (CEO): Lux + Anivia
@@ -185,7 +189,7 @@ const IGNORE_BET_IDS = new Set([
   if (STDOUT_ONLY) {
     console.log(json);
   } else {
-    const outDir = path.join(__dirname, 'cron-data');
+    const outDir = path.join(ROOT, 'cron-data');
     if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
     const file = path.join(outDir, 'real_bets_method.json');
     fs.writeFileSync(file, json);

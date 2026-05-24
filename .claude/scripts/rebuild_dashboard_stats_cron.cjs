@@ -5,7 +5,11 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
-const { loadFairPinnacle } = require('./lib/loadFairPinnacle.cjs');
+
+// ROOT aponta pra raiz do repositório (sobe 2 níveis de .claude/scripts/)
+const ROOT = path.resolve(__dirname, '../..');
+
+const { loadFairPinnacle } = require(path.join(ROOT, 'lib/loadFairPinnacle.cjs'));
 
 const LOLES = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 const SPLIT2_START = '2026-04-01';
@@ -143,7 +147,7 @@ async function fetchUserBets() {
   let supabaseKey = process.env.SUPABASE_SECRET_KEY;
   if (!supabaseUrl || !supabaseKey) {
     try {
-      const cfg = require('./.claude/scripts/_load-config.cjs').loadConfig();
+      const cfg = require('./_load-config.cjs').loadConfig();
       supabaseUrl = supabaseUrl || cfg.supabaseUrl;
       supabaseKey = supabaseKey || cfg.supabaseKey;
     } catch {}
@@ -459,7 +463,7 @@ async function fetchUserBets() {
     },
   };
 
-  const outDir = path.join(__dirname, 'cron-data');
+  const outDir = path.join(ROOT, 'cron-data');
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
   const outFile = path.join(outDir, 'dashboard_stats.json');
   fs.writeFileSync(outFile, JSON.stringify(out, null, 2));

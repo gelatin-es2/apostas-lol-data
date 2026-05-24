@@ -60,6 +60,7 @@ Vercel deploya automático em cada push pro `main` (Root Directory = `dashboard/
 | `ml_picks.json` / `.js` | mesmo | Winrate por champion × posição |
 | `tier2_dashboard_stats.json` | `rebuild_tier2_dashboard_stats.cjs` | Backtest 3 ligas tier 2 EU |
 | `lfl_dashboard_stats.json` | `rebuild_lfl_dashboard_stats.cjs` | LFL only com breakdown rico |
+| `snapshots/bets-YYYY-MM-DD.json` | `export-bets-snapshot.cjs` | Snapshot diário completo de todas as bets (backup) |
 | `*-polymarket-lines.json` | (histórico, imutável) | Odds Polymarket — descontinuado 2026-05-23 |
 
 Tudo commitado no próprio repo. Stats puxam via `raw.githubusercontent.com` (URL absoluta — repo precisa ser **público**).

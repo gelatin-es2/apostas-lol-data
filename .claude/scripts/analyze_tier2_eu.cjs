@@ -20,7 +20,10 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const OUT_DIR = path.join(__dirname, 'cron-data');
+// ROOT aponta pra raiz do repositório (sobe 2 níveis de .claude/scripts/)
+const ROOT = path.resolve(__dirname, '../..');
+
+const OUT_DIR = path.join(ROOT, 'cron-data');
 const LOLES = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 const SPLIT2_START = '2026-04-01';
 const LINE = 29.5;
