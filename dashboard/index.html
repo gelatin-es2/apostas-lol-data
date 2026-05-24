@@ -97,6 +97,7 @@
     }
     .kpi.green::before { background: var(--green); }
     .kpi.red::before { background: var(--red); }
+    .kpi.orange::before { background: #f97316; }
     .kpi .label {
       color: var(--muted);
       font-size: 11px;
@@ -997,6 +998,22 @@
     function renderKPIs(k) {
       const profitClass = k.profit >= 0 ? 'green' : 'red';
       const roiClass = k.roi >= 0 ? 'green' : 'red';
+
+      // Card off-método: calcula direto de allOffBets (var de escopo global do load)
+      let offCard = '';
+      if (allOffBets && allOffBets.length > 0) {
+        const offStake   = allOffBets.reduce((s, b) => s + (Number(b.stake) || 0), 0);
+        const offN       = allOffBets.length;
+        const offProfit  = allOffBets.reduce((s, b) => s + (b.profit != null ? Number(b.profit) : 0), 0);
+        const offProfitFmt = `${offProfit >= 0 ? '+' : ''}R$ ${fmtMoney(offProfit)}`;
+        offCard = `
+        <div class="kpi orange">
+          <div class="label">Stake off-método</div>
+          <div class="value" style="color:#f97316">R$ ${fmtMoney(offStake)}</div>
+          <div class="sub">n=${offN} bets · profit ${offProfitFmt}</div>
+        </div>`;
+      }
+
       document.getElementById('kpis').innerHTML = `
         <div class="kpi ${profitClass}">
           <div class="label">Lucro total</div>
@@ -1017,6 +1034,7 @@
           <div class="value">${k.total}</div>
           <div class="sub">${k.pending} pendente${k.pending === 1 ? '' : 's'}</div>
         </div>
+        ${offCard}
       `;
     }
 
