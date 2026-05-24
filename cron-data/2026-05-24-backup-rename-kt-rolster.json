@@ -1,0 +1,464 @@
+[
+  {
+    "id": "0c0d6538-2645-4f57-9201-ffee8b0d60c0",
+    "team_a": "KT",
+    "team_b": "Gen.G Esports",
+    "raw_extraction": {
+      "compositions": {
+        "source": "lolesports livestats game 115548128963037528",
+        "team_a": {
+          "name": "kt Rolster",
+          "side": "blue",
+          "picks": {
+            "adc": "Ezreal",
+            "mid": "Anivia",
+            "top": "Ambessa",
+            "jungle": "Pantheon",
+            "support": "Nami"
+          }
+        },
+        "team_b": {
+          "name": "Gen.G Esports",
+          "side": "red",
+          "picks": {
+            "adc": "Jhin",
+            "mid": "Ryze",
+            "top": "Sion",
+            "jungle": "Naafiri",
+            "support": "Karma"
+          }
+        }
+      },
+      "match_context": {
+        "kills_red": 17,
+        "pick_line": 29.5,
+        "red_picks": {
+          "adc": "Jhin",
+          "mid": "Ryze",
+          "top": "Sion",
+          "jungle": "Naafiri",
+          "support": "Karma"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Ezreal",
+          "mid": "Anivia",
+          "top": "Ambessa",
+          "jungle": "Pantheon",
+          "support": "Nami"
+        },
+        "kills_blue": 0,
+        "enriched_at": "2026-05-22T19:38:10.307Z",
+        "red_team_id": "100205573495116443",
+        "total_kills": 17,
+        "winner_side": "red",
+        "blue_team_id": "99566404579461230",
+        "trigger_type": "2peel",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128963037528",
+        "lolesports_match_id": "115548128963037527",
+        "match_ambiguous_at_link": false
+      },
+      "bookmaker_native": {
+        "bet_id": "#4976228392",
+        "raw_pick_text": "Menos de 29.5",
+        "raw_stake_text": "R$ 1.000,00"
+      }
+    }
+  },
+  {
+    "id": "7e8d8db3-e10d-4117-9808-5321ac4c38e9",
+    "team_a": "KRX",
+    "team_b": "KT",
+    "raw_extraction": {
+      "compositions": {
+        "source": "lolesports livestats game 115548128963037556",
+        "team_a": {
+          "name": "KIWOOM DRX",
+          "side": "blue",
+          "picks": {
+            "adc": "Ezreal",
+            "mid": "Aurora",
+            "top": "Renekton",
+            "jungle": "XinZhao",
+            "support": "Bard"
+          }
+        },
+        "team_b": {
+          "name": "kt Rolster",
+          "side": "red",
+          "picks": {
+            "adc": "Sivir",
+            "mid": "Annie",
+            "top": "Jayce",
+            "jungle": "Pantheon",
+            "support": "Karma"
+          }
+        }
+      },
+      "match_context": {
+        "kills_red": 23,
+        "pick_line": 29.5,
+        "red_picks": {
+          "adc": "Sivir",
+          "mid": "Annie",
+          "top": "Jayce",
+          "jungle": "Pantheon",
+          "support": "Karma"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Ezreal",
+          "mid": "Aurora",
+          "top": "Renekton",
+          "jungle": "XinZhao",
+          "support": "Bard"
+        },
+        "kills_blue": 3,
+        "enriched_at": "2026-05-14T15:04:59.825Z",
+        "red_team_id": "99566404579461230",
+        "total_kills": 26,
+        "winner_side": "red",
+        "blue_team_id": "99566404585387054",
+        "trigger_type": "1peel+flex",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128963037556",
+        "lolesports_match_id": "115548128963037555",
+        "match_ambiguous_at_link": false
+      },
+      "bookmaker_native": {
+        "bet_id": "#3047934335",
+        "raw_pick_text": "Under 29.5",
+        "raw_stake_text": "BRL 500.00"
+      }
+    }
+  },
+  {
+    "id": "6b1a3bfb-b484-4e4d-bab7-f113cd56ff79",
+    "team_a": "KRX",
+    "team_b": "KT",
+    "raw_extraction": {
+      "compositions": {
+        "source": "lolesports livestats game 115548128963037557",
+        "team_a": {
+          "name": "KIWOOM DRX",
+          "side": "red",
+          "picks": {
+            "adc": "Yunara",
+            "mid": "Orianna",
+            "top": "Kennen",
+            "jungle": "Vi",
+            "support": "Lulu"
+          }
+        },
+        "team_b": {
+          "name": "kt Rolster",
+          "side": "blue",
+          "picks": {
+            "adc": "Corki",
+            "mid": "Ryze",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          }
+        }
+      },
+      "match_context": {
+        "kills_red": 22,
+        "pick_line": 29.5,
+        "red_picks": {
+          "adc": "Yunara",
+          "mid": "Orianna",
+          "top": "Kennen",
+          "jungle": "Vi",
+          "support": "Lulu"
+        },
+        "under_hit": false,
+        "blue_picks": {
+          "adc": "Corki",
+          "mid": "Ryze",
+          "top": "Gnar",
+          "jungle": "JarvanIV",
+          "support": "Nami"
+        },
+        "kills_blue": 11,
+        "enriched_at": "2026-05-14T15:05:00.274Z",
+        "red_team_id": "99566404585387054",
+        "total_kills": 33,
+        "winner_side": "red",
+        "blue_team_id": "99566404579461230",
+        "trigger_type": "2peel",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128963037557",
+        "lolesports_match_id": "115548128963037555",
+        "match_ambiguous_at_link": false
+      },
+      "bookmaker_native": {
+        "bet_id": "20188092502",
+        "raw_pick_text": "Menos de 29.5",
+        "raw_stake_text": "R$ 674,59"
+      }
+    }
+  },
+  {
+    "id": "0c6d38ac-133b-4a95-aeaf-9764fec39634",
+    "team_a": "KRX",
+    "team_b": "KT",
+    "raw_extraction": {
+      "compositions": {
+        "source": "lolesports livestats game 115548128963037557",
+        "team_a": {
+          "name": "KIWOOM DRX",
+          "side": "red",
+          "picks": {
+            "adc": "Yunara",
+            "mid": "Orianna",
+            "top": "Kennen",
+            "jungle": "Vi",
+            "support": "Lulu"
+          }
+        },
+        "team_b": {
+          "name": "kt Rolster",
+          "side": "blue",
+          "picks": {
+            "adc": "Corki",
+            "mid": "Ryze",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          }
+        }
+      },
+      "match_context": {
+        "kills_red": 22,
+        "pick_line": 29.5,
+        "red_picks": {
+          "adc": "Yunara",
+          "mid": "Orianna",
+          "top": "Kennen",
+          "jungle": "Vi",
+          "support": "Lulu"
+        },
+        "under_hit": false,
+        "blue_picks": {
+          "adc": "Corki",
+          "mid": "Ryze",
+          "top": "Gnar",
+          "jungle": "JarvanIV",
+          "support": "Nami"
+        },
+        "kills_blue": 11,
+        "enriched_at": "2026-05-14T15:05:00.640Z",
+        "red_team_id": "99566404585387054",
+        "total_kills": 33,
+        "winner_side": "red",
+        "blue_team_id": "99566404579461230",
+        "trigger_type": "2peel",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128963037557",
+        "lolesports_match_id": "115548128963037555",
+        "match_ambiguous_at_link": false
+      },
+      "bookmaker_native": {
+        "bet_id": "#3047960903",
+        "raw_pick_text": "Under 29.5",
+        "raw_stake_text": "BRL 400.00"
+      }
+    }
+  },
+  {
+    "id": "ffe2dd41-76cb-489c-9a7f-98dea07bc3c7",
+    "team_a": "Dplus KIA",
+    "team_b": "KT",
+    "raw_extraction": {
+      "match_context": {
+        "kills_red": 13,
+        "pick_line": 27.5,
+        "red_picks": {
+          "adc": "Caitlyn",
+          "mid": "Viktor",
+          "top": "Jayce",
+          "jungle": "Skarner",
+          "support": "Lux"
+        },
+        "under_hit": false,
+        "blue_picks": {
+          "adc": "Yunara",
+          "mid": "Taliyah",
+          "top": "Yorick",
+          "jungle": "Naafiri",
+          "support": "Lulu"
+        },
+        "kills_blue": 15,
+        "enriched_at": "2026-05-08T14:04:42.311Z",
+        "red_team_id": "100725845018863243",
+        "total_kills": 28,
+        "winner_side": "blue",
+        "blue_team_id": "99566404579461230",
+        "trigger_type": "1peel+flex",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128963037541",
+        "lolesports_match_id": "115548128963037539",
+        "match_ambiguous_at_link": false
+      }
+    }
+  },
+  {
+    "id": "71551f26-60e4-42b3-bfbb-a1208d88de5b",
+    "team_a": "KT Rolster",
+    "team_b": "Hanwha Life Esports",
+    "raw_extraction": {
+      "odd": 1.72,
+      "pick": "Under 31.5",
+      "stake": 600,
+      "strategy": "ladder",
+      "bookmaker": "Betano",
+      "is_map_bet": true,
+      "map_number": 2,
+      "compositions": {
+        "source": "lolesports livestats game 115548128962840621",
+        "team_a": {
+          "name": "kt Rolster",
+          "side": "red",
+          "picks": {
+            "adc": "Yunara",
+            "mid": "Anivia",
+            "top": "Renekton",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          }
+        },
+        "team_b": {
+          "name": "Hanwha Life Esports",
+          "side": "blue",
+          "picks": {
+            "adc": "Lucian",
+            "mid": "Ahri",
+            "top": "Jax",
+            "jungle": "JarvanIV",
+            "support": "Milio"
+          }
+        }
+      },
+      "bet_placed_at": "2026-04-29T08:02:00-03:00",
+      "match_context": {
+        "kills_red": 8,
+        "pick_line": 31.5,
+        "red_picks": {
+          "adc": "Yunara",
+          "mid": "Anivia",
+          "top": "Renekton",
+          "jungle": "XinZhao",
+          "support": "Lulu"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Lucian",
+          "mid": "Ahri",
+          "top": "Jax",
+          "jungle": "JarvanIV",
+          "support": "Milio"
+        },
+        "kills_blue": 20,
+        "enriched_at": "2026-05-08T14:04:33.364Z",
+        "red_team_id": "99566404579461230",
+        "total_kills": 28,
+        "winner_side": "blue",
+        "blue_team_id": "100205573496804586",
+        "trigger_type": "2peel",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128962840621",
+        "lolesports_match_id": "115548128962840619",
+        "match_ambiguous_at_link": false
+      },
+      "ladder_group_id": "ladder-kt-hle-m2-20260429",
+      "ladder_position": "31.5",
+      "bet_id_bookmaker": "20068176652",
+      "score_at_bet_time": "KT 0-1 HLE",
+      "lolesports_game_id": "115548128962840621"
+    }
+  },
+  {
+    "id": "90b1524a-61a6-4aab-84e4-cec564dec183",
+    "team_a": "KT Rolster",
+    "team_b": "Hanwha Life Esports",
+    "raw_extraction": {
+      "odd": 1.87,
+      "pick": "Under 30.5",
+      "stake": 600,
+      "strategy": "ladder",
+      "bookmaker": "Betano",
+      "is_map_bet": true,
+      "map_number": 2,
+      "compositions": {
+        "source": "lolesports livestats game 115548128962840621",
+        "team_a": {
+          "name": "kt Rolster",
+          "side": "red",
+          "picks": {
+            "adc": "Yunara",
+            "mid": "Anivia",
+            "top": "Renekton",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          }
+        },
+        "team_b": {
+          "name": "Hanwha Life Esports",
+          "side": "blue",
+          "picks": {
+            "adc": "Lucian",
+            "mid": "Ahri",
+            "top": "Jax",
+            "jungle": "JarvanIV",
+            "support": "Milio"
+          }
+        }
+      },
+      "bet_placed_at": "2026-04-29T08:02:00-03:00",
+      "match_context": {
+        "kills_red": 8,
+        "pick_line": 30.5,
+        "red_picks": {
+          "adc": "Yunara",
+          "mid": "Anivia",
+          "top": "Renekton",
+          "jungle": "XinZhao",
+          "support": "Lulu"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Lucian",
+          "mid": "Ahri",
+          "top": "Jax",
+          "jungle": "JarvanIV",
+          "support": "Milio"
+        },
+        "kills_blue": 20,
+        "enriched_at": "2026-05-08T14:04:10.707Z",
+        "red_team_id": "99566404579461230",
+        "total_kills": 28,
+        "winner_side": "blue",
+        "blue_team_id": "100205573496804586",
+        "trigger_type": "2peel",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128962840621",
+        "lolesports_match_id": "115548128962840619",
+        "match_ambiguous_at_link": false
+      },
+      "ladder_group_id": "ladder-kt-hle-m2-20260429",
+      "ladder_position": "30.5",
+      "bet_id_bookmaker": "20068178722",
+      "score_at_bet_time": "KT 0-1 HLE",
+      "lolesports_game_id": "115548128962840621"
+    }
+  }
+]

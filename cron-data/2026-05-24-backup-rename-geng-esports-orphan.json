@@ -1,0 +1,79 @@
+[
+  {
+    "id": "44a90635-e213-4477-99de-dd4786e20e1d",
+    "team_a": "NONGSHIM RED FORCE",
+    "team_b": "Gen.G",
+    "raw_extraction": {
+      "odd": 1.83,
+      "pick": "Under 27.5",
+      "stake": 300,
+      "market": "Total Kills",
+      "team_a": "Nongshim RedForce",
+      "team_b": "Gen.G",
+      "bookmaker": "EstrelaBet",
+      "confidence": "high",
+      "is_map_bet": true,
+      "map_number": 2,
+      "compositions": {
+        "source": "lolesports livestats game 115548128962906281",
+        "team_a": {
+          "name": "NONGSHIM RED FORCE",
+          "side": "blue",
+          "picks": {
+            "adc": "Corki",
+            "mid": "Aurora",
+            "top": "Gnar",
+            "jungle": "XinZhao",
+            "support": "Nami"
+          }
+        },
+        "team_b": {
+          "name": "Gen.G Esports",
+          "side": "red",
+          "picks": {
+            "adc": "Caitlyn",
+            "mid": "Mel",
+            "top": "TwistedFate",
+            "jungle": "Trundle",
+            "support": "Karma"
+          }
+        }
+      },
+      "bet_placed_at": "2026-04-26T08:08:00-03:00",
+      "match_context": {
+        "kills_red": 17,
+        "pick_line": 27.5,
+        "red_picks": {
+          "adc": "Caitlyn",
+          "mid": "Mel",
+          "top": "TwistedFate",
+          "jungle": "Trundle",
+          "support": "Karma"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Corki",
+          "mid": "Aurora",
+          "top": "Gnar",
+          "jungle": "XinZhao",
+          "support": "Nami"
+        },
+        "kills_blue": 5,
+        "enriched_at": "2026-05-08T14:03:54.564Z",
+        "red_team_id": "100205573495116443",
+        "total_kills": 22,
+        "winner_side": "red",
+        "blue_team_id": "102747101565183056",
+        "trigger_type": "2peel",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128962906281",
+        "lolesports_match_id": "115548128962906279",
+        "match_ambiguous_at_link": false
+      },
+      "cashout_offered": 256.76,
+      "bet_id_bookmaker": "4878063455",
+      "score_at_bet_time": "Nongshim 0:1 Gen.G"
+    }
+  }
+]

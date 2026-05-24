@@ -1,0 +1,567 @@
+[
+  {
+    "id": "a54ad94d-b702-414b-b8aa-8c375a1e2144",
+    "team_a": "HLE",
+    "team_b": "Dplus KIA",
+    "raw_extraction": {
+      "compositions": {
+        "source": "lolesports livestats game 115548128962971868",
+        "team_a": {
+          "name": "Hanwha Life Esports",
+          "side": "blue",
+          "picks": {
+            "adc": "Caitlyn",
+            "mid": "Orianna",
+            "top": "Sion",
+            "jungle": "LeeSin",
+            "support": "Karma"
+          }
+        },
+        "team_b": {
+          "name": "Dplus KIA",
+          "side": "red",
+          "picks": {
+            "adc": "Ashe",
+            "mid": "Zyra",
+            "top": "Irelia",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          }
+        }
+      },
+      "match_context": {
+        "kills_red": 17,
+        "pick_line": 29.5,
+        "red_picks": {
+          "adc": "Ashe",
+          "mid": "Zyra",
+          "top": "Irelia",
+          "jungle": "JarvanIV",
+          "support": "Seraphine"
+        },
+        "under_hit": false,
+        "blue_picks": {
+          "adc": "Caitlyn",
+          "mid": "Orianna",
+          "top": "Sion",
+          "jungle": "LeeSin",
+          "support": "Karma"
+        },
+        "kills_blue": 23,
+        "enriched_at": "2026-05-17T17:49:19.251Z",
+        "red_team_id": "100725845018863243",
+        "total_kills": 40,
+        "winner_side": "blue",
+        "blue_team_id": "100205573496804586",
+        "trigger_type": "2peel",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128962971868",
+        "lolesports_match_id": "115548128962971867",
+        "match_ambiguous_at_link": false
+      },
+      "bookmaker_native": {
+        "bet_id": "20194681572",
+        "raw_pick_text": "Menos de 29.5",
+        "raw_stake_text": "R$ 667,14"
+      }
+    }
+  },
+  {
+    "id": "17a81664-c10d-4b45-acfc-0d19b577faad",
+    "team_a": "HLE",
+    "team_b": "DN SOOPers",
+    "raw_extraction": {
+      "compositions": {
+        "source": "lolesports livestats game 115548128962971856",
+        "team_a": {
+          "name": "Hanwha Life Esports",
+          "side": "red",
+          "picks": {
+            "adc": "Caitlyn",
+            "mid": "Aurora",
+            "top": "Gnar",
+            "jungle": "XinZhao",
+            "support": "Bard"
+          }
+        },
+        "team_b": {
+          "name": "DN SOOPers",
+          "side": "blue",
+          "picks": {
+            "adc": "Jhin",
+            "mid": "Ahri",
+            "top": "Renekton",
+            "jungle": "Pantheon",
+            "support": "Karma"
+          }
+        }
+      },
+      "match_context": {
+        "kills_red": 22,
+        "pick_line": 29.5,
+        "red_picks": {
+          "adc": "Caitlyn",
+          "mid": "Aurora",
+          "top": "Gnar",
+          "jungle": "XinZhao",
+          "support": "Bard"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Jhin",
+          "mid": "Ahri",
+          "top": "Renekton",
+          "jungle": "Pantheon",
+          "support": "Karma"
+        },
+        "kills_blue": 7,
+        "enriched_at": "2026-05-08T14:04:40.542Z",
+        "red_team_id": "100205573496804586",
+        "total_kills": 29,
+        "winner_side": "red",
+        "blue_team_id": "99566404581868574",
+        "trigger_type": "1peel+flex",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128962971856",
+        "lolesports_match_id": "115548128962971855",
+        "match_ambiguous_at_link": false
+      },
+      "bookmaker_native": {
+        "bet_id": "3041596531",
+        "raw_pick_text": "Under 29.5",
+        "raw_stake_text": "BRL 600.00"
+      }
+    }
+  },
+  {
+    "id": "f59027be-74f3-4d35-a3d5-fa44b0ffcbc1",
+    "team_a": "HLE",
+    "team_b": "Dplus KIA",
+    "raw_extraction": {
+      "compositions": {
+        "source": "lolesports livestats game 115548128962971868",
+        "team_a": {
+          "name": "Hanwha Life Esports",
+          "side": "blue",
+          "picks": {
+            "adc": "Caitlyn",
+            "mid": "Orianna",
+            "top": "Sion",
+            "jungle": "LeeSin",
+            "support": "Karma"
+          }
+        },
+        "team_b": {
+          "name": "Dplus KIA",
+          "side": "red",
+          "picks": {
+            "adc": "Ashe",
+            "mid": "Zyra",
+            "top": "Irelia",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          }
+        }
+      },
+      "match_context": {
+        "kills_red": 17,
+        "pick_line": 29.5,
+        "red_picks": {
+          "adc": "Ashe",
+          "mid": "Zyra",
+          "top": "Irelia",
+          "jungle": "JarvanIV",
+          "support": "Seraphine"
+        },
+        "under_hit": false,
+        "blue_picks": {
+          "adc": "Caitlyn",
+          "mid": "Orianna",
+          "top": "Sion",
+          "jungle": "LeeSin",
+          "support": "Karma"
+        },
+        "kills_blue": 23,
+        "enriched_at": "2026-05-17T17:49:19.618Z",
+        "red_team_id": "100725845018863243",
+        "total_kills": 40,
+        "winner_side": "blue",
+        "blue_team_id": "100205573496804586",
+        "trigger_type": "2peel",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128962971868",
+        "lolesports_match_id": "115548128962971867",
+        "match_ambiguous_at_link": false
+      },
+      "bookmaker_native": {
+        "bet_id": "4951341542",
+        "raw_pick_text": "Menos de 29.5",
+        "raw_stake_text": "R$ 320,00"
+      }
+    }
+  },
+  {
+    "id": "e445419f-94e7-41ba-8a03-e73471a58b04",
+    "team_a": "HLE",
+    "team_b": "Dplus KIA",
+    "raw_extraction": {
+      "match_context": {
+        "enriched_at": "2026-05-14T15:04:55.743Z",
+        "coverage_status": "ewc_not_in_lolesports",
+        "league_inferred": "EWC"
+      },
+      "bookmaker_native": {
+        "bet_id": "3046570547",
+        "raw_pick_text": "Under 34.5",
+        "raw_stake_text": "R$ 1.000,00"
+      }
+    }
+  },
+  {
+    "id": "57a3f082-2745-47aa-85e6-63ce5eab21a3",
+    "team_a": "HLE",
+    "team_b": "Dplus KIA",
+    "raw_extraction": {
+      "compositions": {
+        "source": "lolesports livestats game 115548128962971869",
+        "team_a": {
+          "name": "Hanwha Life Esports",
+          "side": "blue",
+          "picks": {
+            "adc": "Corki",
+            "mid": "Cassiopeia",
+            "top": "Yorick",
+            "jungle": "XinZhao",
+            "support": "Nami"
+          }
+        },
+        "team_b": {
+          "name": "Dplus KIA",
+          "side": "red",
+          "picks": {
+            "adc": "Yunara",
+            "mid": "TwistedFate",
+            "top": "Jayce",
+            "jungle": "Nocturne",
+            "support": "Lulu"
+          }
+        }
+      },
+      "match_context": {
+        "kills_red": 8,
+        "pick_line": 30.5,
+        "red_picks": {
+          "adc": "Yunara",
+          "mid": "TwistedFate",
+          "top": "Jayce",
+          "jungle": "Nocturne",
+          "support": "Lulu"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Corki",
+          "mid": "Cassiopeia",
+          "top": "Yorick",
+          "jungle": "XinZhao",
+          "support": "Nami"
+        },
+        "kills_blue": 15,
+        "enriched_at": "2026-05-17T17:49:04.424Z",
+        "red_team_id": "100725845018863243",
+        "total_kills": 23,
+        "winner_side": "blue",
+        "blue_team_id": "100205573496804586",
+        "trigger_type": "2peel",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128962971869",
+        "lolesports_match_id": "115548128962971867",
+        "match_ambiguous_at_link": false
+      },
+      "bookmaker_native": {
+        "bet_id": "#3048568838",
+        "raw_pick_text": "Under 30.5",
+        "raw_stake_text": "BRL 1,000.00"
+      }
+    }
+  },
+  {
+    "id": "7349219f-8fd1-4c7a-bab0-3b084cc33896",
+    "team_a": "NS",
+    "team_b": "HLE",
+    "raw_extraction": {
+      "match_context": {
+        "teams": [
+          {
+            "code": "HLE",
+            "name": "Hanwha Life Esports"
+          },
+          {
+            "code": "NS",
+            "name": "NONGSHIM RED FORCE"
+          }
+        ],
+        "game_id": "115548128962971876",
+        "red_bans": null,
+        "blue_bans": null,
+        "kills_red": 28,
+        "league_id": "98767991310872058",
+        "red_picks": {
+          "adc": "Lucian",
+          "mid": "Annie",
+          "top": "Rumble",
+          "jungle": "MonkeyKing",
+          "support": "Milio"
+        },
+        "under_hit": false,
+        "blue_picks": {
+          "adc": "Jhin",
+          "mid": "Akali",
+          "top": "Yorick",
+          "jungle": "XinZhao",
+          "support": "Bard"
+        },
+        "kills_blue": 15,
+        "red_barons": 1,
+        "red_towers": 9,
+        "settled_at": "2026-05-23T12:06:55.456Z",
+        "start_time": "2026-05-23T10:00:00Z",
+        "blue_barons": 0,
+        "blue_towers": 4,
+        "game_number": 1,
+        "red_dragons": 4,
+        "red_team_id": "102747101565183056",
+        "total_kills": 43,
+        "winner_side": "red",
+        "blue_dragons": 1,
+        "blue_team_id": "100205573496804586",
+        "league_short": "LCK",
+        "trigger_type": "1peel+flex",
+        "kills_at_15min": null,
+        "red_total_gold": 64881,
+        "blue_total_gold": 56494,
+        "first_blood_team": "red",
+        "game_duration_secs": null,
+        "gold_diff_at_15min": null,
+        "lolesports_game_id": "115548128962971876",
+        "lolesports_match_id": "115548128962971875",
+        "series_score_at_bet": null
+      },
+      "bookmaker_native": {
+        "bet_id": "4979294582",
+        "raw_pick_text": "Menos de 30.5",
+        "raw_stake_text": "1000.00"
+      }
+    }
+  },
+  {
+    "id": "f3b28f12-29cb-4265-981b-f4b5e956a17b",
+    "team_a": "BFX",
+    "team_b": "HLE",
+    "raw_extraction": {
+      "compositions": {
+        "source": "lolesports livestats game 115548128962906317",
+        "team_a": {
+          "name": "BNK FEARX",
+          "side": "red",
+          "picks": {
+            "adc": "Lucian",
+            "mid": "TwistedFate",
+            "top": "Sion",
+            "jungle": "Trundle",
+            "support": "Milio"
+          }
+        },
+        "team_b": {
+          "name": "Hanwha Life Esports",
+          "side": "blue",
+          "picks": {
+            "adc": "Ashe",
+            "mid": "Mel",
+            "top": "Ambessa",
+            "jungle": "Pantheon",
+            "support": "Seraphine"
+          }
+        }
+      },
+      "match_context": {
+        "kills_red": 8,
+        "pick_line": 32.5,
+        "red_picks": {
+          "adc": "Lucian",
+          "mid": "TwistedFate",
+          "top": "Sion",
+          "jungle": "Trundle",
+          "support": "Milio"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Ashe",
+          "mid": "Mel",
+          "top": "Ambessa",
+          "jungle": "Pantheon",
+          "support": "Seraphine"
+        },
+        "kills_blue": 13,
+        "enriched_at": "2026-05-22T19:38:07.723Z",
+        "red_team_id": "100725845022060229",
+        "total_kills": 21,
+        "winner_side": "blue",
+        "blue_team_id": "100205573496804586",
+        "trigger_type": "2peel",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128962906317",
+        "lolesports_match_id": "115548128962906315",
+        "match_ambiguous_at_link": false
+      },
+      "ladder_group_id": "05d518fb-9d91-46a5-ac7b-c61a4eb3b81f",
+      "bookmaker_native": {
+        "bet_id": "#3053268187",
+        "raw_pick_text": "Under 32.5",
+        "raw_stake_text": "R$1.000,00"
+      }
+    }
+  },
+  {
+    "id": "51f77a95-ad1d-4ddf-bbec-806e9af1c537",
+    "team_a": "BFX",
+    "team_b": "HLE",
+    "raw_extraction": {
+      "compositions": {
+        "source": "lolesports livestats game 115548128962906317",
+        "team_a": {
+          "name": "BNK FEARX",
+          "side": "red",
+          "picks": {
+            "adc": "Lucian",
+            "mid": "TwistedFate",
+            "top": "Sion",
+            "jungle": "Trundle",
+            "support": "Milio"
+          }
+        },
+        "team_b": {
+          "name": "Hanwha Life Esports",
+          "side": "blue",
+          "picks": {
+            "adc": "Ashe",
+            "mid": "Mel",
+            "top": "Ambessa",
+            "jungle": "Pantheon",
+            "support": "Seraphine"
+          }
+        }
+      },
+      "match_context": {
+        "kills_red": 8,
+        "pick_line": 32.5,
+        "red_picks": {
+          "adc": "Lucian",
+          "mid": "TwistedFate",
+          "top": "Sion",
+          "jungle": "Trundle",
+          "support": "Milio"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Ashe",
+          "mid": "Mel",
+          "top": "Ambessa",
+          "jungle": "Pantheon",
+          "support": "Seraphine"
+        },
+        "kills_blue": 13,
+        "enriched_at": "2026-05-22T19:38:10.742Z",
+        "red_team_id": "100725845022060229",
+        "total_kills": 21,
+        "winner_side": "blue",
+        "blue_team_id": "100205573496804586",
+        "trigger_type": "2peel",
+        "coverage_status": "enriched",
+        "league_inferred": "LCK",
+        "lolesports_game_id": "115548128962906317",
+        "lolesports_match_id": "115548128962906315",
+        "match_ambiguous_at_link": false
+      },
+      "ladder_group_id": "05d518fb-9d91-46a5-ac7b-c61a4eb3b81f",
+      "bookmaker_native": {
+        "bet_id": "#3053268150",
+        "raw_pick_text": "Under 32.5",
+        "raw_stake_text": "R$1.000,00"
+      }
+    }
+  },
+  {
+    "id": "c0f06b09-901d-49c2-a96d-f8ed6e4c455a",
+    "team_a": "NS",
+    "team_b": "HLE",
+    "raw_extraction": {
+      "match_context": {
+        "teams": [
+          {
+            "code": "HLE",
+            "name": "Hanwha Life Esports"
+          },
+          {
+            "code": "NS",
+            "name": "NONGSHIM RED FORCE"
+          }
+        ],
+        "game_id": "115548128962971876",
+        "red_bans": null,
+        "blue_bans": null,
+        "kills_red": 28,
+        "league_id": "98767991310872058",
+        "red_picks": {
+          "adc": "Lucian",
+          "mid": "Annie",
+          "top": "Rumble",
+          "jungle": "MonkeyKing",
+          "support": "Milio"
+        },
+        "under_hit": false,
+        "blue_picks": {
+          "adc": "Jhin",
+          "mid": "Akali",
+          "top": "Yorick",
+          "jungle": "XinZhao",
+          "support": "Bard"
+        },
+        "kills_blue": 15,
+        "red_barons": 1,
+        "red_towers": 9,
+        "settled_at": "2026-05-23T12:06:55.535Z",
+        "start_time": "2026-05-23T10:00:00Z",
+        "blue_barons": 0,
+        "blue_towers": 4,
+        "game_number": 1,
+        "red_dragons": 4,
+        "red_team_id": "102747101565183056",
+        "total_kills": 43,
+        "winner_side": "red",
+        "blue_dragons": 1,
+        "blue_team_id": "100205573496804586",
+        "league_short": "LCK",
+        "trigger_type": "1peel+flex",
+        "kills_at_15min": null,
+        "red_total_gold": 64881,
+        "blue_total_gold": 56494,
+        "first_blood_team": "red",
+        "game_duration_secs": null,
+        "gold_diff_at_15min": null,
+        "lolesports_game_id": "115548128962971876",
+        "lolesports_match_id": "115548128962971875",
+        "series_score_at_bet": null
+      },
+      "bookmaker_native": {
+        "bet_id": "3054800517",
+        "raw_pick_text": "Under 30.5",
+        "raw_stake_text": "BRL 1.000,00"
+      }
+    }
+  }
+]

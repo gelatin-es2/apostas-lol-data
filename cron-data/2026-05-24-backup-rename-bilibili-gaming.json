@@ -1,0 +1,301 @@
+[
+  {
+    "id": "155c0a95-86df-4df6-814d-72651681992a",
+    "team_a": "JDG",
+    "team_b": "BLG",
+    "raw_extraction": {
+      "compositions": {
+        "source": "lolesports livestats game 115615926677896628",
+        "team_a": {
+          "name": "Beijing JDG Esports",
+          "side": "blue",
+          "picks": {
+            "adc": "Jhin",
+            "mid": "Ryze",
+            "top": "Ambessa",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          }
+        },
+        "team_b": {
+          "name": "BILIBILI GAMING",
+          "side": "red",
+          "picks": {
+            "adc": "Ezreal",
+            "mid": "Aurora",
+            "top": "Sion",
+            "jungle": "Vi",
+            "support": "Seraphine"
+          }
+        }
+      },
+      "match_context": {
+        "kills_red": 18,
+        "pick_line": 29.5,
+        "red_picks": {
+          "adc": "Ezreal",
+          "mid": "Aurora",
+          "top": "Sion",
+          "jungle": "Vi",
+          "support": "Seraphine"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Jhin",
+          "mid": "Ryze",
+          "top": "Ambessa",
+          "jungle": "JarvanIV",
+          "support": "Karma"
+        },
+        "kills_blue": 6,
+        "enriched_at": "2026-05-08T14:04:49.770Z",
+        "red_team_id": "99566404853854212",
+        "total_kills": 24,
+        "winner_side": "red",
+        "blue_team_id": "99566404852189289",
+        "trigger_type": "2peel",
+        "coverage_status": "enriched",
+        "league_inferred": "LPL",
+        "lolesports_game_id": "115615926677896628",
+        "lolesports_match_id": "115615926677896627",
+        "match_ambiguous_at_link": false
+      },
+      "bookmaker_native": {
+        "bet_id": "4925503500",
+        "raw_pick_text": "Menos de 29.5",
+        "raw_stake_text": "R$ 600,00"
+      }
+    }
+  },
+  {
+    "id": "2c0cccbe-030f-4d08-898a-54823e37bb7f",
+    "team_a": "Team WE",
+    "team_b": "Bilibili Gaming",
+    "raw_extraction": {
+      "odd": 1.7,
+      "pick": "Under 29.5",
+      "stake": 600,
+      "market": "Total Kills",
+      "team_a": "Team WE",
+      "team_b": "Bilibili Gaming",
+      "bookmaker": "EstrelaBet",
+      "is_map_bet": true,
+      "map_number": 1,
+      "compositions": {
+        "source": "lolesports livestats game 115615926677896636",
+        "team_a": {
+          "name": "Team WE",
+          "side": "red",
+          "picks": {
+            "adc": "Jhin",
+            "mid": "Ahri",
+            "top": "Sion",
+            "jungle": "Xin Zhao",
+            "support": "Karma"
+          }
+        },
+        "team_b": {
+          "name": "Bilibili Gaming",
+          "side": "blue",
+          "picks": {
+            "adc": "Ezreal",
+            "mid": "Annie",
+            "top": "Vayne",
+            "jungle": "Jarvan IV",
+            "support": "Bard"
+          }
+        }
+      },
+      "bet_placed_at": "2026-04-29T08:29:00-03:00",
+      "match_context": {
+        "kills_red": 16,
+        "red_picks": {
+          "adc": "Jhin",
+          "mid": "Ahri",
+          "top": "Sion",
+          "jungle": "XinZhao",
+          "support": "Karma"
+        },
+        "blue_picks": {
+          "adc": "Ezreal",
+          "mid": "Annie",
+          "top": "Vayne",
+          "jungle": "JarvanIV",
+          "support": "Bard"
+        },
+        "kills_blue": 24,
+        "start_time": "2026-04-29T11:00:00Z",
+        "red_team_id": "98767991887166787",
+        "total_kills": 40,
+        "winner_side": "blue",
+        "blue_team_id": "99566404853854212",
+        "trigger_type": "1peel+flex",
+        "backfill_source": "manual_fuzzy_match_2026-05-22",
+        "lolesports_game_id": "115615926677896636",
+        "lolesports_match_id": "115615926677896635"
+      },
+      "bet_id_bookmaker": "4889856979",
+      "lolesports_game_id": "115615926677896636",
+      "lolesports_match_id": "115615926677896635"
+    }
+  },
+  {
+    "id": "8424cf6b-8754-4cae-bdb0-89dbb4a02bf7",
+    "team_a": "WeiboGaming",
+    "team_b": "Bilibili Gaming",
+    "raw_extraction": {
+      "odd": 1.77,
+      "pick": "Over 29.5",
+      "stake": 300,
+      "market": "Total Kills",
+      "team_a": "Weibo Gaming",
+      "team_b": "Bilibili Gaming",
+      "strategy": "hedge",
+      "bookmaker": "EstrelaBet",
+      "hedge_note": "Hedge sintético consolidado: 300 Over EstrelaBet @1.77 + 300 Under Pinnacle @1.746 = NET -R$69",
+      "hedge_side": "over",
+      "is_map_bet": true,
+      "map_number": 2,
+      "compositions": {
+        "source": "lolesports livestats game 115615926677896645",
+        "team_a": {
+          "name": "WeiboGaming",
+          "side": "blue",
+          "picks": {
+            "adc": "Jhin",
+            "mid": "Leblanc",
+            "top": "Ambessa",
+            "jungle": "Vi",
+            "support": "Karma"
+          }
+        },
+        "team_b": {
+          "name": "BILIBILI GAMING",
+          "side": "red",
+          "picks": {
+            "adc": "MissFortune",
+            "mid": "Azir",
+            "top": "Varus",
+            "jungle": "MonkeyKing",
+            "support": "Nautilus"
+          }
+        }
+      },
+      "bet_placed_at": "2026-04-26T09:20:00-03:00",
+      "match_context": {
+        "kills_red": 22,
+        "pick_line": 29.5,
+        "red_picks": {
+          "adc": "MissFortune",
+          "mid": "Azir",
+          "top": "Varus",
+          "jungle": "MonkeyKing",
+          "support": "Nautilus"
+        },
+        "under_hit": false,
+        "blue_picks": {
+          "adc": "Jhin",
+          "mid": "Leblanc",
+          "top": "Ambessa",
+          "jungle": "Vi",
+          "support": "Karma"
+        },
+        "kills_blue": 14,
+        "enriched_at": "2026-05-08T14:04:33.004Z",
+        "red_team_id": "99566404853854212",
+        "total_kills": 36,
+        "winner_side": "red",
+        "blue_team_id": "99566404853058754",
+        "trigger_type": null,
+        "coverage_status": "enriched",
+        "league_inferred": "LPL",
+        "lolesports_game_id": "115615926677896645",
+        "lolesports_match_id": "115615926677896643",
+        "match_ambiguous_at_link": false
+      },
+      "hedge_group_id": "hedge-wbg-blg-m2-20260426",
+      "bet_id_bookmaker": "4878308167",
+      "hedge_consolidated": true,
+      "lolesports_game_id": "115615926677896645",
+      "hedge_legs_original": [
+        "8424cf6b",
+        "80e096d6"
+      ]
+    }
+  },
+  {
+    "id": "64ad478a-bb29-496b-a37c-d98b71af79c3",
+    "team_a": "WeiboGaming",
+    "team_b": "Bilibili Gaming",
+    "raw_extraction": {
+      "odd": 1.72,
+      "pick": "Under 29.5",
+      "stake": 600,
+      "market": "Total Kills",
+      "team_a": "Weibo Gaming",
+      "team_b": "Bilibili Gaming",
+      "bookmaker": "EstrelaBet",
+      "confidence": "high",
+      "is_map_bet": true,
+      "map_number": 1,
+      "compositions": {
+        "source": "lolesports livestats game 115615926677896644",
+        "team_a": {
+          "name": "WeiboGaming",
+          "side": "red",
+          "picks": {
+            "adc": "Ashe",
+            "mid": "Mel",
+            "top": "Aurora",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          }
+        },
+        "team_b": {
+          "name": "BILIBILI GAMING",
+          "side": "blue",
+          "picks": {
+            "adc": "Ezreal",
+            "mid": "Annie",
+            "top": "Gnar",
+            "jungle": "Naafiri",
+            "support": "Bard"
+          }
+        }
+      },
+      "bet_placed_at": "2026-04-26T08:27:00-03:00",
+      "match_context": {
+        "kills_red": 9,
+        "pick_line": 29.5,
+        "red_picks": {
+          "adc": "Ashe",
+          "mid": "Mel",
+          "top": "Aurora",
+          "jungle": "JarvanIV",
+          "support": "Seraphine"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Ezreal",
+          "mid": "Annie",
+          "top": "Gnar",
+          "jungle": "Naafiri",
+          "support": "Bard"
+        },
+        "kills_blue": 17,
+        "enriched_at": "2026-05-08T14:04:26.927Z",
+        "red_team_id": "99566404853058754",
+        "total_kills": 26,
+        "winner_side": "blue",
+        "blue_team_id": "99566404853854212",
+        "trigger_type": "1peel+flex",
+        "coverage_status": "enriched",
+        "league_inferred": "LPL",
+        "lolesports_game_id": "115615926677896644",
+        "lolesports_match_id": "115615926677896643",
+        "match_ambiguous_at_link": false
+      },
+      "bet_id_bookmaker": "4878119069"
+    }
+  }
+]
