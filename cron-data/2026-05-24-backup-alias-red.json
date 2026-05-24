@@ -1,0 +1,348 @@
+{
+  "alias": "RED",
+  "canonical": "RED Canids Kalunga",
+  "backed_up_at": "2026-05-24T12:20:02.217Z",
+  "rows_team_a": [
+    {
+      "id": "6ec2fa9c-8ed5-43a1-9b5e-1e54c1db4742",
+      "team_a": "RED",
+      "team_b": "Fluxo",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181843",
+          "team_a": {
+            "name": "RED Canids Kalunga",
+            "side": "blue",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Azir",
+              "top": "Anivia",
+              "jungle": "DrMundo",
+              "support": "Alistar"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "red",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Orianna",
+              "top": "Vayne",
+              "jungle": "Nocturne",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Sivir",
+            "mid": "Orianna",
+            "top": "Vayne",
+            "jungle": "Nocturne",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Zeri",
+            "mid": "Azir",
+            "top": "Anivia",
+            "jungle": "DrMundo",
+            "support": "Alistar"
+          },
+          "kills_blue": 13,
+          "enriched_at": "2026-05-24T09:18:23.537Z",
+          "red_team_id": "109480056092207899",
+          "total_kills": 25,
+          "winner_side": null,
+          "blue_team_id": "99566408221961358",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181843",
+          "lolesports_match_id": "115565670260181839",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "20205664362",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 200,00"
+        }
+      }
+    },
+    {
+      "id": "d2f4a79f-76be-42a1-aae5-9400204542b0",
+      "team_a": "RED",
+      "team_b": "Fluxo",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181842",
+          "team_a": {
+            "name": "RED Canids Kalunga",
+            "side": "blue",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Sylas",
+              "top": "Jayce",
+              "jungle": "RekSai",
+              "support": "Rakan"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "red",
+            "picks": {
+              "adc": "Smolder",
+              "mid": "Ahri",
+              "top": "Renekton",
+              "jungle": "XinZhao",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 1,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Smolder",
+            "mid": "Ahri",
+            "top": "Renekton",
+            "jungle": "XinZhao",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Jhin",
+            "mid": "Sylas",
+            "top": "Jayce",
+            "jungle": "RekSai",
+            "support": "Rakan"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:18:55.164Z",
+          "red_team_id": "109480056092207899",
+          "total_kills": 18,
+          "winner_side": "blue",
+          "blue_team_id": "99566408221961358",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181842",
+          "lolesports_match_id": "115565670260181839",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4956818988",
+          "raw_pick_text": "Menos de 30.5",
+          "raw_stake_text": "R$ 740,13"
+        }
+      }
+    },
+    {
+      "id": "54ec6850-77b6-4fab-8e06-2734f8c73df1",
+      "team_a": "RED",
+      "team_b": "Fluxo",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181843",
+          "team_a": {
+            "name": "RED Canids Kalunga",
+            "side": "blue",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Azir",
+              "top": "Anivia",
+              "jungle": "DrMundo",
+              "support": "Alistar"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "red",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Orianna",
+              "top": "Vayne",
+              "jungle": "Nocturne",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Sivir",
+            "mid": "Orianna",
+            "top": "Vayne",
+            "jungle": "Nocturne",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Zeri",
+            "mid": "Azir",
+            "top": "Anivia",
+            "jungle": "DrMundo",
+            "support": "Alistar"
+          },
+          "kills_blue": 13,
+          "enriched_at": "2026-05-24T09:18:58.142Z",
+          "red_team_id": "109480056092207899",
+          "total_kills": 25,
+          "winner_side": null,
+          "blue_team_id": "99566408221961358",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181843",
+          "lolesports_match_id": "115565670260181839",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "20205664372",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 300,00"
+        }
+      }
+    },
+    {
+      "id": "e91f1fa3-63e7-4c3d-ada1-ad41f571563c",
+      "team_a": "RED",
+      "team_b": "Fluxo",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181841",
+          "team_a": {
+            "name": "RED Canids Kalunga",
+            "side": "red",
+            "picks": {
+              "adc": "Senna",
+              "mid": "Taliyah",
+              "top": "Gwen",
+              "jungle": "Pantheon",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Tristana",
+              "top": "Sion",
+              "jungle": "Skarner",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Senna",
+            "mid": "Taliyah",
+            "top": "Gwen",
+            "jungle": "Pantheon",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Tristana",
+            "top": "Sion",
+            "jungle": "Skarner",
+            "support": "Lulu"
+          },
+          "kills_blue": 8,
+          "enriched_at": "2026-05-24T09:19:09.535Z",
+          "red_team_id": "99566408221961358",
+          "total_kills": 24,
+          "winner_side": "red",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181841",
+          "lolesports_match_id": "115565670260181839",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#3050028474",
+          "raw_pick_text": "Under 29.5",
+          "raw_stake_text": "BRL 1,000.00"
+        }
+      }
+    },
+    {
+      "id": "cf2f30d5-bb91-44cc-bffa-9b20874a1446",
+      "team_a": "RED",
+      "team_b": "Fluxo",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181843",
+          "team_a": {
+            "name": "RED Canids Kalunga",
+            "side": "blue",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Azir",
+              "top": "Anivia",
+              "jungle": "DrMundo",
+              "support": "Alistar"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "red",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Orianna",
+              "top": "Vayne",
+              "jungle": "Nocturne",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Sivir",
+            "mid": "Orianna",
+            "top": "Vayne",
+            "jungle": "Nocturne",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Zeri",
+            "mid": "Azir",
+            "top": "Anivia",
+            "jungle": "DrMundo",
+            "support": "Alistar"
+          },
+          "kills_blue": 13,
+          "enriched_at": "2026-05-24T09:22:48.561Z",
+          "red_team_id": "109480056092207899",
+          "total_kills": 25,
+          "winner_side": null,
+          "blue_team_id": "99566408221961358",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181843",
+          "lolesports_match_id": "115565670260181839",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "20205664352",
+          "raw_pick_text": "Menos de 29.5",
+          "raw_stake_text": "R$ 200,00"
+        }
+      }
+    }
+  ],
+  "rows_team_b": []
+}

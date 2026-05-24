@@ -1,0 +1,144 @@
+{
+  "alias": "IG",
+  "canonical": "Invictus Gaming",
+  "backed_up_at": "2026-05-24T12:20:04.032Z",
+  "rows_team_a": [],
+  "rows_team_b": [
+    {
+      "id": "6bffc8d8-303f-48dc-84f4-6f6525879141",
+      "team_a": "Xi'an Team WE",
+      "team_b": "IG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896657",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ahri",
+              "top": "Yorick",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Invictus Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Sylas",
+              "top": "Jayce",
+              "jungle": "Nocturne",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Sylas",
+            "top": "Jayce",
+            "jungle": "Nocturne",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ahri",
+            "top": "Yorick",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "kills_blue": 6,
+          "enriched_at": "2026-05-24T09:19:51.014Z",
+          "red_team_id": "99566404848691211",
+          "total_kills": 27,
+          "winner_side": "red",
+          "blue_team_id": "98767991887166787",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896657",
+          "lolesports_match_id": "115615926677896655",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3041588327",
+          "raw_pick_text": "Under 30.5",
+          "raw_stake_text": "BRL 600.00"
+        }
+      }
+    },
+    {
+      "id": "d75fa8fc-5ae6-4c89-b5ae-d545b7ca2ec3",
+      "team_a": "Xi'an Team WE",
+      "team_b": "IG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896657",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ahri",
+              "top": "Yorick",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Invictus Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Sylas",
+              "top": "Jayce",
+              "jungle": "Nocturne",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 31.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Sylas",
+            "top": "Jayce",
+            "jungle": "Nocturne",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ahri",
+            "top": "Yorick",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "kills_blue": 6,
+          "enriched_at": "2026-05-24T09:19:42.133Z",
+          "red_team_id": "99566404848691211",
+          "total_kills": 27,
+          "winner_side": "red",
+          "blue_team_id": "98767991887166787",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896657",
+          "lolesports_match_id": "115615926677896655",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3041587364",
+          "raw_pick_text": "Under 31.5",
+          "raw_stake_text": "BRL 600.00"
+        }
+      }
+    }
+  ]
+}

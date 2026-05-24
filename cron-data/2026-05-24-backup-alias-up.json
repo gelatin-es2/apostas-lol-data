@@ -1,0 +1,238 @@
+{
+  "alias": "UP",
+  "canonical": "Ultra Prime",
+  "backed_up_at": "2026-05-24T12:20:00.706Z",
+  "rows_team_a": [
+    {
+      "id": "2e8053b9-8c21-48fa-a02d-ab1b307a720a",
+      "team_a": "UP",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "manual_from_print_2026-05-08_map3",
+          "team_a": {
+            "name": "UP",
+            "side": "unknown",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Ahri",
+              "top": "KSante",
+              "jungle": "Nocturne",
+              "support": "Yuumi"
+            }
+          },
+          "team_b": {
+            "name": "LNG",
+            "side": "unknown",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Yone",
+              "top": "Gwen",
+              "jungle": "Trundle",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "note": "Mapa 3 da serie aconteceu (placar final 1-2 LNG, mapa 3 LNG 14 - 8 UP, 22 kills, 30:13 duracao). Riot livestats /window retornou 204 vazio mas o jogo foi disputado. Settled manual pelo print do Elvis 2026-05-08.",
+          "teams": [
+            {
+              "code": "UP",
+              "name": "Ultra Prime"
+            },
+            {
+              "code": "LNG",
+              "name": "Suzhou LNG Esports"
+            }
+          ],
+          "kills_up": 8,
+          "up_picks": {
+            "adc": "Zeri",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "Nocturne",
+            "support": "Yuumi"
+          },
+          "kills_lng": 14,
+          "kills_red": 8,
+          "league_id": "98767991314006698",
+          "lng_picks": {
+            "adc": "Yunara",
+            "mid": "Yone",
+            "top": "Gwen",
+            "jungle": "Trundle",
+            "support": "Lulu"
+          },
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "Nocturne",
+            "support": "Yuumi"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Yone",
+            "top": "Gwen",
+            "jungle": "Trundle",
+            "support": "Lulu"
+          },
+          "kills_blue": 14,
+          "start_time": "2026-05-08T09:00:00Z",
+          "total_kills": 22,
+          "league_short": "LPL",
+          "map3_game_id": "115615926685761106",
+          "trigger_type": "2peel",
+          "settle_source": "manual_from_print_2026-05-08",
+          "coverage_status": "manual_settled_riot_livestats_unavailable",
+          "lolesports_match_id": "115615924499588653",
+          "map3_state_at_placement": "inProgress"
+        },
+        "bookmaker_native": {
+          "bet_id": "4925391402",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 600,00"
+        }
+      }
+    },
+    {
+      "id": "7e568fc9-07d5-4686-bd36-d600c4af153c",
+      "team_a": "UP",
+      "team_b": "OMG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615926685761109",
+          "team_a": {
+            "name": "Ultra Prime",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Akali",
+              "top": "Yorick",
+              "jungle": "Pantheon",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Oh My God",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Leblanc",
+              "top": "Gnar",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 5,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Leblanc",
+            "top": "Gnar",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Akali",
+            "top": "Yorick",
+            "jungle": "Pantheon",
+            "support": "Bard"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:22:46.392Z",
+          "red_team_id": "99566404845279652",
+          "total_kills": 24,
+          "winner_side": "blue",
+          "blue_team_id": "103461966986776720",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685761109",
+          "lolesports_match_id": "115615924499588657",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#3048605532",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "BRL 1,000.00"
+        }
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "bbd4d39d-f22b-4f2d-95e5-37cf317e7545",
+      "team_a": "OMG",
+      "team_b": "UP",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588658",
+          "team_a": {
+            "name": "Oh My God",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Taliyah",
+              "top": "Rumble",
+              "jungle": "Vi",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Ultra Prime",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ryze",
+              "top": "KSante",
+              "jungle": "JarvanIV",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Taliyah",
+            "top": "Rumble",
+            "jungle": "Vi",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ryze",
+            "top": "KSante",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:18:05.121Z",
+          "red_team_id": "99566404845279652",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "103461966986776720",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588658",
+          "lolesports_match_id": "115615924499588657",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4951392250",
+          "raw_pick_text": "Menos de 25.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    }
+  ]
+}

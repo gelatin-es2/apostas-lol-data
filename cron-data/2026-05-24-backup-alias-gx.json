@@ -1,0 +1,76 @@
+{
+  "alias": "GX",
+  "canonical": "GIANTX",
+  "backed_up_at": "2026-05-24T12:20:01.756Z",
+  "rows_team_a": [
+    {
+      "id": "6a34f634-ab4e-439b-8e88-67a5a5ae3cc2",
+      "team_a": "GX",
+      "team_b": "MKOI",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523762",
+          "team_a": {
+            "name": "GIANTX",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Azir",
+              "top": "Renekton",
+              "jungle": "Skarner",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Movistar KOI",
+            "side": "blue",
+            "picks": {
+              "adc": "Kalista",
+              "mid": "Anivia",
+              "top": "Shen",
+              "jungle": "JarvanIV",
+              "support": "Renata"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 13,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Azir",
+            "top": "Renekton",
+            "jungle": "Skarner",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Kalista",
+            "mid": "Anivia",
+            "top": "Shen",
+            "jungle": "JarvanIV",
+            "support": "Renata"
+          },
+          "kills_blue": 26,
+          "enriched_at": "2026-05-24T09:17:55.335Z",
+          "red_team_id": "101383793572656373",
+          "total_kills": 39,
+          "winner_side": "blue",
+          "blue_team_id": "103461966965149786",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523762",
+          "lolesports_match_id": "115548668059523760",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3043182516",
+          "raw_pick_text": "Under 26.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    }
+  ],
+  "rows_team_b": []
+}

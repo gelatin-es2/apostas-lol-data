@@ -1,0 +1,361 @@
+{
+  "alias": "RED Canids",
+  "canonical": "RED Canids Kalunga",
+  "backed_up_at": "2026-05-24T12:20:02.291Z",
+  "rows_team_a": [],
+  "rows_team_b": [
+    {
+      "id": "139b40a0-e0d3-4edf-9941-d7a8f9d1de6b",
+      "team_a": "FURIA",
+      "team_b": "RED Canids",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260116219",
+          "team_a": {
+            "name": "FURIA",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Orianna",
+              "top": "Gnar",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "RED Canids Kalunga",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ryze",
+              "top": "Renekton",
+              "jungle": "Nocturne",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 26,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Orianna",
+            "top": "Gnar",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Ryze",
+            "top": "Renekton",
+            "jungle": "Nocturne",
+            "support": "Nami"
+          },
+          "kills_blue": 9,
+          "enriched_at": "2026-05-24T09:19:44.780Z",
+          "red_team_id": "100205576309502431",
+          "total_kills": 35,
+          "winner_side": "red",
+          "blue_team_id": "99566408221961358",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260116219",
+          "lolesports_match_id": "115565670260116217",
+          "match_ambiguous_at_link": false
+        }
+      }
+    },
+    {
+      "id": "cae8ee04-b41e-41ff-9e43-dda90b2451a8",
+      "team_a": "FURIA",
+      "team_b": "RED Canids",
+      "raw_extraction": {
+        "odd": 1.95,
+        "pick": "Under 27.5",
+        "stake": 200,
+        "strategy": "ladder_under",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 1,
+        "tournament": "CBLOL 2026 Split 1",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260116218",
+          "team_a": {
+            "name": "FURIA",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Annie",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Yuumi"
+            }
+          },
+          "team_b": {
+            "name": "RED Canids Kalunga",
+            "side": "blue",
+            "picks": {
+              "adc": "Varus",
+              "mid": "Anivia",
+              "top": "Rumble",
+              "jungle": "Trundle",
+              "support": "Alistar"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 14,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Annie",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Yuumi"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Varus",
+            "mid": "Anivia",
+            "top": "Rumble",
+            "jungle": "Trundle",
+            "support": "Alistar"
+          },
+          "kills_blue": 22,
+          "enriched_at": "2026-05-24T09:19:57.326Z",
+          "red_team_id": "100205576309502431",
+          "total_kills": 36,
+          "winner_side": "blue",
+          "blue_team_id": "99566408221961358",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260116218",
+          "lolesports_match_id": "115565670260116217",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 390
+      }
+    },
+    {
+      "id": "6d5b78f8-be58-49c6-a0b4-9cef70a8a976",
+      "team_a": "FURIA",
+      "team_b": "RED Canids",
+      "raw_extraction": {
+        "odd": 1.65,
+        "pick": "Under 29.5",
+        "stake": 200,
+        "strategy": "ladder_under",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 1,
+        "tournament": "CBLOL 2026 Split 1",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260116218",
+          "team_a": {
+            "name": "FURIA",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Annie",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Yuumi"
+            }
+          },
+          "team_b": {
+            "name": "RED Canids Kalunga",
+            "side": "blue",
+            "picks": {
+              "adc": "Varus",
+              "mid": "Anivia",
+              "top": "Rumble",
+              "jungle": "Trundle",
+              "support": "Alistar"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 14,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Annie",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Yuumi"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Varus",
+            "mid": "Anivia",
+            "top": "Rumble",
+            "jungle": "Trundle",
+            "support": "Alistar"
+          },
+          "kills_blue": 22,
+          "enriched_at": "2026-05-24T09:20:16.560Z",
+          "red_team_id": "100205576309502431",
+          "total_kills": 36,
+          "winner_side": "blue",
+          "blue_team_id": "99566408221961358",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260116218",
+          "lolesports_match_id": "115565670260116217",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 330
+      }
+    },
+    {
+      "id": "4bb5a553-4cf9-4983-9c81-596b0a34fb4c",
+      "team_a": "Los Grandes",
+      "team_b": "RED Canids",
+      "raw_extraction": {
+        "odd": 1.746,
+        "pick": "Under 28.5",
+        "stake": 300,
+        "market": "Map 1 Total Kills",
+        "team_a": "Los Grandes",
+        "team_b": "RED Canids",
+        "currency": "BRL",
+        "bookmaker": "Pinnacle",
+        "confidence": "high",
+        "is_map_bet": true,
+        "map_number": 1,
+        "compositions": {
+          "source": "lolesports livestats game 115565670260116254",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Orianna",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "RED Canids Kalunga",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Leblanc",
+              "top": "Rumble",
+              "jungle": "Pantheon",
+              "support": "Neeko"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 26,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Leblanc",
+            "top": "Rumble",
+            "jungle": "Pantheon",
+            "support": "Neeko"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Orianna",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Nami"
+          },
+          "kills_blue": 15,
+          "enriched_at": "2026-05-24T09:20:28.275Z",
+          "red_team_id": "99566408221961358",
+          "total_kills": 41,
+          "winner_side": "red",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260116254",
+          "lolesports_match_id": "115565670260116253",
+          "match_ambiguous_at_link": false
+        }
+      }
+    },
+    {
+      "id": "add68527-dc75-4eef-bf94-f7b97eb2fe37",
+      "team_a": "FURIA",
+      "team_b": "RED Canids",
+      "raw_extraction": {
+        "odd": 1.79,
+        "pick": "Under 28.5",
+        "stake": 200,
+        "strategy": "ladder_under",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 1,
+        "tournament": "CBLOL 2026 Split 1",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260116218",
+          "team_a": {
+            "name": "FURIA",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Annie",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Yuumi"
+            }
+          },
+          "team_b": {
+            "name": "RED Canids Kalunga",
+            "side": "blue",
+            "picks": {
+              "adc": "Varus",
+              "mid": "Anivia",
+              "top": "Rumble",
+              "jungle": "Trundle",
+              "support": "Alistar"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 14,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Annie",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Yuumi"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Varus",
+            "mid": "Anivia",
+            "top": "Rumble",
+            "jungle": "Trundle",
+            "support": "Alistar"
+          },
+          "kills_blue": 22,
+          "enriched_at": "2026-05-24T09:22:36.606Z",
+          "red_team_id": "100205576309502431",
+          "total_kills": 36,
+          "winner_side": "blue",
+          "blue_team_id": "99566408221961358",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260116218",
+          "lolesports_match_id": "115565670260116217",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 358
+      }
+    }
+  ]
+}

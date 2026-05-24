@@ -1,0 +1,154 @@
+{
+  "alias": "GEN",
+  "canonical": "Gen.G Esports",
+  "backed_up_at": "2026-05-24T12:20:01.141Z",
+  "rows_team_a": [],
+  "rows_team_b": [
+    {
+      "id": "f0f6898b-4e75-437d-a7e6-c64cec5d7cf5",
+      "team_a": "DN SOOPers",
+      "team_b": "GEN",
+      "raw_extraction": {
+        "match_context": {
+          "teams": [
+            {
+              "code": "GEN",
+              "name": "Gen.G Esports"
+            },
+            {
+              "code": "DNS",
+              "name": "DN SOOPers"
+            }
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 6,
+          "league_id": "98767991310872058",
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Vayne",
+            "jungle": "Maokai",
+            "support": "Milio"
+          },
+          "kills_blue": 14,
+          "red_barons": 0,
+          "red_towers": 1,
+          "settled_at": "2026-05-24T09:39:18.555Z",
+          "start_time": "2026-05-24T08:00:00Z",
+          "blue_barons": 1,
+          "blue_towers": 9,
+          "red_dragons": 2,
+          "red_team_id": "99566404581868574",
+          "total_kills": 20,
+          "winner_side": "blue",
+          "blue_dragons": 2,
+          "blue_team_id": "100205573495116443",
+          "league_short": "LCK",
+          "trigger_type": "2peel",
+          "kills_at_15min": null,
+          "red_total_gold": 47653,
+          "blue_total_gold": 59254,
+          "selected_reason": "live",
+          "first_blood_team": "blue",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115548128962971949",
+          "lolesports_match_id": "115548128962971947",
+          "series_score_at_bet": {
+            "current_map": 2,
+            "maps_completed_before": 1
+          }
+        },
+        "ladder_group_id": "74a813c1-f045-48ba-9b32-14950eb0a4b1",
+        "ladder_position": "28.5",
+        "bookmaker_native": {
+          "bet_id": "#3055625398",
+          "raw_pick_text": "DN SOOPers (Kills) - Gen.G (Kills), Under 28.5",
+          "raw_stake_text": "BRL 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "d97f5d33-5f5c-44d3-acd4-c90dc07863c2",
+      "team_a": "DN SOOPers",
+      "team_b": "GEN",
+      "raw_extraction": {
+        "match_context": {
+          "teams": [
+            {
+              "code": "GEN",
+              "name": "Gen.G Esports"
+            },
+            {
+              "code": "DNS",
+              "name": "DN SOOPers"
+            }
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 6,
+          "league_id": "98767991310872058",
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Vayne",
+            "jungle": "Maokai",
+            "support": "Milio"
+          },
+          "kills_blue": 14,
+          "red_barons": 0,
+          "red_towers": 1,
+          "settled_at": "2026-05-24T09:39:18.627Z",
+          "start_time": "2026-05-24T08:00:00Z",
+          "blue_barons": 1,
+          "blue_towers": 9,
+          "red_dragons": 2,
+          "red_team_id": "99566404581868574",
+          "total_kills": 20,
+          "winner_side": "blue",
+          "blue_dragons": 2,
+          "blue_team_id": "100205573495116443",
+          "league_short": "LCK",
+          "trigger_type": "2peel",
+          "kills_at_15min": null,
+          "red_total_gold": 47653,
+          "blue_total_gold": 59254,
+          "selected_reason": "live",
+          "first_blood_team": "blue",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115548128962971949",
+          "lolesports_match_id": "115548128962971947",
+          "series_score_at_bet": {
+            "current_map": 2,
+            "maps_completed_before": 1
+          }
+        },
+        "ladder_group_id": "74a813c1-f045-48ba-9b32-14950eb0a4b1",
+        "ladder_position": "28.5",
+        "bookmaker_native": {
+          "bet_id": "#3055626219",
+          "raw_pick_text": "DN SOOPers (Kills) - Gen.G (Kills), Under 28.5",
+          "raw_stake_text": "BRL 3.000,00"
+        }
+      }
+    }
+  ]
+}

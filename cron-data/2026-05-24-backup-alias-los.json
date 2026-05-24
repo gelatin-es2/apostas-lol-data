@@ -1,0 +1,1917 @@
+{
+  "alias": "LOS",
+  "canonical": "Los Grandes",
+  "backed_up_at": "2026-05-24T12:20:01.346Z",
+  "rows_team_a": [
+    {
+      "id": "56a41c23-9063-4539-86c7-08ae2aa2f761",
+      "team_a": "LOS",
+      "team_b": "FX",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181828",
+          "team_a": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Viktor",
+              "top": "Kennen",
+              "jungle": "Trundle",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Zoe",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 3,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Viktor",
+            "top": "Kennen",
+            "jungle": "Trundle",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Zoe",
+            "top": "Renekton",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:18:19.145Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 19,
+          "winner_side": "blue",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181828",
+          "lolesports_match_id": "115565670260181827",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3045318919",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "R$ 500,00"
+        }
+      }
+    },
+    {
+      "id": "7de36edb-9212-48bb-8b0f-a19a73f9c014",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:22:52.226Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": "3055117023",
+          "currency": "BRL",
+          "raw_pick_text": "Under 30.5",
+          "raw_stake_text": "539.50"
+        }
+      }
+    },
+    {
+      "id": "2d5f80ca-d51b-4eec-8df6-5f72db328cd1",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:06.970Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": null,
+          "payout": 74.81,
+          "currency": "BRL",
+          "raw_pick_text": "Under 26.5",
+          "raw_stake_text": "37.40 BRL"
+        }
+      }
+    },
+    {
+      "id": "e0818baf-18db-4ef3-b2ea-5bf5e025ac0f",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181848",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ryze",
+              "top": "Sylas",
+              "jungle": "RekSai",
+              "support": "Anivia"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Syndra",
+              "top": "Gnar",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Syndra",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Sylas",
+            "jungle": "RekSai",
+            "support": "Anivia"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:12.013Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181848",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "0fd42f55-1e6c-465a-b8a0-fcd8b1fd1c45",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 29.5",
+          "raw_stake_text": "51.90 BRL"
+        }
+      }
+    },
+    {
+      "id": "3af55066-2685-4050-856e-da95d98ec854",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181848",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ryze",
+              "top": "Sylas",
+              "jungle": "RekSai",
+              "support": "Anivia"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Syndra",
+              "top": "Gnar",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Syndra",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Sylas",
+            "jungle": "RekSai",
+            "support": "Anivia"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:14.892Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181848",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "0fd42f55-1e6c-465a-b8a0-fcd8b1fd1c45",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "51.90 BRL"
+        }
+      }
+    },
+    {
+      "id": "ac26bc0c-d937-47c7-8098-f9d967e4f15a",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:06.629Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": null,
+          "payout": 109.23,
+          "currency": "BRL",
+          "raw_pick_text": "Under 29.5",
+          "raw_stake_text": "71.89 BRL"
+        }
+      }
+    },
+    {
+      "id": "65884fb4-c414-4542-a0cc-df58d88898e4",
+      "team_a": "LOS",
+      "team_b": "LEVIATÁN",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115565670260116226",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Viktor",
+              "top": "Ambessa",
+              "jungle": "Aatrox",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "LEVIATÁN",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Aurora",
+              "top": "Jayce",
+              "jungle": "XinZhao",
+              "support": "Anivia"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Aurora",
+            "top": "Jayce",
+            "jungle": "XinZhao",
+            "support": "Anivia"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Sivir",
+            "mid": "Viktor",
+            "top": "Ambessa",
+            "jungle": "Aatrox",
+            "support": "Karma"
+          },
+          "kills_blue": 21,
+          "enriched_at": "2026-05-24T09:20:54.473Z",
+          "red_team_id": "107598699275015260",
+          "total_kills": 28,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260116226",
+          "lolesports_match_id": "115565670260116225",
+          "match_ambiguous_at_link": false
+        },
+        "missed_opportunity": true
+      }
+    },
+    {
+      "id": "4bcbad40-af62-4918-9187-341289140a78",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:20:57.794Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": null,
+          "payout": 94.85,
+          "currency": "BRL",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "57.51 BRL"
+        }
+      }
+    },
+    {
+      "id": "9a610b21-5b02-4b89-84e7-d81b38ddde81",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:20:59.927Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": null,
+          "payout": 84.16,
+          "currency": "BRL",
+          "raw_pick_text": "Under 25.5",
+          "raw_stake_text": "37.40 BRL"
+        }
+      }
+    },
+    {
+      "id": "89f15755-1feb-4cd4-ba42-d5c36748be60",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:03.348Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": "4980547801",
+          "currency": "BRL",
+          "raw_pick_text": "Menos de 26.5",
+          "raw_stake_text": "R$750,00"
+        }
+      }
+    },
+    {
+      "id": "1eee3654-d3fb-47d5-ac26-ec098204e870",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:06.288Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": "3055101659",
+          "currency": "BRL",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "R$1000"
+        }
+      }
+    },
+    {
+      "id": "19dc3a8b-b5d4-4c25-b68b-20205c71af95",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:07.312Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": null,
+          "payout": 84.16,
+          "currency": "BRL",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "46.76 BRL"
+        }
+      }
+    },
+    {
+      "id": "d52f270d-2271-4f2e-9d51-d9e4012ed989",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181848",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ryze",
+              "top": "Sylas",
+              "jungle": "RekSai",
+              "support": "Anivia"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Syndra",
+              "top": "Gnar",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Syndra",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Sylas",
+            "jungle": "RekSai",
+            "support": "Anivia"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:11.659Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181848",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "0fd42f55-1e6c-465a-b8a0-fcd8b1fd1c45",
+        "bookmaker_native": {
+          "bet_id": "4980795430",
+          "raw_pick_text": "Menos de 27.5 Terceiro Mapa Total Kills",
+          "raw_stake_text": "R$694,44"
+        }
+      }
+    },
+    {
+      "id": "71869fdb-979d-403f-a71b-cf0f197f0bf3",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181848",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ryze",
+              "top": "Sylas",
+              "jungle": "RekSai",
+              "support": "Anivia"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Syndra",
+              "top": "Gnar",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Syndra",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Sylas",
+            "jungle": "RekSai",
+            "support": "Anivia"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:13.329Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181848",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "0fd42f55-1e6c-465a-b8a0-fcd8b1fd1c45",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 30.5",
+          "raw_stake_text": "51.90 BRL"
+        }
+      }
+    },
+    {
+      "id": "ce8cefa3-bf01-4ceb-8692-93347294a9d9",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181848",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ryze",
+              "top": "Sylas",
+              "jungle": "RekSai",
+              "support": "Anivia"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Syndra",
+              "top": "Gnar",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Syndra",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Sylas",
+            "jungle": "RekSai",
+            "support": "Anivia"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:15.230Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181848",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "0fd42f55-1e6c-465a-b8a0-fcd8b1fd1c45",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "40.62 BRL"
+        }
+      }
+    },
+    {
+      "id": "3b1cd1ba-4f38-4729-b13a-4cfd2d691441",
+      "team_a": "LOS",
+      "team_b": "FX",
+      "raw_extraction": {
+        "strategy": "hedge",
+        "hedge_note": "Perna UNDER do hedge. Par com bet fe572a59 (Over 27.5 R50). NET previsto: -R41 (kills<27.5) ou -R24.50 (kills>=27.5). Elvis cashou pre-match porque Under era pra amanha (10/05) e ele nao apostaria pre-match normalmente.",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181828",
+          "team_a": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Viktor",
+              "top": "Kennen",
+              "jungle": "Trundle",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Zoe",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 3,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Viktor",
+            "top": "Kennen",
+            "jungle": "Trundle",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Zoe",
+            "top": "Renekton",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:18:45.568Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 19,
+          "winner_side": "blue",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181828",
+          "lolesports_match_id": "115565670260181827",
+          "match_ambiguous_at_link": false
+        },
+        "hedge_group_id": "hedge_los_fx_2026-05-10_map1",
+        "bookmaker_native": {
+          "bet_id": "3044178382",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "c30b1b00-b797-4e96-a46c-402bc8afc553",
+      "team_a": "LOS",
+      "team_b": "FX",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181829",
+          "team_a": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ryze",
+              "top": "Rumble",
+              "jungle": "Nocturne",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Ahri",
+              "top": "KSante",
+              "jungle": "JarvanIV",
+              "support": "Alistar"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 27,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "Nocturne",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "JarvanIV",
+            "support": "Alistar"
+          },
+          "kills_blue": 8,
+          "enriched_at": "2026-05-24T09:22:42.110Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 35,
+          "winner_side": "red",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181829",
+          "lolesports_match_id": "115565670260181827",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3045368222",
+          "raw_pick_text": "Under 29.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "fe572a59-25c4-47a4-a072-c11584dcbd0b",
+      "team_a": "LOS",
+      "team_b": "FX",
+      "raw_extraction": {
+        "strategy": "hedge",
+        "hedge_note": "Perna OVER do hedge. Par com bet 3b1cd1ba (Under 27.5 R$1k). NET previsto: -R$141 (kills<27.5) ou -R$124.50 (kills>=27.5). Elvis cashou pre-match porque Under era pra amanha (10/05) e ele nao apostaria pre-match normalmente.",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181828",
+          "team_a": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Viktor",
+              "top": "Kennen",
+              "jungle": "Trundle",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Zoe",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 3,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Viktor",
+            "top": "Kennen",
+            "jungle": "Trundle",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Zoe",
+            "top": "Renekton",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:22:42.563Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 19,
+          "winner_side": "blue",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181828",
+          "lolesports_match_id": "115565670260181827",
+          "match_ambiguous_at_link": false
+        },
+        "hedge_group_id": "hedge_los_fx_2026-05-10_map1",
+        "bookmaker_native": {
+          "bet_id": "3044194524",
+          "raw_pick_text": "Over 27.5",
+          "raw_stake_text": "R$ 850,00"
+        }
+      }
+    },
+    {
+      "id": "bda81637-6741-484e-8f08-18b8984546a3",
+      "team_a": "LOS",
+      "team_b": "Vivo Keyd Stars",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:22:53.011Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": "3055116445",
+          "currency": "BRL",
+          "raw_pick_text": "Under 30.5",
+          "raw_stake_text": "564.71"
+        }
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "106b3a70-be09-4994-b33d-18f9995bc70f",
+      "team_a": "FX",
+      "team_b": "LOS",
+      "raw_extraction": {
+        "caso": "B",
+        "nota": "Imagem inline no contexto da sessao, nao persistida em disco.",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181832",
+          "team_a": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Jinx",
+              "mid": "Yone",
+              "top": "Sion",
+              "jungle": "Maokai",
+              "support": "Thresh"
+            }
+          },
+          "team_b": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Aphelios",
+              "mid": "TwistedFate",
+              "top": "Olaf",
+              "jungle": "Skarner",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 10,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Aphelios",
+            "mid": "TwistedFate",
+            "top": "Olaf",
+            "jungle": "Skarner",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Jinx",
+            "mid": "Yone",
+            "top": "Sion",
+            "jungle": "Maokai",
+            "support": "Thresh"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:18:10.535Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 27,
+          "winner_side": "blue",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181832",
+          "lolesports_match_id": "115565670260181827",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "ladder_los_fx_2026-05-10_map5",
+        "screenshot_path": null,
+        "bookmaker_native": {
+          "bet_id": "4936758533",
+          "raw_pick_text": "Menos de 25.5",
+          "raw_stake_text": "R$ 240,00"
+        }
+      }
+    },
+    {
+      "id": "5612a9b7-93e6-4fb3-afaf-c065c25637fe",
+      "team_a": "Vivo Keyd Stars",
+      "team_b": "LOS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115565670260116259",
+          "team_a": {
+            "name": "Vivo Keyd Stars",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Xerath",
+              "top": "KSante",
+              "jungle": "Aatrox",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Mel",
+              "top": "Vayne",
+              "jungle": "Zaahen",
+              "support": "Anivia"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Mel",
+            "top": "Vayne",
+            "jungle": "Zaahen",
+            "support": "Anivia"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Xerath",
+            "top": "KSante",
+            "jungle": "Aatrox",
+            "support": "Seraphine"
+          },
+          "kills_blue": 7,
+          "enriched_at": "2026-05-24T09:20:53.477Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 23,
+          "winner_side": "red",
+          "blue_team_id": "99566408219409348",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260116259",
+          "lolesports_match_id": "115565670260116257",
+          "match_ambiguous_at_link": false
+        },
+        "missed_opportunity": true
+      }
+    },
+    {
+      "id": "d4447d65-a5b7-45f8-b70b-2dfd89f418c3",
+      "team_a": "Vivo Keyd Stars",
+      "team_b": "LOS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115565670260116260",
+          "team_a": {
+            "name": "Vivo Keyd Stars",
+            "side": "blue",
+            "picks": {
+              "adc": "Aphelios",
+              "mid": "Galio",
+              "top": "Jayce",
+              "jungle": "LeeSin",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Zoe",
+              "top": "Yorick",
+              "jungle": "Ambessa",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Zoe",
+            "top": "Yorick",
+            "jungle": "Ambessa",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Aphelios",
+            "mid": "Galio",
+            "top": "Jayce",
+            "jungle": "LeeSin",
+            "support": "Milio"
+          },
+          "kills_blue": 12,
+          "enriched_at": "2026-05-24T09:20:33.601Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 24,
+          "winner_side": "blue",
+          "blue_team_id": "99566408219409348",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260116260",
+          "lolesports_match_id": "115565670260116257",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "987160b9-d20b-45a2-a196-c0ba43538c1b",
+      "team_a": "Vivo Keyd Stars",
+      "team_b": "LOS",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 2,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:08.509Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": "N°217",
+          "currency": "BRL",
+          "placed_time": "14:05",
+          "raw_pick_text": "Total, Mapa 2 Menos de 27.5",
+          "raw_stake_text": "R$251,80",
+          "ganho_potencial": 455.75
+        }
+      }
+    },
+    {
+      "id": "963d1166-8b86-4c1c-8974-76c419b16fe3",
+      "team_a": "Vivo Keyd Stars",
+      "team_b": "LOS",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 2,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:08.851Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": "N°218",
+          "currency": "BRL",
+          "placed_time": "14:05",
+          "raw_pick_text": "Total, Mapa 2 Menos de 28.5",
+          "raw_stake_text": "R$251,80",
+          "ganho_potencial": 420.5
+        }
+      }
+    },
+    {
+      "id": "eca6ee84-7052-4aac-9e8d-5a540806229f",
+      "team_a": "Vivo Keyd Stars",
+      "team_b": "LOS",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 2,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:09.849Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": "N°219",
+          "currency": "BRL",
+          "placed_time": "14:06",
+          "raw_pick_text": "Total, Mapa 2 Menos de 26.5",
+          "raw_stake_text": "R$251,98",
+          "ganho_potencial": 418.28
+        }
+      }
+    },
+    {
+      "id": "591e9bae-a0a9-45d5-b59f-8981cb06b649",
+      "team_a": "Vivo Keyd Stars",
+      "team_b": "LOS",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181847",
+          "team_a": {
+            "name": "Vivo Keyd Stars",
+            "side": "red",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Taliyah",
+              "top": "Aatrox",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 2,
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Taliyah",
+            "top": "Aatrox",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:00.428Z",
+          "red_team_id": "99566408219409348",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181847",
+          "lolesports_match_id": "115565670260181845",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "a672b748-d31d-40c1-ada1-4ab6b35ff6c5",
+        "bookmaker_native": {
+          "bet_id": "N°216",
+          "currency": "BRL",
+          "placed_time": "14:05",
+          "raw_pick_text": "Total, Mapa 2 Menos de 26.5",
+          "raw_stake_text": "R$251,80",
+          "ganho_potencial": 493.52
+        }
+      }
+    },
+    {
+      "id": "6369ae03-778a-4c42-8af1-11118f389ad7",
+      "team_a": "FX",
+      "team_b": "LOS",
+      "raw_extraction": {
+        "caso": "B",
+        "nota": "Imagem inline no contexto da sessao, nao persistida em disco.",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181832",
+          "team_a": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Jinx",
+              "mid": "Yone",
+              "top": "Sion",
+              "jungle": "Maokai",
+              "support": "Thresh"
+            }
+          },
+          "team_b": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Aphelios",
+              "mid": "TwistedFate",
+              "top": "Olaf",
+              "jungle": "Skarner",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 10,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Aphelios",
+            "mid": "TwistedFate",
+            "top": "Olaf",
+            "jungle": "Skarner",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Jinx",
+            "mid": "Yone",
+            "top": "Sion",
+            "jungle": "Maokai",
+            "support": "Thresh"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:19:09.009Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 27,
+          "winner_side": "blue",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181832",
+          "lolesports_match_id": "115565670260181827",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "ladder_los_fx_2026-05-10_map5",
+        "screenshot_path": null,
+        "bookmaker_native": {
+          "bet_id": "4936753861",
+          "raw_pick_text": "Menos de 26.5",
+          "raw_stake_text": "R$ 760,13"
+        }
+      }
+    }
+  ]
+}

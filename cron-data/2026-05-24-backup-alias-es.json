@@ -1,0 +1,352 @@
+{
+  "alias": "ES",
+  "canonical": "Esprit Shonen",
+  "backed_up_at": "2026-05-24T12:20:01.563Z",
+  "rows_team_a": [],
+  "rows_team_b": [
+    {
+      "id": "8d882c41-8321-4071-9ac6-5bd1aac9c440",
+      "team_a": "GL",
+      "team_b": "ES",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792721737",
+          "team_a": {
+            "name": "Galions",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Viktor",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Esprit Shonen",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Akali",
+              "top": "Rumble",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Viktor",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Akali",
+            "top": "Rumble",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "kills_blue": 8,
+          "enriched_at": "2026-05-24T09:18:27.698Z",
+          "red_team_id": "103935468920814040",
+          "total_kills": 29,
+          "winner_side": "red",
+          "blue_team_id": "109508365983748798",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792721737",
+          "lolesports_match_id": "116316789792721736",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "62cd5224-f6a5-45e6-8fd4-b97ff30dbdd6",
+        "bookmaker_native": {
+          "bet_id": "#3053507749",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "BRL 532.71"
+        }
+      }
+    },
+    {
+      "id": "fdbcc9e1-c772-4974-b239-73f48d524ea3",
+      "team_a": "GL",
+      "team_b": "ES",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792721737",
+          "team_a": {
+            "name": "Galions",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Viktor",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Esprit Shonen",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Akali",
+              "top": "Rumble",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Viktor",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Akali",
+            "top": "Rumble",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "kills_blue": 8,
+          "enriched_at": "2026-05-24T09:18:55.503Z",
+          "red_team_id": "103935468920814040",
+          "total_kills": 29,
+          "winner_side": "red",
+          "blue_team_id": "109508365983748798",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792721737",
+          "lolesports_match_id": "116316789792721736",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "62cd5224-f6a5-45e6-8fd4-b97ff30dbdd6",
+        "bookmaker_native": {
+          "bet_id": "#3053506695",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "BRL 577.94"
+        }
+      }
+    },
+    {
+      "id": "aa71e961-b90b-4bf9-ad30-a0ea74786da0",
+      "team_a": "GL",
+      "team_b": "ES",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789793180490",
+          "team_a": {
+            "name": "Galions",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Renekton",
+              "jungle": "Zaahen",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Esprit Shonen",
+            "side": "red",
+            "picks": {
+              "adc": "Senna",
+              "mid": "Cassiopeia",
+              "top": "Ornn",
+              "jungle": "MonkeyKing",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Senna",
+            "mid": "Cassiopeia",
+            "top": "Ornn",
+            "jungle": "MonkeyKing",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Renekton",
+            "jungle": "Zaahen",
+            "support": "Seraphine"
+          },
+          "kills_blue": 22,
+          "enriched_at": "2026-05-24T09:19:04.558Z",
+          "red_team_id": "109508365983748798",
+          "total_kills": 34,
+          "winner_side": "blue",
+          "blue_team_id": "103935468920814040",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789793180490",
+          "lolesports_match_id": "116316789792721736",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#3053531128",
+          "raw_pick_text": "Under 29.5",
+          "raw_stake_text": "BRL 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "8915e24b-0c2a-404f-ac26-398b044c3117",
+      "team_a": "GL",
+      "team_b": "ES",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792721737",
+          "team_a": {
+            "name": "Galions",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Viktor",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Esprit Shonen",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Akali",
+              "top": "Rumble",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Viktor",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Akali",
+            "top": "Rumble",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "kills_blue": 8,
+          "enriched_at": "2026-05-24T09:20:52.547Z",
+          "red_team_id": "103935468920814040",
+          "total_kills": 29,
+          "winner_side": "red",
+          "blue_team_id": "109508365983748798",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792721737",
+          "lolesports_match_id": "116316789792721736",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "62cd5224-f6a5-45e6-8fd4-b97ff30dbdd6",
+        "bookmaker_native": {
+          "bet_id": "#3053505462",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "BRL 300.00"
+        }
+      }
+    },
+    {
+      "id": "cc069f45-92de-4920-915d-6740f7d519a2",
+      "team_a": "GL",
+      "team_b": "ES",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792721737",
+          "team_a": {
+            "name": "Galions",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Viktor",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Esprit Shonen",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Akali",
+              "top": "Rumble",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Viktor",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Akali",
+            "top": "Rumble",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "kills_blue": 8,
+          "enriched_at": "2026-05-24T09:21:04.018Z",
+          "red_team_id": "103935468920814040",
+          "total_kills": 29,
+          "winner_side": "red",
+          "blue_team_id": "109508365983748798",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792721737",
+          "lolesports_match_id": "116316789792721736",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": null,
+        "bookmaker_native": {
+          "bet_id": "#4973747423",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$600,00"
+        }
+      }
+    }
+  ]
+}

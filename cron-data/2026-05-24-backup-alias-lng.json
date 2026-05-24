@@ -1,0 +1,903 @@
+{
+  "alias": "LNG",
+  "canonical": "Suzhou LNG Esports",
+  "backed_up_at": "2026-05-24T12:20:02.939Z",
+  "rows_team_a": [
+    {
+      "id": "61507820-8d22-41d4-9f21-aed990f9b678",
+      "team_a": "LNG",
+      "team_b": "LGD",
+      "raw_extraction": {
+        "match_context": {
+          "teams": [
+            {
+              "code": "LNG",
+              "name": "Suzhou LNG Esports"
+            },
+            {
+              "code": "LGD",
+              "name": "LGD GAMING"
+            }
+          ],
+          "kills_red": 0,
+          "league_id": "98767991314006698",
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Anivia",
+            "top": "Rumble",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Cassiopeia",
+            "top": "Yorick",
+            "jungle": "Nocturne",
+            "support": "Lulu"
+          },
+          "kills_blue": 0,
+          "settled_at": "2026-05-14T11:02:13.296Z",
+          "start_time": "2026-05-14T09:00:00Z",
+          "red_team_id": "99566404846951820",
+          "total_kills": 0,
+          "winner_side": null,
+          "blue_team_id": "99566404850008779",
+          "league_short": "LPL",
+          "trigger_type": "2peel",
+          "lolesports_game_id": "115615926685761093",
+          "lolesports_match_id": "115615924499588641"
+        },
+        "bookmaker_native": {
+          "bet_id": "4948393928",
+          "raw_pick_text": "Menos de 25.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "2dbc39c4-ca41-49c6-85c2-0be0dd022840",
+      "team_a": "Xi'an Team WE",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541884",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Akali",
+              "top": "Sion",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Suzhou LNG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Gnar",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Gnar",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "kills_blue": 3,
+          "enriched_at": "2026-05-24T09:19:38.175Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 11,
+          "winner_side": "red",
+          "blue_team_id": "99566404850008779",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541884",
+          "lolesports_match_id": "115616219464541883",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "2c367091-a26c-48b3-b35f-a6c999f4257b",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "157.80 BRL"
+        }
+      }
+    },
+    {
+      "id": "2e8053b9-8c21-48fa-a02d-ab1b307a720a",
+      "team_a": "Ultra Prime",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "manual_from_print_2026-05-08_map3",
+          "team_a": {
+            "name": "UP",
+            "side": "unknown",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Ahri",
+              "top": "KSante",
+              "jungle": "Nocturne",
+              "support": "Yuumi"
+            }
+          },
+          "team_b": {
+            "name": "LNG",
+            "side": "unknown",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Yone",
+              "top": "Gwen",
+              "jungle": "Trundle",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "note": "Mapa 3 da serie aconteceu (placar final 1-2 LNG, mapa 3 LNG 14 - 8 UP, 22 kills, 30:13 duracao). Riot livestats /window retornou 204 vazio mas o jogo foi disputado. Settled manual pelo print do Elvis 2026-05-08.",
+          "teams": [
+            {
+              "code": "UP",
+              "name": "Ultra Prime"
+            },
+            {
+              "code": "LNG",
+              "name": "Suzhou LNG Esports"
+            }
+          ],
+          "kills_up": 8,
+          "up_picks": {
+            "adc": "Zeri",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "Nocturne",
+            "support": "Yuumi"
+          },
+          "kills_lng": 14,
+          "kills_red": 8,
+          "league_id": "98767991314006698",
+          "lng_picks": {
+            "adc": "Yunara",
+            "mid": "Yone",
+            "top": "Gwen",
+            "jungle": "Trundle",
+            "support": "Lulu"
+          },
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "Nocturne",
+            "support": "Yuumi"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Yone",
+            "top": "Gwen",
+            "jungle": "Trundle",
+            "support": "Lulu"
+          },
+          "kills_blue": 14,
+          "start_time": "2026-05-08T09:00:00Z",
+          "total_kills": 22,
+          "league_short": "LPL",
+          "map3_game_id": "115615926685761106",
+          "trigger_type": "2peel",
+          "settle_source": "manual_from_print_2026-05-08",
+          "coverage_status": "manual_settled_riot_livestats_unavailable",
+          "lolesports_match_id": "115615924499588653",
+          "map3_state_at_placement": "inProgress"
+        },
+        "bookmaker_native": {
+          "bet_id": "4925391402",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 600,00"
+        }
+      }
+    },
+    {
+      "id": "58e759c0-e185-4db9-915c-f1795295bb43",
+      "team_a": "Xi'an Team WE",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541887",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ahri",
+              "top": "Ornn",
+              "jungle": "Naafiri",
+              "support": "Lux"
+            }
+          },
+          "team_b": {
+            "name": "Suzhou LNG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "MissFortune",
+              "mid": "Tristana",
+              "top": "Yorick",
+              "jungle": "Maokai",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 22,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ahri",
+            "top": "Ornn",
+            "jungle": "Naafiri",
+            "support": "Lux"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "MissFortune",
+            "mid": "Tristana",
+            "top": "Yorick",
+            "jungle": "Maokai",
+            "support": "Karma"
+          },
+          "kills_blue": 2,
+          "enriched_at": "2026-05-24T09:20:22.814Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 24,
+          "winner_side": "red",
+          "blue_team_id": "99566404850008779",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541887",
+          "lolesports_match_id": "115616219464541883",
+          "match_ambiguous_at_link": false
+        }
+      }
+    },
+    {
+      "id": "98dbe612-139a-4969-b670-9bbd1032ffc0",
+      "team_a": "Xi'an Team WE",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541884",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Akali",
+              "top": "Sion",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Suzhou LNG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Gnar",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Gnar",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "kills_blue": 3,
+          "enriched_at": "2026-05-24T09:19:34.756Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 11,
+          "winner_side": "red",
+          "blue_team_id": "99566404850008779",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541884",
+          "lolesports_match_id": "115616219464541883",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "2c367091-a26c-48b3-b35f-a6c999f4257b",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 29.5",
+          "raw_stake_text": "242.72 BRL"
+        }
+      }
+    },
+    {
+      "id": "f1c51f97-7936-4e34-b3e2-d98a10e639c8",
+      "team_a": "Xi'an Team WE",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541884",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Akali",
+              "top": "Sion",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Suzhou LNG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Gnar",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Gnar",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "kills_blue": 3,
+          "enriched_at": "2026-05-24T09:19:46.630Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 11,
+          "winner_side": "red",
+          "blue_team_id": "99566404850008779",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541884",
+          "lolesports_match_id": "115616219464541883",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "2c367091-a26c-48b3-b35f-a6c999f4257b",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "210.40 BRL"
+        }
+      }
+    },
+    {
+      "id": "a3c53d73-7b7e-462d-9097-1b61f9aadca7",
+      "team_a": "Xi'an Team WE",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541888",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Smolder",
+              "top": "Aatrox",
+              "jungle": "Poppy",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Suzhou LNG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Jinx",
+              "mid": "Galio",
+              "top": "Ambessa",
+              "jungle": "Jayce",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Smolder",
+            "top": "Aatrox",
+            "jungle": "Poppy",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Jinx",
+            "mid": "Galio",
+            "top": "Ambessa",
+            "jungle": "Jayce",
+            "support": "Lulu"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:20:37.810Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 17,
+          "winner_side": "red",
+          "blue_team_id": "99566404850008779",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541888",
+          "lolesports_match_id": "115616219464541883",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "079c655a-8b72-4dcd-9e6e-8e2f8405f8e5",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Total. Mapa 5 Menos de 26.5",
+          "raw_stake_text": "251.80 BRL"
+        }
+      }
+    },
+    {
+      "id": "6b00943f-a304-4651-b657-130ddcf403f8",
+      "team_a": "Xi'an Team WE",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541884",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Akali",
+              "top": "Sion",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Suzhou LNG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Gnar",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Gnar",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "kills_blue": 3,
+          "enriched_at": "2026-05-24T09:19:48.898Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 11,
+          "winner_side": "red",
+          "blue_team_id": "99566404850008779",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541884",
+          "lolesports_match_id": "115616219464541883",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "2c367091-a26c-48b3-b35f-a6c999f4257b",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "194.21 BRL"
+        }
+      }
+    },
+    {
+      "id": "af922095-1e66-462b-91e7-49c5cb8a4ecb",
+      "team_a": "Xi'an Team WE",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541884",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Akali",
+              "top": "Sion",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Suzhou LNG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Gnar",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Gnar",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "kills_blue": 3,
+          "enriched_at": "2026-05-24T09:19:38.522Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 11,
+          "winner_side": "red",
+          "blue_team_id": "99566404850008779",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541884",
+          "lolesports_match_id": "115616219464541883",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "2c367091-a26c-48b3-b35f-a6c999f4257b",
+        "bookmaker_native": {
+          "bet_id": "3054595314",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "1000 BRL"
+        }
+      }
+    },
+    {
+      "id": "0f79cb9e-01a5-4b91-b2f6-0945090be420",
+      "team_a": "Xi'an Team WE",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541887",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ahri",
+              "top": "Ornn",
+              "jungle": "Naafiri",
+              "support": "Lux"
+            }
+          },
+          "team_b": {
+            "name": "Suzhou LNG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "MissFortune",
+              "mid": "Tristana",
+              "top": "Yorick",
+              "jungle": "Maokai",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 22,
+          "pick_line": 4,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ahri",
+            "top": "Ornn",
+            "jungle": "Naafiri",
+            "support": "Lux"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "MissFortune",
+            "mid": "Tristana",
+            "top": "Yorick",
+            "jungle": "Maokai",
+            "support": "Karma"
+          },
+          "kills_blue": 2,
+          "enriched_at": "2026-05-24T09:20:44.983Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 24,
+          "winner_side": "red",
+          "blue_team_id": "99566404850008779",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541887",
+          "lolesports_match_id": "115616219464541883",
+          "match_ambiguous_at_link": false
+        }
+      }
+    },
+    {
+      "id": "59d18b0d-1b16-4717-aa47-804a0b068435",
+      "team_a": "Xi'an Team WE",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541884",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Akali",
+              "top": "Sion",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Suzhou LNG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Gnar",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Gnar",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "kills_blue": 3,
+          "enriched_at": "2026-05-24T09:19:30.921Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 11,
+          "winner_side": "red",
+          "blue_team_id": "99566404850008779",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541884",
+          "lolesports_match_id": "115616219464541883",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "2c367091-a26c-48b3-b35f-a6c999f4257b",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "168.32 BRL"
+        }
+      }
+    },
+    {
+      "id": "1aee590c-5525-4dd5-8956-b3892e093d1c",
+      "team_a": "Xi'an Team WE",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541884",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Akali",
+              "top": "Sion",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Suzhou LNG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Gnar",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Gnar",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "kills_blue": 3,
+          "enriched_at": "2026-05-24T09:19:42.465Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 11,
+          "winner_side": "red",
+          "blue_team_id": "99566404850008779",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541884",
+          "lolesports_match_id": "115616219464541883",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "2c367091-a26c-48b3-b35f-a6c999f4257b",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 26.5",
+          "raw_stake_text": "137.17 BRL"
+        }
+      }
+    },
+    {
+      "id": "0b03b4ea-d1f1-4a6c-84d7-8853e3c06787",
+      "team_a": "Xi'an Team WE",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541888",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Smolder",
+              "top": "Aatrox",
+              "jungle": "Poppy",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Suzhou LNG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Jinx",
+              "mid": "Galio",
+              "top": "Ambessa",
+              "jungle": "Jayce",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Smolder",
+            "top": "Aatrox",
+            "jungle": "Poppy",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Jinx",
+            "mid": "Galio",
+            "top": "Ambessa",
+            "jungle": "Jayce",
+            "support": "Lulu"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:22:50.496Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 17,
+          "winner_side": "red",
+          "blue_team_id": "99566404850008779",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541888",
+          "lolesports_match_id": "115616219464541883",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "079c655a-8b72-4dcd-9e6e-8e2f8405f8e5",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Menos de 27.5 Quinto Mapa Total Kills",
+          "raw_stake_text": "R$815,21"
+        }
+      }
+    }
+  ]
+}

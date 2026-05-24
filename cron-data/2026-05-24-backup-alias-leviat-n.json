@@ -1,0 +1,73 @@
+{
+  "alias": "LEVIATÁN",
+  "canonical": "Leviatan Esports",
+  "backed_up_at": "2026-05-24T12:20:01.833Z",
+  "rows_team_a": [],
+  "rows_team_b": [
+    {
+      "id": "65884fb4-c414-4542-a0cc-df58d88898e4",
+      "team_a": "Los Grandes",
+      "team_b": "LEVIATÁN",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115565670260116226",
+          "team_a": {
+            "name": "LOS",
+            "side": "blue",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Viktor",
+              "top": "Ambessa",
+              "jungle": "Aatrox",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "LEVIATÁN",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Aurora",
+              "top": "Jayce",
+              "jungle": "XinZhao",
+              "support": "Anivia"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Aurora",
+            "top": "Jayce",
+            "jungle": "XinZhao",
+            "support": "Anivia"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Sivir",
+            "mid": "Viktor",
+            "top": "Ambessa",
+            "jungle": "Aatrox",
+            "support": "Karma"
+          },
+          "kills_blue": 21,
+          "enriched_at": "2026-05-24T09:20:54.473Z",
+          "red_team_id": "107598699275015260",
+          "total_kills": 28,
+          "winner_side": "blue",
+          "blue_team_id": "109480204628225868",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260116226",
+          "lolesports_match_id": "115565670260116225",
+          "match_ambiguous_at_link": false
+        },
+        "missed_opportunity": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "alias": "KOI",
+  "canonical": "Movistar KOI",
+  "backed_up_at": "2026-05-24T12:20:03.622Z",
+  "rows_team_a": [
+    {
+      "id": "ccb645d9-c0da-46da-84f1-bd533ed8756a",
+      "team_a": "KOI",
+      "team_b": "G2 Esports",
+      "raw_extraction": {
+        "strategy": "hedge_middle",
+        "hedge_note": "Perna OVER 27.5 do hedge com middle. Par com c2760923 Under 28.5 Parimatch. Cenarios NET: <=27 = -R$286 / =28 = +R$1584 (middle hit) / >=29 = -R$130.",
+        "case_b_note": "screenshot_path null — imagem inline no contexto da sessao, sem arquivo persistido em disco",
+        "match_context": {
+          "teams": [
+            "KOI",
+            "G2"
+          ],
+          "kills_red": 18,
+          "red_picks": {
+            "adc": "Sivir",
+            "mid": "Ahri",
+            "top": "Vayne",
+            "jungle": "Skarner",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Kaisa",
+            "mid": "Lissandra",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Nautilus"
+          },
+          "kills_blue": 14,
+          "settled_at": "2026-05-10T18:22:24.896Z",
+          "start_time": "2026-05-10T16:00:00Z",
+          "red_team_id": "98767991926151025",
+          "total_kills": 32,
+          "winner_side": "red",
+          "blue_team_id": "103461966965149786",
+          "league_short": "LEC",
+          "map2_game_id": "115548668059589338",
+          "trigger_type": null,
+          "lolesports_game_id": "115548668059589338",
+          "lolesports_match_id": "115548668059589336"
+        },
+        "hedge_group_id": "hedge_mkoi_g2_2026-05-10_map2",
+        "bookmaker_native": {
+          "bet_id": "4936057285",
+          "raw_pick_text": "Mais de 27.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    }
+  ],
+  "rows_team_b": []
+}

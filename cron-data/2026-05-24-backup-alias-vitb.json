@@ -1,0 +1,276 @@
+{
+  "alias": "VITB",
+  "canonical": "Vitality.Bee",
+  "backed_up_at": "2026-05-24T12:20:02.366Z",
+  "rows_team_a": [
+    {
+      "id": "868d9dd7-b81b-4f66-b9ab-50e36f95750b",
+      "team_a": "VITB",
+      "team_b": "Galions",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792656164",
+          "team_a": {
+            "name": "Vitality.Bee",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ahri",
+              "top": "Fiora",
+              "jungle": "Naafiri",
+              "support": "Anivia"
+            }
+          },
+          "team_b": {
+            "name": "Galions",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Ryze",
+              "top": "Renekton",
+              "jungle": "Nocturne",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ahri",
+            "top": "Fiora",
+            "jungle": "Naafiri",
+            "support": "Anivia"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Ryze",
+            "top": "Renekton",
+            "jungle": "Nocturne",
+            "support": "Lulu"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:20:42.323Z",
+          "red_team_id": "102787200151698443",
+          "total_kills": 30,
+          "winner_side": "blue",
+          "blue_team_id": "103935468920814040",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792656164",
+          "lolesports_match_id": "116316789792656162",
+          "match_ambiguous_at_link": false
+        }
+      }
+    },
+    {
+      "id": "5e4aabe0-3252-4563-99c2-bb2fa9f24d5a",
+      "team_a": "VITB",
+      "team_b": "Galions",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792656163",
+          "team_a": {
+            "name": "Vitality.Bee",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Mel",
+              "top": "Ambessa",
+              "jungle": "Vi",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Galions",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Viktor",
+              "top": "Rumble",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 11,
+          "pick_line": 32.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Mel",
+            "top": "Ambessa",
+            "jungle": "Vi",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Viktor",
+            "top": "Rumble",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "kills_blue": 18,
+          "enriched_at": "2026-05-24T09:17:54.104Z",
+          "red_team_id": "102787200151698443",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "103935468920814040",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792656163",
+          "lolesports_match_id": "116316789792656162",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3042406972",
+          "raw_pick_text": "Under 32.5",
+          "raw_stake_text": "BRL 600.00"
+        }
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "f2d608d0-b656-4167-904d-dce99bd4e67e",
+      "team_a": "TLNP",
+      "team_b": "VITB",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792721733",
+          "team_a": {
+            "name": "TLN Pirates",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Akali",
+              "top": "Gwen",
+              "jungle": "Pantheon",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Vitality.Bee",
+            "side": "blue",
+            "picks": {
+              "adc": "Jinx",
+              "mid": "Viktor",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Akali",
+            "top": "Gwen",
+            "jungle": "Pantheon",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Jinx",
+            "mid": "Viktor",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "kills_blue": 7,
+          "enriched_at": "2026-05-24T09:20:54.821Z",
+          "red_team_id": "115745361559907281",
+          "total_kills": 23,
+          "winner_side": "red",
+          "blue_team_id": "102787200151698443",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792721733",
+          "lolesports_match_id": "116316789792721732",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#4974160776",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 730,51"
+        }
+      }
+    },
+    {
+      "id": "0d0006d8-c13c-4a35-b311-630349e40a45",
+      "team_a": "TLNP",
+      "team_b": "VITB",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792721733",
+          "team_a": {
+            "name": "TLN Pirates",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Akali",
+              "top": "Gwen",
+              "jungle": "Pantheon",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Vitality.Bee",
+            "side": "blue",
+            "picks": {
+              "adc": "Jinx",
+              "mid": "Viktor",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Akali",
+            "top": "Gwen",
+            "jungle": "Pantheon",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Jinx",
+            "mid": "Viktor",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "kills_blue": 7,
+          "enriched_at": "2026-05-24T09:20:12.301Z",
+          "red_team_id": "115745361559907281",
+          "total_kills": 23,
+          "winner_side": "red",
+          "blue_team_id": "102787200151698443",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792721733",
+          "lolesports_match_id": "116316789792721732",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#3053577434",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "BRL 891,99"
+        }
+      }
+    }
+  ]
+}

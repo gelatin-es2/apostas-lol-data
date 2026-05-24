@@ -1,0 +1,227 @@
+{
+  "alias": "KC",
+  "canonical": "Karmine Corp",
+  "backed_up_at": "2026-05-24T12:20:03.149Z",
+  "rows_team_a": [
+    {
+      "id": "1e94b2cf-f604-4e63-9046-9fe43c144d6d",
+      "team_a": "KC",
+      "team_b": "G2 Esports",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548668059589350",
+          "team_a": {
+            "name": "Karmine Corp",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ryze",
+              "top": "Aurora",
+              "jungle": "XinZhao",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "G2 Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Annie",
+              "top": "Gnar",
+              "jungle": "Olaf",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 14,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Ryze",
+            "top": "Aurora",
+            "jungle": "XinZhao",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Annie",
+            "top": "Gnar",
+            "jungle": "Olaf",
+            "support": "Bard"
+          },
+          "kills_blue": 21,
+          "enriched_at": "2026-05-24T09:18:04.108Z",
+          "red_team_id": "111692118851466302",
+          "total_kills": 35,
+          "winner_side": "blue",
+          "blue_team_id": "98767991926151025",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059589350",
+          "lolesports_match_id": "115548668059589348",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3043055237",
+          "raw_pick_text": "Under 26.5",
+          "raw_stake_text": "R$ 300,00"
+        }
+      }
+    },
+    {
+      "id": "41dd5a31-0503-43d1-9822-009646b9ce09",
+      "team_a": "KC",
+      "team_b": "G2 Esports",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548668059589349",
+          "team_a": {
+            "name": "Karmine Corp",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Azir",
+              "top": "Sion",
+              "jungle": "Pantheon",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "G2 Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Leblanc",
+              "top": "Kled",
+              "jungle": "Skarner",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 2,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Azir",
+            "top": "Sion",
+            "jungle": "Pantheon",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Leblanc",
+            "top": "Kled",
+            "jungle": "Skarner",
+            "support": "Nami"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-05-24T09:22:30.618Z",
+          "red_team_id": "111692118851466302",
+          "total_kills": 16,
+          "winner_side": "blue",
+          "blue_team_id": "98767991926151025",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059589349",
+          "lolesports_match_id": "115548668059589348",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3043019665",
+          "raw_pick_text": "Under 26.5",
+          "raw_stake_text": "R$ 300,00"
+        }
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "abeddad0-61c2-4c2d-8a1f-87a26413ab15",
+      "team_a": "G2 Esports",
+      "team_b": "KC",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "G2 Esports",
+            "side": "team_a",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Cassiopeia",
+              "top": "K'Sante",
+              "jungle": "Vi",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "Karmine Corp",
+            "side": "team_b",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Annie",
+              "top": "Sion",
+              "jungle": "Naafiri",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:20:00.303Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "#3049940881",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "BRL 140.00"
+        }
+      }
+    },
+    {
+      "id": "cddbd2df-f3f8-4b6f-b85c-a622ee9a68cd",
+      "team_a": "G2 Esports",
+      "team_b": "KC",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "G2 Esports",
+            "side": "team_a",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Cassiopeia",
+              "top": "K'Sante",
+              "jungle": "Vi",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "Karmine Corp",
+            "side": "team_b",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Annie",
+              "top": "Sion",
+              "jungle": "Naafiri",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:20:00.488Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "20203985812",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 339,48"
+        }
+      }
+    }
+  ]
+}

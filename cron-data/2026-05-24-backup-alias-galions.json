@@ -1,0 +1,90 @@
+{
+  "alias": "GALIONS",
+  "canonical": "Galions",
+  "backed_up_at": "2026-05-24T12:20:04.108Z",
+  "rows_team_a": [],
+  "rows_team_b": [
+    {
+      "id": "672fe7fc-b1fc-4b20-8e5c-85b0101572e4",
+      "team_a": "Natus Vincere",
+      "team_b": "GALIONS",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "Natus Vincere",
+            "side": "team_a",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Cassiopeia",
+              "top": "Sion",
+              "jungle": "Wukong",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Galions",
+            "side": "team_b",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Viktor",
+              "top": "Vayne",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:18:32.246Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "4951987977",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 694,44"
+        }
+      }
+    },
+    {
+      "id": "199d9081-815b-4e78-86d3-52b71adb0a47",
+      "team_a": "Natus Vincere",
+      "team_b": "GALIONS",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "Natus Vincere",
+            "side": "team_a",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Cassiopeia",
+              "top": "Sion",
+              "jungle": "Wukong",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Galions",
+            "side": "team_b",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Viktor",
+              "top": "Vayne",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:22:46.586Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "4951989430",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 300,00"
+        }
+      }
+    }
+  ]
+}

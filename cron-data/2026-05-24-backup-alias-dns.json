@@ -1,0 +1,513 @@
+{
+  "alias": "DNS",
+  "canonical": "DN SOOPers",
+  "backed_up_at": "2026-05-24T12:20:00.818Z",
+  "rows_team_a": [
+    {
+      "id": "3c46596d-4e05-439a-bae0-f52bc98dc4f2",
+      "team_a": "DNS",
+      "team_b": "KRX",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971964",
+          "team_a": {
+            "name": "DN SOOPers",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Yone",
+              "top": "Rumble",
+              "jungle": "Skarner",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "KIWOOM DRX",
+            "side": "red",
+            "picks": {
+              "adc": "MissFortune",
+              "mid": "Cassiopeia",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 17,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "MissFortune",
+            "mid": "Cassiopeia",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Yone",
+            "top": "Rumble",
+            "jungle": "Skarner",
+            "support": "Milio"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:20:13.374Z",
+          "red_team_id": "99566404585387054",
+          "total_kills": 22,
+          "winner_side": "red",
+          "blue_team_id": "99566404581868574",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971964",
+          "lolesports_match_id": "115548128962971963",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#3053888659",
+          "raw_pick_text": "Under 29.5",
+          "raw_stake_text": "BRL 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "f0f6898b-4e75-437d-a7e6-c64cec5d7cf5",
+      "team_a": "DNS",
+      "team_b": "GEN",
+      "raw_extraction": {
+        "match_context": {
+          "teams": [
+            {
+              "code": "GEN",
+              "name": "Gen.G Esports"
+            },
+            {
+              "code": "DNS",
+              "name": "DN SOOPers"
+            }
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 6,
+          "league_id": "98767991310872058",
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Vayne",
+            "jungle": "Maokai",
+            "support": "Milio"
+          },
+          "kills_blue": 14,
+          "red_barons": 0,
+          "red_towers": 1,
+          "settled_at": "2026-05-24T09:39:18.555Z",
+          "start_time": "2026-05-24T08:00:00Z",
+          "blue_barons": 1,
+          "blue_towers": 9,
+          "red_dragons": 2,
+          "red_team_id": "99566404581868574",
+          "total_kills": 20,
+          "winner_side": "blue",
+          "blue_dragons": 2,
+          "blue_team_id": "100205573495116443",
+          "league_short": "LCK",
+          "trigger_type": "2peel",
+          "kills_at_15min": null,
+          "red_total_gold": 47653,
+          "blue_total_gold": 59254,
+          "selected_reason": "live",
+          "first_blood_team": "blue",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115548128962971949",
+          "lolesports_match_id": "115548128962971947",
+          "series_score_at_bet": {
+            "current_map": 2,
+            "maps_completed_before": 1
+          }
+        },
+        "ladder_group_id": "74a813c1-f045-48ba-9b32-14950eb0a4b1",
+        "ladder_position": "28.5",
+        "bookmaker_native": {
+          "bet_id": "#3055625398",
+          "raw_pick_text": "DN SOOPers (Kills) - Gen.G (Kills), Under 28.5",
+          "raw_stake_text": "BRL 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "d97f5d33-5f5c-44d3-acd4-c90dc07863c2",
+      "team_a": "DNS",
+      "team_b": "GEN",
+      "raw_extraction": {
+        "match_context": {
+          "teams": [
+            {
+              "code": "GEN",
+              "name": "Gen.G Esports"
+            },
+            {
+              "code": "DNS",
+              "name": "DN SOOPers"
+            }
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 6,
+          "league_id": "98767991310872058",
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Vayne",
+            "jungle": "Maokai",
+            "support": "Milio"
+          },
+          "kills_blue": 14,
+          "red_barons": 0,
+          "red_towers": 1,
+          "settled_at": "2026-05-24T09:39:18.627Z",
+          "start_time": "2026-05-24T08:00:00Z",
+          "blue_barons": 1,
+          "blue_towers": 9,
+          "red_dragons": 2,
+          "red_team_id": "99566404581868574",
+          "total_kills": 20,
+          "winner_side": "blue",
+          "blue_dragons": 2,
+          "blue_team_id": "100205573495116443",
+          "league_short": "LCK",
+          "trigger_type": "2peel",
+          "kills_at_15min": null,
+          "red_total_gold": 47653,
+          "blue_total_gold": 59254,
+          "selected_reason": "live",
+          "first_blood_team": "blue",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115548128962971949",
+          "lolesports_match_id": "115548128962971947",
+          "series_score_at_bet": {
+            "current_map": 2,
+            "maps_completed_before": 1
+          }
+        },
+        "ladder_group_id": "74a813c1-f045-48ba-9b32-14950eb0a4b1",
+        "ladder_position": "28.5",
+        "bookmaker_native": {
+          "bet_id": "#3055626219",
+          "raw_pick_text": "DN SOOPers (Kills) - Gen.G (Kills), Under 28.5",
+          "raw_stake_text": "BRL 3.000,00"
+        }
+      }
+    },
+    {
+      "id": "4281fedc-2efb-4948-9fe6-ecc996c99c4f",
+      "team_a": "DNS",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "ladder_info": {
+          "map": 1,
+          "direction": "Under",
+          "ladder_group": "DNS_GEN_M1_2026-05-24",
+          "ladder_group_id": "9a182860-09c9-434e-89d3-9ec399cb4fad"
+        },
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971948",
+          "team_a": {
+            "name": "DN SOOPers",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ryze",
+              "top": "Rumble",
+              "jungle": "LeeSin",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Gen.G Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Anivia",
+              "top": "Ambessa",
+              "jungle": "Skarner",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 9,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "LeeSin",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Anivia",
+            "top": "Ambessa",
+            "jungle": "Skarner",
+            "support": "Bard"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:20:18.403Z",
+          "red_team_id": "99566404581868574",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "100205573495116443",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971948",
+          "lolesports_match_id": "115548128962971947",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": null,
+          "payout": 271.41,
+          "bet_tab": "Open Single",
+          "raw_pick_text": "Under 26.5 Total Kills Over/Under",
+          "raw_stake_text": "157.80 BRL",
+          "cashout_offered": 161.54
+        }
+      }
+    },
+    {
+      "id": "b3ecbb89-5852-443e-b361-6720dc05f984",
+      "team_a": "DNS",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "ladder_info": {
+          "map": 1,
+          "direction": "Under",
+          "ladder_group": "DNS_GEN_M1_2026-05-24",
+          "ladder_group_id": "9a182860-09c9-434e-89d3-9ec399cb4fad"
+        },
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971948",
+          "team_a": {
+            "name": "DN SOOPers",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ryze",
+              "top": "Rumble",
+              "jungle": "LeeSin",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Gen.G Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Anivia",
+              "top": "Ambessa",
+              "jungle": "Skarner",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 9,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "LeeSin",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Anivia",
+            "top": "Ambessa",
+            "jungle": "Skarner",
+            "support": "Bard"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:20:19.955Z",
+          "red_team_id": "99566404581868574",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "100205573495116443",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971948",
+          "lolesports_match_id": "115548128962971947",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "49832",
+          "bet_context": "AO VIVO (in-play)",
+          "raw_pick_text": "DN SOOPers vs. Gen.G, Menos de 26.5, Primeiro Mapa - Total Kills",
+          "raw_stake_text": "R$ 1.000,00",
+          "cashout_offered": 161.54,
+          "ganho_total_esperado": 1700
+        }
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "737adb98-f591-4195-8765-ab49e6a36e15",
+      "team_a": "BRO",
+      "team_b": "DNS",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971944",
+          "team_a": {
+            "name": "HANJIN BRION",
+            "side": "blue",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Ryze",
+              "top": "Sion",
+              "jungle": "LeeSin",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "DN SOOPers",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Taliyah",
+              "top": "Renekton",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 5,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Taliyah",
+            "top": "Renekton",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Jhin",
+            "mid": "Ryze",
+            "top": "Sion",
+            "jungle": "LeeSin",
+            "support": "Karma"
+          },
+          "kills_blue": 24,
+          "enriched_at": "2026-05-24T09:18:53.415Z",
+          "red_team_id": "99566404581868574",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "105505619546859895",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971944",
+          "lolesports_match_id": "115548128962971943",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 245,93"
+        }
+      }
+    },
+    {
+      "id": "e5726f27-b55a-4287-a49f-e5767f86f1f7",
+      "team_a": "BRO",
+      "team_b": "DNS",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971944",
+          "team_a": {
+            "name": "HANJIN BRION",
+            "side": "blue",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Ryze",
+              "top": "Sion",
+              "jungle": "LeeSin",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "DN SOOPers",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Taliyah",
+              "top": "Renekton",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 5,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Taliyah",
+            "top": "Renekton",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Jhin",
+            "mid": "Ryze",
+            "top": "Sion",
+            "jungle": "LeeSin",
+            "support": "Karma"
+          },
+          "kills_blue": 24,
+          "enriched_at": "2026-05-24T09:22:45.397Z",
+          "red_team_id": "99566404581868574",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "105505619546859895",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971944",
+          "lolesports_match_id": "115548128962971943",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "20194855552",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 745,76"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,326 @@
+{
+  "alias": "AL",
+  "canonical": "Anyone's Legend",
+  "backed_up_at": "2026-05-24T12:20:00.599Z",
+  "rows_team_a": [],
+  "rows_team_b": [
+    {
+      "id": "d1fde1a9-a676-4dc3-8d40-4ad5fdb1c11e",
+      "team_a": "WE",
+      "team_b": "AL",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615926677831078",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Aurora",
+              "top": "Jayce",
+              "jungle": "Malphite",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Anyone's Legend",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Viktor",
+              "top": "Vayne",
+              "jungle": "Pantheon",
+              "support": "Lux"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 13,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Aurora",
+            "top": "Jayce",
+            "jungle": "Malphite",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Viktor",
+            "top": "Vayne",
+            "jungle": "Pantheon",
+            "support": "Lux"
+          },
+          "kills_blue": 27,
+          "enriched_at": "2026-05-24T09:20:42.962Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 40,
+          "winner_side": "blue",
+          "blue_team_id": "99566404856367466",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677831078",
+          "lolesports_match_id": "115615926677831075",
+          "match_ambiguous_at_link": false
+        }
+      }
+    },
+    {
+      "id": "feabf752-3c67-4793-9a08-87fd96531952",
+      "team_a": "Beijing JDG Esports",
+      "team_b": "AL",
+      "raw_extraction": {
+        "match_context": {
+          "enriched_at": "2026-05-24T09:20:07.450Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "ladder_group_id": "e7810809-21cc-4378-aaf9-daa8b85ad14b",
+        "bookmaker_native": {
+          "bet_id": "#3053265090",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "R$649,75"
+        }
+      }
+    },
+    {
+      "id": "63adddd9-b309-4eab-9152-0894f10e3e65",
+      "team_a": "Beijing JDG Esports",
+      "team_b": "AL",
+      "raw_extraction": {
+        "match_context": {
+          "enriched_at": "2026-05-24T09:20:07.636Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "ladder_group_id": "e7810809-21cc-4378-aaf9-daa8b85ad14b",
+        "bookmaker_native": {
+          "bet_id": "#3053263271",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "R$200,00"
+        }
+      }
+    },
+    {
+      "id": "d0125c9c-77bc-47b4-92ef-1990b1e9949d",
+      "team_a": "Beijing JDG Esports",
+      "team_b": "AL",
+      "raw_extraction": {
+        "match_context": {
+          "enriched_at": "2026-05-24T09:20:07.808Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "ladder_group_id": "e7810809-21cc-4378-aaf9-daa8b85ad14b",
+        "bookmaker_native": {
+          "bet_id": "#3053265070",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "R$584,78"
+        }
+      }
+    },
+    {
+      "id": "ab7b416d-f752-4379-99a6-b1e497fe5e19",
+      "team_a": "Beijing JDG Esports",
+      "team_b": "AL",
+      "raw_extraction": {
+        "match_context": {
+          "enriched_at": "2026-05-24T09:20:07.980Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "ladder_group_id": "e7810809-21cc-4378-aaf9-daa8b85ad14b",
+        "bookmaker_native": {
+          "bet_id": "#3053264190",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "R$614,77"
+        }
+      }
+    },
+    {
+      "id": "0753ff3a-def6-4737-ad37-1b1b316b4902",
+      "team_a": "Beijing JDG Esports",
+      "team_b": "AL",
+      "raw_extraction": {
+        "match_context": {
+          "enriched_at": "2026-05-24T09:20:09.818Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "#4973058836",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "34ae764e-abb3-4225-9e52-a070d58e4991",
+      "team_a": "Beijing JDG Esports",
+      "team_b": "AL",
+      "raw_extraction": {
+        "match_context": {
+          "enriched_at": "2026-05-24T09:20:10.004Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "#4973144776",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 500,00"
+        }
+      }
+    },
+    {
+      "id": "7eda9f86-67cb-4809-ae32-a0851ff4e2f8",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "AL",
+      "raw_extraction": {
+        "hedge_note": "Hedge sintético consolidado: 3x600 Under EstrelaBet @1.75 + 582.52 Over Pinnacle @2.03 + 1000 Over Pinnacle @2.20 = NET -R$232.52",
+        "compositions": {
+          "source": "lolesports livestats game 115615926677831073",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "TwistedFate",
+              "top": "Jayce",
+              "jungle": "LeeSin",
+              "support": "Nautilus"
+            }
+          },
+          "team_b": {
+            "name": "Anyone's Legend",
+            "side": "red",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Mel",
+              "top": "Gnar",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": null,
+          "red_picks": {
+            "adc": "Sivir",
+            "mid": "Mel",
+            "top": "Gnar",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "under_hit": null,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "TwistedFate",
+            "top": "Jayce",
+            "jungle": "LeeSin",
+            "support": "Nautilus"
+          },
+          "kills_blue": 15,
+          "enriched_at": "2026-05-24T09:22:37.657Z",
+          "red_team_id": "99566404856367466",
+          "total_kills": 22,
+          "winner_side": "blue",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677831073",
+          "lolesports_match_id": "115615926677831071",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4922188421",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$600,00"
+        },
+        "hedge_consolidated": true,
+        "hedge_legs_original": [
+          "7eda9f86",
+          "ea91d464",
+          "94dc93e1",
+          "ac00b0cd",
+          "3c162336"
+        ]
+      }
+    },
+    {
+      "id": "8687efe9-dd60-4008-be4c-72191e9f4295",
+      "team_a": "WE",
+      "team_b": "AL",
+      "raw_extraction": {
+        "case_b": true,
+        "notes_extra": "Bet baseada em time-strength (WE+AL ambos 77.8% Split 2). Bard presente no draft mas em LPL - fora regra Bard-so-LEC. Bet tecnica do CEO, nao trigger metodo.",
+        "compositions": {
+          "source": "lolesports livestats game 115615926677831076",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Akali",
+              "top": "Rumble",
+              "jungle": "Trundle",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Anyone's Legend",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Annie",
+              "top": "Galio",
+              "jungle": "Naafiri",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 11,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Sivir",
+            "mid": "Akali",
+            "top": "Rumble",
+            "jungle": "Trundle",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Annie",
+            "top": "Galio",
+            "jungle": "Naafiri",
+            "support": "Seraphine"
+          },
+          "kills_blue": 3,
+          "enriched_at": "2026-05-24T09:22:43.607Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 14,
+          "winner_side": "red",
+          "blue_team_id": "99566404856367466",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677831076",
+          "lolesports_match_id": "115615926677831075",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4944676372",
+          "raw_pick_text": "Menos de 29.5",
+          "raw_stake_text": "R$ 1.000,00"
+        },
+        "placement_context": "AO VIVO - Map 1 em andamento no momento da bet (09:26 BRT). Match start_time 11:00Z (08:00 BRT), delta ~86min.",
+        "screenshot_path_note": "Caso B - imagem inline no chat, sem arquivo persistido em disco."
+      }
+    }
+  ]
+}

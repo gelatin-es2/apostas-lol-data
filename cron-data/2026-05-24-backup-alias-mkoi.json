@@ -1,0 +1,335 @@
+{
+  "alias": "MKOI",
+  "canonical": "Movistar KOI",
+  "backed_up_at": "2026-05-24T12:20:03.507Z",
+  "rows_team_a": [
+    {
+      "id": "0b76323b-c8d4-4068-888e-f2824f8bee7f",
+      "team_a": "MKOI",
+      "team_b": "G2 Esports",
+      "raw_extraction": {
+        "strategy": "hedge",
+        "hedge_note": "Perna UNDER 28.5 do hedge linhas iguais. Par com 1eedfc2b Parimatch Over 28.5 R$952.38. NET: <=28 = -R$202.38 / >=29 = 0 (zero loss). Stake quebrado pra equalizar profit em R$1000.",
+        "compositions": {
+          "source": "lolesports livestats game 115548668059589339",
+          "team_a": {
+            "name": "Movistar KOI",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Galio",
+              "top": "Anivia",
+              "jungle": "XinZhao",
+              "support": "Rell"
+            }
+          },
+          "team_b": {
+            "name": "G2 Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "MissFortune",
+              "mid": "Leblanc",
+              "top": "KSante",
+              "jungle": "LeeSin",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 27,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Galio",
+            "top": "Anivia",
+            "jungle": "XinZhao",
+            "support": "Rell"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "MissFortune",
+            "mid": "Leblanc",
+            "top": "KSante",
+            "jungle": "LeeSin",
+            "support": "Seraphine"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:18:01.069Z",
+          "red_team_id": "103461966965149786",
+          "total_kills": 44,
+          "winner_side": "red",
+          "blue_team_id": "98767991926151025",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059589339",
+          "lolesports_match_id": "115548668059589336",
+          "match_ambiguous_at_link": false
+        },
+        "hedge_group_id": "hedge_mkoi_g2_2026-05-10_map3",
+        "bookmaker_native": {
+          "bet_id": "4936421359",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "9082f64c-b6f3-452e-b4dc-88e68b37d73e",
+      "team_a": "MKOI",
+      "team_b": "GIANTX",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "Movistar KOI",
+            "side": "team_a",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Cassiopeia",
+              "top": "Anivia",
+              "jungle": "Xin Zhao",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "GIANTX",
+            "side": "team_b",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Viktor",
+              "top": "Varus",
+              "jungle": "Skarner",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:19:26.305Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "#3048956576",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "BRL 1,000.00"
+        }
+      }
+    },
+    {
+      "id": "c2760923-8ebe-4bbb-b802-444172f80fc9",
+      "team_a": "MKOI",
+      "team_b": "G2 Esports",
+      "raw_extraction": {
+        "case": "B",
+        "note": "imagem inline session-only, sem arquivo persistido",
+        "strategy": "hedge_middle",
+        "hedge_note": "Perna UNDER 28.5 do hedge com middle. Par com ccb645d9 Over 27.5 EstrelaBet. Cenarios NET: <=27 = -R$286 / =28 = +R$1584 (middle hit) / >=29 = -R$130.",
+        "compositions": {
+          "source": "lolesports livestats game 115548668059589338",
+          "team_a": {
+            "name": "Movistar KOI",
+            "side": "blue",
+            "picks": {
+              "adc": "Kaisa",
+              "mid": "Lissandra",
+              "top": "Gnar",
+              "jungle": "JarvanIV",
+              "support": "Nautilus"
+            }
+          },
+          "team_b": {
+            "name": "G2 Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Ahri",
+              "top": "Vayne",
+              "jungle": "Skarner",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 18,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Sivir",
+            "mid": "Ahri",
+            "top": "Vayne",
+            "jungle": "Skarner",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Kaisa",
+            "mid": "Lissandra",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Nautilus"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-05-24T09:17:56.736Z",
+          "red_team_id": "98767991926151025",
+          "total_kills": 32,
+          "winner_side": "red",
+          "blue_team_id": "103461966965149786",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059589338",
+          "lolesports_match_id": "115548668059589336",
+          "match_ambiguous_at_link": false
+        },
+        "hedge_group_id": "hedge_mkoi_g2_2026-05-10_map2",
+        "correction_note": "Bookmaker corrigido de Parimatch -> Pinnacle em 2026-05-10 por confirmacao do Elvis. Print colado direto (Caso B) impediu re-verificacao visual.",
+        "bookmaker_native": {
+          "bet_id": "3045407341",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "1eedfc2b-ecb5-4b10-81a9-42b3749658f7",
+      "team_a": "MKOI",
+      "team_b": "G2 Esports",
+      "raw_extraction": {
+        "strategy": "hedge",
+        "hedge_note": "Perna OVER 28.5 do hedge linhas iguais. Par com 0b76323b Under 28.5 EstrelaBet R$1k. NET: <=28 = -R$202.38 / >=29 = 0 (zero loss). Stake quebrado pra equalizar profit em R$1000.",
+        "compositions": {
+          "source": "lolesports livestats game 115548668059589339",
+          "team_a": {
+            "name": "Movistar KOI",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Galio",
+              "top": "Anivia",
+              "jungle": "XinZhao",
+              "support": "Rell"
+            }
+          },
+          "team_b": {
+            "name": "G2 Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "MissFortune",
+              "mid": "Leblanc",
+              "top": "KSante",
+              "jungle": "LeeSin",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 27,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Galio",
+            "top": "Anivia",
+            "jungle": "XinZhao",
+            "support": "Rell"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "MissFortune",
+            "mid": "Leblanc",
+            "top": "KSante",
+            "jungle": "LeeSin",
+            "support": "Seraphine"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:22:47.238Z",
+          "red_team_id": "103461966965149786",
+          "total_kills": 44,
+          "winner_side": "red",
+          "blue_team_id": "98767991926151025",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059589339",
+          "lolesports_match_id": "115548668059589336",
+          "match_ambiguous_at_link": false
+        },
+        "hedge_group_id": "hedge_mkoi_g2_2026-05-10_map3",
+        "screenshot_note": "Caso B — imagem inline na sessão, sem arquivo persistido. screenshot_path=null.",
+        "bookmaker_native": {
+          "bet_id": "3045463649",
+          "raw_pick_text": "Over 28.5",
+          "raw_stake_text": "R$ 952,38"
+        }
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "6a34f634-ab4e-439b-8e88-67a5a5ae3cc2",
+      "team_a": "GIANTX",
+      "team_b": "MKOI",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523762",
+          "team_a": {
+            "name": "GIANTX",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Azir",
+              "top": "Renekton",
+              "jungle": "Skarner",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Movistar KOI",
+            "side": "blue",
+            "picks": {
+              "adc": "Kalista",
+              "mid": "Anivia",
+              "top": "Shen",
+              "jungle": "JarvanIV",
+              "support": "Renata"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 13,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Azir",
+            "top": "Renekton",
+            "jungle": "Skarner",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Kalista",
+            "mid": "Anivia",
+            "top": "Shen",
+            "jungle": "JarvanIV",
+            "support": "Renata"
+          },
+          "kills_blue": 26,
+          "enriched_at": "2026-05-24T09:17:55.335Z",
+          "red_team_id": "101383793572656373",
+          "total_kills": 39,
+          "winner_side": "blue",
+          "blue_team_id": "103461966965149786",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523762",
+          "lolesports_match_id": "115548668059523760",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3043182516",
+          "raw_pick_text": "Under 26.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    }
+  ]
+}

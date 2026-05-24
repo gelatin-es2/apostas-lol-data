@@ -1,0 +1,139 @@
+{
+  "alias": "SEN",
+  "canonical": "Sentinels",
+  "backed_up_at": "2026-05-24T12:20:03.812Z",
+  "rows_team_a": [
+    {
+      "id": "12b4d95a-3cce-4250-82d5-351cb4397990",
+      "team_a": "SEN",
+      "team_b": "DIG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115564793879338109",
+          "team_a": {
+            "name": "Sentinels",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Anivia",
+              "top": "Sion",
+              "jungle": "JarvanIV",
+              "support": "Lux"
+            }
+          },
+          "team_b": {
+            "name": "Dignitas",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ryze",
+              "top": "Shen",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 9,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Anivia",
+            "top": "Sion",
+            "jungle": "JarvanIV",
+            "support": "Lux"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Ryze",
+            "top": "Shen",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "kills_blue": 1,
+          "enriched_at": "2026-05-24T09:20:02.935Z",
+          "red_team_id": "115688562107799886",
+          "total_kills": 10,
+          "winner_side": "red",
+          "blue_team_id": "98926509883054987",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879338109",
+          "lolesports_match_id": "115564793879338108",
+          "match_ambiguous_at_link": false
+        }
+      }
+    },
+    {
+      "id": "25a447f9-46b8-4d26-8a64-e3f965be7c0e",
+      "team_a": "SEN",
+      "team_b": "DIG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115564793879338110",
+          "team_a": {
+            "name": "Sentinels",
+            "side": "blue",
+            "picks": {
+              "adc": "Varus",
+              "mid": "Hwei",
+              "top": "Renekton",
+              "jungle": "Skarner",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Dignitas",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Ornn",
+              "jungle": "Naafiri",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Ornn",
+            "jungle": "Naafiri",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Varus",
+            "mid": "Hwei",
+            "top": "Renekton",
+            "jungle": "Skarner",
+            "support": "Bard"
+          },
+          "kills_blue": 18,
+          "enriched_at": "2026-05-24T09:22:49.188Z",
+          "red_team_id": "98926509883054987",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "115688562107799886",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879338110",
+          "lolesports_match_id": "115564793879338108",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4962575100",
+          "raw_pick_text": "Menos de 25.5",
+          "raw_stake_text": "R$ 500,00"
+        }
+      }
+    }
+  ],
+  "rows_team_b": []
+}

@@ -1,0 +1,215 @@
+{
+  "alias": "SLY",
+  "canonical": "Solary",
+  "backed_up_at": "2026-05-24T12:20:02.576Z",
+  "rows_team_a": [
+    {
+      "id": "35a330a6-406f-42e7-88c6-2bf8ec583d40",
+      "team_a": "SLY",
+      "team_b": "ZYB",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792656159",
+          "team_a": {
+            "name": "Solary",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Taliyah",
+              "top": "Anivia",
+              "jungle": "XinZhao",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "ZYB",
+            "side": "blue",
+            "picks": {
+              "adc": "Vayne",
+              "mid": "Azir",
+              "top": "Gnar",
+              "jungle": "Jax",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 32.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Taliyah",
+            "top": "Anivia",
+            "jungle": "XinZhao",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Vayne",
+            "mid": "Azir",
+            "top": "Gnar",
+            "jungle": "Jax",
+            "support": "Karma"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:18:24.679Z",
+          "red_team_id": "105515345386578249",
+          "total_kills": 26,
+          "winner_side": "red",
+          "blue_team_id": "115745558004231657",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792656159",
+          "lolesports_match_id": "116316789792656158",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4922968829",
+          "raw_pick_text": "Menos de 32.5",
+          "raw_stake_text": "R$600"
+        }
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "433a1c6f-9cb2-4a4d-9fbe-6cc7fd5536e7",
+      "team_a": "Galions",
+      "team_b": "SLY",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792721711",
+          "team_a": {
+            "name": "Galions",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Cassiopeia",
+              "top": "Sion",
+              "jungle": "MonkeyKing",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Solary",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ryze",
+              "top": "Zaahen",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 20,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Ryze",
+            "top": "Zaahen",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Cassiopeia",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Seraphine"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:18:51.540Z",
+          "red_team_id": "105515345386578249",
+          "total_kills": 39,
+          "winner_side": "red",
+          "blue_team_id": "103935468920814040",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792721711",
+          "lolesports_match_id": "116316789792721710",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "7e1401de-bf4c-4f0e-b19d-b787e980d9bc",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 251,17 BRL"
+        }
+      }
+    },
+    {
+      "id": "fb608e0e-9365-4928-8387-4d1ca647a143",
+      "team_a": "Galions",
+      "team_b": "SLY",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792721711",
+          "team_a": {
+            "name": "Galions",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Cassiopeia",
+              "top": "Sion",
+              "jungle": "MonkeyKing",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Solary",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ryze",
+              "top": "Zaahen",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 20,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Ryze",
+            "top": "Zaahen",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Cassiopeia",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Seraphine"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:19:45.112Z",
+          "red_team_id": "105515345386578249",
+          "total_kills": 39,
+          "winner_side": "red",
+          "blue_team_id": "103935468920814040",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792721711",
+          "lolesports_match_id": "116316789792721710",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "7e1401de-bf4c-4f0e-b19d-b787e980d9bc",
+        "bookmaker_native": {
+          "bet_id": "#4971060451",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 721,15"
+        }
+      }
+    }
+  ]
+}

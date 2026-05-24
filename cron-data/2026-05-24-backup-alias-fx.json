@@ -1,0 +1,771 @@
+{
+  "alias": "FX",
+  "canonical": "Fluxo",
+  "backed_up_at": "2026-05-24T12:20:01.457Z",
+  "rows_team_a": [
+    {
+      "id": "106b3a70-be09-4994-b33d-18f9995bc70f",
+      "team_a": "FX",
+      "team_b": "Los Grandes",
+      "raw_extraction": {
+        "caso": "B",
+        "nota": "Imagem inline no contexto da sessao, nao persistida em disco.",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181832",
+          "team_a": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Jinx",
+              "mid": "Yone",
+              "top": "Sion",
+              "jungle": "Maokai",
+              "support": "Thresh"
+            }
+          },
+          "team_b": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Aphelios",
+              "mid": "TwistedFate",
+              "top": "Olaf",
+              "jungle": "Skarner",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 10,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Aphelios",
+            "mid": "TwistedFate",
+            "top": "Olaf",
+            "jungle": "Skarner",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Jinx",
+            "mid": "Yone",
+            "top": "Sion",
+            "jungle": "Maokai",
+            "support": "Thresh"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:18:10.535Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 27,
+          "winner_side": "blue",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181832",
+          "lolesports_match_id": "115565670260181827",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "ladder_los_fx_2026-05-10_map5",
+        "screenshot_path": null,
+        "bookmaker_native": {
+          "bet_id": "4936758533",
+          "raw_pick_text": "Menos de 25.5",
+          "raw_stake_text": "R$ 240,00"
+        }
+      }
+    },
+    {
+      "id": "6369ae03-778a-4c42-8af1-11118f389ad7",
+      "team_a": "FX",
+      "team_b": "Los Grandes",
+      "raw_extraction": {
+        "caso": "B",
+        "nota": "Imagem inline no contexto da sessao, nao persistida em disco.",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181832",
+          "team_a": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Jinx",
+              "mid": "Yone",
+              "top": "Sion",
+              "jungle": "Maokai",
+              "support": "Thresh"
+            }
+          },
+          "team_b": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Aphelios",
+              "mid": "TwistedFate",
+              "top": "Olaf",
+              "jungle": "Skarner",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 10,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Aphelios",
+            "mid": "TwistedFate",
+            "top": "Olaf",
+            "jungle": "Skarner",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Jinx",
+            "mid": "Yone",
+            "top": "Sion",
+            "jungle": "Maokai",
+            "support": "Thresh"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:19:09.009Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 27,
+          "winner_side": "blue",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181832",
+          "lolesports_match_id": "115565670260181827",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "ladder_los_fx_2026-05-10_map5",
+        "screenshot_path": null,
+        "bookmaker_native": {
+          "bet_id": "4936753861",
+          "raw_pick_text": "Menos de 26.5",
+          "raw_stake_text": "R$ 760,13"
+        }
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "56a41c23-9063-4539-86c7-08ae2aa2f761",
+      "team_a": "Los Grandes",
+      "team_b": "FX",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181828",
+          "team_a": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Viktor",
+              "top": "Kennen",
+              "jungle": "Trundle",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Zoe",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 3,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Viktor",
+            "top": "Kennen",
+            "jungle": "Trundle",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Zoe",
+            "top": "Renekton",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:18:19.145Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 19,
+          "winner_side": "blue",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181828",
+          "lolesports_match_id": "115565670260181827",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3045318919",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "R$ 500,00"
+        }
+      }
+    },
+    {
+      "id": "6ec2fa9c-8ed5-43a1-9b5e-1e54c1db4742",
+      "team_a": "RED",
+      "team_b": "FX",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181843",
+          "team_a": {
+            "name": "RED Canids Kalunga",
+            "side": "blue",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Azir",
+              "top": "Anivia",
+              "jungle": "DrMundo",
+              "support": "Alistar"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "red",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Orianna",
+              "top": "Vayne",
+              "jungle": "Nocturne",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Sivir",
+            "mid": "Orianna",
+            "top": "Vayne",
+            "jungle": "Nocturne",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Zeri",
+            "mid": "Azir",
+            "top": "Anivia",
+            "jungle": "DrMundo",
+            "support": "Alistar"
+          },
+          "kills_blue": 13,
+          "enriched_at": "2026-05-24T09:18:23.537Z",
+          "red_team_id": "109480056092207899",
+          "total_kills": 25,
+          "winner_side": null,
+          "blue_team_id": "99566408221961358",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181843",
+          "lolesports_match_id": "115565670260181839",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "20205664362",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 200,00"
+        }
+      }
+    },
+    {
+      "id": "d2f4a79f-76be-42a1-aae5-9400204542b0",
+      "team_a": "RED",
+      "team_b": "FX",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181842",
+          "team_a": {
+            "name": "RED Canids Kalunga",
+            "side": "blue",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Sylas",
+              "top": "Jayce",
+              "jungle": "RekSai",
+              "support": "Rakan"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "red",
+            "picks": {
+              "adc": "Smolder",
+              "mid": "Ahri",
+              "top": "Renekton",
+              "jungle": "XinZhao",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 1,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Smolder",
+            "mid": "Ahri",
+            "top": "Renekton",
+            "jungle": "XinZhao",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Jhin",
+            "mid": "Sylas",
+            "top": "Jayce",
+            "jungle": "RekSai",
+            "support": "Rakan"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:18:55.164Z",
+          "red_team_id": "109480056092207899",
+          "total_kills": 18,
+          "winner_side": "blue",
+          "blue_team_id": "99566408221961358",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181842",
+          "lolesports_match_id": "115565670260181839",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4956818988",
+          "raw_pick_text": "Menos de 30.5",
+          "raw_stake_text": "R$ 740,13"
+        }
+      }
+    },
+    {
+      "id": "54ec6850-77b6-4fab-8e06-2734f8c73df1",
+      "team_a": "RED",
+      "team_b": "FX",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181843",
+          "team_a": {
+            "name": "RED Canids Kalunga",
+            "side": "blue",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Azir",
+              "top": "Anivia",
+              "jungle": "DrMundo",
+              "support": "Alistar"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "red",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Orianna",
+              "top": "Vayne",
+              "jungle": "Nocturne",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Sivir",
+            "mid": "Orianna",
+            "top": "Vayne",
+            "jungle": "Nocturne",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Zeri",
+            "mid": "Azir",
+            "top": "Anivia",
+            "jungle": "DrMundo",
+            "support": "Alistar"
+          },
+          "kills_blue": 13,
+          "enriched_at": "2026-05-24T09:18:58.142Z",
+          "red_team_id": "109480056092207899",
+          "total_kills": 25,
+          "winner_side": null,
+          "blue_team_id": "99566408221961358",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181843",
+          "lolesports_match_id": "115565670260181839",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "20205664372",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 300,00"
+        }
+      }
+    },
+    {
+      "id": "e91f1fa3-63e7-4c3d-ada1-ad41f571563c",
+      "team_a": "RED",
+      "team_b": "FX",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181841",
+          "team_a": {
+            "name": "RED Canids Kalunga",
+            "side": "red",
+            "picks": {
+              "adc": "Senna",
+              "mid": "Taliyah",
+              "top": "Gwen",
+              "jungle": "Pantheon",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Tristana",
+              "top": "Sion",
+              "jungle": "Skarner",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Senna",
+            "mid": "Taliyah",
+            "top": "Gwen",
+            "jungle": "Pantheon",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Tristana",
+            "top": "Sion",
+            "jungle": "Skarner",
+            "support": "Lulu"
+          },
+          "kills_blue": 8,
+          "enriched_at": "2026-05-24T09:19:09.535Z",
+          "red_team_id": "99566408221961358",
+          "total_kills": 24,
+          "winner_side": "red",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181841",
+          "lolesports_match_id": "115565670260181839",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#3050028474",
+          "raw_pick_text": "Under 29.5",
+          "raw_stake_text": "BRL 1,000.00"
+        }
+      }
+    },
+    {
+      "id": "3b1cd1ba-4f38-4729-b13a-4cfd2d691441",
+      "team_a": "Los Grandes",
+      "team_b": "FX",
+      "raw_extraction": {
+        "strategy": "hedge",
+        "hedge_note": "Perna UNDER do hedge. Par com bet fe572a59 (Over 27.5 R50). NET previsto: -R41 (kills<27.5) ou -R24.50 (kills>=27.5). Elvis cashou pre-match porque Under era pra amanha (10/05) e ele nao apostaria pre-match normalmente.",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181828",
+          "team_a": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Viktor",
+              "top": "Kennen",
+              "jungle": "Trundle",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Zoe",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 3,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Viktor",
+            "top": "Kennen",
+            "jungle": "Trundle",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Zoe",
+            "top": "Renekton",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:18:45.568Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 19,
+          "winner_side": "blue",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181828",
+          "lolesports_match_id": "115565670260181827",
+          "match_ambiguous_at_link": false
+        },
+        "hedge_group_id": "hedge_los_fx_2026-05-10_map1",
+        "bookmaker_native": {
+          "bet_id": "3044178382",
+          "raw_pick_text": "Under 27.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "c30b1b00-b797-4e96-a46c-402bc8afc553",
+      "team_a": "Los Grandes",
+      "team_b": "FX",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181829",
+          "team_a": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ryze",
+              "top": "Rumble",
+              "jungle": "Nocturne",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Ahri",
+              "top": "KSante",
+              "jungle": "JarvanIV",
+              "support": "Alistar"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 27,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "Nocturne",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "JarvanIV",
+            "support": "Alistar"
+          },
+          "kills_blue": 8,
+          "enriched_at": "2026-05-24T09:22:42.110Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 35,
+          "winner_side": "red",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181829",
+          "lolesports_match_id": "115565670260181827",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3045368222",
+          "raw_pick_text": "Under 29.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "fe572a59-25c4-47a4-a072-c11584dcbd0b",
+      "team_a": "Los Grandes",
+      "team_b": "FX",
+      "raw_extraction": {
+        "strategy": "hedge",
+        "hedge_note": "Perna OVER do hedge. Par com bet 3b1cd1ba (Under 27.5 R$1k). NET previsto: -R$141 (kills<27.5) ou -R$124.50 (kills>=27.5). Elvis cashou pre-match porque Under era pra amanha (10/05) e ele nao apostaria pre-match normalmente.",
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181828",
+          "team_a": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Viktor",
+              "top": "Kennen",
+              "jungle": "Trundle",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Zoe",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 3,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Viktor",
+            "top": "Kennen",
+            "jungle": "Trundle",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Zoe",
+            "top": "Renekton",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:22:42.563Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 19,
+          "winner_side": "blue",
+          "blue_team_id": "109480056092207899",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181828",
+          "lolesports_match_id": "115565670260181827",
+          "match_ambiguous_at_link": false
+        },
+        "hedge_group_id": "hedge_los_fx_2026-05-10_map1",
+        "bookmaker_native": {
+          "bet_id": "3044194524",
+          "raw_pick_text": "Over 27.5",
+          "raw_stake_text": "R$ 850,00"
+        }
+      }
+    },
+    {
+      "id": "cf2f30d5-bb91-44cc-bffa-9b20874a1446",
+      "team_a": "RED",
+      "team_b": "FX",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115565670260181843",
+          "team_a": {
+            "name": "RED Canids Kalunga",
+            "side": "blue",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Azir",
+              "top": "Anivia",
+              "jungle": "DrMundo",
+              "support": "Alistar"
+            }
+          },
+          "team_b": {
+            "name": "Fluxo",
+            "side": "red",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Orianna",
+              "top": "Vayne",
+              "jungle": "Nocturne",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Sivir",
+            "mid": "Orianna",
+            "top": "Vayne",
+            "jungle": "Nocturne",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Zeri",
+            "mid": "Azir",
+            "top": "Anivia",
+            "jungle": "DrMundo",
+            "support": "Alistar"
+          },
+          "kills_blue": 13,
+          "enriched_at": "2026-05-24T09:22:48.561Z",
+          "red_team_id": "109480056092207899",
+          "total_kills": 25,
+          "winner_side": null,
+          "blue_team_id": "99566408221961358",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565670260181843",
+          "lolesports_match_id": "115565670260181839",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "20205664352",
+          "raw_pick_text": "Menos de 29.5",
+          "raw_stake_text": "R$ 200,00"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,351 @@
+{
+  "alias": "BRO",
+  "canonical": "HANJIN BRION",
+  "backed_up_at": "2026-05-24T12:20:01.031Z",
+  "rows_team_a": [
+    {
+      "id": "737adb98-f591-4195-8765-ab49e6a36e15",
+      "team_a": "BRO",
+      "team_b": "DN SOOPers",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971944",
+          "team_a": {
+            "name": "HANJIN BRION",
+            "side": "blue",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Ryze",
+              "top": "Sion",
+              "jungle": "LeeSin",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "DN SOOPers",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Taliyah",
+              "top": "Renekton",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 5,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Taliyah",
+            "top": "Renekton",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Jhin",
+            "mid": "Ryze",
+            "top": "Sion",
+            "jungle": "LeeSin",
+            "support": "Karma"
+          },
+          "kills_blue": 24,
+          "enriched_at": "2026-05-24T09:18:53.415Z",
+          "red_team_id": "99566404581868574",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "105505619546859895",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971944",
+          "lolesports_match_id": "115548128962971943",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 245,93"
+        }
+      }
+    },
+    {
+      "id": "e5726f27-b55a-4287-a49f-e5767f86f1f7",
+      "team_a": "BRO",
+      "team_b": "DN SOOPers",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971944",
+          "team_a": {
+            "name": "HANJIN BRION",
+            "side": "blue",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Ryze",
+              "top": "Sion",
+              "jungle": "LeeSin",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "DN SOOPers",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Taliyah",
+              "top": "Renekton",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 5,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Taliyah",
+            "top": "Renekton",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Jhin",
+            "mid": "Ryze",
+            "top": "Sion",
+            "jungle": "LeeSin",
+            "support": "Karma"
+          },
+          "kills_blue": 24,
+          "enriched_at": "2026-05-24T09:22:45.397Z",
+          "red_team_id": "99566404581868574",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "105505619546859895",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971944",
+          "lolesports_match_id": "115548128962971943",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "20194855552",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 745,76"
+        }
+      }
+    },
+    {
+      "id": "31ba0280-1e60-4f41-b97f-490b99f37bf4",
+      "team_a": "BRO",
+      "team_b": "BNK FEARX",
+      "raw_extraction": {
+        "device_type": "Desktop",
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971921",
+          "team_a": {
+            "name": "HANJIN BRION",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Aurora",
+              "top": "Zaahen",
+              "jungle": "Trundle",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "BNK FEARX",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ahri",
+              "top": "Ambessa",
+              "jungle": "Vi",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 15,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Ahri",
+            "top": "Ambessa",
+            "jungle": "Vi",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Aurora",
+            "top": "Zaahen",
+            "jungle": "Trundle",
+            "support": "Milio"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:19:22.673Z",
+          "red_team_id": "100725845022060229",
+          "total_kills": 34,
+          "winner_side": "blue",
+          "blue_team_id": "105505619546859895",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971921",
+          "lolesports_match_id": "115548128962971919",
+          "match_ambiguous_at_link": false
+        },
+        "partial_score": "BRION 1:0 FEARX",
+        "potential_win": 1056,
+        "print_datetime": "2026-05-07T08:17:00-03:00",
+        "status_in_print": "ABERTO",
+        "bookmaker_native": {
+          "bet_id": "4921975915",
+          "raw_pick_text": "Menos de 30.5",
+          "raw_stake_text": "R$600,00"
+        }
+      }
+    },
+    {
+      "id": "390776fd-8cc4-4335-9a41-c3870e8ef1f5",
+      "team_a": "BRO",
+      "team_b": "BNK FEARX",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971921",
+          "team_a": {
+            "name": "HANJIN BRION",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Aurora",
+              "top": "Zaahen",
+              "jungle": "Trundle",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "BNK FEARX",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ahri",
+              "top": "Ambessa",
+              "jungle": "Vi",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 15,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Ahri",
+            "top": "Ambessa",
+            "jungle": "Vi",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Aurora",
+            "top": "Zaahen",
+            "jungle": "Trundle",
+            "support": "Milio"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:19:12.036Z",
+          "red_team_id": "100725845022060229",
+          "total_kills": 34,
+          "winner_side": "blue",
+          "blue_team_id": "105505619546859895",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971921",
+          "lolesports_match_id": "115548128962971919",
+          "match_ambiguous_at_link": false
+        },
+        "status_in_print": "Bet Accepted",
+        "bookmaker_native": {
+          "bet_id": "3042265439",
+          "raw_pick_text": "Under 29.5",
+          "raw_stake_text": "BRL 600.00"
+        },
+        "potential_profit": 444
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "9c5861c5-48ae-4546-8045-c3103fc47676",
+      "team_a": "Dplus KIA",
+      "team_b": "BRO",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548128963037509",
+          "team_a": {
+            "name": "Dplus KIA",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "KogMaw",
+              "top": "Anivia",
+              "jungle": "XinZhao",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "HANJIN BRION",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Cassiopeia",
+              "top": "Jayce",
+              "jungle": "Vi",
+              "support": "Lux"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "KogMaw",
+            "top": "Anivia",
+            "jungle": "XinZhao",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Cassiopeia",
+            "top": "Jayce",
+            "jungle": "Vi",
+            "support": "Lux"
+          },
+          "kills_blue": 12,
+          "enriched_at": "2026-05-24T09:21:03.008Z",
+          "red_team_id": "100725845018863243",
+          "total_kills": 18,
+          "winner_side": "blue",
+          "blue_team_id": "105505619546859895",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128963037509",
+          "lolesports_match_id": "115548128963037507",
+          "match_ambiguous_at_link": false
+        }
+      }
+    }
+  ]
+}

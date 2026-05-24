@@ -1,0 +1,156 @@
+{
+  "alias": "NIP",
+  "canonical": "Shenzhen NINJAS IN PYJAMAS",
+  "backed_up_at": "2026-05-24T12:20:02.068Z",
+  "rows_team_a": [
+    {
+      "id": "6740f14f-ebde-4646-ac94-a02831e0af0c",
+      "team_a": "NIP",
+      "team_b": "EDWARD GAMING",
+      "raw_extraction": {
+        "match_context": {
+          "teams": [
+            {
+              "code": "NIP",
+              "name": "Shenzhen NINJAS IN PYJAMAS"
+            },
+            {
+              "code": "EDG",
+              "name": "EDWARD GAMING"
+            }
+          ],
+          "game_id": "115616219464541900",
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 18,
+          "league_id": "98767991314006698",
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Mel",
+            "top": "KSante",
+            "jungle": "Maokai",
+            "support": "Yuumi"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Aphelios",
+            "mid": "Ahri",
+            "top": "Ambessa",
+            "jungle": "Shyvana",
+            "support": "Thresh"
+          },
+          "game_state": "unstarted",
+          "kills_blue": 9,
+          "red_barons": 1,
+          "red_towers": 8,
+          "settled_at": "2026-05-24T11:14:06.148Z",
+          "start_time": "2026-05-24T06:00:00Z",
+          "blue_barons": 0,
+          "blue_towers": 4,
+          "red_dragons": 2,
+          "red_team_id": "98767991882270868",
+          "total_kills": 27,
+          "winner_side": "red",
+          "blue_dragons": 3,
+          "blue_team_id": "101388912914513220",
+          "league_short": "LPL",
+          "trigger_type": null,
+          "kills_at_15min": null,
+          "red_total_gold": 72318,
+          "blue_total_gold": 65708,
+          "selected_reason": "exact_date_completed",
+          "first_blood_team": "red",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115616219464541900",
+          "lolesports_match_id": "115616219464541895",
+          "series_score_at_bet": {
+            "current_map": 5,
+            "maps_completed_before": 4
+          }
+        },
+        "ladder_group_id": "d035c55a-2914-4373-8b50-6dbbc5fa980c",
+        "bookmaker_native": {
+          "bet_id": "4983420733",
+          "raw_pick_text": "NIP vs EDG, Menos de 26.5, Quinto Mapa - Total Kills",
+          "raw_stake_text": "R$ 150,00"
+        }
+      }
+    },
+    {
+      "id": "c4eda66d-61bc-4249-93bd-c92f4074dbc8",
+      "team_a": "NIP",
+      "team_b": "EDWARD GAMING",
+      "raw_extraction": {
+        "match_context": {
+          "teams": [
+            {
+              "code": "NIP",
+              "name": "Shenzhen NINJAS IN PYJAMAS"
+            },
+            {
+              "code": "EDG",
+              "name": "EDWARD GAMING"
+            }
+          ],
+          "game_id": "115616219464541900",
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 18,
+          "league_id": "98767991314006698",
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Mel",
+            "top": "KSante",
+            "jungle": "Maokai",
+            "support": "Yuumi"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Aphelios",
+            "mid": "Ahri",
+            "top": "Ambessa",
+            "jungle": "Shyvana",
+            "support": "Thresh"
+          },
+          "game_state": "unstarted",
+          "kills_blue": 9,
+          "red_barons": 1,
+          "red_towers": 8,
+          "settled_at": "2026-05-24T11:14:06.259Z",
+          "start_time": "2026-05-24T06:00:00Z",
+          "blue_barons": 0,
+          "blue_towers": 4,
+          "red_dragons": 2,
+          "red_team_id": "98767991882270868",
+          "total_kills": 27,
+          "winner_side": "red",
+          "blue_dragons": 3,
+          "blue_team_id": "101388912914513220",
+          "league_short": "LPL",
+          "trigger_type": null,
+          "kills_at_15min": null,
+          "red_total_gold": 72318,
+          "blue_total_gold": 65708,
+          "selected_reason": "exact_date_completed",
+          "first_blood_team": "red",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115616219464541900",
+          "lolesports_match_id": "115616219464541895",
+          "series_score_at_bet": {
+            "current_map": 5,
+            "maps_completed_before": 4
+          }
+        },
+        "ladder_group_id": "d035c55a-2914-4373-8b50-6dbbc5fa980c",
+        "bookmaker_native": {
+          "bet_id": "4983420294",
+          "raw_pick_text": "NIP vs EDG, Menos de 27.5, Quinto Mapa - Total Kills",
+          "raw_stake_text": "R$ 852,27"
+        }
+      }
+    }
+  ],
+  "rows_team_b": []
+}

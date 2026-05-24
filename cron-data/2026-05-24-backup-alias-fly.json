@@ -1,0 +1,293 @@
+{
+  "alias": "FLY",
+  "canonical": "FlyQuest",
+  "backed_up_at": "2026-05-24T12:20:03.253Z",
+  "rows_team_a": [],
+  "rows_team_b": [
+    {
+      "id": "6afcdb06-688c-474d-94b6-ec01e4a339c3",
+      "team_a": "C9",
+      "team_b": "FLY",
+      "raw_extraction": {
+        "meta": {
+          "case": "B",
+          "notes": "Map 5 decisor BO5 C9 vs FLY — bet placed 2026-05-23, screenshot não persistido",
+          "currency": "BRL",
+          "market_type": "total_kills_map",
+          "ladder_group_id": "fc38d99c-e2d2-4ab5-843b-945adcbf1d32"
+        },
+        "compositions": {
+          "source": "lolesports livestats game 115564793879469293",
+          "team_a": {
+            "name": "Cloud9 Kia",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Swain",
+              "top": "Gnar",
+              "jungle": "Sejuani",
+              "support": "Alistar"
+            }
+          },
+          "team_b": {
+            "name": "FlyQuest",
+            "side": "blue",
+            "picks": {
+              "adc": "Kalista",
+              "mid": "Azir",
+              "top": "Akali",
+              "jungle": "DrMundo",
+              "support": "Renata"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Swain",
+            "top": "Gnar",
+            "jungle": "Sejuani",
+            "support": "Alistar"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Kalista",
+            "mid": "Azir",
+            "top": "Akali",
+            "jungle": "DrMundo",
+            "support": "Renata"
+          },
+          "kills_blue": 6,
+          "enriched_at": "2026-05-24T09:18:22.450Z",
+          "red_team_id": "98767991877340524",
+          "total_kills": 27,
+          "winner_side": "red",
+          "blue_team_id": "98926509892121852",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879469293",
+          "lolesports_match_id": "115564793879469288",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3055327177",
+          "raw_pick_text": "Under 25.5",
+          "raw_stake_text": "R$1000"
+        }
+      }
+    },
+    {
+      "id": "42f6a319-b6ee-45f3-b4fe-219bb46a0c09",
+      "team_a": "C9",
+      "team_b": "FLY",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115564793879469290",
+          "team_a": {
+            "name": "Cloud9 Kia",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Yorick",
+              "jungle": "Naafiri",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "FlyQuest",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ryze",
+              "top": "Jayce",
+              "jungle": "JarvanIV",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 11,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Jayce",
+            "jungle": "JarvanIV",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Yorick",
+            "jungle": "Naafiri",
+            "support": "Seraphine"
+          },
+          "kills_blue": 11,
+          "enriched_at": "2026-05-24T09:21:24.816Z",
+          "red_team_id": "98926509892121852",
+          "total_kills": 22,
+          "winner_side": "blue",
+          "blue_team_id": "98767991877340524",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879469290",
+          "lolesports_match_id": "115564793879469288",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "93805247-99ec-4dfd-a4eb-83e1bda20897",
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Total. Mapa 2 Menos de 26.5",
+          "raw_stake_text": "R$251,17"
+        }
+      }
+    },
+    {
+      "id": "45516dd4-8cb8-4e44-a68d-74cff250e3ee",
+      "team_a": "C9",
+      "team_b": "FLY",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115564793879469290",
+          "team_a": {
+            "name": "Cloud9 Kia",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Yorick",
+              "jungle": "Naafiri",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "FlyQuest",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ryze",
+              "top": "Jayce",
+              "jungle": "JarvanIV",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 11,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Jayce",
+            "jungle": "JarvanIV",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Yorick",
+            "jungle": "Naafiri",
+            "support": "Seraphine"
+          },
+          "kills_blue": 11,
+          "enriched_at": "2026-05-24T09:21:24.475Z",
+          "red_team_id": "98926509892121852",
+          "total_kills": 22,
+          "winner_side": "blue",
+          "blue_team_id": "98767991877340524",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879469290",
+          "lolesports_match_id": "115564793879469288",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "93805247-99ec-4dfd-a4eb-83e1bda20897",
+        "bookmaker_native": {
+          "bet_id": "3055257143",
+          "raw_pick_text": "Under 26.5",
+          "raw_stake_text": "BRL 1000.00"
+        }
+      }
+    },
+    {
+      "id": "40a3d9e2-6dc6-412c-a4b2-5494d2013ba8",
+      "team_a": "C9",
+      "team_b": "FLY",
+      "raw_extraction": {
+        "market_type": "total_kills_map",
+        "compositions": {
+          "source": "lolesports livestats game 115564793879469290",
+          "team_a": {
+            "name": "Cloud9 Kia",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Yorick",
+              "jungle": "Naafiri",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "FlyQuest",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ryze",
+              "top": "Jayce",
+              "jungle": "JarvanIV",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 11,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Jayce",
+            "jungle": "JarvanIV",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Yorick",
+            "jungle": "Naafiri",
+            "support": "Seraphine"
+          },
+          "kills_blue": 11,
+          "enriched_at": "2026-05-24T09:22:53.782Z",
+          "red_team_id": "98926509892121852",
+          "total_kills": 22,
+          "winner_side": "blue",
+          "blue_team_id": "98767991877340524",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879469290",
+          "lolesports_match_id": "115564793879469288",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "93805247-99ec-4dfd-a4eb-83e1bda20897",
+        "bookmaker_native": {
+          "bet_id": "4981608178",
+          "raw_pick_text": "Menos de 26.5",
+          "raw_stake_text": "R$712,02"
+        }
+      }
+    }
+  ]
+}

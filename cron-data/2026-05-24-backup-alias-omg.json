@@ -1,0 +1,145 @@
+{
+  "alias": "OMG",
+  "canonical": "Oh My God",
+  "backed_up_at": "2026-05-24T12:20:03.705Z",
+  "rows_team_a": [
+    {
+      "id": "bbd4d39d-f22b-4f2d-95e5-37cf317e7545",
+      "team_a": "OMG",
+      "team_b": "Ultra Prime",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588658",
+          "team_a": {
+            "name": "Oh My God",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Taliyah",
+              "top": "Rumble",
+              "jungle": "Vi",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Ultra Prime",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ryze",
+              "top": "KSante",
+              "jungle": "JarvanIV",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Taliyah",
+            "top": "Rumble",
+            "jungle": "Vi",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ryze",
+            "top": "KSante",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:18:05.121Z",
+          "red_team_id": "99566404845279652",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "103461966986776720",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588658",
+          "lolesports_match_id": "115615924499588657",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4951392250",
+          "raw_pick_text": "Menos de 25.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "7e568fc9-07d5-4686-bd36-d600c4af153c",
+      "team_a": "Ultra Prime",
+      "team_b": "OMG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615926685761109",
+          "team_a": {
+            "name": "Ultra Prime",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Akali",
+              "top": "Yorick",
+              "jungle": "Pantheon",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Oh My God",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Leblanc",
+              "top": "Gnar",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 5,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Leblanc",
+            "top": "Gnar",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Akali",
+            "top": "Yorick",
+            "jungle": "Pantheon",
+            "support": "Bard"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:22:46.392Z",
+          "red_team_id": "99566404845279652",
+          "total_kills": 24,
+          "winner_side": "blue",
+          "blue_team_id": "103461966986776720",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685761109",
+          "lolesports_match_id": "115615924499588657",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#3048605532",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "BRL 1,000.00"
+        }
+      }
+    }
+  ]
+}

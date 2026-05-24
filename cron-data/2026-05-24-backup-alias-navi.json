@@ -1,0 +1,173 @@
+{
+  "alias": "NAVI",
+  "canonical": "Natus Vincere",
+  "backed_up_at": "2026-05-24T12:20:03.404Z",
+  "rows_team_a": [
+    {
+      "id": "672fe7fc-b1fc-4b20-8e5c-85b0101572e4",
+      "team_a": "NAVI",
+      "team_b": "GALIONS",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "Natus Vincere",
+            "side": "team_a",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Cassiopeia",
+              "top": "Sion",
+              "jungle": "Wukong",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Galions",
+            "side": "team_b",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Viktor",
+              "top": "Vayne",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:18:32.246Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "4951987977",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 694,44"
+        }
+      }
+    },
+    {
+      "id": "199d9081-815b-4e78-86d3-52b71adb0a47",
+      "team_a": "NAVI",
+      "team_b": "GALIONS",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "Natus Vincere",
+            "side": "team_a",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Cassiopeia",
+              "top": "Sion",
+              "jungle": "Wukong",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Galions",
+            "side": "team_b",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Viktor",
+              "top": "Vayne",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:22:46.586Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "4951989430",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 300,00"
+        }
+      }
+    },
+    {
+      "id": "5accc59e-64cd-4d36-8c61-5ea745d54aa7",
+      "team_a": "NAVI",
+      "team_b": "Galions",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "Natus Vincere",
+            "side": "team_a",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Aurora",
+              "top": "Rumble",
+              "jungle": "Ambessa",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Galions",
+            "side": "team_b",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Annie",
+              "top": "Ornn",
+              "jungle": "Naafiri",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:19:56.668Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "#3048868015",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "BRL 1,000.00"
+        }
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "b6ba5e98-674e-407a-b336-754f1931938d",
+      "team_a": "G2 Esports",
+      "team_b": "NAVI",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "G2 Esports",
+            "side": "team_a",
+            "picks": {
+              "adc": "Smolder",
+              "mid": "Annie",
+              "top": "Vayne",
+              "jungle": "Pantheon",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Natus Vincere",
+            "side": "team_b",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Cassiopeia",
+              "top": "Sion",
+              "jungle": "Wukong",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:19:28.188Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "#3048105450",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "BRL 1,000.00"
+        }
+      }
+    }
+  ]
+}

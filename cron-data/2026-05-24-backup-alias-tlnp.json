@@ -1,0 +1,213 @@
+{
+  "alias": "TLNP",
+  "canonical": "TLN Pirates",
+  "backed_up_at": "2026-05-24T12:20:02.465Z",
+  "rows_team_a": [
+    {
+      "id": "f2d608d0-b656-4167-904d-dce99bd4e67e",
+      "team_a": "TLNP",
+      "team_b": "Vitality.Bee",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792721733",
+          "team_a": {
+            "name": "TLN Pirates",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Akali",
+              "top": "Gwen",
+              "jungle": "Pantheon",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Vitality.Bee",
+            "side": "blue",
+            "picks": {
+              "adc": "Jinx",
+              "mid": "Viktor",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Akali",
+            "top": "Gwen",
+            "jungle": "Pantheon",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Jinx",
+            "mid": "Viktor",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "kills_blue": 7,
+          "enriched_at": "2026-05-24T09:20:54.821Z",
+          "red_team_id": "115745361559907281",
+          "total_kills": 23,
+          "winner_side": "red",
+          "blue_team_id": "102787200151698443",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792721733",
+          "lolesports_match_id": "116316789792721732",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#4974160776",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 730,51"
+        }
+      }
+    },
+    {
+      "id": "0d0006d8-c13c-4a35-b311-630349e40a45",
+      "team_a": "TLNP",
+      "team_b": "Vitality.Bee",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792721733",
+          "team_a": {
+            "name": "TLN Pirates",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Akali",
+              "top": "Gwen",
+              "jungle": "Pantheon",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Vitality.Bee",
+            "side": "blue",
+            "picks": {
+              "adc": "Jinx",
+              "mid": "Viktor",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Akali",
+            "top": "Gwen",
+            "jungle": "Pantheon",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Jinx",
+            "mid": "Viktor",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "kills_blue": 7,
+          "enriched_at": "2026-05-24T09:20:12.301Z",
+          "red_team_id": "115745361559907281",
+          "total_kills": 23,
+          "winner_side": "red",
+          "blue_team_id": "102787200151698443",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792721733",
+          "lolesports_match_id": "116316789792721732",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#3053577434",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "BRL 891,99"
+        }
+      }
+    }
+  ],
+  "rows_team_b": [
+    {
+      "id": "6477bf78-fcbd-4716-a063-233d90dfb527",
+      "team_a": "KCB",
+      "team_b": "TLNP",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116316789792721715",
+          "team_a": {
+            "name": "Karmine Corp Blue",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Anivia",
+              "top": "Renekton",
+              "jungle": "RekSai",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "TLN Pirates",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Ziggs",
+              "top": "Ornn",
+              "jungle": "Vi",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Ziggs",
+            "top": "Ornn",
+            "jungle": "Vi",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Anivia",
+            "top": "Renekton",
+            "jungle": "RekSai",
+            "support": "Bard"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-05-24T09:20:06.022Z",
+          "red_team_id": "115745361559907281",
+          "total_kills": 20,
+          "winner_side": "blue",
+          "blue_team_id": "105515219038427019",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LFL",
+          "lolesports_game_id": "116316789792721715",
+          "lolesports_match_id": "116316789792721714",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#3052809835",
+          "raw_pick_text": "Under 30.5",
+          "raw_stake_text": "BRL 1.000,00"
+        }
+      }
+    }
+  ]
+}

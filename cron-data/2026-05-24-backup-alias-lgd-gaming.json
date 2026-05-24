@@ -1,0 +1,83 @@
+{
+  "alias": "LGD Gaming",
+  "canonical": "LGD GAMING",
+  "backed_up_at": "2026-05-24T12:20:04.338Z",
+  "rows_team_a": [],
+  "rows_team_b": [
+    {
+      "id": "02eb809b-76bd-491c-a5d0-9f31fa6c74a7",
+      "team_a": "THUNDER TALK GAMING",
+      "team_b": "LGD Gaming",
+      "raw_extraction": {
+        "odd": 1.7,
+        "pick": "Under 25.5",
+        "stake": 834.05,
+        "bookmaker": "Betano",
+        "is_map_bet": true,
+        "map_number": 2,
+        "tournament": "LPL Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115615926685761097",
+          "team_a": {
+            "name": "THUNDER TALK GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "KSante",
+              "jungle": "Naafiri",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "LGD GAMING",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Ahri",
+              "top": "Rumble",
+              "jungle": "Trundle",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 11,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Ahri",
+            "top": "Rumble",
+            "jungle": "Trundle",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "KSante",
+            "jungle": "Naafiri",
+            "support": "Milio"
+          },
+          "kills_blue": 1,
+          "enriched_at": "2026-05-24T09:22:31.244Z",
+          "red_team_id": "99566404846951820",
+          "total_kills": 12,
+          "winner_side": "red",
+          "blue_team_id": "101388912911039804",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685761097",
+          "lolesports_match_id": "115615924499588645",
+          "match_ambiguous_at_link": false
+        },
+        "cashout_offered": 789.5,
+        "ganho_potencial": 1417.89,
+        "lolesports_game_id": "115615926685761097",
+        "lolesports_match_id": "115615924499588645",
+        "series_score_at_bet": "1-0"
+      }
+    }
+  ]
+}
