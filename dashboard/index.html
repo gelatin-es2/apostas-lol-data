@@ -1582,8 +1582,10 @@
       `;
 
       // Side-by-side por trigger (sempre mostra os 2)
+      // Bugfix 2026-05-23: usa `bets` (já filtrado por liga/champ/trigger) em vez de
+      // `allBetsRaw` — antes a tabela mostrava dados de TODAS as ligas mesmo com filtro ativo.
       function statsForTrigger(trig) {
-        const filtered = allBetsRaw.filter(b => (b.raw_extraction?.match_context?.trigger_type) === trig);
+        const filtered = bets.filter(b => (b.raw_extraction?.match_context?.trigger_type) === trig);
         const sims = filtered.map(b => ({ b, sim: getBetSimulation(b) })).filter(x => x.sim);
         if (!sims.length) return null;
         const g = sims.filter(x => x.sim.won).length;
@@ -1851,8 +1853,9 @@
       `;
 
       // Lado a lado por trigger (sempre mostra os 2 pra comparação rápida)
+      // Bugfix 2026-05-23: usa `games` (já filtrado) em vez de `split1Games` (raw).
       function statsForTrigger(trig) {
-        const filtered = split1Games.filter(g => g.trigger === trig);
+        const filtered = games.filter(g => g.trigger === trig);
         if (!filtered.length) return null;
         const g = filtered.filter(simHit).length;
         const r = filtered.length - g;
