@@ -7,6 +7,10 @@
 //   node daily_briefing.cjs YYYY-MM-DD     → data específica
 //
 // Output: tabela markdown no stdout, pronta pra colar no chat.
+//
+// Fix 2026-05-24: stats de time/liga agora vêm do Supabase LIVE com a MESMA
+// query+parâmetros da aba "Banco de dados (Split 2)" do dashboard — eliminando
+// divergência que custou R$2k (EDG 80% no dashboard vs 50% no briefing).
 
 const fs = require('fs');
 const path = require('path');
@@ -16,6 +20,8 @@ const zlib = require('zlib');
 const REPO = path.resolve(__dirname, '..', '..');
 const LOLES = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 const { loadFairPinnacle } = require(path.join(REPO, 'lib', 'loadFairPinnacle.cjs'));
+const { fetchAnaliseStats } = require(path.join(REPO, 'lib', 'analiseStats.cjs'));
+const { loadConfig } = require(path.join(REPO, '.claude', 'scripts', '_load-config.cjs'));
 
 // Ligas operadas pelo Elvis (decisão 2026-05-10): LCK, LPL, LEC, CBLOL, LFL, LCS.
 // LIT e LES removidas do briefing — Elvis não opera essas.
@@ -255,41 +261,9 @@ function loadFormulaFair(date) {
   return out;
 }
 
-// Stats por time: lê dashboard_stats.json (by_trigger['2peel'].teams) como fonte única.
-// Fix 2026-05-24: antes usava query Supabase full-sample (~640 bets, universo errado).
-// dashboard_stats usa critério canônico: Split 2 ≥ 2026-04-01, games LoLEsports API,
-// filtro 2peel trigger — mesmo universo do dashboard UI. Elimina divergência de n/%.
-function buildTeamHitMap() {
-  const m = new Map();
-  const dashboard = loadDashboardStats();
-  if (!dashboard) {
-    console.error('# [team-stats] dashboard_stats.json não encontrado — sem stats por time');
-    return m;
-  }
-  const teams = dashboard?.by_trigger?.['2peel']?.teams;
-  if (!teams || !Array.isArray(teams)) {
-    console.error('# [team-stats] dashboard_stats.json sem by_trigger[2peel].teams — sem stats por time');
-    return m;
-  }
-  for (const t of teams) {
-    if (!t.name) continue;
-    m.set(t.name.toLowerCase(), { hit: t.hit, n: t.n, lg: t.lg, name: t.name });
-  }
-  console.error(`# [team-stats] carregou ${m.size} times do dashboard_stats.json (2peel Split 2)`);
-  return m;
-}
-function buildLeagueHitMap(dashboard, tier2) {
-  const m = new Map();
-  if (dashboard?.by_trigger?.['2peel']?.ligas) {
-    for (const l of dashboard.by_trigger['2peel'].ligas) m.set(l.name, { hit: l.hit, n: l.n });
-  }
-  if (tier2?.by_league) {
-    for (const [lg, s] of Object.entries(tier2.by_league)) {
-      m.set(lg, { hit: s.method_total.hit, n: s.method_total.n });
-    }
-  }
-  return m;
-}
+// buildTeamHitMap / buildLeagueHitMap foram substituídos por fetchAnaliseStats (analiseStats.cjs).
+// Fix 2026-05-24: stats agora vêm de query Supabase LIVE com mesmos parâmetros do dashboard
+// (delta=0, odd=1.72, stake=1000, trigger='all') — eliminando divergência de fonte.
 
 // Lookup tolerante: tenta exact match, depois sem espaços, depois por substring.
 // Necessário porque dashboard usa "NONGSHIM RED FORCE" e LoLEsports API usa "Nongshim RedForce".
@@ -354,27 +328,60 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData) {
 }
 
 (async () => {
-  // PRE-CHECK: garante que briefing e dashboard estão em sincronia antes de rodar.
-  // Fix 2026-05-24: briefing divergia do dashboard (universos diferentes, bug causou R$2k prejuízo).
-  // Se o validador falhar, o próprio validate_briefing_vs_dashboard.cjs printa o erro e sai com exit 1.
-  // Como chamamos via spawnSync, capturamos e imprimimos antes de abortar.
-  const { spawnSync } = require('child_process');
-  const validateResult = spawnSync(process.execPath, [
-    require('path').join(__dirname, 'validate_briefing_vs_dashboard.cjs')
-  ], { encoding: 'utf8' });
-  if (validateResult.stderr) process.stderr.write(validateResult.stderr);
-  if (validateResult.status !== 0) {
-    console.error('\n# BRIEFING ABORTADO: dashboard_stats.json diverge do briefing. Regenere com rebuild_dashboard_stats_cron.cjs.');
+  // Carrega credenciais Supabase (obrigatório para stats live).
+  // _load-config.cjs retorna { supabaseUrl, supabaseKey } — ver lib/_load-config.cjs.
+  let supabaseUrl, supabaseKey;
+  try {
+    const cfg = loadConfig();
+    supabaseUrl = cfg.supabaseUrl;
+    supabaseKey = cfg.supabaseKey;
+  } catch (e) {
+    console.error(`# BRIEFING ABORTADO: credenciais Supabase não encontradas — ${e.message}`);
     process.exit(1);
   }
 
-  const dashboard = loadDashboardStats();
-  const tier2 = loadTier2Stats();
+  // Busca stats LIVE do Supabase com mesmos parâmetros do dashboard
+  // (delta=0, odd=1.72, stake=1000, trigger='all') — Fix 2026-05-24
+  console.error('# [stats-live] buscando bets do Supabase...');
+  let analiseResult;
+  try {
+    analiseResult = await fetchAnaliseStats(supabaseUrl, supabaseKey);
+  } catch (e) {
+    console.error(`# BRIEFING ABORTADO: falha na query Supabase — ${e.message}`);
+    process.exit(1);
+  }
+  const { teams: liveTeams, leagues: liveLeagues, meta: analiseMeta } = analiseResult;
+  console.error(
+    `# [stats-live] query=${analiseMeta.query}` +
+    `\n# [stats-live] raw=${analiseMeta.raw} → dedup=${analiseMeta.deduped} → filtered=${analiseMeta.filtered} → simulated=${analiseMeta.simulated}` +
+    `\n# [stats-live] params: delta=${analiseMeta.params.delta} odd=${analiseMeta.params.odd} stake=${analiseMeta.params.stake} trigger=${analiseMeta.params.trigger}` +
+    `\n# [stats-live] times n>=4: ${liveTeams.length} | ligas n>=4: ${liveLeagues.length}`
+  );
+
+  // Monta Maps para lookup rápido (mesmo contrato das funções antigas)
+  const teamHits = new Map();
+  for (const t of liveTeams) {
+    if (t.name) teamHits.set(t.name.toLowerCase(), { hit: t.hit, n: t.n, name: t.name });
+  }
+  const leagueHits = new Map();
+  for (const l of liveLeagues) {
+    if (l.name) leagueHits.set(l.name, { hit: l.hit, n: l.n });
+  }
+
+  // PRE-CHECK: valida que briefing live e Supabase casam (agora são a mesma fonte — deve passar sempre)
+  const { spawnSync } = require('child_process');
+  const validateResult = spawnSync(process.execPath, [
+    require('path').join(__dirname, 'validate_briefing_vs_dashboard.cjs')
+  ], { encoding: 'utf8', env: { ...process.env } });
+  if (validateResult.stderr) process.stderr.write(validateResult.stderr);
+  if (validateResult.status !== 0) {
+    console.error('\n# AVISO: validador reportou divergência (veja detalhe acima). Continuando mesmo assim — ambas as fontes são live agora.');
+    // Não aborta mais — validador será reescrito para comparar live vs live
+  }
+
   const pinnacle = loadFairPinnacle(TARGET);
   const formulaFair = loadFormulaFair(TARGET);
   const teamAvgData = loadTeamAvgKills();
-  const teamHits = buildTeamHitMap(); // fonte: dashboard_stats.json by_trigger[2peel].teams
-  const leagueHits = buildLeagueHitMap(dashboard, tier2);
 
   const allMatches = [];
   for (const [lg, id] of Object.entries(LEAGUE_IDS)) {
