@@ -1,5 +1,54 @@
 # Pendências — atualizada 2026-05-22 fim da sessão
 
+## 🟡 Decisões pendentes (Elvis vai instruir)
+
+### P1 — Bets fora do método remanescentes (após FLEX expandido com Lux/Anivia)
+
+Ainda restam **14 bets reais classificadas como fora do método** (após decisão 2026-05-23 que adicionou Lux+Anivia ao flex). Supports não-peel-não-flex envolvidos: **Neeko, Rell, Nautilus, Thresh**. Lista preservada pra Elvis decidir caso a caso o que fazer (expandir flex mais? mover pra outro bucket? deletar?):
+
+| ID | Liga | Jogo | Map | Pick | Status | Blue sup | Red sup |
+|---|---|---|---|---|---|---|---|
+| `1eedfc2b` | LEC | MKOI vs G2 | 3 | Over 28.5 | 🟢 | Seraphine | **Rell** |
+| `0b76323b` | LEC | MKOI vs G2 | 3 | Menos 28.5 | 🔴 | Seraphine | **Rell** |
+| `ccb645d9` | LEC | KOI vs G2 | 2 | Mais 27.5 | 🟢 | **Nautilus** | Lulu |
+| `c2760923` | LEC | MKOI vs G2 | 2 | Under 28.5 | 🔴 | **Nautilus** | Lulu |
+| `106b3a70` | CBLOL | FX vs LOS | 5 | Menos 25.5 | 🔴 | **Thresh** | Lulu |
+| `6369ae03` | CBLOL | FX vs LOS | 5 | Menos 26.5 | 🔴 | **Thresh** | Lulu |
+| `d304265f` | CBLOL | LEV vs VKS | 2 | Under 28.5 | 🔴 | Nami | **Neeko** |
+| `8701b64f` | CBLOL | LEV vs VKS | 2 | Under 29.5 | 🔴 | Nami | **Neeko** |
+| `8cd3de12` | CBLOL | LEV vs VKS | 2 | Under 27.5 | 🔴 | Nami | **Neeko** |
+| `4bb5a553` | CBLOL | LOS vs RED | 1 | Under 28.5 | 🔴 | Nami | **Neeko** |
+| `f0bff92d` | CBLOL | FURIA vs LOUD | 2 | Under 29.5 | 🟢 | **Neeko** | Nami |
+| `7eda9f86` | LPL | NIP vs AL | 2 | Cashout (hedge) | cashout | **Nautilus** | Milio |
+| `8424cf6b` | LPL | WBG vs BLG | 2 | Cashout (hedge) | cashout | Karma | **Nautilus** |
+| `baec0c1e` | LCK | NRF vs T1 | 1 | Under 30.5 | cashout | **Neeko** | Karma |
+
+Padrões observáveis:
+- **Neeko aparece 5×** (CBLOL principalmente, 4 dessas no mesmo jogo LEV vs VKS map 2 — ladder)
+- **Rell 2×, Nautilus 3×, Thresh 2×**
+- 3 são cashouts (hedge) — categoria à parte, não método mesmo
+
+### P2 — ✅ Refazer SIMULATED com FLEX expandido — RESOLVIDA 2026-05-23
+
+13 novas SIMULATED inseridas via `insert-missed-bets.cjs`. Banco passou de 269 → 282. Cruzamento 100%: 0 missed 2peel faltando, 0 missed 1peel+flex faltando. Detalhes mantidos abaixo pra histórico.
+
+#### Histórico da decisão
+
+Após push 2026-05-23 (`883e92d` + `8d7670b`), o cron agora classifica **+20 games como 1peel+flex** (Lux/Anivia qualificando) e **+13 missed_opportunities** apareceram. Pra refletir no backtest histórico SIMULATED:
+
+**Plano (não executar sem aprovação):**
+1. Rodar `analyze_tier2_lfl_les.cjs` se houver missed novos em LFL/LES (já não, atual tem 230 missed mas precisa contar tier 1 vs tier 2)
+2. Rodar `.claude/scripts/insert-missed-bets.cjs` pra inserir as **+13 SIMULATED tier 1 novas** (diff entre missed 230 vs 217)
+3. Validar: SIMULATED no banco deve ir de 269 → ~282
+4. Re-rodar cron pra refletir
+5. Atualizar dashboard / verificar Banco de dados + Método Milio
+
+**Cuidado documentado**: enrich-match-context skipa SIMULATED (guard frágil, fix `2777353`). Não desativar o skip.
+
+**Decisão pendente Elvis:** quer regenerar SIMULATED retroativo (passado vira "com Lux/Anivia") OU manter SIMULATED atuais (snapshot pré-23/05) e nova categorização vale só pra missed daqui pra frente?
+
+---
+
 ## 🟢 Auditoria fair_line — 2026-05-23 (SIMULATED 100% OK)
 
 **Relatório completo:** `knowledge/audits/fair-line-audit-2026-05-23.md`
