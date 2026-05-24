@@ -5,11 +5,16 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "capture:lck-lpl": "node capture_fair_lines.cjs lck,lpl",
-    "capture:lec-cblol": "node capture_fair_lines.cjs lec,cblol",
-    "analyze:yesterday": "node analyze_yesterday.cjs",
-    "save:report": "node save_report_to_db.cjs",
-    "rebuild:dashboard": "node rebuild_dashboard_stats_cron.cjs"
+    "capture:lck-lpl": "node .claude/scripts/capture_fair_lines.cjs lck,lpl",
+    "capture:lec-cblol": "node .claude/scripts/capture_fair_lines.cjs lec,cblol",
+    "analyze:yesterday": "node .claude/scripts/analyze_yesterday.cjs",
+    "save:report": "node .claude/scripts/save_report_to_db.cjs",
+    "rebuild:dashboard": "node .claude/scripts/rebuild_dashboard_stats_cron.cjs",
+    "rebuild:lfl": "node .claude/scripts/rebuild_lfl_dashboard_stats.cjs",
+    "rebuild:tier2": "node .claude/scripts/rebuild_tier2_dashboard_stats.cjs",
+    "analyze:tier2-eu": "node .claude/scripts/analyze_tier2_eu.cjs",
+    "compute:real-bets": "node .claude/scripts/compute_real_bets_method.cjs",
+    "snapshot:bets": "node .claude/scripts/export-bets-snapshot.cjs"
   },
   "engines": {
     "node": ">=20"

@@ -32,51 +32,57 @@ jobs:
       # Polymarket descontinuado em 2026-05-23 — fair Pinnacle manual via /log-fair.
       # Cada bloco é idempotente (skipa eventos já completed). Em weekdays, lec/cblol = 0.
       - name: Capture fair lines (LCK + LPL)
-        run: node capture_fair_lines.cjs lck,lpl
+        run: node .claude/scripts/capture_fair_lines.cjs lck,lpl
         continue-on-error: true
 
       - name: Capture fair lines (LEC + CBLOL)
-        run: node capture_fair_lines.cjs lec,cblol
+        run: node .claude/scripts/capture_fair_lines.cjs lec,cblol
         continue-on-error: true
 
       # Analisa ontem (sempre)
       - name: Analyze yesterday's games
-        run: node analyze_yesterday.cjs
+        run: node .claude/scripts/analyze_yesterday.cjs
         continue-on-error: true
 
       # Analisa hoje também — pega jogos da manhã que já completaram
       # (importante na execução das 14:00 UTC quando LCK/LPL da manhã já fecharam)
       - name: Analyze today's games (best-effort)
-        run: node analyze_yesterday.cjs $(date -u +%Y-%m-%d)
+        run: node .claude/scripts/analyze_yesterday.cjs $(date -u +%Y-%m-%d)
         continue-on-error: true
 
       # Salva relatório dos triggered maps no Supabase (ontem + hoje)
       - name: Save report — yesterday
         if: env.SUPABASE_SECRET_KEY != ''
-        run: node save_report_to_db.cjs $(date -u -d 'yesterday' +%Y-%m-%d)
+        run: node .claude/scripts/save_report_to_db.cjs $(date -u -d 'yesterday' +%Y-%m-%d)
         continue-on-error: true
 
       - name: Save report — today
         if: env.SUPABASE_SECRET_KEY != ''
-        run: node save_report_to_db.cjs $(date -u +%Y-%m-%d)
+        run: node .claude/scripts/save_report_to_db.cjs $(date -u +%Y-%m-%d)
         continue-on-error: true
 
       # Rebuild dashboard stats (Split 2 only)
       - name: Rebuild dashboard stats
-        run: node rebuild_dashboard_stats_cron.cjs
+        run: node .claude/scripts/rebuild_dashboard_stats_cron.cjs
         continue-on-error: true
 
       # Compute real bets method stats (aplicando regra Bardo só LEC) — pra dashboard frontend
       - name: Compute real bets method stats
         if: env.SUPABASE_SECRET_KEY != ''
-        run: node compute_real_bets_method.cjs
+        run: node .claude/scripts/compute_real_bets_method.cjs
         continue-on-error: true
 
       # Tier 2 EU analysis (LFL/LES/LIT/EMEA Masters etc) — split 2 inteiro, standalone
       # Roda todo dia mas só atualiza se há novos games (idempotente).
       # Importante pra Qua/Qui (dias que essas ligas jogam, antes das 12h BRT)
       - name: Analyze Tier 2 EU (LFL/LES/LIT)
-        run: node analyze_tier2_eu.cjs
+        run: node .claude/scripts/analyze_tier2_eu.cjs
+        continue-on-error: true
+
+      # Export snapshot diário do banco pra backup em cron-data/snapshots/
+      - name: Export bets snapshot
+        if: env.SUPABASE_SECRET_KEY != ''
+        run: node .claude/scripts/export-bets-snapshot.cjs
         continue-on-error: true
 
       - name: Commit results

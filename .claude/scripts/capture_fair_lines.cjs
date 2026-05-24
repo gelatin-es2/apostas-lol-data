@@ -5,8 +5,8 @@
 // Este script gera a fair via fórmula que coexiste com Pinnacle no banco.
 //
 // Uso:
-//   node capture_fair_lines.cjs lck,lpl
-//   node capture_fair_lines.cjs lec,cblol
+//   node .claude/scripts/capture_fair_lines.cjs lck,lpl
+//   node .claude/scripts/capture_fair_lines.cjs lec,cblol
 //
 // Output: cron-data/YYYY-MM-DD-fair-pre.json (cumulativo: cada execução mescla)
 
@@ -14,8 +14,11 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const ORACLE_CSV = process.env.ORACLE_CSV || path.resolve(__dirname, '..', 'year_backtest/datasets/2026_oracle.csv');
-const OUT_DIR = path.join(__dirname, 'cron-data');
+// ROOT aponta pra raiz do repositório (sobe 2 níveis de .claude/scripts/)
+const ROOT = path.resolve(__dirname, '../..');
+
+const ORACLE_CSV = process.env.ORACLE_CSV || path.resolve(ROOT, '..', 'year_backtest/datasets/2026_oracle.csv');
+const OUT_DIR = path.join(ROOT, 'cron-data');
 
 const LIGAS_ALVO = (process.argv[2] || 'lck,lpl').toLowerCase().split(',');
 const TODAY = new Date().toISOString().slice(0, 10);

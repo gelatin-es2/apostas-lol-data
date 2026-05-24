@@ -1,12 +1,15 @@
 // save_report_to_db.cjs — lê cron-data/YYYY-MM-DD-results.json e faz upsert
 // dos mapas com trigger (2peel | 1peel+flex) na tabela method_reports do Supabase.
 //
-// Uso: node save_report_to_db.cjs            → ontem (default p/ cron diário)
-//      node save_report_to_db.cjs YYYY-MM-DD → data específica
+// Uso: node .claude/scripts/save_report_to_db.cjs            → ontem (default p/ cron diário)
+//      node .claude/scripts/save_report_to_db.cjs YYYY-MM-DD → data específica
 
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+
+// ROOT aponta pra raiz do repositório (sobe 2 níveis de .claude/scripts/)
+const ROOT = path.resolve(__dirname, '../..');
 
 const SUPA_URL = process.env.SUPABASE_URL || 'https://yxhpopkxlupdpqkdaffg.supabase.co';
 const SUPA_KEY = process.env.SUPABASE_SECRET_KEY;
@@ -15,7 +18,7 @@ if (!SUPA_KEY) { console.error('ERRO: SUPABASE_SECRET_KEY não setado'); process
 function ymd(d) { return d.toISOString().slice(0, 10); }
 const TARGET = process.argv[2] || ymd(new Date(Date.now() - 24*3600*1000));
 
-const file = path.join(__dirname, 'cron-data', `${TARGET}-results.json`);
+const file = path.join(ROOT, 'cron-data', `${TARGET}-results.json`);
 if (!fs.existsSync(file)) { console.error(`Sem arquivo: ${file}`); process.exit(1); }
 
 const data = JSON.parse(fs.readFileSync(file, 'utf8'));

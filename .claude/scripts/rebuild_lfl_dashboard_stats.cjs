@@ -6,6 +6,9 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
+// ROOT aponta pra raiz do repositório (sobe 2 níveis de .claude/scripts/)
+const ROOT = path.resolve(__dirname, '../..');
+
 const LOLES = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 const SPLIT2_START = '2026-04-01';
 const PEEL = ['Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio'];
@@ -225,7 +228,7 @@ async function fetchGameMeta(gameId) {
     champs_2peel: stats2peel.champs,
     champs_all: statsAll.champs,
   };
-  const outFile = path.join(__dirname, 'cron-data', 'lfl_dashboard_stats.json');
+  const outFile = path.join(ROOT, 'cron-data', 'lfl_dashboard_stats.json');
   fs.writeFileSync(outFile, JSON.stringify(out, null, 2));
   console.error(`Wrote: ${outFile}`);
   const bt = stats2peel.backtest;
