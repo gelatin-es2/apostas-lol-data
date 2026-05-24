@@ -2,39 +2,47 @@
   "date": "2026-05-24",
   "captures": [
     {
-      "captured_at": "2026-05-24T07:43:59.430Z",
+      "captured_at": "2026-05-24T13:00:44.627Z",
       "ligas": [
         "LCK",
         "LPL"
       ],
+      "fair_lines": []
+    },
+    {
+      "captured_at": "2026-05-24T13:00:45.343Z",
+      "ligas": [
+        "LEC",
+        "CBLOL"
+      ],
       "fair_lines": [
         {
-          "league": "LCK",
-          "league_id": "98767991310872058",
-          "event_id": "115548128962971947",
-          "start_time": "2026-05-24T08:00:00Z",
-          "team_a": "DNS",
-          "team_b": "GEN",
+          "league": "LEC",
+          "league_id": "98767991302996019",
+          "event_id": "115548668059589352",
+          "start_time": "2026-05-24T15:00:00Z",
+          "team_a": "VIT",
+          "team_b": "MKOI",
           "team_a_avg": null,
           "team_b_avg": null,
           "fair_formula": null,
           "fair_pinnacle": null,
           "fair_source": "unavailable",
-          "bo": 3
+          "bo": 5
         },
         {
-          "league": "LCK",
-          "league_id": "98767991310872058",
-          "event_id": "115548128962971891",
-          "start_time": "2026-05-24T10:00:00Z",
-          "team_a": "BRO",
-          "team_b": "T1",
+          "league": "CBLOL",
+          "league_id": "98767991332355509",
+          "event_id": "115565670260181851",
+          "start_time": "2026-05-24T16:00:00Z",
+          "team_a": "RED",
+          "team_b": "FUR",
           "team_a_avg": null,
           "team_b_avg": null,
           "fair_formula": null,
           "fair_pinnacle": null,
           "fair_source": "unavailable",
-          "bo": 3
+          "bo": 5
         }
       ]
     }
