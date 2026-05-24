@@ -465,6 +465,58 @@
       font-size: 10px; color: var(--muted);
       margin-top: 2px;
     }
+
+    /* ===== Bets fora do método ===== */
+    .bet-off {
+      border-left: 3px solid var(--yellow) !important;
+      opacity: 0.75;
+    }
+    .bet-off:hover { opacity: 1; }
+    .badge-off {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: var(--yellow-soft);
+      color: var(--yellow);
+    }
+    .toggle-method-btn {
+      margin-top: 6px;
+      display: block;
+      background: transparent;
+      border: 1px solid var(--border-soft);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .toggle-method-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent-2);
+    }
+    .toggle-method-btn.toggle-method-off:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+    .toggle-method-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .off-method-section {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-soft);
+    }
+    .off-method-section .section-title {
+      color: var(--yellow);
+    }
   </style>
 </head>
 <body>
@@ -525,6 +577,12 @@
     </div>
     <div id="bets" class="bets">
       <div class="loading">Carregando apostas</div>
+    </div>
+
+    <div class="off-method-section">
+      <div class="section-title">Bets fora do método</div>
+      <div id="offMethodKpis" class="kpis" style="margin-bottom:12px"></div>
+      <div id="offMethodBets" class="bets"></div>
     </div>
   </main>
 
@@ -857,7 +915,8 @@
       return normalizeLeague(league);
     };
 
-    let allBets = [];
+    let allBets = [];          // bets is_method_bet=true (base do Tracker)
+    let allOffBets = [];       // bets is_method_bet=false
     let currentFilter = 'all';
     let currentDayFilter = null; // 'YYYY-MM-DD' ou null
     let currentMonthFilter = null; // 'YYYY-MM' ou null
@@ -877,20 +936,30 @@
     }
 
     async function load() {
-      const { data, error } = await sb
-        .from('bets')
-        .select('*')
-        .neq('bookmaker', 'SIMULATED')  // Tracker = só bets reais. Simuladas vão pra aba Análise.
-        .order('bet_datetime', { ascending: false })
-        .limit(500);
+      // Busca método e off-método em paralelo
+      const [{ data: methodData, error: methodErr }, { data: offData, error: offErr }] = await Promise.all([
+        sb.from('bets')
+          .select('*')
+          .neq('bookmaker', 'SIMULATED')
+          .eq('is_method_bet', true)
+          .order('bet_datetime', { ascending: false })
+          .limit(500),
+        sb.from('bets')
+          .select('*')
+          .neq('bookmaker', 'SIMULATED')
+          .eq('is_method_bet', false)
+          .order('bet_datetime', { ascending: false })
+          .limit(500),
+      ]);
 
-      if (error) {
+      if (methodErr) {
         document.getElementById('bets').innerHTML =
-          `<div class="empty">Erro: ${error.message}</div>`;
+          `<div class="empty">Erro: ${methodErr.message}</div>`;
         return;
       }
 
-      allBets = data || [];
+      allBets = methodData || [];
+      allOffBets = offData || [];
       // Popula dropdown de liga do Tracker com ligas presentes nas bets reais
       const trkLigaSel = document.getElementById('trkLeague');
       const currentTrkLeague = trkLigaSel.value;
@@ -1341,7 +1410,8 @@
       renderBySupport(view);
       renderByLeague(view);
       renderByTeam(view);
-      renderBets(applyTrkFilters(allBets));
+      renderBetsWithToggle(applyTrkFilters(allBets));
+      renderOffMethodSection(allOffBets);
 
       const lastBet = allBets[0];
       const lastDt = lastBet ? fmtDate(lastBet.bet_datetime || lastBet.created_at) : '—';
@@ -1353,7 +1423,186 @@
       if (currentDayFilter) parts.push(`dia ${dayLabelFromKey(currentDayFilter)}`);
       const filterStr = parts.length ? ` · vendo ${parts.join(' / ')}` : '';
       document.getElementById('metaInfo').textContent =
-        `${allBets.length} apostas · última em ${lastDt}${filterStr}`;
+        `${allBets.length} método · ${allOffBets.length} off · última em ${lastDt}${filterStr}`;
+    }
+
+    // ===== Seção "Bets fora do método" =====
+    async function toggleMethodBet(betId, currentIsMethod) {
+      const newVal = !currentIsMethod;
+      const { error } = await sb
+        .from('bets')
+        .update({ is_method_bet: newVal })
+        .eq('id', betId);
+      if (error) {
+        console.error('toggleMethodBet:', error);
+        alert('Erro ao atualizar: ' + error.message);
+        return;
+      }
+      // Re-carrega as listas do Tracker (inclui off)
+      await load();
+    }
+
+    function renderOffMethodSection(offBets) {
+      const el = document.getElementById('offMethodBets');
+      const kpiEl = document.getElementById('offMethodKpis');
+      if (!el || !kpiEl) return;
+
+      if (!offBets || !offBets.length) {
+        kpiEl.innerHTML = '';
+        el.innerHTML = '<div class="empty">Nenhuma bet fora do método.</div>';
+        return;
+      }
+
+      // KPIs próprios
+      const k = computeKPIs(offBets);
+      const profitClass = k.profit >= 0 ? 'green' : 'red';
+      const roiClass = k.roi >= 0 ? 'green' : 'red';
+      kpiEl.innerHTML = `
+        <div class="kpi ${profitClass}">
+          <div class="label">Lucro (off)</div>
+          <div class="value ${profitClass}">${k.profit >= 0 ? '+' : ''}${fmtMoney(k.profit)}</div>
+          <div class="sub">de R$ ${fmtMoney(k.turnover)} apostados</div>
+        </div>
+        <div class="kpi ${roiClass}">
+          <div class="label">ROI (off)</div>
+          <div class="value ${roiClass}">${k.roi.toFixed(1)}%</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Hit rate (off)</div>
+          <div class="value">${k.hitRate.toFixed(1)}%</div>
+          <div class="sub">${k.wins}W / ${k.losses}L</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Apostas off</div>
+          <div class="value">${k.total}</div>
+          <div class="sub">${k.pending} pendente${k.pending === 1 ? '' : 's'}</div>
+        </div>
+      `;
+
+      const html = offBets.map((b) => {
+        const profit = b.profit;
+        const profitText = profit == null ? '—' : `${profit >= 0 ? '+' : ''}R$ ${fmtMoney(profit)}`;
+        const profitCls = profit == null ? 'muted' : profit >= 0 ? 'green' : 'red';
+        const isHedge = b.raw_extraction?.strategy === 'hedge';
+        const mapInfo = b.is_map_bet ? ` · M${b.map_number ?? '?'}` : '';
+        const compHtml = renderComp(normalizeComp(b));
+        const teamADisplay  = normalizeTeamName(b.team_a);
+        const teamBDisplay  = normalizeTeamName(b.team_b);
+        const marketDisplay = normalizeMarket(b.market, b.is_map_bet, b.map_number);
+        const leagueDisplay = normalizeLeague(b.league);
+
+        return `
+          <div class="bet bet-off" data-bet-id="${b.id}">
+            <div>
+              <div class="head">
+                <span class="teams">${teamADisplay} <span style="color:var(--muted);font-weight:500">vs</span> ${teamBDisplay}</span>
+                ${leagueDisplay ? `<span class="league">· ${leagueDisplay}</span>` : ''}
+                <span class="badge ${b.status}">${b.status}</span>
+                ${isHedge ? '<span class="badge hedge">hedge</span>' : ''}
+                <span class="badge-off">fora do método</span>
+              </div>
+              <div class="market">
+                ${marketDisplay} → <strong>${b.pick ?? '?'}</strong>${mapInfo}
+              </div>
+              <div class="meta">
+                ${fmtDate(b.bet_datetime || b.created_at)} · ${b.bookmaker ?? '?'} · Odd ${(Number(b.odd) || 0).toFixed(2)} · Stake R$ ${fmtMoney(b.stake)}
+              </div>
+              ${compHtml}
+            </div>
+            <div class="right">
+              <div class="profit ${profitCls}">${profitText}</div>
+              <button class="toggle-method-btn" title="Restaurar para o método" data-id="${b.id}" data-method="false">↩ restaurar</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      el.innerHTML = html;
+
+      // Bind dos botões de restaurar
+      el.querySelectorAll('.toggle-method-btn').forEach((btn) => {
+        btn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          const id = btn.dataset.id;
+          btn.disabled = true;
+          btn.textContent = '...';
+          await toggleMethodBet(id, false);
+        });
+      });
+    }
+
+    // Adiciona botão toggle nos cards de bet do método
+    function renderBetsWithToggle(bets) {
+      let filtered = currentFilter === 'all' ? bets : bets.filter((b) => b.status === currentFilter);
+      if (currentMonthFilter) {
+        filtered = filtered.filter((b) => {
+          const dt = b.bet_datetime || b.created_at;
+          return dt && dayKeyBRT(dt).slice(0, 7) === currentMonthFilter;
+        });
+      }
+      if (currentDayFilter) {
+        filtered = filtered.filter((b) => {
+          const dt = b.bet_datetime || b.created_at;
+          return dt && dayKeyBRT(dt) === currentDayFilter;
+        });
+      }
+
+      if (!filtered.length) {
+        document.getElementById('bets').innerHTML =
+          '<div class="empty">Nenhuma aposta nessa filtragem.</div>';
+        return;
+      }
+
+      const html = filtered.map((b) => {
+        const profit = b.profit;
+        const profitText = profit == null ? '—' : `${profit >= 0 ? '+' : ''}R$ ${fmtMoney(profit)}`;
+        const profitCls = profit == null ? 'muted' : profit >= 0 ? 'green' : 'red';
+        const isHedge = b.raw_extraction?.strategy === 'hedge';
+        const mapInfo = b.is_map_bet ? ` · M${b.map_number ?? '?'}` : '';
+        const compHtml = renderComp(normalizeComp(b));
+        const teamADisplay  = normalizeTeamName(b.team_a);
+        const teamBDisplay  = normalizeTeamName(b.team_b);
+        const marketDisplay = normalizeMarket(b.market, b.is_map_bet, b.map_number);
+        const leagueDisplay = normalizeLeague(b.league);
+
+        return `
+          <div class="bet" data-bet-id="${b.id}">
+            <div>
+              <div class="head">
+                <span class="teams">${teamADisplay} <span style="color:var(--muted);font-weight:500">vs</span> ${teamBDisplay}</span>
+                ${leagueDisplay ? `<span class="league">· ${leagueDisplay}</span>` : ''}
+                <span class="badge ${b.status}">${b.status}</span>
+                ${isHedge ? '<span class="badge hedge">hedge</span>' : ''}
+              </div>
+              <div class="market">
+                ${marketDisplay} → <strong>${b.pick ?? '?'}</strong>${mapInfo}
+              </div>
+              <div class="meta">
+                ${fmtDate(b.bet_datetime || b.created_at)} · ${b.bookmaker ?? '?'} · Odd ${(Number(b.odd) || 0).toFixed(2)} · Stake R$ ${fmtMoney(b.stake)}
+              </div>
+              ${compHtml}
+            </div>
+            <div class="right">
+              <div class="profit ${profitCls}">${profitText}</div>
+              <button class="toggle-method-btn toggle-method-off" title="Mover para fora do método" data-id="${b.id}" data-method="true">🎯 fora do método</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const betsEl = document.getElementById('bets');
+      betsEl.innerHTML = html;
+
+      // Bind dos botões toggle
+      betsEl.querySelectorAll('.toggle-method-btn').forEach((btn) => {
+        btn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          const id = btn.dataset.id;
+          btn.disabled = true;
+          btn.textContent = '...';
+          await toggleMethodBet(id, true);
+        });
+      });
     }
 
     document.querySelectorAll('.chip').forEach((chip) => {
@@ -1361,7 +1610,7 @@
         document.querySelectorAll('.chip').forEach((c) => c.classList.remove('active'));
         chip.classList.add('active');
         currentFilter = chip.dataset.filter;
-        renderBets(applyTrkFilters(allBets));
+        renderBetsWithToggle(applyTrkFilters(allBets));
       });
     });
 
@@ -1455,6 +1704,7 @@
           .from('bets')
           .select('*')
           .in('status', ['green', 'red'])
+          .eq('is_method_bet', true)
           .order('bet_datetime', { ascending: false })
           .limit(2000);
         if (error) { console.warn('analise fetch:', error); return; }
