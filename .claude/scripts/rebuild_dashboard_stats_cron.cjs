@@ -11,6 +11,19 @@ const ROOT = path.resolve(__dirname, '../..');
 
 const { loadFairPinnacle } = require(path.join(ROOT, 'lib/loadFairPinnacle.cjs'));
 
+// Alias map: resolve nome longo da API → canonical curto do banco (2026-05-24)
+const ALIAS_MAP = (() => {
+  try {
+    const j = JSON.parse(fs.readFileSync(path.join(ROOT, 'lib/team-aliases.json'), 'utf8'));
+    return j.aliases || {};
+  } catch { return {}; }
+})();
+function resolveCanonical(name) {
+  if (!name) return name;
+  if (ALIAS_MAP[name]) return ALIAS_MAP[name];
+  return name;
+}
+
 const LOLES = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 const SPLIT2_START = '2026-04-01';
 const PEEL = ['Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio'];
@@ -232,7 +245,8 @@ async function fetchUserBets() {
   const leagueKillsList = new Map();
   function teamName(g, side) {
     const tid = side === 'blue' ? g.blueTeamId : g.redTeamId;
-    return teamsMap.get(tid) || tid;
+    const raw = teamsMap.get(tid) || tid;
+    return resolveCanonical(raw); // normaliza pra canonical curto do banco
   }
   for (const g of games) {
     const blueName = teamName(g, 'blue');
@@ -400,7 +414,7 @@ async function fetchUserBets() {
       date: g.date,
       league: g.lg,
       map: g.mapNum,
-      teams: [teamsMap.get(g.blueTeamId) || g.blueTeamId, teamsMap.get(g.redTeamId) || g.redTeamId],
+      teams: [resolveCanonical(teamsMap.get(g.blueTeamId) || g.blueTeamId), resolveCanonical(teamsMap.get(g.redTeamId) || g.redTeamId)],
       trigger: triggerType,
       line: g.line,
       kills: g.kills,

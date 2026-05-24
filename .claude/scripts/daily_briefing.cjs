@@ -23,6 +23,27 @@ const { loadFairPinnacle } = require(path.join(REPO, 'lib', 'loadFairPinnacle.cj
 const { fetchAnaliseStats } = require(path.join(REPO, 'lib', 'analiseStats.cjs'));
 const { loadConfig } = require(path.join(REPO, '.claude', 'scripts', '_load-config.cjs'));
 
+// Carrega alias map pra resolver nomes longos (API lolesports) → canonicals curtos (banco)
+const ALIAS_MAP = (() => {
+  try {
+    const j = JSON.parse(fs.readFileSync(path.join(REPO, 'lib', 'team-aliases.json'), 'utf8'));
+    return j.aliases || {};
+  } catch { return {}; }
+})();
+
+// Resolve nome de time vindo da API (longo) → canonical curto do banco.
+// Ex: "Shenzhen NINJAS IN PYJAMAS" → "NIP", "WeiboGaming" → "Weibo"
+function resolveCanonical(name) {
+  if (!name) return name;
+  if (ALIAS_MAP[name]) return ALIAS_MAP[name];
+  // Tenta case-insensitive fallback
+  const lower = name.toLowerCase();
+  for (const [alias, canon] of Object.entries(ALIAS_MAP)) {
+    if (alias.toLowerCase() === lower) return canon;
+  }
+  return name; // retorna original se não encontrar
+}
+
 // Ligas operadas pelo Elvis (decisão 2026-05-10): LCK, LPL, LEC, CBLOL, LFL, LCS.
 // LIT e LES removidas do briefing — Elvis não opera essas.
 const LEAGUE_IDS = {
@@ -464,9 +485,9 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData) {
     // Coluna Liga
     const lgCell = formatLeagueCell(lgForStats, leagueHits) + (isEwc ? ' _(EWC Bo5)_' : '');
 
-    // Colunas Time A / Time B
-    const nameA = m.team_a_name || m.team_a;
-    const nameB = m.team_b_name || m.team_b;
+    // Colunas Time A / Time B — resolve alias pra canonical curto antes do lookup de stats
+    const nameA = resolveCanonical(m.team_a_name || m.team_a);
+    const nameB = resolveCanonical(m.team_b_name || m.team_b);
     const cellA = formatTeamCell(nameA, teamHits) + (m.state !== 'unstarted' ? ` _(${m.state})_` : '');
     const cellB = formatTeamCell(nameB, teamHits);
 
@@ -488,6 +509,7 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData) {
         ?? pinnacle.lookupByName(nameA, nameB)
         ?? null;
       // Fórmula: tenta fair-pre.json do cron, fallback pra cálculo direto de team_avg_kills
+      // nameA/nameB já foram resolvidos para canonical curto (lookup em team_avg_kills funciona)
       const cronFrm = formulaFair.get(String(m.match_id)) ?? null;
       frmLine = cronFrm ?? calcFormulaFair(nameA, nameB, teamAvgData);
     }
