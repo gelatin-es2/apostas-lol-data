@@ -465,9 +465,11 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData) {
     } else {
       const teamAKey = (m.team_a || '').toLowerCase().replace(/\s+/g, '');
       const teamBKey = (m.team_b || '').toLowerCase().replace(/\s+/g, '');
+      // byMatchId → byAnchor (código da API) → lookupByName (anchor substring de nome completo)
       pinLine = pinnacle.byMatchId.get(String(m.match_id))
         ?? pinnacle.byAnchor.get(teamAKey)?.fair_line
         ?? pinnacle.byAnchor.get(teamBKey)?.fair_line
+        ?? pinnacle.lookupByName(nameA, nameB)
         ?? null;
       // Fórmula: tenta fair-pre.json do cron, fallback pra cálculo direto de team_avg_kills
       const cronFrm = formulaFair.get(String(m.match_id)) ?? null;
