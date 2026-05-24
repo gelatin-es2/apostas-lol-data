@@ -255,58 +255,27 @@ function loadFormulaFair(date) {
   return out;
 }
 
-// Stats por time: combina bets reais settled + SIMULATED (full sample).
-// Query sem filtro de bookmaker → pega tudo com status green/red, limit 5000.
-// Melhoria 2026-05-23: era só SIMULATED (282 bets). Full sample → ~640 bets,
-// mais confiável especialmente pra CBLOL (times com n<5 passavam sem flag).
-async function buildTeamHitMap() {
+// Stats por time: lê dashboard_stats.json (by_trigger['2peel'].teams) como fonte única.
+// Fix 2026-05-24: antes usava query Supabase full-sample (~640 bets, universo errado).
+// dashboard_stats usa critério canônico: Split 2 ≥ 2026-04-01, games LoLEsports API,
+// filtro 2peel trigger — mesmo universo do dashboard UI. Elimina divergência de n/%.
+function buildTeamHitMap() {
   const m = new Map();
-  let cfg;
-  try {
-    const { loadConfig } = require(path.join(__dirname, '_load-config.cjs'));
-    cfg = loadConfig();
-  } catch (e) {
-    console.error(`# [full-sample] loadConfig falhou: ${e.message} — continuando sem stats por time`);
+  const dashboard = loadDashboardStats();
+  if (!dashboard) {
+    console.error('# [team-stats] dashboard_stats.json não encontrado — sem stats por time');
     return m;
   }
-  const url = new URL(cfg.supabaseUrl);
-  const raw = await new Promise((resolve) => {
-    https.get({
-      host: url.hostname,
-      path: '/rest/v1/bets?select=team_a,team_b,league,status&status=in.(green,red)&limit=5000',
-      headers: { 'apikey': cfg.supabaseKey, 'Authorization': 'Bearer ' + cfg.supabaseKey },
-    }, res => {
-      let b = '';
-      res.on('data', c => b += c);
-      res.on('end', () => resolve({ status: res.statusCode, body: b }));
-    }).on('error', e => {
-      console.error(`# [full-sample] Supabase request falhou: ${e.message}`);
-      resolve(null);
-    });
-  });
-  if (!raw || raw.status >= 400) {
-    console.error(`# [full-sample] Supabase retornou ${raw?.status}`);
+  const teams = dashboard?.by_trigger?.['2peel']?.teams;
+  if (!teams || !Array.isArray(teams)) {
+    console.error('# [team-stats] dashboard_stats.json sem by_trigger[2peel].teams — sem stats por time');
     return m;
   }
-  let rows;
-  try { rows = JSON.parse(raw.body); } catch (e) {
-    console.error(`# [full-sample] JSON inválido: ${e.message}`);
-    return m;
+  for (const t of teams) {
+    if (!t.name) continue;
+    m.set(t.name.toLowerCase(), { hit: t.hit, n: t.n, lg: t.lg, name: t.name });
   }
-  const acc = {}; // name_lower → { hits, n, lg, displayName }
-  for (const r of rows) {
-    for (const teamName of [r.team_a, r.team_b]) {
-      if (!teamName) continue;
-      const k = teamName.toLowerCase();
-      if (!acc[k]) acc[k] = { hits: 0, n: 0, lg: r.league, displayName: teamName };
-      acc[k].n += 1;
-      if (r.status === 'green') acc[k].hits += 1;
-    }
-  }
-  for (const k of Object.keys(acc)) {
-    const a = acc[k];
-    m.set(k, { hit: +(100 * a.hits / a.n).toFixed(1), n: a.n, lg: a.lg, name: a.displayName });
-  }
+  console.error(`# [team-stats] carregou ${m.size} times do dashboard_stats.json (2peel Split 2)`);
   return m;
 }
 function buildLeagueHitMap(dashboard, tier2) {
@@ -385,12 +354,26 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData) {
 }
 
 (async () => {
+  // PRE-CHECK: garante que briefing e dashboard estão em sincronia antes de rodar.
+  // Fix 2026-05-24: briefing divergia do dashboard (universos diferentes, bug causou R$2k prejuízo).
+  // Se o validador falhar, o próprio validate_briefing_vs_dashboard.cjs printa o erro e sai com exit 1.
+  // Como chamamos via spawnSync, capturamos e imprimimos antes de abortar.
+  const { spawnSync } = require('child_process');
+  const validateResult = spawnSync(process.execPath, [
+    require('path').join(__dirname, 'validate_briefing_vs_dashboard.cjs')
+  ], { encoding: 'utf8' });
+  if (validateResult.stderr) process.stderr.write(validateResult.stderr);
+  if (validateResult.status !== 0) {
+    console.error('\n# BRIEFING ABORTADO: dashboard_stats.json diverge do briefing. Regenere com rebuild_dashboard_stats_cron.cjs.');
+    process.exit(1);
+  }
+
   const dashboard = loadDashboardStats();
   const tier2 = loadTier2Stats();
   const pinnacle = loadFairPinnacle(TARGET);
   const formulaFair = loadFormulaFair(TARGET);
   const teamAvgData = loadTeamAvgKills();
-  const teamHits = await buildTeamHitMap(); // full sample: SIMULATED + reais
+  const teamHits = buildTeamHitMap(); // fonte: dashboard_stats.json by_trigger[2peel].teams
   const leagueHits = buildLeagueHitMap(dashboard, tier2);
 
   const allMatches = [];
