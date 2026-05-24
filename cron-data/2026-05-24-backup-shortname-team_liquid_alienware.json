@@ -1,0 +1,496 @@
+{
+  "old": "Team Liquid Alienware",
+  "new": "TL",
+  "rows": [
+    {
+      "id": "283b9369-d8c9-48e7-a4bb-72b723c42245",
+      "team_a": "Team Liquid Alienware",
+      "team_b": "Shopify Rebellion",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115564793879469285",
+          "team_a": {
+            "name": "Team Liquid Alienware",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Aurora",
+              "top": "Jax",
+              "jungle": "XinZhao",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Shopify Rebellion",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Mel",
+              "top": "Ambessa",
+              "jungle": "Pantheon",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 2,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Mel",
+            "top": "Ambessa",
+            "jungle": "Pantheon",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Aurora",
+            "top": "Jax",
+            "jungle": "XinZhao",
+            "support": "Seraphine"
+          },
+          "kills_blue": 25,
+          "enriched_at": "2026-05-24T09:18:29.521Z",
+          "red_team_id": "111504538396430510",
+          "total_kills": 27,
+          "winner_side": "blue",
+          "blue_team_id": "98926509885559666",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879469285",
+          "lolesports_match_id": "115564793879469284",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "b1f9a5b9-9380-4336-955f-60c8274211f6",
+      "team_a": "Team Liquid Alienware",
+      "team_b": "Sentinels",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115564793879338131",
+          "team_a": {
+            "name": "Team Liquid Alienware",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Sion",
+              "jungle": "Naafiri",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Sentinels",
+            "side": "red",
+            "picks": {
+              "adc": "Kaisa",
+              "mid": "Galio",
+              "top": "Renekton",
+              "jungle": "Vi",
+              "support": "Rakan"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 9,
+          "pick_line": 24.5,
+          "red_picks": {
+            "adc": "Kaisa",
+            "mid": "Galio",
+            "top": "Renekton",
+            "jungle": "Vi",
+            "support": "Rakan"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Sion",
+            "jungle": "Naafiri",
+            "support": "Nami"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-05-24T09:19:41.047Z",
+          "red_team_id": "115688562107799886",
+          "total_kills": 23,
+          "winner_side": "blue",
+          "blue_team_id": "98926509885559666",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879338131",
+          "lolesports_match_id": "115564793879338128",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "67862fa7-4813-4b42-9289-c191ee1e649c",
+      "team_a": "Team Liquid Alienware",
+      "team_b": "Sentinels",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115564793879338130",
+          "team_a": {
+            "name": "Team Liquid Alienware",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Leblanc",
+              "top": "Gnar",
+              "jungle": "XinZhao",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "Sentinels",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Aurora",
+              "top": "Varus",
+              "jungle": "Trundle",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 19,
+          "pick_line": 23.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Aurora",
+            "top": "Varus",
+            "jungle": "Trundle",
+            "support": "Bard"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Leblanc",
+            "top": "Gnar",
+            "jungle": "XinZhao",
+            "support": "Karma"
+          },
+          "kills_blue": 11,
+          "enriched_at": "2026-05-24T09:20:53.018Z",
+          "red_team_id": "115688562107799886",
+          "total_kills": 30,
+          "winner_side": null,
+          "blue_team_id": "98926509885559666",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879338130",
+          "lolesports_match_id": "115564793879338128",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "d32006a8-a8c0-4d93-bcc1-d62a5128df04",
+      "team_a": "Team Liquid Alienware",
+      "team_b": "Dignitas",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115564793879403709",
+          "team_a": {
+            "name": "Team Liquid Alienware",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Aurora",
+              "top": "Sion",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Dignitas",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Annie",
+              "top": "Rumble",
+              "jungle": "Nocturne",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 11,
+          "pick_line": 23.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Annie",
+            "top": "Rumble",
+            "jungle": "Nocturne",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Aurora",
+            "top": "Sion",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 12,
+          "enriched_at": "2026-05-24T09:18:54.259Z",
+          "red_team_id": "98926509883054987",
+          "total_kills": 23,
+          "winner_side": "blue",
+          "blue_team_id": "98926509885559666",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879403709",
+          "lolesports_match_id": "115564793879403708",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "83ac9903-05e9-4e5b-bc96-4840f87b301c",
+      "team_a": "Team Liquid Alienware",
+      "team_b": "LYON",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115564793879469281",
+          "team_a": {
+            "name": "Team Liquid Alienware",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Aurora",
+              "top": "Gragas",
+              "jungle": "XinZhao",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "LYON",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "TwistedFate",
+              "top": "Jayce",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 18,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "TwistedFate",
+            "top": "Jayce",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Aurora",
+            "top": "Gragas",
+            "jungle": "XinZhao",
+            "support": "Seraphine"
+          },
+          "kills_blue": 7,
+          "enriched_at": "2026-05-24T09:20:16.216Z",
+          "red_team_id": "99566405941863385",
+          "total_kills": 25,
+          "winner_side": "red",
+          "blue_team_id": "98926509885559666",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879469281",
+          "lolesports_match_id": "115564793879469280",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "d15e5086-77f3-45bf-b961-6a2dd291152c",
+      "team_a": "Cloud9 Kia",
+      "team_b": "Team Liquid Alienware",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115564793879403690",
+          "team_a": {
+            "name": "Cloud9 Kia",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Sion",
+              "jungle": "Nocturne",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Team Liquid Alienware",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ryze",
+              "top": "Renekton",
+              "jungle": "XinZhao",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 9,
+          "pick_line": 24.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Renekton",
+            "jungle": "XinZhao",
+            "support": "Karma"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Sion",
+            "jungle": "Nocturne",
+            "support": "Seraphine"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:21:57.959Z",
+          "red_team_id": "98926509885559666",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "98767991877340524",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879403690",
+          "lolesports_match_id": "115564793879403688",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "50f8f6b3-95bb-4ed2-91a1-48672139fcee",
+      "team_a": "Disguised",
+      "team_b": "Team Liquid Alienware",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115564793879403725",
+          "team_a": {
+            "name": "Disguised",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Ryze",
+              "top": "Rumble",
+              "jungle": "Pantheon",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Team Liquid Alienware",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Yone",
+              "top": "Ornn",
+              "jungle": "Sejuani",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 15,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Yone",
+            "top": "Ornn",
+            "jungle": "Sejuani",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "Pantheon",
+            "support": "Nami"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:22:14.309Z",
+          "red_team_id": "98926509885559666",
+          "total_kills": 20,
+          "winner_side": "red",
+          "blue_team_id": "110428362822825796",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564793879403725",
+          "lolesports_match_id": "115564793879403724",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    }
+  ]
+}

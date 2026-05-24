@@ -1,0 +1,1267 @@
+{
+  "old": "Invictus Gaming",
+  "new": "IG",
+  "rows": [
+    {
+      "id": "83f3e13c-1069-4b17-822c-24317b0ba65d",
+      "team_a": "Invictus Gaming",
+      "team_b": "Weibo",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685695525",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Orianna",
+              "top": "Jayce",
+              "jungle": "XinZhao",
+              "support": "Anivia"
+            }
+          },
+          "team_b": {
+            "name": "WeiboGaming",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Jax",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 27,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Jax",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Jhin",
+            "mid": "Orianna",
+            "top": "Jayce",
+            "jungle": "XinZhao",
+            "support": "Anivia"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:18:11.034Z",
+          "red_team_id": "99566404853058754",
+          "total_kills": 43,
+          "winner_side": null,
+          "blue_team_id": "99566404848691211",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685695525",
+          "lolesports_match_id": "115615924499588609",
+          "match_ambiguous_at_link": false
+        },
+        "missed_opportunity": true
+      }
+    },
+    {
+      "id": "7f6dfc0d-22e5-410b-b5ef-429e83fdf162",
+      "team_a": "Invictus Gaming",
+      "team_b": "TES",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588608",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Orianna",
+              "top": "Rumble",
+              "jungle": "Nocturne",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Azir",
+              "top": "Galio",
+              "jungle": "Pantheon",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 9,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Azir",
+            "top": "Galio",
+            "jungle": "Pantheon",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Orianna",
+            "top": "Rumble",
+            "jungle": "Nocturne",
+            "support": "Seraphine"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:21:30.071Z",
+          "red_team_id": "99566404854685458",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "99566404848691211",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588608",
+          "lolesports_match_id": "115615924499588607",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "518a9ffe-e183-40ff-9297-9f99b798371a",
+      "team_a": "Invictus Gaming",
+      "team_b": "WE",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685695521",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Viktor",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Xi'an Team WE",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Annie",
+              "top": "Ambessa",
+              "jungle": "Trundle",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Annie",
+            "top": "Ambessa",
+            "jungle": "Trundle",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Viktor",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Nami"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:21:40.094Z",
+          "red_team_id": "98767991887166787",
+          "total_kills": 24,
+          "winner_side": "blue",
+          "blue_team_id": "99566404848691211",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685695521",
+          "lolesports_match_id": "115615924499588605",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "7fe55a15-6404-40e5-bc60-39dc869450f0",
+      "team_a": "Invictus Gaming",
+      "team_b": "Anyone's Legend",
+      "raw_extraction": {
+        "odd": 1.74,
+        "pick": "Under 29.5",
+        "stake": 200,
+        "strategy": "ladder_under",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 2,
+        "tournament": "LPL Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115615926677831065",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Mel",
+              "top": "Jayce",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Anyone's Legend",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Vayne",
+              "jungle": "Vi",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Mel",
+            "top": "Jayce",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Vayne",
+            "jungle": "Vi",
+            "support": "Seraphine"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:22:32.691Z",
+          "red_team_id": "99566404848691211",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "99566404856367466",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677831065",
+          "lolesports_match_id": "115615926677831063",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 348
+      }
+    },
+    {
+      "id": "edec6996-96e3-4d5e-878e-7e79aae45364",
+      "team_a": "Invictus Gaming",
+      "team_b": "Anyone's Legend",
+      "raw_extraction": {
+        "odd": 1.87,
+        "pick": "Under 26.5",
+        "stake": 300,
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 1,
+        "tournament": "LPL Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115615926677831064",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Azir",
+              "top": "Gnar",
+              "jungle": "Nocturne",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Anyone's Legend",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Orianna",
+              "top": "Sion",
+              "jungle": "Naafiri",
+              "support": "Bard"
+            }
+          }
+        },
+        "bet_placed_at": "2026-05-02T09:12:00-03:00",
+        "match_context": {
+          "kills_red": 23,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Orianna",
+            "top": "Sion",
+            "jungle": "Naafiri",
+            "support": "Bard"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Azir",
+            "top": "Gnar",
+            "jungle": "Nocturne",
+            "support": "Lulu"
+          },
+          "kills_blue": 8,
+          "enriched_at": "2026-05-24T09:19:46.287Z",
+          "red_team_id": "99566404856367466",
+          "total_kills": 31,
+          "winner_side": "red",
+          "blue_team_id": "99566404848691211",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677831064",
+          "lolesports_match_id": "115615926677831063",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 561,
+        "bet_id_bookmaker": "20089715372",
+        "lolesports_game_id": "115615926677831064",
+        "lolesports_match_id": "115615926677831063"
+      }
+    },
+    {
+      "id": "747ef90d-cd00-4ee0-8054-0cc7315b2bfa",
+      "team_a": "Invictus Gaming",
+      "team_b": "Weibo",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685695526",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Leblanc",
+              "top": "Zaahen",
+              "jungle": "Skarner",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "WeiboGaming",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Lissandra",
+              "top": "Renekton",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Lissandra",
+            "top": "Renekton",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Leblanc",
+            "top": "Zaahen",
+            "jungle": "Skarner",
+            "support": "Lulu"
+          },
+          "kills_blue": 12,
+          "enriched_at": "2026-05-24T09:18:06.151Z",
+          "red_team_id": "99566404853058754",
+          "total_kills": 28,
+          "winner_side": "red",
+          "blue_team_id": "99566404848691211",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685695526",
+          "lolesports_match_id": "115615924499588609",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "cf2fe9c8-78d9-4b74-a121-889eb0df3baf",
+      "team_a": "Invictus Gaming",
+      "team_b": "Anyone's Legend",
+      "raw_extraction": {
+        "odd": 1.61,
+        "pick": "Under 30.5",
+        "stake": 200,
+        "strategy": "ladder_under",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 2,
+        "tournament": "LPL Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115615926677831065",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Mel",
+              "top": "Jayce",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Anyone's Legend",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Vayne",
+              "jungle": "Vi",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Mel",
+            "top": "Jayce",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Vayne",
+            "jungle": "Vi",
+            "support": "Seraphine"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:20:45.438Z",
+          "red_team_id": "99566404848691211",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "99566404856367466",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677831065",
+          "lolesports_match_id": "115615926677831063",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 322
+      }
+    },
+    {
+      "id": "fdf126fb-cdc9-4c63-b8e3-7f0421e87bdc",
+      "team_a": "Invictus Gaming",
+      "team_b": "Anyone's Legend",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588578",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Leblanc",
+              "top": "Sion",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Anyone's Legend",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Azir",
+              "top": "Shen",
+              "jungle": "JarvanIV",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 14,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Azir",
+            "top": "Shen",
+            "jungle": "JarvanIV",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Leblanc",
+            "top": "Sion",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 1,
+          "enriched_at": "2026-05-24T09:20:48.444Z",
+          "red_team_id": "99566404856367466",
+          "total_kills": 15,
+          "winner_side": "red",
+          "blue_team_id": "99566404848691211",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588578",
+          "lolesports_match_id": "115615924499588577",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "431d2f18-d4f1-43bb-9b36-ff8b34959da8",
+      "team_a": "Invictus Gaming",
+      "team_b": "BLG",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588590",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Annie",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "BILIBILI GAMING",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Syndra",
+              "top": "Renekton",
+              "jungle": "JarvanIV",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 18,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Syndra",
+            "top": "Renekton",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Annie",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "kills_blue": 7,
+          "enriched_at": "2026-05-24T09:21:23.188Z",
+          "red_team_id": "99566404853854212",
+          "total_kills": 25,
+          "winner_side": "red",
+          "blue_team_id": "99566404848691211",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588590",
+          "lolesports_match_id": "115615924499588589",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "02a1ec28-96c8-46eb-8497-98595e03c36e",
+      "team_a": "Invictus Gaming",
+      "team_b": "NIP",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896652",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Akali",
+              "top": "Gwen",
+              "jungle": "Nocturne",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Orianna",
+              "top": "Sion",
+              "jungle": "Vi",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Orianna",
+            "top": "Sion",
+            "jungle": "Vi",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Sivir",
+            "mid": "Akali",
+            "top": "Gwen",
+            "jungle": "Nocturne",
+            "support": "Karma"
+          },
+          "kills_blue": 18,
+          "enriched_at": "2026-05-24T09:20:09.112Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 24,
+          "winner_side": "blue",
+          "blue_team_id": "99566404848691211",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896652",
+          "lolesports_match_id": "115615926677896651",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "60e6e987-5f3f-419f-91fd-a5ea1ec50a1d",
+      "team_a": "Invictus Gaming",
+      "team_b": "JDG",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896649",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Akali",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Beijing JDG Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Cassiopeia",
+              "top": "KSante",
+              "jungle": "Trundle",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 24,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Cassiopeia",
+            "top": "KSante",
+            "jungle": "Trundle",
+            "support": "Karma"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Akali",
+            "top": "Renekton",
+            "jungle": "Pantheon",
+            "support": "Nami"
+          },
+          "kills_blue": 6,
+          "enriched_at": "2026-05-24T09:21:59.870Z",
+          "red_team_id": "99566404852189289",
+          "total_kills": 30,
+          "winner_side": "red",
+          "blue_team_id": "99566404848691211",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896649",
+          "lolesports_match_id": "115615926677896647",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "89f22ada-e18f-4953-b4dc-77a55947b240",
+      "team_a": "Invictus Gaming",
+      "team_b": "Anyone's Legend",
+      "raw_extraction": {
+        "odd": 1.662,
+        "pick": "Under 29.5",
+        "stake": 600,
+        "bookmaker": "Pinnacle",
+        "is_map_bet": true,
+        "map_number": 2,
+        "tournament": "LPL Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115615926677831065",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Mel",
+              "top": "Jayce",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Anyone's Legend",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Vayne",
+              "jungle": "Vi",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "lucro_liquido": 397.2,
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Mel",
+            "top": "Jayce",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Vayne",
+            "jungle": "Vi",
+            "support": "Seraphine"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:22:34.083Z",
+          "red_team_id": "99566404848691211",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "99566404856367466",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677831065",
+          "lolesports_match_id": "115615926677831063",
+          "match_ambiguous_at_link": false
+        },
+        "bet_id_bookmaker": "3038535296"
+      }
+    },
+    {
+      "id": "8b369466-57eb-406d-b00a-8c5cdc3b9874",
+      "team_a": "Weibo",
+      "team_b": "Invictus Gaming",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896665",
+          "team_a": {
+            "name": "WeiboGaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Azir",
+              "top": "Jayce",
+              "jungle": "Maokai",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Invictus Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Annie",
+              "top": "Gnar",
+              "jungle": "XinZhao",
+              "support": "Lux"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 15,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Annie",
+            "top": "Gnar",
+            "jungle": "XinZhao",
+            "support": "Lux"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Azir",
+            "top": "Jayce",
+            "jungle": "Maokai",
+            "support": "Milio"
+          },
+          "kills_blue": 10,
+          "enriched_at": "2026-05-24T09:20:43.629Z",
+          "red_team_id": "99566404848691211",
+          "total_kills": 25,
+          "winner_side": "red",
+          "blue_team_id": "99566404853058754",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896665",
+          "lolesports_match_id": "115615926677896663",
+          "match_ambiguous_at_link": false
+        }
+      }
+    },
+    {
+      "id": "d30bea6a-eab5-430d-8de5-2690159fa3f9",
+      "team_a": "NIP",
+      "team_b": "Invictus Gaming",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685695519",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Azir",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Invictus Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Orianna",
+              "top": "Sion",
+              "jungle": "MonkeyKing",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 5,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Orianna",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Azir",
+            "top": "Renekton",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 9,
+          "enriched_at": "2026-05-24T09:18:43.445Z",
+          "red_team_id": "99566404848691211",
+          "total_kills": 14,
+          "winner_side": "blue",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685695519",
+          "lolesports_match_id": "115615924499588603",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "6bffc8d8-303f-48dc-84f4-6f6525879141",
+      "team_a": "WE",
+      "team_b": "Invictus Gaming",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896657",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ahri",
+              "top": "Yorick",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Invictus Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Sylas",
+              "top": "Jayce",
+              "jungle": "Nocturne",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Sylas",
+            "top": "Jayce",
+            "jungle": "Nocturne",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ahri",
+            "top": "Yorick",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "kills_blue": 6,
+          "enriched_at": "2026-05-24T09:19:51.014Z",
+          "red_team_id": "99566404848691211",
+          "total_kills": 27,
+          "winner_side": "red",
+          "blue_team_id": "98767991887166787",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896657",
+          "lolesports_match_id": "115615926677896655",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3041588327",
+          "raw_pick_text": "Under 30.5",
+          "raw_stake_text": "BRL 600.00"
+        }
+      }
+    },
+    {
+      "id": "d75fa8fc-5ae6-4c89-b5ae-d545b7ca2ec3",
+      "team_a": "WE",
+      "team_b": "Invictus Gaming",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896657",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ahri",
+              "top": "Yorick",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Invictus Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Sylas",
+              "top": "Jayce",
+              "jungle": "Nocturne",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 31.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Sylas",
+            "top": "Jayce",
+            "jungle": "Nocturne",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ahri",
+            "top": "Yorick",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "kills_blue": 6,
+          "enriched_at": "2026-05-24T09:19:42.133Z",
+          "red_team_id": "99566404848691211",
+          "total_kills": 27,
+          "winner_side": "red",
+          "blue_team_id": "98767991887166787",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896657",
+          "lolesports_match_id": "115615926677896655",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3041587364",
+          "raw_pick_text": "Under 31.5",
+          "raw_stake_text": "BRL 600.00"
+        }
+      }
+    },
+    {
+      "id": "6562cd10-468a-4094-baf8-5ab90f45a63f",
+      "team_a": "BLG",
+      "team_b": "Invictus Gaming",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896624",
+          "team_a": {
+            "name": "BILIBILI GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "TwistedFate",
+              "top": "Gnar",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Invictus Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ryze",
+              "top": "Jax",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 19,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Jax",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "TwistedFate",
+            "top": "Gnar",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 13,
+          "enriched_at": "2026-05-24T09:22:00.892Z",
+          "red_team_id": "99566404848691211",
+          "total_kills": 32,
+          "winner_side": "red",
+          "blue_team_id": "99566404853854212",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896624",
+          "lolesports_match_id": "115615926677896623",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "947667d5-d9a9-4770-b8e7-72fb89518395",
+      "team_a": "Weibo",
+      "team_b": "Invictus Gaming",
+      "raw_extraction": {
+        "odd": 1.74,
+        "pick": "Under 29.5",
+        "stake": 600,
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 3,
+        "tournament": "LPL Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896666",
+          "team_a": {
+            "name": "WeiboGaming",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "TwistedFate",
+              "top": "Jax",
+              "jungle": "Nocturne",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Invictus Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Viktor",
+              "top": "Renekton",
+              "jungle": "MonkeyKing",
+              "support": "Lulu"
+            }
+          }
+        },
+        "series_score": "1-1",
+        "bet_placed_at": "2026-05-01T10:26:00-03:00",
+        "match_context": {
+          "kills_red": 5,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "TwistedFate",
+            "top": "Jax",
+            "jungle": "Nocturne",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Viktor",
+            "top": "Renekton",
+            "jungle": "MonkeyKing",
+            "support": "Lulu"
+          },
+          "kills_blue": 18,
+          "enriched_at": "2026-05-24T09:22:34.697Z",
+          "red_team_id": "99566404853058754",
+          "total_kills": 23,
+          "winner_side": "blue",
+          "blue_team_id": "99566404848691211",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896666",
+          "lolesports_match_id": "115615926677896663",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 1044,
+        "bet_id_bookmaker": "4897600990",
+        "lolesports_game_id": "115615926677896666",
+        "lolesports_match_id": "115615926677896663"
+      }
+    }
+  ]
+}

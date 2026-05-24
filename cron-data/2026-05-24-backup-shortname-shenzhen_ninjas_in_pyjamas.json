@@ -1,0 +1,2026 @@
+{
+  "old": "Shenzhen NINJAS IN PYJAMAS",
+  "new": "NIP",
+  "rows": [
+    {
+      "id": "d30bea6a-eab5-430d-8de5-2690159fa3f9",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "Invictus Gaming",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685695519",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Azir",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Invictus Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Orianna",
+              "top": "Sion",
+              "jungle": "MonkeyKing",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 5,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Orianna",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Azir",
+            "top": "Renekton",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 9,
+          "enriched_at": "2026-05-24T09:18:43.445Z",
+          "red_team_id": "99566404848691211",
+          "total_kills": 14,
+          "winner_side": "blue",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685695519",
+          "lolesports_match_id": "115615924499588603",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "dbba9cd3-c29e-4788-85a1-ff98a3e91fbc",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "Weibo",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896692",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ryze",
+              "top": "Anivia",
+              "jungle": "Qiyana",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "WeiboGaming",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Azir",
+              "top": "Varus",
+              "jungle": "Trundle",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 23.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Azir",
+            "top": "Varus",
+            "jungle": "Trundle",
+            "support": "Karma"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Ryze",
+            "top": "Anivia",
+            "jungle": "Qiyana",
+            "support": "Milio"
+          },
+          "kills_blue": 12,
+          "enriched_at": "2026-05-24T09:21:14.559Z",
+          "red_team_id": "99566404853058754",
+          "total_kills": 33,
+          "winner_side": "red",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896692",
+          "lolesports_match_id": "115615926677896691",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "17dbceb5-a406-496c-96f2-8c8abcc2b0e2",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "EDG",
+      "raw_extraction": {
+        "ladder_info": {
+          "map": 2,
+          "direction": "Under",
+          "ladder_group": "NIP_EDG_M2_2026-05-24",
+          "ladder_group_id": "be8a908f-4064-45bc-a3c2-9799aa44166c"
+        },
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541897",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ryze",
+              "top": "Gnar",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "EDWARD GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Orianna",
+              "top": "Tristana",
+              "jungle": "JarvanIV",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Ryze",
+            "top": "Gnar",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Orianna",
+            "top": "Tristana",
+            "jungle": "JarvanIV",
+            "support": "Bard"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:19:07.137Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 37,
+          "winner_side": "red",
+          "blue_team_id": "98767991882270868",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541897",
+          "lolesports_match_id": "115616219464541895",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4983181515",
+          "placed_utc": "2026-05-24T06:57:00Z",
+          "raw_pick_text": "Menos de 26.5, Segundo Mapa - Total Kills",
+          "raw_stake_text": "R$ 700,00",
+          "settled_win_loss": -700,
+          "score_at_placement": "NIP 1:1 EDG"
+        }
+      }
+    },
+    {
+      "id": "de407356-e60b-4971-a0be-51932ade670e",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "EDG",
+      "raw_extraction": {
+        "ladder_info": {
+          "map": 1,
+          "direction": "Under",
+          "ladder_group": "NIP_EDG_M1_2026-05-24",
+          "ladder_group_id": "9884b76c-4adf-428c-bae7-624585bfc434"
+        },
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541896",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Cassiopeia",
+              "top": "Jayce",
+              "jungle": "Skarner",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "EDWARD GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Sion",
+              "jungle": "LeeSin",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 4,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Cassiopeia",
+            "top": "Jayce",
+            "jungle": "Skarner",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Sion",
+            "jungle": "LeeSin",
+            "support": "Seraphine"
+          },
+          "kills_blue": 10,
+          "enriched_at": "2026-05-24T09:19:15.984Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 14,
+          "winner_side": "blue",
+          "blue_team_id": "98767991882270868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541896",
+          "lolesports_match_id": "115616219464541895",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3055537885",
+          "placed_utc": "2026-05-24T06:03:57Z",
+          "settled_utc": "2026-05-24T06:41:23Z",
+          "raw_pick_text": "Under 25.5 Map 1 OU, LPL",
+          "raw_stake_text": "R$ 1.000,00",
+          "settled_win_loss": 657
+        }
+      }
+    },
+    {
+      "id": "be54260b-19c1-4def-80d3-265e2f6461ea",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "EDG",
+      "raw_extraction": {
+        "ladder_info": {
+          "map": 1,
+          "direction": "Under",
+          "ladder_group": "NIP_EDG_M1_2026-05-24",
+          "ladder_group_id": "9884b76c-4adf-428c-bae7-624585bfc434"
+        },
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541896",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Cassiopeia",
+              "top": "Jayce",
+              "jungle": "Skarner",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "EDWARD GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Sion",
+              "jungle": "LeeSin",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 4,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Cassiopeia",
+            "top": "Jayce",
+            "jungle": "Skarner",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Sion",
+            "jungle": "LeeSin",
+            "support": "Seraphine"
+          },
+          "kills_blue": 10,
+          "enriched_at": "2026-05-24T09:18:48.099Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 14,
+          "winner_side": "blue",
+          "blue_team_id": "98767991882270868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541896",
+          "lolesports_match_id": "115616219464541895",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3055536248",
+          "placed_utc": "2026-05-24T06:03:49Z",
+          "settled_utc": "2026-05-24T06:41:23Z",
+          "raw_pick_text": "Under 25.5 Map 1 OU, LPL",
+          "raw_stake_text": "R$ 1.714,30",
+          "settled_win_loss": 1260.01
+        }
+      }
+    },
+    {
+      "id": "b696fe4e-afec-4771-973a-220919184b71",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "EDG",
+      "raw_extraction": {
+        "ladder_info": {
+          "map": 2,
+          "direction": "Under",
+          "ladder_group": "NIP_EDG_M2_2026-05-24",
+          "ladder_group_id": "be8a908f-4064-45bc-a3c2-9799aa44166c"
+        },
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541897",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ryze",
+              "top": "Gnar",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "EDWARD GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Orianna",
+              "top": "Tristana",
+              "jungle": "JarvanIV",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Ryze",
+            "top": "Gnar",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Orianna",
+            "top": "Tristana",
+            "jungle": "JarvanIV",
+            "support": "Bard"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:18:54.713Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 37,
+          "winner_side": "red",
+          "blue_team_id": "98767991882270868",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541897",
+          "lolesports_match_id": "115616219464541895",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3055565394",
+          "placed_utc": "2026-05-24T06:57:04Z",
+          "settled_utc": "2026-05-24T07:45:37Z",
+          "raw_pick_text": "Ninjas in Pyjamas (Kills) -vs- EDward Gaming (Kills) Under 25.5",
+          "raw_stake_text": "R$ 1.300,00",
+          "settled_win_loss": -1300
+        }
+      }
+    },
+    {
+      "id": "6740f14f-ebde-4646-ac94-a02831e0af0c",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "EDG",
+      "raw_extraction": {
+        "match_context": {
+          "teams": [
+            {
+              "code": "NIP",
+              "name": "Shenzhen NINJAS IN PYJAMAS"
+            },
+            {
+              "code": "EDG",
+              "name": "EDWARD GAMING"
+            }
+          ],
+          "game_id": "115616219464541900",
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 18,
+          "league_id": "98767991314006698",
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Mel",
+            "top": "KSante",
+            "jungle": "Maokai",
+            "support": "Yuumi"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Aphelios",
+            "mid": "Ahri",
+            "top": "Ambessa",
+            "jungle": "Shyvana",
+            "support": "Thresh"
+          },
+          "game_state": "unstarted",
+          "kills_blue": 9,
+          "red_barons": 1,
+          "red_towers": 8,
+          "settled_at": "2026-05-24T11:14:06.148Z",
+          "start_time": "2026-05-24T06:00:00Z",
+          "blue_barons": 0,
+          "blue_towers": 4,
+          "red_dragons": 2,
+          "red_team_id": "98767991882270868",
+          "total_kills": 27,
+          "winner_side": "red",
+          "blue_dragons": 3,
+          "blue_team_id": "101388912914513220",
+          "league_short": "LPL",
+          "trigger_type": null,
+          "kills_at_15min": null,
+          "red_total_gold": 72318,
+          "blue_total_gold": 65708,
+          "selected_reason": "exact_date_completed",
+          "first_blood_team": "red",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115616219464541900",
+          "lolesports_match_id": "115616219464541895",
+          "series_score_at_bet": {
+            "current_map": 5,
+            "maps_completed_before": 4
+          }
+        },
+        "ladder_group_id": "d035c55a-2914-4373-8b50-6dbbc5fa980c",
+        "bookmaker_native": {
+          "bet_id": "4983420733",
+          "raw_pick_text": "NIP vs EDG, Menos de 26.5, Quinto Mapa - Total Kills",
+          "raw_stake_text": "R$ 150,00"
+        }
+      }
+    },
+    {
+      "id": "c4eda66d-61bc-4249-93bd-c92f4074dbc8",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "EDG",
+      "raw_extraction": {
+        "match_context": {
+          "teams": [
+            {
+              "code": "NIP",
+              "name": "Shenzhen NINJAS IN PYJAMAS"
+            },
+            {
+              "code": "EDG",
+              "name": "EDWARD GAMING"
+            }
+          ],
+          "game_id": "115616219464541900",
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 18,
+          "league_id": "98767991314006698",
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Mel",
+            "top": "KSante",
+            "jungle": "Maokai",
+            "support": "Yuumi"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Aphelios",
+            "mid": "Ahri",
+            "top": "Ambessa",
+            "jungle": "Shyvana",
+            "support": "Thresh"
+          },
+          "game_state": "unstarted",
+          "kills_blue": 9,
+          "red_barons": 1,
+          "red_towers": 8,
+          "settled_at": "2026-05-24T11:14:06.259Z",
+          "start_time": "2026-05-24T06:00:00Z",
+          "blue_barons": 0,
+          "blue_towers": 4,
+          "red_dragons": 2,
+          "red_team_id": "98767991882270868",
+          "total_kills": 27,
+          "winner_side": "red",
+          "blue_dragons": 3,
+          "blue_team_id": "101388912914513220",
+          "league_short": "LPL",
+          "trigger_type": null,
+          "kills_at_15min": null,
+          "red_total_gold": 72318,
+          "blue_total_gold": 65708,
+          "selected_reason": "exact_date_completed",
+          "first_blood_team": "red",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115616219464541900",
+          "lolesports_match_id": "115616219464541895",
+          "series_score_at_bet": {
+            "current_map": 5,
+            "maps_completed_before": 4
+          }
+        },
+        "ladder_group_id": "d035c55a-2914-4373-8b50-6dbbc5fa980c",
+        "bookmaker_native": {
+          "bet_id": "4983420294",
+          "raw_pick_text": "NIP vs EDG, Menos de 27.5, Quinto Mapa - Total Kills",
+          "raw_stake_text": "R$ 852,27"
+        }
+      }
+    },
+    {
+      "id": "400319d7-47cb-4810-b047-fb78e392a6c6",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "JDG",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685695527",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ryze",
+              "top": "Gnar",
+              "jungle": "LeeSin",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Beijing JDG Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Anivia",
+              "top": "Jax",
+              "jungle": "XinZhao",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Anivia",
+            "top": "Jax",
+            "jungle": "XinZhao",
+            "support": "Bard"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Ryze",
+            "top": "Gnar",
+            "jungle": "LeeSin",
+            "support": "Milio"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:20:24.112Z",
+          "red_team_id": "99566404852189289",
+          "total_kills": 28,
+          "winner_side": "blue",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685695527",
+          "lolesports_match_id": "115615924499588611",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "ac140296-5146-47d4-a6ae-3a126d7cd3bc",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "JDG",
+      "raw_extraction": {
+        "odd": 1.73,
+        "pick": "Under 29.5",
+        "stake": 600,
+        "market": "Total Kills",
+        "team_a": "Ninjas in Pyjamas",
+        "team_b": "JD Gaming",
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 1,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896668",
+          "team_a": {
+            "name": "Ninjas in Pyjamas",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Ahri",
+              "top": "Rumble",
+              "jungle": "Nocturne",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "JD Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ryze",
+              "top": "Ambessa",
+              "jungle": "Trundle",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 10,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Ahri",
+            "top": "Rumble",
+            "jungle": "Nocturne",
+            "support": "Karma"
+          },
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Ryze",
+            "top": "Ambessa",
+            "jungle": "Trundle",
+            "support": "Seraphine"
+          },
+          "kills_blue": 17,
+          "start_time": "2026-04-29T09:00:00Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 27,
+          "winner_side": "blue",
+          "blue_team_id": "99566404852189289",
+          "trigger_type": "2peel",
+          "backfill_source": "manual_fuzzy_match_2026-05-22",
+          "lolesports_game_id": "115615926677896668",
+          "lolesports_match_id": "115615926677896667"
+        },
+        "bet_id_bookmaker": "4889695190",
+        "lolesports_game_id": "115615926677896668",
+        "lolesports_match_id": "115615926677896667"
+      }
+    },
+    {
+      "id": "11d5cb81-3275-4038-9287-e86f32b3b48b",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "JDG",
+      "raw_extraction": {
+        "odd": 1.8,
+        "pick": "Under 27.5",
+        "stake": 200,
+        "currency": "BRL",
+        "strategy": "ladder",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 2,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896669",
+          "team_a": {
+            "name": "Ninjas in Pyjamas",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Azir",
+              "top": "Gnar",
+              "jungle": "Pantheon",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "JD Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Aurora",
+              "top": "Renekton",
+              "jungle": "Jarvan IV",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Aurora",
+            "top": "Renekton",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          },
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Azir",
+            "top": "Gnar",
+            "jungle": "Pantheon",
+            "support": "Lulu"
+          },
+          "kills_blue": 9,
+          "start_time": "2026-04-29T09:00:00Z",
+          "red_team_id": "99566404852189289",
+          "total_kills": 30,
+          "winner_side": "red",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "2peel",
+          "backfill_source": "manual_fuzzy_match_2026-05-22",
+          "lolesports_game_id": "115615926677896669",
+          "lolesports_match_id": "115615926677896667"
+        },
+        "ladder_group_id": "ladder-nip-jdg-m2-20260429",
+        "ladder_position": "27.5",
+        "lolesports_game_id": "115615926677896669"
+      }
+    },
+    {
+      "id": "7cda2d53-aa2c-46ec-b0ac-c610c144d3f8",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "JDG",
+      "raw_extraction": {
+        "odd": 1.67,
+        "pick": "Under 29.5",
+        "stake": 200,
+        "currency": "BRL",
+        "strategy": "ladder",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 2,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896669",
+          "team_a": {
+            "name": "Ninjas in Pyjamas",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Azir",
+              "top": "Gnar",
+              "jungle": "Pantheon",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "JD Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Aurora",
+              "top": "Renekton",
+              "jungle": "Jarvan IV",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Aurora",
+            "top": "Renekton",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          },
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Azir",
+            "top": "Gnar",
+            "jungle": "Pantheon",
+            "support": "Lulu"
+          },
+          "kills_blue": 9,
+          "start_time": "2026-04-29T09:00:00Z",
+          "red_team_id": "99566404852189289",
+          "total_kills": 30,
+          "winner_side": "red",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "2peel",
+          "backfill_source": "manual_fuzzy_match_2026-05-22",
+          "lolesports_game_id": "115615926677896669",
+          "lolesports_match_id": "115615926677896667"
+        },
+        "ladder_group_id": "ladder-nip-jdg-m2-20260429",
+        "ladder_position": "29.5",
+        "lolesports_game_id": "115615926677896669"
+      }
+    },
+    {
+      "id": "c4c79b71-6826-40c6-bc9e-215271c81e29",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "JDG",
+      "raw_extraction": {
+        "odd": 1.81,
+        "pick": "Under 28.5",
+        "stake": 200,
+        "currency": "BRL",
+        "strategy": "ladder",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 2,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896669",
+          "team_a": {
+            "name": "Ninjas in Pyjamas",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Azir",
+              "top": "Gnar",
+              "jungle": "Pantheon",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "JD Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Aurora",
+              "top": "Renekton",
+              "jungle": "Jarvan IV",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Aurora",
+            "top": "Renekton",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          },
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Azir",
+            "top": "Gnar",
+            "jungle": "Pantheon",
+            "support": "Lulu"
+          },
+          "kills_blue": 9,
+          "start_time": "2026-04-29T09:00:00Z",
+          "red_team_id": "99566404852189289",
+          "total_kills": 30,
+          "winner_side": "red",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "2peel",
+          "backfill_source": "manual_fuzzy_match_2026-05-22",
+          "lolesports_game_id": "115615926677896669",
+          "lolesports_match_id": "115615926677896667"
+        },
+        "ladder_group_id": "ladder-nip-jdg-m2-20260429",
+        "ladder_position": "28.5",
+        "lolesports_game_id": "115615926677896669"
+      }
+    },
+    {
+      "id": "cf285953-4109-4689-821f-c9f69db9f2ec",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "JDG",
+      "raw_extraction": {
+        "odd": 1.57,
+        "pick": "Under 28.5",
+        "stake": 669.45,
+        "strategy": "ladder",
+        "bookmaker": "Betano",
+        "is_map_bet": true,
+        "map_number": 2,
+        "ladder_role": "heavy",
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896669",
+          "team_a": {
+            "name": "Ninjas in Pyjamas",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Azir",
+              "top": "Gnar",
+              "jungle": "Pantheon",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "JD Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Aurora",
+              "top": "Renekton",
+              "jungle": "Jarvan IV",
+              "support": "Nami"
+            }
+          }
+        },
+        "bet_placed_at": "2026-04-29T06:13:00-03:00",
+        "match_context": {
+          "kills_red": 21,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Aurora",
+            "top": "Renekton",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          },
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Azir",
+            "top": "Gnar",
+            "jungle": "Pantheon",
+            "support": "Lulu"
+          },
+          "kills_blue": 9,
+          "start_time": "2026-04-29T09:00:00Z",
+          "red_team_id": "99566404852189289",
+          "total_kills": 30,
+          "winner_side": "red",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "2peel",
+          "backfill_source": "manual_fuzzy_match_2026-05-22",
+          "lolesports_game_id": "115615926677896669",
+          "lolesports_match_id": "115615926677896667"
+        },
+        "ladder_group_id": "ladder-nip-jdg-m2-20260429",
+        "ladder_position": "28.5",
+        "bet_id_bookmaker": "20068036692",
+        "lolesports_game_id": "115615926677896669"
+      }
+    },
+    {
+      "id": "7eda9f86-67cb-4809-ae32-a0851ff4e2f8",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "Anyone's Legend",
+      "raw_extraction": {
+        "hedge_note": "Hedge sintético consolidado: 3x600 Under EstrelaBet @1.75 + 582.52 Over Pinnacle @2.03 + 1000 Over Pinnacle @2.20 = NET -R$232.52",
+        "compositions": {
+          "source": "lolesports livestats game 115615926677831073",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "TwistedFate",
+              "top": "Jayce",
+              "jungle": "LeeSin",
+              "support": "Nautilus"
+            }
+          },
+          "team_b": {
+            "name": "Anyone's Legend",
+            "side": "red",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Mel",
+              "top": "Gnar",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": null,
+          "red_picks": {
+            "adc": "Sivir",
+            "mid": "Mel",
+            "top": "Gnar",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "under_hit": null,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "TwistedFate",
+            "top": "Jayce",
+            "jungle": "LeeSin",
+            "support": "Nautilus"
+          },
+          "kills_blue": 15,
+          "enriched_at": "2026-05-24T09:22:37.657Z",
+          "red_team_id": "99566404856367466",
+          "total_kills": 22,
+          "winner_side": "blue",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677831073",
+          "lolesports_match_id": "115615926677831071",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4922188421",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$600,00"
+        },
+        "hedge_consolidated": true,
+        "hedge_legs_original": [
+          "7eda9f86",
+          "ea91d464",
+          "94dc93e1",
+          "ac00b0cd",
+          "3c162336"
+        ]
+      }
+    },
+    {
+      "id": "3dd5aca8-3a18-4c17-939f-1f985bf987dd",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "EDG",
+      "raw_extraction": {
+        "ladder_info": {
+          "map": 1,
+          "direction": "Under",
+          "ladder_group": "NIP_EDG_M1_2026-05-24",
+          "ladder_group_id": "9884b76c-4adf-428c-bae7-624585bfc434"
+        },
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541896",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Cassiopeia",
+              "top": "Jayce",
+              "jungle": "Skarner",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "EDWARD GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Sion",
+              "jungle": "LeeSin",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 4,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Cassiopeia",
+            "top": "Jayce",
+            "jungle": "Skarner",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Sion",
+            "jungle": "LeeSin",
+            "support": "Seraphine"
+          },
+          "kills_blue": 10,
+          "enriched_at": "2026-05-24T09:19:02.905Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 14,
+          "winner_side": "blue",
+          "blue_team_id": "98767991882270868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541896",
+          "lolesports_match_id": "115616219464541895",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4983121594",
+          "placed_utc": "2026-05-24T06:04:00Z",
+          "ganho_total": 1153.11,
+          "raw_pick_text": "Menos de 26.5, Primeiro Mapa - Total Kills",
+          "raw_stake_text": "R$ 703,12",
+          "settled_win_loss": 449.99
+        }
+      }
+    },
+    {
+      "id": "d685b833-7455-4eaa-8138-c16e18f076cc",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "EDG",
+      "raw_extraction": {
+        "ladder_info": {
+          "map": 1,
+          "direction": "Under",
+          "ladder_group": "NIP_EDG_M1_2026-05-24",
+          "ladder_group_id": "9884b76c-4adf-428c-bae7-624585bfc434"
+        },
+        "compositions": {
+          "source": "lolesports livestats game 115616219464541896",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Cassiopeia",
+              "top": "Jayce",
+              "jungle": "Skarner",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "EDWARD GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Annie",
+              "top": "Sion",
+              "jungle": "LeeSin",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 4,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Cassiopeia",
+            "top": "Jayce",
+            "jungle": "Skarner",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Annie",
+            "top": "Sion",
+            "jungle": "LeeSin",
+            "support": "Seraphine"
+          },
+          "kills_blue": 10,
+          "enriched_at": "2026-05-24T09:19:23.445Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 14,
+          "winner_side": "blue",
+          "blue_team_id": "98767991882270868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115616219464541896",
+          "lolesports_match_id": "115616219464541895",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "3055536267",
+          "placed_utc": "2026-05-24T06:03:52Z",
+          "settled_utc": "2026-05-24T06:41:23Z",
+          "raw_pick_text": "Under 25.5 Map 1 OU, LPL",
+          "raw_stake_text": "R$ 1.802,53",
+          "settled_win_loss": 1259.97
+        }
+      }
+    },
+    {
+      "id": "b2dafd5b-d1d6-4e78-a000-52319a7d8b8b",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "BLG",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896632",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Annie",
+              "top": "Jayce",
+              "jungle": "Nocturne",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "BILIBILI GAMING",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ryze",
+              "top": "Gnar",
+              "jungle": "JarvanIV",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 17,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Ryze",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Annie",
+            "top": "Jayce",
+            "jungle": "Nocturne",
+            "support": "Lulu"
+          },
+          "kills_blue": 13,
+          "enriched_at": "2026-05-24T09:21:48.193Z",
+          "red_team_id": "99566404853854212",
+          "total_kills": 30,
+          "winner_side": "red",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896632",
+          "lolesports_match_id": "115615926677896631",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "480b8241-96fe-42d0-b46d-17cc35e2e37c",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "TES",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896688",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Cassiopeia",
+              "top": "Gnar",
+              "jungle": "Nocturne",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Ambessa",
+              "jungle": "LeeSin",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 4,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Ambessa",
+            "jungle": "LeeSin",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Cassiopeia",
+            "top": "Gnar",
+            "jungle": "Nocturne",
+            "support": "Nami"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:21:56.739Z",
+          "red_team_id": "99566404854685458",
+          "total_kills": 20,
+          "winner_side": "blue",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896688",
+          "lolesports_match_id": "115615926677896687",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "be416e87-8c42-44ca-90e9-0ee325d19e76",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "BLG",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685695509",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Gragas",
+              "jungle": "Nocturne",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "BILIBILI GAMING",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Akali",
+              "top": "Jayce",
+              "jungle": "XinZhao",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 10,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Akali",
+            "top": "Jayce",
+            "jungle": "XinZhao",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Gragas",
+            "jungle": "Nocturne",
+            "support": "Milio"
+          },
+          "kills_blue": 21,
+          "enriched_at": "2026-05-24T09:22:07.919Z",
+          "red_team_id": "99566404853854212",
+          "total_kills": 31,
+          "winner_side": "blue",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685695509",
+          "lolesports_match_id": "115615924499588593",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "c0210525-f37b-4ebc-8898-6341a3c1a029",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "BLG",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588594",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ahri",
+              "top": "Gnar",
+              "jungle": "Vi",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "BILIBILI GAMING",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Aurora",
+              "top": "Yorick",
+              "jungle": "JarvanIV",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 24,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Aurora",
+            "top": "Yorick",
+            "jungle": "JarvanIV",
+            "support": "Bard"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Ahri",
+            "top": "Gnar",
+            "jungle": "Vi",
+            "support": "Seraphine"
+          },
+          "kills_blue": 24,
+          "enriched_at": "2026-05-24T09:22:11.010Z",
+          "red_team_id": "99566404853854212",
+          "total_kills": 48,
+          "winner_side": "blue",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588594",
+          "lolesports_match_id": "115615924499588593",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "b5c0cf97-f516-4d8e-922d-6a46f5397140",
+      "team_a": "Weibo",
+      "team_b": "Shenzhen NINJAS IN PYJAMAS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588624",
+          "team_a": {
+            "name": "WeiboGaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ryze",
+              "top": "Sion",
+              "jungle": "Pantheon",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ahri",
+              "top": "Rumble",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 15,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Ahri",
+            "top": "Rumble",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ryze",
+            "top": "Sion",
+            "jungle": "Pantheon",
+            "support": "Nami"
+          },
+          "kills_blue": 24,
+          "enriched_at": "2026-05-24T09:20:46.573Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 39,
+          "winner_side": "blue",
+          "blue_team_id": "99566404853058754",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588624",
+          "lolesports_match_id": "115615924499588623",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "8a420ec6-5351-49b2-af7e-da3c7e2d8bd7",
+      "team_a": "WE",
+      "team_b": "Shenzhen NINJAS IN PYJAMAS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588620",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "blue",
+            "picks": {
+              "adc": "Aphelios",
+              "mid": "Aurora",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ahri",
+              "top": "Rumble",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 18,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Ahri",
+            "top": "Rumble",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Aphelios",
+            "mid": "Aurora",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "kills_blue": 3,
+          "enriched_at": "2026-05-24T09:21:16.922Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 21,
+          "winner_side": "red",
+          "blue_team_id": "98767991887166787",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588620",
+          "lolesports_match_id": "115615924499588619",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "1d7544a5-de62-4c58-8f63-8004e9d8fe2b",
+      "team_a": "Anyone's Legend",
+      "team_b": "Shenzhen NINJAS IN PYJAMAS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685695497",
+          "team_a": {
+            "name": "Anyone's Legend",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Azir",
+              "top": "Sion",
+              "jungle": "Qiyana",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Orianna",
+              "top": "Gwen",
+              "jungle": "Trundle",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Orianna",
+            "top": "Gwen",
+            "jungle": "Trundle",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Azir",
+            "top": "Sion",
+            "jungle": "Qiyana",
+            "support": "Milio"
+          },
+          "kills_blue": 15,
+          "enriched_at": "2026-05-24T09:19:11.206Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 23,
+          "winner_side": "blue",
+          "blue_team_id": "99566404856367466",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685695497",
+          "lolesports_match_id": "115615924499588581",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "336c690f-3907-4039-ada6-f15d89ce95b4",
+      "team_a": "Anyone's Legend",
+      "team_b": "Shenzhen NINJAS IN PYJAMAS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677831072",
+          "team_a": {
+            "name": "Anyone's Legend",
+            "side": "blue",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Azir",
+              "top": "Rumble",
+              "jungle": "Skarner",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Annie",
+              "top": "Sion",
+              "jungle": "Nocturne",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 15,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Annie",
+            "top": "Sion",
+            "jungle": "Nocturne",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Jhin",
+            "mid": "Azir",
+            "top": "Rumble",
+            "jungle": "Skarner",
+            "support": "Bard"
+          },
+          "kills_blue": 1,
+          "enriched_at": "2026-05-24T09:19:59.697Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 16,
+          "winner_side": "red",
+          "blue_team_id": "99566404856367466",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677831072",
+          "lolesports_match_id": "115615926677831071",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "34830b54-ba36-4148-8adb-045d66045d16",
+      "team_a": "TES",
+      "team_b": "Shenzhen NINJAS IN PYJAMAS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685695537",
+          "team_a": {
+            "name": "TOP ESPORTS",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Ryze",
+              "top": "LeeSin",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Malzahar",
+              "top": "Anivia",
+              "jungle": "JarvanIV",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 13,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Malzahar",
+            "top": "Anivia",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Ryze",
+            "top": "LeeSin",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "kills_blue": 18,
+          "enriched_at": "2026-05-24T09:19:21.962Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 31,
+          "winner_side": "blue",
+          "blue_team_id": "99566404854685458",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685695537",
+          "lolesports_match_id": "115615924499588621",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "771215d7-a7fd-466a-8e1f-e59fab9eb666",
+      "team_a": "WE",
+      "team_b": "Shenzhen NINJAS IN PYJAMAS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896686",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "TwistedFate",
+              "top": "Shen",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "KogMaw",
+              "mid": "Ryze",
+              "top": "Sion",
+              "jungle": "Naafiri",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 20,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "KogMaw",
+            "mid": "Ryze",
+            "top": "Sion",
+            "jungle": "Naafiri",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "TwistedFate",
+            "top": "Shen",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:20:22.300Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 25,
+          "winner_side": "red",
+          "blue_team_id": "98767991887166787",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896686",
+          "lolesports_match_id": "115615926677896683",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "02a1ec28-96c8-46eb-8497-98595e03c36e",
+      "team_a": "Invictus Gaming",
+      "team_b": "Shenzhen NINJAS IN PYJAMAS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896652",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Akali",
+              "top": "Gwen",
+              "jungle": "Nocturne",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Orianna",
+              "top": "Sion",
+              "jungle": "Vi",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Orianna",
+            "top": "Sion",
+            "jungle": "Vi",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Sivir",
+            "mid": "Akali",
+            "top": "Gwen",
+            "jungle": "Nocturne",
+            "support": "Karma"
+          },
+          "kills_blue": 18,
+          "enriched_at": "2026-05-24T09:20:09.112Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 24,
+          "winner_side": "blue",
+          "blue_team_id": "99566404848691211",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896652",
+          "lolesports_match_id": "115615926677896651",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    }
+  ]
+}

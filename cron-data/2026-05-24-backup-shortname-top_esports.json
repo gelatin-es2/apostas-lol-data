@@ -1,0 +1,1148 @@
+{
+  "old": "TOP ESPORTS",
+  "new": "TES",
+  "rows": [
+    {
+      "id": "fa4baf71-5161-4c11-948e-6b2ccc7f4076",
+      "team_a": "TOP ESPORTS",
+      "team_b": "Anyone's Legend",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685695501",
+          "team_a": {
+            "name": "TOP ESPORTS",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ahri",
+              "top": "Jayce",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Anyone's Legend",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ryze",
+              "top": "Yorick",
+              "jungle": "Poppy",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Ryze",
+            "top": "Yorick",
+            "jungle": "Poppy",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Ahri",
+            "top": "Jayce",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:20:49.286Z",
+          "red_team_id": "99566404856367466",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "99566404854685458",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685695501",
+          "lolesports_match_id": "115615924499588585",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "34830b54-ba36-4148-8adb-045d66045d16",
+      "team_a": "TOP ESPORTS",
+      "team_b": "Shenzhen NINJAS IN PYJAMAS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685695537",
+          "team_a": {
+            "name": "TOP ESPORTS",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Ryze",
+              "top": "LeeSin",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Malzahar",
+              "top": "Anivia",
+              "jungle": "JarvanIV",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 13,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Malzahar",
+            "top": "Anivia",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Ryze",
+            "top": "LeeSin",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "kills_blue": 18,
+          "enriched_at": "2026-05-24T09:19:21.962Z",
+          "red_team_id": "101388912914513220",
+          "total_kills": 31,
+          "winner_side": "blue",
+          "blue_team_id": "99566404854685458",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685695537",
+          "lolesports_match_id": "115615924499588621",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "6a0ad6f8-38da-4c63-ace4-1bca5e97dd9c",
+      "team_a": "TOP ESPORTS",
+      "team_b": "Beijing JDG Esports",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896678",
+          "team_a": {
+            "name": "TOP ESPORTS",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Viktor",
+              "top": "Renekton",
+              "jungle": "XinZhao",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Beijing JDG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Cassiopeia",
+              "top": "Gnar",
+              "jungle": "Trundle",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 10,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Viktor",
+            "top": "Renekton",
+            "jungle": "XinZhao",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Cassiopeia",
+            "top": "Gnar",
+            "jungle": "Trundle",
+            "support": "Lulu"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:19:19.199Z",
+          "red_team_id": "99566404854685458",
+          "total_kills": 29,
+          "winner_side": "blue",
+          "blue_team_id": "99566404852189289",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896678",
+          "lolesports_match_id": "115615926677896675",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4918192244",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$1.200,00"
+        }
+      }
+    },
+    {
+      "id": "11f29c0c-8874-4654-b678-62adcd71f4f3",
+      "team_a": "TOP ESPORTS",
+      "team_b": "BILIBILI GAMING",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588598",
+          "team_a": {
+            "name": "TOP ESPORTS",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Azir",
+              "top": "Vayne",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "BILIBILI GAMING",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Akali",
+              "top": "Gnar",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Akali",
+            "top": "Gnar",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Azir",
+            "top": "Vayne",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:21:23.838Z",
+          "red_team_id": "99566404853854212",
+          "total_kills": 35,
+          "winner_side": "blue",
+          "blue_team_id": "99566404854685458",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588598",
+          "lolesports_match_id": "115615924499588597",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "5792788f-2b3a-4fc0-b80c-7ba03b5005ba",
+      "team_a": "TOP ESPORTS",
+      "team_b": "Anyone's Legend",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588586",
+          "team_a": {
+            "name": "TOP ESPORTS",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Azir",
+              "top": "Gnar",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Anyone's Legend",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Orianna",
+              "top": "Renekton",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Orianna",
+            "top": "Renekton",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Azir",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:21:30.585Z",
+          "red_team_id": "99566404856367466",
+          "total_kills": 32,
+          "winner_side": null,
+          "blue_team_id": "99566404854685458",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588586",
+          "lolesports_match_id": "115615924499588585",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "4b9c6a6d-90b0-4678-af6a-e242dafc162a",
+      "team_a": "Weibo",
+      "team_b": "TOP ESPORTS",
+      "raw_extraction": {
+        "odd": 2.05,
+        "pick": "Top Esports",
+        "stake": 600,
+        "market": "Map 2 Moneyline",
+        "team_a": "Weibo Gaming",
+        "team_b": "Top Esports",
+        "currency": "BRL",
+        "bookmaker": "Pinnacle",
+        "is_map_bet": true,
+        "map_number": 2,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685761081",
+          "team_a": {
+            "name": "WeiboGaming",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Annie",
+              "top": "Ambessa",
+              "jungle": "Naafiri",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ahri",
+              "top": "Gnar",
+              "jungle": "XinZhao",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 22,
+          "pick_line": null,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Annie",
+            "top": "Ambessa",
+            "jungle": "Naafiri",
+            "support": "Bard"
+          },
+          "under_hit": null,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Ahri",
+            "top": "Gnar",
+            "jungle": "XinZhao",
+            "support": "Seraphine"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-05-24T09:20:38.983Z",
+          "red_team_id": "99566404853058754",
+          "total_kills": 36,
+          "winner_side": "red",
+          "blue_team_id": "99566404854685458",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685761081",
+          "lolesports_match_id": "115615924499588629",
+          "match_ambiguous_at_link": false
+        },
+        "bet_id_bookmaker": "3035499553",
+        "lolesports_game_id": "115615926685761081"
+      }
+    },
+    {
+      "id": "616ca798-ac58-4064-9f46-b8477fe4c5d2",
+      "team_a": "Weibo",
+      "team_b": "TOP ESPORTS",
+      "raw_extraction": {
+        "odd": 1.826,
+        "pick": "Under 29.5",
+        "stake": 600,
+        "market": "Map 1 Total Kills",
+        "team_a": "Weibo Gaming",
+        "team_b": "Top Esports",
+        "currency": "BRL",
+        "bookmaker": "Pinnacle",
+        "is_map_bet": true,
+        "map_number": 1,
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588630",
+          "team_a": {
+            "name": "WeiboGaming",
+            "side": "red",
+            "picks": {
+              "adc": "Varus",
+              "mid": "Ryze",
+              "top": "Jayce",
+              "jungle": "Vi",
+              "support": "Rakan"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Azir",
+              "top": "KSante",
+              "jungle": "Pantheon",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 18,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Varus",
+            "mid": "Ryze",
+            "top": "Jayce",
+            "jungle": "Vi",
+            "support": "Rakan"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Azir",
+            "top": "KSante",
+            "jungle": "Pantheon",
+            "support": "Nami"
+          },
+          "kills_blue": 9,
+          "enriched_at": "2026-05-24T09:22:25.322Z",
+          "red_team_id": "99566404853058754",
+          "total_kills": 27,
+          "winner_side": "red",
+          "blue_team_id": "99566404854685458",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588630",
+          "lolesports_match_id": "115615924499588629",
+          "match_ambiguous_at_link": false
+        },
+        "bet_id_bookmaker": "3035465097",
+        "lolesports_game_id": "115615924499588630",
+        "lolesports_match_id": "115615924499588629"
+      }
+    },
+    {
+      "id": "53fe7f68-c99b-45f8-a91a-6734362b7b71",
+      "team_a": "Weibo",
+      "team_b": "TOP ESPORTS",
+      "raw_extraction": {
+        "odd": 1.74,
+        "pick": "Under 31.5",
+        "stake": 1200,
+        "market": "Total Kills",
+        "team_a": "Weibo Gaming",
+        "team_b": "Top Esports",
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 2,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685761081",
+          "team_a": {
+            "name": "WeiboGaming",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Annie",
+              "top": "Ambessa",
+              "jungle": "Naafiri",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ahri",
+              "top": "Gnar",
+              "jungle": "XinZhao",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 22,
+          "pick_line": 31.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Annie",
+            "top": "Ambessa",
+            "jungle": "Naafiri",
+            "support": "Bard"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Ahri",
+            "top": "Gnar",
+            "jungle": "XinZhao",
+            "support": "Seraphine"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-05-24T09:22:27.202Z",
+          "red_team_id": "99566404853058754",
+          "total_kills": 36,
+          "winner_side": "red",
+          "blue_team_id": "99566404854685458",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685761081",
+          "lolesports_match_id": "115615924499588629",
+          "match_ambiguous_at_link": false
+        },
+        "bet_id_bookmaker": "4885788676",
+        "lolesports_game_id": "115615926685761081",
+        "lolesports_match_id": "115615924499588629"
+      }
+    },
+    {
+      "id": "c2904845-5e28-4ec6-aa2e-66b9f9c9c306",
+      "team_a": "Xi'an Team WE",
+      "team_b": "TOP ESPORTS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896697",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Leblanc",
+              "top": "Aatrox",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Aurora",
+              "top": "Ambessa",
+              "jungle": "XinZhao",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 17,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Aurora",
+            "top": "Ambessa",
+            "jungle": "XinZhao",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Leblanc",
+            "top": "Aatrox",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 4,
+          "enriched_at": "2026-05-24T09:21:18.449Z",
+          "red_team_id": "99566404854685458",
+          "total_kills": 21,
+          "winner_side": "red",
+          "blue_team_id": "98767991887166787",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896697",
+          "lolesports_match_id": "115615926677896695",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "7f6dfc0d-22e5-410b-b5ef-429e83fdf162",
+      "team_a": "Invictus Gaming",
+      "team_b": "TOP ESPORTS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588608",
+          "team_a": {
+            "name": "Invictus Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Orianna",
+              "top": "Rumble",
+              "jungle": "Nocturne",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Azir",
+              "top": "Galio",
+              "jungle": "Pantheon",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 9,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Azir",
+            "top": "Galio",
+            "jungle": "Pantheon",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Orianna",
+            "top": "Rumble",
+            "jungle": "Nocturne",
+            "support": "Seraphine"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:21:30.071Z",
+          "red_team_id": "99566404854685458",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "99566404848691211",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588608",
+          "lolesports_match_id": "115615924499588607",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "a88b38fb-7182-40a4-9fff-bfcfb88d484a",
+      "team_a": "Beijing JDG Esports",
+      "team_b": "TOP ESPORTS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685695531",
+          "team_a": {
+            "name": "Beijing JDG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "TwistedFate",
+              "top": "Vayne",
+              "jungle": "Pantheon",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Annie",
+              "top": "Gnar",
+              "jungle": "Naafiri",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 18,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Annie",
+            "top": "Gnar",
+            "jungle": "Naafiri",
+            "support": "Karma"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "TwistedFate",
+            "top": "Vayne",
+            "jungle": "Pantheon",
+            "support": "Bard"
+          },
+          "kills_blue": 10,
+          "enriched_at": "2026-05-24T09:21:51.046Z",
+          "red_team_id": "99566404854685458",
+          "total_kills": 28,
+          "winner_side": "red",
+          "blue_team_id": "99566404852189289",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685695531",
+          "lolesports_match_id": "115615924499588615",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "bd38de0d-bfa7-40d3-9007-00da8a0bb4de",
+      "team_a": "BILIBILI GAMING",
+      "team_b": "TOP ESPORTS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896641",
+          "team_a": {
+            "name": "BILIBILI GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Anivia",
+              "top": "Gnar",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Ryze",
+              "top": "Ambessa",
+              "jungle": "LeeSin",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 14,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Ryze",
+            "top": "Ambessa",
+            "jungle": "LeeSin",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Anivia",
+            "top": "Gnar",
+            "jungle": "Pantheon",
+            "support": "Milio"
+          },
+          "kills_blue": 18,
+          "enriched_at": "2026-05-24T09:20:25.283Z",
+          "red_team_id": "99566404854685458",
+          "total_kills": 32,
+          "winner_side": "blue",
+          "blue_team_id": "99566404853854212",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896641",
+          "lolesports_match_id": "115615926677896639",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "8fe2d52d-0938-43d1-8710-eb3a43284bba",
+      "team_a": "Xi'an Team WE",
+      "team_b": "TOP ESPORTS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896696",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Ryze",
+              "top": "Jayce",
+              "jungle": "LeeSin",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Annie",
+              "top": "KSante",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 22,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Annie",
+            "top": "KSante",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Ryze",
+            "top": "Jayce",
+            "jungle": "LeeSin",
+            "support": "Bard"
+          },
+          "kills_blue": 10,
+          "enriched_at": "2026-05-24T09:18:30.706Z",
+          "red_team_id": "99566404854685458",
+          "total_kills": 32,
+          "winner_side": "red",
+          "blue_team_id": "98767991887166787",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896696",
+          "lolesports_match_id": "115615926677896695",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "871929de-d1d2-4bda-ae4c-2732b6d397a2",
+      "team_a": "Weibo",
+      "team_b": "TOP ESPORTS",
+      "raw_extraction": {
+        "odd": 1.769,
+        "pick": "Under 28.5",
+        "stake": 1000,
+        "bookmaker": "Pinnacle",
+        "is_map_bet": true,
+        "map_number": 2,
+        "tournament": "LPL Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115615926677962241",
+          "team_a": {
+            "name": "WeiboGaming",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Azir",
+              "top": "Aurora",
+              "jungle": "Skarner",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Yone",
+              "top": "Renekton",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "lucro_liquido": 769,
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Azir",
+            "top": "Aurora",
+            "jungle": "Skarner",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Yone",
+            "top": "Renekton",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "kills_blue": 20,
+          "enriched_at": "2026-05-24T09:22:35.758Z",
+          "red_team_id": "99566404853058754",
+          "total_kills": 27,
+          "winner_side": "blue",
+          "blue_team_id": "99566404854685458",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677962241",
+          "lolesports_match_id": "115615926677962239",
+          "match_ambiguous_at_link": false
+        },
+        "bet_id_bookmaker": "3038417324",
+        "lolesports_game_id": "115615926677962241",
+        "lolesports_match_id": "115615926677962239"
+      }
+    },
+    {
+      "id": "480b8241-96fe-42d0-b46d-17cc35e2e37c",
+      "team_a": "Shenzhen NINJAS IN PYJAMAS",
+      "team_b": "TOP ESPORTS",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926677896688",
+          "team_a": {
+            "name": "Shenzhen NINJAS IN PYJAMAS",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Cassiopeia",
+              "top": "Gnar",
+              "jungle": "Nocturne",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Ambessa",
+              "jungle": "LeeSin",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 4,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Ambessa",
+            "jungle": "LeeSin",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Cassiopeia",
+            "top": "Gnar",
+            "jungle": "Nocturne",
+            "support": "Nami"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:21:56.739Z",
+          "red_team_id": "99566404854685458",
+          "total_kills": 20,
+          "winner_side": "blue",
+          "blue_team_id": "101388912914513220",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677896688",
+          "lolesports_match_id": "115615926677896687",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "81c02151-32f2-41d2-b695-59d45b5f1f10",
+      "team_a": "Weibo",
+      "team_b": "TOP ESPORTS",
+      "raw_extraction": {
+        "odd": 1.751,
+        "pick": "Under 28.5",
+        "stake": 200,
+        "bookmaker": "Pinnacle",
+        "is_map_bet": true,
+        "map_number": 2,
+        "tournament": "LPL Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115615926677962241",
+          "team_a": {
+            "name": "WeiboGaming",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Azir",
+              "top": "Aurora",
+              "jungle": "Skarner",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "TOP ESPORTS",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Yone",
+              "top": "Renekton",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "lucro_liquido": 150.2,
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Azir",
+            "top": "Aurora",
+            "jungle": "Skarner",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Yone",
+            "top": "Renekton",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "kills_blue": 20,
+          "enriched_at": "2026-05-24T09:22:33.741Z",
+          "red_team_id": "99566404853058754",
+          "total_kills": 27,
+          "winner_side": "blue",
+          "blue_team_id": "99566404854685458",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926677962241",
+          "lolesports_match_id": "115615926677962239",
+          "match_ambiguous_at_link": false
+        },
+        "bet_id_bookmaker": "3038415855",
+        "lolesports_game_id": "115615926677962241",
+        "lolesports_match_id": "115615926677962239"
+      }
+    }
+  ]
+}

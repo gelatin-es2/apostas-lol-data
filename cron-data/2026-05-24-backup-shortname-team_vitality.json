@@ -1,0 +1,904 @@
+{
+  "old": "Team Vitality",
+  "new": "Vitality",
+  "rows": [
+    {
+      "id": "2fb31dff-c8a9-492b-81d7-0127c6a279e0",
+      "team_a": "Team Vitality",
+      "team_b": "SK Gaming",
+      "raw_extraction": {
+        "odd": 1.746,
+        "pick": "Under 31.5",
+        "stake": 600,
+        "bookmaker": "Pinnacle",
+        "is_map_bet": true,
+        "map_number": 2,
+        "tournament": "LEC 2026 Spring Season",
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523714",
+          "team_a": {
+            "name": "Team Vitality",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Ahri",
+              "top": "Gnar",
+              "jungle": "XinZhao",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "SK Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Kaisa",
+              "mid": "Yasuo",
+              "top": "Anivia",
+              "jungle": "Vi",
+              "support": "Rakan"
+            }
+          }
+        },
+        "lucro_liquido": 447.6,
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 31.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Ahri",
+            "top": "Gnar",
+            "jungle": "XinZhao",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Kaisa",
+            "mid": "Yasuo",
+            "top": "Anivia",
+            "jungle": "Vi",
+            "support": "Rakan"
+          },
+          "kills_blue": 15,
+          "enriched_at": "2026-05-24T09:18:41.167Z",
+          "red_team_id": "99322214695067838",
+          "total_kills": 27,
+          "winner_side": "blue",
+          "blue_team_id": "101383793567806688",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523714",
+          "lolesports_match_id": "115548668059523712",
+          "match_ambiguous_at_link": false
+        },
+        "bet_id_bookmaker": "3038836256"
+      }
+    },
+    {
+      "id": "d79cac08-acda-47d3-90a9-c318efe0819e",
+      "team_a": "Team Vitality",
+      "team_b": "Shifters",
+      "raw_extraction": {
+        "odd": 1.76,
+        "pick": "Under 28.5",
+        "stake": 600,
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 1,
+        "tournament": "EWC EMEA",
+        "settle_mode": "manual",
+        "compositions": {
+          "source": "user-provided",
+          "team_a": {
+            "name": "Team Vitality",
+            "picks_raw": "Aurora, Xin Zhao, Azir, Ezreal, Bard",
+            "peel_supports": [
+              "Bard"
+            ]
+          },
+          "team_b": {
+            "name": "Shifters",
+            "picks_raw": "Rumble, Wukong, Ryze, Ashe, Seraphine",
+            "peel_supports": [
+              "Seraphine"
+            ]
+          },
+          "method_match_note": "Bardo conta peel so em LEC; EWC = neutro. Shifters na lista cuidado.",
+          "peel_count_strict": 1,
+          "peel_count_with_bard": 2
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:18:45.237Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "ganho_potencial": 1056,
+        "bet_id_bookmaker": "4894314119"
+      }
+    },
+    {
+      "id": "590ceae5-00fc-4902-b11a-f85fb8e27dbd",
+      "team_a": "Team Vitality",
+      "team_b": "GIANTX",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523710",
+          "team_a": {
+            "name": "Team Vitality",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Syndra",
+              "top": "Jayce",
+              "jungle": "Aatrox",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "GIANTX",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Aurora",
+              "top": "Rumble",
+              "jungle": "XinZhao",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 9,
+          "pick_line": 24.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Aurora",
+            "top": "Rumble",
+            "jungle": "XinZhao",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Syndra",
+            "top": "Jayce",
+            "jungle": "Aatrox",
+            "support": "Lulu"
+          },
+          "kills_blue": 18,
+          "enriched_at": "2026-05-24T09:18:56.506Z",
+          "red_team_id": "101383793572656373",
+          "total_kills": 27,
+          "winner_side": "blue",
+          "blue_team_id": "99322214695067838",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523710",
+          "lolesports_match_id": "115548668059523708",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "3be618ed-61c9-4482-affb-dd490fe8ff91",
+      "team_a": "Team Vitality",
+      "team_b": "Movistar KOI",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523718",
+          "team_a": {
+            "name": "Team Vitality",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Sylas",
+              "top": "Gnar",
+              "jungle": "MonkeyKing",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "Movistar KOI",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Viktor",
+              "top": "Ambessa",
+              "jungle": "Vi",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 14,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Viktor",
+            "top": "Ambessa",
+            "jungle": "Vi",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Sylas",
+            "top": "Gnar",
+            "jungle": "MonkeyKing",
+            "support": "Karma"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:21:34.265Z",
+          "red_team_id": "103461966965149786",
+          "total_kills": 19,
+          "winner_side": "red",
+          "blue_team_id": "99322214695067838",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523718",
+          "lolesports_match_id": "115548668059523716",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "c7a9d025-50db-4fc5-b8a9-73e9b482c95b",
+      "team_a": "Team Vitality",
+      "team_b": "Shifters",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523705",
+          "team_a": {
+            "name": "Team Vitality",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Azir",
+              "top": "Rumble",
+              "jungle": "XinZhao",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Shifters",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Taliyah",
+              "top": "Jayce",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 19,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Taliyah",
+            "top": "Jayce",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Azir",
+            "top": "Rumble",
+            "jungle": "XinZhao",
+            "support": "Nami"
+          },
+          "kills_blue": 7,
+          "enriched_at": "2026-05-24T09:21:44.279Z",
+          "red_team_id": "107563714667537640",
+          "total_kills": 26,
+          "winner_side": "red",
+          "blue_team_id": "99322214695067838",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523705",
+          "lolesports_match_id": "115548668059523704",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "c25fbbf5-1c58-42c0-946d-50724494e186",
+      "team_a": "Team Vitality",
+      "team_b": "Shifters",
+      "raw_extraction": {
+        "odd": 1.72,
+        "pick": "Under 30.5",
+        "stake": 200,
+        "bookmaker": "Pinnacle",
+        "is_map_bet": true,
+        "map_number": 2,
+        "off_method": true,
+        "tournament": "EWC EMEA",
+        "settle_mode": "manual",
+        "compositions": {
+          "source": "user-provided (loading screen)",
+          "team_a": {
+            "name": "Team Vitality",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Nami",
+              "top": "Jayce",
+              "jungle": "Jarvan IV",
+              "support": "Lissandra"
+            },
+            "players": {
+              "adc": "Carzzy",
+              "mid": "Humanoid",
+              "top": "Naak Nako",
+              "jungle": "Lyncas",
+              "support": "Fleshy"
+            }
+          },
+          "team_b": {
+            "name": "Shifters",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Ahri",
+              "top": "Yorick",
+              "jungle": "Sejuani",
+              "support": "Milio"
+            }
+          },
+          "comp_note": "Lissandra sup nao e peel (engage/CC). Nami mid nao conta como sup peel. Apenas Milio (SHF) e peel.",
+          "method_match": false,
+          "peel_supports": [
+            "Milio"
+          ],
+          "peel_count_strict": 1
+        },
+        "series_score": "0-1 SHF",
+        "lucro_liquido": 144,
+        "match_context": {
+          "enriched_at": "2026-05-24T09:19:30.552Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        }
+      }
+    },
+    {
+      "id": "6b41c752-6544-4045-a941-c81a787db014",
+      "team_a": "Team Vitality",
+      "team_b": "SK Gaming",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523715",
+          "team_a": {
+            "name": "Team Vitality",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Syndra",
+              "top": "Aatrox",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "SK Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "KogMaw",
+              "mid": "Irelia",
+              "top": "Ryze",
+              "jungle": "Zaahen",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 5,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "KogMaw",
+            "mid": "Irelia",
+            "top": "Ryze",
+            "jungle": "Zaahen",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Syndra",
+            "top": "Aatrox",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:19:39.051Z",
+          "red_team_id": "101383793567806688",
+          "total_kills": 21,
+          "winner_side": null,
+          "blue_team_id": "99322214695067838",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523715",
+          "lolesports_match_id": "115548668059523712",
+          "match_ambiguous_at_link": false
+        }
+      }
+    },
+    {
+      "id": "d7783674-5c25-47f5-8382-078231bcdf97",
+      "team_a": "Team Vitality",
+      "team_b": "Fnatic",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523723",
+          "team_a": {
+            "name": "Team Vitality",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Varus",
+              "jungle": "Aatrox",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Fnatic",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Taliyah",
+              "top": "Gnar",
+              "jungle": "Naafiri",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 24.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Taliyah",
+            "top": "Gnar",
+            "jungle": "Naafiri",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Varus",
+            "jungle": "Aatrox",
+            "support": "Milio"
+          },
+          "kills_blue": 18,
+          "enriched_at": "2026-05-24T09:19:52.856Z",
+          "red_team_id": "98767991866488695",
+          "total_kills": 25,
+          "winner_side": "blue",
+          "blue_team_id": "99322214695067838",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523723",
+          "lolesports_match_id": "115548668059523720",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "09ae31b8-12a8-40d9-8573-7fcc72462014",
+      "team_a": "Team Vitality",
+      "team_b": "Shifters",
+      "raw_extraction": {
+        "odd": 1.78,
+        "pick": "Under 30.5",
+        "stake": 375.46,
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 2,
+        "off_method": true,
+        "tournament": "EWC EMEA",
+        "settle_mode": "manual",
+        "compositions": {
+          "source": "user-provided (loading screen)",
+          "team_a": {
+            "name": "Team Vitality",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Nami",
+              "top": "Jayce",
+              "jungle": "Jarvan IV",
+              "support": "Lissandra"
+            },
+            "players": {
+              "adc": "Carzzy",
+              "mid": "Humanoid",
+              "top": "Naak Nako",
+              "jungle": "Lyncas",
+              "support": "Fleshy"
+            }
+          },
+          "team_b": {
+            "name": "Shifters",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Ahri",
+              "top": "Yorick",
+              "jungle": "Sejuani",
+              "support": "Milio"
+            }
+          },
+          "comp_note": "Lissandra sup nao e peel (engage/CC). Nami mid nao conta como sup peel. Apenas Milio (SHF) e peel.",
+          "method_match": false,
+          "peel_supports": [
+            "Milio"
+          ],
+          "peel_count_strict": 1
+        },
+        "series_score": "0-1 SHF",
+        "match_context": {
+          "enriched_at": "2026-05-24T09:20:00.070Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "ganho_potencial": 668.32,
+        "bet_id_bookmaker": "20076998322"
+      }
+    },
+    {
+      "id": "55e444d3-7ff7-4cdd-858c-703a6daf87bc",
+      "team_a": "Team Vitality",
+      "team_b": "SK Gaming",
+      "raw_extraction": {
+        "odd": 1.729,
+        "pick": "Under 29.5",
+        "stake": 600,
+        "bookmaker": "Pinnacle",
+        "is_map_bet": true,
+        "map_number": 3,
+        "tournament": "LEC 2026 Spring Season",
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523715",
+          "team_a": {
+            "name": "Team Vitality",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Syndra",
+              "top": "Aatrox",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "SK Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "KogMaw",
+              "mid": "Irelia",
+              "top": "Ryze",
+              "jungle": "Zaahen",
+              "support": "Lulu"
+            }
+          }
+        },
+        "series_score": "1-1",
+        "lucro_liquido": 437.4,
+        "match_context": {
+          "kills_red": 5,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "KogMaw",
+            "mid": "Irelia",
+            "top": "Ryze",
+            "jungle": "Zaahen",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Syndra",
+            "top": "Aatrox",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:22:38.729Z",
+          "red_team_id": "101383793567806688",
+          "total_kills": 21,
+          "winner_side": null,
+          "blue_team_id": "99322214695067838",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523715",
+          "lolesports_match_id": "115548668059523712",
+          "match_ambiguous_at_link": false
+        },
+        "bet_id_bookmaker": "3038882364"
+      }
+    },
+    {
+      "id": "244bdf2a-382d-452b-a8fd-81aa35663dcd",
+      "team_a": "Movistar KOI",
+      "team_b": "Team Vitality",
+      "raw_extraction": {
+        "odd": 1.75,
+        "pick": "Over 28.5",
+        "stake": 400,
+        "bookmaker": "EstrelaBet",
+        "user_note": "nao_apostar_over_dnvm",
+        "is_map_bet": true,
+        "map_number": 3,
+        "tournament": "EWC EMEA",
+        "cashout_loss": 80,
+        "compositions": {
+          "source": "user-provided (EWC EMEA)",
+          "team_a": {
+            "name": "Movistar KOI",
+            "side": "unknown",
+            "picks": {
+              "adc": "Kalista",
+              "mid": "Anivia",
+              "top": "Ambessa",
+              "jungle": "Jarvan IV",
+              "support": "Renata"
+            }
+          },
+          "team_b": {
+            "name": "Team Vitality",
+            "side": "unknown",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Aurora",
+              "top": "Gnar",
+              "jungle": "Nocturne",
+              "support": "Pyke"
+            }
+          },
+          "anti_peel": "Pyke (VIT) - engage, quebrou padrao 2-peel",
+          "peel_count": 1,
+          "peel_supports": [
+            "Renata"
+          ]
+        },
+        "bet_placed_at": "2026-04-29T15:48:00-03:00",
+        "match_context": {
+          "enriched_at": "2026-05-24T09:18:12.930Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "experiment_over": true,
+        "bet_id_bookmaker": "4891426133"
+      }
+    },
+    {
+      "id": "80ffac40-cf00-49a2-befc-c633f49cc52f",
+      "team_a": "Fnatic",
+      "team_b": "Team Vitality",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523722",
+          "team_a": {
+            "name": "Fnatic",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Aurora",
+              "top": "KSante",
+              "jungle": "Skarner",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Team Vitality",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Syndra",
+              "top": "TwistedFate",
+              "jungle": "Pantheon",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Syndra",
+            "top": "TwistedFate",
+            "jungle": "Pantheon",
+            "support": "Bard"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Aurora",
+            "top": "KSante",
+            "jungle": "Skarner",
+            "support": "Seraphine"
+          },
+          "kills_blue": 12,
+          "enriched_at": "2026-05-24T09:18:59.701Z",
+          "red_team_id": "99322214695067838",
+          "total_kills": 33,
+          "winner_side": "red",
+          "blue_team_id": "98767991866488695",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523722",
+          "lolesports_match_id": "115548668059523720",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4911527990",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$600.00",
+          "raw_market_text": "Segundo Mapa - Total Kills"
+        }
+      }
+    },
+    {
+      "id": "62eb9121-11fd-4828-ab3f-9bac0cd0aadb",
+      "team_a": "Movistar KOI",
+      "team_b": "Team Vitality",
+      "raw_extraction": {
+        "odd": 1.82,
+        "pick": "Under 29.5",
+        "stake": 600,
+        "bookmaker": "EstrelaBet",
+        "good_flag": "AMBOS times BONS pra Under (KOI 83% n=6, VIT 83% n=12)",
+        "is_map_bet": true,
+        "map_number": 2,
+        "tournament": "EWC EMEA",
+        "compositions": {
+          "source": "user-provided (EWC EMEA)",
+          "team_a": {
+            "name": "Movistar KOI",
+            "side": "unknown",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Ryze",
+              "top": "Jayce",
+              "jungle": "Qiyana",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Team Vitality",
+            "side": "unknown",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Syndra",
+              "top": "Vayne",
+              "jungle": "Xin Zhao",
+              "support": "Milio"
+            }
+          },
+          "peel_count": 2,
+          "peel_supports": [
+            "Lulu",
+            "Milio"
+          ]
+        },
+        "bet_placed_at": "2026-04-29T14:48:00-03:00",
+        "match_context": {
+          "enriched_at": "2026-05-24T09:20:01.004Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bet_id_bookmaker": "4891045505"
+      }
+    },
+    {
+      "id": "83acb2e9-9d4c-4137-a0dd-a043e12a9765",
+      "team_a": "Movistar KOI",
+      "team_b": "Team Vitality",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523717",
+          "team_a": {
+            "name": "Movistar KOI",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Azir",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Team Vitality",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Orianna",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 24,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Orianna",
+            "top": "Renekton",
+            "jungle": "Pantheon",
+            "support": "Nami"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Azir",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "kills_blue": 6,
+          "enriched_at": "2026-05-24T09:21:52.775Z",
+          "red_team_id": "99322214695067838",
+          "total_kills": 30,
+          "winner_side": "red",
+          "blue_team_id": "103461966965149786",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523717",
+          "lolesports_match_id": "115548668059523716",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    }
+  ]
+}

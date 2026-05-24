@@ -1,0 +1,1523 @@
+{
+  "old": "Gen.G Esports",
+  "new": "Gen.G",
+  "rows": [
+    {
+      "id": "effc90de-c7c9-4e12-bd02-2f97a8e1d70d",
+      "team_a": "Gen.G Esports",
+      "team_b": "BNK FEARX",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548128962840673",
+          "team_a": {
+            "name": "Gen.G Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Azir",
+              "top": "Rumble",
+              "jungle": "Skarner",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "BNK FEARX",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Mel",
+              "top": "KSante",
+              "jungle": "XinZhao",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Mel",
+            "top": "KSante",
+            "jungle": "XinZhao",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Azir",
+            "top": "Rumble",
+            "jungle": "Skarner",
+            "support": "Bard"
+          },
+          "kills_blue": 18,
+          "enriched_at": "2026-05-24T09:18:17.425Z",
+          "red_team_id": "100725845022060229",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "100205573495116443",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962840673",
+          "lolesports_match_id": "115548128962840671",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "20001f39-6489-402e-9eb0-797534cb6aeb",
+      "team_a": "Gen.G Esports",
+      "team_b": "DN SOOPers",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548128962906233",
+          "team_a": {
+            "name": "Gen.G Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Akali",
+              "top": "Naafiri",
+              "jungle": "Maokai",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "DN SOOPers",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Varus",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Varus",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Akali",
+            "top": "Naafiri",
+            "jungle": "Maokai",
+            "support": "Lulu"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:19:29.197Z",
+          "red_team_id": "99566404581868574",
+          "total_kills": 22,
+          "winner_side": "blue",
+          "blue_team_id": "100205573495116443",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962906233",
+          "lolesports_match_id": "115548128962906231",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "100f82fc-277d-4b91-bb36-91d9a5bd5095",
+      "team_a": "Gen.G Esports",
+      "team_b": "T1",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971896",
+          "team_a": {
+            "name": "Gen.G Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Rumble",
+              "top": "Renekton",
+              "jungle": "Skarner",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "T1",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "TwistedFate",
+              "top": "Yorick",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 9,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "TwistedFate",
+            "top": "Yorick",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Rumble",
+            "top": "Renekton",
+            "jungle": "Skarner",
+            "support": "Seraphine"
+          },
+          "kills_blue": 24,
+          "enriched_at": "2026-05-24T09:20:21.304Z",
+          "red_team_id": "98767991853197861",
+          "total_kills": 33,
+          "winner_side": "blue",
+          "blue_team_id": "100205573495116443",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971896",
+          "lolesports_match_id": "115548128962971895",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "ac6fd9d3-e6f2-41fc-bddd-65e94ae04ae4",
+      "team_a": "Gen.G Esports",
+      "team_b": "Dplus KIA",
+      "raw_extraction": {
+        "odd": 1.77,
+        "pick": "Under 27.5",
+        "stake": 600,
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 3,
+        "tournament": "LCK Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115548128963037526",
+          "team_a": {
+            "name": "Gen.G Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Sylas",
+              "top": "Nidalee",
+              "jungle": "Skarner",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "Dplus KIA",
+            "side": "blue",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Orianna",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Rakan"
+            }
+          }
+        },
+        "series_score": "1-1",
+        "bet_placed_at": "2026-05-02T06:45:00-03:00",
+        "match_context": {
+          "kills_red": 14,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Sylas",
+            "top": "Nidalee",
+            "jungle": "Skarner",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Sivir",
+            "mid": "Orianna",
+            "top": "Renekton",
+            "jungle": "Pantheon",
+            "support": "Rakan"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:20:30.952Z",
+          "red_team_id": "100205573495116443",
+          "total_kills": 19,
+          "winner_side": "red",
+          "blue_team_id": "100725845018863243",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128963037526",
+          "lolesports_match_id": "115548128963037523",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 1062,
+        "bet_id_bookmaker": "4900889590",
+        "lolesports_game_id": "115548128963037526",
+        "lolesports_match_id": "115548128963037523"
+      }
+    },
+    {
+      "id": "117e49e7-0c59-4577-aa70-0127e61c647a",
+      "team_a": "Gen.G Esports",
+      "team_b": "HANJIN BRION",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548128962906253",
+          "team_a": {
+            "name": "Gen.G Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Anivia",
+              "top": "Gnar",
+              "jungle": "Nocturne",
+              "support": "Alistar"
+            }
+          },
+          "team_b": {
+            "name": "HANJIN BRION",
+            "side": "red",
+            "picks": {
+              "adc": "Xayah",
+              "mid": "Ryze",
+              "top": "Ambessa",
+              "jungle": "Pantheon",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 10,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Xayah",
+            "mid": "Ryze",
+            "top": "Ambessa",
+            "jungle": "Pantheon",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Anivia",
+            "top": "Gnar",
+            "jungle": "Nocturne",
+            "support": "Alistar"
+          },
+          "kills_blue": 21,
+          "enriched_at": "2026-05-24T09:20:36.284Z",
+          "red_team_id": "105505619546859895",
+          "total_kills": 31,
+          "winner_side": "blue",
+          "blue_team_id": "100205573495116443",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962906253",
+          "lolesports_match_id": "115548128962906251",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "12f4056e-c723-4735-b3ad-50d640f63433",
+      "team_a": "Gen.G Esports",
+      "team_b": "T1",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548128962840644",
+          "team_a": {
+            "name": "Gen.G Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Anivia",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "T1",
+            "side": "red",
+            "picks": {
+              "adc": "Kalista",
+              "mid": "Ryze",
+              "top": "Jayce",
+              "jungle": "JarvanIV",
+              "support": "Renata"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Kalista",
+            "mid": "Ryze",
+            "top": "Jayce",
+            "jungle": "JarvanIV",
+            "support": "Renata"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Anivia",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Bard"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-05-24T09:18:35.485Z",
+          "red_team_id": "98767991853197861",
+          "total_kills": 22,
+          "winner_side": "blue",
+          "blue_team_id": "100205573495116443",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962840644",
+          "lolesports_match_id": "115548128962840643",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "a449724b-864a-47af-b115-dda7dc92cfc1",
+      "team_a": "Gen.G Esports",
+      "team_b": "KIWOOM DRX",
+      "raw_extraction": {
+        "odd": 1.78,
+        "pick": "Under 28.5",
+        "sides": {
+          "red": "Gen.G",
+          "blue": "KIWOOM DRX"
+        },
+        "stake": 748.48,
+        "strategy": "ladder_under",
+        "bookmaker": "Betano",
+        "is_map_bet": true,
+        "map_number": 2,
+        "tournament": "LCK Spring Week 5",
+        "compositions": {
+          "source": "lolesports livestats game 115548128962906285",
+          "team_a": {
+            "name": "Gen.G Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Akali",
+              "top": "Jayce",
+              "jungle": "Vi",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "KIWOOM DRX",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ryze",
+              "top": "Rumble",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          }
+        },
+        "ladder_group": "20075656592",
+        "bet_placed_at": "2026-04-30T05:54:00-03:00",
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Akali",
+            "top": "Jayce",
+            "jungle": "Vi",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "kills_blue": 27,
+          "enriched_at": "2026-05-24T09:20:14.545Z",
+          "red_team_id": "100205573495116443",
+          "total_kills": 43,
+          "winner_side": "blue",
+          "blue_team_id": "99566404585387054",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962906285",
+          "lolesports_match_id": "115548128962906283",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 1332.29,
+        "bet_id_bookmaker": "20075656592",
+        "lolesports_game_id": "115548128962906285",
+        "lolesports_match_id": "115548128962906283"
+      }
+    },
+    {
+      "id": "3e31c896-d175-4a83-b26f-d6d8737ded84",
+      "team_a": "Gen.G Esports",
+      "team_b": "KIWOOM DRX",
+      "raw_extraction": {
+        "odd": 1.65,
+        "pick": "Under 29.5",
+        "sides": {
+          "red": "Gen.G",
+          "blue": "KIWOOM DRX"
+        },
+        "stake": 500,
+        "strategy": "ladder_under",
+        "bookmaker": "Betano",
+        "is_map_bet": true,
+        "map_number": 2,
+        "tournament": "LCK Spring Week 5",
+        "compositions": {
+          "source": "lolesports livestats game 115548128962906285",
+          "team_a": {
+            "name": "Gen.G Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Akali",
+              "top": "Jayce",
+              "jungle": "Vi",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "KIWOOM DRX",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ryze",
+              "top": "Rumble",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          }
+        },
+        "ladder_group": "20075656592",
+        "bet_placed_at": "2026-04-30T05:54:00-03:00",
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Akali",
+            "top": "Jayce",
+            "jungle": "Vi",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "kills_blue": 27,
+          "enriched_at": "2026-05-24T09:22:29.431Z",
+          "red_team_id": "100205573495116443",
+          "total_kills": 43,
+          "winner_side": "blue",
+          "blue_team_id": "99566404585387054",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962906285",
+          "lolesports_match_id": "115548128962906283",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 825,
+        "bet_id_bookmaker": "20075656592",
+        "lolesports_game_id": "115548128962906285",
+        "lolesports_match_id": "115548128962906283"
+      }
+    },
+    {
+      "id": "25a24aa2-193c-4d02-97a5-8ab91d2f63ff",
+      "team_a": "Gen.G Esports",
+      "team_b": "Dplus KIA",
+      "raw_extraction": {
+        "odd": 1.81,
+        "pick": "Under 27.5",
+        "stake": 300,
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 1,
+        "tournament": "LCK Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115548128963037524",
+          "team_a": {
+            "name": "Gen.G Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ryze",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Dplus KIA",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Jayce",
+              "jungle": "LeeSin",
+              "support": "Nami"
+            }
+          }
+        },
+        "bet_placed_at": "2026-05-02T05:05:00-03:00",
+        "match_context": {
+          "kills_red": 11,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Jayce",
+            "jungle": "LeeSin",
+            "support": "Nami"
+          },
+          "kills_blue": 4,
+          "enriched_at": "2026-05-24T09:22:35.412Z",
+          "red_team_id": "100205573495116443",
+          "total_kills": 15,
+          "winner_side": "red",
+          "blue_team_id": "100725845018863243",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128963037524",
+          "lolesports_match_id": "115548128963037523",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 543,
+        "bet_id_bookmaker": "4900728234",
+        "lolesports_game_id": "115548128963037524",
+        "lolesports_match_id": "115548128963037523"
+      }
+    },
+    {
+      "id": "db63435a-200e-4efd-a88e-add2244e0049",
+      "team_a": "kt Rolster",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548128962906276",
+          "team_a": {
+            "name": "kt Rolster",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Zoe",
+              "top": "Jayce",
+              "jungle": "XinZhao",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "Gen.G Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Aurora",
+              "top": "KSante",
+              "jungle": "Nocturne",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 9,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Aurora",
+            "top": "KSante",
+            "jungle": "Nocturne",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Zoe",
+            "top": "Jayce",
+            "jungle": "XinZhao",
+            "support": "Karma"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-05-24T09:21:26.826Z",
+          "red_team_id": "100205573495116443",
+          "total_kills": 23,
+          "winner_side": "blue",
+          "blue_team_id": "99566404579461230",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962906276",
+          "lolesports_match_id": "115548128962906275",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "8b89f6a1-c1f7-4c48-989c-d21389cafc8c",
+      "team_a": "Hanwha",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548128962840613",
+          "team_a": {
+            "name": "Hanwha Life Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Yone",
+              "top": "Rumble",
+              "jungle": "Vi",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Gen.G Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Akali",
+              "top": "Ambessa",
+              "jungle": "Pantheon",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 13,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Akali",
+            "top": "Ambessa",
+            "jungle": "Pantheon",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Yone",
+            "top": "Rumble",
+            "jungle": "Vi",
+            "support": "Lulu"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:21.871Z",
+          "red_team_id": "100205573495116443",
+          "total_kills": 36,
+          "winner_side": "blue",
+          "blue_team_id": "100205573496804586",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962840613",
+          "lolesports_match_id": "115548128962840611",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "0c0d6538-2645-4f57-9201-ffee8b0d60c0",
+      "team_a": "kt Rolster",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548128963037528",
+          "team_a": {
+            "name": "kt Rolster",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Anivia",
+              "top": "Ambessa",
+              "jungle": "Pantheon",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Gen.G Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Ryze",
+              "top": "Sion",
+              "jungle": "Naafiri",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 17,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Ryze",
+            "top": "Sion",
+            "jungle": "Naafiri",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Anivia",
+            "top": "Ambessa",
+            "jungle": "Pantheon",
+            "support": "Nami"
+          },
+          "kills_blue": 0,
+          "enriched_at": "2026-05-24T09:19:56.496Z",
+          "red_team_id": "100205573495116443",
+          "total_kills": 17,
+          "winner_side": "red",
+          "blue_team_id": "99566404579461230",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128963037528",
+          "lolesports_match_id": "115548128963037527",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#4976228392",
+          "raw_pick_text": "Menos de 29.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "4281fedc-2efb-4948-9fe6-ecc996c99c4f",
+      "team_a": "DN SOOPers",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "ladder_info": {
+          "map": 1,
+          "direction": "Under",
+          "ladder_group": "DNS_GEN_M1_2026-05-24",
+          "ladder_group_id": "9a182860-09c9-434e-89d3-9ec399cb4fad"
+        },
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971948",
+          "team_a": {
+            "name": "DN SOOPers",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ryze",
+              "top": "Rumble",
+              "jungle": "LeeSin",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Gen.G Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Anivia",
+              "top": "Ambessa",
+              "jungle": "Skarner",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 9,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "LeeSin",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Anivia",
+            "top": "Ambessa",
+            "jungle": "Skarner",
+            "support": "Bard"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:20:18.403Z",
+          "red_team_id": "99566404581868574",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "100205573495116443",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971948",
+          "lolesports_match_id": "115548128962971947",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": null,
+          "payout": 271.41,
+          "bet_tab": "Open Single",
+          "raw_pick_text": "Under 26.5 Total Kills Over/Under",
+          "raw_stake_text": "157.80 BRL",
+          "cashout_offered": 161.54
+        }
+      }
+    },
+    {
+      "id": "b3ecbb89-5852-443e-b361-6720dc05f984",
+      "team_a": "DN SOOPers",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "ladder_info": {
+          "map": 1,
+          "direction": "Under",
+          "ladder_group": "DNS_GEN_M1_2026-05-24",
+          "ladder_group_id": "9a182860-09c9-434e-89d3-9ec399cb4fad"
+        },
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971948",
+          "team_a": {
+            "name": "DN SOOPers",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ryze",
+              "top": "Rumble",
+              "jungle": "LeeSin",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Gen.G Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Anivia",
+              "top": "Ambessa",
+              "jungle": "Skarner",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 9,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "LeeSin",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Anivia",
+            "top": "Ambessa",
+            "jungle": "Skarner",
+            "support": "Bard"
+          },
+          "kills_blue": 17,
+          "enriched_at": "2026-05-24T09:20:19.955Z",
+          "red_team_id": "99566404581868574",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "100205573495116443",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971948",
+          "lolesports_match_id": "115548128962971947",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "49832",
+          "bet_context": "AO VIVO (in-play)",
+          "raw_pick_text": "DN SOOPers vs. Gen.G, Menos de 26.5, Primeiro Mapa - Total Kills",
+          "raw_stake_text": "R$ 1.000,00",
+          "cashout_offered": 161.54,
+          "ganho_total_esperado": 1700
+        }
+      }
+    },
+    {
+      "id": "6062db7a-75a9-4e99-917f-77d1accea5b4",
+      "team_a": "KIWOOM DRX",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548128963037536",
+          "team_a": {
+            "name": "KIWOOM DRX",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Ryze",
+              "top": "Gnar",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Gen.G Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Anivia",
+              "top": "Sion",
+              "jungle": "Pantheon",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Ryze",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Jhin",
+            "mid": "Anivia",
+            "top": "Sion",
+            "jungle": "Pantheon",
+            "support": "Karma"
+          },
+          "kills_blue": 29,
+          "enriched_at": "2026-05-24T09:19:00.931Z",
+          "red_team_id": "99566404585387054",
+          "total_kills": 35,
+          "winner_side": "blue",
+          "blue_team_id": "100205573495116443",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128963037536",
+          "lolesports_match_id": "115548128963037535",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4925342741",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 600,00"
+        }
+      }
+    },
+    {
+      "id": "f0f6898b-4e75-437d-a7e6-c64cec5d7cf5",
+      "team_a": "DN SOOPers",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "match_context": {
+          "teams": [
+            {
+              "code": "GEN",
+              "name": "Gen.G Esports"
+            },
+            {
+              "code": "DNS",
+              "name": "DN SOOPers"
+            }
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 6,
+          "league_id": "98767991310872058",
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Vayne",
+            "jungle": "Maokai",
+            "support": "Milio"
+          },
+          "kills_blue": 14,
+          "red_barons": 0,
+          "red_towers": 1,
+          "settled_at": "2026-05-24T09:39:18.555Z",
+          "start_time": "2026-05-24T08:00:00Z",
+          "blue_barons": 1,
+          "blue_towers": 9,
+          "red_dragons": 2,
+          "red_team_id": "99566404581868574",
+          "total_kills": 20,
+          "winner_side": "blue",
+          "blue_dragons": 2,
+          "blue_team_id": "100205573495116443",
+          "league_short": "LCK",
+          "trigger_type": "2peel",
+          "kills_at_15min": null,
+          "red_total_gold": 47653,
+          "blue_total_gold": 59254,
+          "selected_reason": "live",
+          "first_blood_team": "blue",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115548128962971949",
+          "lolesports_match_id": "115548128962971947",
+          "series_score_at_bet": {
+            "current_map": 2,
+            "maps_completed_before": 1
+          }
+        },
+        "ladder_group_id": "74a813c1-f045-48ba-9b32-14950eb0a4b1",
+        "ladder_position": "28.5",
+        "bookmaker_native": {
+          "bet_id": "#3055625398",
+          "raw_pick_text": "DN SOOPers (Kills) - Gen.G (Kills), Under 28.5",
+          "raw_stake_text": "BRL 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "d97f5d33-5f5c-44d3-acd4-c90dc07863c2",
+      "team_a": "DN SOOPers",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "match_context": {
+          "teams": [
+            {
+              "code": "GEN",
+              "name": "Gen.G Esports"
+            },
+            {
+              "code": "DNS",
+              "name": "DN SOOPers"
+            }
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 6,
+          "league_id": "98767991310872058",
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Vayne",
+            "jungle": "Maokai",
+            "support": "Milio"
+          },
+          "kills_blue": 14,
+          "red_barons": 0,
+          "red_towers": 1,
+          "settled_at": "2026-05-24T09:39:18.627Z",
+          "start_time": "2026-05-24T08:00:00Z",
+          "blue_barons": 1,
+          "blue_towers": 9,
+          "red_dragons": 2,
+          "red_team_id": "99566404581868574",
+          "total_kills": 20,
+          "winner_side": "blue",
+          "blue_dragons": 2,
+          "blue_team_id": "100205573495116443",
+          "league_short": "LCK",
+          "trigger_type": "2peel",
+          "kills_at_15min": null,
+          "red_total_gold": 47653,
+          "blue_total_gold": 59254,
+          "selected_reason": "live",
+          "first_blood_team": "blue",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115548128962971949",
+          "lolesports_match_id": "115548128962971947",
+          "series_score_at_bet": {
+            "current_map": 2,
+            "maps_completed_before": 1
+          }
+        },
+        "ladder_group_id": "74a813c1-f045-48ba-9b32-14950eb0a4b1",
+        "ladder_position": "28.5",
+        "bookmaker_native": {
+          "bet_id": "#3055626219",
+          "raw_pick_text": "DN SOOPers (Kills) - Gen.G (Kills), Under 28.5",
+          "raw_stake_text": "BRL 3.000,00"
+        }
+      }
+    },
+    {
+      "id": "510b4001-6576-4b7d-ab94-6561ca2eceaf",
+      "team_a": "T1",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971897",
+          "team_a": {
+            "name": "T1",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Anivia",
+              "top": "Ornn",
+              "jungle": "LeeSin",
+              "support": "Lux"
+            }
+          },
+          "team_b": {
+            "name": "Gen.G Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Annie",
+              "top": "Sion",
+              "jungle": "MonkeyKing",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 26,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Annie",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Karma"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Anivia",
+            "top": "Ornn",
+            "jungle": "LeeSin",
+            "support": "Lux"
+          },
+          "kills_blue": 22,
+          "enriched_at": "2026-05-24T09:20:45.900Z",
+          "red_team_id": "100205573495116443",
+          "total_kills": 48,
+          "winner_side": "blue",
+          "blue_team_id": "98767991853197861",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971897",
+          "lolesports_match_id": "115548128962971895",
+          "match_ambiguous_at_link": false
+        },
+        "missed_opportunity": true
+      }
+    },
+    {
+      "id": "cbb8ffd6-a036-4205-85b6-1cdcab608c63",
+      "team_a": "BNK FEARX",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548128962971924",
+          "team_a": {
+            "name": "BNK FEARX",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Akali",
+              "top": "Renekton",
+              "jungle": "Vi",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Gen.G Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Cassiopeia",
+              "top": "Sion",
+              "jungle": "JarvanIV",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 17,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Cassiopeia",
+            "top": "Sion",
+            "jungle": "JarvanIV",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Akali",
+            "top": "Renekton",
+            "jungle": "Vi",
+            "support": "Seraphine"
+          },
+          "kills_blue": 6,
+          "enriched_at": "2026-05-24T09:19:27.647Z",
+          "red_team_id": "100205573495116443",
+          "total_kills": 23,
+          "winner_side": "red",
+          "blue_team_id": "100725845022060229",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962971924",
+          "lolesports_match_id": "115548128962971923",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#3047876935",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "BRL 1,000.00"
+        }
+      }
+    },
+    {
+      "id": "44a90635-e213-4477-99de-dd4786e20e1d",
+      "team_a": "NONGSHIM RED FORCE",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "odd": 1.83,
+        "pick": "Under 27.5",
+        "stake": 300,
+        "market": "Total Kills",
+        "team_a": "Nongshim RedForce",
+        "team_b": "Gen.G",
+        "bookmaker": "EstrelaBet",
+        "confidence": "high",
+        "is_map_bet": true,
+        "map_number": 2,
+        "compositions": {
+          "source": "lolesports livestats game 115548128962906281",
+          "team_a": {
+            "name": "NONGSHIM RED FORCE",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Aurora",
+              "top": "Gnar",
+              "jungle": "XinZhao",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Gen.G Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Mel",
+              "top": "TwistedFate",
+              "jungle": "Trundle",
+              "support": "Karma"
+            }
+          }
+        },
+        "bet_placed_at": "2026-04-26T08:08:00-03:00",
+        "match_context": {
+          "kills_red": 17,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Mel",
+            "top": "TwistedFate",
+            "jungle": "Trundle",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Aurora",
+            "top": "Gnar",
+            "jungle": "XinZhao",
+            "support": "Nami"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:19:30.366Z",
+          "red_team_id": "100205573495116443",
+          "total_kills": 22,
+          "winner_side": "red",
+          "blue_team_id": "102747101565183056",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128962906281",
+          "lolesports_match_id": "115548128962906279",
+          "match_ambiguous_at_link": false
+        },
+        "cashout_offered": 256.76,
+        "bet_id_bookmaker": "4878063455",
+        "score_at_bet_time": "Nongshim 0:1 Gen.G"
+      }
+    },
+    {
+      "id": "ac3d838b-b54d-4626-8728-d0792043732d",
+      "team_a": "KIWOOM DRX",
+      "team_b": "Gen.G Esports",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115548128963037537",
+          "team_a": {
+            "name": "KIWOOM DRX",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Viktor",
+              "top": "Renekton",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Gen.G Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "KogMaw",
+              "mid": "Annie",
+              "top": "Shen",
+              "jungle": "Naafiri",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Viktor",
+            "top": "Renekton",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "KogMaw",
+            "mid": "Annie",
+            "top": "Shen",
+            "jungle": "Naafiri",
+            "support": "Lulu"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:22:39.559Z",
+          "red_team_id": "99566404585387054",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "100205573495116443",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LCK",
+          "lolesports_game_id": "115548128963037537",
+          "lolesports_match_id": "115548128963037535",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4925414028",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 1.200,00"
+        }
+      }
+    }
+  ]
+}

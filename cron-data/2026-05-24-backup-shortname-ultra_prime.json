@@ -1,0 +1,807 @@
+{
+  "old": "Ultra Prime",
+  "new": "UP",
+  "rows": [
+    {
+      "id": "715424ed-0333-4048-8070-0dfadd117cc4",
+      "team_a": "Ultra Prime",
+      "team_b": "LGD GAMING",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685761099",
+          "team_a": {
+            "name": "Ultra Prime",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Aurora",
+              "top": "Yorick",
+              "jungle": "XinZhao",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "LGD GAMING",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Syndra",
+              "top": "Gnar",
+              "jungle": "JarvanIV",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 22.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Syndra",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Aurora",
+            "top": "Yorick",
+            "jungle": "XinZhao",
+            "support": "Seraphine"
+          },
+          "kills_blue": 10,
+          "enriched_at": "2026-05-24T09:19:39.796Z",
+          "red_team_id": "99566404846951820",
+          "total_kills": 17,
+          "winner_side": "blue",
+          "blue_team_id": "103461966986776720",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685761099",
+          "lolesports_match_id": "115615924499588647",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "14dd085b-1361-4a68-81c6-a723e4a167d8",
+      "team_a": "Ultra Prime",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615926685761105",
+          "team_a": {
+            "name": "Ultra Prime",
+            "side": "blue",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Cassiopeia",
+              "top": "Vayne",
+              "jungle": "LeeSin",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Suzhou LNG Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Aurora",
+              "top": "Udyr",
+              "jungle": "Pantheon",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 27,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Aurora",
+            "top": "Udyr",
+            "jungle": "Pantheon",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Jhin",
+            "mid": "Cassiopeia",
+            "top": "Vayne",
+            "jungle": "LeeSin",
+            "support": "Bard"
+          },
+          "kills_blue": 23,
+          "enriched_at": "2026-05-24T09:21:50.029Z",
+          "red_team_id": "99566404850008779",
+          "total_kills": 50,
+          "winner_side": "red",
+          "blue_team_id": "103461966986776720",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685761105",
+          "lolesports_match_id": "115615924499588653",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "b5c93287-012b-42cd-b6db-616b4c16434b",
+      "team_a": "Ultra Prime",
+      "team_b": "EDG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615926685761091",
+          "team_a": {
+            "name": "Ultra Prime",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Ryze",
+              "top": "Yorick",
+              "jungle": "Pantheon",
+              "support": "Anivia"
+            }
+          },
+          "team_b": {
+            "name": "EDWARD GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Malzahar",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 12,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Ryze",
+            "top": "Yorick",
+            "jungle": "Pantheon",
+            "support": "Anivia"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Malzahar",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "kills_blue": 3,
+          "enriched_at": "2026-05-24T09:20:41.041Z",
+          "red_team_id": "103461966986776720",
+          "total_kills": 15,
+          "winner_side": "red",
+          "blue_team_id": "98767991882270868",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685761091",
+          "lolesports_match_id": "115615924499588639",
+          "match_ambiguous_at_link": false
+        }
+      }
+    },
+    {
+      "id": "2e8053b9-8c21-48fa-a02d-ab1b307a720a",
+      "team_a": "Ultra Prime",
+      "team_b": "LNG",
+      "raw_extraction": {
+        "compositions": {
+          "source": "manual_from_print_2026-05-08_map3",
+          "team_a": {
+            "name": "UP",
+            "side": "unknown",
+            "picks": {
+              "adc": "Zeri",
+              "mid": "Ahri",
+              "top": "KSante",
+              "jungle": "Nocturne",
+              "support": "Yuumi"
+            }
+          },
+          "team_b": {
+            "name": "LNG",
+            "side": "unknown",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Yone",
+              "top": "Gwen",
+              "jungle": "Trundle",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "note": "Mapa 3 da serie aconteceu (placar final 1-2 LNG, mapa 3 LNG 14 - 8 UP, 22 kills, 30:13 duracao). Riot livestats /window retornou 204 vazio mas o jogo foi disputado. Settled manual pelo print do Elvis 2026-05-08.",
+          "teams": [
+            {
+              "code": "UP",
+              "name": "Ultra Prime"
+            },
+            {
+              "code": "LNG",
+              "name": "Suzhou LNG Esports"
+            }
+          ],
+          "kills_up": 8,
+          "up_picks": {
+            "adc": "Zeri",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "Nocturne",
+            "support": "Yuumi"
+          },
+          "kills_lng": 14,
+          "kills_red": 8,
+          "league_id": "98767991314006698",
+          "lng_picks": {
+            "adc": "Yunara",
+            "mid": "Yone",
+            "top": "Gwen",
+            "jungle": "Trundle",
+            "support": "Lulu"
+          },
+          "red_picks": {
+            "adc": "Zeri",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "Nocturne",
+            "support": "Yuumi"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Yone",
+            "top": "Gwen",
+            "jungle": "Trundle",
+            "support": "Lulu"
+          },
+          "kills_blue": 14,
+          "start_time": "2026-05-08T09:00:00Z",
+          "total_kills": 22,
+          "league_short": "LPL",
+          "map3_game_id": "115615926685761106",
+          "trigger_type": "2peel",
+          "settle_source": "manual_from_print_2026-05-08",
+          "coverage_status": "manual_settled_riot_livestats_unavailable",
+          "lolesports_match_id": "115615924499588653",
+          "map3_state_at_placement": "inProgress"
+        },
+        "bookmaker_native": {
+          "bet_id": "4925391402",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 600,00"
+        }
+      }
+    },
+    {
+      "id": "d20532f9-0205-42e4-8733-5fcf90680d8a",
+      "team_a": "Ultra Prime",
+      "team_b": "THUNDER TALK GAMING",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588660",
+          "team_a": {
+            "name": "Ultra Prime",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Cassiopeia",
+              "top": "Udyr",
+              "jungle": "JarvanIV",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "THUNDER TALK GAMING",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Ryze",
+              "top": "Ambessa",
+              "jungle": "XinZhao",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 19,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Ryze",
+            "top": "Ambessa",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Cassiopeia",
+            "top": "Udyr",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          },
+          "kills_blue": 9,
+          "enriched_at": "2026-05-24T09:22:16.683Z",
+          "red_team_id": "101388912911039804",
+          "total_kills": 28,
+          "winner_side": "red",
+          "blue_team_id": "103461966986776720",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588660",
+          "lolesports_match_id": "115615924499588659",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "7e568fc9-07d5-4686-bd36-d600c4af153c",
+      "team_a": "Ultra Prime",
+      "team_b": "Oh My God",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615926685761109",
+          "team_a": {
+            "name": "Ultra Prime",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Akali",
+              "top": "Yorick",
+              "jungle": "Pantheon",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "Oh My God",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Leblanc",
+              "top": "Gnar",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 5,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Leblanc",
+            "top": "Gnar",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Akali",
+            "top": "Yorick",
+            "jungle": "Pantheon",
+            "support": "Bard"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:22:46.392Z",
+          "red_team_id": "99566404845279652",
+          "total_kills": 24,
+          "winner_side": "blue",
+          "blue_team_id": "103461966986776720",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615926685761109",
+          "lolesports_match_id": "115615924499588657",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "#3048605532",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "BRL 1,000.00"
+        }
+      }
+    },
+    {
+      "id": "fdb8330b-63b8-409e-93e5-44d789769a2e",
+      "team_a": "EDG",
+      "team_b": "Ultra Prime",
+      "raw_extraction": {
+        "odd": 1.97,
+        "pick": "Under 24.5",
+        "stake": 200,
+        "strategy": "ladder_under",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 1,
+        "tournament": "LPL Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588640",
+          "team_a": {
+            "name": "EDWARD GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Aurora",
+              "top": "Gnar",
+              "jungle": "Nocturne",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Ultra Prime",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ahri",
+              "top": "Ambessa",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "ladder_lines": [
+          "24.5",
+          "26.5",
+          "25.5"
+        ],
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 24.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Ahri",
+            "top": "Ambessa",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Aurora",
+            "top": "Gnar",
+            "jungle": "Nocturne",
+            "support": "Milio"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-05-24T09:18:32.069Z",
+          "red_team_id": "103461966986776720",
+          "total_kills": 22,
+          "winner_side": "blue",
+          "blue_team_id": "98767991882270868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588640",
+          "lolesports_match_id": "115615924499588639",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 394,
+        "lolesports_game_id": "115615924499588640",
+        "lolesports_match_id": "115615924499588639"
+      }
+    },
+    {
+      "id": "32fc42fb-36e1-45e3-8c33-d6af2d99536b",
+      "team_a": "LNG",
+      "team_b": "Ultra Prime",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588654",
+          "team_a": {
+            "name": "Suzhou LNG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Annie",
+              "top": "Sion",
+              "jungle": "XinZhao",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Ultra Prime",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Ryze",
+              "top": "Yorick",
+              "jungle": "JarvanIV",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 3,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Ryze",
+            "top": "Yorick",
+            "jungle": "JarvanIV",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Annie",
+            "top": "Sion",
+            "jungle": "XinZhao",
+            "support": "Milio"
+          },
+          "kills_blue": 12,
+          "enriched_at": "2026-05-24T09:20:04.858Z",
+          "red_team_id": "103461966986776720",
+          "total_kills": 15,
+          "winner_side": "blue",
+          "blue_team_id": "99566404850008779",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588654",
+          "lolesports_match_id": "115615924499588653",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "bbd4d39d-f22b-4f2d-95e5-37cf317e7545",
+      "team_a": "Oh My God",
+      "team_b": "Ultra Prime",
+      "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588658",
+          "team_a": {
+            "name": "Oh My God",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Taliyah",
+              "top": "Rumble",
+              "jungle": "Vi",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Ultra Prime",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ryze",
+              "top": "KSante",
+              "jungle": "JarvanIV",
+              "support": "Nami"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Taliyah",
+            "top": "Rumble",
+            "jungle": "Vi",
+            "support": "Lulu"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ryze",
+            "top": "KSante",
+            "jungle": "JarvanIV",
+            "support": "Nami"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-05-24T09:18:05.121Z",
+          "red_team_id": "99566404845279652",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "103461966986776720",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588658",
+          "lolesports_match_id": "115615924499588657",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": "4951392250",
+          "raw_pick_text": "Menos de 25.5",
+          "raw_stake_text": "R$ 1.000,00"
+        }
+      }
+    },
+    {
+      "id": "e1db40af-da5d-4bea-9c07-d921220ea50b",
+      "team_a": "EDG",
+      "team_b": "Ultra Prime",
+      "raw_extraction": {
+        "odd": 1.66,
+        "pick": "Under 26.5",
+        "stake": 200,
+        "strategy": "ladder_under",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 1,
+        "tournament": "LPL Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588640",
+          "team_a": {
+            "name": "EDWARD GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Aurora",
+              "top": "Gnar",
+              "jungle": "Nocturne",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Ultra Prime",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ahri",
+              "top": "Ambessa",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Ahri",
+            "top": "Ambessa",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Aurora",
+            "top": "Gnar",
+            "jungle": "Nocturne",
+            "support": "Milio"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-05-24T09:18:08.101Z",
+          "red_team_id": "103461966986776720",
+          "total_kills": 22,
+          "winner_side": "blue",
+          "blue_team_id": "98767991882270868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588640",
+          "lolesports_match_id": "115615924499588639",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 332,
+        "bet_id_bookmaker": "87",
+        "lolesports_game_id": "115615924499588640",
+        "lolesports_match_id": "115615924499588639"
+      }
+    },
+    {
+      "id": "8c0dd0e7-73c2-44d0-accf-a5b7b8b9eddf",
+      "team_a": "EDG",
+      "team_b": "Ultra Prime",
+      "raw_extraction": {
+        "odd": 1.8,
+        "pick": "Under 25.5",
+        "stake": 200,
+        "strategy": "ladder_under",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 1,
+        "tournament": "LPL Spring 2026",
+        "compositions": {
+          "source": "lolesports livestats game 115615924499588640",
+          "team_a": {
+            "name": "EDWARD GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Aurora",
+              "top": "Gnar",
+              "jungle": "Nocturne",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Ultra Prime",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ahri",
+              "top": "Ambessa",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Ahri",
+            "top": "Ambessa",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Aurora",
+            "top": "Gnar",
+            "jungle": "Nocturne",
+            "support": "Milio"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-05-24T09:22:31.889Z",
+          "red_team_id": "103461966986776720",
+          "total_kills": 22,
+          "winner_side": "blue",
+          "blue_team_id": "98767991882270868",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "115615924499588640",
+          "lolesports_match_id": "115615924499588639",
+          "match_ambiguous_at_link": false
+        },
+        "ganho_potencial": 360,
+        "bet_id_bookmaker": "86",
+        "lolesports_game_id": "115615924499588640",
+        "lolesports_match_id": "115615924499588639"
+      }
+    }
+  ]
+}

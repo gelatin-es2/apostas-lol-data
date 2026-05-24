@@ -1,0 +1,1158 @@
+{
+  "old": "Natus Vincere",
+  "new": "NAVI",
+  "rows": [
+    {
+      "id": "672fe7fc-b1fc-4b20-8e5c-85b0101572e4",
+      "team_a": "Natus Vincere",
+      "team_b": "Galions",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "Natus Vincere",
+            "side": "team_a",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Cassiopeia",
+              "top": "Sion",
+              "jungle": "Wukong",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Galions",
+            "side": "team_b",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Viktor",
+              "top": "Vayne",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:18:32.246Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "4951987977",
+          "raw_pick_text": "Menos de 28.5",
+          "raw_stake_text": "R$ 694,44"
+        }
+      }
+    },
+    {
+      "id": "199d9081-815b-4e78-86d3-52b71adb0a47",
+      "team_a": "Natus Vincere",
+      "team_b": "Galions",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "Natus Vincere",
+            "side": "team_a",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Cassiopeia",
+              "top": "Sion",
+              "jungle": "Wukong",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Galions",
+            "side": "team_b",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Viktor",
+              "top": "Vayne",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:22:46.586Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "4951989430",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 300,00"
+        }
+      }
+    },
+    {
+      "id": "2ac49afb-63f4-448c-a71f-75860ad8a23d",
+      "team_a": "Natus Vincere",
+      "team_b": "GIANTX",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523682",
+          "team_a": {
+            "name": "Natus Vincere",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Aurora",
+              "top": "Renekton",
+              "jungle": "Zaahen",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "GIANTX",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Ahri",
+              "top": "Varus",
+              "jungle": "Nocturne",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 4,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Ahri",
+            "top": "Varus",
+            "jungle": "Nocturne",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Aurora",
+            "top": "Renekton",
+            "jungle": "Zaahen",
+            "support": "Lulu"
+          },
+          "kills_blue": 22,
+          "enriched_at": "2026-05-24T09:21:25.838Z",
+          "red_team_id": "101383793572656373",
+          "total_kills": 26,
+          "winner_side": "blue",
+          "blue_team_id": "114868016111590239",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523682",
+          "lolesports_match_id": "115548668059523680",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "5accc59e-64cd-4d36-8c61-5ea745d54aa7",
+      "team_a": "Natus Vincere",
+      "team_b": "Galions",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "Natus Vincere",
+            "side": "team_a",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Aurora",
+              "top": "Rumble",
+              "jungle": "Ambessa",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Galions",
+            "side": "team_b",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Annie",
+              "top": "Ornn",
+              "jungle": "Naafiri",
+              "support": "Bard"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:19:56.668Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "#3048868015",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "BRL 1,000.00"
+        }
+      }
+    },
+    {
+      "id": "9a0ce6b0-bc2c-439c-bc8e-dfc7d21f5583",
+      "team_a": "Natus Vincere",
+      "team_b": "Team Heretics",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523638",
+          "team_a": {
+            "name": "Natus Vincere",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Ahri",
+              "top": "Sion",
+              "jungle": "Aatrox",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Team Heretics",
+            "side": "red",
+            "picks": {
+              "adc": "Xayah",
+              "mid": "Annie",
+              "top": "Rumble",
+              "jungle": "MonkeyKing",
+              "support": "Rakan"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 6,
+          "pick_line": 22.5,
+          "red_picks": {
+            "adc": "Xayah",
+            "mid": "Annie",
+            "top": "Rumble",
+            "jungle": "MonkeyKing",
+            "support": "Rakan"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Ahri",
+            "top": "Sion",
+            "jungle": "Aatrox",
+            "support": "Lulu"
+          },
+          "kills_blue": 22,
+          "enriched_at": "2026-05-24T09:21:49.374Z",
+          "red_team_id": "109637393694097670",
+          "total_kills": 28,
+          "winner_side": "blue",
+          "blue_team_id": "114868016111590239",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523638",
+          "lolesports_match_id": "115548668059523636",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "9b1f1c62-a801-40f3-99a0-32adc984a9a2",
+      "team_a": "GIANTX",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "odd": 1.8,
+        "pick": "Under 29.5",
+        "stake": 600,
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 2,
+        "tournament": "EWC EMEA",
+        "compositions": {
+          "source": "user-provided (EWC EMEA)",
+          "team_a": {
+            "name": "GIANTX",
+            "side": "unknown",
+            "picks": {
+              "adc": "Corki",
+              "mid": "LeBlanc",
+              "top": "Ambessa",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Natus Vincere",
+            "side": "unknown",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Ahri",
+              "top": "Rumble",
+              "jungle": "Wukong",
+              "support": "Lulu"
+            }
+          },
+          "peel_count": 2,
+          "observation": "2-peel puro (vs M1 Bard+Seraphine que furou).",
+          "peel_supports": [
+            "Nami",
+            "Lulu"
+          ]
+        },
+        "bet_placed_at": "2026-04-29T13:03:00-03:00",
+        "match_context": {
+          "enriched_at": "2026-05-24T09:18:43.621Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bet_id_bookmaker": "4890568823"
+      }
+    },
+    {
+      "id": "7dbc923c-f2b0-47d5-b4da-0e687529eede",
+      "team_a": "Shifters",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "odd": 1.6,
+        "pick": "Under 27.5",
+        "stake": 30,
+        "market": "Total Kills",
+        "team_a": "Shifters",
+        "team_b": "Natus Vincere",
+        "currency": "BRL",
+        "strategy": "ladder",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 2,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523678",
+          "team_a": {
+            "name": "Shifters",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Anivia",
+              "top": "Jayce",
+              "jungle": "Shen",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Natus Vincere",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ahri",
+              "top": "KSante",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          }
+        },
+        "bet_placed_at": "2026-04-26T13:24:00-03:00",
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Anivia",
+            "top": "Jayce",
+            "jungle": "Shen",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:22:20.517Z",
+          "red_team_id": "107563714667537640",
+          "total_kills": 26,
+          "winner_side": "red",
+          "blue_team_id": "114868016111590239",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523678",
+          "lolesports_match_id": "115548668059523676",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "ladder-shft-navi-m2-20260426",
+        "ladder_position": "27.5",
+        "bet_id_bookmaker": "167",
+        "lolesports_game_id": "115548668059523678"
+      }
+    },
+    {
+      "id": "519c9a04-567b-4202-a3ff-88da7699d215",
+      "team_a": "GIANTX",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "odd": 1.78,
+        "pick": "Under 28.5",
+        "stake": 120,
+        "strategy": "ladder",
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 1,
+        "tournament": "EWC EMEA",
+        "compositions": {
+          "source": "user-provided (EWC EMEA, lolesports nao cobre)",
+          "team_a": {
+            "name": "Natus Vincere",
+            "side": "unknown",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Cassiopeia",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "GIANTX",
+            "side": "unknown",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ryze",
+              "top": "Sion",
+              "jungle": "Xin Zhao",
+              "support": "Seraphine"
+            }
+          },
+          "peel_count": 2,
+          "peel_supports": [
+            "Bard",
+            "Seraphine"
+          ]
+        },
+        "bet_placed_at": "2026-04-29T12:06:00-03:00",
+        "match_context": {
+          "enriched_at": "2026-05-24T09:19:27.829Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "cashout_offered": 102.31,
+        "ladder_group_id": "ladder-gx-navi-m1-20260429",
+        "ladder_position": "28.5",
+        "bet_id_bookmaker": "4890367318"
+      }
+    },
+    {
+      "id": "3ddc13b1-d085-4a13-b551-6c709b856a15",
+      "team_a": "Shifters",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "odd": 1.85,
+        "pick": "Under 28.5",
+        "stake": 170,
+        "market": "Total Kills",
+        "team_a": "Shifters",
+        "team_b": "Natus Vincere",
+        "strategy": "ladder",
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 2,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523678",
+          "team_a": {
+            "name": "Shifters",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Anivia",
+              "top": "Jayce",
+              "jungle": "Shen",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Natus Vincere",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ahri",
+              "top": "KSante",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          }
+        },
+        "bet_placed_at": "2026-04-26T13:30:00-03:00",
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Anivia",
+            "top": "Jayce",
+            "jungle": "Shen",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:22:22.900Z",
+          "red_team_id": "107563714667537640",
+          "total_kills": 26,
+          "winner_side": "red",
+          "blue_team_id": "114868016111590239",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523678",
+          "lolesports_match_id": "115548668059523676",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "ladder-shft-navi-m2-20260426",
+        "ladder_position": "28.5",
+        "bet_id_bookmaker": "4879622479",
+        "lolesports_game_id": "115548668059523678",
+        "ladder_reinforcement": true
+      }
+    },
+    {
+      "id": "fd8b9df4-c4bd-4b95-a29f-e4eebe0c66c2",
+      "team_a": "GIANTX",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "odd": 1.81,
+        "pick": "Under 28.5",
+        "stake": 482,
+        "strategy": "ladder",
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 1,
+        "tournament": "EWC EMEA",
+        "ladder_role": "heavy_dupla_28.5",
+        "compositions": {
+          "source": "user-provided (EWC EMEA, lolesports nao cobre)",
+          "team_a": {
+            "name": "Natus Vincere",
+            "side": "unknown",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Cassiopeia",
+              "top": "Renekton",
+              "jungle": "Pantheon",
+              "support": "Bard"
+            }
+          },
+          "team_b": {
+            "name": "GIANTX",
+            "side": "unknown",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Ryze",
+              "top": "Sion",
+              "jungle": "Xin Zhao",
+              "support": "Seraphine"
+            }
+          },
+          "peel_count": 2,
+          "peel_supports": [
+            "Bard",
+            "Seraphine"
+          ]
+        },
+        "bet_placed_at": "2026-04-29T12:04:00-03:00",
+        "match_context": {
+          "enriched_at": "2026-05-24T09:20:00.660Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "cashout_offered": 417.86,
+        "ladder_group_id": "ladder-gx-navi-m1-20260429",
+        "ladder_position": "28.5",
+        "bet_id_bookmaker": "4890362915"
+      }
+    },
+    {
+      "id": "00c66d42-e8ff-4a8f-8f15-846fe55eea29",
+      "team_a": "Shifters",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "odd": 1.62,
+        "pick": "Under 29.5",
+        "stake": 200,
+        "market": "Total Kills",
+        "team_a": "Shifters",
+        "team_b": "Natus Vincere",
+        "currency": "BRL",
+        "strategy": "ladder",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 2,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523678",
+          "team_a": {
+            "name": "Shifters",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Anivia",
+              "top": "Jayce",
+              "jungle": "Shen",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Natus Vincere",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ahri",
+              "top": "KSante",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          }
+        },
+        "bet_placed_at": "2026-04-26T13:21:00-03:00",
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Anivia",
+            "top": "Jayce",
+            "jungle": "Shen",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:19:34.420Z",
+          "red_team_id": "107563714667537640",
+          "total_kills": 26,
+          "winner_side": "red",
+          "blue_team_id": "114868016111590239",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523678",
+          "lolesports_match_id": "115548668059523676",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "ladder-shft-navi-m2-20260426",
+        "ladder_position": "29.5",
+        "bet_id_bookmaker": "164",
+        "lolesports_game_id": "115548668059523678"
+      }
+    },
+    {
+      "id": "55d8caf7-7aa4-4e0d-9606-e12ef0c8be8f",
+      "team_a": "Shifters",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "odd": 1.72,
+        "pick": "Under 26.5",
+        "stake": 30,
+        "market": "Total Kills",
+        "team_a": "Shifters",
+        "team_b": "Natus Vincere",
+        "currency": "BRL",
+        "strategy": "ladder",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 2,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523678",
+          "team_a": {
+            "name": "Shifters",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Anivia",
+              "top": "Jayce",
+              "jungle": "Shen",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Natus Vincere",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ahri",
+              "top": "KSante",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          }
+        },
+        "bet_placed_at": "2026-04-26T13:24:00-03:00",
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Anivia",
+            "top": "Jayce",
+            "jungle": "Shen",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:20:05.209Z",
+          "red_team_id": "107563714667537640",
+          "total_kills": 26,
+          "winner_side": "red",
+          "blue_team_id": "114868016111590239",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523678",
+          "lolesports_match_id": "115548668059523676",
+          "match_ambiguous_at_link": false
+        },
+        "cashout_offered": 25.32,
+        "ladder_group_id": "ladder-shft-navi-m2-20260426",
+        "ladder_position": "26.5",
+        "bet_id_bookmaker": "166",
+        "lolesports_game_id": "115548668059523678"
+      }
+    },
+    {
+      "id": "e9144e03-0e8a-4a11-bd80-ff1b772b8192",
+      "team_a": "Shifters",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "odd": 1.79,
+        "pick": "Under 25.5",
+        "stake": 600,
+        "market": "Total Kills",
+        "team_a": "Shifters",
+        "team_b": "Natus Vincere",
+        "bookmaker": "EstrelaBet",
+        "is_map_bet": true,
+        "map_number": 1,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523677",
+          "team_a": {
+            "name": "Shifters",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Ryze",
+              "top": "Aurora",
+              "jungle": "Darius",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "Natus Vincere",
+            "side": "blue",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Viktor",
+              "top": "Rumble",
+              "jungle": "Xin Zhao",
+              "support": "Seraphine"
+            }
+          }
+        },
+        "bet_placed_at": "2026-04-26T12:12:00-03:00",
+        "match_context": {
+          "kills_red": 16,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Ryze",
+            "top": "Aurora",
+            "jungle": "Darius",
+            "support": "Karma"
+          },
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Viktor",
+            "top": "Rumble",
+            "jungle": "XinZhao",
+            "support": "Seraphine"
+          },
+          "kills_blue": 22,
+          "start_time": "2026-04-26T15:00:00Z",
+          "red_team_id": "107563714667537640",
+          "total_kills": 38,
+          "winner_side": "blue",
+          "blue_team_id": "114868016111590239",
+          "trigger_type": "2peel",
+          "backfill_source": "manual_fuzzy_match_2026-05-22",
+          "lolesports_game_id": "115548668059523677",
+          "lolesports_match_id": "115548668059523676"
+        },
+        "bet_id_bookmaker": "4879164206",
+        "lolesports_game_id": "115548668059523677"
+      }
+    },
+    {
+      "id": "02e1898b-6700-466e-a6d4-fb5e43691694",
+      "team_a": "G2 Esports",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "simulated": true,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523702",
+          "team_a": {
+            "name": "G2 Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Orianna",
+              "top": "KSante",
+              "jungle": "Trundle",
+              "support": "Lulu"
+            }
+          },
+          "team_b": {
+            "name": "Natus Vincere",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Viktor",
+              "top": "Ambessa",
+              "jungle": "MonkeyKing",
+              "support": "Milio"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 24.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Viktor",
+            "top": "Ambessa",
+            "jungle": "MonkeyKing",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Yunara",
+            "mid": "Orianna",
+            "top": "KSante",
+            "jungle": "Trundle",
+            "support": "Lulu"
+          },
+          "kills_blue": 25,
+          "enriched_at": "2026-05-24T09:21:54.480Z",
+          "red_team_id": "114868016111590239",
+          "total_kills": 41,
+          "winner_side": "blue",
+          "blue_team_id": "98767991926151025",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523702",
+          "lolesports_match_id": "115548668059523700",
+          "match_ambiguous_at_link": false
+        },
+        "simulation_v2": true,
+        "simulation_v3": true,
+        "simulation_v4": true,
+        "simulation_note": "v4 — linha=fair-2 mantendo odd 1.83 (worst-true scenario per CEO 2026-05-22)",
+        "missed_opportunity": true,
+        "restored_fair_2026_05_22": true
+      }
+    },
+    {
+      "id": "b6ba5e98-674e-407a-b336-754f1931938d",
+      "team_a": "G2 Esports",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "compositions": {
+          "team_a": {
+            "name": "G2 Esports",
+            "side": "team_a",
+            "picks": {
+              "adc": "Smolder",
+              "mid": "Annie",
+              "top": "Vayne",
+              "jungle": "Pantheon",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Natus Vincere",
+            "side": "team_b",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Cassiopeia",
+              "top": "Sion",
+              "jungle": "Wukong",
+              "support": "Lulu"
+            }
+          }
+        },
+        "match_context": {
+          "enriched_at": "2026-05-24T09:19:28.188Z",
+          "coverage_status": "ewc_not_in_lolesports",
+          "league_inferred": "EWC"
+        },
+        "bookmaker_native": {
+          "bet_id": "#3048105450",
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "BRL 1,000.00"
+        }
+      }
+    },
+    {
+      "id": "ca1c3f2c-97c5-4e5a-82d2-fb7fe49769ac",
+      "team_a": "Fnatic",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "odd": 1.71,
+        "pick": "Under 27.5",
+        "stake": 300,
+        "market": "Total Kills",
+        "team_a": "Fnatic",
+        "team_b": "Natus Vincere",
+        "bookmaker": "EstrelaBet",
+        "confidence": "high",
+        "is_map_bet": true,
+        "map_number": 1,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523693",
+          "team_a": {
+            "name": "Fnatic",
+            "side": "red",
+            "picks": {
+              "adc": "Ashe",
+              "mid": "Viktor",
+              "top": "KSante",
+              "jungle": "JarvanIV",
+              "support": "Seraphine"
+            }
+          },
+          "team_b": {
+            "name": "Natus Vincere",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Aurora",
+              "top": "Gwen",
+              "jungle": "XinZhao",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 14,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Ashe",
+            "mid": "Viktor",
+            "top": "KSante",
+            "jungle": "JarvanIV",
+            "support": "Seraphine"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Aurora",
+            "top": "Gwen",
+            "jungle": "XinZhao",
+            "support": "Karma"
+          },
+          "kills_blue": 7,
+          "enriched_at": "2026-05-24T09:22:17.409Z",
+          "red_team_id": "98767991866488695",
+          "total_kills": 21,
+          "winner_side": "red",
+          "blue_team_id": "114868016111590239",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523693",
+          "lolesports_match_id": "115548668059523692",
+          "match_ambiguous_at_link": false
+        }
+      }
+    },
+    {
+      "id": "45f41dfe-a0da-4ad3-bdb3-5e19a6a42b29",
+      "team_a": "Fnatic",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "odd": 1.71,
+        "pick": "Under 27.5",
+        "stake": 600,
+        "market": "Total Kills",
+        "team_a": "Fnatic",
+        "team_b": "Natus Vincere",
+        "bookmaker": "EstrelaBet",
+        "confidence": "high",
+        "is_map_bet": true,
+        "map_number": 2,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523694",
+          "team_a": {
+            "name": "Fnatic",
+            "side": "red",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ahri",
+              "top": "Gnar",
+              "jungle": "Skarner",
+              "support": "Nami"
+            }
+          },
+          "team_b": {
+            "name": "Natus Vincere",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Syndra",
+              "top": "Ambessa",
+              "jungle": "Pantheon",
+              "support": "Bard"
+            }
+          }
+        },
+        "bet_placed_at": "2026-04-25T13:17:00-03:00",
+        "match_context": {
+          "kills_red": 7,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Corki",
+            "mid": "Ahri",
+            "top": "Gnar",
+            "jungle": "Skarner",
+            "support": "Nami"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Syndra",
+            "top": "Ambessa",
+            "jungle": "Pantheon",
+            "support": "Bard"
+          },
+          "kills_blue": 13,
+          "enriched_at": "2026-05-24T09:22:19.124Z",
+          "red_team_id": "98767991866488695",
+          "total_kills": 20,
+          "winner_side": "blue",
+          "blue_team_id": "114868016111590239",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523694",
+          "lolesports_match_id": "115548668059523692",
+          "match_ambiguous_at_link": false
+        },
+        "bet_id_bookmaker": "4874291378"
+      }
+    },
+    {
+      "id": "deee4a20-39a3-4494-866a-1435ad53a577",
+      "team_a": "Shifters",
+      "team_b": "Natus Vincere",
+      "raw_extraction": {
+        "odd": 1.74,
+        "pick": "Under 28.5",
+        "stake": 200,
+        "market": "Total Kills",
+        "team_a": "Shifters",
+        "team_b": "Natus Vincere",
+        "currency": "BRL",
+        "strategy": "ladder",
+        "bookmaker": "Parimatch",
+        "is_map_bet": true,
+        "map_number": 2,
+        "compositions": {
+          "source": "lolesports livestats game 115548668059523678",
+          "team_a": {
+            "name": "Shifters",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Anivia",
+              "top": "Jayce",
+              "jungle": "Shen",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Natus Vincere",
+            "side": "blue",
+            "picks": {
+              "adc": "Corki",
+              "mid": "Ahri",
+              "top": "KSante",
+              "jungle": "Vi",
+              "support": "Nami"
+            }
+          }
+        },
+        "bet_placed_at": "2026-04-26T13:21:00-03:00",
+        "match_context": {
+          "kills_red": 21,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Anivia",
+            "top": "Jayce",
+            "jungle": "Shen",
+            "support": "Milio"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Corki",
+            "mid": "Ahri",
+            "top": "KSante",
+            "jungle": "Vi",
+            "support": "Nami"
+          },
+          "kills_blue": 5,
+          "enriched_at": "2026-05-24T09:22:20.184Z",
+          "red_team_id": "107563714667537640",
+          "total_kills": 26,
+          "winner_side": "red",
+          "blue_team_id": "114868016111590239",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
+          "lolesports_game_id": "115548668059523678",
+          "lolesports_match_id": "115548668059523676",
+          "match_ambiguous_at_link": false
+        },
+        "ladder_group_id": "ladder-shft-navi-m2-20260426",
+        "ladder_position": "28.5",
+        "bet_id_bookmaker": "165",
+        "lolesports_game_id": "115548668059523678"
+      }
+    }
+  ]
+}
