@@ -19,6 +19,7 @@ const fs = require('fs');
 const path = require('path');
 const { loadConfig } = require('./_load-config.cjs');
 const { loadFairPinnacle } = require('../../lib/loadFairPinnacle.cjs');
+const { normalizeTeam } = require('../../lib/normalizeTeam.cjs');
 
 const CRON_DIR = path.resolve(__dirname, '..', '..', 'cron-data');
 const PEEL_PURE_SETTLE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
@@ -73,8 +74,8 @@ function buildTeamAvgsFromResults(targetDate) {
 // Calcula fair_formula para um bet usando histório de times.
 function calcFairFormula(bet, teamHist, leagueAvg) {
   const mc = bet.raw_extraction?.match_context || {};
-  const teamA = mc.teams?.[0]?.name || bet.team_a;
-  const teamB = mc.teams?.[1]?.name || bet.team_b;
+  const teamA = normalizeTeam(mc.teams?.[0]?.name || bet.team_a);
+  const teamB = normalizeTeam(mc.teams?.[1]?.name || bet.team_b);
   const lg = (bet.league || '').toUpperCase().replace(/\s+/g,'');
   const lgKey = ['LCK','LPL','LEC','CBLOL','LFL','LCS'].find(k => lg.includes(k)) || null;
 
