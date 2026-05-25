@@ -339,7 +339,7 @@ function decideOutcome(bet, gameData) {
 // o que poderia resultar em snapshots stale diferentes pra cada bet.
 async function settleBet(supabaseUrl, supabaseKey, bet, gameWindowCache) {
   const matchId = bet.raw_extraction?.match_context?.lolesports_match_id;
-  if (!matchId) return { bet_id: bet.id, status: 'skipped', reason: 'no_match_id_in_raw_extraction' };
+  if (!matchId) return { bet_id: bet.id, league: bet.league, status: 'skipped', reason: 'no_match_id_in_raw_extraction' };
 
   // 1. eventDetails → games
   let detail;
@@ -349,7 +349,7 @@ async function settleBet(supabaseUrl, supabaseKey, bet, gameWindowCache) {
     return { bet_id: bet.id, status: 'error', reason: `eventDetails: ${e.message}` };
   }
   const games = detail?.data?.event?.match?.games || [];
-  if (games.length === 0) return { bet_id: bet.id, status: 'skipped', reason: 'no_games_in_match' };
+  if (games.length === 0) return { bet_id: bet.id, league: bet.league, status: 'skipped', reason: 'no_games_in_match' };
 
   // 2. localiza o game pelo map_number (se is_map_bet) ou primeiro completed (se match-level)
   let game;
@@ -358,8 +358,8 @@ async function settleBet(supabaseUrl, supabaseKey, bet, gameWindowCache) {
   } else {
     game = games.find(g => g.state === 'completed') || games[0];
   }
-  if (!game) return { bet_id: bet.id, status: 'skipped', reason: `no_game_for_map_${bet.map_number}` };
-  if (game.state !== 'completed') return { bet_id: bet.id, status: 'skipped', reason: `game_state_${game.state}` };
+  if (!game) return { bet_id: bet.id, league: bet.league, status: 'skipped', reason: `no_game_for_map_${bet.map_number}` };
+  if (game.state !== 'completed') return { bet_id: bet.id, league: bet.league, status: 'skipped', reason: `game_state_${game.state}` };
 
   // 3. window livestats — Fix 1: cache por game_id pra evitar requests duplicados
   const matchStart = detail?.data?.event?.startTime || bet.bet_datetime;
@@ -388,16 +388,16 @@ async function settleBet(supabaseUrl, supabaseKey, bet, gameWindowCache) {
   // Fix 2+3: frame suspeito (CDN stale) → skip pra retry na próxima execução
   if (gd.suspect) {
     process.stderr.write(`[WARN] bet=${bet.id} game=${cacheKey} frame suspeito: ${gd.suspect_reason}\n`);
-    return { bet_id: bet.id, status: 'skipped', reason: `suspect_frame: ${gd.suspect_reason}` };
+    return { bet_id: bet.id, league: bet.league, status: 'skipped', reason: `suspect_frame: ${gd.suspect_reason}` };
   }
 
   if (gd.gameState && gd.gameState !== 'finished' && !trustCompleted) {
-    return { bet_id: bet.id, status: 'skipped', reason: `game_window_state_${gd.gameState}` };
+    return { bet_id: bet.id, league: bet.league, status: 'skipped', reason: `game_window_state_${gd.gameState}` };
   }
 
   // 4. decide outcome
   const outcome = decideOutcome(bet, gd);
-  if (outcome.skip_reason) return { bet_id: bet.id, status: 'skipped', reason: outcome.skip_reason };
+  if (outcome.skip_reason) return { bet_id: bet.id, league: bet.league, status: 'skipped', reason: outcome.skip_reason };
 
   // 5. detecta trigger
   const triggerType = detectTrigger(gd.bluePicks.support, gd.redPicks.support);

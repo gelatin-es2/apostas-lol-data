@@ -219,17 +219,82 @@ function localToUtcEpoch(localStr, tzOffsetH) {
 // Lista global de falhas Liquipedia pra surfacing no output principal
 const EWC_FETCH_FAILURES = [];
 
+// Cache local de schedule EWC pra resiliência a Liquipedia 429.
+// Quando consegue puxar, salva por (qualifier, target_date). Quando falha, lê do cache se ≤24h.
+const EWC_CACHE_PATH = path.join(REPO, 'cron-data', 'ewc-schedule-cache.json');
+const EWC_CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24h
+
+function loadEwcCache() {
+  try { return JSON.parse(fs.readFileSync(EWC_CACHE_PATH, 'utf8')); }
+  catch { return { qualifiers: {} }; }
+}
+function saveEwcCache(cache) {
+  try { fs.writeFileSync(EWC_CACHE_PATH, JSON.stringify(cache, null, 2)); }
+  catch (e) { console.error(`# EWC cache save falhou: ${e.message}`); }
+}
+
+// Re-aplica enriquecimento (fair, canonical names, match_id) em matches cacheados
+function rehydrateCachedMatches(cachedParsed, qualifier, targetDateUtc, teamAvgData) {
+  const out = [];
+  for (const p of cachedParsed) {
+    const utcMs = localToUtcEpoch(p.date_local_str, qualifier.tz_offset_h);
+    if (utcMs == null) continue;
+    const startTime = new Date(utcMs).toISOString();
+    if (startTime.slice(0, 10) !== targetDateUtc) continue;
+    const teamAName = canonicalTeamName(p.team_a_code);
+    const teamBName = canonicalTeamName(p.team_b_code);
+    const fair = fairForEwcMatch(teamAName, teamBName, qualifier.league_proxy, teamAvgData);
+    out.push({
+      league: qualifier.key,
+      match_id: `liquipedia:${qualifier.page}:${p.date_local_str}:${p.team_a_code}vs${p.team_b_code}`,
+      start_time: startTime,
+      state: p.finished ? 'completed' : 'unstarted',
+      team_a: p.team_a_code.toUpperCase(),
+      team_b: p.team_b_code.toUpperCase(),
+      team_a_name: teamAName,
+      team_b_name: teamBName,
+      ewc_fair: fair,
+    });
+  }
+  return out;
+}
+
 async function fetchEwcQualifierMatches(qualifier, targetDateUtc, teamAvgData) {
   const urlPath = `/leagueoflegends/api.php?action=parse&page=${encodeURIComponent(qualifier.page)}&format=json&prop=wikitext`;
   let r;
   try { r = await fetchLiquipediaJson(urlPath); }
   catch (e) {
+    // FALLBACK: tenta cache local
+    const cache = loadEwcCache();
+    const cached = cache.qualifiers?.[qualifier.key];
+    if (cached?.parsed_matches && cached.cached_at) {
+      const ageMs = Date.now() - new Date(cached.cached_at).getTime();
+      if (ageMs <= EWC_CACHE_TTL_MS) {
+        const ageH = (ageMs / 3600000).toFixed(1);
+        console.error(`# ${qualifier.key} liquipedia falhou (${e.message}) — usando cache de ${ageH}h atrás`);
+        return rehydrateCachedMatches(cached.parsed_matches, qualifier, targetDateUtc, teamAvgData);
+      }
+      console.error(`# ${qualifier.key} cache expirou (${(ageMs/3600000).toFixed(1)}h > 24h) — sem fallback`);
+    }
     console.error(`# ${qualifier.key} liquipedia falhou: ${e.message}`);
     EWC_FETCH_FAILURES.push({ key: qualifier.key, error: e.message, page: qualifier.page });
     return [];
   }
   const wt = r.parse?.wikitext?.['*'] || '';
   const parsed = parseLiquipediaMatches(wt);
+
+  // SUCESSO: salva no cache pra próxima vez que Liquipedia falhar
+  if (parsed.length > 0) {
+    const cache = loadEwcCache();
+    cache.qualifiers = cache.qualifiers || {};
+    cache.qualifiers[qualifier.key] = {
+      cached_at: new Date().toISOString(),
+      page: qualifier.page,
+      parsed_matches: parsed,
+    };
+    saveEwcCache(cache);
+  }
+
   const out = [];
   for (const p of parsed) {
     const utcMs = localToUtcEpoch(p.date_local_str, qualifier.tz_offset_h);
