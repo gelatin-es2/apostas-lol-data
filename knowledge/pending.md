@@ -1,5 +1,16 @@
 # Pendências — atualizada 2026-05-22 fim da sessão
 
+## Auditoria concluida -- Vitality.Bee (2026-05-25)
+
+9 bets com league=LFL envolvendo Vitality.Bee foram auditadas.
+
+**Conclusao:** Vitality.Bee **joga na LFL principal** (confirmado via Liquipedia LFL 2026 Spring). NAO e roster academy. Oponentes (TLN Pirates, Joblife, Esprit Shonen, Ici Japon Corp, Galions) sao todos times da LFL principal. Classificacao no banco esta correta -- NENHUM UPDATE necessario.
+
+Referencia: https://liquipedia.net/leagueoflegends/LFL/2026/Spring
+
+---
+
+
 ## 🟡 Decisões pendentes (Elvis vai instruir)
 
 ### P1 — Bets fora do método remanescentes (após FLEX expandido com Lux/Anivia)
