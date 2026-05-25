@@ -1,0 +1,399 @@
+{
+  "generated_at": "2026-05-25T18:58:17.258Z",
+  "fix": "map-dedup-2026-05-25",
+  "description": "stats agregam por mapa (lolesports_game_id), não por bet do banco",
+  "trigger_2peel": {
+    "meta": {
+      "raw": 455,
+      "deduped": 455,
+      "filtered": 267,
+      "simulated": 267,
+      "params": {
+        "delta": 0,
+        "odd": 1.72,
+        "stake": 1000,
+        "trigger": "2peel",
+        "league": "all",
+        "champ": "all"
+      },
+      "query": "/rest/v1/bets?select=*&status=in.(green,red)&is_method_bet=eq.true&order=bet_datetime.desc&limit=2000"
+    },
+    "top15_teams": [
+      {
+        "name": "VIT",
+        "n": 1,
+        "w": 1,
+        "profit": 1440,
+        "hit": 100,
+        "small_sample": true
+      },
+      {
+        "name": "WE",
+        "n": 10,
+        "w": 10,
+        "profit": 15120,
+        "hit": 100,
+        "small_sample": false
+      },
+      {
+        "name": "TLN Pirates",
+        "n": 4,
+        "w": 4,
+        "profit": 3600,
+        "hit": 100,
+        "small_sample": false
+      },
+      {
+        "name": "Vitality.Bee",
+        "n": 4,
+        "w": 4,
+        "profit": 3600,
+        "hit": 100,
+        "small_sample": false
+      },
+      {
+        "name": "LOUD",
+        "n": 4,
+        "w": 4,
+        "profit": 7920,
+        "hit": 100,
+        "small_sample": false
+      },
+      {
+        "name": "Fluxo",
+        "n": 2,
+        "w": 2,
+        "profit": 1440,
+        "hit": 100,
+        "small_sample": true
+      },
+      {
+        "name": "LUA Gaming",
+        "n": 4,
+        "w": 4,
+        "profit": 2880,
+        "hit": 100,
+        "small_sample": false
+      },
+      {
+        "name": "Heretics Academy",
+        "n": 3,
+        "w": 3,
+        "profit": 2160,
+        "hit": 100,
+        "small_sample": true
+      },
+      {
+        "name": "LYON",
+        "n": 2,
+        "w": 2,
+        "profit": 1440,
+        "hit": 100,
+        "small_sample": true
+      },
+      {
+        "name": "ZYB",
+        "n": 1,
+        "w": 1,
+        "profit": 720,
+        "hit": 100,
+        "small_sample": true
+      },
+      {
+        "name": "SK Gaming",
+        "n": 3,
+        "w": 3,
+        "profit": 2880,
+        "hit": 100,
+        "small_sample": true
+      },
+      {
+        "name": "Ici Japon Corp",
+        "n": 2,
+        "w": 2,
+        "profit": 1440,
+        "hit": 100,
+        "small_sample": true
+      },
+      {
+        "name": "LGD GAMING",
+        "n": 7,
+        "w": 6,
+        "profit": 6200,
+        "hit": 86,
+        "small_sample": false
+      },
+      {
+        "name": "DN SOOPers",
+        "n": 7,
+        "w": 6,
+        "profit": 3040,
+        "hit": 86,
+        "small_sample": false
+      },
+      {
+        "name": "VKS",
+        "n": 5,
+        "w": 4,
+        "profit": -4520,
+        "hit": 80,
+        "small_sample": false
+      }
+    ],
+    "leagues": [
+      {
+        "name": "CBLOL",
+        "n": 12,
+        "w": 9,
+        "profit": 680,
+        "hit": 75,
+        "small_sample": false
+      },
+      {
+        "name": "LES",
+        "n": 17,
+        "w": 12,
+        "profit": 3640,
+        "hit": 71,
+        "small_sample": false
+      },
+      {
+        "name": "LFL",
+        "n": 13,
+        "w": 9,
+        "profit": -800,
+        "hit": 69,
+        "small_sample": false
+      },
+      {
+        "name": "LPL",
+        "n": 54,
+        "w": 34,
+        "profit": 16320,
+        "hit": 63,
+        "small_sample": false
+      },
+      {
+        "name": "LCK",
+        "n": 39,
+        "w": 24,
+        "profit": -6680,
+        "hit": 62,
+        "small_sample": false
+      },
+      {
+        "name": "LEC",
+        "n": 31,
+        "w": 17,
+        "profit": -1440,
+        "hit": 55,
+        "small_sample": false
+      },
+      {
+        "name": "LCS",
+        "n": 15,
+        "w": 8,
+        "profit": 1640,
+        "hit": 53,
+        "small_sample": false
+      }
+    ]
+  },
+  "trigger_all": {
+    "meta": {
+      "raw": 455,
+      "deduped": 455,
+      "filtered": 455,
+      "simulated": 413,
+      "params": {
+        "delta": 0,
+        "odd": 1.72,
+        "stake": 1000,
+        "trigger": "all",
+        "league": "all",
+        "champ": "all"
+      },
+      "query": "/rest/v1/bets?select=*&status=in.(green,red)&is_method_bet=eq.true&order=bet_datetime.desc&limit=2000"
+    },
+    "top15_teams": [
+      {
+        "name": "VIT",
+        "n": 2,
+        "w": 2,
+        "profit": 2880,
+        "hit": 100,
+        "small_sample": true
+      },
+      {
+        "name": "Heretics Academy",
+        "n": 4,
+        "w": 4,
+        "profit": 2880,
+        "hit": 100,
+        "small_sample": false
+      },
+      {
+        "name": "SK Gaming",
+        "n": 5,
+        "w": 5,
+        "profit": 4320,
+        "hit": 100,
+        "small_sample": false
+      },
+      {
+        "name": "Skillcamp",
+        "n": 2,
+        "w": 2,
+        "profit": 1440,
+        "hit": 100,
+        "small_sample": true
+      },
+      {
+        "name": "TLN Pirates",
+        "n": 9,
+        "w": 8,
+        "profit": 5480,
+        "hit": 89,
+        "small_sample": false
+      },
+      {
+        "name": "Fluxo",
+        "n": 7,
+        "w": 6,
+        "profit": 5480,
+        "hit": 86,
+        "small_sample": false
+      },
+      {
+        "name": "UCAM Esports Club",
+        "n": 6,
+        "w": 5,
+        "profit": 2600,
+        "hit": 83,
+        "small_sample": false
+      },
+      {
+        "name": "LUA Gaming",
+        "n": 6,
+        "w": 5,
+        "profit": 2600,
+        "hit": 83,
+        "small_sample": false
+      },
+      {
+        "name": "UB Alma Mater",
+        "n": 6,
+        "w": 5,
+        "profit": 2600,
+        "hit": 83,
+        "small_sample": false
+      },
+      {
+        "name": "DN SOOPers",
+        "n": 10,
+        "w": 8,
+        "profit": 4200,
+        "hit": 80,
+        "small_sample": false
+      },
+      {
+        "name": "Dplus",
+        "n": 15,
+        "w": 12,
+        "profit": 1520,
+        "hit": 80,
+        "small_sample": false
+      },
+      {
+        "name": "LGD GAMING",
+        "n": 8,
+        "w": 6,
+        "profit": 5200,
+        "hit": 75,
+        "small_sample": false
+      },
+      {
+        "name": "Vitality.Bee",
+        "n": 8,
+        "w": 6,
+        "profit": 3040,
+        "hit": 75,
+        "small_sample": false
+      },
+      {
+        "name": "FALKE ESPORTS",
+        "n": 4,
+        "w": 3,
+        "profit": 1160,
+        "hit": 75,
+        "small_sample": false
+      },
+      {
+        "name": "LOUD",
+        "n": 8,
+        "w": 6,
+        "profit": 7360,
+        "hit": 75,
+        "small_sample": false
+      }
+    ],
+    "leagues": [
+      {
+        "name": "LES",
+        "n": 23,
+        "w": 17,
+        "profit": 6240,
+        "hit": 74,
+        "small_sample": false
+      },
+      {
+        "name": "LFL",
+        "n": 26,
+        "w": 18,
+        "profit": 1680,
+        "hit": 69,
+        "small_sample": false
+      },
+      {
+        "name": "CBLOL",
+        "n": 25,
+        "w": 16,
+        "profit": -3400,
+        "hit": 64,
+        "small_sample": false
+      },
+      {
+        "name": "LCK",
+        "n": 67,
+        "w": 39,
+        "profit": -9160,
+        "hit": 58,
+        "small_sample": false
+      },
+      {
+        "name": "LPL",
+        "n": 86,
+        "w": 49,
+        "profit": 6840,
+        "hit": 57,
+        "small_sample": false
+      },
+      {
+        "name": "LEC",
+        "n": 47,
+        "w": 26,
+        "profit": -5520,
+        "hit": 55,
+        "small_sample": false
+      },
+      {
+        "name": "LCS",
+        "n": 27,
+        "w": 13,
+        "profit": -320,
+        "hit": 48,
+        "small_sample": false
+      }
+    ]
+  }
+}
