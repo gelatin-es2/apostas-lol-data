@@ -66,6 +66,11 @@ jobs:
         run: node .claude/scripts/rebuild_dashboard_stats_cron.cjs
         continue-on-error: true
 
+      # Rebuild LFL dashboard stats (standalone, antes só rodava manual — adicionado 2026-05-25)
+      - name: Rebuild LFL dashboard stats
+        run: node .claude/scripts/rebuild_lfl_dashboard_stats.cjs
+        continue-on-error: true
+
       # Compute real bets method stats (aplicando regra Bardo só LEC) — pra dashboard frontend
       - name: Compute real bets method stats
         if: env.SUPABASE_SECRET_KEY != ''
