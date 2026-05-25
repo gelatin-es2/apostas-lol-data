@@ -1,0 +1,371 @@
+[
+  {
+    "id": "b43036c7-4121-4367-8cb5-4ded24f9a30e",
+    "created_at": "2026-05-24T15:07:03.624279+00:00",
+    "bookmaker": "pinnacle",
+    "league": "LEC",
+    "team_a": "VIT",
+    "team_b": "KOI",
+    "market": "Total - Map 1 - LoL - LEC",
+    "pick": "Under 27.5",
+    "odd": 1.675,
+    "stake": 1000,
+    "bet_datetime": "2026-05-24T15:00:00+00:00",
+    "pandascore_match_id": 115548668059589340,
+    "pandascore_match_name": null,
+    "is_map_bet": true,
+    "map_number": 1,
+    "status": "green",
+    "profit": 675,
+    "settled_at": "2026-05-24T16:20:24.851+00:00",
+    "settle_source": "lolesports api - 18 kills",
+    "screenshot_path": null,
+    "raw_extraction": {
+      "match_context": {
+        "state": "inProgress",
+        "teams": [
+          {
+            "code": "MKOI",
+            "name": "Movistar KOI"
+          },
+          {
+            "code": "VIT",
+            "name": "Team Vitality"
+          }
+        ],
+        "red_bans": null,
+        "blue_bans": null,
+        "kills_red": 6,
+        "league_id": "98767991302996019",
+        "red_picks": {
+          "adc": "Ezreal",
+          "mid": "Syndra",
+          "top": "Anivia",
+          "jungle": "Vi",
+          "support": "Nami"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Ashe",
+          "mid": "Cassiopeia",
+          "top": "Rumble",
+          "jungle": "MonkeyKing",
+          "support": "Seraphine"
+        },
+        "kills_blue": 12,
+        "red_barons": 0,
+        "red_towers": 3,
+        "settled_at": "2026-05-24T16:20:24.846Z",
+        "start_time": "2026-05-24T15:00:00Z",
+        "blue_barons": 1,
+        "blue_towers": 9,
+        "red_dragons": 1,
+        "red_team_id": "99322214695067838",
+        "total_kills": 18,
+        "winner_side": "blue",
+        "blue_dragons": 5,
+        "blue_team_id": "103461966965149786",
+        "league_short": "LEC",
+        "trigger_type": "2peel",
+        "kills_at_15min": null,
+        "red_total_gold": 61376,
+        "blue_total_gold": 71532,
+        "selected_reason": "live",
+        "first_blood_team": "blue",
+        "game_duration_secs": null,
+        "gold_diff_at_15min": null,
+        "lolesports_game_id": "115548668059589353",
+        "lolesports_match_id": "115548668059589352",
+        "series_score_at_bet": null
+      },
+      "ladder_group_id": "3fffbfe5-19d2-43da-b86f-f80f28b465e3",
+      "bookmaker_native": {
+        "bet_id": "3055913832",
+        "raw_pick_text": "Vitality (Kills) - Movistar KOI (Kills), Under 27.5",
+        "raw_stake_text": "R$ 1.000,00"
+      }
+    },
+    "notes": "ladder_group_id:3fffbfe5-19d2-43da-b86f-f80f28b465e3",
+    "fair_pinnacle": null,
+    "fair_formula": 31.5,
+    "fair_line_source": "formula",
+    "is_method_bet": true
+  },
+  {
+    "id": "c8a635fc-83e2-4a13-9478-f3d8e64a6762",
+    "created_at": "2026-05-24T15:07:14.971681+00:00",
+    "bookmaker": "thunderpick",
+    "league": "LEC",
+    "team_a": "VIT",
+    "team_b": "KOI",
+    "market": "Total Kills Over/Under - Map 1",
+    "pick": "Under 27.5",
+    "odd": 1.8,
+    "stake": 157.8,
+    "bet_datetime": "2026-05-24T15:00:00+00:00",
+    "pandascore_match_id": 115548668059589340,
+    "pandascore_match_name": null,
+    "is_map_bet": true,
+    "map_number": 1,
+    "status": "green",
+    "profit": 126.24,
+    "settled_at": "2026-05-24T16:20:24.958+00:00",
+    "settle_source": "lolesports api - 18 kills",
+    "screenshot_path": null,
+    "raw_extraction": {
+      "match_context": {
+        "state": "inProgress",
+        "teams": [
+          {
+            "code": "MKOI",
+            "name": "Movistar KOI"
+          },
+          {
+            "code": "VIT",
+            "name": "Team Vitality"
+          }
+        ],
+        "red_bans": null,
+        "blue_bans": null,
+        "kills_red": 6,
+        "league_id": "98767991302996019",
+        "red_picks": {
+          "adc": "Ezreal",
+          "mid": "Syndra",
+          "top": "Anivia",
+          "jungle": "Vi",
+          "support": "Nami"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Ashe",
+          "mid": "Cassiopeia",
+          "top": "Rumble",
+          "jungle": "MonkeyKing",
+          "support": "Seraphine"
+        },
+        "kills_blue": 12,
+        "red_barons": 0,
+        "red_towers": 3,
+        "settled_at": "2026-05-24T16:20:24.953Z",
+        "start_time": "2026-05-24T15:00:00Z",
+        "blue_barons": 1,
+        "blue_towers": 9,
+        "red_dragons": 1,
+        "red_team_id": "99322214695067838",
+        "total_kills": 18,
+        "winner_side": "blue",
+        "blue_dragons": 5,
+        "blue_team_id": "103461966965149786",
+        "league_short": "LEC",
+        "trigger_type": "2peel",
+        "kills_at_15min": null,
+        "red_total_gold": 61376,
+        "blue_total_gold": 71532,
+        "selected_reason": "live",
+        "first_blood_team": "blue",
+        "game_duration_secs": null,
+        "gold_diff_at_15min": null,
+        "lolesports_game_id": "115548668059589353",
+        "lolesports_match_id": "115548668059589352",
+        "series_score_at_bet": null
+      },
+      "ladder_group_id": "3fffbfe5-19d2-43da-b86f-f80f28b465e3",
+      "bookmaker_native": {
+        "bet_id": null,
+        "raw_pick_text": "Under 27.5 Total Kills Over/Under (Map 1 VIT vs MKOI)",
+        "raw_stake_text": "R$ 157,80",
+        "cashout_offered": 157.8
+      }
+    },
+    "notes": "ladder_group_id:3fffbfe5-19d2-43da-b86f-f80f28b465e3",
+    "fair_pinnacle": null,
+    "fair_formula": 31.5,
+    "fair_line_source": "formula",
+    "is_method_bet": true
+  },
+  {
+    "id": "ece7d4a8-5abf-41c0-b494-29f6ac91756a",
+    "created_at": "2026-05-24T16:54:47.655206+00:00",
+    "bookmaker": "pinnacle",
+    "league": "LEC",
+    "team_a": "VIT",
+    "team_b": "KOI",
+    "market": "Total Kills",
+    "pick": "Under 27.5",
+    "odd": 1.666,
+    "stake": 300,
+    "bet_datetime": "2026-05-24T15:00:00+00:00",
+    "pandascore_match_id": 115548668059589340,
+    "pandascore_match_name": null,
+    "is_map_bet": true,
+    "map_number": 3,
+    "status": "green",
+    "profit": 199.8,
+    "settled_at": "2026-05-24T17:32:28.946+00:00",
+    "settle_source": "lolesports api - 17 kills",
+    "screenshot_path": null,
+    "raw_extraction": {
+      "match_context": {
+        "teams": [
+          {
+            "code": "MKOI",
+            "name": "Movistar KOI"
+          },
+          {
+            "code": "VIT",
+            "name": "Team Vitality"
+          }
+        ],
+        "red_bans": null,
+        "blue_bans": null,
+        "kills_red": 3,
+        "league_id": "98767991302996019",
+        "red_picks": {
+          "adc": "Lucian",
+          "mid": "Annie",
+          "top": "Olaf",
+          "jungle": "Jayce",
+          "support": "Milio"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Xayah",
+          "mid": "Taliyah",
+          "top": "Varus",
+          "jungle": "LeeSin",
+          "support": "Rakan"
+        },
+        "kills_blue": 14,
+        "red_barons": 0,
+        "red_towers": 1,
+        "settled_at": "2026-05-24T17:32:28.940Z",
+        "start_time": "2026-05-24T15:00:00Z",
+        "blue_barons": 1,
+        "blue_towers": 11,
+        "red_dragons": 2,
+        "red_team_id": "99322214695067838",
+        "total_kills": 17,
+        "winner_side": "blue",
+        "blue_dragons": 1,
+        "blue_team_id": "103461966965149786",
+        "league_short": "LEC",
+        "trigger_type": "1peel+flex",
+        "kills_at_15min": null,
+        "red_total_gold": 43914,
+        "blue_total_gold": 57256,
+        "first_blood_team": "blue",
+        "game_duration_secs": null,
+        "gold_diff_at_15min": null,
+        "lolesports_game_id": "115548668059589355",
+        "lolesports_match_id": "115548668059589352",
+        "series_score_at_bet": {
+          "current_map": 3,
+          "maps_completed_before": 2
+        }
+      },
+      "bookmaker_native": {
+        "bet_id": "3056035623",
+        "raw_pick_text": "Vitality (Kills) - Movistar KOI (Kills), Under 27.5",
+        "raw_stake_text": "R$ 300,00"
+      }
+    },
+    "notes": "ladder H1/H2 group:f3276521-186e-482c-a72d-7ca604547b32 — Under 27.5 Map3 VIT vs MKOI",
+    "fair_pinnacle": null,
+    "fair_formula": 31.5,
+    "fair_line_source": "formula",
+    "is_method_bet": true
+  },
+  {
+    "id": "f321d022-785c-41ee-b049-8fc8ce2d4185",
+    "created_at": "2026-05-24T16:54:55.124824+00:00",
+    "bookmaker": "pinnacle",
+    "league": "LEC",
+    "team_a": "VIT",
+    "team_b": "KOI",
+    "market": "Total Kills",
+    "pick": "Under 27.5",
+    "odd": 1.729,
+    "stake": 1700,
+    "bet_datetime": "2026-05-24T15:00:00+00:00",
+    "pandascore_match_id": 115548668059589340,
+    "pandascore_match_name": null,
+    "is_map_bet": true,
+    "map_number": 3,
+    "status": "green",
+    "profit": 1239.3,
+    "settled_at": "2026-05-24T17:32:29.034+00:00",
+    "settle_source": "lolesports api - 17 kills",
+    "screenshot_path": null,
+    "raw_extraction": {
+      "match_context": {
+        "teams": [
+          {
+            "code": "MKOI",
+            "name": "Movistar KOI"
+          },
+          {
+            "code": "VIT",
+            "name": "Team Vitality"
+          }
+        ],
+        "red_bans": null,
+        "blue_bans": null,
+        "kills_red": 3,
+        "league_id": "98767991302996019",
+        "red_picks": {
+          "adc": "Lucian",
+          "mid": "Annie",
+          "top": "Olaf",
+          "jungle": "Jayce",
+          "support": "Milio"
+        },
+        "under_hit": true,
+        "blue_picks": {
+          "adc": "Xayah",
+          "mid": "Taliyah",
+          "top": "Varus",
+          "jungle": "LeeSin",
+          "support": "Rakan"
+        },
+        "kills_blue": 14,
+        "red_barons": 0,
+        "red_towers": 1,
+        "settled_at": "2026-05-24T17:32:29.030Z",
+        "start_time": "2026-05-24T15:00:00Z",
+        "blue_barons": 1,
+        "blue_towers": 11,
+        "red_dragons": 2,
+        "red_team_id": "99322214695067838",
+        "total_kills": 17,
+        "winner_side": "blue",
+        "blue_dragons": 1,
+        "blue_team_id": "103461966965149786",
+        "league_short": "LEC",
+        "trigger_type": "1peel+flex",
+        "kills_at_15min": null,
+        "red_total_gold": 43914,
+        "blue_total_gold": 57256,
+        "first_blood_team": "blue",
+        "game_duration_secs": null,
+        "gold_diff_at_15min": null,
+        "lolesports_game_id": "115548668059589355",
+        "lolesports_match_id": "115548668059589352",
+        "series_score_at_bet": {
+          "current_map": 3,
+          "maps_completed_before": 2
+        }
+      },
+      "bookmaker_native": {
+        "bet_id": "3056035564",
+        "raw_pick_text": "Under 27.5 Map 3 LEC",
+        "raw_stake_text": "R$ 1.700,00"
+      }
+    },
+    "notes": "ladder H1/H2 group:f3276521-186e-482c-a72d-7ca604547b32 — Under 27.5 Map3 VIT vs MKOI",
+    "fair_pinnacle": null,
+    "fair_formula": 31.5,
+    "fair_line_source": "formula",
+    "is_method_bet": true
+  }
+]
