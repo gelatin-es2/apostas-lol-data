@@ -1876,17 +1876,32 @@
       }
       document.getElementById('anByTrigger').innerHTML = trigCard('2peel puro', t2) + trigCard('1peel+flex', t1f);
 
+      // Fix 2026-05-25: agrega por (chave | game_id) antes de contar — elimina inflação por ladder.
+      // Múltiplas bets no mesmo mapa/linha contam como 1 entrada; status = green se PnL > 0.
+      // Bets sem game_id recebem ID sintético "NOID-<id>" → tratadas como mapa único.
       function aggBy(keyFn) {
-        const m = {};
+        // 1ª passada: por (chave | game_id) — junta bets do mesmo mapa
+        const byMap = new Map();
         for (const { b, sim } of simulated) {
+          const gid = b.raw_extraction?.match_context?.lolesports_game_id
+            ? String(b.raw_extraction.match_context.lolesports_game_id)
+            : `NOID-${b.id || b.bet_id || Math.random()}`;
           const keys = keyFn(b);
           for (const k of keys) {
             if (!k) continue;
-            if (!m[k]) m[k] = { name: k, n: 0, w: 0, profit: 0 };
-            m[k].n++;
-            if (sim.won) { m[k].w++; m[k].profit += stake * (odd - 1); }
-            else { m[k].profit -= stake; }
+            const mapKey = k + '|' + gid;
+            if (!byMap.has(mapKey)) byMap.set(mapKey, { name: k, profit: 0 });
+            const entry = byMap.get(mapKey);
+            entry.profit += sim.won ? stake * (odd - 1) : -stake;
           }
+        }
+        // 2ª passada: por time/liga — cada mapa = 1 entrada; green se profit > 0
+        const m = {};
+        for (const { name, profit } of byMap.values()) {
+          if (!m[name]) m[name] = { name, n: 0, w: 0, profit: 0 };
+          m[name].n++;
+          if (profit > 0) m[name].w++;
+          m[name].profit += profit;
         }
         return Object.values(m)
           .filter(x => x.n >= 1)
