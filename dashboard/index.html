@@ -608,6 +608,7 @@
         </select>
         <label style="font-size:12px;color:var(--muted);font-weight:600">ODD:</label>
         <select id="anOdd" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="real" selected>real (odd da bet)</option>
           <option value="2.10">2.10</option>
           <option value="2.00">2.00</option>
           <option value="1.90">1.90</option>
@@ -616,7 +617,7 @@
           <option value="1.80">1.80</option>
           <option value="1.77">1.77 (sua média real)</option>
           <option value="1.74">1.74</option>
-          <option value="1.72" selected>1.72 (conservadora)</option>
+          <option value="1.72">1.72 (conservadora)</option>
           <option value="1.70">1.70</option>
           <option value="1.65">1.65</option>
           <option value="1.60">1.60</option>
@@ -673,10 +674,11 @@
         </select>
         <label style="font-size:12px;color:var(--muted);font-weight:600">ODD:</label>
         <select id="miOdd" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="real" selected>real (odd da bet)</option>
           <option value="2.10">2.10</option><option value="2.00">2.00</option><option value="1.90">1.90</option>
           <option value="1.85">1.85</option><option value="1.83">1.83 (fair)</option><option value="1.80">1.80</option>
           <option value="1.77">1.77</option><option value="1.74">1.74</option>
-          <option value="1.72" selected>1.72</option>
+          <option value="1.72">1.72</option>
           <option value="1.70">1.70</option><option value="1.65">1.65</option><option value="1.60">1.60</option>
         </select>
         <label style="font-size:12px;color:var(--muted);font-weight:600">STAKE:</label>
@@ -1779,7 +1781,16 @@
 
     function renderAnaliseTab() {
       const delta = parseInt(document.getElementById('anFairDelta').value);
-      const odd = parseFloat(document.getElementById('anOdd').value);
+      const oddRaw = document.getElementById('anOdd').value;
+      // oddIsReal: usa odd real da bet pra bets reais; fallback 1.72 em SIMULATED sem odd
+      const oddIsReal = (oddRaw === 'real');
+      const odd = oddIsReal ? 1.72 : parseFloat(oddRaw); // fallback ref pra SIMULATED
+      // Retorna o odd a usar pro cálculo de profit de uma bet
+      function betOdd(b) {
+        if (!oddIsReal) return odd;
+        const ro = parseFloat(b.odd);
+        return (b.bookmaker !== 'SIMULATED' && !isNaN(ro) && ro > 1) ? ro : 1.72;
+      }
       const stake = parseFloat(document.getElementById('anStake').value) || 1000;
       const triggerFilter = document.getElementById('anTrigger').value;
       const leagueFilter = document.getElementById('anLeague').value;
@@ -1840,7 +1851,7 @@
       const simulated = bets.map(b => ({ b, sim: getBetSimulation(b) })).filter(x => x.sim);
       const total = simulated.length;
       const green = simulated.filter(x => x.sim.won).length;
-      const profit = simulated.reduce((s, x) => s + (x.sim.won ? stake * (odd - 1) : -stake), 0);
+      const profit = simulated.reduce((s, x) => s + (x.sim.won ? stake * (betOdd(x.b) - 1) : -stake), 0);
       const stakeSum = total * stake;
       const hitPct = total ? (100 * green / total) : 0;
       const roi = stakeSum ? (100 * profit / stakeSum) : 0;
@@ -1864,7 +1875,7 @@
         if (!sims.length) return null;
         const g = sims.filter(x => x.sim.won).length;
         const r = sims.length - g;
-        const p = g*stake*(odd-1) - r*stake;
+        const p = sims.reduce((acc, x) => acc + (x.sim.won ? stake * (betOdd(x.b) - 1) : -stake), 0);
         return { n: sims.length, hit: 100*g/sims.length, profit: p, roi: 100*p/(sims.length*stake) };
       }
       const t2 = statsForTrigger('2peel');
@@ -1892,7 +1903,7 @@
             const mapKey = k + '|' + gid;
             if (!byMap.has(mapKey)) byMap.set(mapKey, { name: k, profit: 0 });
             const entry = byMap.get(mapKey);
-            entry.profit += sim.won ? stake * (odd - 1) : -stake;
+            entry.profit += sim.won ? stake * (betOdd(b) - 1) : -stake;
           }
         }
         // 2ª passada: por time/liga — cada mapa = 1 entrada; green se profit > 0
@@ -1966,7 +1977,14 @@
     function renderMilioTab() {
       if (!analiseRawBets) return;
       const delta = parseInt(document.getElementById('miFairDelta').value);
-      const odd = parseFloat(document.getElementById('miOdd').value);
+      const miOddRaw = document.getElementById('miOdd').value;
+      const miOddIsReal = (miOddRaw === 'real');
+      const odd = miOddIsReal ? 1.72 : parseFloat(miOddRaw);
+      function miBetOdd(b) {
+        if (!miOddIsReal) return odd;
+        const ro = parseFloat(b.odd);
+        return (b.bookmaker !== 'SIMULATED' && !isNaN(ro) && ro > 1) ? ro : 1.72;
+      }
       const stake = parseFloat(document.getElementById('miStake').value) || 2000;
 
       // Filtra: só bets onde Milio é support em algum lado
@@ -2002,7 +2020,7 @@
       const simulated = milioBets.map(b => ({ b, sim: getBetSim(b) })).filter(x => x.sim);
       const total = simulated.length;
       const green = simulated.filter(x => x.sim.won).length;
-      const profit = simulated.reduce((s, x) => s + (x.sim.won ? stake * (odd - 1) : -stake), 0);
+      const profit = simulated.reduce((s, x) => s + (x.sim.won ? stake * (miBetOdd(x.b) - 1) : -stake), 0);
       const stakeSum = total * stake;
       const hitPct = total ? (100 * green / total) : 0;
       const roi = stakeSum ? (100 * profit / stakeSum) : 0;
@@ -2036,7 +2054,7 @@
             if (!k) continue;
             if (!m[k]) m[k] = { name: k, n: 0, w: 0, profit: 0 };
             m[k].n++;
-            if (sim.won) { m[k].w++; m[k].profit += stake * (odd - 1); }
+            if (sim.won) { m[k].w++; m[k].profit += stake * (miBetOdd(b) - 1); }
             else m[k].profit -= stake;
           }
         }
