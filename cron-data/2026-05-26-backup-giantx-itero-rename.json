@@ -1,0 +1,78 @@
+[
+  {
+    "id": "7dc7ec21-5a7b-4528-999e-af140daa0501",
+    "created_at": "2026-05-21T16:14:30.899487+00:00",
+    "bookmaker": "pinnacle",
+    "league": "LES",
+    "team_a": "GIANTX",
+    "team_b": "FALKE ESPORTS",
+    "market": "Total Kills",
+    "pick": "Under 29.5",
+    "odd": 1.735,
+    "stake": 1000,
+    "bet_datetime": "2026-05-21T15:45:00+00:00",
+    "pandascore_match_id": 116295697480989310,
+    "pandascore_match_name": null,
+    "is_map_bet": true,
+    "map_number": 2,
+    "status": "red",
+    "profit": -1000,
+    "settled_at": "2026-05-21T16:50:42.593+00:00",
+    "settle_source": "lolesports api - 45 kills",
+    "screenshot_path": null,
+    "raw_extraction": {
+      "match_context": {
+        "teams": [
+          {
+            "code": "GX",
+            "name": "GIANTX ITERO"
+          },
+          {
+            "code": "FLK",
+            "name": "FALKE ESPORTS"
+          }
+        ],
+        "kills_red": 14,
+        "league_id": "105266074488398661",
+        "red_picks": {
+          "adc": "Caitlyn",
+          "mid": "Anivia",
+          "top": "Darius",
+          "jungle": "XinZhao",
+          "support": "Karma"
+        },
+        "under_hit": false,
+        "blue_picks": {
+          "adc": "Corki",
+          "mid": "Xerath",
+          "top": "Ambessa",
+          "jungle": "Vi",
+          "support": "Nami"
+        },
+        "kills_blue": 31,
+        "settled_at": "2026-05-21T16:50:42.593Z",
+        "start_time": "2026-05-21T15:00:00Z",
+        "red_team_id": "112444725757989017",
+        "total_kills": 45,
+        "winner_side": "blue",
+        "blue_team_id": "111624630736536145",
+        "league_short": "LES",
+        "trigger_type": "2peel",
+        "coverage_note": "PATCH manual — find-match falhou por strictTeamMatch exigir nome exato (FALKE vs FALKE ESPORTS). match_id resolvido manualmente via getSchedule LES.",
+        "lolesports_game_id": "116295697480989309",
+        "lolesports_match_id": "116295697480989307"
+      },
+      "ladder_group_id": null,
+      "bookmaker_native": {
+        "bet_id": "#3053502093",
+        "raw_pick_text": "Under 29.5",
+        "raw_stake_text": "BRL 1000.00"
+      }
+    },
+    "notes": null,
+    "fair_pinnacle": null,
+    "fair_formula": null,
+    "fair_line_source": null,
+    "is_method_bet": true
+  }
+]
