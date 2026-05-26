@@ -101,7 +101,11 @@ function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
     const won = m.kills < simulatedLine;
     const profit = won ? +(STAKE * (ODD - 1)).toFixed(2) : -STAKE;
     const status = won ? 'green' : 'red';
-    const betDatetime = `${m.date}T12:00:00Z`; // mid-day pra estar dentro do guard
+    // Offset em segundos pelo game_id pra evitar conflito UNIQUE (pick, bookmaker, stake, bet_datetime, odd)
+    const gidOffset = (parseInt(String(m.gameId).slice(-6)) || 0) % 3600;
+    const ss = String(gidOffset % 60).padStart(2, '0');
+    const mm = String(Math.floor(gidOffset / 60)).padStart(2, '0');
+    const betDatetime = `${m.date}T12:${mm}:${ss}Z`;
 
     const pinMap = getPinnacle(m.date);
     const fairPinnacle = m.matchId ? (pinMap.byMatchId.get(String(m.matchId)) ?? null) : null;
