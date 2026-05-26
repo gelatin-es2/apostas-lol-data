@@ -14,7 +14,8 @@
     "rebuild:tier2": "node .claude/scripts/rebuild_tier2_dashboard_stats.cjs",
     "analyze:tier2-eu": "node .claude/scripts/analyze_tier2_eu.cjs",
     "compute:real-bets": "node .claude/scripts/compute_real_bets_method.cjs",
-    "snapshot:bets": "node .claude/scripts/export-bets-snapshot.cjs"
+    "snapshot:bets": "node .claude/scripts/export-bets-snapshot.cjs",
+    "audit:aliases": "node .claude/scripts/audit_team_aliases.cjs"
   },
   "engines": {
     "node": ">=20"
