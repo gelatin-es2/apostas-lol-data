@@ -1851,19 +1851,41 @@
       const simulated = bets.map(b => ({ b, sim: getBetSimulation(b) })).filter(x => x.sim);
       const total = simulated.length;
       const green = simulated.filter(x => x.sim.won).length;
-      const profit = simulated.reduce((s, x) => s + (x.sim.won ? stake * (betOdd(x.b) - 1) : -stake), 0);
-      const stakeSum = total * stake;
       const hitPct = total ? (100 * green / total) : 0;
-      const roi = stakeSum ? (100 * profit / stakeSum) : 0;
       const breakeven = (100 / odd).toFixed(1);
       const realCount = simulated.filter(x => x.b.bookmaker !== 'SIMULATED').length;
       const simCount = simulated.filter(x => x.b.bookmaker === 'SIMULATED').length;
 
+      // PnL real: usa b.profit do banco (reflete cashouts/hedges) pra bets reais;
+      // SIMULATED não tem profit gravado — recalcula pela simulação.
+      // PnL simulado (sem cashout): sempre recalcula, ignora cashout — avalia método puro.
+      let profitReal = 0;
+      let profitSim = 0;
+      let totalStake = 0;
+      for (const { b, sim } of simulated) {
+        const s = parseFloat(b.stake) || stake;
+        const o = betOdd(b);
+        totalStake += s;
+        if (b.bookmaker === 'SIMULATED') {
+          // SIMULATED não tem profit real — usa simulação
+          profitReal += sim.won ? s * (o - 1) : -s;
+        } else {
+          // Real: usa profit gravado no banco (já reflete cashout/hedge parcial)
+          profitReal += parseFloat(b.profit) || 0;
+        }
+        // Simulado puro: ignora cashout, recalcula sempre
+        profitSim += sim.won ? s * (o - 1) : -s;
+      }
+      const roiReal = totalStake ? (100 * profitReal / totalStake) : 0;
+      const roiSim = totalStake ? (100 * profitSim / totalStake) : 0;
+
       document.getElementById('anKpis').innerHTML = `
         <div class="kpi"><div class="label">Bets totais</div><div class="value">${total}</div><div class="sub">${realCount} reais · ${simCount} simuladas</div></div>
         <div class="kpi"><div class="label">Hit (Δ${delta >= 0 ? '+' : ''}${delta})</div><div class="value ${hitPct >= parseFloat(breakeven) ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div><div class="sub">BE ${breakeven}%</div></div>
-        <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profit >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profit)}</div></div>
-        <div class="kpi"><div class="label">ROI</div><div class="value ${roi >= 0 ? 'green' : 'red'}">${roi >= 0 ? '+' : ''}${roi.toFixed(1).replace('.',',')}%</div></div>
+        <div class="kpi"><div class="label">Profit (real)</div><div class="value ${profitReal >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profitReal)}</div><div class="sub" style="font-size:10px;opacity:.7">com cashouts</div></div>
+        <div class="kpi"><div class="label">ROI (real)</div><div class="value ${roiReal >= 0 ? 'green' : 'red'}">${roiReal >= 0 ? '+' : ''}${roiReal.toFixed(1).replace('.',',')}%</div><div class="sub" style="font-size:10px;opacity:.7">com cashouts</div></div>
+        <div class="kpi" style="opacity:.65"><div class="label">Profit (sem cashout)</div><div class="value ${profitSim >= 0 ? 'green' : 'red'}" style="font-size:16px">R$ ${fmtMoney(profitSim)}</div><div class="sub" style="font-size:10px;opacity:.7">método puro</div></div>
+        <div class="kpi" style="opacity:.65"><div class="label">ROI (sem cashout)</div><div class="value ${roiSim >= 0 ? 'green' : 'red'}" style="font-size:16px">${roiSim >= 0 ? '+' : ''}${roiSim.toFixed(1).replace('.',',')}%</div><div class="sub" style="font-size:10px;opacity:.7">método puro</div></div>
       `;
 
       // Side-by-side por trigger (sempre mostra os 2)
