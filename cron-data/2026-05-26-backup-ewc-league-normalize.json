@@ -1,0 +1,205 @@
+[
+  {
+    "id": "76239e03-0022-420c-9f2b-e5f3ab0c460a",
+    "created_at": "2026-05-26T08:08:06.874591+00:00",
+    "bookmaker": "pinnacle",
+    "league": "EWC-SK-Qualifier",
+    "team_a": "Dplus",
+    "team_b": "Hanwha Life",
+    "market": "Total Kills",
+    "pick": "Under 32.5",
+    "odd": 1.751,
+    "stake": 1500,
+    "bet_datetime": "2026-05-26T07:00:00+00:00",
+    "pandascore_match_id": null,
+    "pandascore_match_name": null,
+    "is_map_bet": true,
+    "map_number": 1,
+    "status": "green",
+    "profit": 1126.5,
+    "settled_at": "2026-05-26T08:08:04.904+00:00",
+    "settle_source": "bookmaker_native_print",
+    "screenshot_path": null,
+    "raw_extraction": {
+      "ladder_info": {
+        "note": "ladder cross-odd mesma linha Under 32.5 Map 1 DK×HLE Pinnacle",
+        "total_legs": 2,
+        "ladder_group_id": "2005cfce-aa96-436d-8fdf-f480e60a81da",
+        "ladder_position": 1
+      },
+      "match_context": {
+        "team_a": "Dplus",
+        "team_b": "Hanwha Life",
+        "start_time": "2026-05-26T07:00:00Z",
+        "total_kills": 27,
+        "compositions": {
+          "team_1_picks": [
+            "Ambessa",
+            "Xin Zhao",
+            "Viktor",
+            "Ashe",
+            "Seraphine"
+          ],
+          "team_2_picks": [
+            "Rumble",
+            "Pantheon",
+            "Orianna",
+            "Lucian",
+            "Milio"
+          ]
+        },
+        "league_short": "EWC-SK-Qualifier",
+        "trigger_type": "2peel",
+        "milio_outlier": true,
+        "fair_line_used": 33.5,
+        "coverage_status": "ewc_not_in_lolesports",
+        "fair_source_ref": "2026-05-25-fair-pinnacle.json",
+        "lolesports_match_id": null,
+        "bet_datetime_patched_at": "2026-05-26T08:15:42.362Z",
+        "bet_datetime_patch_reason": "EWC sem start_time da API; estimado em 26/05 madrugada BRT conforme CEO"
+      },
+      "bookmaker_native": {
+        "bet_id": "3056923004",
+        "raw_pick_text": "Dplus KIA (Kills) - Hanwha Life (Kills), Under 32.5",
+        "raw_stake_text": "R$ 1.500,00",
+        "settled_win_loss": "Win"
+      }
+    },
+    "notes": "EWC South Korea Qualifier 2026-05-25 — Map 1 — ladder cross-odd Pinnacle",
+    "fair_pinnacle": null,
+    "fair_formula": null,
+    "fair_line_source": null,
+    "is_method_bet": true
+  },
+  {
+    "id": "e54e450f-8d30-48fe-b62a-98b6242c4669",
+    "created_at": "2026-05-26T08:10:46.065391+00:00",
+    "bookmaker": "pinnacle",
+    "league": "EWC_SK_QUAL",
+    "team_a": "Dplus",
+    "team_b": "Hanwha",
+    "market": "Total - Map 2",
+    "pick": "Under 32.5",
+    "odd": 1.704,
+    "stake": 1000,
+    "bet_datetime": "2026-05-26T08:00:00+00:00",
+    "pandascore_match_id": null,
+    "pandascore_match_name": null,
+    "is_map_bet": true,
+    "map_number": 2,
+    "status": "pending",
+    "profit": null,
+    "settled_at": null,
+    "settle_source": null,
+    "screenshot_path": null,
+    "raw_extraction": {
+      "match_context": {
+        "team_a": "Dplus",
+        "team_b": "Hanwha",
+        "coverage": "ewc_not_in_lolesports",
+        "red_picks": [
+          "Jayce",
+          "Trundle",
+          "Ryze",
+          "Senna",
+          "Alistar"
+        ],
+        "blue_picks": [
+          "Yorick",
+          "Vi",
+          "Anivia",
+          "Yunara",
+          "Lulu"
+        ],
+        "start_time": "2026-05-26T08:00:00Z",
+        "league_short": "EWC_SK_QUAL",
+        "trigger_type": "1peel+flex",
+        "lolesports_match_id": null,
+        "bet_datetime_patched_at": "2026-05-26T08:15:42.443Z",
+        "bet_datetime_patch_reason": "EWC sem start_time da API; estimado em 26/05 madrugada BRT conforme CEO"
+      },
+      "bookmaker_native": {
+        "bet_id": "3056933044",
+        "raw_pick_text": "Dplus KIA (Kills) - Hanwha Life (Kills), Under 32.5",
+        "raw_stake_text": "R$ 1.000,00"
+      }
+    },
+    "notes": "EWC South Korea Qualifier 2026-05-25 — Map 2. lolesports nao cobre EWC. Settle manual. Trigger: Lulu (peel) + Alistar (flex engage) = 1peel+flex. Fair Pinnacle 33.5 informado pelo CEO.",
+    "fair_pinnacle": 33.5,
+    "fair_formula": null,
+    "fair_line_source": "pinnacle_manual",
+    "is_method_bet": true
+  },
+  {
+    "id": "e375bb88-f8a9-4427-ae08-c9ffcca1b6c4",
+    "created_at": "2026-05-26T08:08:19.799499+00:00",
+    "bookmaker": "pinnacle",
+    "league": "EWC-SK-Qualifier",
+    "team_a": "Dplus",
+    "team_b": "Hanwha Life",
+    "market": "Total Kills",
+    "pick": "Under 32.5",
+    "odd": 1.787,
+    "stake": 2500,
+    "bet_datetime": "2026-05-26T07:00:00+00:00",
+    "pandascore_match_id": null,
+    "pandascore_match_name": null,
+    "is_map_bet": true,
+    "map_number": 1,
+    "status": "green",
+    "profit": 1967.5,
+    "settled_at": "2026-05-26T08:08:17.866+00:00",
+    "settle_source": "bookmaker_native_print",
+    "screenshot_path": null,
+    "raw_extraction": {
+      "ladder_info": {
+        "note": "ladder cross-odd mesma linha Under 32.5 Map 1 DK×HLE Pinnacle",
+        "total_legs": 2,
+        "ladder_group_id": "2005cfce-aa96-436d-8fdf-f480e60a81da",
+        "ladder_position": 2
+      },
+      "match_context": {
+        "team_a": "Dplus",
+        "team_b": "Hanwha Life",
+        "start_time": "2026-05-26T07:00:00Z",
+        "total_kills": 27,
+        "compositions": {
+          "team_1_picks": [
+            "Ambessa",
+            "Xin Zhao",
+            "Viktor",
+            "Ashe",
+            "Seraphine"
+          ],
+          "team_2_picks": [
+            "Rumble",
+            "Pantheon",
+            "Orianna",
+            "Lucian",
+            "Milio"
+          ]
+        },
+        "league_short": "EWC-SK-Qualifier",
+        "trigger_type": "2peel",
+        "milio_outlier": true,
+        "fair_line_used": 33.5,
+        "coverage_status": "ewc_not_in_lolesports",
+        "fair_source_ref": "2026-05-25-fair-pinnacle.json",
+        "lolesports_match_id": null,
+        "bet_datetime_patched_at": "2026-05-26T08:15:42.418Z",
+        "bet_datetime_patch_reason": "EWC sem start_time da API; estimado em 26/05 madrugada BRT conforme CEO"
+      },
+      "bookmaker_native": {
+        "bet_id": "3056924181",
+        "raw_pick_text": "Under 32.5 Map 1 DK×HLE EWC SK",
+        "raw_stake_text": "R$ 2.500,00",
+        "settled_win_loss": "Win"
+      }
+    },
+    "notes": "EWC South Korea Qualifier 2026-05-25 — Map 1 — ladder cross-odd Pinnacle",
+    "fair_pinnacle": null,
+    "fair_formula": null,
+    "fair_line_source": null,
+    "is_method_bet": true
+  }
+]

@@ -35,6 +35,39 @@ try {
  *  2. nome está em aliases → retorna canônico
  *  3. caso contrário → retorna original e loga aviso (audit trail)
  */
+/**
+ * normalizeLeague: converte formatos EWC fora-padrão pro canônico EWC-LCK/LEC/LPL.
+ * Causa: bookmakers usam "EWC SK Qualifier", "EWC_SK_QUAL", "Esports World Cup Korea Q" etc.
+ * Sem normalização, hook check-pending-bets (que filtra `/^EWC[-_ ]/`) pode pegar errado e
+ * settle script só ignora EWC se prefix bate. Bet fica pending forever silencioso.
+ */
+function normalizeLeague(league) {
+  if (!league) return league;
+  const l = String(league).trim();
+  // Detecta variantes EWC e mapeia região → canônico
+  // Padrões: EWC-X, EWC_X, EWC X, "Esports World Cup X"
+  const m = l.match(/^(?:EWC[-_\s]+|Esports\s*World\s*Cup[-_\s]+)(.+)$/i);
+  if (m) {
+    const region = m[1].toLowerCase().replace(/[\s_-]/g, '');
+    // Korea / SK / Korean / LCK
+    if (/^(sk|korea|korean|lck|kr|skquali|skqual|koreaquali)/i.test(region)) return 'EWC-LCK';
+    // EMEA / LEC / Europe
+    if (/^(emea|eu|europe|european|lec|emeaquali)/i.test(region)) return 'EWC-LEC';
+    // China / LPL / Chinese
+    if (/^(china|chinese|lpl|cn|chinaquali|lplquali)/i.test(region)) return 'EWC-LPL';
+    // NA / LCS / Americas
+    if (/^(na|americas|lcs|northamerica)/i.test(region)) return 'EWC-LCS';
+    // APAC / Asia-Pacific
+    if (/^(apac|asiapacific|asiapac)/i.test(region)) return 'EWC-APAC';
+    // SA / South America / Brazil / CBLOL
+    if (/^(sa|southamerica|brazil|cblol|brasil)/i.test(region)) return 'EWC-CBLOL';
+    // Default: prefix EWC- + região original
+    console.error(`[NORM-LEAGUE] EWC variant não-mapeada: "${league}" → mantendo com prefix EWC-`);
+    return 'EWC-' + region.toUpperCase();
+  }
+  return l;
+}
+
 function normalizeTeam(name) {
   if (!name || !TEAM_ALIASES) return name;
   // Regra 1: isolated (ex: Karmine Corp Blue, Vitality.Bee) — nunca unificar
@@ -185,6 +218,11 @@ function postJson(supabaseUrl, supabaseKey, urlPath, body) {
     if (mc.team_a) mc.team_a = normalizeTeam(mc.team_a);
     if (mc.team_b) mc.team_b = normalizeTeam(mc.team_b);
   }
+
+  // Fix 2026-05-26: normaliza liga EWC fora-padrão pra evitar "no_match_id" silencioso.
+  // EWC_SK_QUAL, EWC-SK-Qualifier, EWC SK Quali, etc → mapeia pro padrão EWC-LCK/LEC/LPL.
+  // Hook check-pending-bets filtra por /^EWC[-_ ]/ — entradas no formato canônico não poluem display.
+  bet.league = normalizeLeague(bet.league);
 
   // Guard 2026-05-20: bet_datetime deve estar consistente com match start_time.
   // Erro recorrente: agente passa "hoje" interpretando data errada e bet fica
