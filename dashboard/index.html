@@ -1863,20 +1863,15 @@
       const realCount = simulated.filter(x => x.b.bookmaker !== 'SIMULATED').length;
       const simCount = simulated.filter(x => x.b.bookmaker === 'SIMULATED').length;
 
-      // Profit: usa b.profit do banco pra reais (reflete cashout/hedge) + recalc pra SIMULATED.
-      // Stake real (b.stake) em tudo — não param fixo. ROI sobre stake total real.
-      // Fix 2026-05-26: revertido pra 4 KPIs limpos (decisão Elvis "junto") + consistência stake real.
+      // Profit: sempre TEÓRICO com params do dropdown (stake, odd) — esta seção é simulação.
+      // Não usa b.profit real nem b.stake real. Consistente com o que os cards de time mostram.
+      // Fix 2026-05-28: revertido bug introduzido em e386451 que misturava PnL real (b.profit)
+      // nos cards de time, tornando impossível ter PnL negativo com hit>BE (ex: Esprit Shonen 66.7%).
       let profit = 0;
-      let totalStake = 0;
+      const totalStake = simulated.length * stake;
       for (const { b, sim } of simulated) {
-        const s = parseFloat(b.stake) || stake;
         const o = betOdd(b);
-        totalStake += s;
-        if (b.bookmaker === 'SIMULATED') {
-          profit += sim.won ? s * (o - 1) : -s;
-        } else {
-          profit += parseFloat(b.profit) || 0;
-        }
+        profit += sim.won ? stake * (o - 1) : -stake;
       }
       const roi = totalStake ? (100 * profit / totalStake) : 0;
 
@@ -1895,18 +1890,14 @@
         const sims = filtered.map(b => ({ b, sim: getBetSimulation(b) })).filter(x => x.sim);
         if (!sims.length) return null;
         const g = sims.filter(x => x.sim.won).length;
-        // Fix 2026-05-26: usa stake real e profit do banco pra consistência com KPI principal
-        let p = 0, sStake = 0;
+        // Profit teórico com params do dropdown (stake, odd) — consistente com aggBy e KPI global.
+        // Fix 2026-05-28: era b.profit real pra bets reais (bug e386451), causava ROI errado por trigger.
+        let p = 0;
         for (const x of sims) {
-          const s = parseFloat(x.b.stake) || stake;
           const o = betOdd(x.b);
-          sStake += s;
-          if (x.b.bookmaker === 'SIMULATED') {
-            p += x.sim.won ? s * (o - 1) : -s;
-          } else {
-            p += parseFloat(x.b.profit) || 0;
-          }
+          p += x.sim.won ? stake * (o - 1) : -stake;
         }
+        const sStake = sims.length * stake;
         return { n: sims.length, hit: 100*g/sims.length, profit: p, roi: sStake ? (100*p/sStake) : 0 };
       }
       const t2 = statsForTrigger('2peel');
@@ -1921,26 +1912,31 @@
       // Fix 2026-05-25: agrega por (chave | game_id) antes de contar — elimina inflação por ladder.
       // Múltiplas bets no mesmo mapa/linha contam como 1 entrada; status = green se PnL > 0.
       // Bets sem game_id recebem ID sintético "NOID-<id>" → tratadas como mapa único.
-      // Fix 2026-05-26: profit usa b.profit pra reais (cashout) + recalc stake_real pra SIMULATED.
+      // Fix 2026-05-28: profit SEMPRE teórico com params do dropdown (stake, odd).
+      //   Bug anterior (e386451): bets reais usavam b.profit do banco → PnL real misturado com hit
+      //   simulado, impossibilitando valores negativos com hit acima do BE (ex: Esprit Shonen 66.7% → -R$50).
       function aggBy(keyFn) {
         // 1ª passada: por (chave | game_id) — junta bets do mesmo mapa
         const byMap = new Map();
+        const normKey = s => (s || '').toLowerCase().replace(/\s+/g, '-');
         for (const { b, sim } of simulated) {
-          const gid = b.raw_extraction?.match_context?.lolesports_game_id
-            ? String(b.raw_extraction.match_context.lolesports_game_id)
-            : `NOID-${b.id || b.bet_id || Math.random()}`;
+          let gid;
+          if (b.raw_extraction?.match_context?.lolesports_game_id) {
+            gid = String(b.raw_extraction.match_context.lolesports_game_id);
+          } else {
+            // Fix 2026-05-28: NOID-<uuid> único por bet → cada ladder bet virava mapa independente.
+            // Chave determinística data+times+mapa resolve EWC sem lolesports_game_id.
+            const date = (b.bet_datetime || '').slice(0, 10);
+            gid = `EWC-${date}-${normKey(b.team_a)}-vs-${normKey(b.team_b)}-map${b.map_number || '?'}`;
+          }
           const keys = keyFn(b);
+          const o = betOdd(b);
+          const betProfit = sim.won ? stake * (o - 1) : -stake;
           for (const k of keys) {
             if (!k) continue;
             const mapKey = k + '|' + gid;
-            if (!byMap.has(mapKey)) byMap.set(mapKey, { name: k, profit: 0 });
-            const entry = byMap.get(mapKey);
-            const s = parseFloat(b.stake) || stake;
-            const o = betOdd(b);
-            const betProfit = (b.bookmaker === 'SIMULATED')
-              ? (sim.won ? s * (o - 1) : -s)
-              : (parseFloat(b.profit) || 0);
-            entry.profit += betProfit;
+            // 1 stake por mapa: skip se já existe — ladder (N bets no mesmo game_id) conta como 1.
+            if (!byMap.has(mapKey)) byMap.set(mapKey, { name: k, profit: betProfit });
           }
         }
         // 2ª passada: por time/liga — cada mapa = 1 entrada; green se profit > 0
