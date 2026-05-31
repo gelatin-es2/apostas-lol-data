@@ -663,7 +663,10 @@
     <div style="background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(16,185,129,0.06)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
       <div style="font-weight:700; font-size:14px; color:var(--green)">🌟 Método Milio — sub-método dedicado</div>
       <div style="font-size:12px; color:var(--muted); margin-top:6px">
-        Filtra bets reais + simuladas onde <strong>Milio aparece como support (qualquer lado)</strong>. Milio é outlier consistente no Split 2: hit muito acima da média em qualquer cenário. Candidato a operar com <strong>stake maior</strong>. Mesmos controles Δ/odd/stake da aba Banco de dados.
+        <strong>TODOS os 105 jogos</strong> do Split 2 (LCK/LPL/LEC/CBLOL/LCS) onde <strong>Milio jogou de support</strong> — com ou sem bet, fonte results.json (audit 2026-05-31). Under hit recalculado live com o slider Δ (<code>kills &lt; fair + Δ</code>). Profit teórico usa a odd do slider.
+      </div>
+      <div style="font-size:11px; color:var(--muted); margin-top:8px; line-height:1.6">
+        🟢 <strong>STACK</strong>: Milio vs Bard/Lulu (under detona) · 🔴 <strong>EVITAR</strong>: Milio vs Nautilus/Alistar/Renata (engage-tank fura) ou time NIP (joga rápido) · ⚠️ amostra fraca (n&lt;5)
       </div>
       <div style="display:flex;gap:16px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border-soft);flex-wrap:wrap">
         <label style="font-size:12px;color:var(--muted);font-weight:600">Δ FAIR LINE:</label>
@@ -688,17 +691,29 @@
 
     <div id="miKpis" class="kpis"></div>
 
-    <div class="section-title">Hit por liga (Milio sup)</div>
+    <div class="section-title">Hit por trigger (Milio sozinho = coin-flip)</div>
+    <div id="miByTrigger" class="days"></div>
+
+    <div class="section-title">Hit por sup adversário 🟢 STACK / 🔴 EVITAR</div>
+    <div id="miByOpponentSup" class="days"></div>
+
+    <div class="section-title">Hit por liga</div>
     <div id="miByLeague" class="days"></div>
 
-    <div class="section-title">Hit por time (com ou contra Milio)</div>
+    <div class="section-title">Hit por time do Milio 🔴 NIP=evitar</div>
     <div id="miByTeam" class="days"></div>
 
-    <div class="section-title">Hit por sup adversário (parceiro de bracket — qual sup contra Milio bate Under?)</div>
-    <div id="miByOpponentSup" class="days"></div>
+    <div class="section-title">Calibração de fair (edge = fair − kills)</div>
+    <div id="miFairCalib" class="days"></div>
+
+    <div class="section-title">Tendência temporal (edge está fechando?)</div>
+    <div id="miByTime" class="days"></div>
 
     <div class="section-title">Hit por mapa</div>
     <div id="miByMap" class="days"></div>
+
+    <div class="section-title">Todos os 105 jogos</div>
+    <div id="miAllGames" class="days"></div>
   </main>
 
   <main class="container tab-pane" data-pane="split1">
@@ -1964,9 +1979,10 @@
 
       // Lista canônica de suports válidos do método (peel_pure + flex)
       // Expandido 2026-05-23: Lux + Anivia adicionados como flex
+      // Alistar REMOVIDO 2026-05-29 (CEO): -26.8% ROI n=21 consistente em 2 amostragens
       const VALID_SUPPORTS = new Set([
         'Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio',
-        'Bard','Rakan','Alistar','Lux','Anivia'
+        'Bard','Rakan','Lux','Anivia'
       ]);
 
       // Pré-popula cache uma passada com todos os times (normTeamName está no escopo módulo)
@@ -2007,124 +2023,149 @@
     loadAnaliseTab();
 
     // ===== Aba "Método Milio" =====
+    // ===== Aba Milio — fonte: milio_dashboard_data.json (105 jogos results.json) =====
+    const MILIO_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/milio_dashboard_data.json';
+    let milioData = null;
+    const MILIO_FLAGS = {
+      stack_opp_sup: ['Bard', 'Lulu'],
+      avoid_opp_sup: ['Nautilus', 'Alistar', 'Renata'],
+      avoid_team: ['NIP'],
+    };
+
+    async function loadMilioData() {
+      if (milioData) return;
+      try {
+        const res = await fetch(MILIO_URL + '?v=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) { document.getElementById('miKpis').innerHTML = '<div class="empty">Dados ainda não publicados (push pendente)</div>'; return; }
+        milioData = await res.json();
+      } catch (e) {
+        console.warn('milio fetch:', e);
+        document.getElementById('miKpis').innerHTML = '<div class="empty">Erro ao carregar — tenta refresh</div>';
+      }
+    }
+
     function renderMilioTab() {
-      if (!analiseRawBets) return;
+      if (!milioData) return;
       const delta = parseInt(document.getElementById('miFairDelta').value);
       const miOddRaw = document.getElementById('miOdd').value;
-      const miOddIsReal = (miOddRaw === 'real');
-      const odd = miOddIsReal ? 1.72 : parseFloat(miOddRaw);
-      function miBetOdd(b) {
-        if (!miOddIsReal) return odd;
-        const ro = parseFloat(b.odd);
-        return (b.bookmaker !== 'SIMULATED' && !isNaN(ro) && ro > 1) ? ro : 1.72;
-      }
+      const odd = (miOddRaw === 'real') ? 1.72 : parseFloat(miOddRaw); // jogos não têm odd real → ref 1.72
       const stake = parseFloat(document.getElementById('miStake').value) || 2000;
+      const games = milioData.games || [];
 
-      // Filtra: só bets onde Milio é support em algum lado
-      const milioBets = analiseRawBets.filter(b => {
-        const mc = b.raw_extraction?.match_context || {};
-        return mc.blue_picks?.support === 'Milio' || mc.red_picks?.support === 'Milio';
-      });
+      // under_hit recalculado live: kills < fair + delta
+      const sim = games
+        .filter(g => g.fair != null && g.total_kills != null)
+        .map(g => ({ g, won: g.total_kills < (g.fair + delta) }));
 
-      function getBetSim(b) {
-        const mc = b.raw_extraction?.match_context || {};
-        let baseLine = null;
-        if (b.bookmaker === 'SIMULATED') {
-          baseLine = mc.fair_line_calculated ?? null;
-          if (baseLine == null) {
-            const m = (b.pick || '').match(/(\d+(?:[.,]\d+)?)/);
-            if (m) baseLine = parseFloat(m[1].replace(',','.'));
-            // NÃO subtrair 1 — SIMULATED salva linha direta
-          }
-        } else {
-          const m = (b.pick || '').match(/(\d+(?:[.,]\d+)?)/);
-          if (m) baseLine = parseFloat(m[1].replace(',','.'));
-          const realOdd = parseFloat(b.odd);
-          if (!isNaN(realOdd) && realOdd < 1.72) baseLine = baseLine - 1;
-        }
-        if (baseLine == null) return null;
-        const kills = mc.total_kills;
-        if (kills == null) return null;
-        const simLine = baseLine + delta;
-        const isOver = /over|mais de/i.test(b.pick || '');
-        return { won: isOver ? (kills > simLine) : (kills < simLine) };
-      }
-
-      const simulated = milioBets.map(b => ({ b, sim: getBetSim(b) })).filter(x => x.sim);
-      const total = simulated.length;
-      const green = simulated.filter(x => x.sim.won).length;
-      const profit = simulated.reduce((s, x) => s + (x.sim.won ? stake * (miBetOdd(x.b) - 1) : -stake), 0);
-      const stakeSum = total * stake;
+      const total = sim.length;
+      const green = sim.filter(x => x.won).length;
+      const profit = sim.reduce((s, x) => s + (x.won ? stake * (odd - 1) : -stake), 0);
       const hitPct = total ? (100 * green / total) : 0;
-      const roi = stakeSum ? (100 * profit / stakeSum) : 0;
+      const roi = total ? (100 * profit / (total * stake)) : 0;
       const breakeven = (100 / odd).toFixed(1);
-      const realCount = simulated.filter(x => x.b.bookmaker !== 'SIMULATED').length;
-      const simCount = simulated.filter(x => x.b.bookmaker === 'SIMULATED').length;
-
-      // Games únicos + hit por game (controle de amplificação por ladder)
-      const gamesMap = new Map();
-      for (const x of simulated) {
-        const mc = x.b.raw_extraction?.match_context || {};
-        const k = String(mc.lolesports_game_id || `${mc.lolesports_match_id}|${x.b.map_number}` || x.b.id);
-        if (!gamesMap.has(k)) gamesMap.set(k, x.sim.won); // primeira bet do game decide
-      }
-      const uniqGames = gamesMap.size;
-      const uniqGreen = [...gamesMap.values()].filter(v => v).length;
-      const uniqHit = uniqGames ? (100 * uniqGreen / uniqGames) : 0;
 
       document.getElementById('miKpis').innerHTML = `
-        <div class="kpi"><div class="label">Bets c/ Milio sup</div><div class="value">${total}</div><div class="sub">${uniqGames} games · ${realCount}r · ${simCount}s</div></div>
-        <div class="kpi"><div class="label">Hit (Δ${delta >= 0 ? '+' : ''}${delta})</div><div class="value ${hitPct >= parseFloat(breakeven) ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div><div class="sub">BE ${breakeven}% · 1/game ${uniqHit.toFixed(1).replace('.',',')}%</div></div>
-        <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profit >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profit)}</div></div>
+        <div class="kpi"><div class="label">Jogos c/ Milio sup</div><div class="value">${total}</div><div class="sub">${milioData.range?.[0]} → ${milioData.range?.[1]}</div></div>
+        <div class="kpi"><div class="label">Under hit (Δ${delta >= 0 ? '+' : ''}${delta})</div><div class="value ${hitPct >= parseFloat(breakeven) ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div><div class="sub">BE ${breakeven}% @ odd ${odd}</div></div>
+        <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profit >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profit)}</div><div class="sub">stake R$ ${fmtMoney(stake)}/jogo</div></div>
         <div class="kpi"><div class="label">ROI</div><div class="value ${roi >= 0 ? 'green' : 'red'}">${roi >= 0 ? '+' : ''}${roi.toFixed(1).replace('.',',')}%</div></div>
       `;
 
-      function aggBy(keyFn) {
+      // Agrega por chave; minN filtra amostra fraca; flag = fn(name) → 'stack'|'avoid'|null
+      function aggBy(keyFn, minN, flagFn) {
         const m = {};
-        for (const { b, sim } of simulated) {
-          const keys = keyFn(b);
-          for (const k of keys) {
+        for (const { g, won } of sim) {
+          for (const k of keyFn(g)) {
             if (!k) continue;
-            if (!m[k]) m[k] = { name: k, n: 0, w: 0, profit: 0 };
-            m[k].n++;
-            if (sim.won) { m[k].w++; m[k].profit += stake * (miBetOdd(b) - 1); }
-            else m[k].profit -= stake;
+            if (!m[k]) m[k] = { name: k, n: 0, w: 0, profit: 0, kills: 0 };
+            m[k].n++; m[k].kills += g.total_kills;
+            if (won) { m[k].w++; m[k].profit += stake * (odd - 1); } else m[k].profit -= stake;
           }
         }
-        return Object.values(m).filter(x => x.n >= 3).map(x => ({...x, hit: 100*x.w/x.n})).sort((a,b) => b.hit - a.hit);
+        return Object.values(m)
+          .map(x => ({ ...x, hit: 100 * x.w / x.n, avgK: x.kills / x.n, flag: flagFn ? flagFn(x.name) : null }))
+          .filter(x => x.n >= (minN || 1))
+          .sort((a, b) => b.hit - a.hit);
       }
 
       function renderList(target, rows, label) {
         const html = rows.map(r => {
+          const weak = r.n < 5;
           const cls = r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red');
-          return `<div class="day"><div><div class="date">${r.name}</div><div class="stats">n=${r.n} · R$ ${fmtMoney(r.profit)}</div></div><div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div></div>`;
+          const icon = r.flag === 'stack' ? '🟢 ' : (r.flag === 'avoid' ? '🔴 ' : '');
+          const weakTag = weak ? ' <span style="color:var(--muted);font-size:10px">⚠️n&lt;5</span>' : '';
+          const avgK = r.avgK != null ? ` · ${r.avgK.toFixed(1)}k` : '';
+          return `<div class="day"><div><div class="date">${icon}${r.name}${weakTag}</div><div class="stats">n=${r.n}${avgK} · R$ ${fmtMoney(r.profit)}</div></div><div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div></div>`;
         }).join('');
         document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
       }
 
-      // Pré-popula cache de nomes (caso aba Milio renderize antes da Banco de dados)
-      for (const b of milioBets) { normTeamName(b.team_a); normTeamName(b.team_b); }
+      // 1. Por trigger (achado #1: Milio sozinho = coin-flip)
+      renderList('miByTrigger', aggBy(g => [g.trigger || 'sem trigger'], 1), 'trigger');
 
-      renderList('miByLeague', aggBy(b => [normalizeLeague(b.league)]), 'dados de liga');
-      renderList('miByTeam', aggBy(b => [normTeamName(b.team_a), normTeamName(b.team_b)]), 'dados de time');
-      // Sup adversário: o OUTRO sup do jogo (não Milio)
-      renderList('miByOpponentSup', aggBy(b => {
-        const mc = b.raw_extraction?.match_context || {};
-        const sB = mc.blue_picks?.support, sR = mc.red_picks?.support;
-        if (sB === 'Milio') return [sR];
-        if (sR === 'Milio') return [sB];
-        return [];
-      }), 'dados de sup adversário');
-      renderList('miByMap', aggBy(b => ['Map ' + (b.map_number || '?')]), 'dados de mapa');
+      // 2. Por sup adversário com flags STACK/EVITAR
+      const oppFlag = (sup) => MILIO_FLAGS.stack_opp_sup.includes(sup) ? 'stack'
+        : (MILIO_FLAGS.avoid_opp_sup.includes(sup) ? 'avoid' : null);
+      renderList('miByOpponentSup', aggBy(g => [g.opp_sup], 1, oppFlag), 'sup adversário');
+
+      // 3. Por liga
+      renderList('miByLeague', aggBy(g => [g.league], 1), 'liga');
+
+      // 4. Por time do Milio, com flag NIP
+      const teamFlag = (t) => MILIO_FLAGS.avoid_team.includes(t) ? 'avoid' : null;
+      renderList('miByTeam', aggBy(g => [g.milio_team], 3, teamFlag), 'time');
+
+      // 5. Calibração de fair — distribuição da margem (fair - kills)
+      const margins = sim.map(x => x.g.fair - x.g.total_kills);
+      const edge = margins.reduce((a, b) => a + b, 0) / (margins.length || 1);
+      const buckets = [
+        { name: 'Under por 4+ kills', n: margins.filter(m => m >= 4).length },
+        { name: 'Under por 2-3', n: margins.filter(m => m >= 2 && m < 4).length },
+        { name: 'Under por 1 (no fio)', n: margins.filter(m => m > 0 && m < 2).length },
+        { name: 'OVER (furou)', n: margins.filter(m => m <= 0).length },
+      ];
+      document.getElementById('miFairCalib').innerHTML =
+        `<div class="day"><div><div class="date">Edge médio (fair − kills)</div><div class="stats">média de quanto o fair fica acima dos kills reais</div></div><div class="profit ${edge > 0 ? 'green' : 'red'}">+${edge.toFixed(1)}k</div></div>` +
+        buckets.map(b => `<div class="day"><div><div class="date">${b.name}</div><div class="stats">${total ? (100*b.n/total).toFixed(0) : 0}% dos jogos</div></div><div class="profit">${b.n}</div></div>`).join('');
+
+      // 6. Tendência temporal — 3 blocos
+      const block = (from, to) => {
+        const sub = sim.filter(x => x.g.date >= from && x.g.date <= to);
+        if (!sub.length) return null;
+        const w = sub.filter(x => x.won).length;
+        const avgF = sub.reduce((a, x) => a + x.g.fair, 0) / sub.length;
+        const avgK = sub.reduce((a, x) => a + x.g.total_kills, 0) / sub.length;
+        return { n: sub.length, hit: 100 * w / sub.length, avgF, avgK };
+      };
+      const blocks = [
+        { name: 'Abril', b: block('2026-04-01', '2026-04-30') },
+        { name: 'Maio 01-15', b: block('2026-05-01', '2026-05-15') },
+        { name: 'Maio 16-31', b: block('2026-05-16', '2026-05-31') },
+      ].filter(x => x.b);
+      document.getElementById('miByTime').innerHTML = blocks.map(x => {
+        const cls = x.b.hit >= 60 ? 'green' : (x.b.hit >= 50 ? '' : 'red');
+        return `<div class="day"><div><div class="date">${x.name}</div><div class="stats">n=${x.b.n} · fair ${x.b.avgF.toFixed(1)} · ${x.b.avgK.toFixed(1)}k · gap ${(x.b.avgF-x.b.avgK).toFixed(1)}</div></div><div class="profit ${cls}">${x.b.hit.toFixed(1).replace('.',',')}%</div></div>`;
+      }).join('') || '<div class="empty">Sem dados.</div>';
+
+      // 7. Por mapa
+      renderList('miByMap', aggBy(g => ['Map ' + (g.map || '?')], 1), 'mapa');
+
+      // 8. Todos os jogos (lista cronológica reversa)
+      const allHtml = [...games].reverse().map(g => {
+        const won = g.total_kills < (g.fair + delta);
+        const oppF = oppFlag(g.opp_sup);
+        const icon = oppF === 'stack' ? '🟢' : (oppF === 'avoid' || MILIO_FLAGS.avoid_team.includes(g.milio_team) ? '🔴' : '');
+        return `<div class="day"><div><div class="date">${g.date} · ${g.league} · M${g.map} ${icon}</div><div class="stats">${g.milio_team} (Milio) vs ${g.opp_team} (${g.opp_sup}) · ${g.trigger || 'sem trig'} · fair ${g.fair}</div></div><div class="profit ${won ? 'green' : 'red'}">${g.total_kills}k ${won ? '✓' : '✗'}</div></div>`;
+      }).join('');
+      document.getElementById('miAllGames').innerHTML = allHtml;
     }
 
     document.getElementById('miFairDelta').addEventListener('change', renderMilioTab);
     document.getElementById('miOdd').addEventListener('change', renderMilioTab);
     document.getElementById('miStake').addEventListener('input', renderMilioTab);
 
-    // Renderiza a aba Milio quando dados carregados (usa o mesmo fetch da analise)
     async function ensureBetsLoaded() {
-      if (!analiseRawBets) await loadAnaliseTab();
+      await loadMilioData();
       renderMilioTab();
     }
     ensureBetsLoaded();
