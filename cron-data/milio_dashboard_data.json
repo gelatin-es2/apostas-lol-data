@@ -1,12 +1,21 @@
 {
-  "generated_at": "2026-05-31T13:42:51.973Z",
-  "source": "results.json (Split 2 majors LCK/LPL/LEC/CBLOL/LCS — todos os mapas do Milio)",
+  "generated_at": "2026-05-31T14:29:40.979Z",
+  "source": "híbrido: results.json (majors, base-mapa) + Supabase (LFL/LES, dedup por game)",
   "range": [
     "2026-04-08",
     "2026-05-30"
   ],
-  "milio_count": 105,
-  "baseline_under_hit_pct": 68.6,
+  "milio_count": 114,
+  "baseline_under_hit_pct": 67.5,
+  "by_league": {
+    "LPL": 41,
+    "LCK": 31,
+    "LEC": 12,
+    "CBLOL": 14,
+    "LCS": 7,
+    "LES": 5,
+    "LFL": 4
+  },
   "flags": {
     "stack_opp_sup": [
       "Bard",
@@ -21,7 +30,9 @@
       "NIP"
     ],
     "weak_sample_league": [
-      "LCS"
+      "LCS",
+      "LFL",
+      "LES"
     ]
   },
   "games": [
@@ -41,7 +52,8 @@
       "fair": 29.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926685695519",
+      "src": "results.json"
     },
     {
       "date": "2026-04-09",
@@ -59,7 +71,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615924499588624",
+      "src": "results.json"
     },
     {
       "date": "2026-04-10",
@@ -77,7 +90,8 @@
       "fair": 28.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962840637",
+      "src": "results.json"
     },
     {
       "date": "2026-04-10",
@@ -95,7 +109,8 @@
       "fair": 30.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115548128962840602",
+      "src": "results.json"
     },
     {
       "date": "2026-04-10",
@@ -113,7 +128,8 @@
       "fair": 24.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926685761085",
+      "src": "results.json"
     },
     {
       "date": "2026-04-11",
@@ -131,7 +147,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548668059523731",
+      "src": "results.json"
     },
     {
       "date": "2026-04-12",
@@ -149,7 +166,8 @@
       "fair": 21.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926685761096",
+      "src": "results.json"
     },
     {
       "date": "2026-04-14",
@@ -167,7 +185,8 @@
       "fair": 28.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115565670260116260",
+      "src": "results.json"
     },
     {
       "date": "2026-04-15",
@@ -185,7 +204,8 @@
       "fair": 26.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115565670260050651",
+      "src": "results.json"
     },
     {
       "date": "2026-04-17",
@@ -203,7 +223,8 @@
       "fair": 24.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115615924499588656",
+      "src": "results.json"
     },
     {
       "date": "2026-04-17",
@@ -221,7 +242,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115615926685695527",
+      "src": "results.json"
     },
     {
       "date": "2026-04-18",
@@ -239,7 +261,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615924499588618",
+      "src": "results.json"
     },
     {
       "date": "2026-04-18",
@@ -257,7 +280,8 @@
       "fair": 26.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115548668059523683",
+      "src": "results.json"
     },
     {
       "date": "2026-04-18",
@@ -275,7 +299,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115565670260050638",
+      "src": "results.json"
     },
     {
       "date": "2026-04-18",
@@ -293,7 +318,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115565670260116251",
+      "src": "results.json"
     },
     {
       "date": "2026-04-19",
@@ -311,7 +337,8 @@
       "fair": 29.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115615926685695491",
+      "src": "results.json"
     },
     {
       "date": "2026-04-19",
@@ -329,7 +356,8 @@
       "fair": 25.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115564793879403709",
+      "src": "results.json"
     },
     {
       "date": "2026-04-22",
@@ -347,7 +375,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926685695497",
+      "src": "results.json"
     },
     {
       "date": "2026-04-23",
@@ -365,7 +394,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962906233",
+      "src": "results.json"
     },
     {
       "date": "2026-04-23",
@@ -383,7 +413,8 @@
       "fair": 22.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926685761083",
+      "src": "results.json"
     },
     {
       "date": "2026-04-23",
@@ -401,7 +432,8 @@
       "fair": 30.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926685695509",
+      "src": "results.json"
     },
     {
       "date": "2026-04-24",
@@ -419,7 +451,8 @@
       "fair": 24.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926685761101",
+      "src": "results.json"
     },
     {
       "date": "2026-04-25",
@@ -437,7 +470,8 @@
       "fair": 28.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615924499588622",
+      "src": "results.json"
     },
     {
       "date": "2026-04-25",
@@ -455,7 +489,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926685695529",
+      "src": "results.json"
     },
     {
       "date": "2026-04-25",
@@ -473,7 +508,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677896622",
+      "src": "results.json"
     },
     {
       "date": "2026-04-25",
@@ -491,7 +527,8 @@
       "fair": 30.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548668059523750",
+      "src": "results.json"
     },
     {
       "date": "2026-04-26",
@@ -509,7 +546,8 @@
       "fair": 25.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926685761099",
+      "src": "results.json"
     },
     {
       "date": "2026-04-26",
@@ -527,7 +565,8 @@
       "fair": 29.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548668059523678",
+      "src": "results.json"
     },
     {
       "date": "2026-04-26",
@@ -545,7 +584,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548668059589342",
+      "src": "results.json"
     },
     {
       "date": "2026-04-28",
@@ -563,7 +603,8 @@
       "fair": 28.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115615924499588578",
+      "src": "results.json"
     },
     {
       "date": "2026-04-29",
@@ -581,7 +622,8 @@
       "fair": 30.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962840621",
+      "src": "results.json"
     },
     {
       "date": "2026-04-30",
@@ -599,7 +641,8 @@
       "fair": 29.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962906285",
+      "src": "results.json"
     },
     {
       "date": "2026-04-30",
@@ -617,7 +660,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962840676",
+      "src": "results.json"
     },
     {
       "date": "2026-04-30",
@@ -635,7 +679,8 @@
       "fair": 25.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926685761097",
+      "src": "results.json"
     },
     {
       "date": "2026-04-30",
@@ -653,7 +698,27 @@
       "fair": 25.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615924499588640",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-04-30",
+      "league": "LES",
+      "map": 2,
+      "team_blue": "KOI Fénix",
+      "team_red": "UB Alma Mater",
+      "milio_side": "red",
+      "milio_team": "UB Alma Mater",
+      "opp_team": "KOI Fénix",
+      "opp_sup": "Lulu",
+      "sup_blue": "Lulu",
+      "sup_red": "Milio",
+      "total_kills": 36,
+      "fair": 29.5,
+      "fair_source": null,
+      "trigger": "2peel",
+      "game_id": "116295697480989281",
+      "src": "supabase"
     },
     {
       "date": "2026-05-01",
@@ -671,7 +736,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962906228",
+      "src": "results.json"
     },
     {
       "date": "2026-05-01",
@@ -689,7 +755,8 @@
       "fair": 31.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115548128962906313",
+      "src": "results.json"
     },
     {
       "date": "2026-05-01",
@@ -707,7 +774,8 @@
       "fair": 28.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115615926677831081",
+      "src": "results.json"
     },
     {
       "date": "2026-05-01",
@@ -725,7 +793,8 @@
       "fair": 29.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115615926677896665",
+      "src": "results.json"
     },
     {
       "date": "2026-05-02",
@@ -743,7 +812,8 @@
       "fair": 31.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115548128963037561",
+      "src": "results.json"
     },
     {
       "date": "2026-05-02",
@@ -761,7 +831,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677896673",
+      "src": "results.json"
     },
     {
       "date": "2026-05-02",
@@ -779,7 +850,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677831065",
+      "src": "results.json"
     },
     {
       "date": "2026-05-02",
@@ -797,7 +869,8 @@
       "fair": 29.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548668059523715",
+      "src": "results.json"
     },
     {
       "date": "2026-05-02",
@@ -815,7 +888,8 @@
       "fair": 29.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115565670260116234",
+      "src": "results.json"
     },
     {
       "date": "2026-05-02",
@@ -833,7 +907,8 @@
       "fair": 28.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115565670260116219",
+      "src": "results.json"
     },
     {
       "date": "2026-05-03",
@@ -851,7 +926,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962971916",
+      "src": "results.json"
     },
     {
       "date": "2026-05-03",
@@ -869,7 +945,8 @@
       "fair": 26.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548668059523702",
+      "src": "results.json"
     },
     {
       "date": "2026-05-03",
@@ -887,7 +964,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115565670260050647",
+      "src": "results.json"
     },
     {
       "date": "2026-05-03",
@@ -905,7 +983,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115565670260116271",
+      "src": "results.json"
     },
     {
       "date": "2026-05-04",
@@ -923,7 +1002,8 @@
       "fair": 26.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548668059523723",
+      "src": "results.json"
     },
     {
       "date": "2026-05-04",
@@ -941,7 +1021,8 @@
       "fair": 30.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548668059523741",
+      "src": "results.json"
     },
     {
       "date": "2026-05-06",
@@ -959,7 +1040,46 @@
       "fair": 28.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115548128962971857",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-05-06",
+      "league": "LES",
+      "map": 3,
+      "team_blue": "FALKE ESPORTS",
+      "team_red": "LUA Gaming",
+      "milio_side": "blue",
+      "milio_team": "FALKE ESPORTS",
+      "opp_team": "LUA Gaming",
+      "opp_sup": "Renata",
+      "sup_blue": "Milio",
+      "sup_red": "Renata",
+      "total_kills": 27,
+      "fair": 30.5,
+      "fair_source": null,
+      "trigger": "2peel",
+      "game_id": "116295697481054858",
+      "src": "supabase"
+    },
+    {
+      "date": "2026-05-06",
+      "league": "LES",
+      "map": 2,
+      "team_blue": "GIANTX ITERO",
+      "team_red": "Barça Esports",
+      "milio_side": "blue",
+      "milio_team": "GIANTX ITERO",
+      "opp_team": "Barça Esports",
+      "opp_sup": "Bard",
+      "sup_blue": "Milio",
+      "sup_red": "Bard",
+      "total_kills": 43,
+      "fair": 32.5,
+      "fair_source": null,
+      "trigger": "1peel+flex",
+      "game_id": "116295697481054897",
+      "src": "supabase"
     },
     {
       "date": "2026-05-07",
@@ -977,7 +1097,8 @@
       "fair": 28.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962971921",
+      "src": "results.json"
     },
     {
       "date": "2026-05-07",
@@ -995,7 +1116,8 @@
       "fair": 25.5,
       "fair_source": "polymarket_match_level",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677962238",
+      "src": "results.json"
     },
     {
       "date": "2026-05-07",
@@ -1013,7 +1135,8 @@
       "fair": 25.5,
       "fair_source": "polymarket_game2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115615926677831073",
+      "src": "results.json"
     },
     {
       "date": "2026-05-08",
@@ -1031,7 +1154,8 @@
       "fair": 30.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128963037537",
+      "src": "results.json"
     },
     {
       "date": "2026-05-08",
@@ -1049,7 +1173,8 @@
       "fair": 27.5,
       "fair_source": "polymarket_game1",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615924499588654",
+      "src": "results.json"
     },
     {
       "date": "2026-05-08",
@@ -1067,7 +1192,8 @@
       "fair": 28.5,
       "fair_source": "polymarket_game2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548668059523762",
+      "src": "results.json"
     },
     {
       "date": "2026-05-09",
@@ -1085,7 +1211,8 @@
       "fair": 30.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115548128963037516",
+      "src": "results.json"
     },
     {
       "date": "2026-05-09",
@@ -1103,7 +1230,8 @@
       "fair": 31.5,
       "fair_source": "polymarket_game2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677896697",
+      "src": "results.json"
     },
     {
       "date": "2026-05-09",
@@ -1121,7 +1249,8 @@
       "fair": 26.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115565670260181824",
+      "src": "results.json"
     },
     {
       "date": "2026-05-10",
@@ -1139,7 +1268,8 @@
       "fair": 29.5,
       "fair_source": "polymarket_game2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115548128962971901",
+      "src": "results.json"
     },
     {
       "date": "2026-05-10",
@@ -1157,7 +1287,8 @@
       "fair": 25.5,
       "fair_source": "polymarket_game1",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677896692",
+      "src": "results.json"
     },
     {
       "date": "2026-05-10",
@@ -1175,7 +1306,8 @@
       "fair": 27.5,
       "fair_source": "polymarket_game2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677831069",
+      "src": "results.json"
     },
     {
       "date": "2026-05-10",
@@ -1193,7 +1325,8 @@
       "fair": 28.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115565670260181828",
+      "src": "results.json"
     },
     {
       "date": "2026-05-10",
@@ -1211,7 +1344,8 @@
       "fair": 26.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115564793879469282",
+      "src": "results.json"
     },
     {
       "date": "2026-05-12",
@@ -1229,7 +1363,8 @@
       "fair": 28.5,
       "fair_source": "polymarket_game1",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677896688",
+      "src": "results.json"
     },
     {
       "date": "2026-05-12",
@@ -1247,7 +1382,8 @@
       "fair": 31.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677896624",
+      "src": "results.json"
     },
     {
       "date": "2026-05-13",
@@ -1265,7 +1401,8 @@
       "fair": 29.5,
       "fair_source": "polymarket_game2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962971909",
+      "src": "results.json"
     },
     {
       "date": "2026-05-13",
@@ -1283,7 +1420,8 @@
       "fair": 26.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115548128962971952",
+      "src": "results.json"
     },
     {
       "date": "2026-05-13",
@@ -1301,7 +1439,8 @@
       "fair": 26.5,
       "fair_source": "polymarket_game2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115615926677831077",
+      "src": "results.json"
     },
     {
       "date": "2026-05-14",
@@ -1319,7 +1458,8 @@
       "fair": 29.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962971924",
+      "src": "results.json"
     },
     {
       "date": "2026-05-14",
@@ -1337,7 +1477,27 @@
       "fair": 26.5,
       "fair_source": "polymarket_game2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677896681",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-05-14",
+      "league": "LES",
+      "map": 2,
+      "team_blue": "LUA Gaming",
+      "team_red": "UCAM Esports Club",
+      "milio_side": "blue",
+      "milio_team": "LUA Gaming",
+      "opp_team": "UCAM Esports Club",
+      "opp_sup": "Seraphine",
+      "sup_blue": "Milio",
+      "sup_red": "Seraphine",
+      "total_kills": 0,
+      "fair": 27.5,
+      "fair_source": null,
+      "trigger": "2peel",
+      "game_id": "116295697481054877",
+      "src": "supabase"
     },
     {
       "date": "2026-05-15",
@@ -1355,7 +1515,8 @@
       "fair": 25.5,
       "fair_source": "polymarket_game2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115615926685761109",
+      "src": "results.json"
     },
     {
       "date": "2026-05-15",
@@ -1373,7 +1534,8 @@
       "fair": 29.5,
       "fair_source": "polymarket_game2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677896641",
+      "src": "results.json"
     },
     {
       "date": "2026-05-16",
@@ -1391,7 +1553,8 @@
       "fair": 31.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962971937",
+      "src": "results.json"
     },
     {
       "date": "2026-05-16",
@@ -1409,7 +1572,8 @@
       "fair": 28.5,
       "fair_source": "polymarket_match_level",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677896686",
+      "src": "results.json"
     },
     {
       "date": "2026-05-16",
@@ -1427,7 +1591,8 @@
       "fair": 28.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115565670260181843",
+      "src": "results.json"
     },
     {
       "date": "2026-05-16",
@@ -1445,7 +1610,8 @@
       "fair": 28.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115564793879403721",
+      "src": "results.json"
     },
     {
       "date": "2026-05-17",
@@ -1463,7 +1629,8 @@
       "fair": 31.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962971874",
+      "src": "results.json"
     },
     {
       "date": "2026-05-17",
@@ -1481,7 +1648,8 @@
       "fair": 30.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115548128963037521",
+      "src": "results.json"
     },
     {
       "date": "2026-05-17",
@@ -1499,7 +1667,8 @@
       "fair": 28.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115615926677896648",
+      "src": "results.json"
     },
     {
       "date": "2026-05-17",
@@ -1517,7 +1686,8 @@
       "fair": 29.5,
       "fair_source": "polymarket_game2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115615926677831061",
+      "src": "results.json"
     },
     {
       "date": "2026-05-17",
@@ -1535,7 +1705,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115565670260181835",
+      "src": "results.json"
     },
     {
       "date": "2026-05-17",
@@ -1553,7 +1724,8 @@
       "fair": 25.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115564793879338109",
+      "src": "results.json"
     },
     {
       "date": "2026-05-17",
@@ -1571,7 +1743,8 @@
       "fair": 27.5,
       "fair_source": "livestats_team_avg(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115564793879469265",
+      "src": "results.json"
     },
     {
       "date": "2026-05-20",
@@ -1587,11 +1760,10 @@
       "sup_red": "Nautilus",
       "total_kills": 29,
       "fair": 32.5,
-      "fair_pinnacle": null,
-      "fair_formula": 32.5,
       "fair_source": "formula(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115548128962971912",
+      "src": "results.json"
     },
     {
       "date": "2026-05-20",
@@ -1607,11 +1779,29 @@
       "sup_red": "Milio",
       "total_kills": 25,
       "fair": 30.5,
-      "fair_pinnacle": null,
-      "fair_formula": 30.5,
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128963037552",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-05-20",
+      "league": "LFL",
+      "map": 1,
+      "team_blue": "Galions",
+      "team_red": "Solary",
+      "milio_side": "red",
+      "milio_team": "Solary",
+      "opp_team": "Galions",
+      "opp_sup": "Seraphine",
+      "sup_blue": "Seraphine",
+      "sup_red": "Milio",
+      "total_kills": 39,
+      "fair": 28.5,
+      "fair_source": "user_bet_backfill_2026-05-29",
+      "trigger": "2peel",
+      "game_id": "116316789792721711",
+      "src": "supabase"
     },
     {
       "date": "2026-05-21",
@@ -1627,11 +1817,67 @@
       "sup_red": "Milio",
       "total_kills": 21,
       "fair": 29.5,
-      "fair_pinnacle": null,
-      "fair_formula": 29.5,
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962906317",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-05-21",
+      "league": "LES",
+      "map": 2,
+      "team_blue": "KOI Fénix",
+      "team_red": "UCAM Esports Club",
+      "milio_side": "red",
+      "milio_team": "UCAM Esports Club",
+      "opp_team": "KOI Fénix",
+      "opp_sup": "Lulu",
+      "sup_blue": "Lulu",
+      "sup_red": "Milio",
+      "total_kills": 12,
+      "fair": 29.5,
+      "fair_source": null,
+      "trigger": "2peel",
+      "game_id": "116295697480923741",
+      "src": "supabase"
+    },
+    {
+      "date": "2026-05-21",
+      "league": "LFL",
+      "map": 1,
+      "team_blue": "Galions",
+      "team_red": "Esprit Shonen",
+      "milio_side": "red",
+      "milio_team": "Esprit Shonen",
+      "opp_team": "Galions",
+      "opp_sup": "Karma",
+      "sup_blue": "Karma",
+      "sup_red": "Milio",
+      "total_kills": 29,
+      "fair": 27.5,
+      "fair_source": "user_bet_backfill_2026-05-29",
+      "trigger": "2peel",
+      "game_id": "116316789792721737",
+      "src": "supabase"
+    },
+    {
+      "date": "2026-05-21",
+      "league": "LFL",
+      "map": 1,
+      "team_blue": "TLN Pirates",
+      "team_red": "Vitality.Bee",
+      "milio_side": "blue",
+      "milio_team": "TLN Pirates",
+      "opp_team": "Vitality.Bee",
+      "opp_sup": "Lulu",
+      "sup_blue": "Milio",
+      "sup_red": "Lulu",
+      "total_kills": 23,
+      "fair": 27.5,
+      "fair_source": "user_bet_backfill_2026-05-29",
+      "trigger": "2peel",
+      "game_id": "116316789792721733",
+      "src": "supabase"
     },
     {
       "date": "2026-05-22",
@@ -1647,11 +1893,10 @@
       "sup_red": "Bard",
       "total_kills": 22,
       "fair": 29.5,
-      "fair_pinnacle": null,
-      "fair_formula": 29.5,
       "fair_source": "formula(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115548128962971964",
+      "src": "results.json"
     },
     {
       "date": "2026-05-23",
@@ -1667,11 +1912,10 @@
       "sup_red": "Milio",
       "total_kills": 16,
       "fair": 26.5,
-      "fair_pinnacle": null,
-      "fair_formula": 26.5,
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962971928",
+      "src": "results.json"
     },
     {
       "date": "2026-05-23",
@@ -1687,11 +1931,10 @@
       "sup_red": "Nami",
       "total_kills": 11,
       "fair": 27.5,
-      "fair_pinnacle": null,
-      "fair_formula": 27.5,
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115616219464541884",
+      "src": "results.json"
     },
     {
       "date": "2026-05-24",
@@ -1707,11 +1950,10 @@
       "sup_red": "Nami",
       "total_kills": 20,
       "fair": 29.5,
-      "fair_pinnacle": null,
-      "fair_formula": 29.5,
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962971949",
+      "src": "results.json"
     },
     {
       "date": "2026-05-24",
@@ -1727,11 +1969,10 @@
       "sup_red": "Milio",
       "total_kills": 29,
       "fair": 29.5,
-      "fair_pinnacle": null,
-      "fair_formula": 29.5,
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962971893",
+      "src": "results.json"
     },
     {
       "date": "2026-05-24",
@@ -1747,11 +1988,10 @@
       "sup_red": "Milio",
       "total_kills": 14,
       "fair": 27.5,
-      "fair_pinnacle": null,
-      "fair_formula": 27.5,
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115616219464541896",
+      "src": "results.json"
     },
     {
       "date": "2026-05-24",
@@ -1767,11 +2007,10 @@
       "sup_red": "Milio",
       "total_kills": 15,
       "fair": 25.5,
-      "fair_pinnacle": null,
-      "fair_formula": 25.5,
       "fair_source": "formula(team+league)/2",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115616219464541902",
+      "src": "results.json"
     },
     {
       "date": "2026-05-24",
@@ -1787,11 +2026,10 @@
       "sup_red": "Milio",
       "total_kills": 17,
       "fair": 29.5,
-      "fair_pinnacle": null,
-      "fair_formula": 29.5,
       "fair_source": "formula(team+team)/2",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115548668059589355",
+      "src": "results.json"
     },
     {
       "date": "2026-05-24",
@@ -1807,11 +2045,10 @@
       "sup_red": "Nautilus",
       "total_kills": 26,
       "fair": 24.5,
-      "fair_pinnacle": null,
-      "fair_formula": 24.5,
       "fair_source": "formula(team+team)/2",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115564793879469296",
+      "src": "results.json"
     },
     {
       "date": "2026-05-25",
@@ -1827,11 +2064,10 @@
       "sup_red": "Bard",
       "total_kills": 28,
       "fair": 26.5,
-      "fair_pinnacle": 26.5,
-      "fair_formula": 26.5,
       "fair_source": "pinnacle_manual",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115565670260181858",
+      "src": "results.json"
     },
     {
       "date": "2026-05-27",
@@ -1847,11 +2083,10 @@
       "sup_red": "Alistar",
       "total_kills": 43,
       "fair": 29.5,
-      "fair_pinnacle": 29.5,
-      "fair_formula": 32.5,
       "fair_source": "pinnacle_manual",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115548128962971865",
+      "src": "results.json"
     },
     {
       "date": "2026-05-27",
@@ -1867,11 +2102,10 @@
       "sup_red": "Milio",
       "total_kills": 32,
       "fair": 29.5,
-      "fair_pinnacle": 29.5,
-      "fair_formula": 29.5,
       "fair_source": "pinnacle_manual",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115548128962971942",
+      "src": "results.json"
     },
     {
       "date": "2026-05-28",
@@ -1887,11 +2121,29 @@
       "sup_red": "Milio",
       "total_kills": 16,
       "fair": 28.5,
-      "fair_pinnacle": 28.5,
-      "fair_formula": 30.5,
       "fair_source": "pinnacle_manual",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115548128962971904",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-05-28",
+      "league": "LFL",
+      "map": 1,
+      "team_blue": "Galions",
+      "team_red": "TLN Pirates",
+      "milio_side": "red",
+      "milio_team": "TLN Pirates",
+      "opp_team": "Galions",
+      "opp_sup": "Lulu",
+      "sup_blue": "Lulu",
+      "sup_red": "Milio",
+      "total_kills": 16,
+      "fair": 29.5,
+      "fair_source": "user_bet_backfill_2026-05-29",
+      "trigger": "2peel",
+      "game_id": "116316789793770317",
+      "src": "supabase"
     },
     {
       "date": "2026-05-30",
@@ -1907,11 +2159,10 @@
       "sup_red": "Milio",
       "total_kills": 19,
       "fair": 28.5,
-      "fair_pinnacle": 28.5,
-      "fair_formula": 28.5,
       "fair_source": "pinnacle_manual",
       "trigger": null,
-      "peel_count": 1
+      "game_id": "115548668059589372",
+      "src": "results.json"
     },
     {
       "date": "2026-05-30",
@@ -1927,11 +2178,10 @@
       "sup_red": "Milio",
       "total_kills": 19,
       "fair": 27.5,
-      "fair_pinnacle": 27.5,
-      "fair_formula": 27.5,
       "fair_source": "pinnacle_manual",
       "trigger": "1peel+flex",
-      "peel_count": 1
+      "game_id": "115565670260181866",
+      "src": "results.json"
     },
     {
       "date": "2026-05-30",
@@ -1947,11 +2197,10 @@
       "sup_red": "Seraphine",
       "total_kills": 21,
       "fair": 25.5,
-      "fair_pinnacle": 25.5,
-      "fair_formula": 22.5,
       "fair_source": "pinnacle_manual",
       "trigger": "2peel",
-      "peel_count": 2
+      "game_id": "115564793879469308",
+      "src": "results.json"
     }
   ]
 }
