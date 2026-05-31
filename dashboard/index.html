@@ -700,20 +700,14 @@
     <div class="section-title">Hit por liga</div>
     <div id="miByLeague" class="days"></div>
 
-    <div class="section-title">Hit por time do Milio 🔴 NIP=evitar</div>
+    <div class="section-title">Hit por time (Milio + adversário) 🔴 NIP=evitar</div>
     <div id="miByTeam" class="days"></div>
 
-    <div class="section-title">Calibração de fair (edge = fair − kills)</div>
-    <div id="miFairCalib" class="days"></div>
-
-    <div class="section-title">Tendência temporal (edge está fechando?)</div>
-    <div id="miByTime" class="days"></div>
+    <div class="section-title">Hit por boneco — todas as lanes</div>
+    <div id="miByChamp" class="days"></div>
 
     <div class="section-title">Hit por mapa</div>
     <div id="miByMap" class="days"></div>
-
-    <div class="section-title">Todos os 105 jogos</div>
-    <div id="miAllGames" class="days"></div>
   </main>
 
   <main class="container tab-pane" data-pane="split1">
@@ -2111,53 +2105,24 @@
       // 3. Por liga
       renderList('miByLeague', aggBy(g => [g.league], 1), 'liga');
 
-      // 4. Por time do Milio, com flag NIP
+      // 4. Por time — Milio E adversário (todos os times do jogo), flag NIP
       const teamFlag = (t) => MILIO_FLAGS.avoid_team.includes(t) ? 'avoid' : null;
-      renderList('miByTeam', aggBy(g => [g.milio_team], 3, teamFlag), 'time');
+      renderList('miByTeam', aggBy(g => [g.milio_team, g.opp_team], 3, teamFlag), 'time');
 
-      // 5. Calibração de fair — distribuição da margem (fair - kills)
-      const margins = sim.map(x => x.g.fair - x.g.total_kills);
-      const edge = margins.reduce((a, b) => a + b, 0) / (margins.length || 1);
-      const buckets = [
-        { name: 'Under por 4+ kills', n: margins.filter(m => m >= 4).length },
-        { name: 'Under por 2-3', n: margins.filter(m => m >= 2 && m < 4).length },
-        { name: 'Under por 1 (no fio)', n: margins.filter(m => m > 0 && m < 2).length },
-        { name: 'OVER (furou)', n: margins.filter(m => m <= 0).length },
-      ];
-      document.getElementById('miFairCalib').innerHTML =
-        `<div class="day"><div><div class="date">Edge médio (fair − kills)</div><div class="stats">média de quanto o fair fica acima dos kills reais</div></div><div class="profit ${edge > 0 ? 'green' : 'red'}">+${edge.toFixed(1)}k</div></div>` +
-        buckets.map(b => `<div class="day"><div><div class="date">${b.name}</div><div class="stats">${total ? (100*b.n/total).toFixed(0) : 0}% dos jogos</div></div><div class="profit">${b.n}</div></div>`).join('');
+      // 5. Por boneco — todas as lanes (top/jungle/mid/adc/support dos 2 times).
+      // Usa picks completos quando disponíveis (games_with_full_picks).
+      const ROLES = ['top', 'jungle', 'mid', 'adc', 'support'];
+      renderList('miByChamp', aggBy(g => {
+        const champs = [];
+        for (const side of [g.blue_picks, g.red_picks]) {
+          if (!side) continue;
+          for (const r of ROLES) if (side[r]) champs.push(side[r]);
+        }
+        return [...new Set(champs)]; // 1 jogo conta 1x por boneco mesmo se espelhado
+      }, 4), 'boneco');
 
-      // 6. Tendência temporal — 3 blocos
-      const block = (from, to) => {
-        const sub = sim.filter(x => x.g.date >= from && x.g.date <= to);
-        if (!sub.length) return null;
-        const w = sub.filter(x => x.won).length;
-        const avgF = sub.reduce((a, x) => a + x.g.fair, 0) / sub.length;
-        const avgK = sub.reduce((a, x) => a + x.g.total_kills, 0) / sub.length;
-        return { n: sub.length, hit: 100 * w / sub.length, avgF, avgK };
-      };
-      const blocks = [
-        { name: 'Abril', b: block('2026-04-01', '2026-04-30') },
-        { name: 'Maio 01-15', b: block('2026-05-01', '2026-05-15') },
-        { name: 'Maio 16-31', b: block('2026-05-16', '2026-05-31') },
-      ].filter(x => x.b);
-      document.getElementById('miByTime').innerHTML = blocks.map(x => {
-        const cls = x.b.hit >= 60 ? 'green' : (x.b.hit >= 50 ? '' : 'red');
-        return `<div class="day"><div><div class="date">${x.name}</div><div class="stats">n=${x.b.n} · fair ${x.b.avgF.toFixed(1)} · ${x.b.avgK.toFixed(1)}k · gap ${(x.b.avgF-x.b.avgK).toFixed(1)}</div></div><div class="profit ${cls}">${x.b.hit.toFixed(1).replace('.',',')}%</div></div>`;
-      }).join('') || '<div class="empty">Sem dados.</div>';
-
-      // 7. Por mapa
+      // 6. Por mapa
       renderList('miByMap', aggBy(g => ['Map ' + (g.map || '?')], 1), 'mapa');
-
-      // 8. Todos os jogos (lista cronológica reversa)
-      const allHtml = [...games].reverse().map(g => {
-        const won = g.total_kills < (g.fair + delta);
-        const oppF = oppFlag(g.opp_sup);
-        const icon = oppF === 'stack' ? '🟢' : (oppF === 'avoid' || MILIO_FLAGS.avoid_team.includes(g.milio_team) ? '🔴' : '');
-        return `<div class="day"><div><div class="date">${g.date} · ${g.league} · M${g.map} ${icon}</div><div class="stats">${g.milio_team} (Milio) vs ${g.opp_team} (${g.opp_sup}) · ${g.trigger || 'sem trig'} · fair ${g.fair}</div></div><div class="profit ${won ? 'green' : 'red'}">${g.total_kills}k ${won ? '✓' : '✗'}</div></div>`;
-      }).join('');
-      document.getElementById('miAllGames').innerHTML = allHtml;
     }
 
     document.getElementById('miFairDelta').addEventListener('change', renderMilioTab);
