@@ -1,0 +1,50 @@
+{
+  "date": "2026-05-31",
+  "captures": [
+    {
+      "captured_at": "2026-05-31T13:14:37.905Z",
+      "ligas": [
+        "LCK",
+        "LPL"
+      ],
+      "fair_lines": []
+    },
+    {
+      "captured_at": "2026-05-31T13:14:38.596Z",
+      "ligas": [
+        "LEC",
+        "CBLOL"
+      ],
+      "fair_lines": [
+        {
+          "league": "LEC",
+          "league_id": "98767991302996019",
+          "event_id": "115548668059589376",
+          "start_time": "2026-05-31T15:00:00Z",
+          "team_a": "VIT",
+          "team_b": "GX",
+          "team_a_avg": null,
+          "team_b_avg": null,
+          "fair_formula": null,
+          "fair_pinnacle": null,
+          "fair_source": "unavailable",
+          "bo": 5
+        },
+        {
+          "league": "CBLOL",
+          "league_id": "98767991332355509",
+          "event_id": "115565670260181869",
+          "start_time": "2026-05-31T16:00:00Z",
+          "team_a": "LOS",
+          "team_b": "RED",
+          "team_a_avg": null,
+          "team_b_avg": null,
+          "fair_formula": null,
+          "fair_pinnacle": null,
+          "fair_source": "unavailable",
+          "bo": 5
+        }
+      ]
+    }
+  ]
+}
