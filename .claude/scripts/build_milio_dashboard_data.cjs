@@ -1,12 +1,11 @@
 // Gera cron-data/milio_dashboard_data.json — TODOS os jogos do Split 2 onde o
 // suporte Milio apareceu (qualquer lado), a partir dos results.json.
 //
-// Fonte: cron-data/YYYY-MM-DD-results.json (mesma base do audit 2026-05-31).
-// Diferente da aba Milio antiga (que lia só bets do Supabase, n=72): aqui pega
-// TODOS os mapas que Milio jogou (com ou sem bet), n=105+.
+// Fonte: cron-data/YYYY-MM-DD-results.json (gerados por analyze_yesterday no cron).
+// Base COMPLETA: todos os mapas que Milio jogou, com ou sem bet (n=105+),
+// diferente da aba antiga que lia só bets do Supabase (n=66, ladder/filtro).
 //
-// A dashboard carrega esse JSON via raw.github e recalcula hit/ROI live com o
-// slider Δ fair (under_hit = total_kills < matchup_fair + delta).
+// Roda no cron (.github/workflows/daily-cron.yml) DEPOIS do analyze → auto-atualiza.
 //
 // Uso: node .claude/scripts/build_milio_dashboard_data.cjs
 // Output: cron-data/milio_dashboard_data.json
@@ -17,8 +16,16 @@ const path = require('path');
 const CRON = path.resolve(__dirname, '..', '..', 'cron-data');
 const OUT = path.join(CRON, 'milio_dashboard_data.json');
 
+// Flags do audit 2026-05-31 (knowledge/audits/milio-audit-2026-05-31.md)
+const FLAGS = {
+  stack_opp_sup: ['Bard', 'Lulu'],                  // 🟢 under detona (83% / 80%)
+  avoid_opp_sup: ['Nautilus', 'Alistar', 'Renata'], // 🔴 engage-tank fura
+  avoid_team: ['NIP'],                              // 🔴 joga rápido mesmo com Milio
+  weak_sample_league: ['LCS'],                      // ⚠️ n fraco
+};
+
 const files = fs.readdirSync(CRON)
-  .filter(x => /^\d{4}-\d{2}-\d{2}-results\.json$/.test(x))
+  .filter(x => /^\d{4}-\d{2}-\d{2}-results\.json$/.test(x)) // exclui -migration-, -backup-
   .sort();
 
 const games = [];
@@ -29,11 +36,10 @@ for (const file of files) {
   try { d = JSON.parse(fs.readFileSync(path.join(CRON, file), 'utf8')); } catch { continue; }
   const day = file.slice(0, 10);
   for (const r of (d.results || [])) {
-    const sb = (r.sup_blue || '');
-    const sr = (r.sup_red || '');
-    const milioBlue = sb.toLowerCase().includes('milio');
-    const milioRed = sr.toLowerCase().includes('milio');
+    const milioBlue = (r.sup_blue || '').toLowerCase().includes('milio');
+    const milioRed = (r.sup_red || '').toLowerCase().includes('milio');
     if (!milioBlue && !milioRed) continue;
+    if (r.total_kills == null || r.matchup_fair == null) continue;
     if (!firstDay) firstDay = day;
     lastDay = day;
     games.push({
@@ -63,17 +69,11 @@ const hits = games.filter(g => g.total_kills < g.fair).length;
 
 const out = {
   generated_at: new Date().toISOString(),
-  source: 'results.json (Split 2 majors LCK/LPL/LEC/CBLOL/LCS)',
+  source: 'results.json (Split 2 majors LCK/LPL/LEC/CBLOL/LCS — todos os mapas do Milio)',
   range: [firstDay, lastDay],
   milio_count: games.length,
-  baseline_under_hit_pct: +(100 * hits / games.length).toFixed(1),
-  // Flags do audit 2026-05-31 (knowledge/audits/milio-audit-2026-05-31.md)
-  flags: {
-    stack_opp_sup: ['Bard', 'Lulu'],      // 🟢 under detona (83% / 80%)
-    avoid_opp_sup: ['Nautilus', 'Alistar', 'Renata'], // 🔴 engage-tank, kills furam
-    avoid_team: ['NIP'],                   // 🔴 joga rápido mesmo com Milio (33% n=6)
-    weak_sample_league: ['LCS'],           // ⚠️ n=7, não acionável
-  },
+  baseline_under_hit_pct: games.length ? +(100 * hits / games.length).toFixed(1) : 0,
+  flags: FLAGS,
   games,
 };
 

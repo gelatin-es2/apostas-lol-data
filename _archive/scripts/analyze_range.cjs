@@ -17,9 +17,13 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
-const { loadFairPinnacle } = require('./lib/loadFairPinnacle.cjs');
+// Fix 2026-05-31: script vive em _archive/scripts/ — resolve lib e cron-data
+// na RAIZ do repo (../..), não relativo ao próprio dir. Antes quebrava o cron
+// (Cannot find module './lib/...') e o gap de results.json 24→30/05.
+const REPO_ROOT = path.resolve(__dirname, '..', '..');
+const { loadFairPinnacle } = require(path.join(REPO_ROOT, 'lib', 'loadFairPinnacle.cjs'));
 
-const OUT_DIR = path.join(__dirname, 'cron-data');
+const OUT_DIR = path.join(REPO_ROOT, 'cron-data');
 const LOLES_KEY = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 
 const LEAGUE_IDS = {

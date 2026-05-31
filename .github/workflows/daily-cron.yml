@@ -66,6 +66,12 @@ jobs:
         run: node .claude/scripts/rebuild_dashboard_stats_cron.cjs
         continue-on-error: true
 
+      # Build dados da aba "Método Milio" (todos os jogos do Milio nos results.json).
+      # Roda DEPOIS do analyze (que gera os results.json do dia). Audit 2026-05-31.
+      - name: Build Milio dashboard data
+        run: node .claude/scripts/build_milio_dashboard_data.cjs
+        continue-on-error: true
+
       # Rebuild LFL dashboard stats (standalone, antes só rodava manual — adicionado 2026-05-25)
       - name: Rebuild LFL dashboard stats
         run: node .claude/scripts/rebuild_lfl_dashboard_stats.cjs
