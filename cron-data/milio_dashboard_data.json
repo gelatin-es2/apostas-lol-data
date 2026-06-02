@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-06-01T17:23:36.568Z",
+  "generated_at": "2026-06-02T16:06:36.674Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL/LES + picks completos por game_id)",
   "range": [
     "2026-04-08",
-    "2026-06-01"
+    "2026-06-02"
   ],
-  "milio_count": 97,
+  "milio_count": 99,
   "games_with_full_picks": 0,
-  "baseline_under_hit_pct": 68,
+  "baseline_under_hit_pct": 68.7,
   "by_league": {
-    "LPL": 41,
+    "LPL": 42,
     "LCK": 27,
-    "LEC": 10,
+    "LEC": 11,
     "CBLOL": 13,
     "LCS": 6
   },
@@ -2458,6 +2458,56 @@
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "115616219464541938",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-06-01",
+      "league": "LEC",
+      "map": 3,
+      "team_blue": "KC",
+      "team_red": "GX",
+      "milio_side": "red",
+      "milio_team": "GX",
+      "opp_team": "KC",
+      "opp_sup": "Nami",
+      "sup_blue": "Nami",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "support": "Nami"
+      },
+      "red_picks": {
+        "support": "Milio"
+      },
+      "total_kills": 21,
+      "fair": 29.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": "2peel",
+      "game_id": "115548668059589385",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-06-02",
+      "league": "LPL",
+      "map": 3,
+      "team_blue": "TT",
+      "team_red": "LGD",
+      "milio_side": "red",
+      "milio_team": "LGD",
+      "opp_team": "TT",
+      "opp_sup": "Nautilus",
+      "sup_blue": "Nautilus",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "support": "Nautilus"
+      },
+      "red_picks": {
+        "support": "Milio"
+      },
+      "total_kills": 24,
+      "fair": 26.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": null,
+      "game_id": "115616219464607482",
       "src": "results.json"
     }
   ]
