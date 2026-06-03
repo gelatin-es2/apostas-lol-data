@@ -1,0 +1,78 @@
+{
+  "date": "2026-06-03",
+  "analyzed_at": "2026-06-03T16:19:45.031Z",
+  "ligas": [
+    "LCK",
+    "LPL",
+    "LEC",
+    "CBLOL",
+    "LCS"
+  ],
+  "count": 2,
+  "results": [
+    {
+      "league": "LPL",
+      "match_id": "115616219464607485",
+      "game_id": "115616219464607486",
+      "map_number": 1,
+      "team_blue": "BLG",
+      "team_red": "EDG",
+      "kills_blue": 22,
+      "kills_red": 6,
+      "total_kills": 28,
+      "sup_blue": "Bard",
+      "sup_red": "Seraphine",
+      "peel_count": 1,
+      "peel_bucket": "1peel",
+      "flex_engages": [
+        "Bard"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 32.5,
+      "fair_pinnacle": null,
+      "fair_formula": 32.5,
+      "fair_source": "formula(team+team)/2",
+      "fair_raw": 65.94,
+      "fair_adjusted": 32.5,
+      "blue_avg": 38.44,
+      "red_avg": 27.5,
+      "blue_sample_n": 9,
+      "red_sample_n": 14,
+      "league_baseline": 28.5,
+      "vs_league": 4,
+      "under_hit": true
+    },
+    {
+      "league": "LPL",
+      "match_id": "115616219464607485",
+      "game_id": "115616219464607487",
+      "map_number": 2,
+      "team_blue": "BLG",
+      "team_red": "EDG",
+      "kills_blue": 17,
+      "kills_red": 8,
+      "total_kills": 25,
+      "sup_blue": "Rakan",
+      "sup_red": "Milio",
+      "peel_count": 1,
+      "peel_bucket": "1peel",
+      "flex_engages": [
+        "Rakan"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 33.5,
+      "fair_pinnacle": null,
+      "fair_formula": 33.5,
+      "fair_source": "formula(team+team)/2",
+      "fair_raw": 66.49,
+      "fair_adjusted": 33.5,
+      "blue_avg": 38.78,
+      "red_avg": 27.71,
+      "blue_sample_n": 9,
+      "red_sample_n": 14,
+      "league_baseline": 28.5,
+      "vs_league": 5,
+      "under_hit": true
+    }
+  ]
+}
