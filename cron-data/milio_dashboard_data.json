@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-06-06T13:14:53.844Z",
+  "generated_at": "2026-06-07T13:28:27.393Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL/LES + picks completos por game_id)",
   "range": [
     "2026-04-08",
-    "2026-06-06"
+    "2026-06-07"
   ],
-  "milio_count": 103,
+  "milio_count": 108,
   "games_with_full_picks": 0,
-  "baseline_under_hit_pct": 68.9,
+  "baseline_under_hit_pct": 68.5,
   "by_league": {
-    "LPL": 45,
-    "LCK": 28,
-    "LEC": 11,
-    "CBLOL": 13,
-    "LCS": 6
+    "LPL": 46,
+    "LCK": 29,
+    "LEC": 12,
+    "CBLOL": 14,
+    "LCS": 7
   },
   "flags": {
     "stack_opp_sup": [
@@ -2608,6 +2608,131 @@
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "115616219464607506",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-06-06",
+      "league": "LEC",
+      "map": 2,
+      "team_blue": "KC",
+      "team_red": "MKOI",
+      "milio_side": "blue",
+      "milio_team": "KC",
+      "opp_team": "MKOI",
+      "opp_sup": "Seraphine",
+      "sup_blue": "Milio",
+      "sup_red": "Seraphine",
+      "blue_picks": {
+        "support": "Milio"
+      },
+      "red_picks": {
+        "support": "Seraphine"
+      },
+      "total_kills": 28,
+      "fair": 26.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": "2peel",
+      "game_id": "115548668059589390",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-06-06",
+      "league": "CBLOL",
+      "map": 2,
+      "team_blue": "LOS",
+      "team_red": "FUR",
+      "milio_side": "red",
+      "milio_team": "FUR",
+      "opp_team": "LOS",
+      "opp_sup": "Karma",
+      "sup_blue": "Karma",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "support": "Karma"
+      },
+      "red_picks": {
+        "support": "Milio"
+      },
+      "total_kills": 22,
+      "fair": 24.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": "2peel",
+      "game_id": "115565670260181877",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-06-06",
+      "league": "LCS",
+      "map": 4,
+      "team_blue": "FLY",
+      "team_red": "TLAW",
+      "milio_side": "blue",
+      "milio_team": "FLY",
+      "opp_team": "TLAW",
+      "opp_sup": "Lulu",
+      "sup_blue": "Milio",
+      "sup_red": "Lulu",
+      "blue_picks": {
+        "support": "Milio"
+      },
+      "red_picks": {
+        "support": "Lulu"
+      },
+      "total_kills": 15,
+      "fair": 23.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": "2peel",
+      "game_id": "115564793879469322",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-06-07",
+      "league": "LCK",
+      "map": 3,
+      "team_blue": "KT",
+      "team_red": "DK",
+      "milio_side": "blue",
+      "milio_team": "KT",
+      "opp_team": "DK",
+      "opp_sup": "Lulu",
+      "sup_blue": "Milio",
+      "sup_red": "Lulu",
+      "blue_picks": {
+        "support": "Milio"
+      },
+      "red_picks": {
+        "support": "Lulu"
+      },
+      "total_kills": 30,
+      "fair": 25.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": "2peel",
+      "game_id": "115548128963037572",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-06-07",
+      "league": "LPL",
+      "map": 3,
+      "team_blue": "WE",
+      "team_red": "TES",
+      "milio_side": "red",
+      "milio_team": "TES",
+      "opp_team": "WE",
+      "opp_sup": "Seraphine",
+      "sup_blue": "Seraphine",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "support": "Seraphine"
+      },
+      "red_picks": {
+        "support": "Milio"
+      },
+      "total_kills": 20,
+      "fair": 27.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": "2peel",
+      "game_id": "115616219464607494",
       "src": "results.json"
     }
   ]
