@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-06-07T13:33:05.321Z",
-  "total_bets": 730,
+  "exported_at": "2026-06-07T17:47:14.697Z",
+  "total_bets": 731,
   "bets": [
     {
       "id": "5575e950-363f-4593-aea7-ca9944adf4cc",
@@ -63263,6 +63263,78 @@
       "fair_pinnacle": 31.5,
       "fair_formula": 30.5,
       "fair_line_source": "pinnacle_manual",
+      "is_method_bet": true
+    },
+    {
+      "id": "5fc08ab6-ea16-4e1a-b38c-751c49f64352",
+      "created_at": "2026-06-07T16:08:21.369966+00:00",
+      "bookmaker": "thunderpick",
+      "league": "EWC-CBLOL",
+      "team_a": "LOUD",
+      "team_b": "Keyd Stars",
+      "market": "Total Kills Over/Under",
+      "pick": "Under 28.5",
+      "odd": 1.8,
+      "stake": 1000.03,
+      "bet_datetime": "2026-06-07T16:00:00+00:00",
+      "pandascore_match_id": null,
+      "pandascore_match_name": null,
+      "is_map_bet": true,
+      "map_number": 1,
+      "status": "red",
+      "profit": -1000.03,
+      "settled_at": "2026-06-07T19:40:00+00:00",
+      "settle_source": "manual_elvis",
+      "screenshot_path": null,
+      "raw_extraction": {
+        "match_context": {
+          "draft": {
+            "VKS": [
+              "gnar",
+              "vi",
+              "viktor",
+              "lucian",
+              "milio"
+            ],
+            "LOUD": [
+              "sion",
+              "reksai",
+              "cassiopeia",
+              "xayah",
+              "rakan"
+            ]
+          },
+          "notes": "EWC SA/LATAM qualifier Bo3 Fearless Draft",
+          "teams": [
+            "LOUD",
+            "Keyd Stars"
+          ],
+          "coverage": "ewc_qualifier_manual_settle",
+          "supports": {
+            "VKS": "milio",
+            "LOUD": "rakan"
+          },
+          "under_hit": false,
+          "start_time": "2026-06-07T16:00:00Z",
+          "total_kills": 30,
+          "flex_engages": [
+            "rakan"
+          ],
+          "league_short": "EWC-CBLOL",
+          "trigger_type": "1peel+flex",
+          "manual_settle": true,
+          "lolesports_match_id": null
+        },
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "R$1.000,03"
+        }
+      },
+      "notes": "EWC SA/LATAM qualifier Bo3 Fearless Draft. Settle MANUAL — sem cobertura lolesports API.",
+      "fair_pinnacle": null,
+      "fair_formula": null,
+      "fair_line_source": null,
       "is_method_bet": true
     }
   ]
