@@ -1,0 +1,46 @@
+{
+  "date": "2026-06-08",
+  "analyzed_at": "2026-06-08T11:14:39.068Z",
+  "ligas": [
+    "LCK",
+    "LPL",
+    "LEC",
+    "CBLOL",
+    "LCS"
+  ],
+  "count": 1,
+  "results": [
+    {
+      "league": "LPL",
+      "match_id": "115616219464607509",
+      "game_id": "115616219464607511",
+      "map_number": 2,
+      "team_blue": "AL",
+      "team_red": "BLG",
+      "kills_blue": 16,
+      "kills_red": 12,
+      "total_kills": 28,
+      "sup_blue": "Alistar",
+      "sup_red": "Milio",
+      "peel_count": 1,
+      "peel_bucket": "1peel",
+      "flex_engages": [
+        "Alistar"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 32.5,
+      "fair_pinnacle": null,
+      "fair_formula": 32.5,
+      "fair_source": "formula(team+team)/2",
+      "fair_raw": 64.09,
+      "fair_adjusted": 32.5,
+      "blue_avg": 30.89,
+      "red_avg": 33.2,
+      "blue_sample_n": 9,
+      "red_sample_n": 10,
+      "league_baseline": 28.04,
+      "vs_league": 4.46,
+      "under_hit": true
+    }
+  ]
+}
