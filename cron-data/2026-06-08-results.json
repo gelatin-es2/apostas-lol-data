@@ -1,6 +1,6 @@
 {
   "date": "2026-06-08",
-  "analyzed_at": "2026-06-08T11:14:39.068Z",
+  "analyzed_at": "2026-06-08T15:30:27.153Z",
   "ligas": [
     "LCK",
     "LPL",
@@ -8,7 +8,7 @@
     "CBLOL",
     "LCS"
   ],
-  "count": 1,
+  "count": 2,
   "results": [
     {
       "league": "LPL",
@@ -32,15 +32,47 @@
       "fair_pinnacle": null,
       "fair_formula": 32.5,
       "fair_source": "formula(team+team)/2",
-      "fair_raw": 64.09,
+      "fair_raw": 64.47,
       "fair_adjusted": 32.5,
-      "blue_avg": 30.89,
-      "red_avg": 33.2,
-      "blue_sample_n": 9,
-      "red_sample_n": 10,
-      "league_baseline": 28.04,
-      "vs_league": 4.46,
+      "blue_avg": 31.2,
+      "red_avg": 33.27,
+      "blue_sample_n": 10,
+      "red_sample_n": 11,
+      "league_baseline": 28.15,
+      "vs_league": 4.35,
       "under_hit": true
+    },
+    {
+      "league": "LPL",
+      "match_id": "115616219464607509",
+      "game_id": "115616219464607512",
+      "map_number": 3,
+      "team_blue": "AL",
+      "team_red": "BLG",
+      "kills_blue": 25,
+      "kills_red": 9,
+      "total_kills": 34,
+      "sup_blue": "Karma",
+      "sup_red": "Bard",
+      "peel_count": 1,
+      "peel_bucket": "1peel",
+      "flex_engages": [
+        "Bard"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 31.5,
+      "fair_pinnacle": null,
+      "fair_formula": 31.5,
+      "fair_source": "formula(team+team)/2",
+      "fair_raw": 63.33,
+      "fair_adjusted": 31.5,
+      "blue_avg": 30.6,
+      "red_avg": 32.73,
+      "blue_sample_n": 10,
+      "red_sample_n": 11,
+      "league_baseline": 28.15,
+      "vs_league": 3.35,
+      "under_hit": false
     }
   ]
 }
