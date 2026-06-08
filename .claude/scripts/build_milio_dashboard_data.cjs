@@ -5,7 +5,7 @@
 // Fonte HÍBRIDA + ENRIQUECIMENTO:
 //   - Majors LCK/LPL/LEC/CBLOL/LCS → results.json (base-mapa: todo mapa jogado).
 //     Tem só o support por jogo (analyze_range só extrai support).
-//   - Tier2 LFL/LES → Supabase bets (única fonte com esses jogos).
+//   - Tier2 LFL → Supabase bets (única fonte com esses jogos). LES removido (2026-06-08).
 //   - ENRIQUECIMENTO: picks completos (top/jungle/mid/adc/support dos 2 times)
 //     vêm do Supabase, cruzados por lolesports_game_id. Jogos que viraram bet
 //     ganham picks completos; mapas sem bet ficam só com support.
@@ -23,7 +23,7 @@ const { loadConfig } = require('./_load-config.cjs');
 const CRON = path.resolve(__dirname, '..', '..', 'cron-data');
 const OUT = path.join(CRON, 'milio_dashboard_data.json');
 const MAJORS = ['LCK', 'LPL', 'LEC', 'CBLOL', 'LCS'];
-const TIER2 = ['LFL', 'LES'];
+const TIER2 = ['LFL']; // LES removido 2026-06-08 — fora das ligas operadas
 const ROLES = ['top', 'jungle', 'mid', 'adc', 'support'];
 
 // Flags do audit 2026-05-31 (knowledge/audits/milio-audit-2026-05-31.md)
@@ -31,7 +31,7 @@ const FLAGS = {
   stack_opp_sup: ['Bard', 'Lulu'],
   avoid_opp_sup: ['Nautilus', 'Alistar', 'Renata'],
   avoid_team: ['NIP'],
-  weak_sample_league: ['LCS', 'LFL', 'LES'],
+  weak_sample_league: ['LCS', 'LFL'],
 };
 
 const isMilio = s => (s || '').toLowerCase().includes('milio');
@@ -99,7 +99,7 @@ function fromResultsJson() {
   return games;
 }
 
-// ---------- Tier2 LFL/LES via Supabase (dedup por game_id) ----------
+// ---------- Tier2 LFL via Supabase (dedup por game_id) ----------
 function tier2FromSupabase(rows) {
   const byGame = new Map();
   for (const x of rows) {
@@ -157,9 +157,24 @@ function buildPicksIndex(rows) {
 }
 
 (async () => {
-  let rows = [];
-  try { rows = await fetchSupabase(); }
-  catch (e) { console.error('[WARN] Supabase falhou:', e.message); }
+  // --- Lê JSON existente pra comparação de sanidade ---
+  let prevFullPicks = 0;
+  try {
+    if (fs.existsSync(OUT)) {
+      const prev = JSON.parse(fs.readFileSync(OUT, 'utf8'));
+      prevFullPicks = prev.games_with_full_picks || 0;
+    }
+  } catch { /* ignora — sem prev é 0 */ }
+
+  // --- Fetch Supabase: ERRO FATAL se falhar ---
+  let rows;
+  try {
+    rows = await fetchSupabase();
+  } catch (e) {
+    console.error('[ERRO FATAL] Supabase fetch falhou — abortando escrita para preservar JSON existente.');
+    console.error('Motivo:', e.message);
+    process.exit(2); // exit != 0 → step do cron marca falha visível
+  }
 
   const picksIdx = buildPicksIndex(rows);
   const majors = fromResultsJson();
@@ -180,12 +195,19 @@ function buildPicksIndex(rows) {
   const hits = games.filter(g => g.total_kills < g.fair).length;
   const withFullPicks = games.filter(g => hasFullPicks(g.blue_picks) && hasFullPicks(g.red_picks)).length;
 
+  // --- Guard: não capota JSON bom com dado vazio ---
+  if (withFullPicks === 0 && prevFullPicks > 0) {
+    console.error(`[ERRO FATAL] Novo output tem games_with_full_picks=0 mas JSON existente tinha ${prevFullPicks}.`);
+    console.error('Supabase retornou dados mas picks foram zerados — possível bug de parsing. JSON preservado intacto.');
+    process.exit(2);
+  }
+
   const byLeague = {};
   for (const g of games) byLeague[g.league] = (byLeague[g.league] || 0) + 1;
 
   const out = {
     generated_at: new Date().toISOString(),
-    source: 'híbrido: results.json (majors) + Supabase (LFL/LES + picks completos por game_id)',
+    source: 'híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)',
     range: [firstDay, lastDay],
     milio_count: games.length,
     games_with_full_picks: withFullPicks,

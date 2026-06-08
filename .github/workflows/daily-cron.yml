@@ -19,6 +19,7 @@ jobs:
       contents: write
     env:
       SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      SUPABASE_URL: https://yxhpopkxlupdpqkdaffg.supabase.co
     steps:
       - uses: actions/checkout@v4
         with:
