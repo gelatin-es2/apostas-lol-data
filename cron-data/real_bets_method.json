@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-15T17:00:38.500Z",
+  "generated_at": "2026-06-16T16:29:14.640Z",
   "total_bets_universe": 365,
-  "total_settled": 359,
+  "total_settled": 361,
   "method_rules": {
     "peel_pure": [
       "soraka",
@@ -30,13 +30,13 @@
   },
   "by_trigger": {
     "2peel": {
-      "n": 193,
-      "wins": 117,
+      "n": 195,
+      "wins": 119,
       "losses": 76,
-      "hit": 60.6,
-      "stake": 146174.48,
-      "profit": 14736.48,
-      "roi": 10.1,
+      "hit": 61,
+      "stake": 148174.48,
+      "profit": 16073.48,
+      "roi": 10.8,
       "breakeven": 54.1
     },
     "1peel+flex": {
@@ -50,25 +50,25 @@
       "breakeven": 54.1
     },
     "method_total": {
-      "n": 246,
-      "wins": 144,
+      "n": 248,
+      "wins": 146,
       "losses": 102,
-      "hit": 58.5,
-      "stake": 178187.11,
-      "profit": 17219.21,
-      "roi": 9.7,
+      "hit": 58.9,
+      "stake": 180187.11,
+      "profit": 18556.21,
+      "roi": 10.3,
       "breakeven": 54.1
     }
   },
   "discipline": {
     "following_method": {
-      "n": 246,
-      "wins": 144,
+      "n": 248,
+      "wins": 146,
       "losses": 102,
-      "hit": 58.5,
-      "stake": 178187.11,
-      "profit": 17219.21,
-      "roi": 9.7,
+      "hit": 58.9,
+      "stake": 180187.11,
+      "profit": 18556.21,
+      "roi": 10.3,
       "breakeven": 54.1
     },
     "not_following_method": {
@@ -81,7 +81,7 @@
       "roi": 2.4,
       "breakeven": 54.1
     },
-    "diff_profit": 15255.99,
+    "diff_profit": 16592.99,
     "not_following_breakdown": {
       "under": {
         "n": 107,
@@ -229,13 +229,13 @@
       "breakeven": 54.1
     },
     "?": {
-      "n": 21,
-      "wins": 13,
+      "n": 23,
+      "wins": 15,
       "losses": 8,
-      "hit": 61.9,
-      "stake": 24075.12,
-      "profit": -234.7,
-      "roi": -1,
+      "hit": 65.2,
+      "stake": 26075.12,
+      "profit": 1102.3,
+      "roi": 4.2,
       "breakeven": 54.1
     }
   }
