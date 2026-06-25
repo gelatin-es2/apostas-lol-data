@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-24T14:11:05.071Z",
+  "generated_at": "2026-06-25T14:06:04.732Z",
   "split_start": "2026-04-01",
   "line_fallback": 29.5,
   "line_sources": {
@@ -738,18 +738,6 @@
       "hit": 67.2
     },
     {
-      "champ": "Shen",
-      "role": "top",
-      "n": 12,
-      "hit": 66.7
-    },
-    {
-      "champ": "Jax",
-      "role": "top",
-      "n": 9,
-      "hit": 66.7
-    },
-    {
       "champ": "Zoe",
       "role": "mid",
       "n": 9,
@@ -762,8 +750,20 @@
       "hit": 66.7
     },
     {
+      "champ": "Shen",
+      "role": "top",
+      "n": 12,
+      "hit": 66.7
+    },
+    {
       "champ": "Yone",
       "role": "mid",
+      "n": 9,
+      "hit": 66.7
+    },
+    {
+      "champ": "Jax",
+      "role": "top",
       "n": 9,
       "hit": 66.7
     },
@@ -1630,18 +1630,6 @@
           "hit": 67.2
         },
         {
-          "champ": "Shen",
-          "role": "top",
-          "n": 12,
-          "hit": 66.7
-        },
-        {
-          "champ": "Jax",
-          "role": "top",
-          "n": 9,
-          "hit": 66.7
-        },
-        {
           "champ": "Zoe",
           "role": "mid",
           "n": 9,
@@ -1654,8 +1642,20 @@
           "hit": 66.7
         },
         {
+          "champ": "Shen",
+          "role": "top",
+          "n": 12,
+          "hit": 66.7
+        },
+        {
           "champ": "Yone",
           "role": "mid",
+          "n": 9,
+          "hit": 66.7
+        },
+        {
+          "champ": "Jax",
+          "role": "top",
           "n": 9,
           "hit": 66.7
         },
@@ -2035,16 +2035,16 @@
           "small_sample": false
         },
         {
-          "name": "Team Heretics",
+          "name": "Natus Vincere",
           "lg": "LEC",
-          "n": 8,
+          "n": 4,
           "hit": 75,
           "small_sample": false
         },
         {
-          "name": "Natus Vincere",
+          "name": "Team Heretics",
           "lg": "LEC",
-          "n": 4,
+          "n": 8,
           "hit": 75,
           "small_sample": false
         },
@@ -2322,14 +2322,14 @@
           "small_sample": false
         },
         {
-          "name": "G2 Esports",
+          "name": "Team Vitality",
           "lg": "LEC",
           "n": 7,
           "hit": 42.9,
           "small_sample": false
         },
         {
-          "name": "Team Vitality",
+          "name": "G2 Esports",
           "lg": "LEC",
           "n": 7,
           "hit": 42.9,
@@ -2583,12 +2583,6 @@
           "hit": 60.6
         },
         {
-          "champ": "Skarner",
-          "role": "jungle",
-          "n": 25,
-          "hit": 60
-        },
-        {
           "champ": "KSante",
           "role": "top",
           "n": 40,
@@ -2598,6 +2592,12 @@
           "champ": "Renekton",
           "role": "top",
           "n": 35,
+          "hit": 60
+        },
+        {
+          "champ": "Skarner",
+          "role": "jungle",
+          "n": 25,
           "hit": 60
         },
         {
@@ -2655,15 +2655,15 @@
           "hit": 51.1
         },
         {
-          "champ": "Varus",
-          "role": "adc",
-          "n": 12,
-          "hit": 50
-        },
-        {
           "champ": "Akali",
           "role": "mid",
           "n": 22,
+          "hit": 50
+        },
+        {
+          "champ": "Varus",
+          "role": "adc",
+          "n": 12,
           "hit": 50
         },
         {
@@ -3356,12 +3356,6 @@
           "hit": 80
         },
         {
-          "champ": "Sejuani",
-          "role": "jungle",
-          "n": 12,
-          "hit": 75
-        },
-        {
           "champ": "Zoe",
           "role": "mid",
           "n": 12,
@@ -3382,6 +3376,12 @@
         {
           "champ": "Yone",
           "role": "mid",
+          "n": 12,
+          "hit": 75
+        },
+        {
+          "champ": "Sejuani",
+          "role": "jungle",
           "n": 12,
           "hit": 75
         },
@@ -13020,36 +13020,6 @@
         }
       },
       {
-        "gameId": "115548668059523650",
-        "matchId": "115548668059523648",
-        "date": "2026-04-06",
-        "league": "LEC",
-        "map": 2,
-        "teams": [
-          "GIANTX",
-          "Team Heretics"
-        ],
-        "trigger": "2peel",
-        "line": 24.5,
-        "kills": 29,
-        "hit_simulated": false,
-        "profit_simulated": -1000,
-        "blue_picks": {
-          "top": "Renekton",
-          "jungle": "JarvanIV",
-          "mid": "Annie",
-          "adc": "Ashe",
-          "support": "Seraphine"
-        },
-        "red_picks": {
-          "top": "Gnar",
-          "jungle": "XinZhao",
-          "mid": "Ahri",
-          "adc": "Yunara",
-          "support": "Lulu"
-        }
-      },
-      {
         "gameId": "115548668059523717",
         "matchId": "115548668059523716",
         "date": "2026-04-06",
@@ -13107,6 +13077,36 @@
           "mid": "Viktor",
           "adc": "Ashe",
           "support": "Seraphine"
+        }
+      },
+      {
+        "gameId": "115548668059523650",
+        "matchId": "115548668059523648",
+        "date": "2026-04-06",
+        "league": "LEC",
+        "map": 2,
+        "teams": [
+          "GIANTX",
+          "Team Heretics"
+        ],
+        "trigger": "2peel",
+        "line": 24.5,
+        "kills": 29,
+        "hit_simulated": false,
+        "profit_simulated": -1000,
+        "blue_picks": {
+          "top": "Renekton",
+          "jungle": "JarvanIV",
+          "mid": "Annie",
+          "adc": "Ashe",
+          "support": "Seraphine"
+        },
+        "red_picks": {
+          "top": "Gnar",
+          "jungle": "XinZhao",
+          "mid": "Ahri",
+          "adc": "Yunara",
+          "support": "Lulu"
         }
       },
       {
