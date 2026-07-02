@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-01T14:09:10.163Z",
+  "generated_at": "2026-07-02T13:35:16.188Z",
   "total_bets_universe": 366,
-  "total_settled": 361,
+  "total_settled": 362,
   "method_rules": {
     "peel_pure": [
       "soraka",
@@ -40,35 +40,35 @@
       "breakeven": 54.1
     },
     "1peel+flex": {
-      "n": 53,
+      "n": 54,
       "wins": 27,
-      "losses": 26,
-      "hit": 50.9,
-      "stake": 32012.63,
-      "profit": 2482.73,
-      "roi": 7.8,
+      "losses": 27,
+      "hit": 50,
+      "stake": 33780.1,
+      "profit": 715.26,
+      "roi": 2.1,
       "breakeven": 54.1
     },
     "method_total": {
-      "n": 248,
+      "n": 249,
       "wins": 146,
-      "losses": 102,
-      "hit": 58.9,
-      "stake": 180187.11,
-      "profit": 18556.21,
-      "roi": 10.3,
+      "losses": 103,
+      "hit": 58.6,
+      "stake": 181954.58,
+      "profit": 16788.74,
+      "roi": 9.2,
       "breakeven": 54.1
     }
   },
   "discipline": {
     "following_method": {
-      "n": 248,
+      "n": 249,
       "wins": 146,
-      "losses": 102,
-      "hit": 58.9,
-      "stake": 180187.11,
-      "profit": 18556.21,
-      "roi": 10.3,
+      "losses": 103,
+      "hit": 58.6,
+      "stake": 181954.58,
+      "profit": 16788.74,
+      "roi": 9.2,
       "breakeven": 54.1
     },
     "not_following_method": {
@@ -81,7 +81,7 @@
       "roi": 2.4,
       "breakeven": 54.1
     },
-    "diff_profit": 16592.99,
+    "diff_profit": 14825.52,
     "not_following_breakdown": {
       "under": {
         "n": 107,
@@ -147,13 +147,13 @@
       "breakeven": 54.1
     },
     "Alistar": {
-      "n": 9,
+      "n": 10,
       "wins": 4,
-      "losses": 5,
-      "hit": 44.4,
-      "stake": 4300.02,
-      "profit": -1264.99,
-      "roi": -29.4,
+      "losses": 6,
+      "hit": 40,
+      "stake": 6067.49,
+      "profit": -3032.46,
+      "roi": -50,
       "breakeven": 54.1
     },
     "anivia": {
@@ -229,13 +229,13 @@
       "breakeven": 54.1
     },
     "?": {
-      "n": 23,
+      "n": 24,
       "wins": 15,
-      "losses": 8,
-      "hit": 65.2,
-      "stake": 26075.12,
-      "profit": 1102.3,
-      "roi": 4.2,
+      "losses": 9,
+      "hit": 62.5,
+      "stake": 27842.59,
+      "profit": -665.17,
+      "roi": -2.4,
       "breakeven": 54.1
     }
   }
