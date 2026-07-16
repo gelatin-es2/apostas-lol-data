@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-15T13:16:44.893Z",
+  "generated_at": "2026-07-16T13:21:54.742Z",
   "split_start": "2026-04-01",
   "line_fallback": 29.5,
   "line_sources": {
-    "livestats_team_avg(total+total)/2": 778,
+    "livestats_team_avg(total+total)/2": 782,
     "user_bet@1.71_minus1": 12,
     "user_bet@1.79": 10,
     "user_bet@1.85": 2,
@@ -1825,22 +1825,22 @@
     },
     "1peel+flex": {
       "backtest": {
-        "n": 217,
-        "hit": 60.4,
-        "profit": 25350,
-        "roi": 11.7,
+        "n": 218,
+        "hit": 60.6,
+        "profit": 26200,
+        "roi": 12,
         "breakeven": 54.1
       },
       "ligas": [
         {
+          "name": "LES",
+          "n": 17,
+          "hit": 64.7
+        },
+        {
           "name": "LFL",
           "n": 19,
           "hit": 63.2
-        },
-        {
-          "name": "LES",
-          "n": 16,
-          "hit": 62.5
         },
         {
           "name": "LPL",
@@ -1905,6 +1905,11 @@
           "hit": 60.7
         },
         {
+          "name": "Alistar",
+          "n": 18,
+          "hit": 50
+        },
+        {
           "name": "Lux",
           "n": 12,
           "hit": 50
@@ -1916,18 +1921,13 @@
         },
         {
           "name": "Karma",
-          "n": 48,
-          "hit": 47.9
+          "n": 49,
+          "hit": 49
         },
         {
           "name": "Lulu",
           "n": 36,
           "hit": 47.2
-        },
-        {
-          "name": "Alistar",
-          "n": 17,
-          "hit": 47.1
         },
         {
           "name": "Bard (fora LEC)",
@@ -1995,7 +1995,7 @@
         {
           "name": "UB Alma Mater",
           "lg": "LES",
-          "n": 2,
+          "n": 3,
           "hit": 100,
           "small_sample": true
         },
@@ -2124,6 +2124,13 @@
           "n": 6,
           "hit": 66.7,
           "small_sample": false
+        },
+        {
+          "name": "GIANTX ITERO",
+          "lg": "LES",
+          "n": 3,
+          "hit": 66.7,
+          "small_sample": true
         },
         {
           "name": "Dplus KIA",
@@ -2308,13 +2315,6 @@
           "small_sample": false
         },
         {
-          "name": "GIANTX ITERO",
-          "lg": "LES",
-          "n": 2,
-          "hit": 50,
-          "small_sample": true
-        },
-        {
           "name": "Hanwha Life Esports",
           "lg": "LCK",
           "n": 9,
@@ -2427,16 +2427,16 @@
           "hit": 75
         },
         {
+          "champ": "Jayce",
+          "role": "top",
+          "n": 28,
+          "hit": 75
+        },
+        {
           "champ": "Anivia",
           "role": "top",
           "n": 8,
           "hit": 75
-        },
-        {
-          "champ": "Jayce",
-          "role": "top",
-          "n": 27,
-          "hit": 74.1
         },
         {
           "champ": "Ryze",
@@ -2511,6 +2511,12 @@
           "hit": 63.3
         },
         {
+          "champ": "Cassiopeia",
+          "role": "mid",
+          "n": 19,
+          "hit": 63.2
+        },
+        {
           "champ": "Corki",
           "role": "adc",
           "n": 27,
@@ -2533,6 +2539,12 @@
           "role": "top",
           "n": 8,
           "hit": 62.5
+        },
+        {
+          "champ": "Sion",
+          "role": "top",
+          "n": 42,
+          "hit": 61.9
         },
         {
           "champ": "LeeSin",
@@ -2559,18 +2571,6 @@
           "hit": 61.2
         },
         {
-          "champ": "Cassiopeia",
-          "role": "mid",
-          "n": 18,
-          "hit": 61.1
-        },
-        {
-          "champ": "Sion",
-          "role": "top",
-          "n": 41,
-          "hit": 61
-        },
-        {
           "champ": "Yorick",
           "role": "top",
           "n": 23,
@@ -2586,6 +2586,12 @@
           "champ": "KSante",
           "role": "top",
           "n": 40,
+          "hit": 60
+        },
+        {
+          "champ": "MonkeyKing",
+          "role": "jungle",
+          "n": 20,
           "hit": 60
         },
         {
@@ -2611,12 +2617,6 @@
           "role": "top",
           "n": 55,
           "hit": 58.2
-        },
-        {
-          "champ": "MonkeyKing",
-          "role": "jungle",
-          "n": 19,
-          "hit": 57.9
         },
         {
           "champ": "Naafiri",
@@ -2649,10 +2649,22 @@
           "hit": 52.4
         },
         {
+          "champ": "Sivir",
+          "role": "adc",
+          "n": 25,
+          "hit": 52
+        },
+        {
           "champ": "Annie",
           "role": "mid",
           "n": 47,
           "hit": 51.1
+        },
+        {
+          "champ": "JarvanIV",
+          "role": "jungle",
+          "n": 60,
+          "hit": 50
         },
         {
           "champ": "Akali",
@@ -2685,22 +2697,10 @@
           "hit": 50
         },
         {
-          "champ": "Sivir",
-          "role": "adc",
-          "n": 24,
-          "hit": 50
-        },
-        {
           "champ": "Taliyah",
           "role": "mid",
           "n": 10,
           "hit": 50
-        },
-        {
-          "champ": "JarvanIV",
-          "role": "jungle",
-          "n": 59,
-          "hit": 49.2
         },
         {
           "champ": "Yunara",
@@ -2742,10 +2742,10 @@
     },
     "all": {
       "backtest": {
-        "n": 486,
+        "n": 487,
         "hit": 62.8,
-        "profit": 78250,
-        "roi": 16.1,
+        "profit": 79100,
+        "roi": 16.2,
         "breakeven": 54.1
       },
       "ligas": [
@@ -2755,12 +2755,12 @@
           "hit": 67.4
         },
         {
-          "name": "LFL",
-          "n": 39,
-          "hit": 64.1
+          "name": "LES",
+          "n": 40,
+          "hit": 65
         },
         {
-          "name": "LES",
+          "name": "LFL",
           "n": 39,
           "hit": 64.1
         },
@@ -2828,8 +2828,8 @@
         },
         {
           "name": "Karma",
-          "n": 115,
-          "hit": 57.4
+          "n": 116,
+          "hit": 57.8
         },
         {
           "name": "Renata",
@@ -2837,14 +2837,14 @@
           "hit": 52.9
         },
         {
-          "name": "Lux",
-          "n": 12,
+          "name": "Alistar",
+          "n": 18,
           "hit": 50
         },
         {
-          "name": "Alistar",
-          "n": 17,
-          "hit": 47.1
+          "name": "Lux",
+          "n": 12,
+          "hit": 50
         },
         {
           "name": "Soraka",
@@ -2870,8 +2870,8 @@
         {
           "name": "UB Alma Mater",
           "lg": "LES",
-          "n": 7,
-          "hit": 85.7,
+          "n": 8,
+          "hit": 87.5,
           "small_sample": false
         },
         {
@@ -2980,6 +2980,13 @@
           "small_sample": false
         },
         {
+          "name": "GIANTX ITERO",
+          "lg": "LES",
+          "n": 10,
+          "hit": 70,
+          "small_sample": false
+        },
+        {
           "name": "Fnatic",
           "lg": "LEC",
           "n": 13,
@@ -3046,13 +3053,6 @@
           "name": "Esprit Shonen",
           "lg": "LFL",
           "n": 6,
-          "hit": 66.7,
-          "small_sample": false
-        },
-        {
-          "name": "GIANTX ITERO",
-          "lg": "LES",
-          "n": 9,
           "hit": 66.7,
           "small_sample": false
         },
@@ -3356,21 +3356,21 @@
           "hit": 80
         },
         {
-          "champ": "Zoe",
-          "role": "mid",
-          "n": 12,
-          "hit": 75
-        },
-        {
           "champ": "Syndra",
           "role": "mid",
-          "n": 16,
-          "hit": 75
+          "n": 17,
+          "hit": 76.5
         },
         {
           "champ": "Jayce",
           "role": "top",
-          "n": 68,
+          "n": 69,
+          "hit": 75.4
+        },
+        {
+          "champ": "Zoe",
+          "role": "mid",
+          "n": 12,
           "hit": 75
         },
         {
@@ -3436,8 +3436,8 @@
         {
           "champ": "Cassiopeia",
           "role": "mid",
-          "n": 46,
-          "hit": 67.4
+          "n": 47,
+          "hit": 68.1
         },
         {
           "champ": "Taliyah",
@@ -3454,8 +3454,8 @@
         {
           "champ": "Sion",
           "role": "top",
-          "n": 109,
-          "hit": 66.1
+          "n": 110,
+          "hit": 66.4
         },
         {
           "champ": "Ambessa",
@@ -3530,6 +3530,12 @@
           "hit": 63.4
         },
         {
+          "champ": "MonkeyKing",
+          "role": "jungle",
+          "n": 60,
+          "hit": 63.3
+        },
+        {
           "champ": "Mel",
           "role": "mid",
           "n": 30,
@@ -3564,12 +3570,6 @@
           "role": "adc",
           "n": 27,
           "hit": 63
-        },
-        {
-          "champ": "MonkeyKing",
-          "role": "jungle",
-          "n": 59,
-          "hit": 62.7
         },
         {
           "champ": "Zaahen",
@@ -3706,7 +3706,13 @@
         {
           "champ": "JarvanIV",
           "role": "jungle",
-          "n": 121,
+          "n": 122,
+          "hit": 54.9
+        },
+        {
+          "champ": "Sivir",
+          "role": "adc",
+          "n": 33,
           "hit": 54.5
         },
         {
@@ -3720,12 +3726,6 @@
           "role": "top",
           "n": 15,
           "hit": 53.3
-        },
-        {
-          "champ": "Sivir",
-          "role": "adc",
-          "n": 32,
-          "hit": 53.1
         },
         {
           "champ": "Lissandra",
@@ -3773,12 +3773,42 @@
     }
   },
   "missed_opportunities": {
-    "count": 339,
-    "would_hit": 217,
+    "count": 340,
+    "would_hit": 218,
     "would_miss": 122,
-    "hit_pct": 64,
-    "profit_simulated": 62450,
+    "hit_pct": 64.1,
+    "profit_simulated": 63300,
     "list": [
+      {
+        "gameId": "116833506932193684",
+        "matchId": "116833506932193683",
+        "date": "2026-07-15",
+        "league": "LES",
+        "map": 1,
+        "teams": [
+          "UB Alma Mater",
+          "GIANTX ITERO"
+        ],
+        "trigger": "1peel+flex",
+        "line": 30.5,
+        "kills": 29,
+        "hit_simulated": true,
+        "profit_simulated": 850,
+        "blue_picks": {
+          "top": "Sion",
+          "jungle": "MonkeyKing",
+          "mid": "Syndra",
+          "adc": "Sivir",
+          "support": "Alistar"
+        },
+        "red_picks": {
+          "top": "Jayce",
+          "jungle": "JarvanIV",
+          "mid": "Cassiopeia",
+          "adc": "Lux",
+          "support": "Karma"
+        }
+      },
       {
         "gameId": "115616219464607524",
         "matchId": "115616219464607521",
@@ -4360,7 +4390,7 @@
           "Barça Esports"
         ],
         "trigger": "2peel",
-        "line": 33.5,
+        "line": 34.5,
         "kills": 48,
         "hit_simulated": false,
         "profit_simulated": -1000,
@@ -4420,7 +4450,7 @@
           "UCAM Esports Club"
         ],
         "trigger": "2peel",
-        "line": 30.5,
+        "line": 31.5,
         "kills": 30,
         "hit_simulated": true,
         "profit_simulated": 850,
@@ -4450,7 +4480,7 @@
           "UCAM Esports Club"
         ],
         "trigger": "1peel+flex",
-        "line": 30.5,
+        "line": 31.5,
         "kills": 26,
         "hit_simulated": true,
         "profit_simulated": 850,
@@ -4480,7 +4510,7 @@
           "Heretics Academy"
         ],
         "trigger": "2peel",
-        "line": 31.5,
+        "line": 32.5,
         "kills": 39,
         "hit_simulated": false,
         "profit_simulated": -1000,
@@ -4570,7 +4600,7 @@
           "Barça Esports"
         ],
         "trigger": "1peel+flex",
-        "line": 32.5,
+        "line": 33.5,
         "kills": 17,
         "hit_simulated": true,
         "profit_simulated": 850,
@@ -5380,7 +5410,7 @@
           "KOI Fénix"
         ],
         "trigger": "2peel",
-        "line": 30.5,
+        "line": 31.5,
         "kills": 25,
         "hit_simulated": true,
         "profit_simulated": 850,
@@ -7390,7 +7420,7 @@
           "Barça Esports"
         ],
         "trigger": "1peel+flex",
-        "line": 32.5,
+        "line": 33.5,
         "kills": 43,
         "hit_simulated": false,
         "profit_simulated": -1000,
@@ -8140,7 +8170,7 @@
           "UB Alma Mater"
         ],
         "trigger": "2peel",
-        "line": 30.5,
+        "line": 31.5,
         "kills": 36,
         "hit_simulated": false,
         "profit_simulated": -1000,
@@ -8200,7 +8230,7 @@
           "UCAM Esports Club"
         ],
         "trigger": "1peel+flex",
-        "line": 30.5,
+        "line": 29.5,
         "kills": 20,
         "hit_simulated": true,
         "profit_simulated": 850,
@@ -9520,7 +9550,7 @@
           "UCAM Esports Club"
         ],
         "trigger": "1peel+flex",
-        "line": 31.5,
+        "line": 32.5,
         "kills": 24,
         "hit_simulated": true,
         "profit_simulated": 850,
@@ -9550,7 +9580,7 @@
           "Barça Esports"
         ],
         "trigger": "1peel+flex",
-        "line": 31.5,
+        "line": 32.5,
         "kills": 25,
         "hit_simulated": true,
         "profit_simulated": 850,
@@ -10840,7 +10870,7 @@
           "FALKE ESPORTS"
         ],
         "trigger": "2peel",
-        "line": 33.5,
+        "line": 34.5,
         "kills": 24,
         "hit_simulated": true,
         "profit_simulated": 850,
@@ -11020,7 +11050,7 @@
           "FALKE ESPORTS"
         ],
         "trigger": "1peel+flex",
-        "line": 32.5,
+        "line": 33.5,
         "kills": 38,
         "hit_simulated": false,
         "profit_simulated": -1000,
@@ -12970,7 +13000,7 @@
           "Barça Esports"
         ],
         "trigger": "2peel",
-        "line": 34.5,
+        "line": 35.5,
         "kills": 36,
         "hit_simulated": false,
         "profit_simulated": -1000,
