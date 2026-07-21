@@ -45,6 +45,12 @@ const LEAGUE_IDS = {
   LFL: '105266103462388553',
   LES: '105266074488398661',
   LIT: '105266094998946936',
+  // +3 ligas 2026-07-21 (método Under aprovado): Prime League, LCK Challengers
+  // ('KCL' — evita colisão com regex \bLCK\b em normalizeLeague), EMEA Masters
+  // ('EUM' — código canônico já esperado por lib/normTeamName.cjs)
+  'Prime League': '105266091639104326',
+  KCL: '98767991335774713',
+  EUM: '100695891328981122',
 };
 // Nota: EWC não está aqui (não é torneio Riot). Pra EWC qualifiers, daily_briefing.cjs
 // usa Liquipedia. Bet-logger pra EWC ainda precisa fallback manual.

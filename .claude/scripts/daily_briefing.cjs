@@ -46,13 +46,24 @@ function resolveCanonical(name) {
 
 // Ligas operadas pelo Elvis (decisão 2026-05-10): LCK, LPL, LEC, CBLOL, LFL, LCS.
 // LIT e LES removidas do briefing — Elvis não opera essas.
+// +3 ligas 2026-07-21 (método Under aprovado, validado externamente): Prime League,
+// LCK Challengers (código curto 'KCL' — 'LCK Challengers'/'LCK-CL' colidem com o regex
+// \bLCK\b de normalizeLeague em lib/normTeamName.cjs e poluiriam as stats da LCK principal),
+// EMEA Masters (código curto 'EUM' — já é o código canônico esperado por normalizeLeague,
+// que hoje mapeia "EMEA MASTERS" → 'EUM'; usar 'EUM' direto evita o mesmo tipo de
+// desalinhamento). Fair dessas 3 = fórmula (mesmo caminho genérico de calcFormulaFair,
+// sem histórico em team_avg_kills.json ainda → cai no fallback "—"/29.5 como qualquer
+// time sem dado, igual funcionaria pra um time novo de LFL).
 const LEAGUE_IDS = {
-  LCK:   '98767991310872058',
-  LPL:   '98767991314006698',
-  LEC:   '98767991302996019',
-  CBLOL: '98767991332355509',
-  LFL:   '105266103462388553',
-  LCS:   '98767991299243165',
+  LCK:            '98767991310872058',
+  LPL:            '98767991314006698',
+  LEC:            '98767991302996019',
+  CBLOL:          '98767991332355509',
+  LFL:            '105266103462388553',
+  LCS:            '98767991299243165',
+  'Prime League': '105266091639104326',
+  KCL:            '98767991335774713', // LCK Challengers
+  EUM:            '100695891328981122', // EMEA Masters
 };
 
 // Dias úteis em ms (offset BRT = UTC -3)
@@ -529,7 +540,7 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData) {
   // Header
   console.log(`# Jogos de ${TARGET} — briefing método 2peel\n`);
   if (allMatches.length === 0) {
-    console.log('Sem jogos das ligas operadas (LCK/LPL/LEC/CBLOL/LFL/LCS) hoje.');
+    console.log('Sem jogos das ligas operadas (LCK/LPL/LEC/CBLOL/LFL/LCS + Prime League/KCL/EUM) hoje.');
     return;
   }
 
