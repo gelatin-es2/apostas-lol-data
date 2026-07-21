@@ -409,7 +409,8 @@ function flagLeague(lg, leagueHitMap) {
 // n≥10 pra colorir (sample mínimo razoável de liga). Entre 50-59% → ⚪.
 function formatLeagueCell(lg, leagueHitMap) {
   const e = leagueHitMap.get(lg);
-  if (!e || e.n < 10) return lg; // sem dados suficientes, só nome
+  if (!e) return `⚪ ${lg} _(s/ amostra)_`; // liga nova sem bets ainda
+  if (e.n < 10) return `⚪ ${lg} (${e.hit}% n=${e.n})`; // amostra pequena
   if (e.hit >= 60) return `🟢 ${lg} (${e.hit}% n=${e.n})`;
   if (e.hit < 50) return `🔴 ${lg} (${e.hit}% n=${e.n})`;
   return `⚪ ${lg} (${e.hit}% n=${e.n})`; // 50-59%
