@@ -73,7 +73,7 @@ Tudo commitado no próprio repo. Stats puxam via `raw.githubusercontent.com` (UR
 
 ```js
 PEEL_PURE   = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','nami','milio']
-FLEX_ENGAGE = ['bard','rakan','alistar','lux','anivia']  // expandido 2026-05-23: Lux + Anivia
+FLEX_ENGAGE = ['bard','rakan','lux','anivia']  // 2026-05-23 +Lux+Anivia · 2026-05-29 -Alistar (-26.8% ROI n=21)
 ```
 
 | Trigger | Condição |
@@ -120,7 +120,7 @@ Filtro: `SPLIT2_START = 2026-04-01`.
 
 ## Bugs conhecidos pendentes
 
-1. **CBLOL leagueId divergente** entre `capture_fair_lines.cjs` (`98767991325878492`) e demais (`98767991332355509`). Investigar antes de tocar CBLOL.
+1. ~~CBLOL leagueId divergente~~ — CORRIGIDO 2026-05-05 (ver knowledge/references/lolesports-league-ids.md); pendência removida 2026-07-22 após verificação.
 2. **CSV Oracle deprecated** em 2026-05-05 mas `capture_fair_lines.cjs` ainda tem `process.exit(1)` se não acha — dead code, remover.
 3. **Tier 2 EU não está no cron** — `rebuild_tier2_dashboard_stats.cjs` e `rebuild_lfl_dashboard_stats.cjs` rodam manual. Adicionar ao workflow se quiser auto-update.
 4. **EWC qualifier auto-settle** — sem fonte API (não-Riot), settle manual via input do CEO.

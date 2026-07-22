@@ -32,7 +32,7 @@ Roda em GitHub Actions 2x/dia (cron) + Hook Claude Code a cada msg do CEO (settl
 
 ```js
 PEEL_PURE   = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','nami','milio']
-FLEX_ENGAGE = ['bard','rakan','alistar','lux','anivia']  // expandido 2026-05-23: Lux + Anivia
+FLEX_ENGAGE = ['bard','rakan','lux','anivia']  // 2026-05-23 +Lux+Anivia · 2026-05-29 -Alistar (-26.8% ROI n=21)
 ```
 
 | Trigger | Condição |
@@ -205,7 +205,7 @@ Print de bet do CEO no chat:
 
 ## Ainda pendentes
 
-1. **CBLOL leagueId divergente** entre `capture_fair_lines.cjs` (`98767991325878492`) e demais (`98767991332355509`). Investigar antes de tocar CBLOL.
+1. ~~CBLOL leagueId divergente~~ — CORRIGIDO 2026-05-05 (ver knowledge/references/lolesports-league-ids.md); pendência removida 2026-07-22 após verificação.
 2. **README desatualizado** com horário cron (06:50/15:00 UTC vs real 06:30/14:00).
 3. **CSV Oracle deprecated** (decisão 2026-05-05) mas `capture_fair_lines.cjs` ainda tem `process.exit(1)` se não acha — dead code, remover.
 4. **Tier 2 EU não está no cron** (rebuild_tier2 e rebuild_lfl rodam manual). Adicionar ao workflow se quiser auto-update no dashboard.

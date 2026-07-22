@@ -36,7 +36,7 @@ const LEAGUE_IDS = {
 
 const PEEL_PURE   = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
 // FLEX expandido 2026-05-23 (CEO): Lux + Anivia
-const FLEX_ENGAGE = ['bard','rakan','alistar','lux','anivia'];
+const FLEX_ENGAGE = ['bard','rakan','lux','anivia']; // Alistar removido 2026-05-29 (decisao CEO) — sync com rebuild_dashboard_stats_cron.cjs e settle-pending-bets.cjs
 
 const HISTORY_DAYS = 21;        // janela pra construir avg dos times
 const MIN_SAMPLE_TEAM = 5;       // abaixo disso → fallback liga
