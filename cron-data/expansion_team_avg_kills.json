@@ -1,0 +1,1659 @@
+{
+  "generated_at": "2026-07-22T20:53:32.126Z",
+  "source_file": "audit-output/00-universe-allregions.json",
+  "filter": "game_state === \"finished\"",
+  "formula": "(avgA+avgB)/2 round to nearest .5; team avg = mean(total_kills) all finished games; n<5 -> league avg (mean total_kills/game, same league)",
+  "fair_adjustment": 0,
+  "min_sample_team": 5,
+  "total_games_used": 2966,
+  "teams_covered": 254,
+  "teams_using_league_fallback": 14,
+  "teams": {
+    "T1": {
+      "avg_kills": 33.11,
+      "n_games": 80,
+      "league": "LCK",
+      "source": "team_avg"
+    },
+    "TL": {
+      "avg_kills": 27.15,
+      "n_games": 47,
+      "league": "LCS",
+      "source": "team_avg"
+    },
+    "Relove Deep Cross Gaming": {
+      "avg_kills": 31.98,
+      "n_games": 45,
+      "league": "LCP",
+      "source": "team_avg"
+    },
+    "Karmine": {
+      "avg_kills": 29.72,
+      "n_games": 58,
+      "league": "Esports World Cup",
+      "source": "team_avg"
+    },
+    "Hanwha": {
+      "avg_kills": 32.03,
+      "n_games": 67,
+      "league": "LCK",
+      "source": "team_avg"
+    },
+    "Team Secret Whales": {
+      "avg_kills": 30.65,
+      "n_games": 37,
+      "league": "LCP",
+      "source": "team_avg"
+    },
+    "TES": {
+      "avg_kills": 29.82,
+      "n_games": 50,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "G2 Esports": {
+      "avg_kills": 29.85,
+      "n_games": 52,
+      "league": "Esports World Cup",
+      "source": "team_avg"
+    },
+    "FURIA": {
+      "avg_kills": 27.62,
+      "n_games": 34,
+      "league": "Esports World Cup",
+      "source": "team_avg"
+    },
+    "LYON": {
+      "avg_kills": 28.54,
+      "n_games": 46,
+      "league": "Esports World Cup",
+      "source": "team_avg"
+    },
+    "BLG": {
+      "avg_kills": 32.08,
+      "n_games": 74,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "C9": {
+      "avg_kills": 24.75,
+      "n_games": 28,
+      "league": "LCS",
+      "source": "team_avg"
+    },
+    "Disguised": {
+      "avg_kills": 27.8,
+      "n_games": 15,
+      "league": "LCS",
+      "source": "team_avg"
+    },
+    "Sentinels": {
+      "avg_kills": 25.29,
+      "n_games": 24,
+      "league": "Esports World Cup",
+      "source": "team_avg"
+    },
+    "FlyQuest": {
+      "avg_kills": 26.07,
+      "n_games": 29,
+      "league": "LCS",
+      "source": "team_avg"
+    },
+    "Dignitas": {
+      "avg_kills": 24.29,
+      "n_games": 17,
+      "league": "LCS",
+      "source": "team_avg"
+    },
+    "Shopify Rebellion": {
+      "avg_kills": 27.75,
+      "n_games": 16,
+      "league": "LCS",
+      "source": "team_avg"
+    },
+    "Fluxo W7M": {
+      "avg_kills": 26.5,
+      "n_games": 28,
+      "league": "CBLOL",
+      "source": "team_avg"
+    },
+    "RED Kalunga": {
+      "avg_kills": 27.96,
+      "n_games": 24,
+      "league": "CBLOL",
+      "source": "team_avg"
+    },
+    "LOUD": {
+      "avg_kills": 25.52,
+      "n_games": 23,
+      "league": "CBLOL",
+      "source": "team_avg"
+    },
+    "paiN Gaming": {
+      "avg_kills": 26.54,
+      "n_games": 13,
+      "league": "CBLOL",
+      "source": "team_avg"
+    },
+    "Los Grandes": {
+      "avg_kills": 27.46,
+      "n_games": 39,
+      "league": "CBLOL",
+      "source": "team_avg"
+    },
+    "Leviatan Esports": {
+      "avg_kills": 29.31,
+      "n_games": 13,
+      "league": "CBLOL",
+      "source": "team_avg"
+    },
+    "VKS": {
+      "avg_kills": 27.74,
+      "n_games": 19,
+      "league": "CBLOL",
+      "source": "team_avg"
+    },
+    "KOI": {
+      "avg_kills": 30.06,
+      "n_games": 33,
+      "league": "Esports World Cup",
+      "source": "team_avg"
+    },
+    "Vitality": {
+      "avg_kills": 27.44,
+      "n_games": 25,
+      "league": "LEC",
+      "source": "team_avg"
+    },
+    "NAVI": {
+      "avg_kills": 26.05,
+      "n_games": 19,
+      "league": "LEC",
+      "source": "team_avg"
+    },
+    "Team Heretics": {
+      "avg_kills": 22.2,
+      "n_games": 15,
+      "league": "LEC",
+      "source": "team_avg"
+    },
+    "SK Gaming": {
+      "avg_kills": 31.67,
+      "n_games": 15,
+      "league": "LEC",
+      "source": "team_avg"
+    },
+    "Shifters": {
+      "avg_kills": 30.76,
+      "n_games": 21,
+      "league": "LEC",
+      "source": "team_avg"
+    },
+    "Fnatic": {
+      "avg_kills": 26,
+      "n_games": 17,
+      "league": "LEC",
+      "source": "team_avg"
+    },
+    "GIANTX": {
+      "avg_kills": 27.08,
+      "n_games": 24,
+      "league": "LEC",
+      "source": "team_avg"
+    },
+    "Team Secret": {
+      "avg_kills": 32.2,
+      "n_games": 4,
+      "league": "Esports World Cup",
+      "source": "league_avg_fallback"
+    },
+    "Gen.G": {
+      "avg_kills": 29.72,
+      "n_games": 57,
+      "league": "LCK",
+      "source": "team_avg"
+    },
+    "GAM Esports": {
+      "avg_kills": 30.63,
+      "n_games": 35,
+      "league": "LCP",
+      "source": "team_avg"
+    },
+    "Dplus": {
+      "avg_kills": 26.41,
+      "n_games": 63,
+      "league": "LCK",
+      "source": "team_avg"
+    },
+    "AG.AL": {
+      "avg_kills": 32.2,
+      "n_games": 4,
+      "league": "Esports World Cup",
+      "source": "league_avg_fallback"
+    },
+    "MIBR.LOS": {
+      "avg_kills": 34.6,
+      "n_games": 5,
+      "league": "Esports World Cup",
+      "source": "team_avg"
+    },
+    "JDG": {
+      "avg_kills": 28,
+      "n_games": 49,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "KIWOOM": {
+      "avg_kills": 29.98,
+      "n_games": 43,
+      "league": "LCK",
+      "source": "team_avg"
+    },
+    "KT": {
+      "avg_kills": 28.98,
+      "n_games": 49,
+      "league": "LCK",
+      "source": "team_avg"
+    },
+    "FEARX": {
+      "avg_kills": 29.84,
+      "n_games": 38,
+      "league": "LCK",
+      "source": "team_avg"
+    },
+    "BRO": {
+      "avg_kills": 27.05,
+      "n_games": 41,
+      "league": "LCK",
+      "source": "team_avg"
+    },
+    "Nongshim": {
+      "avg_kills": 32.61,
+      "n_games": 38,
+      "league": "LCK",
+      "source": "team_avg"
+    },
+    "DN SOOPers": {
+      "avg_kills": 26.36,
+      "n_games": 36,
+      "league": "LCK",
+      "source": "team_avg"
+    },
+    "WE": {
+      "avg_kills": 28.2,
+      "n_games": 50,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "IG": {
+      "avg_kills": 29.73,
+      "n_games": 37,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "Weibo": {
+      "avg_kills": 27.05,
+      "n_games": 37,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "AL": {
+      "avg_kills": 27.23,
+      "n_games": 43,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "NIP": {
+      "avg_kills": 28,
+      "n_games": 36,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "LNG": {
+      "avg_kills": 25.25,
+      "n_games": 16,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "UP": {
+      "avg_kills": 27.27,
+      "n_games": 11,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "EDG": {
+      "avg_kills": 25.57,
+      "n_games": 23,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "Oh My God": {
+      "avg_kills": 20.77,
+      "n_games": 13,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "LGD GAMING": {
+      "avg_kills": 24.22,
+      "n_games": 27,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "THUNDER TALK GAMING": {
+      "avg_kills": 27.71,
+      "n_games": 24,
+      "league": "LPL",
+      "source": "team_avg"
+    },
+    "DetonatioN FocusMe": {
+      "avg_kills": 26.33,
+      "n_games": 18,
+      "league": "LCP",
+      "source": "team_avg"
+    },
+    "Ground Zero Gaming": {
+      "avg_kills": 30.64,
+      "n_games": 14,
+      "league": "LCP",
+      "source": "team_avg"
+    },
+    "MVK Esports": {
+      "avg_kills": 27.2,
+      "n_games": 25,
+      "league": "LCP",
+      "source": "team_avg"
+    },
+    "Fukuoka SoftBank HAWKS gaming": {
+      "avg_kills": 25.11,
+      "n_games": 19,
+      "league": "LCP",
+      "source": "team_avg"
+    },
+    "CTBC Flying Oyster": {
+      "avg_kills": 30.27,
+      "n_games": 22,
+      "league": "LCP",
+      "source": "team_avg"
+    },
+    "NRG": {
+      "avg_kills": 29.09,
+      "n_games": 23,
+      "league": "NACL",
+      "source": "team_avg"
+    },
+    "Maryville University": {
+      "avg_kills": 34.56,
+      "n_games": 27,
+      "league": "NACL",
+      "source": "team_avg"
+    },
+    "Winthrop University": {
+      "avg_kills": 33.45,
+      "n_games": 38,
+      "league": "NACL",
+      "source": "team_avg"
+    },
+    "Supernova": {
+      "avg_kills": 29.96,
+      "n_games": 25,
+      "league": "NACL",
+      "source": "team_avg"
+    },
+    "Citadel Gaming": {
+      "avg_kills": 32.88,
+      "n_games": 17,
+      "league": "NACL",
+      "source": "team_avg"
+    },
+    "Dorado Gaming": {
+      "avg_kills": 33.18,
+      "n_games": 22,
+      "league": "NACL",
+      "source": "team_avg"
+    },
+    "CCG Esports": {
+      "avg_kills": 27.26,
+      "n_games": 31,
+      "league": "NACL",
+      "source": "team_avg"
+    },
+    "Blue Otter": {
+      "avg_kills": 29.1,
+      "n_games": 20,
+      "league": "NACL",
+      "source": "team_avg"
+    },
+    "Conviction": {
+      "avg_kills": 27.86,
+      "n_games": 28,
+      "league": "NACL",
+      "source": "team_avg"
+    },
+    "Apex Mission Impossible": {
+      "avg_kills": 27.8,
+      "n_games": 15,
+      "league": "NACL",
+      "source": "team_avg"
+    },
+    "Cupid Esports": {
+      "avg_kills": 30.66,
+      "n_games": 2,
+      "league": "NACL",
+      "source": "league_avg_fallback"
+    },
+    "Ole Miss Esports": {
+      "avg_kills": 30.66,
+      "n_games": 2,
+      "league": "NACL",
+      "source": "league_avg_fallback"
+    },
+    "French Flair": {
+      "avg_kills": 33.38,
+      "n_games": 3,
+      "league": "EMEA Masters",
+      "source": "league_avg_fallback"
+    },
+    "Berlin International Gaming": {
+      "avg_kills": 35.76,
+      "n_games": 38,
+      "league": "Prime League",
+      "source": "team_avg"
+    },
+    "MISA Esports": {
+      "avg_kills": 30.23,
+      "n_games": 39,
+      "league": "TCL",
+      "source": "team_avg"
+    },
+    "Unicorns of Love Sexy Edition": {
+      "avg_kills": 29.81,
+      "n_games": 32,
+      "league": "Prime League",
+      "source": "team_avg"
+    },
+    "Solary": {
+      "avg_kills": 34.15,
+      "n_games": 41,
+      "league": "La Ligue Française",
+      "source": "team_avg"
+    },
+    "Galions": {
+      "avg_kills": 32.95,
+      "n_games": 41,
+      "league": "La Ligue Française",
+      "source": "team_avg"
+    },
+    "GMBLERS Esports": {
+      "avg_kills": 31.85,
+      "n_games": 27,
+      "league": "LoL Italian Tournament",
+      "source": "team_avg"
+    },
+    "NightBirds": {
+      "avg_kills": 37.56,
+      "n_games": 32,
+      "league": "Hitpoint Masters",
+      "source": "team_avg"
+    },
+    "mCon Esports": {
+      "avg_kills": 34.7,
+      "n_games": 37,
+      "league": "Road of Legends",
+      "source": "team_avg"
+    },
+    "GOAL esports": {
+      "avg_kills": 33.66,
+      "n_games": 29,
+      "league": "Hellenic Legends League",
+      "source": "team_avg"
+    },
+    "Frites Esports Club": {
+      "avg_kills": 34.43,
+      "n_games": 30,
+      "league": "Road of Legends",
+      "source": "team_avg"
+    },
+    "Ruddy Corporation": {
+      "avg_kills": 35.2,
+      "n_games": 25,
+      "league": "NLC",
+      "source": "team_avg"
+    },
+    "BOMBA Team": {
+      "avg_kills": 33.11,
+      "n_games": 35,
+      "league": "Rift Legends",
+      "source": "team_avg"
+    },
+    "MAGAZA": {
+      "avg_kills": 32.85,
+      "n_games": 27,
+      "league": "Esports Balkan League",
+      "source": "team_avg"
+    },
+    "CITA Kaizen": {
+      "avg_kills": 37,
+      "n_games": 31,
+      "league": "Hitpoint Masters",
+      "source": "team_avg"
+    },
+    "Bubliki": {
+      "avg_kills": 35.67,
+      "n_games": 21,
+      "league": "Liga Portuguesa",
+      "source": "team_avg"
+    },
+    "Karmine Corp Blue": {
+      "avg_kills": 33.59,
+      "n_games": 34,
+      "league": "La Ligue Française",
+      "source": "team_avg"
+    },
+    "E Wie Einfach E-Sports": {
+      "avg_kills": 35,
+      "n_games": 45,
+      "league": "Prime League",
+      "source": "team_avg"
+    },
+    "Verdant": {
+      "avg_kills": 37.28,
+      "n_games": 18,
+      "league": "NLC",
+      "source": "team_avg"
+    },
+    "FN Esports": {
+      "avg_kills": 39,
+      "n_games": 33,
+      "league": "Arabian League",
+      "source": "team_avg"
+    },
+    "Otter Side": {
+      "avg_kills": 34.63,
+      "n_games": 16,
+      "league": "Liga Portuguesa",
+      "source": "team_avg"
+    },
+    "Partizan Sangal": {
+      "avg_kills": 36.38,
+      "n_games": 26,
+      "league": "Esports Balkan League",
+      "source": "team_avg"
+    },
+    "HMBLE": {
+      "avg_kills": 35.05,
+      "n_games": 19,
+      "league": "LoL Italian Tournament",
+      "source": "team_avg"
+    },
+    "UCAM Esports Club": {
+      "avg_kills": 27.74,
+      "n_games": 38,
+      "league": "LES",
+      "source": "team_avg"
+    },
+    "G2 NORD": {
+      "avg_kills": 33.59,
+      "n_games": 49,
+      "league": "Prime League",
+      "source": "team_avg"
+    },
+    "Heretics Academy": {
+      "avg_kills": 28.86,
+      "n_games": 35,
+      "league": "LES",
+      "source": "team_avg"
+    },
+    "PCIFIC Esports": {
+      "avg_kills": 29.97,
+      "n_games": 36,
+      "league": "TCL",
+      "source": "team_avg"
+    },
+    "Forsaken": {
+      "avg_kills": 41.64,
+      "n_games": 33,
+      "league": "Rift Legends",
+      "source": "team_avg"
+    },
+    "WLGaming": {
+      "avg_kills": 32.44,
+      "n_games": 36,
+      "league": "Hellenic Legends League",
+      "source": "team_avg"
+    },
+    "Eintracht Spandau": {
+      "avg_kills": 34.48,
+      "n_games": 48,
+      "league": "Prime League",
+      "source": "team_avg"
+    },
+    "Anubis Gaming": {
+      "avg_kills": 36.54,
+      "n_games": 37,
+      "league": "Arabian League",
+      "source": "team_avg"
+    },
+    "UWinks": {
+      "avg_kills": 36.37,
+      "n_games": 19,
+      "league": "LJL",
+      "source": "team_avg"
+    },
+    "DFM Academy": {
+      "avg_kills": 41,
+      "n_games": 16,
+      "league": "LJL",
+      "source": "team_avg"
+    },
+    "L Guide Gaming": {
+      "avg_kills": 37.11,
+      "n_games": 19,
+      "league": "LJL",
+      "source": "team_avg"
+    },
+    "Rising Gaming": {
+      "avg_kills": 35.95,
+      "n_games": 22,
+      "league": "LJL",
+      "source": "team_avg"
+    },
+    "FENNEL": {
+      "avg_kills": 36.35,
+      "n_games": 23,
+      "league": "LJL",
+      "source": "team_avg"
+    },
+    "RAYN Clocks": {
+      "avg_kills": 36.06,
+      "n_games": 18,
+      "league": "LJL",
+      "source": "team_avg"
+    },
+    "Arneb": {
+      "avg_kills": 35.57,
+      "n_games": 21,
+      "league": "LJL",
+      "source": "team_avg"
+    },
+    "New Meta": {
+      "avg_kills": 37.32,
+      "n_games": 22,
+      "league": "LJL",
+      "source": "team_avg"
+    },
+    "BoostGate Esports": {
+      "avg_kills": 24.95,
+      "n_games": 20,
+      "league": "TCL",
+      "source": "team_avg"
+    },
+    "Ozarox Esports": {
+      "avg_kills": 31,
+      "n_games": 20,
+      "league": "TCL",
+      "source": "team_avg"
+    },
+    "SU Esports": {
+      "avg_kills": 32.13,
+      "n_games": 23,
+      "league": "TCL",
+      "source": "team_avg"
+    },
+    "Dark Passage": {
+      "avg_kills": 35.53,
+      "n_games": 15,
+      "league": "TCL",
+      "source": "team_avg"
+    },
+    "Bushido Wildcats": {
+      "avg_kills": 37.35,
+      "n_games": 23,
+      "league": "TCL",
+      "source": "team_avg"
+    },
+    "Team Phoenix": {
+      "avg_kills": 32.53,
+      "n_games": 15,
+      "league": "TCL",
+      "source": "team_avg"
+    },
+    "Lund Esports Organization": {
+      "avg_kills": 32.57,
+      "n_games": 7,
+      "league": "NLC",
+      "source": "team_avg"
+    },
+    "DMG Esports": {
+      "avg_kills": 39.5,
+      "n_games": 8,
+      "league": "NLC",
+      "source": "team_avg"
+    },
+    "Lundqvist Lightside": {
+      "avg_kills": 33.67,
+      "n_games": 9,
+      "league": "NLC",
+      "source": "team_avg"
+    },
+    "Bulldog Esports": {
+      "avg_kills": 35.15,
+      "n_games": 13,
+      "league": "NLC",
+      "source": "team_avg"
+    },
+    "Arctic Pandas": {
+      "avg_kills": 35.38,
+      "n_games": 13,
+      "league": "NLC",
+      "source": "team_avg"
+    },
+    "Deer Gaming": {
+      "avg_kills": 34.69,
+      "n_games": 16,
+      "league": "NLC",
+      "source": "team_avg"
+    },
+    "Absolved": {
+      "avg_kills": 35.55,
+      "n_games": 1,
+      "league": "NLC",
+      "source": "league_avg_fallback"
+    },
+    "Brod & Friends": {
+      "avg_kills": 35.55,
+      "n_games": 3,
+      "league": "NLC",
+      "source": "league_avg_fallback"
+    },
+    "Sørby Esports": {
+      "avg_kills": 35.55,
+      "n_games": 2,
+      "league": "NLC",
+      "source": "league_avg_fallback"
+    },
+    "Bardicted to U": {
+      "avg_kills": 35.55,
+      "n_games": 2,
+      "league": "NLC",
+      "source": "league_avg_fallback"
+    },
+    "Skillcamp": {
+      "avg_kills": 30.22,
+      "n_games": 9,
+      "league": "La Ligue Française",
+      "source": "team_avg"
+    },
+    "Vitality.Bee": {
+      "avg_kills": 33,
+      "n_games": 16,
+      "league": "La Ligue Française",
+      "source": "team_avg"
+    },
+    "Esprit Shonen": {
+      "avg_kills": 31.14,
+      "n_games": 14,
+      "league": "La Ligue Française",
+      "source": "team_avg"
+    },
+    "Joblife": {
+      "avg_kills": 29.22,
+      "n_games": 9,
+      "league": "La Ligue Française",
+      "source": "team_avg"
+    },
+    "Ici Japon Corp": {
+      "avg_kills": 33.5,
+      "n_games": 12,
+      "league": "La Ligue Française",
+      "source": "team_avg"
+    },
+    "ZYB": {
+      "avg_kills": 33.77,
+      "n_games": 13,
+      "league": "La Ligue Française",
+      "source": "team_avg"
+    },
+    "TLN Pirates": {
+      "avg_kills": 27.14,
+      "n_games": 21,
+      "league": "La Ligue Française",
+      "source": "team_avg"
+    },
+    "Senshi eSports": {
+      "avg_kills": 37.17,
+      "n_games": 23,
+      "league": "Road of Legends",
+      "source": "team_avg"
+    },
+    "Once Upon a Team": {
+      "avg_kills": 42.15,
+      "n_games": 27,
+      "league": "Road of Legends",
+      "source": "team_avg"
+    },
+    "Myth Esports": {
+      "avg_kills": 36.6,
+      "n_games": 20,
+      "league": "Road of Legends",
+      "source": "team_avg"
+    },
+    "ZennIT": {
+      "avg_kills": 37.24,
+      "n_games": 17,
+      "league": "Road of Legends",
+      "source": "team_avg"
+    },
+    "The Bandits": {
+      "avg_kills": 36.72,
+      "n_games": 25,
+      "league": "Road of Legends",
+      "source": "team_avg"
+    },
+    "Dynasty": {
+      "avg_kills": 35.55,
+      "n_games": 22,
+      "league": "Road of Legends",
+      "source": "team_avg"
+    },
+    "Crusaders": {
+      "avg_kills": 37.21,
+      "n_games": 14,
+      "league": "Liga Portuguesa",
+      "source": "team_avg"
+    },
+    "Dream Esports": {
+      "avg_kills": 30.86,
+      "n_games": 7,
+      "league": "Liga Portuguesa",
+      "source": "team_avg"
+    },
+    "GTZ Esports": {
+      "avg_kills": 30.71,
+      "n_games": 7,
+      "league": "Liga Portuguesa",
+      "source": "team_avg"
+    },
+    "Ronaldo Team": {
+      "avg_kills": 38.3,
+      "n_games": 10,
+      "league": "Liga Portuguesa",
+      "source": "team_avg"
+    },
+    "Francesinhas": {
+      "avg_kills": 33.29,
+      "n_games": 7,
+      "league": "Liga Portuguesa",
+      "source": "team_avg"
+    },
+    "ZeroZone Gaming": {
+      "avg_kills": 39,
+      "n_games": 6,
+      "league": "Liga Portuguesa",
+      "source": "team_avg"
+    },
+    "StoneHenge Esports": {
+      "avg_kills": 26.33,
+      "n_games": 9,
+      "league": "LoL Italian Tournament",
+      "source": "team_avg"
+    },
+    "Colossal Gaming": {
+      "avg_kills": 28.53,
+      "n_games": 17,
+      "league": "LoL Italian Tournament",
+      "source": "team_avg"
+    },
+    "TITANS": {
+      "avg_kills": 29.6,
+      "n_games": 10,
+      "league": "LoL Italian Tournament",
+      "source": "team_avg"
+    },
+    "EKO Esports": {
+      "avg_kills": 31.23,
+      "n_games": 13,
+      "league": "LoL Italian Tournament",
+      "source": "team_avg"
+    },
+    "Aeterna Esports": {
+      "avg_kills": 32.75,
+      "n_games": 16,
+      "league": "LoL Italian Tournament",
+      "source": "team_avg"
+    },
+    "Zena Esports": {
+      "avg_kills": 32.2,
+      "n_games": 15,
+      "league": "LoL Italian Tournament",
+      "source": "team_avg"
+    },
+    "Anonymo": {
+      "avg_kills": 31.11,
+      "n_games": 18,
+      "league": "Rift Legends",
+      "source": "team_avg"
+    },
+    "GLORE": {
+      "avg_kills": 37.57,
+      "n_games": 14,
+      "league": "Rift Legends",
+      "source": "team_avg"
+    },
+    "Barcząca Esports": {
+      "avg_kills": 36.76,
+      "n_games": 25,
+      "league": "Rift Legends",
+      "source": "team_avg"
+    },
+    "DOCISK": {
+      "avg_kills": 34.93,
+      "n_games": 14,
+      "league": "Rift Legends",
+      "source": "team_avg"
+    },
+    "LODIS": {
+      "avg_kills": 40.64,
+      "n_games": 14,
+      "league": "Rift Legends",
+      "source": "team_avg"
+    },
+    "DV1 inStreamly": {
+      "avg_kills": 36.18,
+      "n_games": 17,
+      "league": "Rift Legends",
+      "source": "team_avg"
+    },
+    "FALKE ESPORTS": {
+      "avg_kills": 32.7,
+      "n_games": 20,
+      "league": "LES",
+      "source": "team_avg"
+    },
+    "KOI Fénix": {
+      "avg_kills": 34.54,
+      "n_games": 24,
+      "league": "LES",
+      "source": "team_avg"
+    },
+    "Barça Esports": {
+      "avg_kills": 35.43,
+      "n_games": 28,
+      "league": "LES",
+      "source": "team_avg"
+    },
+    "LUA Gaming": {
+      "avg_kills": 28.9,
+      "n_games": 21,
+      "league": "LES",
+      "source": "team_avg"
+    },
+    "GIANTX ITERO": {
+      "avg_kills": 30.31,
+      "n_games": 16,
+      "league": "LES",
+      "source": "team_avg"
+    },
+    "UB Alma Mater": {
+      "avg_kills": 29.83,
+      "n_games": 18,
+      "league": "LES",
+      "source": "team_avg"
+    },
+    "Rossmann Centaurs": {
+      "avg_kills": 30.52,
+      "n_games": 25,
+      "league": "Prime League",
+      "source": "team_avg"
+    },
+    "TeamOrangeGaming": {
+      "avg_kills": 36.74,
+      "n_games": 31,
+      "league": "Prime League",
+      "source": "team_avg"
+    },
+    "Kaufland Hangry Knights": {
+      "avg_kills": 30.07,
+      "n_games": 28,
+      "league": "Prime League",
+      "source": "team_avg"
+    },
+    "VfB Stuttgart": {
+      "avg_kills": 38.33,
+      "n_games": 27,
+      "league": "Prime League",
+      "source": "team_avg"
+    },
+    "Eintracht Frankfurt": {
+      "avg_kills": 35.23,
+      "n_games": 26,
+      "league": "Prime League",
+      "source": "team_avg"
+    },
+    "Onion Team": {
+      "avg_kills": 39,
+      "n_games": 17,
+      "league": "Hitpoint Masters",
+      "source": "team_avg"
+    },
+    "EXILE Esports": {
+      "avg_kills": 45.68,
+      "n_games": 19,
+      "league": "Hitpoint Masters",
+      "source": "team_avg"
+    },
+    "Bohemian Guardians": {
+      "avg_kills": 39.89,
+      "n_games": 18,
+      "league": "Hitpoint Masters",
+      "source": "team_avg"
+    },
+    "eSuba": {
+      "avg_kills": 46.08,
+      "n_games": 25,
+      "league": "Hitpoint Masters",
+      "source": "team_avg"
+    },
+    "BRUTE": {
+      "avg_kills": 40.93,
+      "n_games": 15,
+      "league": "Hitpoint Masters",
+      "source": "team_avg"
+    },
+    "UP2U Meavedron": {
+      "avg_kills": 40.65,
+      "n_games": 23,
+      "league": "Hitpoint Masters",
+      "source": "team_avg"
+    },
+    "Lupus Esports": {
+      "avg_kills": 36.9,
+      "n_games": 10,
+      "league": "Esports Balkan League",
+      "source": "team_avg"
+    },
+    "Croatian Flair": {
+      "avg_kills": 39.55,
+      "n_games": 11,
+      "league": "Esports Balkan League",
+      "source": "team_avg"
+    },
+    "The Secret Club": {
+      "avg_kills": 34.82,
+      "n_games": 22,
+      "league": "Esports Balkan League",
+      "source": "team_avg"
+    },
+    "SPIKE Syndicate": {
+      "avg_kills": 37.2,
+      "n_games": 15,
+      "league": "Esports Balkan League",
+      "source": "team_avg"
+    },
+    "TQ DURPA KASLQ": {
+      "avg_kills": 33.57,
+      "n_games": 7,
+      "league": "Esports Balkan League",
+      "source": "team_avg"
+    },
+    "Lenovo Legion Honvéd": {
+      "avg_kills": 41.88,
+      "n_games": 8,
+      "league": "Esports Balkan League",
+      "source": "team_avg"
+    },
+    "Washed Gaming": {
+      "avg_kills": 29,
+      "n_games": 5,
+      "league": "Esports Balkan League",
+      "source": "team_avg"
+    },
+    "Team Spawn Peek": {
+      "avg_kills": 42.14,
+      "n_games": 7,
+      "league": "Esports Balkan League",
+      "source": "team_avg"
+    },
+    "Spartans EU": {
+      "avg_kills": 35.45,
+      "n_games": 20,
+      "league": "Hellenic Legends League",
+      "source": "team_avg"
+    },
+    "TheParadOx Invaders": {
+      "avg_kills": 35.55,
+      "n_games": 22,
+      "league": "Hellenic Legends League",
+      "source": "team_avg"
+    },
+    "Team Phantasma": {
+      "avg_kills": 33.41,
+      "n_games": 22,
+      "league": "Hellenic Legends League",
+      "source": "team_avg"
+    },
+    "Gamespace M.C.": {
+      "avg_kills": 35.68,
+      "n_games": 19,
+      "league": "Hellenic Legends League",
+      "source": "team_avg"
+    },
+    "Team Insidious": {
+      "avg_kills": 32.18,
+      "n_games": 17,
+      "league": "Hellenic Legends League",
+      "source": "team_avg"
+    },
+    "ALMO Players": {
+      "avg_kills": 37.95,
+      "n_games": 19,
+      "league": "Hellenic Legends League",
+      "source": "team_avg"
+    },
+    "Valerion": {
+      "avg_kills": 31.14,
+      "n_games": 7,
+      "league": "Hellenic Legends League",
+      "source": "team_avg"
+    },
+    "Hell ZeroLag": {
+      "avg_kills": 34,
+      "n_games": 7,
+      "league": "Hellenic Legends League",
+      "source": "team_avg"
+    },
+    "Dragons Esports": {
+      "avg_kills": 40.33,
+      "n_games": 21,
+      "league": "Arabian League",
+      "source": "team_avg"
+    },
+    "JSK Gamefy": {
+      "avg_kills": 37.39,
+      "n_games": 28,
+      "league": "Arabian League",
+      "source": "team_avg"
+    },
+    "3BL GALAXY ESPORTS": {
+      "avg_kills": 37.03,
+      "n_games": 31,
+      "league": "Arabian League",
+      "source": "team_avg"
+    },
+    "One More Esports ": {
+      "avg_kills": 37.04,
+      "n_games": 26,
+      "league": "Arabian League",
+      "source": "team_avg"
+    },
+    "BAAM Esports": {
+      "avg_kills": 36.63,
+      "n_games": 30,
+      "league": "Arabian League",
+      "source": "team_avg"
+    },
+    "GNG Amazigh": {
+      "avg_kills": 37.03,
+      "n_games": 30,
+      "league": "Arabian League",
+      "source": "team_avg"
+    },
+    "Disruptors": {
+      "avg_kills": 41.2,
+      "n_games": 5,
+      "league": "Arabian League",
+      "source": "team_avg"
+    },
+    "Pyramid IV Esports": {
+      "avg_kills": 37.53,
+      "n_games": 2,
+      "league": "Arabian League",
+      "source": "league_avg_fallback"
+    },
+    "DNS Challengers": {
+      "avg_kills": 31.53,
+      "n_games": 43,
+      "league": "LCK Challengers",
+      "source": "team_avg"
+    },
+    "DK Challengers": {
+      "avg_kills": 27.62,
+      "n_games": 39,
+      "league": "LCK Challengers",
+      "source": "team_avg"
+    },
+    "kt Challengers": {
+      "avg_kills": 35.29,
+      "n_games": 41,
+      "league": "LCK Challengers",
+      "source": "team_avg"
+    },
+    "KRX Challengers": {
+      "avg_kills": 27.85,
+      "n_games": 41,
+      "league": "LCK Challengers",
+      "source": "team_avg"
+    },
+    "HLE Challengers": {
+      "avg_kills": 30.77,
+      "n_games": 40,
+      "league": "LCK Challengers",
+      "source": "team_avg"
+    },
+    "T1 Esports Academy": {
+      "avg_kills": 35.73,
+      "n_games": 40,
+      "league": "LCK Challengers",
+      "source": "team_avg"
+    },
+    "NS Challengers": {
+      "avg_kills": 32.52,
+      "n_games": 40,
+      "league": "LCK Challengers",
+      "source": "team_avg"
+    },
+    "BNK FEARX Youth": {
+      "avg_kills": 33.67,
+      "n_games": 45,
+      "league": "LCK Challengers",
+      "source": "team_avg"
+    },
+    "BRO Challengers": {
+      "avg_kills": 30.48,
+      "n_games": 40,
+      "league": "LCK Challengers",
+      "source": "team_avg"
+    },
+    "Gen.G Global Academy": {
+      "avg_kills": 35.21,
+      "n_games": 39,
+      "league": "LCK Challengers",
+      "source": "team_avg"
+    },
+    "INTZ": {
+      "avg_kills": 30.58,
+      "n_games": 19,
+      "league": "Circuito Desafiante",
+      "source": "team_avg"
+    },
+    "Estral Esports": {
+      "avg_kills": 30.95,
+      "n_games": 20,
+      "league": "Circuito Desafiante",
+      "source": "team_avg"
+    },
+    "paiN Gaming Academy": {
+      "avg_kills": 29.74,
+      "n_games": 27,
+      "league": "Circuito Desafiante",
+      "source": "team_avg"
+    },
+    "Ei Nerd Esports": {
+      "avg_kills": 27.64,
+      "n_games": 14,
+      "league": "Circuito Desafiante",
+      "source": "team_avg"
+    },
+    "KaBuM! Eports": {
+      "avg_kills": 28.33,
+      "n_games": 24,
+      "league": "Circuito Desafiante",
+      "source": "team_avg"
+    },
+    "7REX Team": {
+      "avg_kills": 26.85,
+      "n_games": 13,
+      "league": "Circuito Desafiante",
+      "source": "team_avg"
+    },
+    "RMD Gaming": {
+      "avg_kills": 28.07,
+      "n_games": 14,
+      "league": "Circuito Desafiante",
+      "source": "team_avg"
+    },
+    "RED Kalunga Academy": {
+      "avg_kills": 30.14,
+      "n_games": 14,
+      "league": "Circuito Desafiante",
+      "source": "team_avg"
+    },
+    "TEAM SOLID": {
+      "avg_kills": 27.78,
+      "n_games": 9,
+      "league": "Circuito Desafiante",
+      "source": "team_avg"
+    },
+    "Vivo Keyd Stars Academy": {
+      "avg_kills": 26.36,
+      "n_games": 22,
+      "league": "Circuito Desafiante",
+      "source": "team_avg"
+    },
+    "Xu Ji Basalt": {
+      "avg_kills": 35.98,
+      "n_games": 2,
+      "league": "PCS",
+      "source": "league_avg_fallback"
+    },
+    "Frank Esports": {
+      "avg_kills": 31.95,
+      "n_games": 21,
+      "league": "PCS",
+      "source": "team_avg"
+    },
+    "SillySilly Gaming": {
+      "avg_kills": 33.82,
+      "n_games": 17,
+      "league": "PCS",
+      "source": "team_avg"
+    },
+    "One Round Specialists": {
+      "avg_kills": 41.8,
+      "n_games": 5,
+      "league": "PCS",
+      "source": "team_avg"
+    },
+    "CTBC Flying Oyster Academy": {
+      "avg_kills": 37.92,
+      "n_games": 12,
+      "league": "PCS",
+      "source": "team_avg"
+    },
+    "Shadow Keepers Esports": {
+      "avg_kills": 43,
+      "n_games": 11,
+      "league": "PCS",
+      "source": "team_avg"
+    },
+    "Equinox Core": {
+      "avg_kills": 35.98,
+      "n_games": 4,
+      "league": "PCS",
+      "source": "league_avg_fallback"
+    },
+    "GZ Academy": {
+      "avg_kills": 35.98,
+      "n_games": 4,
+      "league": "PCS",
+      "source": "league_avg_fallback"
+    },
+    "WangTing": {
+      "avg_kills": 38.88,
+      "n_games": 8,
+      "league": "PCS",
+      "source": "team_avg"
+    },
+    "Viper Night Raider": {
+      "avg_kills": 25.67,
+      "n_games": 6,
+      "league": "PCS",
+      "source": "team_avg"
+    },
+    "Saigon Zen Esport": {
+      "avg_kills": 35.36,
+      "n_games": 25,
+      "league": "VCS",
+      "source": "team_avg"
+    },
+    "Saigon Warrior": {
+      "avg_kills": 32.05,
+      "n_games": 21,
+      "league": "VCS",
+      "source": "team_avg"
+    },
+    "Saigon MVKE Academy": {
+      "avg_kills": 33.64,
+      "n_games": 11,
+      "league": "VCS",
+      "source": "team_avg"
+    },
+    "Saigon Dino": {
+      "avg_kills": 32.79,
+      "n_games": 29,
+      "league": "VCS",
+      "source": "team_avg"
+    },
+    "TP.HCM SN CyberCore Esports": {
+      "avg_kills": 33.19,
+      "n_games": 21,
+      "league": "VCS",
+      "source": "team_avg"
+    },
+    "Saigon 9Gaming": {
+      "avg_kills": 33.91,
+      "n_games": 11,
+      "league": "VCS",
+      "source": "team_avg"
+    },
+    "NCG Esports": {
+      "avg_kills": 39.38,
+      "n_games": 13,
+      "league": "LRN",
+      "source": "team_avg"
+    },
+    "SDM Tigres": {
+      "avg_kills": 34.22,
+      "n_games": 32,
+      "league": "LRN",
+      "source": "team_avg"
+    },
+    "3V TEAM": {
+      "avg_kills": 36.78,
+      "n_games": 32,
+      "league": "LRN",
+      "source": "team_avg"
+    },
+    "FUEGO": {
+      "avg_kills": 33.05,
+      "n_games": 22,
+      "league": "LRN",
+      "source": "team_avg"
+    },
+    "Zeu5 Esports": {
+      "avg_kills": 35.21,
+      "n_games": 29,
+      "league": "LRN",
+      "source": "team_avg"
+    },
+    "Polar Squad": {
+      "avg_kills": 40,
+      "n_games": 21,
+      "league": "LRN",
+      "source": "team_avg"
+    },
+    "Lyon Academy": {
+      "avg_kills": 38.06,
+      "n_games": 18,
+      "league": "LRN",
+      "source": "team_avg"
+    },
+    "Kits Esports": {
+      "avg_kills": 43.15,
+      "n_games": 13,
+      "league": "LRN",
+      "source": "team_avg"
+    },
+    "Volticons": {
+      "avg_kills": 35.43,
+      "n_games": 37,
+      "league": "LRS",
+      "source": "team_avg"
+    },
+    "Maze Gaming": {
+      "avg_kills": 35.47,
+      "n_games": 17,
+      "league": "LRS",
+      "source": "team_avg"
+    },
+    "Tu Papá Esports": {
+      "avg_kills": 36.87,
+      "n_games": 4,
+      "league": "LRS",
+      "source": "league_avg_fallback"
+    },
+    "9z Globant": {
+      "avg_kills": 38.8,
+      "n_games": 30,
+      "league": "LRS",
+      "source": "team_avg"
+    },
+    "Golden Lions": {
+      "avg_kills": 34.37,
+      "n_games": 30,
+      "league": "LRS",
+      "source": "team_avg"
+    },
+    "Malvinas Gaming": {
+      "avg_kills": 37,
+      "n_games": 28,
+      "league": "LRS",
+      "source": "team_avg"
+    },
+    "Seven Dark": {
+      "avg_kills": 36.36,
+      "n_games": 25,
+      "league": "LRS",
+      "source": "team_avg"
+    },
+    "The New Kings": {
+      "avg_kills": 32.43,
+      "n_games": 7,
+      "league": "LRS",
+      "source": "team_avg"
+    },
+    "Docta Esports Club": {
+      "avg_kills": 38.53,
+      "n_games": 17,
+      "league": "LRS",
+      "source": "team_avg"
+    },
+    "ZEN": {
+      "avg_kills": 41.71,
+      "n_games": 17,
+      "league": "LRS",
+      "source": "team_avg"
+    }
+  },
+  "league_avg_total": {
+    "MSI": {
+      "avg_kills": 33.28,
+      "n_games": 67
+    },
+    "LCS": {
+      "avg_kills": 25.54,
+      "n_games": 94
+    },
+    "CBLOL": {
+      "avg_kills": 27.09,
+      "n_games": 92
+    },
+    "LEC": {
+      "avg_kills": 27.64,
+      "n_games": 118
+    },
+    "Esports World Cup": {
+      "avg_kills": 32.2,
+      "n_games": 49
+    },
+    "LCK": {
+      "avg_kills": 29.25,
+      "n_games": 218
+    },
+    "LPL": {
+      "avg_kills": 27.96,
+      "n_games": 227
+    },
+    "LCP": {
+      "avg_kills": 29.25,
+      "n_games": 97
+    },
+    "NACL": {
+      "avg_kills": 30.66,
+      "n_games": 125
+    },
+    "EMEA Masters": {
+      "avg_kills": 33.38,
+      "n_games": 120
+    },
+    "LJL": {
+      "avg_kills": 36.85,
+      "n_games": 80
+    },
+    "TCL": {
+      "avg_kills": 31.44,
+      "n_games": 84
+    },
+    "NLC": {
+      "avg_kills": 35.55,
+      "n_games": 53
+    },
+    "La Ligue Française": {
+      "avg_kills": 31.58,
+      "n_games": 79
+    },
+    "Road of Legends": {
+      "avg_kills": 36.76,
+      "n_games": 95
+    },
+    "Liga Portuguesa": {
+      "avg_kills": 35.66,
+      "n_games": 41
+    },
+    "LoL Italian Tournament": {
+      "avg_kills": 31.41,
+      "n_games": 59
+    },
+    "Rift Legends": {
+      "avg_kills": 36.54,
+      "n_games": 76
+    },
+    "LES": {
+      "avg_kills": 30.96,
+      "n_games": 90
+    },
+    "Prime League": {
+      "avg_kills": 34.39,
+      "n_games": 153
+    },
+    "Hitpoint Masters": {
+      "avg_kills": 41.07,
+      "n_games": 85
+    },
+    "Esports Balkan League": {
+      "avg_kills": 36.29,
+      "n_games": 63
+    },
+    "Hellenic Legends League": {
+      "avg_kills": 34.24,
+      "n_games": 92
+    },
+    "Arabian League": {
+      "avg_kills": 37.53,
+      "n_games": 117
+    },
+    "LCK Challengers": {
+      "avg_kills": 32.08,
+      "n_games": 204
+    },
+    "Circuito Desafiante": {
+      "avg_kills": 28.77,
+      "n_games": 88
+    },
+    "PCS": {
+      "avg_kills": 35.98,
+      "n_games": 45
+    },
+    "VCS": {
+      "avg_kills": 33.46,
+      "n_games": 59
+    },
+    "LRN": {
+      "avg_kills": 36.77,
+      "n_games": 90
+    },
+    "LRS": {
+      "avg_kills": 36.87,
+      "n_games": 106
+    }
+  }
+}

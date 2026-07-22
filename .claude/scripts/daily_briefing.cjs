@@ -171,6 +171,16 @@ function loadTeamAvgKills() {
   try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch { return null; }
 }
 
+// Fallback pras ligas de expansão (Prime League/KCL/EUM + outras) — team_avg_kills.json
+// só cobre LCK/LPL/LEC/CBLOL/LFL/LCS + internacionais. Gerado offline por
+// scripts/build-expansion-team-avgs.cjs a partir de audit-output/00-universe-allregions.json.
+// Re-rodar esse script quando quiser refrescar a amostra (não é automático via cron ainda).
+function loadExpansionTeamAvgKills() {
+  const f = path.join(REPO, 'cron-data', 'expansion_team_avg_kills.json');
+  if (!fs.existsSync(f)) return null;
+  try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch { return null; }
+}
+
 // Calcula fair line pro EWC: (avg_total_a + avg_total_b) / 2, round pra .5.
 // Fallback hierárquico: avg do time → avg da liga proxy (LCK/LEC/LPL) → 29.5.
 function fairForEwcMatch(teamA, teamB, leagueProxy, teamAvgData) {
@@ -418,12 +428,15 @@ function formatLeagueCell(lg, leagueHitMap) {
 
 // Calcula fair fórmula direto de team_avg_kills.json: (avgA + avgB) / 2 round .5.
 // Funciona pra qualquer jogo do calendário, independente do fair-pre.json do dia.
-// Retorna number|null (null se ambos os times sem avg).
-function calcFormulaFair(teamAName, teamBName, teamAvgData) {
-  if (!teamAvgData) return null;
-  const t = teamAvgData.teams || {};
-  const a = t[teamAName]?.avg_kills ?? null;
-  const b = t[teamBName]?.avg_kills ?? null;
+// Fallback por time: se o time não está em team_avg_kills.json (ligas de expansão
+// — Prime League/KCL/EUM — não cobertas pelo cron principal), tenta
+// expansionAvgData (cron-data/expansion_team_avg_kills.json).
+// Retorna number|null (null se algum dos dois times não tem avg em nenhuma fonte).
+function calcFormulaFair(teamAName, teamBName, teamAvgData, expansionAvgData) {
+  const t = teamAvgData?.teams || {};
+  const te = expansionAvgData?.teams || {};
+  const a = t[teamAName]?.avg_kills ?? te[teamAName]?.avg_kills ?? null;
+  const b = t[teamBName]?.avg_kills ?? te[teamBName]?.avg_kills ?? null;
   if (a == null || b == null) return null;
   const mid = (a + b) / 2;
   return Math.round(mid - 0.5) + 0.5; // round pra .5 mais próximo
@@ -484,6 +497,7 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData) {
   const pinnacle = loadFairPinnacle(TARGET);
   const formulaFair = loadFormulaFair(TARGET);
   const teamAvgData = loadTeamAvgKills();
+  const expansionAvgData = loadExpansionTeamAvgKills();
 
   const allMatches = [];
   for (const [lg, id] of Object.entries(LEAGUE_IDS)) {
@@ -509,9 +523,16 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData) {
 
   // EWC qualifiers (Korea/EMEA/China) via Liquipedia. Fair line calculada
   // reusando team_avg_kills.json (mesmos times do regular).
-  for (const q of EWC_QUALIFIERS) {
-    const ewcMatches = await fetchEwcQualifierMatches(q, TARGET, teamAvgData);
-    for (const m of ewcMatches) allMatches.push(m);
+  // Gate por data 2026-07-22: EWC 2026 encerrou 2026-07-19 — pra TARGET depois
+  // disso não tem mais jogo, só gera fetch inútil na Liquipedia + aviso morto
+  // "EWC QUALIFIERS NÃO CARREGARAM" toda vez. Reabilita automático se a próxima
+  // edição do EWC cair dentro dessa janela de novo (ajustar a data aqui então).
+  const EWC_2026_LAST_DATE = '2026-07-19';
+  if (TARGET <= EWC_2026_LAST_DATE) {
+    for (const q of EWC_QUALIFIERS) {
+      const ewcMatches = await fetchEwcQualifierMatches(q, TARGET, teamAvgData);
+      for (const m of ewcMatches) allMatches.push(m);
+    }
   }
 
   allMatches.sort((a, b) => a.start_time.localeCompare(b.start_time));
@@ -588,7 +609,7 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData) {
       // Fórmula: tenta fair-pre.json do cron, fallback pra cálculo direto de team_avg_kills
       // nameA/nameB já foram resolvidos para canonical curto (lookup em team_avg_kills funciona)
       const cronFrm = formulaFair.get(String(m.match_id)) ?? null;
-      frmLine = cronFrm ?? calcFormulaFair(nameA, nameB, teamAvgData);
+      frmLine = cronFrm ?? calcFormulaFair(nameA, nameB, teamAvgData, expansionAvgData);
     }
 
     const fairPinCell = pinLine != null ? `**${pinLine}**` : '—';
