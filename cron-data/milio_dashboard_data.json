@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-07-21T13:21:08.343Z",
+  "generated_at": "2026-07-22T13:26:02.070Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
-    "2026-06-12"
+    "2026-07-22"
   ],
-  "milio_count": 115,
-  "games_with_full_picks": 94,
-  "baseline_under_hit_pct": 67.8,
+  "milio_count": 117,
+  "games_with_full_picks": 96,
+  "baseline_under_hit_pct": 67.5,
   "by_league": {
-    "LPL": 47,
+    "LPL": 49,
     "LCK": 30,
     "LEC": 12,
     "CBLOL": 14,
@@ -3660,6 +3660,72 @@
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "115548128963037578",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-07-22",
+      "league": "LPL",
+      "map": 2,
+      "team_blue": "EDG",
+      "team_red": "LGD",
+      "milio_side": "red",
+      "milio_team": "LGD",
+      "opp_team": "EDG",
+      "opp_sup": "Lulu",
+      "sup_blue": "Lulu",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "adc": "Yunara",
+        "mid": "Ryze",
+        "top": "Rumble",
+        "jungle": "Qiyana",
+        "support": "Lulu"
+      },
+      "red_picks": {
+        "adc": "Lucian",
+        "mid": "TwistedFate",
+        "top": "KSante",
+        "jungle": "JarvanIV",
+        "support": "Milio"
+      },
+      "total_kills": 31,
+      "fair": 30.5,
+      "fair_source": "formula(league+league)/2",
+      "trigger": "2peel",
+      "game_id": "116566854547769646",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-07-22",
+      "league": "LPL",
+      "map": 1,
+      "team_blue": "TES",
+      "team_red": "WE",
+      "milio_side": "red",
+      "milio_team": "WE",
+      "opp_team": "TES",
+      "opp_sup": "Karma",
+      "sup_blue": "Karma",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "adc": "Ezreal",
+        "mid": "Ahri",
+        "top": "KSante",
+        "jungle": "JarvanIV",
+        "support": "Karma"
+      },
+      "red_picks": {
+        "adc": "Lucian",
+        "mid": "Aurora",
+        "top": "Gnar",
+        "jungle": "Jayce",
+        "support": "Milio"
+      },
+      "total_kills": 28,
+      "fair": 30.5,
+      "fair_source": "formula(league+league)/2",
+      "trigger": "2peel",
+      "game_id": "116566854547769573",
       "src": "results.json"
     }
   ]
