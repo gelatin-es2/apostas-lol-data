@@ -540,6 +540,12 @@
     <div id="allRealKpis" class="kpis" style="margin-bottom:20px"></div>
 
     <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+      <label style="font-size:12px;color:var(--muted);font-weight:600">PERÍODO:</label>
+      <select id="trkPeriod" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+        <option value="all">Tudo</option>
+        <option value="split2">Split 2 (abr-jun)</option>
+        <option value="split3" selected>Split 3 (21/07+)</option>
+      </select>
       <label style="font-size:12px;color:var(--muted);font-weight:600">TRIGGER:</label>
       <select id="trkTrigger" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
         <option value="all" selected>todos</option>
@@ -594,6 +600,14 @@
 
   <main class="container tab-pane" data-pane="under">
     <div class="section-title" style="margin-top:0">Resumo — Método Under (bets reais, is_method_bet=true)</div>
+    <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+      <label style="font-size:12px;color:var(--muted);font-weight:600">PERÍODO:</label>
+      <select id="underPeriod" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+        <option value="all">Tudo</option>
+        <option value="split2">Split 2 (abr-jun)</option>
+        <option value="split3" selected>Split 3 (21/07+)</option>
+      </select>
+    </div>
     <div id="underKpis" class="kpis"></div>
 
     <div class="section-title">Por mês (só método)</div>
@@ -610,6 +624,14 @@
 
   <main class="container tab-pane" data-pane="overkill">
     <div class="section-title" style="margin-top:0">Resumo — Over Kill (experimentos Over / avulsos fora do método)</div>
+    <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+      <label style="font-size:12px;color:var(--muted);font-weight:600">PERÍODO:</label>
+      <select id="overPeriod" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+        <option value="all">Tudo</option>
+        <option value="split2">Split 2 (abr-jun)</option>
+        <option value="split3" selected>Split 3 (21/07+)</option>
+      </select>
+    </div>
     <div id="overKpis" class="kpis"></div>
     <div id="overWindowLine" style="font-size:12px;color:var(--muted);margin:-8px 0 16px"></div>
 
@@ -970,13 +992,63 @@
       return normalizeLeague(league);
     };
 
-    let allBets = [];          // bets is_method_bet=true (base do Tracker)
-    let allOffBets = [];       // bets is_method_bet=false
+    let allBets = [];          // bets is_method_bet=true, JÁ escopadas pelo PERÍODO ativo
+    let allOffBets = [];       // bets is_method_bet=false, idem
+    let allBetsAll = [];       // allBets SEM filtro de período — fonte de dropdowns + recompute
+    let allOffBetsAll = [];    // allOffBets SEM filtro de período
     let currentFilter = 'all';
     let currentDayFilter = null; // 'YYYY-MM-DD' ou null
     let currentMonthFilter = null; // 'YYYY-MM' ou null
     let trkTriggerFilter = 'all';
     let trkLeagueFilter = 'all';
+
+    // ── Filtro de PERÍODO — global, compartilhado (pedido do dono 2026-07-23) ──────
+    // Afeta Planilha (resumo/KPIs/mês/dia/lista/off-método), Método Under e Over Kill.
+    // NÃO afeta Milio/Split1 (fonte própria, fora do escopo do pedido).
+    // Data de corte Split 2 → Split 3 (decisão do dono 2026-07-21). Mesma constante
+    // usada pelo seletor de período da aba "Banco de dados" (renderAnaliseTab).
+    const SPLIT3_START = '2026-07-21';
+    let globalPeriodFilter = 'split3'; // 'all' | 'split2' | 'split3' — default Split 3 ao abrir
+
+    function applyPeriodFilter(bets) {
+      if (globalPeriodFilter === 'all') return bets;
+      return bets.filter(b => {
+        const dayKey = (b.bet_datetime || '').slice(0, 10);
+        const isSplit3 = dayKey >= SPLIT3_START;
+        return globalPeriodFilter === 'split3' ? isSplit3 : !isSplit3;
+      });
+    }
+
+    // Recalcula allBets/allOffBets (escopados) a partir de allBetsAll/allOffBetsAll
+    // (brutos) — chamado no load() e sempre que o seletor de período muda.
+    function applyGlobalPeriod() {
+      allBets = applyPeriodFilter(allBetsAll);
+      allOffBets = applyPeriodFilter(allOffBetsAll);
+    }
+
+    // Os 3 selects de período (Planilha/Under/Over Kill) compartilham o mesmo estado —
+    // mudar em qualquer aba reflete nas outras.
+    function syncPeriodSelectors() {
+      for (const id of ['trkPeriod', 'underPeriod', 'overPeriod']) {
+        const el = document.getElementById(id);
+        if (el) el.value = globalPeriodFilter;
+      }
+    }
+
+    function onPeriodChange(newVal) {
+      globalPeriodFilter = newVal;
+      syncPeriodSelectors();
+      // Reseta drill-down de mês/dia — o dia/mês selecionado pode não existir no
+      // período novo (ex: estava vendo 14/06 e trocou pra Split 3).
+      currentMonthFilter = null;
+      currentDayFilter = null;
+      applyGlobalPeriod();
+      render();
+    }
+
+    function periodLabel(p) {
+      return p === 'split3' ? 'Split 3' : (p === 'split2' ? 'Split 2' : 'tudo');
+    }
 
     // Aplica filtros de trigger e liga sobre um array de bets do Tracker
     function applyTrkFilters(bets) {
@@ -1013,17 +1085,21 @@
         return;
       }
 
-      allBets = methodData || [];
-      allOffBets = offData || [];
+      allBetsAll = methodData || [];
+      allOffBetsAll = offData || [];
+      applyGlobalPeriod(); // deriva allBets/allOffBets escopados pelo período ativo
+
       // Popula dropdown de liga do Tracker com ligas presentes em TODAS as bets reais
-      // (método + fora do método). Auditoria MED-03 (2026-07-23): antes só escaneava
-      // allBets (método) — ligas que só têm bet off-método (ex: Prime League/KCL, hoje
-      // concentradas na aba Over Kill) nunca apareciam no filtro, mesmo aparecendo nos
-      // totais "Por mês/dia" (que já somam allReal desde o fix de 2026-07-23).
+      // (método + fora do método), SEMPRE a partir do bruto (allBetsAll/allOffBetsAll) —
+      // não do escopado por período. Senão o dropdown encolheria conforme o período
+      // selecionado tivesse poucos dias (ex: Split 3 com só 3 dias de dado).
+      // Auditoria MED-03 (2026-07-23): antes só escaneava allBets (método) — ligas que só
+      // têm bet off-método (ex: Prime League/KCL, hoje concentradas na aba Over Kill)
+      // nunca apareciam no filtro.
       const trkLigaSel = document.getElementById('trkLeague');
       const currentTrkLeague = trkLigaSel.value;
       const ligaSet = new Set();
-      for (const b of [...allBets, ...allOffBets]) {
+      for (const b of [...allBetsAll, ...allOffBetsAll]) {
         const lg = normalizeLeague(b.league);
         if (lg) ligaSet.add(lg);
       }
@@ -1035,6 +1111,7 @@
         if (lg === currentTrkLeague) opt.selected = true;
         trkLigaSel.appendChild(opt);
       }
+      syncPeriodSelectors();
       render();
     }
 
@@ -1581,7 +1658,7 @@
       if (currentDayFilter) parts.push(`dia ${dayLabelFromKey(currentDayFilter)}`);
       const filterStr = parts.length ? ` · vendo ${parts.join(' / ')}` : '';
       document.getElementById('metaInfo').textContent =
-        `${allBets.length} método · ${allOffBets.length} off · última em ${lastDt}${filterStr}`;
+        `${allBets.length} método · ${allOffBets.length} off · última em ${lastDt}${filterStr} · período: ${periodLabel(globalPeriodFilter)}`;
     }
 
     // ===== Seção "Bets fora do método" =====
@@ -1914,6 +1991,14 @@
       render();
     });
 
+    // Seletor de PERÍODO — 3 instâncias (Planilha/Under/Over Kill), 1 estado
+    // compartilhado (globalPeriodFilter). Mudar em qualquer uma reflete nas outras.
+    for (const id of ['trkPeriod', 'underPeriod', 'overPeriod']) {
+      document.getElementById(id).addEventListener('change', function() {
+        onPeriodChange(this.value);
+      });
+    }
+
     load();
     setInterval(load, 60_000);
 
@@ -1966,10 +2051,8 @@
     loadMethodByLeague();
 
     // ===== Aba "Banco de dados" — adaptável =====
-    // Data de corte Split 2 → Split 3 (decisão do dono 2026-07-21). Usada pelo
-    // seletor de PERÍODO (auditoria HIGH-01) — sem isso o pool de bets misturava os
-    // 2 splits sob um título "(Split 2)" enganoso.
-    const SPLIT3_START = '2026-07-21';
+    // SPLIT3_START (data de corte Split 2 → Split 3) declarada no topo do script,
+    // junto do filtro de PERÍODO global — reaproveitada aqui pelo seletor desta aba.
     let analiseRawBets = null;
 
     // Normaliza nome de time: case-insensitive + remove punctuation pra agrupar dups
