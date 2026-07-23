@@ -596,6 +596,12 @@
     <div class="section-title" style="margin-top:0">Resumo — Método Under (bets reais, is_method_bet=true)</div>
     <div id="underKpis" class="kpis"></div>
 
+    <div class="section-title">Por mês (só método)</div>
+    <div id="underMonths" class="days"></div>
+
+    <div class="section-title">Por dia (só método)</div>
+    <div id="underDays" class="days"></div>
+
     <div class="section-title">Apostas</div>
     <div id="underBetsList" class="bets">
       <div class="loading">Carregando apostas</div>
@@ -606,6 +612,12 @@
     <div class="section-title" style="margin-top:0">Resumo — Over Kill (experimentos Over / avulsos fora do método)</div>
     <div id="overKpis" class="kpis"></div>
     <div id="overWindowLine" style="font-size:12px;color:var(--muted);margin:-8px 0 16px"></div>
+
+    <div class="section-title">Por mês (Over Kill)</div>
+    <div id="overMonths" class="days"></div>
+
+    <div class="section-title">Por dia (Over Kill)</div>
+    <div id="overDays" class="days"></div>
 
     <div class="section-title">Apostas</div>
     <div id="overBetsList" class="bets">
@@ -1079,7 +1091,9 @@
     }
 
     const MONTH_NAMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-    function renderMonths(bets) {
+
+    // Agrega bets por mês (YYYY-MM). Pura — sem tocar DOM.
+    function groupByMonth(bets) {
       const byMonth = {};
       bets.forEach((b) => {
         const dt = b.bet_datetime || b.created_at;
@@ -1097,24 +1111,32 @@
           byMonth[monthKey].profit += Number(b.profit) || 0;
         }
       });
-      const sorted = Object.values(byMonth).sort((a, b) => b.date.localeCompare(a.date));
+      return Object.values(byMonth).sort((a, b) => b.date.localeCompare(a.date));
+    }
+
+    // Markup dos cards "Por mês" — parametrizado por clicável/ativo (mesmo padrão de
+    // kpisCardHtml/renderSummaryInto): Planilha usa clicável + filtro global;
+    // Método Under/Over Kill usam a versão read-only (só informativa, sem estado próprio).
+    function monthsCardHtml(sorted, totalCount, activeMonth, clickable) {
+      const boxCls = clickable ? 'day day-clickable' : 'day';
+      const allActive = clickable && activeMonth === null;
       const allCard = `
-        <div class="day day-clickable ${currentMonthFilter === null ? 'day-active' : ''}" data-month="all">
+        <div class="${boxCls}${allActive ? ' day-active' : ''}" ${clickable ? 'data-month="all"' : ''}>
           <div>
             <div class="date">Todos meses</div>
-            <div class="stats">${bets.length} apostas</div>
+            <div class="stats">${totalCount} apostas</div>
           </div>
           <div class="profit muted">—</div>
         </div>
       `;
-      const html = allCard + sorted.map((m) => {
+      return allCard + sorted.map((m) => {
         const cls = m.profit >= 0 ? 'green' : 'red';
         const [y, mn] = m.date.split('-');
         const label = `${MONTH_NAMES[parseInt(mn, 10) - 1]}/${y.slice(2)}`;
         const roi = m.stake ? ((m.profit / m.stake) * 100).toFixed(1) + '%' : '';
-        const isActive = currentMonthFilter === m.date;
+        const isActive = clickable && activeMonth === m.date;
         return `
-          <div class="day day-clickable ${isActive ? 'day-active' : ''}" data-month="${m.date}">
+          <div class="${boxCls}${isActive ? ' day-active' : ''}" ${clickable ? `data-month="${m.date}"` : ''}>
             <div>
               <div class="date">${label}</div>
               <div class="stats">${m.total} apostas${m.pending ? ` · ${m.pending} pend` : ''} · ROI ${roi}</div>
@@ -1123,8 +1145,13 @@
           </div>
         `;
       }).join('');
+    }
+
+    // Planilha: card clicável, dirige o filtro global de mês (currentMonthFilter).
+    function renderMonths(bets) {
+      const sorted = groupByMonth(bets);
       const monthsEl = document.getElementById('months');
-      monthsEl.innerHTML = html || '<div class="empty">Sem dados</div>';
+      monthsEl.innerHTML = monthsCardHtml(sorted, bets.length, currentMonthFilter, true) || '<div class="empty">Sem dados</div>';
       monthsEl.querySelectorAll('.day-clickable').forEach((el) => {
         el.addEventListener('click', () => {
           const m = el.dataset.month;
@@ -1134,7 +1161,18 @@
         });
       });
     }
-    function renderDays(bets) {
+
+    // Método Under / Over Kill: mesmo card, só leitura (sem clique nem filtro
+    // próprio — evita estado de filtro duplicado entre abas).
+    function renderMonthsReadOnly(containerId, bets) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      const sorted = groupByMonth(bets);
+      el.innerHTML = monthsCardHtml(sorted, bets.length, null, false) || '<div class="empty">Sem dados</div>';
+    }
+
+    // Agrega bets por dia (YYYY-MM-DD). Pura — sem tocar DOM.
+    function groupByDay(bets) {
       const byDay = {};
       bets.forEach((b) => {
         const dt = b.bet_datetime || b.created_at;
@@ -1150,36 +1188,41 @@
           byDay[dayKey].profit += Number(b.profit) || 0;
         }
       });
+      return Object.values(byDay).sort((a, b) => b.date.localeCompare(a.date));
+    }
 
-      const sorted = Object.values(byDay).sort((a, b) => b.date.localeCompare(a.date));
+    function daysCardHtml(sorted, totalCount, activeDay, clickable) {
+      const boxCls = clickable ? 'day day-clickable' : 'day';
+      const allActive = clickable && activeDay === null;
       const allCard = `
-        <div class="day day-clickable ${currentDayFilter === null ? 'day-active' : ''}" data-day="all">
+        <div class="${boxCls}${allActive ? ' day-active' : ''}" ${clickable ? 'data-day="all"' : ''}>
           <div>
             <div class="date">Todos</div>
-            <div class="stats">${bets.length} apostas</div>
+            <div class="stats">${totalCount} apostas</div>
           </div>
           <div class="profit muted">—</div>
         </div>
       `;
-      const html = allCard + sorted
-        .map((d) => {
-          const cls = d.profit >= 0 ? 'green' : 'red';
-          const dateLabel = dayLabelFromKey(d.date);
-          const isActive = currentDayFilter === d.date;
-          return `
-            <div class="day day-clickable ${isActive ? 'day-active' : ''}" data-day="${d.date}">
-              <div>
-                <div class="date">${dateLabel}</div>
-                <div class="stats">${d.total} apostas${d.pending ? ` · ${d.pending} pend` : ''}</div>
-              </div>
-              <div class="profit ${cls}">${d.profit >= 0 ? '+' : ''}${fmtMoney(d.profit)}</div>
+      return allCard + sorted.map((d) => {
+        const cls = d.profit >= 0 ? 'green' : 'red';
+        const dateLabel = dayLabelFromKey(d.date);
+        const isActive = clickable && activeDay === d.date;
+        return `
+          <div class="${boxCls}${isActive ? ' day-active' : ''}" ${clickable ? `data-day="${d.date}"` : ''}>
+            <div>
+              <div class="date">${dateLabel}</div>
+              <div class="stats">${d.total} apostas${d.pending ? ` · ${d.pending} pend` : ''}</div>
             </div>
-          `;
-        })
-        .join('');
+            <div class="profit ${cls}">${d.profit >= 0 ? '+' : ''}${fmtMoney(d.profit)}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderDays(bets) {
+      const sorted = groupByDay(bets);
       const daysEl = document.getElementById('days');
-      daysEl.innerHTML = html || '<div class="empty">Sem dados</div>';
-      // Click handlers
+      daysEl.innerHTML = daysCardHtml(sorted, bets.length, currentDayFilter, true) || '<div class="empty">Sem dados</div>';
       daysEl.querySelectorAll('.day-clickable').forEach((el) => {
         el.addEventListener('click', () => {
           const day = el.dataset.day;
@@ -1187,6 +1230,13 @@
           render();
         });
       });
+    }
+
+    function renderDaysReadOnly(containerId, bets) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      const sorted = groupByDay(bets);
+      el.innerHTML = daysCardHtml(sorted, bets.length, null, false) || '<div class="empty">Sem dados</div>';
     }
 
     // ── normalizeComp: constrói objeto compatível com renderComp a partir de
@@ -1450,9 +1500,10 @@
       }
       return v;
     }
-    // Bets a serem mostradas em "Por dia" (filtra pelo mês mas não pelo dia)
-    function betsForDays() {
-      const base = applyTrkFilters(allBets);
+    // Bets a serem mostradas em "Por dia" (filtra pelo mês mas não pelo dia).
+    // Genérico — usado tanto com allBets (Método Under) quanto com allReal (Planilha).
+    function betsForDaysScoped(bets) {
+      const base = applyTrkFilters(bets);
       if (!currentMonthFilter) return base;
       return base.filter(b => {
         const dt = b.bet_datetime || b.created_at;
@@ -1460,11 +1511,20 @@
       });
     }
     function render() {
+      // União de todas as bets reais (método + off-método), já sem SIMULATED —
+      // pedido do dono (2026-07-23): os cards Por mês/Por dia da Planilha devem
+      // contar TODAS as bets reais, não só as do método.
+      const allReal = [...allBets, ...allOffBets].sort((a, b) => {
+        const da = new Date(a.bet_datetime || a.created_at);
+        const db = new Date(b.bet_datetime || b.created_at);
+        return db - da;
+      });
+
       const view = betsForView();
       const k = computeKPIs(view);
       renderKPIs(k);
-      renderMonths(applyTrkFilters(allBets));
-      renderDays(betsForDays());
+      renderMonths(applyTrkFilters(allReal));
+      renderDays(betsForDaysScoped(allReal));
       renderBySupport(view);
       renderByLeague(view);
       renderByTeam(view);
@@ -1473,12 +1533,12 @@
       // try/catch isolado: se algo nas abas novas quebrar (dado inesperado),
       // não pode derrubar o resto do render() (KPIs/lista já corretos acima).
       try {
-        renderNewTabs();
+        renderNewTabs(allReal);
       } catch (e) {
         console.error('renderNewTabs falhou:', e);
       }
 
-      const lastBet = allBets[0];
+      const lastBet = allReal[0];
       const lastDt = lastBet ? fmtDate(lastBet.bet_datetime || lastBet.created_at) : '—';
       const parts = [];
       if (currentMonthFilter) {
@@ -1777,26 +1837,26 @@
         (noFlag ? ` · ${noFlag} sem flag` : '');
     }
 
-    function renderNewTabs() {
-      // allBets ∪ allOffBets = todas as bets reais (SIMULATED já excluída na query).
-      const allReal = [...allBets, ...allOffBets].sort((a, b) => {
-        const da = new Date(a.bet_datetime || a.created_at);
-        const db = new Date(b.bet_datetime || b.created_at);
-        return db - da;
-      });
-
+    // allReal (allBets ∪ allOffBets, já sem SIMULATED) vem calculado em render()
+    // pra evitar recomputar/re-sortear a união duas vezes por ciclo de render.
+    function renderNewTabs(allReal) {
       // Planilha: resumo combinado no topo (item 1 do pedido)
       renderSummaryInto('allRealKpis', allReal);
 
-      // Método Under: bets reais com is_method_bet=true
+      // Método Under: bets reais com is_method_bet=true — preserva a visão
+      // histórica só-método (Por mês/Por dia) que antes vivia na Planilha.
       renderSummaryInto('underKpis', allBets);
       renderBetsListInto('underBetsList', allBets);
+      renderMonthsReadOnly('underMonths', applyTrkFilters(allBets));
+      renderDaysReadOnly('underDays', betsForDaysScoped(allBets));
 
       // Over Kill: bets reais com method_variant over_experimental*/off_method*
       const overBets = allReal.filter(isOverKillVariant);
       renderSummaryInto('overKpis', overBets);
       renderBetsListInto('overBetsList', overBets);
       renderOverWindowLine(overBets);
+      renderMonthsReadOnly('overMonths', applyTrkFilters(overBets));
+      renderDaysReadOnly('overDays', betsForDaysScoped(overBets));
     }
 
     document.querySelectorAll('.chip').forEach((chip) => {
