@@ -45,7 +45,13 @@ function resolveCanonical(name) {
 }
 
 // Ligas operadas pelo Elvis (decisão 2026-05-10): LCK, LPL, LEC, CBLOL, LFL, LCS.
-// LIT e LES removidas do briefing — Elvis não opera essas.
+// LIT removida do briefing — Elvis não opera essa.
+// LES re-adicionada 2026-07-23 (dono aprovou operar de novo). CLAUDE.md ainda cita
+// "43.5% SKIP — sangra" pra LES, mas esse número não bate com nenhuma fonte viva
+// (tier2_dashboard_stats.json 2026-05-21: all=59.3% n=27, 2peel=56.3% n=16,
+// 1peel+flex=63.6% n=11; bets reais no Supabase: 66.7% n=30) — doc provavelmente
+// desatualizada, sinalizado no report, não corrigido aqui (fora de escopo).
+// normalizeLeague: 'LES' passa ileso nas 2 implementações (testado empiricamente).
 // +3 ligas 2026-07-21 (método Under aprovado, validado externamente): Prime League,
 // LCK Challengers (código curto 'KCL' — 'LCK Challengers'/'LCK-CL' colidem com o regex
 // \bLCK\b de normalizeLeague em lib/normTeamName.cjs e poluiriam as stats da LCK principal),
@@ -64,6 +70,7 @@ const LEAGUE_IDS = {
   'Prime League': '105266091639104326',
   KCL:            '98767991335774713', // LCK Challengers
   EUM:            '100695891328981122', // EMEA Masters
+  LES:            '105266074488398661',
 };
 
 // Dias úteis em ms (offset BRT = UTC -3)
@@ -558,7 +565,7 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData, expansionAvgData) {
   // Header
   console.log(`# Jogos de ${TARGET} — briefing método 2peel\n`);
   if (allMatches.length === 0) {
-    console.log('Sem jogos das ligas operadas (LCK/LPL/LEC/CBLOL/LFL/LCS + Prime League/KCL/EUM) hoje.');
+    console.log('Sem jogos das ligas operadas (LCK/LPL/LEC/CBLOL/LFL/LCS + Prime League/KCL/EUM/LES) hoje.');
     return;
   }
 
