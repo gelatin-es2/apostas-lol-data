@@ -530,7 +530,7 @@
     <div class="tab active" data-tab="tracker">Planilha</div>
     <div class="tab" data-tab="under">Método Under</div>
     <div class="tab" data-tab="overkill">Over Kill</div>
-    <div class="tab" data-tab="analise">Banco de dados (Split 2)</div>
+    <div class="tab" data-tab="analise">Banco de dados</div>
     <div class="tab" data-tab="milio">Método Milio</div>
     <div class="tab" data-tab="split1">Split 1 + First Stand</div>
   </nav>
@@ -569,7 +569,7 @@
     <div class="section-title">Lucro por time</div>
     <div id="byTeam" class="days"></div>
 
-    <div class="section-title">Hit do método por liga (backtest Split 2, simulação)</div>
+    <div class="section-title">Hit do método por liga (backtest, simulação)</div>
     <div id="methodByLeague" class="days">
       <div class="loading">Carregando…</div>
     </div>
@@ -627,11 +627,17 @@
 
   <main class="container tab-pane" data-pane="analise">
     <div style="background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(99,102,241,0.04)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
-      <div style="font-weight:700; font-size:14px; color:var(--accent-2)">Banco de dados Split 2 — simulação adaptável</div>
+      <div style="font-weight:700; font-size:14px; color:var(--accent-2)">Banco de dados — simulação adaptável</div>
       <div style="font-size:12px; color:var(--muted); margin-top:6px">
         Bets reais do CEO + missed opportunities simuladas. <strong>Ajuste a linha simulada</strong> abaixo pra ver como cada time/champ/sup performa em cenários diferentes. Útil pra identificar quem aguenta cenários adversos. <strong>Não é PnL real.</strong>
       </div>
       <div style="display:flex;gap:16px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border-soft);flex-wrap:wrap">
+        <label style="font-size:12px;color:var(--muted);font-weight:600">PERÍODO:</label>
+        <select id="anPeriod" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+          <option value="all" selected>Tudo</option>
+          <option value="split2">Split 2 (abr-jun)</option>
+          <option value="split3">Split 3 (21/07+)</option>
+        </select>
         <label style="font-size:12px;color:var(--muted);font-weight:600">Δ FAIR LINE:</label>
         <select id="anFairDelta" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
           <option value="-4">−4 (linha 4 abaixo)</option>
@@ -701,10 +707,10 @@
     <div style="background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(16,185,129,0.06)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
       <div style="font-weight:700; font-size:14px; color:var(--green)">🌟 Método Milio — sub-método dedicado</div>
       <div style="font-size:12px; color:var(--muted); margin-top:6px">
-        <strong>TODOS os 105 jogos</strong> do Split 2 (LCK/LPL/LEC/CBLOL/LCS) onde <strong>Milio jogou de support</strong> — com ou sem bet, fonte results.json (audit 2026-05-31). Under hit recalculado live com o slider Δ (<code>kills &lt; fair + Δ</code>). Profit teórico usa a odd do slider.
+        <strong>TODOS os <span id="milioGameCount">–</span> jogos</strong> (LCK/LPL/LEC/CBLOL/LCS) onde <strong>Milio jogou de support</strong> — com ou sem bet, fonte results.json (dado atualizado em <span id="milioLastUpdate">–</span>). Under hit recalculado live com o slider Δ (<code>kills &lt; fair + Δ</code>). Profit teórico usa a odd do slider.
       </div>
       <div style="font-size:11px; color:var(--muted); margin-top:8px; line-height:1.6">
-        🟢 <strong>STACK</strong>: Milio vs Bard/Lulu (under detona) · 🔴 <strong>EVITAR</strong>: Milio vs Nautilus/Alistar/Renata (engage-tank fura) ou time NIP (joga rápido) · ⚠️ amostra fraca (n&lt;5)
+        🟢 <strong>STACK</strong>: Milio vs Bard/Lulu (under detona) · 🔴 <strong>EVITAR</strong>: Milio vs Nautilus/Alistar/Renata (engage-tank fura) · ⚠️ amostra fraca (n&lt;5)
       </div>
       <div style="display:flex;gap:16px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border-soft);flex-wrap:wrap">
         <label style="font-size:12px;color:var(--muted);font-weight:600">Δ FAIR LINE:</label>
@@ -738,7 +744,7 @@
     <div class="section-title">Hit por liga</div>
     <div id="miByLeague" class="days"></div>
 
-    <div class="section-title">Hit por time (Milio + adversário) 🔴 NIP=evitar</div>
+    <div class="section-title">Hit por time (Milio + adversário)</div>
     <div id="miByTeam" class="days"></div>
 
     <div class="section-title">Hit por boneco — todas as lanes</div>
@@ -924,17 +930,13 @@
     };
 
     // ── Liga → display canônico ───────────────────────────────────────────────
-    // O campo `league` tem 14 variações diferentes (ex: "LPL", "LPL Spring 2026",
+    // O campo `league` tem várias variações (ex: "LPL", "LPL Spring 2026",
     // "LPL 2026 Split 2", "LPL 2026"). Normaliza para o código curto.
-    const LEAGUE_DISPLAY = {
-      lck: 'LCK', lpl: 'LPL', lec: 'LEC', cblol: 'CBLOL',
-      lcs: 'LCS', msi: 'MSI', worlds: 'Worlds', lfl: 'LFL',
-      lit: 'LIT', eum: 'EUM', ewc: 'EWC',
-    };
+    // (LEAGUE_DISPLAY morto removido 2026-07-23 — auditoria LOW-02: declarado, nunca usado.)
     const normalizeLeague = (league) => {
       if (!league) return null;
       // Já é código canônico
-      const knownCodes = ['LCK','LPL','LEC','CBLOL','LCS','MSI','Worlds','LFL','LIT','EUM'];
+      const knownCodes = ['LCK','LPL','LEC','CBLOL','LCS','MSI','Worlds','LFL','LIT','EUM','KCL','PRIME'];
       if (knownCodes.includes(league)) return league;
       // Detecta código no texto
       const u = league.toUpperCase();
@@ -949,6 +951,9 @@
       if (/\bLFL\b|LIGUE FRAN/.test(u)) return 'LFL';
       if (/\bLIT\b|ITALIAN/.test(u)) return 'LIT';
       if (/EMEA MASTERS|\bEUM\b/.test(u)) return 'EUM';
+      // 3 ligas de expansão aprovadas 2026-07-21 (auditoria LOW-03: código curto pra Prime League)
+      if (/PRIME LEAGUE/.test(u)) return 'PRIME';
+      if (/^KCL$|LCK CHALLENGERS/.test(u)) return 'KCL';
       return league; // desconhecido: retorna literal
     };
 
@@ -1010,11 +1015,15 @@
 
       allBets = methodData || [];
       allOffBets = offData || [];
-      // Popula dropdown de liga do Tracker com ligas presentes nas bets reais
+      // Popula dropdown de liga do Tracker com ligas presentes em TODAS as bets reais
+      // (método + fora do método). Auditoria MED-03 (2026-07-23): antes só escaneava
+      // allBets (método) — ligas que só têm bet off-método (ex: Prime League/KCL, hoje
+      // concentradas na aba Over Kill) nunca apareciam no filtro, mesmo aparecendo nos
+      // totais "Por mês/dia" (que já somam allReal desde o fix de 2026-07-23).
       const trkLigaSel = document.getElementById('trkLeague');
       const currentTrkLeague = trkLigaSel.value;
       const ligaSet = new Set();
-      for (const b of allBets) {
+      for (const b of [...allBets, ...allOffBets]) {
         const lg = normalizeLeague(b.league);
         if (lg) ligaSet.add(lg);
       }
@@ -1029,10 +1038,21 @@
       render();
     }
 
+    // Agrupa bets por mapa único (mesmo critério de dedup da aba "Banco de dados" —
+    // lolesports_game_id, com fallback determinístico data+times+mapa pra bets sem gid,
+    // ex EWC). Usado pra hit rate por mapa (auditoria HIGH-04, 2026-07-23).
+    function gameKeyOf(b) {
+      const gid = b.raw_extraction?.match_context?.lolesports_game_id;
+      if (gid) return String(gid);
+      const date = (b.bet_datetime || b.created_at || '').slice(0, 10);
+      const norm = (s) => (s || '').toLowerCase().replace(/\s+/g, '-');
+      return `NOID-${date}-${norm(b.team_a)}-vs-${norm(b.team_b)}-map${b.map_number || '?'}`;
+    }
+
     function computeKPIs(bets) {
       // Lucro/turnover incluem green + red + cashout (banca real).
       // Void = bet anulada pelo bookmaker (mapa não jogado, jogo cancelado, etc) — stake devolvida.
-      // Hit rate só conta green/red.
+      // Hit rate por bet só conta green/red.
       const realized = bets.filter((b) => b.status !== 'pending' && b.status !== 'void');
       const wins = bets.filter((b) => b.status === 'green').length;
       const losses = bets.filter((b) => b.status === 'red').length;
@@ -1041,31 +1061,45 @@
       const profit = realized.reduce((s, b) => s + (Number(b.profit) || 0), 0);
       const roi = turnover > 0 ? (profit / turnover) * 100 : 0;
       const hitRate = wins + losses > 0 ? (wins / (wins + losses)) * 100 : 0;
+
+      // Hit rate por MAPA único (auditoria HIGH-04): ladders (mesma linha apostada em
+      // várias casas) chegam a 13 bets no mesmo mapa — hit por bet infla volume sem
+      // inflar sinal. 1 mapa = green se soma de profit do grupo > 0 (mesmo critério do
+      // aggBy da aba "Banco de dados" / lib/analiseStats.cjs).
+      const settled = bets.filter((b) => b.status === 'green' || b.status === 'red');
+      const byMap = new Map();
+      for (const b of settled) {
+        const gk = gameKeyOf(b);
+        if (!byMap.has(gk)) byMap.set(gk, []);
+        byMap.get(gk).push(b);
+      }
+      let mapWins = 0, mapLosses = 0;
+      for (const arr of byMap.values()) {
+        const net = arr.reduce((s, b) => s + (Number(b.profit) || 0), 0);
+        if (net > 0) mapWins++;
+        else if (net < 0) mapLosses++;
+      }
+      const totalMapas = mapWins + mapLosses;
+      const hitRateMapa = totalMapas > 0 ? (mapWins / totalMapas) * 100 : 0;
+
       // "+ 0" normaliza -0 → 0 (evita "+-0,00" quando profit cancela exatamente
       // e o card mistura o prefixo "+" de sinal >=0 com o "-" que toLocaleString
       // imprime pra negative zero).
-      return { profit: profit + 0, roi: roi + 0, hitRate, turnover, total: bets.length, wins, losses, pending };
+      return {
+        profit: profit + 0, roi: roi + 0, hitRate, turnover, total: bets.length, wins, losses, pending,
+        hitRateMapa, mapWins, mapLosses, totalMapas,
+      };
     }
 
     function renderKPIs(k) {
       const profitClass = k.profit >= 0 ? 'green' : 'red';
       const roiClass = k.roi >= 0 ? 'green' : 'red';
+      const hitBetStr = k.hitRate.toFixed(1).replace('.', ',');
 
-      // Card off-método: calcula direto de allOffBets (var de escopo global do load)
-      let offCard = '';
-      if (allOffBets && allOffBets.length > 0) {
-        const offStake   = allOffBets.reduce((s, b) => s + (Number(b.stake) || 0), 0);
-        const offN       = allOffBets.length;
-        const offProfit  = allOffBets.reduce((s, b) => s + (b.profit != null ? Number(b.profit) : 0), 0);
-        const offProfitFmt = `${offProfit >= 0 ? '+' : ''}R$ ${fmtMoney(offProfit)}`;
-        offCard = `
-        <div class="kpi orange">
-          <div class="label">Stake off-método</div>
-          <div class="value" style="color:#f97316">R$ ${fmtMoney(offStake)}</div>
-          <div class="sub">n=${offN} bets · profit ${offProfitFmt}</div>
-        </div>`;
-      }
-
+      // Card laranja "Stake off-método" REMOVIDO (auditoria HIGH-03, 2026-07-23):
+      // não respeitava nenhum filtro (dia/mês/trigger/liga) e duplicava, com número
+      // diferente, o mesmo conceito já coberto pela aba Over Kill + seção "Bets fora
+      // do método" mais abaixo nesta mesma página.
       document.getElementById('kpis').innerHTML = `
         <div class="kpi ${profitClass}">
           <div class="label">Lucro total</div>
@@ -1077,16 +1111,15 @@
           <div class="value ${roiClass}">${k.roi.toFixed(1)}%</div>
         </div>
         <div class="kpi">
-          <div class="label">Hit rate</div>
-          <div class="value">${k.hitRate.toFixed(1)}%</div>
-          <div class="sub">${k.wins}W / ${k.losses}L</div>
+          <div class="label">Hit rate (por mapa)</div>
+          <div class="value">${k.hitRateMapa.toFixed(1)}%</div>
+          <div class="sub">${k.mapWins}W / ${k.mapLosses}L mapas · ${hitBetStr}% por bet · ${k.total} bets/${k.totalMapas} mapas</div>
         </div>
         <div class="kpi">
           <div class="label">Apostas</div>
           <div class="value">${k.total}</div>
           <div class="sub">${k.pending} pendente${k.pending === 1 ? '' : 's'}</div>
         </div>
-        ${offCard}
       `;
     }
 
@@ -1582,6 +1615,7 @@
       const k = computeKPIs(offBets);
       const profitClass = k.profit >= 0 ? 'green' : 'red';
       const roiClass = k.roi >= 0 ? 'green' : 'red';
+      const offHitBetStr = k.hitRate.toFixed(1).replace('.', ',');
       kpiEl.innerHTML = `
         <div class="kpi ${profitClass}">
           <div class="label">Lucro (off)</div>
@@ -1593,9 +1627,9 @@
           <div class="value ${roiClass}">${k.roi.toFixed(1)}%</div>
         </div>
         <div class="kpi">
-          <div class="label">Hit rate (off)</div>
-          <div class="value">${k.hitRate.toFixed(1)}%</div>
-          <div class="sub">${k.wins}W / ${k.losses}L</div>
+          <div class="label">Hit rate (off, por mapa)</div>
+          <div class="value">${k.hitRateMapa.toFixed(1)}%</div>
+          <div class="sub">${k.mapWins}W / ${k.mapLosses}L mapas · ${offHitBetStr}% por bet · ${k.total} bets/${k.totalMapas} mapas</div>
         </div>
         <div class="kpi">
           <div class="label">Apostas off</div>
@@ -1782,11 +1816,13 @@
       el.innerHTML = bets.map(betCardHtml).join('');
     }
 
-    // Mesmo markup de KPI card usado no topo do Tracker (renderKPIs) e no
-    // bloco "Bets fora do método" (renderOffMethodSection), parametrizado por container.
+    // Markup de KPI card usado no resumo topo da Planilha (allRealKpis) e nas abas
+    // Método Under / Over Kill (underKpis/overKpis), parametrizado por container.
+    // Hit rate por mapa (auditoria HIGH-04) — mesmo critério de computeKPIs.
     function kpisCardHtml(k) {
       const profitClass = k.profit >= 0 ? 'green' : 'red';
       const roiClass = k.roi >= 0 ? 'green' : 'red';
+      const hitBetStr = k.hitRate.toFixed(1).replace('.', ',');
       return `
         <div class="kpi ${profitClass}">
           <div class="label">Lucro</div>
@@ -1798,9 +1834,9 @@
           <div class="value ${roiClass}">${k.roi.toFixed(1)}%</div>
         </div>
         <div class="kpi">
-          <div class="label">Hit rate</div>
-          <div class="value">${k.hitRate.toFixed(1)}%</div>
-          <div class="sub">${k.wins}W / ${k.losses}L</div>
+          <div class="label">Hit rate (por mapa)</div>
+          <div class="value">${k.hitRateMapa.toFixed(1)}%</div>
+          <div class="sub">${k.mapWins}W / ${k.mapLosses}L mapas · ${hitBetStr}% por bet · ${k.total} bets/${k.totalMapas} mapas</div>
         </div>
         <div class="kpi">
           <div class="label">Apostas</div>
@@ -1892,20 +1928,19 @@
       });
     });
 
-    // ===== Hit do método por liga — mescla tier1 + tier2 =====
+    // ===== Hit do método por liga =====
+    // Auditoria CRIT-01 (2026-07-23): removida a concatenação com tier2_dashboard_stats.json.
+    // Esse JSON está parado desde 2026-05-21 (rebuild_tier2 não roda no cron) e suas ligas
+    // LFL/LES já foram absorvidas nativamente por dashboard_stats.json (cron diário) — a
+    // mescla duplicava LFL e LES com hit% contraditório. LIT (só existia no tier2) some da
+    // lista de propósito: está fora do escopo de ligas operadas (ver knowledge/decisions).
     const TIER1_STATS_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/dashboard_stats.json';
-    const TIER2_STATS_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/tier2_dashboard_stats.json';
     async function loadMethodByLeague() {
       try {
-        const [r1, r2] = await Promise.all([
-          fetch(TIER1_STATS_URL + '?v=' + Date.now(), { cache: 'no-store' }),
-          fetch(TIER2_STATS_URL + '?v=' + Date.now(), { cache: 'no-store' }),
-        ]);
+        const r1 = await fetch(TIER1_STATS_URL + '?v=' + Date.now(), { cache: 'no-store' });
         const d1 = r1.ok ? await r1.json() : { by_trigger: { '2peel': { ligas: [] } } };
-        const d2 = r2.ok ? await r2.json() : { by_trigger: { '2peel': { ligas: [] } } };
         const ligas = [
           ...(d1.by_trigger?.['2peel']?.ligas || []),
-          ...(d2.by_trigger?.['2peel']?.ligas || []),
         ].sort((a, b) => b.hit - a.hit);
         const html = ligas.map(l => {
           const cls = l.hit >= 60 ? 'green' : (l.hit >= 50 ? '' : 'red');
@@ -1930,7 +1965,11 @@
     }
     loadMethodByLeague();
 
-    // ===== Aba "Banco de dados (Split 2)" — adaptável =====
+    // ===== Aba "Banco de dados" — adaptável =====
+    // Data de corte Split 2 → Split 3 (decisão do dono 2026-07-21). Usada pelo
+    // seletor de PERÍODO (auditoria HIGH-01) — sem isso o pool de bets misturava os
+    // 2 splits sob um título "(Split 2)" enganoso.
+    const SPLIT3_START = '2026-07-21';
     let analiseRawBets = null;
 
     // Normaliza nome de time: case-insensitive + remove punctuation pra agrupar dups
@@ -2031,10 +2070,19 @@
       const triggerFilter = document.getElementById('anTrigger').value;
       const leagueFilter = document.getElementById('anLeague').value;
       const champFilter = document.getElementById('anChampion').value;
+      // Auditoria HIGH-01 (2026-07-23): seletor de período — sem filtro (default) o pool
+      // já misturava Split 2 (abr-jun) com Split 3 (começou 21/07) sem distinção nenhuma.
+      const periodFilter = document.getElementById('anPeriod').value; // 'all' | 'split2' | 'split3'
       const allBetsRaw = analiseRawBets;
       const bets = allBetsRaw.filter(b => {
         if (triggerFilter !== 'all' && (b.raw_extraction?.match_context?.trigger_type) !== triggerFilter) return false;
         if (leagueFilter !== 'all' && normalizeLeague(b.league) !== leagueFilter) return false;
+        if (periodFilter !== 'all') {
+          const dayKey = (b.bet_datetime || '').slice(0, 10);
+          const isSplit3 = dayKey >= SPLIT3_START;
+          if (periodFilter === 'split3' && !isSplit3) return false;
+          if (periodFilter === 'split2' && isSplit3) return false;
+        }
         if (champFilter !== 'all') {
           const mc = b.raw_extraction?.match_context || {};
           let found = false;
@@ -2136,12 +2184,33 @@
       }
       const t2 = statsForTrigger('2peel');
       const t1f = statsForTrigger('1peel+flex');
+      // Auditoria MED-01 (2026-07-23): antes o total do topo (Bets totais) não reconciliava
+      // com a soma dos 2 cards de trigger — bets com trigger_type fora de {2peel,1peel+flex}
+      // ("sem trigger", "ewc_unclassified") entravam no KPI global mas somiam daqui.
+      // Card 3 reconcilia mostrando esse resto agregado.
+      function statsForOther() {
+        const filtered = bets.filter(b => {
+          const t = b.raw_extraction?.match_context?.trigger_type;
+          return t !== '2peel' && t !== '1peel+flex';
+        });
+        const sims = filtered.map(b => ({ b, sim: getBetSimulation(b) })).filter(x => x.sim);
+        if (!sims.length) return null;
+        const g = sims.filter(x => x.sim.won).length;
+        let p = 0;
+        for (const x of sims) {
+          const o = betOdd(x.b);
+          p += x.sim.won ? stake * (o - 1) : -stake;
+        }
+        const sStake = sims.length * stake;
+        return { n: sims.length, hit: 100*g/sims.length, profit: p, roi: sStake ? (100*p/sStake) : 0 };
+      }
+      const tOther = statsForOther();
       function trigCard(label, s) {
         if (!s) return `<div class="day"><div><div class="date">${label}</div><div class="stats">sem dados</div></div></div>`;
         const cls = s.roi >= 0 ? 'green' : 'red';
         return `<div class="day"><div><div class="date">${label}</div><div class="stats">n=${s.n} · hit ${s.hit.toFixed(1)}%</div></div><div class="profit ${cls}">${s.roi >= 0 ? '+' : ''}${s.roi.toFixed(1).replace('.',',')}%<br><span style="font-size:11px;font-weight:600">R$ ${fmtMoney(s.profit)}</span></div></div>`;
       }
-      document.getElementById('anByTrigger').innerHTML = trigCard('2peel puro', t2) + trigCard('1peel+flex', t1f);
+      document.getElementById('anByTrigger').innerHTML = trigCard('2peel puro', t2) + trigCard('1peel+flex', t1f) + trigCard('sem trigger / EWC não classificado', tOther);
 
       // Fix 2026-05-25: agrega por (chave | game_id) antes de contar — elimina inflação por ladder.
       // Múltiplas bets no mesmo mapa/linha contam como 1 entrada; status = green se PnL > 0.
@@ -2232,23 +2301,28 @@
       }), 'dados de boneco');
     }
 
-    // Listeners pros controles
-    for (const id of ['anFairDelta','anOdd','anStake','anTrigger','anLeague','anChampion']) {
-      const el = document.getElementById(id);
-      el.addEventListener('change', renderAnaliseTab);
-      el.addEventListener('input', renderAnaliseTab);
+    // Listeners pros controles.
+    // Auditoria LOW-01 (2026-07-23): antes cada select registrava 'change' E 'input',
+    // disparando o render 2x por alteração (idempotente, mas desperdiça CPU). 'input'
+    // fica só no campo numérico (STAKE), igual ao padrão já usado na aba Milio.
+    for (const id of ['anFairDelta','anOdd','anTrigger','anLeague','anChampion','anPeriod']) {
+      document.getElementById(id).addEventListener('change', renderAnaliseTab);
     }
+    document.getElementById('anStake').addEventListener('input', renderAnaliseTab);
 
     loadAnaliseTab();
 
     // ===== Aba "Método Milio" =====
-    // ===== Aba Milio — fonte: milio_dashboard_data.json (105 jogos results.json) =====
+    // ===== Aba Milio — fonte: milio_dashboard_data.json =====
     const MILIO_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/milio_dashboard_data.json';
     let milioData = null;
+    // MILIO_FLAGS: flags de CAMPEÃO adversário (matchup), não de time — mantidas.
+    // Auditoria MED-02 (2026-07-23): removido avoid_team (flag de TIME, NIP) — decisão do
+    // dono 2026-07-21 aboliu flag de time como sinal de decisão (3 testes mostraram que não
+    // prediz). Flags de campeão são categoria diferente (matchup), não afetadas.
     const MILIO_FLAGS = {
       stack_opp_sup: ['Bard', 'Lulu'],
       avoid_opp_sup: ['Nautilus', 'Alistar', 'Renata'],
-      avoid_team: ['NIP'],
     };
 
     async function loadMilioData() {
@@ -2263,8 +2337,23 @@
       }
     }
 
+    // Auditoria HIGH-02 (2026-07-23): header da aba era texto fixo ("105 jogos",
+    // "audit 2026-05-31") que ficou 2 meses desatualizado enquanto o JSON (atualizado
+    // todo dia pelo cron) já tinha 118+ jogos. Preenche os spans a partir do próprio dado.
+    function updateMilioHeader() {
+      const countEl = document.getElementById('milioGameCount');
+      const updateEl = document.getElementById('milioLastUpdate');
+      if (!milioData || !countEl || !updateEl) return;
+      countEl.textContent = milioData.games?.length ?? '–';
+      const gen = milioData.generated_at ? new Date(milioData.generated_at) : null;
+      updateEl.textContent = gen
+        ? gen.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: TZ })
+        : (milioData.range?.[1] || '–');
+    }
+
     function renderMilioTab() {
       if (!milioData) return;
+      updateMilioHeader();
       const delta = parseInt(document.getElementById('miFairDelta').value);
       const miOddRaw = document.getElementById('miOdd').value;
       const odd = (miOddRaw === 'real') ? 1.72 : parseFloat(miOddRaw); // jogos não têm odd real → ref 1.72
@@ -2330,9 +2419,10 @@
       // 3. Por liga
       renderList('miByLeague', aggBy(g => [g.league], 1), 'liga');
 
-      // 4. Por time — Milio E adversário (todos os times do jogo), flag NIP
-      const teamFlag = (t) => MILIO_FLAGS.avoid_team.includes(t) ? 'avoid' : null;
-      renderList('miByTeam', aggBy(g => [g.milio_team, g.opp_team], 3, teamFlag), 'time');
+      // 4. Por time — Milio E adversário (todos os times do jogo).
+      // Auditoria MED-02: sem flagFn — flag de time removida (informação neutra, sem
+      // ícone de recomendação), consistente com a decisão do dono 2026-07-21.
+      renderList('miByTeam', aggBy(g => [g.milio_team, g.opp_team], 3), 'time');
 
       // 5. Por boneco — todas as lanes (top/jungle/mid/adc/support dos 2 times).
       // Usa picks completos quando disponíveis (games_with_full_picks).
@@ -2472,13 +2562,19 @@
         document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
       }
 
+      // Split 1 preserva a definição HISTÓRICA de suporte válido (inclui Alistar, removido
+      // da lista atual em 2026-05-29 por -26,8% ROI n=21) — Split 1 é dado congelado de
+      // antes dessa decisão, não a definição vigente do método hoje (ver Banco de dados/Milio).
       const VALID_SUPS = new Set(['Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio','Bard','Rakan','Alistar']);
       renderList('s1ByLeague', aggBy(g => [g.league]), 'liga');
       renderList('s1Teams', aggBy(g => g.teams || [], 4).slice(0, 30), 'time');
-      renderList('s1Supports', aggBy(g => {
+      // Auditoria MED-04 (2026-07-23): rotula Alistar explicitamente como "lista da época"
+      // pra deixar claro na UI que essa lista diverge da definição atual do método.
+      const s1SupportRows = aggBy(g => {
         const sB = g.blue_picks?.support, sR = g.red_picks?.support;
         return [VALID_SUPS.has(sB) ? sB : null, VALID_SUPS.has(sR) ? sR : null];
-      }, 4), 'sup');
+      }, 4).map(r => r.name === 'Alistar' ? { ...r, name: 'Alistar (lista da época)' } : r);
+      renderList('s1Supports', s1SupportRows, 'sup');
       renderList('s1Champs', aggBy(g => {
         const out = [];
         for (const side of ['blue_picks', 'red_picks']) {
@@ -2489,10 +2585,11 @@
       }, 6).slice(0, 40), 'boneco');
     }
 
-    for (const id of ['s1FairDelta','s1Odd','s1Stake','s1Trigger','s1League','s1Champion']) {
+    // Auditoria LOW-01 (2026-07-23): mesmo fix de listener duplicado da aba Banco de dados.
+    for (const id of ['s1FairDelta','s1Odd','s1Trigger','s1League','s1Champion']) {
       document.getElementById(id).addEventListener('change', renderSplit1);
-      document.getElementById(id).addEventListener('input', renderSplit1);
     }
+    document.getElementById('s1Stake').addEventListener('input', renderSplit1);
     loadSplit1Data();
 
   </script>
