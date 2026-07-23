@@ -390,17 +390,11 @@ function lookupTeam(name, map) {
 // n >= 1: mostra todos. n < 4 = amostra pequena → cor neutra ⚪ (sem verde/vermelho).
 // Verde ≥60%, vermelho <50%, ⚪ = 50-59% ou amostra insuficiente (n<4).
 function formatTeamCell(name, teamHitMap) {
-  const stats = lookupTeam(name, teamHitMap);
-  if (!stats || stats.n < 1) {
-    return `⚪ ${name} _(s/ amostra)_`;
-  }
-  if (stats.n < 4) {
-    // Amostra pequena: mostra hit mas sem cor (neutra)
-    return `⚪ ${name} (${stats.hit}% n=${stats.n})`;
-  }
-  if (stats.hit < 50) return `🔴 ${name} (${stats.hit}% n=${stats.n})`;
-  if (stats.hit >= 60) return `🟢 ${name} (${stats.hit}% n=${stats.n})`;
-  return `⚪ ${name} (${stats.hit}% n=${stats.n})`;
+  // 2026-07-23 (decisão Elvis pós-contrafactual 22-counterfactual.json): flags de time
+  // REMOVIDAS do briefing — verde/vermelho não prevê (3 testes out-of-sample) e a regra
+  // de stack por flag custou -R$22k no split 2. Aposta-se o GATILHO, não a camisa.
+  // Ver knowledge/reports/2026-07-23-contrafactual-flags.md.
+  return name;
 }
 
 // Mantida por compatibilidade com código EWC que a chama — alias para formatTeamCell.
@@ -418,6 +412,8 @@ function flagLeague(lg, leagueHitMap) {
 // Célula de Liga pra tabela: bolinha colorida + nome + hit%(n).
 // n≥10 pra colorir (sample mínimo razoável de liga). Entre 50-59% → ⚪.
 function formatLeagueCell(lg, leagueHitMap) {
+  return lg; // flags removidas 2026-07-23 (decisão Elvis) — ver formatTeamCell
+  /* eslint-disable no-unreachable */
   const e = leagueHitMap.get(lg);
   if (!e) return `⚪ ${lg} _(s/ amostra)_`; // liga nova sem bets ainda
   if (e.n < 10) return `⚪ ${lg} (${e.hit}% n=${e.n})`; // amostra pequena
