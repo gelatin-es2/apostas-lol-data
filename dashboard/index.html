@@ -528,12 +528,17 @@
 
   <nav class="tabs">
     <div class="tab active" data-tab="tracker">Planilha</div>
+    <div class="tab" data-tab="under">Método Under</div>
+    <div class="tab" data-tab="overkill">Over Kill</div>
     <div class="tab" data-tab="analise">Banco de dados (Split 2)</div>
     <div class="tab" data-tab="milio">Método Milio</div>
     <div class="tab" data-tab="split1">Split 1 + First Stand</div>
   </nav>
 
   <main class="container tab-pane active" data-pane="tracker">
+    <div class="section-title" style="margin-top:0">Resumo — todas as bets reais (método + fora do método)</div>
+    <div id="allRealKpis" class="kpis" style="margin-bottom:20px"></div>
+
     <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
       <label style="font-size:12px;color:var(--muted);font-weight:600">TRIGGER:</label>
       <select id="trkTrigger" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
@@ -584,6 +589,27 @@
       <div class="section-title">Bets fora do método</div>
       <div id="offMethodKpis" class="kpis" style="margin-bottom:12px"></div>
       <div id="offMethodBets" class="bets"></div>
+    </div>
+  </main>
+
+  <main class="container tab-pane" data-pane="under">
+    <div class="section-title" style="margin-top:0">Resumo — Método Under (bets reais, is_method_bet=true)</div>
+    <div id="underKpis" class="kpis"></div>
+
+    <div class="section-title">Apostas</div>
+    <div id="underBetsList" class="bets">
+      <div class="loading">Carregando apostas</div>
+    </div>
+  </main>
+
+  <main class="container tab-pane" data-pane="overkill">
+    <div class="section-title" style="margin-top:0">Resumo — Over Kill (experimentos Over / avulsos fora do método)</div>
+    <div id="overKpis" class="kpis"></div>
+    <div id="overWindowLine" style="font-size:12px;color:var(--muted);margin:-8px 0 16px"></div>
+
+    <div class="section-title">Apostas</div>
+    <div id="overBetsList" class="bets">
+      <div class="loading">Carregando apostas</div>
     </div>
   </main>
 
@@ -1003,7 +1029,10 @@
       const profit = realized.reduce((s, b) => s + (Number(b.profit) || 0), 0);
       const roi = turnover > 0 ? (profit / turnover) * 100 : 0;
       const hitRate = wins + losses > 0 ? (wins / (wins + losses)) * 100 : 0;
-      return { profit, roi, hitRate, turnover, total: bets.length, wins, losses, pending };
+      // "+ 0" normaliza -0 → 0 (evita "+-0,00" quando profit cancela exatamente
+      // e o card mistura o prefixo "+" de sinal >=0 com o "-" que toLocaleString
+      // imprime pra negative zero).
+      return { profit: profit + 0, roi: roi + 0, hitRate, turnover, total: bets.length, wins, losses, pending };
     }
 
     function renderKPIs(k) {
@@ -1441,6 +1470,13 @@
       renderByTeam(view);
       renderBetsWithToggle(applyTrkFilters(allBets));
       renderOffMethodSection(allOffBets);
+      // try/catch isolado: se algo nas abas novas quebrar (dado inesperado),
+      // não pode derrubar o resto do render() (KPIs/lista já corretos acima).
+      try {
+        renderNewTabs();
+      } catch (e) {
+        console.error('renderNewTabs falhou:', e);
+      }
 
       const lastBet = allBets[0];
       const lastDt = lastBet ? fmtDate(lastBet.bet_datetime || lastBet.created_at) : '—';
@@ -1632,6 +1668,135 @@
           await toggleMethodBet(id, true);
         });
       });
+    }
+
+    // ===== Abas "Método Under" e "Over Kill" — reusam computeKPIs + o mesmo
+    // template de card de bet (parametrizado), sem query extra: allBets/allOffBets
+    // (bets is_method_bet=true/false, ambas já sem SIMULATED) cobrem todas as bets reais.
+
+    // Card de bet — mesmo markup visual de renderBetsWithToggle/renderOffMethodSection,
+    // sem o botão de toggle (essas abas são só leitura).
+    function betCardHtml(b) {
+      const profit = b.profit;
+      const profitText = profit == null ? '—' : `${profit >= 0 ? '+' : ''}R$ ${fmtMoney(profit)}`;
+      const profitCls = profit == null ? 'muted' : profit >= 0 ? 'green' : 'red';
+      const isHedge = b.raw_extraction?.strategy === 'hedge';
+      const mapInfo = b.is_map_bet ? ` · M${b.map_number ?? '?'}` : '';
+      const compHtml = renderComp(normalizeComp(b));
+      const teamADisplay  = normalizeTeamName(b.team_a);
+      const teamBDisplay  = normalizeTeamName(b.team_b);
+      const marketDisplay = normalizeMarket(b.market, b.is_map_bet, b.map_number);
+      const leagueDisplay = normalizeLeague(b.league);
+      const mv = b.raw_extraction?.method_variant;
+      const variantTag = mv ? `<span class="badge-off">${mv}</span>` : '';
+
+      return `
+        <div class="bet" data-bet-id="${b.id}">
+          <div>
+            <div class="head">
+              <span class="teams">${teamADisplay} <span style="color:var(--muted);font-weight:500">vs</span> ${teamBDisplay}</span>
+              ${leagueDisplay ? `<span class="league">· ${leagueDisplay}</span>` : ''}
+              <span class="badge ${b.status}">${b.status}</span>
+              ${isHedge ? '<span class="badge hedge">hedge</span>' : ''}
+              ${variantTag}
+            </div>
+            <div class="market">
+              ${marketDisplay} → <strong>${b.pick ?? '?'}</strong>${mapInfo}
+            </div>
+            <div class="meta">
+              ${fmtDate(b.bet_datetime || b.created_at)} · ${b.bookmaker ?? '?'} · Odd ${(Number(b.odd) || 0).toFixed(2)} · Stake R$ ${fmtMoney(b.stake)}
+            </div>
+            ${compHtml}
+          </div>
+          <div class="right">
+            <div class="profit ${profitCls}">${profitText}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderBetsListInto(containerId, bets) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      if (!bets.length) { el.innerHTML = '<div class="empty">Nenhuma aposta.</div>'; return; }
+      el.innerHTML = bets.map(betCardHtml).join('');
+    }
+
+    // Mesmo markup de KPI card usado no topo do Tracker (renderKPIs) e no
+    // bloco "Bets fora do método" (renderOffMethodSection), parametrizado por container.
+    function kpisCardHtml(k) {
+      const profitClass = k.profit >= 0 ? 'green' : 'red';
+      const roiClass = k.roi >= 0 ? 'green' : 'red';
+      return `
+        <div class="kpi ${profitClass}">
+          <div class="label">Lucro</div>
+          <div class="value ${profitClass}">${k.profit >= 0 ? '+' : ''}${fmtMoney(k.profit)}</div>
+          <div class="sub">de R$ ${fmtMoney(k.turnover)} apostados</div>
+        </div>
+        <div class="kpi ${roiClass}">
+          <div class="label">ROI</div>
+          <div class="value ${roiClass}">${k.roi.toFixed(1)}%</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Hit rate</div>
+          <div class="value">${k.hitRate.toFixed(1)}%</div>
+          <div class="sub">${k.wins}W / ${k.losses}L</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Apostas</div>
+          <div class="value">${k.total}</div>
+          <div class="sub">${k.pending} pendente${k.pending === 1 ? '' : 's'}</div>
+        </div>
+      `;
+    }
+
+    function renderSummaryInto(containerId, bets) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      el.innerHTML = kpisCardHtml(computeKPIs(bets));
+    }
+
+    // Over Kill = experimentos Over (janela Camille) + avulsos de linha bugada do split 3
+    function isOverKillVariant(b) {
+      const mv = b.raw_extraction?.method_variant || '';
+      return mv.startsWith('over_experimental') || mv.startsWith('off_method');
+    }
+
+    function renderOverWindowLine(bets) {
+      const el = document.getElementById('overWindowLine');
+      if (!el) return;
+      const flagged = bets.filter((b) => typeof b.raw_extraction?.window_rules_ok === 'boolean');
+      if (!flagged.length) {
+        el.textContent = 'Sem dado de window_rules_ok nessas bets.';
+        return;
+      }
+      const inside = flagged.filter((b) => b.raw_extraction.window_rules_ok === true).length;
+      const outside = flagged.filter((b) => b.raw_extraction.window_rules_ok === false).length;
+      const noFlag = bets.length - flagged.length;
+      el.textContent = `Janela Camille: ${inside} dentro das regras · ${outside} fora` +
+        (noFlag ? ` · ${noFlag} sem flag` : '');
+    }
+
+    function renderNewTabs() {
+      // allBets ∪ allOffBets = todas as bets reais (SIMULATED já excluída na query).
+      const allReal = [...allBets, ...allOffBets].sort((a, b) => {
+        const da = new Date(a.bet_datetime || a.created_at);
+        const db = new Date(b.bet_datetime || b.created_at);
+        return db - da;
+      });
+
+      // Planilha: resumo combinado no topo (item 1 do pedido)
+      renderSummaryInto('allRealKpis', allReal);
+
+      // Método Under: bets reais com is_method_bet=true
+      renderSummaryInto('underKpis', allBets);
+      renderBetsListInto('underBetsList', allBets);
+
+      // Over Kill: bets reais com method_variant over_experimental*/off_method*
+      const overBets = allReal.filter(isOverKillVariant);
+      renderSummaryInto('overKpis', overBets);
+      renderBetsListInto('overBetsList', overBets);
+      renderOverWindowLine(overBets);
     }
 
     document.querySelectorAll('.chip').forEach((chip) => {
