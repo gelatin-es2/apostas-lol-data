@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-07-22T13:26:02.070Z",
+  "generated_at": "2026-07-23T13:25:44.512Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
-    "2026-07-22"
+    "2026-07-23"
   ],
-  "milio_count": 117,
-  "games_with_full_picks": 96,
-  "baseline_under_hit_pct": 67.5,
+  "milio_count": 118,
+  "games_with_full_picks": 97,
+  "baseline_under_hit_pct": 68.6,
   "by_league": {
-    "LPL": 49,
+    "LPL": 50,
     "LCK": 30,
     "LEC": 12,
     "CBLOL": 14,
@@ -3689,7 +3689,7 @@
         "support": "Milio"
       },
       "total_kills": 31,
-      "fair": 30.5,
+      "fair": 37.5,
       "fair_source": "formula(league+league)/2",
       "trigger": "2peel",
       "game_id": "116566854547769646",
@@ -3722,10 +3722,43 @@
         "support": "Milio"
       },
       "total_kills": 28,
-      "fair": 30.5,
+      "fair": 37.5,
       "fair_source": "formula(league+league)/2",
       "trigger": "2peel",
       "game_id": "116566854547769573",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-07-23",
+      "league": "LPL",
+      "map": 2,
+      "team_blue": "AL",
+      "team_red": "JDG",
+      "milio_side": "red",
+      "milio_team": "JDG",
+      "opp_team": "AL",
+      "opp_sup": "Lux",
+      "sup_blue": "Lux",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "adc": "Caitlyn",
+        "mid": "Viktor",
+        "top": "Rumble",
+        "jungle": "JarvanIV",
+        "support": "Lux"
+      },
+      "red_picks": {
+        "adc": "Lucian",
+        "mid": "Sylas",
+        "top": "Ornn",
+        "jungle": "Vi",
+        "support": "Milio"
+      },
+      "total_kills": 27,
+      "fair": 33.5,
+      "fair_source": "formula(league+league)/2",
+      "trigger": "1peel+flex",
+      "game_id": "116566854547769618",
       "src": "results.json"
     }
   ]
