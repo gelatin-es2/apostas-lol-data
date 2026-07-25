@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-07-24T13:21:43.676Z",
+  "generated_at": "2026-07-25T13:03:06.560Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
-    "2026-07-23"
+    "2026-07-25"
   ],
-  "milio_count": 118,
-  "games_with_full_picks": 97,
-  "baseline_under_hit_pct": 68.6,
+  "milio_count": 120,
+  "games_with_full_picks": 98,
+  "baseline_under_hit_pct": 69.2,
   "by_league": {
-    "LPL": 50,
+    "LPL": 52,
     "LCK": 30,
     "LEC": 12,
     "CBLOL": 14,
@@ -3759,6 +3759,64 @@
       "fair_source": "formula(league+league)/2",
       "trigger": "1peel+flex",
       "game_id": "116566854547769618",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-07-24",
+      "league": "LPL",
+      "map": 1,
+      "team_blue": "BLG",
+      "team_red": "EDG",
+      "milio_side": "blue",
+      "milio_team": "BLG",
+      "opp_team": "EDG",
+      "opp_sup": "Rell",
+      "sup_blue": "Milio",
+      "sup_red": "Rell",
+      "blue_picks": {
+        "support": "Milio"
+      },
+      "red_picks": {
+        "support": "Rell"
+      },
+      "total_kills": 32,
+      "fair": 35.5,
+      "fair_source": "formula(team+league)/2",
+      "trigger": null,
+      "game_id": "116566854547769565",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-07-25",
+      "league": "LPL",
+      "map": 1,
+      "team_blue": "WE",
+      "team_red": "LGD",
+      "milio_side": "red",
+      "milio_team": "LGD",
+      "opp_team": "WE",
+      "opp_sup": "Nautilus",
+      "sup_blue": "Nautilus",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "adc": "Ezreal",
+        "mid": "Ryze",
+        "top": "Rumble",
+        "jungle": "Qiyana",
+        "support": "Nautilus"
+      },
+      "red_picks": {
+        "adc": "Lucian",
+        "mid": "Anivia",
+        "top": "Yorick",
+        "jungle": "XinZhao",
+        "support": "Milio"
+      },
+      "total_kills": 15,
+      "fair": 32.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": null,
+      "game_id": "116566854547769605",
       "src": "results.json"
     }
   ]
