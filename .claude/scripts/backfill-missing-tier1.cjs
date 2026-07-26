@@ -23,8 +23,8 @@ const LEAGUE_IDS = {
 };
 
 const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
-// FLEX expandido 2026-05-23 (CEO): Lux + Anivia
-const FLEX_ENGAGE = ['bard','rakan','alistar','lux','anivia'];
+// FLEX expandido 2026-05-23 (CEO): Lux + Anivia. Alistar REMOVIDO 2026-05-29 (CEO): -26.8% ROI n=21.
+const FLEX_ENGAGE = ['bard','rakan','lux','anivia'];
 const norm = s => s ? s.toLowerCase().replace(/[\s.\-'’]/g, '') : '';
 
 function get(host, p, useApiKey) {

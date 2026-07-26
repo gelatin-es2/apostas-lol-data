@@ -1,0 +1,30 @@
+{
+  "date": "2026-07-23",
+  "source": "pinnacle_manual_elvis",
+  "captured_at": "2026-07-23T09:10:00Z",
+  "note": "LPL split 3 dia 2. Fair Pinnacle informada pelo Elvis: AL (vs JDG) = 28.5, BLG (vs TT) = 30.5. Bug de schedule fantasma ontem — hoje confirmados 2 jogos LPL (AL x JDG cedo, TT x BLG depois). AL x JDG map 1 fechou 17 kills.",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "fair_lines": [
+    {
+      "liga": "LPL",
+      "hora_brt": "04:00",
+      "team_a": "Anyone's Legend",
+      "team_b": "JD Gaming",
+      "team_anchor": "AL",
+      "fair_line": 28.5,
+      "lolesports_match_id": "116566854547769616",
+      "source_note": "Pinnacle manual Elvis"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "06:00",
+      "team_a": "THUNDER TALK GAMING",
+      "team_b": "BILIBILI GAMING",
+      "team_anchor": "BLG",
+      "fair_line": 30.5,
+      "lolesports_match_id": "116566854547769568",
+      "source_note": "Pinnacle manual Elvis"
+    }
+  ]
+}

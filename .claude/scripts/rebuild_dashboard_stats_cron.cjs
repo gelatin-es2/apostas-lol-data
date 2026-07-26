@@ -320,7 +320,7 @@ async function fetchUserBets() {
 
   console.error('[5/5] Computing stats...');
 
-  const FLEX = ['Bard', 'Rakan', 'Alistar', 'Lux', 'Anivia']; // expandido 2026-05-23
+  const FLEX = ['Bard', 'Rakan', 'Lux', 'Anivia']; // expandido 2026-05-23 + Alistar removido 2026-05-29 (CEO)
 
   const peel2 = games.filter(g => PEEL.includes(g.bluePicks.support) && PEEL.includes(g.redPicks.support));
   const peel1Flex = games.filter(g => {

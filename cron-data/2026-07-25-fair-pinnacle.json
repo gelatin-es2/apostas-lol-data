@@ -1,0 +1,19 @@
+{
+  "date": "2026-07-25",
+  "source": "pinnacle_manual_elvis",
+  "captured_at": "2026-07-24T22:00:00Z",
+  "note": "Fair Pinnacle de 9 jogos (LPL/LEC/CBLOL/LCS) informada pelo Elvis na véspera via prints. Linhas ~1.78-1.89 = fair. Padrão meta julho mantido (Pinnacle ~+3 vs fórmula). Salva antecipada pra trava de sexta.",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "fair_lines": [
+    { "liga": "LPL", "hora_brt": "04:00", "team_a": "Team WE", "team_b": "LGD GAMING", "team_anchor": "LGD", "fair_line": 29.5, "lolesports_match_id": "116566854547769604", "source_note": "Over 29.5 @ 1.781" },
+    { "liga": "LPL", "hora_brt": "06:00", "team_a": "Invictus Gaming", "team_b": "Weibo Gaming", "team_anchor": "IG", "fair_line": 30.5, "lolesports_match_id": "116566854547835312", "source_note": "ATUALIZADA 25/07 manhã: Under 30.5 @ 1.862 (era 29.5 na véspera — Pinnacle moveu +1)" },
+    { "liga": "LPL", "hora_brt": "08:00", "team_a": "TOP ESPORTS", "team_b": "THUNDER TALK GAMING", "team_anchor": "TES", "fair_line": 31.5, "lolesports_match_id": "116566854547769592", "source_note": "Under 31.5 @ 1.800" },
+    { "liga": "LEC", "hora_brt": "11:30", "team_a": "Vitality", "team_b": "G2 Esports", "team_anchor": "G2", "fair_line": 28.5, "lolesports_match_id": "115548681803406203", "source_note": "Over 28.5 @ 1.819" },
+    { "liga": "LEC", "hora_brt": "14:30", "team_a": "Movistar KOI", "team_b": "Karmine Corp", "team_anchor": "KC", "fair_line": 28.5, "lolesports_match_id": "115548681803406271", "source_note": "Over 28.5 @ 1.840" },
+    { "liga": "CBLOL", "hora_brt": "13:00", "team_a": "FURIA", "team_b": "Los Grandes", "team_anchor": "FURIA", "fair_line": 28.5, "lolesports_match_id": "115565671526402945", "source_note": "Under 28.5 @ 1.859" },
+    { "liga": "CBLOL", "hora_brt": "16:00", "team_a": "LOUD", "team_b": "paiN Gaming", "team_anchor": "LOUD", "fair_line": 29.5, "lolesports_match_id": "115565671526402997", "source_note": "Under 29.5 @ 1.813" },
+    { "liga": "LCS", "hora_brt": "17:00", "team_a": "FlyQuest", "team_b": "LYON", "team_anchor": "FLY", "fair_line": 27.5, "lolesports_match_id": "115564797164345551", "source_note": "Under 27.5 @ 1.892" },
+    { "liga": "LCS", "hora_brt": "20:00", "team_a": "Dignitas", "team_b": "Sentinels", "team_anchor": "DIG", "fair_line": 26.5, "lolesports_match_id": "115564797163821179", "source_note": "Under 26.5 @ 1.877" }
+  ]
+}

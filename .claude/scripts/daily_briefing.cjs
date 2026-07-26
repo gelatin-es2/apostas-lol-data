@@ -52,6 +52,7 @@ function resolveCanonical(name) {
 // 1peel+flex=63.6% n=11; bets reais no Supabase: 66.7% n=30) — doc provavelmente
 // desatualizada, sinalizado no report, não corrigido aqui (fora de escopo).
 // normalizeLeague: 'LES' passa ileso nas 2 implementações (testado empiricamente).
+// Torneios internacionais adicionados 2026-06-27: MSI, First Stand, Worlds (Mundial).
 // +3 ligas 2026-07-21 (método Under aprovado, validado externamente): Prime League,
 // LCK Challengers (código curto 'KCL' — 'LCK Challengers'/'LCK-CL' colidem com o regex
 // \bLCK\b de normalizeLeague em lib/normTeamName.cjs e poluiriam as stats da LCK principal),
@@ -67,10 +68,17 @@ const LEAGUE_IDS = {
   CBLOL:          '98767991332355509',
   LFL:            '105266103462388553',
   LCS:            '98767991299243165',
+  'First Stand':  '113464388705111224',
+  MSI:            '98767991325878492',
+  Worlds:         '98767975604431411',
   'Prime League': '105266091639104326',
   KCL:            '98767991335774713', // LCK Challengers
   EUM:            '100695891328981122', // EMEA Masters
   LES:            '105266074488398661',
+  // LCP (Pacific, tier 1) — TESTE desde 2026-07-25: SÓ Milio vs peel/flex (1k) +
+  // janela Camille. Fair = fórmula (sem histórico em team_avg_kills → fallback,
+  // igual às 3 ligas de 2026-07-21) até Elvis mandar fair Pinnacle da LCP.
+  LCP:            '113476371197627891',
 };
 
 // Dias úteis em ms (offset BRT = UTC -3)
@@ -142,6 +150,10 @@ const EWC_QUALIFIERS = [
   { key: 'EWC-LCK', page: 'Esports_World_Cup/2026/Korea', league_proxy: 'LCK', tz_abbr: 'KST', tz_offset_h: 9 },
   { key: 'EWC-LEC', page: 'Esports_World_Cup/2026/EMEA',  league_proxy: 'LEC', tz_abbr: 'CEST', tz_offset_h: 2 },
   { key: 'EWC-LPL', page: 'Esports_World_Cup/2026/China', league_proxy: 'LPL', tz_abbr: 'CST', tz_offset_h: 8 },
+  // EWC South America & LATAM — começa 2026-06-07 13:00 BRT, Bo3 Fearless, 7 times CBLOL
+  // (RED Canids, Leviatán, Fluxo W7M, paiN, LOUD, Keyd Stars + 1). league_proxy=CBLOL.
+  // page com '&' literal: fetchEwcQualifierMatches já aplica encodeURIComponent.
+  { key: 'EWC-CBLOL', page: 'Esports_World_Cup/2026/South_America_&_LATAM', league_proxy: 'CBLOL', tz_abbr: 'BRT', tz_offset_h: -3 },
 ];
 
 // Mapping team_code (Liquipedia) → nome canônico (lolesports). Se faltar,
@@ -565,7 +577,7 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData, expansionAvgData) {
   // Header
   console.log(`# Jogos de ${TARGET} — briefing método 2peel\n`);
   if (allMatches.length === 0) {
-    console.log('Sem jogos das ligas operadas (LCK/LPL/LEC/CBLOL/LFL/LCS + Prime League/KCL/EUM/LES) hoje.');
+    console.log('Sem jogos das ligas operadas (LCK/LPL/LEC/CBLOL/LFL/LCS + MSI/First Stand/Worlds + Prime League/KCL/EUM/LES) hoje.');
     return;
   }
 

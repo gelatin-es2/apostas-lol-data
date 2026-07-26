@@ -1,0 +1,4886 @@
+{
+  "captured_at": "2026-07-24T07:38:12.166Z",
+  "source": "gamma-api.polymarket.com/events?series_id=10311&closed=false",
+  "events_total": 70,
+  "events_with_moneyline": 70,
+  "events": [
+    {
+      "slug": "lol-al-wb-2026-01-20",
+      "title": "LoL: Anyone's Legend vs Weibo Gaming (BO3) - LPL Group Ascend",
+      "league": "LPL Group Ascend",
+      "team_a": null,
+      "team_b": null,
+      "start_time_utc": "2026-01-20T09:00:00Z",
+      "event_date": "2026-01-20",
+      "live": false,
+      "ended": true,
+      "score": "000-000|2-0|Bo3",
+      "volume_total_usd": 715133.485787,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Anyone's Legend vs Weibo Gaming (BO3)",
+        "market_id": "1120394",
+        "closed": true,
+        "outcomes": [
+          {
+            "name": "Anyone's Legend",
+            "prob": 1,
+            "odd": null
+          },
+          {
+            "name": "Weibo Gaming",
+            "prob": 0,
+            "odd": null
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Anyone's Legend vs Weibo Gaming - Game 1 Winner",
+          "market_id": "1120395",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Anyone's Legend",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "Weibo Gaming",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: Anyone's Legend vs Weibo Gaming - Game 2 Winner",
+          "market_id": "1120396",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Anyone's Legend",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "Weibo Gaming",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-al-wb-2026-01-20"
+    },
+    {
+      "slug": "lol-myth-ban2-2026-05-14",
+      "title": "LoL: Myth Esports vs The Bandits (BO3) - Road Of Legends Regular Season",
+      "league": "Road Of Legends",
+      "team_a": "Myth Esports",
+      "team_b": "The Bandits",
+      "start_time_utc": "2026-05-14T17:30:00Z",
+      "event_date": "2026-05-14",
+      "live": false,
+      "ended": true,
+      "score": "000-000|1-2|Bo3",
+      "volume_total_usd": 103739.98265799998,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Myth Esports vs The Bandits (BO3) - Road Of Legends Regular Season",
+        "market_id": "2203795",
+        "closed": true,
+        "outcomes": [
+          {
+            "name": "Myth Esports",
+            "prob": 0,
+            "odd": null
+          },
+          {
+            "name": "The Bandits",
+            "prob": 1,
+            "odd": null
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Myth Esports vs The Bandits - Game 1 Winner",
+          "market_id": "2203796",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Myth Esports",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "The Bandits",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        },
+        {
+          "question": "LoL: Myth Esports vs The Bandits - Game 2 Winner",
+          "market_id": "2203797",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Myth Esports",
+              "prob": 0,
+              "odd": null
+            },
+            {
+              "name": "The Bandits",
+              "prob": 1,
+              "odd": null
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-myth-ban2-2026-05-14"
+    },
+    {
+      "slug": "lol-t1-drx-2026-05-20",
+      "title": "LoL: T1 vs Kiwoom DRX (BO3) - LCK Rounds 1-2",
+      "league": "LCK",
+      "team_a": "T1",
+      "team_b": "Kiwoom DRX",
+      "start_time_utc": "2026-05-20T08:00:00Z",
+      "event_date": "2026-05-20",
+      "live": false,
+      "ended": true,
+      "score": "000-000|2-1|Bo3",
+      "volume_total_usd": 2594474.8778180014,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: T1 vs Kiwoom DRX (BO3) - LCK Rounds 1-2",
+        "market_id": "2268716",
+        "closed": true,
+        "outcomes": [
+          {
+            "name": "T1",
+            "prob": 1,
+            "odd": null
+          },
+          {
+            "name": "Kiwoom DRX",
+            "prob": 0,
+            "odd": null
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: T1 vs Kiwoom DRX - Game 1 Winner",
+          "market_id": "2268717",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "T1",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "Kiwoom DRX",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: T1 vs Kiwoom DRX - Game 2 Winner",
+          "market_id": "2268718",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "T1",
+              "prob": 0,
+              "odd": null
+            },
+            {
+              "name": "Kiwoom DRX",
+              "prob": 1,
+              "odd": null
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-t1-drx-2026-05-20"
+    },
+    {
+      "slug": "lol-al-lgd-2026-06-05",
+      "title": "LoL: Anyone's Legend vs LGD Gaming (BO5) - LPL Playoffs",
+      "league": "LPL",
+      "team_a": "Anyone's Legend",
+      "team_b": "LGD Gaming",
+      "start_time_utc": "2026-06-05T09:00:00Z",
+      "event_date": "2026-06-05",
+      "live": false,
+      "ended": true,
+      "score": "000-000|3-0|Bo5",
+      "volume_total_usd": 4034297.2075569984,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Anyone's Legend vs LGD Gaming (BO5) - LPL Playoffs",
+        "market_id": "2425258",
+        "closed": true,
+        "outcomes": [
+          {
+            "name": "Anyone's Legend",
+            "prob": 1,
+            "odd": null
+          },
+          {
+            "name": "LGD Gaming",
+            "prob": 0,
+            "odd": null
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Anyone's Legend vs LGD Gaming - Game 1 Winner",
+          "market_id": "2425259",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Anyone's Legend",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "LGD Gaming",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: Anyone's Legend vs LGD Gaming - Game 2 Winner",
+          "market_id": "2425260",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Anyone's Legend",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "LGD Gaming",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: Anyone's Legend vs LGD Gaming - Game 3 Winner",
+          "market_id": "2425261",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Anyone's Legend",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "LGD Gaming",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: Anyone's Legend vs LGD Gaming - Game 4 Winner",
+          "market_id": "2425262",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Anyone's Legend",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "LGD Gaming",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-al-lgd-2026-06-05"
+    },
+    {
+      "slug": "lol-sgw-dino-2026-06-10",
+      "title": "LoL: Saigon Warriors vs Saigon Dino (BO3) - Asia Masters Group C",
+      "league": "Asia Masters",
+      "team_a": "Saigon Warriors",
+      "team_b": "Saigon Dino",
+      "start_time_utc": "2026-06-10T06:10:00Z",
+      "event_date": "2026-06-10",
+      "live": true,
+      "ended": false,
+      "score": "000-000|0-0|Bo3",
+      "volume_total_usd": 471416.7066850001,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Saigon Warriors vs Saigon Dino (BO3) - Asia Masters Group C",
+        "market_id": "2474870",
+        "closed": true,
+        "outcomes": [
+          {
+            "name": "Saigon Warriors",
+            "prob": 1,
+            "odd": null
+          },
+          {
+            "name": "Saigon Dino",
+            "prob": 0,
+            "odd": null
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Saigon Warriors vs Saigon Dino - Game 1 Winner",
+          "market_id": "2474868",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Saigon Warriors",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "Saigon Dino",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        },
+        {
+          "question": "LoL: Saigon Warriors vs Saigon Dino - Game 2 Winner",
+          "market_id": "2474869",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Saigon Warriors",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "Saigon Dino",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-sgw-dino-2026-06-10"
+    },
+    {
+      "slug": "lol-blgj-ktc-2026-06-11",
+      "title": "LoL: Bilibili Gaming Junior vs KT Rolster Challengers (BO3) - Asia Masters Group B",
+      "league": "Asia Masters",
+      "team_a": "Bilibili Gaming Junior",
+      "team_b": "KT Rolster Challengers",
+      "start_time_utc": "2026-06-11T08:20:00Z",
+      "event_date": "2026-06-11",
+      "live": false,
+      "ended": true,
+      "score": "000-000|0-2|Bo3",
+      "volume_total_usd": 352499.37603800016,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Bilibili Gaming Junior vs KT Rolster Challengers (BO3) - Asia Masters Group B",
+        "market_id": "2494981",
+        "closed": true,
+        "outcomes": [
+          {
+            "name": "Bilibili Gaming Junior",
+            "prob": 0,
+            "odd": null
+          },
+          {
+            "name": "KT Rolster Challengers",
+            "prob": 1,
+            "odd": null
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Bilibili Gaming Junior vs KT Rolster Challengers - Game 1 Winner",
+          "market_id": "2494979",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Bilibili Gaming Junior",
+              "prob": 0,
+              "odd": null
+            },
+            {
+              "name": "KT Rolster Challengers",
+              "prob": 1,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: Bilibili Gaming Junior vs KT Rolster Challengers - Game 2 Winner",
+          "market_id": "2494980",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Bilibili Gaming Junior",
+              "prob": 0,
+              "odd": null
+            },
+            {
+              "name": "KT Rolster Challengers",
+              "prob": 1,
+              "odd": null
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-blgj-ktc-2026-06-11"
+    },
+    {
+      "slug": "lol-blg-ly-2026-07-05",
+      "title": "LoL: Bilibili Gaming vs LYON (BO5) - Mid-Season Invitational Playoffs",
+      "league": "Mid-Season Invitational",
+      "team_a": "Bilibili Gaming",
+      "team_b": "LYON",
+      "start_time_utc": "2026-07-06T03:00:00Z",
+      "event_date": "2026-07-05",
+      "live": false,
+      "ended": true,
+      "score": "0-0|3-0|Bo5",
+      "volume_total_usd": 6301216.179315,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Bilibili Gaming vs LYON (BO5) - Mid-Season Invitational Playoffs",
+        "market_id": "2794286",
+        "closed": true,
+        "outcomes": [
+          {
+            "name": "Bilibili Gaming",
+            "prob": 1,
+            "odd": null
+          },
+          {
+            "name": "LYON",
+            "prob": 0,
+            "odd": null
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Bilibili Gaming vs LYON - Game 1 Winner",
+          "market_id": "2794282",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Bilibili Gaming",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "LYON",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: Bilibili Gaming vs LYON - Game 2 Winner",
+          "market_id": "2794283",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Bilibili Gaming",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "LYON",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: Bilibili Gaming vs LYON - Game 3 Winner",
+          "market_id": "2794284",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Bilibili Gaming",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "LYON",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: Bilibili Gaming vs LYON - Game 4 Winner",
+          "market_id": "2794285",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Bilibili Gaming",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "LYON",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-blg-ly-2026-07-05"
+    },
+    {
+      "slug": "lol-g2nord-sge-2026-07-07",
+      "title": "LoL: G2 NORD vs Eintracht Frankfurt (BO1) - Prime League 1st Division Regular Season",
+      "league": "Prime League 1st Division",
+      "team_a": "G2 NORD",
+      "team_b": "Eintracht Frankfurt",
+      "start_time_utc": "2026-07-07T17:00:00Z",
+      "event_date": "2026-07-07",
+      "live": false,
+      "ended": true,
+      "score": "0-0|1-0|Bo1",
+      "volume_total_usd": 70997.98145999997,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: G2 NORD vs Eintracht Frankfurt (BO1) - Prime League 1st Division Regular Season",
+        "market_id": "2798099",
+        "closed": true,
+        "outcomes": [
+          {
+            "name": "G2 NORD",
+            "prob": 1,
+            "odd": null
+          },
+          {
+            "name": "Eintracht Frankfurt",
+            "prob": 0,
+            "odd": null
+          }
+        ]
+      },
+      "moneyline_maps": [],
+      "polymarket_url": "https://polymarket.com/event/lol-g2nord-sge-2026-07-07"
+    },
+    {
+      "slug": "lol-mcn-dyn1-2026-07-14",
+      "title": "LoL: mCon esports vs Dynasty (BO3) - Road Of Legends Regular Season",
+      "league": "Road Of Legends",
+      "team_a": "mCon esports",
+      "team_b": "Dynasty",
+      "start_time_utc": "2026-07-14T17:00:00Z",
+      "event_date": "2026-07-14",
+      "live": false,
+      "ended": true,
+      "score": "000-000|2-0|Bo3",
+      "volume_total_usd": 66539.32250700002,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: mCon esports vs Dynasty (BO3) - Road Of Legends Regular Season",
+        "market_id": "2919520",
+        "closed": true,
+        "outcomes": [
+          {
+            "name": "mCon esports",
+            "prob": 1,
+            "odd": null
+          },
+          {
+            "name": "Dynasty",
+            "prob": 0,
+            "odd": null
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: mCon esports vs Dynasty - Game 1 Winner",
+          "market_id": "2919518",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "mCon esports",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "Dynasty",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: mCon esports vs Dynasty - Game 2 Winner",
+          "market_id": "2919519",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "mCon esports",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "Dynasty",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-mcn-dyn1-2026-07-14"
+    },
+    {
+      "slug": "lol-fec-ban2-2026-07-16",
+      "title": "LoL: Frites Esports Club vs The Bandits (BO3) - Road Of Legends Regular Season",
+      "league": "Road Of Legends",
+      "team_a": "Frites Esports Club",
+      "team_b": "The Bandits",
+      "start_time_utc": "2026-07-16T17:15:00Z",
+      "event_date": "2026-07-16",
+      "live": false,
+      "ended": true,
+      "score": "000-000|2-1|Bo3",
+      "volume_total_usd": 33559.665076000005,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Frites Esports Club vs The Bandits (BO3) - Road Of Legends Regular Season",
+        "market_id": "2919576",
+        "closed": true,
+        "outcomes": [
+          {
+            "name": "Frites Esports Club",
+            "prob": 1,
+            "odd": null
+          },
+          {
+            "name": "The Bandits",
+            "prob": 0,
+            "odd": null
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Frites Esports Club vs The Bandits - Game 1 Winner",
+          "market_id": "2919571",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Frites Esports Club",
+              "prob": 0,
+              "odd": null
+            },
+            {
+              "name": "The Bandits",
+              "prob": 1,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: Frites Esports Club vs The Bandits - Game 2 Winner",
+          "market_id": "2919572",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Frites Esports Club",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "The Bandits",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-fec-ban2-2026-07-16"
+    },
+    {
+      "slug": "lol-lua-ub-2026-07-21",
+      "title": "LoL: LUA Gaming vs UB Alma Mater (BO3) - LES Regular Season",
+      "league": "LES",
+      "team_a": "LUA Gaming",
+      "team_b": "UB Alma Mater",
+      "start_time_utc": "2026-07-21T15:10:00Z",
+      "event_date": "2026-07-21",
+      "live": false,
+      "ended": true,
+      "score": "000-000|2-0|Bo3",
+      "volume_total_usd": 125484.40438899997,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: LUA Gaming vs UB Alma Mater (BO3) - LES Regular Season",
+        "market_id": "2959737",
+        "closed": true,
+        "outcomes": [
+          {
+            "name": "LUA Gaming",
+            "prob": 1,
+            "odd": null
+          },
+          {
+            "name": "UB Alma Mater",
+            "prob": 0,
+            "odd": null
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: LUA Gaming vs UB Alma Mater - Game 1 Winner",
+          "market_id": "2959732",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "LUA Gaming",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "UB Alma Mater",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: LUA Gaming vs UB Alma Mater - Game 2 Winner",
+          "market_id": "2959733",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "LUA Gaming",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "UB Alma Mater",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-lua-ub-2026-07-21"
+    },
+    {
+      "slug": "lol-zrl-gsmc-2026-07-22",
+      "title": "LoL: Zerolag Esports vs Gamespace Mediterranean College Esports (BO2) - HLL Regular Season",
+      "league": "HLL",
+      "team_a": "Zerolag Esports",
+      "team_b": "Gamespace Mediterranean College Esports",
+      "start_time_utc": "2026-07-22T15:20:00Z",
+      "event_date": "2026-07-22",
+      "live": false,
+      "ended": true,
+      "score": "000-000|0-0|Bo2",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "Zerolag Esports to win 2-0?",
+        "market_id": "3029780",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Yes",
+            "prob": 0.475,
+            "odd": 2.105
+          },
+          {
+            "name": "No",
+            "prob": 0.525,
+            "odd": 1.905
+          }
+        ]
+      },
+      "moneyline_maps": [],
+      "polymarket_url": "https://polymarket.com/event/lol-zrl-gsmc-2026-07-22"
+    },
+    {
+      "slug": "lol-zrl-gsmc-2026-07-22-more-markets",
+      "title": "LoL: Zerolag Esports vs Gamespace Mediterranean College Esports - More Markets",
+      "league": "More Markets",
+      "team_a": "Zerolag Esports",
+      "team_b": "Gamespace Mediterranean College Esports",
+      "start_time_utc": "2026-07-22T15:20:00Z",
+      "event_date": "2026-07-22",
+      "live": false,
+      "ended": false,
+      "score": "000-000|0-0|Bo2",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": null,
+      "moneyline_maps": [
+        {
+          "question": "LoL: Zerolag Esports vs Gamespace Mediterranean College Esports - Game 1 Winner",
+          "market_id": "3029787",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Zerolag Esports",
+              "prob": 0.465,
+              "odd": 2.151
+            },
+            {
+              "name": "Gamespace Mediterranean College Esports",
+              "prob": 0.535,
+              "odd": 1.869
+            }
+          ]
+        },
+        {
+          "question": "LoL: Zerolag Esports vs Gamespace Mediterranean College Esports - Game 2 Winner",
+          "market_id": "3029788",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Zerolag Esports",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "Gamespace Mediterranean College Esports",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-zrl-gsmc-2026-07-22-more-markets"
+    },
+    {
+      "slug": "lol-blg-tt-2026-07-23",
+      "title": "LoL: Bilibili Gaming vs ThunderTalk Gaming (BO3) - LPL Group Ascend",
+      "league": "LPL",
+      "team_a": "Bilibili Gaming",
+      "team_b": "ThunderTalk Gaming",
+      "start_time_utc": "2026-07-23T12:25:00Z",
+      "event_date": "2026-07-23",
+      "live": false,
+      "ended": true,
+      "score": "000-000|2-1|Bo3",
+      "volume_total_usd": 3489207.948800997,
+      "volume_24h_usd": 3412425.626222,
+      "moneyline_series": {
+        "question": "LoL: Bilibili Gaming vs ThunderTalk Gaming (BO3) - LPL Group Ascend",
+        "market_id": "2936885",
+        "closed": true,
+        "outcomes": [
+          {
+            "name": "Bilibili Gaming",
+            "prob": 1,
+            "odd": null
+          },
+          {
+            "name": "ThunderTalk Gaming",
+            "prob": 0,
+            "odd": null
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Bilibili Gaming vs ThunderTalk Gaming - Game 1 Winner",
+          "market_id": "2936876",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Bilibili Gaming",
+              "prob": 1,
+              "odd": null
+            },
+            {
+              "name": "ThunderTalk Gaming",
+              "prob": 0,
+              "odd": null
+            }
+          ]
+        },
+        {
+          "question": "LoL: Bilibili Gaming vs ThunderTalk Gaming - Game 2 Winner",
+          "market_id": "2936877",
+          "closed": true,
+          "outcomes": [
+            {
+              "name": "Bilibili Gaming",
+              "prob": 0,
+              "odd": null
+            },
+            {
+              "name": "ThunderTalk Gaming",
+              "prob": 1,
+              "odd": null
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-blg-tt-2026-07-23"
+    },
+    {
+      "slug": "lol-al-lgd-2026-07-24",
+      "title": "LoL: Anyone's Legend vs LGD Gaming (BO3) - LPL Group Ascend",
+      "league": "LPL",
+      "team_a": "Anyone's Legend",
+      "team_b": "LGD Gaming",
+      "start_time_utc": "2026-07-24T07:10:00Z",
+      "event_date": "2026-07-24",
+      "live": true,
+      "ended": false,
+      "score": "000-000|0-0|Bo3",
+      "volume_total_usd": 1005500.6022000004,
+      "volume_24h_usd": 984799.1652820003,
+      "moneyline_series": {
+        "question": "LoL: Anyone's Legend vs LGD Gaming (BO3) - LPL Group Ascend",
+        "market_id": "2936908",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Anyone's Legend",
+            "prob": 0.845,
+            "odd": 1.183
+          },
+          {
+            "name": "LGD Gaming",
+            "prob": 0.155,
+            "odd": 6.452
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Anyone's Legend vs LGD Gaming - Game 1 Winner",
+          "market_id": "2936906",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Anyone's Legend",
+              "prob": 0.88,
+              "odd": 1.136
+            },
+            {
+              "name": "LGD Gaming",
+              "prob": 0.12,
+              "odd": 8.333
+            }
+          ]
+        },
+        {
+          "question": "LoL: Anyone's Legend vs LGD Gaming - Game 2 Winner",
+          "market_id": "2936907",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Anyone's Legend",
+              "prob": 0.705,
+              "odd": 1.418
+            },
+            {
+              "name": "LGD Gaming",
+              "prob": 0.295,
+              "odd": 3.39
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-al-lgd-2026-07-24"
+    },
+    {
+      "slug": "lol-we-jdg-2026-07-24",
+      "title": "LoL: Team WE vs JD Gaming (BO3) - LPL Group Ascend",
+      "league": "LPL",
+      "team_a": "Team WE",
+      "team_b": "JD Gaming",
+      "start_time_utc": "2026-07-24T09:00:00Z",
+      "event_date": "2026-07-24",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 89479.14713500002,
+      "volume_24h_usd": 87491.18131900002,
+      "moneyline_series": {
+        "question": "LoL: Team WE vs JD Gaming (BO3) - LPL Group Ascend",
+        "market_id": "2936940",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Team WE",
+            "prob": 0.285,
+            "odd": 3.509
+          },
+          {
+            "name": "JD Gaming",
+            "prob": 0.715,
+            "odd": 1.399
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Team WE vs JD Gaming - Game 1 Winner",
+          "market_id": "2936929",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Team WE",
+              "prob": 0.335,
+              "odd": 2.985
+            },
+            {
+              "name": "JD Gaming",
+              "prob": 0.665,
+              "odd": 1.504
+            }
+          ]
+        },
+        {
+          "question": "LoL: Team WE vs JD Gaming - Game 2 Winner",
+          "market_id": "2936930",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Team WE",
+              "prob": 0.335,
+              "odd": 2.985
+            },
+            {
+              "name": "JD Gaming",
+              "prob": 0.665,
+              "odd": 1.504
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-we-jdg-2026-07-24"
+    },
+    {
+      "slug": "lol-edg-blg-2026-07-24",
+      "title": "LoL: EDward Gaming vs Bilibili Gaming (BO3) - LPL Group Ascend",
+      "league": "LPL",
+      "team_a": "EDward Gaming",
+      "team_b": "Bilibili Gaming",
+      "start_time_utc": "2026-07-24T11:00:00Z",
+      "event_date": "2026-07-24",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 106389.59794600002,
+      "volume_24h_usd": 100062.52499900003,
+      "moneyline_series": {
+        "question": "LoL: EDward Gaming vs Bilibili Gaming (BO3) - LPL Group Ascend",
+        "market_id": "2936963",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "EDward Gaming",
+            "prob": 0.145,
+            "odd": 6.897
+          },
+          {
+            "name": "Bilibili Gaming",
+            "prob": 0.855,
+            "odd": 1.17
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: EDward Gaming vs Bilibili Gaming - Game 1 Winner",
+          "market_id": "2936938",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "EDward Gaming",
+              "prob": 0.215,
+              "odd": 4.651
+            },
+            {
+              "name": "Bilibili Gaming",
+              "prob": 0.785,
+              "odd": 1.274
+            }
+          ]
+        },
+        {
+          "question": "LoL: EDward Gaming vs Bilibili Gaming - Game 2 Winner",
+          "market_id": "2936939",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "EDward Gaming",
+              "prob": 0.225,
+              "odd": 4.444
+            },
+            {
+              "name": "Bilibili Gaming",
+              "prob": 0.775,
+              "odd": 1.29
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-edg-blg-2026-07-24"
+    },
+    {
+      "slug": "lol-g2-mkoi-2026-07-24",
+      "title": "LoL: G2 Esports vs Movistar KOI (BO3) - LEC Regular Season",
+      "league": "LEC",
+      "team_a": "G2 Esports",
+      "team_b": "Movistar KOI",
+      "start_time_utc": "2026-07-24T14:00:00Z",
+      "event_date": "2026-07-24",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 10631.004229000004,
+      "volume_24h_usd": 8014.572356000006,
+      "moneyline_series": {
+        "question": "LoL: G2 Esports vs Movistar KOI (BO3) - LEC Regular Season",
+        "market_id": "2882920",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "G2 Esports",
+            "prob": 0.695,
+            "odd": 1.439
+          },
+          {
+            "name": "Movistar KOI",
+            "prob": 0.305,
+            "odd": 3.279
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: G2 Esports vs Movistar KOI - Game 1 Winner",
+          "market_id": "2882918",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "G2 Esports",
+              "prob": 0.635,
+              "odd": 1.575
+            },
+            {
+              "name": "Movistar KOI",
+              "prob": 0.365,
+              "odd": 2.74
+            }
+          ]
+        },
+        {
+          "question": "LoL: G2 Esports vs Movistar KOI - Game 2 Winner",
+          "market_id": "2882919",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "G2 Esports",
+              "prob": 0.625,
+              "odd": 1.6
+            },
+            {
+              "name": "Movistar KOI",
+              "prob": 0.375,
+              "odd": 2.667
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-g2-mkoi-2026-07-24"
+    },
+    {
+      "slug": "lol-vit-kc-2026-07-24",
+      "title": "LoL: Team Vitality vs Karmine Corp (BO3) - LEC Regular Season",
+      "league": "LEC",
+      "team_a": "Team Vitality",
+      "team_b": "Karmine Corp",
+      "start_time_utc": "2026-07-24T17:00:00Z",
+      "event_date": "2026-07-24",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 37971.465419,
+      "volume_24h_usd": 36881.16489000001,
+      "moneyline_series": {
+        "question": "LoL: Team Vitality vs Karmine Corp (BO3) - LEC Regular Season",
+        "market_id": "2882943",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Team Vitality",
+            "prob": 0.235,
+            "odd": 4.255
+          },
+          {
+            "name": "Karmine Corp",
+            "prob": 0.765,
+            "odd": 1.307
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Team Vitality vs Karmine Corp - Game 1 Winner",
+          "market_id": "2882941",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Team Vitality",
+              "prob": 0.305,
+              "odd": 3.279
+            },
+            {
+              "name": "Karmine Corp",
+              "prob": 0.695,
+              "odd": 1.439
+            }
+          ]
+        },
+        {
+          "question": "LoL: Team Vitality vs Karmine Corp - Game 2 Winner",
+          "market_id": "2882942",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Team Vitality",
+              "prob": 0.305,
+              "odd": 3.279
+            },
+            {
+              "name": "Karmine Corp",
+              "prob": 0.695,
+              "odd": 1.439
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-vit-kc-2026-07-24"
+    },
+    {
+      "slug": "lol-lgd-we-2026-07-25",
+      "title": "LoL: LGD Gaming vs Team WE (BO3) - LPL Group Ascend",
+      "league": "LPL",
+      "team_a": "LGD Gaming",
+      "team_b": "Team WE",
+      "start_time_utc": "2026-07-25T07:00:00Z",
+      "event_date": "2026-07-25",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 1730.5977700000003,
+      "volume_24h_usd": 934.3138459999998,
+      "moneyline_series": {
+        "question": "LoL: LGD Gaming vs Team WE (BO3) - LPL Group Ascend",
+        "market_id": "2936986",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "LGD Gaming",
+            "prob": 0.42,
+            "odd": 2.381
+          },
+          {
+            "name": "Team WE",
+            "prob": 0.58,
+            "odd": 1.724
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: LGD Gaming vs Team WE - Game 1 Winner",
+          "market_id": "2936961",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "LGD Gaming",
+              "prob": 0.435,
+              "odd": 2.299
+            },
+            {
+              "name": "Team WE",
+              "prob": 0.565,
+              "odd": 1.77
+            }
+          ]
+        },
+        {
+          "question": "LoL: LGD Gaming vs Team WE - Game 2 Winner",
+          "market_id": "2936962",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "LGD Gaming",
+              "prob": 0.435,
+              "odd": 2.299
+            },
+            {
+              "name": "Team WE",
+              "prob": 0.565,
+              "odd": 1.77
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-lgd-we-2026-07-25"
+    },
+    {
+      "slug": "lol-ig1-wb-2026-07-25",
+      "title": "LoL: Invictus Gaming vs Weibo Gaming (BO3) - LPL Group Nirvana",
+      "league": "LPL",
+      "team_a": "Invictus Gaming",
+      "team_b": "Weibo Gaming",
+      "start_time_utc": "2026-07-25T09:00:00Z",
+      "event_date": "2026-07-25",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 3483.316082,
+      "volume_24h_usd": 980.302929,
+      "moneyline_series": {
+        "question": "LoL: Invictus Gaming vs Weibo Gaming (BO3) - LPL Group Nirvana",
+        "market_id": "2937010",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Invictus Gaming",
+            "prob": 0.525,
+            "odd": 1.905
+          },
+          {
+            "name": "Weibo Gaming",
+            "prob": 0.475,
+            "odd": 2.105
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Invictus Gaming vs Weibo Gaming - Game 1 Winner",
+          "market_id": "2936984",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Invictus Gaming",
+              "prob": 0.525,
+              "odd": 1.905
+            },
+            {
+              "name": "Weibo Gaming",
+              "prob": 0.475,
+              "odd": 2.105
+            }
+          ]
+        },
+        {
+          "question": "LoL: Invictus Gaming vs Weibo Gaming - Game 2 Winner",
+          "market_id": "2936985",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Invictus Gaming",
+              "prob": 0.52,
+              "odd": 1.923
+            },
+            {
+              "name": "Weibo Gaming",
+              "prob": 0.48,
+              "odd": 2.083
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-ig1-wb-2026-07-25"
+    },
+    {
+      "slug": "lol-gz-mvk-2026-07-25",
+      "title": "LoL: Ground Zero Gaming vs MVK Esports (BO3) - LCP Swiss Stage",
+      "league": "LCP",
+      "team_a": "Ground Zero Gaming",
+      "team_b": "MVK Esports",
+      "start_time_utc": "2026-07-25T09:00:00Z",
+      "event_date": "2026-07-25",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 165.39604799999998,
+      "volume_24h_usd": 165.39604799999998,
+      "moneyline_series": {
+        "question": "LoL: Ground Zero Gaming vs MVK Esports (BO3) - LCP Swiss Stage",
+        "market_id": "3052254",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Ground Zero Gaming",
+            "prob": 0.38,
+            "odd": 2.632
+          },
+          {
+            "name": "MVK Esports",
+            "prob": 0.62,
+            "odd": 1.613
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Ground Zero Gaming vs MVK Esports - Game 1 Winner",
+          "market_id": "3052250",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Ground Zero Gaming",
+              "prob": 0.46,
+              "odd": 2.174
+            },
+            {
+              "name": "MVK Esports",
+              "prob": 0.54,
+              "odd": 1.852
+            }
+          ]
+        },
+        {
+          "question": "LoL: Ground Zero Gaming vs MVK Esports - Game 2 Winner",
+          "market_id": "3052252",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Ground Zero Gaming",
+              "prob": 0.455,
+              "odd": 2.198
+            },
+            {
+              "name": "MVK Esports",
+              "prob": 0.545,
+              "odd": 1.835
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-gz-mvk-2026-07-25"
+    },
+    {
+      "slug": "lol-tes-tt-2026-07-25",
+      "title": "LoL: Top Esports vs ThunderTalk Gaming (BO3) - LPL Group Ascend",
+      "league": "LPL",
+      "team_a": "Top Esports",
+      "team_b": "ThunderTalk Gaming",
+      "start_time_utc": "2026-07-25T11:00:00Z",
+      "event_date": "2026-07-25",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 1217.6474850000002,
+      "volume_24h_usd": 254.651807,
+      "moneyline_series": {
+        "question": "LoL: Top Esports vs ThunderTalk Gaming (BO3) - LPL Group Ascend",
+        "market_id": "2937047",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Top Esports",
+            "prob": 0.825,
+            "odd": 1.212
+          },
+          {
+            "name": "ThunderTalk Gaming",
+            "prob": 0.175,
+            "odd": 5.714
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Top Esports vs ThunderTalk Gaming - Game 1 Winner",
+          "market_id": "2937007",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Top Esports",
+              "prob": 0.72,
+              "odd": 1.389
+            },
+            {
+              "name": "ThunderTalk Gaming",
+              "prob": 0.28,
+              "odd": 3.571
+            }
+          ]
+        },
+        {
+          "question": "LoL: Top Esports vs ThunderTalk Gaming - Game 2 Winner",
+          "market_id": "2937008",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Top Esports",
+              "prob": 0.715,
+              "odd": 1.399
+            },
+            {
+              "name": "ThunderTalk Gaming",
+              "prob": 0.285,
+              "odd": 3.509
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-tes-tt-2026-07-25"
+    },
+    {
+      "slug": "lol-shg-tsw-2026-07-25",
+      "title": "LoL: Fukuoka SoftBank Hawks Gaming vs Team Secret Whales (BO3) - LCP Swiss Stage",
+      "league": "LCP",
+      "team_a": "Fukuoka SoftBank Hawks Gaming",
+      "team_b": "Team Secret Whales",
+      "start_time_utc": "2026-07-25T11:30:00Z",
+      "event_date": "2026-07-25",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 203.446401,
+      "volume_24h_usd": 203.446401,
+      "moneyline_series": {
+        "question": "LoL: Fukuoka SoftBank Hawks Gaming vs Team Secret Whales (BO3) - LCP Swiss Stage",
+        "market_id": "3052277",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Fukuoka SoftBank Hawks Gaming",
+            "prob": 0.285,
+            "odd": 3.509
+          },
+          {
+            "name": "Team Secret Whales",
+            "prob": 0.715,
+            "odd": 1.399
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Fukuoka SoftBank Hawks Gaming vs Team Secret Whales - Game 1 Winner",
+          "market_id": "3052275",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Fukuoka SoftBank Hawks Gaming",
+              "prob": 0.37,
+              "odd": 2.703
+            },
+            {
+              "name": "Team Secret Whales",
+              "prob": 0.63,
+              "odd": 1.587
+            }
+          ]
+        },
+        {
+          "question": "LoL: Fukuoka SoftBank Hawks Gaming vs Team Secret Whales - Game 2 Winner",
+          "market_id": "3052276",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Fukuoka SoftBank Hawks Gaming",
+              "prob": 0.355,
+              "odd": 2.817
+            },
+            {
+              "name": "Team Secret Whales",
+              "prob": 0.645,
+              "odd": 1.55
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-shg-tsw-2026-07-25"
+    },
+    {
+      "slug": "lol-vit-g2-2026-07-25",
+      "title": "LoL: Team Vitality vs G2 Esports (BO3) - LEC Regular Season",
+      "league": "LEC",
+      "team_a": "Team Vitality",
+      "team_b": "G2 Esports",
+      "start_time_utc": "2026-07-25T14:00:00Z",
+      "event_date": "2026-07-25",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 9893.199866,
+      "volume_24h_usd": 356.42269100000004,
+      "moneyline_series": {
+        "question": "LoL: Team Vitality vs G2 Esports (BO3) - LEC Regular Season",
+        "market_id": "2882973",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Team Vitality",
+            "prob": 0.205,
+            "odd": 4.878
+          },
+          {
+            "name": "G2 Esports",
+            "prob": 0.795,
+            "odd": 1.258
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Team Vitality vs G2 Esports - Game 1 Winner",
+          "market_id": "2882971",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Team Vitality",
+              "prob": 0.265,
+              "odd": 3.774
+            },
+            {
+              "name": "G2 Esports",
+              "prob": 0.735,
+              "odd": 1.361
+            }
+          ]
+        },
+        {
+          "question": "LoL: Team Vitality vs G2 Esports - Game 2 Winner",
+          "market_id": "2882972",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Team Vitality",
+              "prob": 0.235,
+              "odd": 4.255
+            },
+            {
+              "name": "G2 Esports",
+              "prob": 0.765,
+              "odd": 1.307
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-vit-g2-2026-07-25"
+    },
+    {
+      "slug": "lol-fur-los-2026-07-25",
+      "title": "LoL: FURIA Esports vs LOS (BO3) - CBLOL Regular Season",
+      "league": "CBLOL",
+      "team_a": "FURIA Esports",
+      "team_b": "LOS",
+      "start_time_utc": "2026-07-25T16:00:00Z",
+      "event_date": "2026-07-25",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 284.484166,
+      "volume_24h_usd": 130.26885,
+      "moneyline_series": {
+        "question": "LoL: FURIA Esports vs LOS (BO3) - CBLOL Regular Season",
+        "market_id": "2985888",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "FURIA Esports",
+            "prob": 0.555,
+            "odd": 1.802
+          },
+          {
+            "name": "LOS",
+            "prob": 0.445,
+            "odd": 2.247
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: FURIA Esports vs LOS - Game 1 Winner",
+          "market_id": "2985886",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "FURIA Esports",
+              "prob": 0.55,
+              "odd": 1.818
+            },
+            {
+              "name": "LOS",
+              "prob": 0.45,
+              "odd": 2.222
+            }
+          ]
+        },
+        {
+          "question": "LoL: FURIA Esports vs LOS - Game 2 Winner",
+          "market_id": "2985887",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "FURIA Esports",
+              "prob": 0.55,
+              "odd": 1.818
+            },
+            {
+              "name": "LOS",
+              "prob": 0.45,
+              "odd": 2.222
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-fur-los-2026-07-25"
+    },
+    {
+      "slug": "lol-kc-mkoi-2026-07-25",
+      "title": "LoL: Karmine Corp vs Movistar KOI (BO3) - LEC Regular Season",
+      "league": "LEC",
+      "team_a": "Karmine Corp",
+      "team_b": "Movistar KOI",
+      "start_time_utc": "2026-07-25T17:00:00Z",
+      "event_date": "2026-07-25",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 603.6708319999999,
+      "volume_24h_usd": 117.398564,
+      "moneyline_series": {
+        "question": "LoL: Karmine Corp vs Movistar KOI (BO3) - LEC Regular Season",
+        "market_id": "2883604",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Karmine Corp",
+            "prob": 0.655,
+            "odd": 1.527
+          },
+          {
+            "name": "Movistar KOI",
+            "prob": 0.345,
+            "odd": 2.899
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Karmine Corp vs Movistar KOI - Game 1 Winner",
+          "market_id": "2883602",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Karmine Corp",
+              "prob": 0.61,
+              "odd": 1.639
+            },
+            {
+              "name": "Movistar KOI",
+              "prob": 0.39,
+              "odd": 2.564
+            }
+          ]
+        },
+        {
+          "question": "LoL: Karmine Corp vs Movistar KOI - Game 2 Winner",
+          "market_id": "2883603",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Karmine Corp",
+              "prob": 0.61,
+              "odd": 1.639
+            },
+            {
+              "name": "Movistar KOI",
+              "prob": 0.39,
+              "odd": 2.564
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-kc-mkoi-2026-07-25"
+    },
+    {
+      "slug": "lol-lll-png1-2026-07-25",
+      "title": "LoL: LOUD vs paiN Gaming (BO3) - CBLOL Regular Season",
+      "league": "CBLOL",
+      "team_a": "LOUD",
+      "team_b": "paiN Gaming",
+      "start_time_utc": "2026-07-25T18:00:00Z",
+      "event_date": "2026-07-25",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 2169.8384180000003,
+      "volume_24h_usd": 2100.343156,
+      "moneyline_series": {
+        "question": "LoL: LOUD vs paiN Gaming (BO3) - CBLOL Regular Season",
+        "market_id": "2985918",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "LOUD",
+            "prob": 0.635,
+            "odd": 1.575
+          },
+          {
+            "name": "paiN Gaming",
+            "prob": 0.365,
+            "odd": 2.74
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: LOUD vs paiN Gaming - Game 1 Winner",
+          "market_id": "2985909",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "LOUD",
+              "prob": 0.62,
+              "odd": 1.613
+            },
+            {
+              "name": "paiN Gaming",
+              "prob": 0.38,
+              "odd": 2.632
+            }
+          ]
+        },
+        {
+          "question": "LoL: LOUD vs paiN Gaming - Game 2 Winner",
+          "market_id": "2985910",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "LOUD",
+              "prob": 0.62,
+              "odd": 1.613
+            },
+            {
+              "name": "paiN Gaming",
+              "prob": 0.38,
+              "odd": 2.632
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-lll-png1-2026-07-25"
+    },
+    {
+      "slug": "lol-fly-ly-2026-07-25",
+      "title": "LoL: FlyQuest vs LYON (BO3) - LCS Regular Season",
+      "league": "LCS",
+      "team_a": "FlyQuest",
+      "team_b": "LYON",
+      "start_time_utc": "2026-07-25T20:00:00Z",
+      "event_date": "2026-07-25",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 44813.67692799999,
+      "volume_24h_usd": 9935.850450000002,
+      "moneyline_series": {
+        "question": "LoL: FlyQuest vs LYON (BO3) - LCS Regular Season",
+        "market_id": "2884706",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "FlyQuest",
+            "prob": 0.575,
+            "odd": 1.739
+          },
+          {
+            "name": "LYON",
+            "prob": 0.425,
+            "odd": 2.353
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: FlyQuest vs LYON - Game 1 Winner",
+          "market_id": "2884698",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "FlyQuest",
+              "prob": 0.555,
+              "odd": 1.802
+            },
+            {
+              "name": "LYON",
+              "prob": 0.445,
+              "odd": 2.247
+            }
+          ]
+        },
+        {
+          "question": "LoL: FlyQuest vs LYON - Game 2 Winner",
+          "market_id": "2884699",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "FlyQuest",
+              "prob": 0.59,
+              "odd": 1.695
+            },
+            {
+              "name": "LYON",
+              "prob": 0.41,
+              "odd": 2.439
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-fly-ly-2026-07-25"
+    },
+    {
+      "slug": "lol-dig-sen-2026-07-25",
+      "title": "LoL: Dignitas vs Sentinels (BO3) - LCS Regular Season",
+      "league": "LCS",
+      "team_a": "Dignitas",
+      "team_b": "Sentinels",
+      "start_time_utc": "2026-07-25T23:00:00Z",
+      "event_date": "2026-07-25",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 139.73078099999998,
+      "volume_24h_usd": 27,
+      "moneyline_series": {
+        "question": "LoL: Dignitas vs Sentinels (BO3) - LCS Regular Season",
+        "market_id": "2885665",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Dignitas",
+            "prob": 0.155,
+            "odd": 6.452
+          },
+          {
+            "name": "Sentinels",
+            "prob": 0.845,
+            "odd": 1.183
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Dignitas vs Sentinels - Game 1 Winner",
+          "market_id": "2885469",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Dignitas",
+              "prob": 0.23,
+              "odd": 4.348
+            },
+            {
+              "name": "Sentinels",
+              "prob": 0.77,
+              "odd": 1.299
+            }
+          ]
+        },
+        {
+          "question": "LoL: Dignitas vs Sentinels - Game 2 Winner",
+          "market_id": "2885472",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Dignitas",
+              "prob": 0.225,
+              "odd": 4.444
+            },
+            {
+              "name": "Sentinels",
+              "prob": 0.775,
+              "odd": 1.29
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-dig-sen-2026-07-25"
+    },
+    {
+      "slug": "lol-lng-nip-2026-07-26",
+      "title": "LoL: LNG Esports vs Ninjas in Pyjamas (BO3) - LPL Group Nirvana",
+      "league": "LPL",
+      "team_a": "LNG Esports",
+      "team_b": "Ninjas in Pyjamas",
+      "start_time_utc": "2026-07-26T07:00:00Z",
+      "event_date": "2026-07-26",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 291.86996600000003,
+      "volume_24h_usd": 130.77896,
+      "moneyline_series": {
+        "question": "LoL: LNG Esports vs Ninjas in Pyjamas (BO3) - LPL Group Nirvana",
+        "market_id": "2937070",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "LNG Esports",
+            "prob": 0.455,
+            "odd": 2.198
+          },
+          {
+            "name": "Ninjas in Pyjamas",
+            "prob": 0.545,
+            "odd": 1.835
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: LNG Esports vs Ninjas in Pyjamas - Game 1 Winner",
+          "market_id": "2937031",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "LNG Esports",
+              "prob": 0.455,
+              "odd": 2.198
+            },
+            {
+              "name": "Ninjas in Pyjamas",
+              "prob": 0.545,
+              "odd": 1.835
+            }
+          ]
+        },
+        {
+          "question": "LoL: LNG Esports vs Ninjas in Pyjamas - Game 2 Winner",
+          "market_id": "2937032",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "LNG Esports",
+              "prob": 0.455,
+              "odd": 2.198
+            },
+            {
+              "name": "Ninjas in Pyjamas",
+              "prob": 0.545,
+              "odd": 1.835
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-lng-nip-2026-07-26"
+    },
+    {
+      "slug": "lol-tt-edg-2026-07-26",
+      "title": "LoL: ThunderTalk Gaming vs EDward Gaming (BO3) - LPL Group Ascend",
+      "league": "LPL",
+      "team_a": "ThunderTalk Gaming",
+      "team_b": "EDward Gaming",
+      "start_time_utc": "2026-07-26T09:00:00Z",
+      "event_date": "2026-07-26",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 423.96550899999994,
+      "volume_24h_usd": 84.800745,
+      "moneyline_series": {
+        "question": "LoL: ThunderTalk Gaming vs EDward Gaming (BO3) - LPL Group Ascend",
+        "market_id": "2937093",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "ThunderTalk Gaming",
+            "prob": 0.475,
+            "odd": 2.105
+          },
+          {
+            "name": "EDward Gaming",
+            "prob": 0.525,
+            "odd": 1.905
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: ThunderTalk Gaming vs EDward Gaming - Game 1 Winner",
+          "market_id": "2937068",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "ThunderTalk Gaming",
+              "prob": 0.485,
+              "odd": 2.062
+            },
+            {
+              "name": "EDward Gaming",
+              "prob": 0.515,
+              "odd": 1.942
+            }
+          ]
+        },
+        {
+          "question": "LoL: ThunderTalk Gaming vs EDward Gaming - Game 2 Winner",
+          "market_id": "2937069",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "ThunderTalk Gaming",
+              "prob": 0.47,
+              "odd": 2.128
+            },
+            {
+              "name": "EDward Gaming",
+              "prob": 0.53,
+              "odd": 1.887
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-tt-edg-2026-07-26"
+    },
+    {
+      "slug": "lol-dfm-gam-2026-07-26",
+      "title": "LoL: DetonatioN FocusMe vs GAM Esports (BO3) - LCP Swiss Stage",
+      "league": "LCP",
+      "team_a": "DetonatioN FocusMe",
+      "team_b": "GAM Esports",
+      "start_time_utc": "2026-07-26T09:00:00Z",
+      "event_date": "2026-07-26",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 76.1593,
+      "volume_24h_usd": 76.1593,
+      "moneyline_series": {
+        "question": "LoL: DetonatioN FocusMe vs GAM Esports (BO3) - LCP Swiss Stage",
+        "market_id": "3052458",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "DetonatioN FocusMe",
+            "prob": 0.125,
+            "odd": 8
+          },
+          {
+            "name": "GAM Esports",
+            "prob": 0.875,
+            "odd": 1.143
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: DetonatioN FocusMe vs GAM Esports - Game 1 Winner",
+          "market_id": "3052456",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "DetonatioN FocusMe",
+              "prob": 0.245,
+              "odd": 4.082
+            },
+            {
+              "name": "GAM Esports",
+              "prob": 0.755,
+              "odd": 1.325
+            }
+          ]
+        },
+        {
+          "question": "LoL: DetonatioN FocusMe vs GAM Esports - Game 2 Winner",
+          "market_id": "3052457",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "DetonatioN FocusMe",
+              "prob": 0.245,
+              "odd": 4.082
+            },
+            {
+              "name": "GAM Esports",
+              "prob": 0.755,
+              "odd": 1.325
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-dfm-gam-2026-07-26"
+    },
+    {
+      "slug": "lol-al-blg-2026-07-26",
+      "title": "LoL: Anyone's Legend vs Bilibili Gaming (BO3) - LPL Group Ascend",
+      "league": "LPL",
+      "team_a": "Anyone's Legend",
+      "team_b": "Bilibili Gaming",
+      "start_time_utc": "2026-07-26T11:00:00Z",
+      "event_date": "2026-07-26",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 27638.141855999995,
+      "volume_24h_usd": 4851.238257,
+      "moneyline_series": {
+        "question": "LoL: Anyone's Legend vs Bilibili Gaming (BO3) - LPL Group Ascend",
+        "market_id": "2937114",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Anyone's Legend",
+            "prob": 0.375,
+            "odd": 2.667
+          },
+          {
+            "name": "Bilibili Gaming",
+            "prob": 0.625,
+            "odd": 1.6
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Anyone's Legend vs Bilibili Gaming - Game 1 Winner",
+          "market_id": "2937091",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Anyone's Legend",
+              "prob": 0.445,
+              "odd": 2.247
+            },
+            {
+              "name": "Bilibili Gaming",
+              "prob": 0.555,
+              "odd": 1.802
+            }
+          ]
+        },
+        {
+          "question": "LoL: Anyone's Legend vs Bilibili Gaming - Game 2 Winner",
+          "market_id": "2937092",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Anyone's Legend",
+              "prob": 0.455,
+              "odd": 2.198
+            },
+            {
+              "name": "Bilibili Gaming",
+              "prob": 0.545,
+              "odd": 1.835
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-al-blg-2026-07-26"
+    },
+    {
+      "slug": "lol-cfo-dcg-2026-07-26",
+      "title": "LoL: CTBC Flying Oyster vs Deep Cross Gaming (BO3) - LCP Swiss Stage",
+      "league": "LCP",
+      "team_a": "CTBC Flying Oyster",
+      "team_b": "Deep Cross Gaming",
+      "start_time_utc": "2026-07-26T11:30:00Z",
+      "event_date": "2026-07-26",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 42.126151,
+      "volume_24h_usd": 42.126151,
+      "moneyline_series": {
+        "question": "LoL: CTBC Flying Oyster vs Deep Cross Gaming (BO3) - LCP Swiss Stage",
+        "market_id": "3052481",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "CTBC Flying Oyster",
+            "prob": 0.375,
+            "odd": 2.667
+          },
+          {
+            "name": "Deep Cross Gaming",
+            "prob": 0.625,
+            "odd": 1.6
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: CTBC Flying Oyster vs Deep Cross Gaming - Game 1 Winner",
+          "market_id": "3052479",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "CTBC Flying Oyster",
+              "prob": 0.405,
+              "odd": 2.469
+            },
+            {
+              "name": "Deep Cross Gaming",
+              "prob": 0.595,
+              "odd": 1.681
+            }
+          ]
+        },
+        {
+          "question": "LoL: CTBC Flying Oyster vs Deep Cross Gaming - Game 2 Winner",
+          "market_id": "3052480",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "CTBC Flying Oyster",
+              "prob": 0.425,
+              "odd": 2.353
+            },
+            {
+              "name": "Deep Cross Gaming",
+              "prob": 0.575,
+              "odd": 1.739
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-cfo-dcg-2026-07-26"
+    },
+    {
+      "slug": "lol-mkoi-vit-2026-07-26",
+      "title": "LoL: Movistar KOI vs Team Vitality (BO3) - LEC Regular Season",
+      "league": "LEC",
+      "team_a": "Movistar KOI",
+      "team_b": "Team Vitality",
+      "start_time_utc": "2026-07-26T14:00:00Z",
+      "event_date": "2026-07-26",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 186.04613899999998,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Movistar KOI vs Team Vitality (BO3) - LEC Regular Season",
+        "market_id": "2895877",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Movistar KOI",
+            "prob": 0.635,
+            "odd": 1.575
+          },
+          {
+            "name": "Team Vitality",
+            "prob": 0.365,
+            "odd": 2.74
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Movistar KOI vs Team Vitality - Game 1 Winner",
+          "market_id": "2895875",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Movistar KOI",
+              "prob": 0.615,
+              "odd": 1.626
+            },
+            {
+              "name": "Team Vitality",
+              "prob": 0.385,
+              "odd": 2.597
+            }
+          ]
+        },
+        {
+          "question": "LoL: Movistar KOI vs Team Vitality - Game 2 Winner",
+          "market_id": "2895876",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Movistar KOI",
+              "prob": 0.555,
+              "odd": 1.802
+            },
+            {
+              "name": "Team Vitality",
+              "prob": 0.445,
+              "odd": 2.247
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-mkoi-vit-2026-07-26"
+    },
+    {
+      "slug": "lol-fxw7-lev-2026-07-26",
+      "title": "LoL: Fluxo W7M vs Leviatan Esports (BO3) - CBLOL Regular Season",
+      "league": "CBLOL",
+      "team_a": "Fluxo W7M",
+      "team_b": "Leviatan Esports",
+      "start_time_utc": "2026-07-26T16:00:00Z",
+      "event_date": "2026-07-26",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Fluxo W7M vs Leviatan Esports (BO3) - CBLOL Regular Season",
+        "market_id": "2985941",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Fluxo W7M",
+            "prob": 0.73,
+            "odd": 1.37
+          },
+          {
+            "name": "Leviatan Esports",
+            "prob": 0.27,
+            "odd": 3.704
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Fluxo W7M vs Leviatan Esports - Game 1 Winner",
+          "market_id": "2985939",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Fluxo W7M",
+              "prob": 0.66,
+              "odd": 1.515
+            },
+            {
+              "name": "Leviatan Esports",
+              "prob": 0.34,
+              "odd": 2.941
+            }
+          ]
+        },
+        {
+          "question": "LoL: Fluxo W7M vs Leviatan Esports - Game 2 Winner",
+          "market_id": "2985940",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Fluxo W7M",
+              "prob": 0.475,
+              "odd": 2.105
+            },
+            {
+              "name": "Leviatan Esports",
+              "prob": 0.525,
+              "odd": 1.905
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-fxw7-lev-2026-07-26"
+    },
+    {
+      "slug": "lol-g2-kc-2026-07-26",
+      "title": "LoL: G2 Esports vs Karmine Corp (BO3) - LEC Regular Season",
+      "league": "LEC",
+      "team_a": "G2 Esports",
+      "team_b": "Karmine Corp",
+      "start_time_utc": "2026-07-26T17:00:00Z",
+      "event_date": "2026-07-26",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 1421.9393380000004,
+      "volume_24h_usd": 138.160628,
+      "moneyline_series": {
+        "question": "LoL: G2 Esports vs Karmine Corp (BO3) - LEC Regular Season",
+        "market_id": "2896888",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "G2 Esports",
+            "prob": 0.645,
+            "odd": 1.55
+          },
+          {
+            "name": "Karmine Corp",
+            "prob": 0.355,
+            "odd": 2.817
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: G2 Esports vs Karmine Corp - Game 1 Winner",
+          "market_id": "2896883",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "G2 Esports",
+              "prob": 0.615,
+              "odd": 1.626
+            },
+            {
+              "name": "Karmine Corp",
+              "prob": 0.385,
+              "odd": 2.597
+            }
+          ]
+        },
+        {
+          "question": "LoL: G2 Esports vs Karmine Corp - Game 2 Winner",
+          "market_id": "2896884",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "G2 Esports",
+              "prob": 0.605,
+              "odd": 1.653
+            },
+            {
+              "name": "Karmine Corp",
+              "prob": 0.395,
+              "odd": 2.532
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-g2-kc-2026-07-26"
+    },
+    {
+      "slug": "lol-red-vks-2026-07-26",
+      "title": "LoL: RED Canids vs Vivo Keyd Stars (BO3) - CBLOL Regular Season",
+      "league": "CBLOL",
+      "team_a": "RED Canids",
+      "team_b": "Vivo Keyd Stars",
+      "start_time_utc": "2026-07-26T18:00:00Z",
+      "event_date": "2026-07-26",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: RED Canids vs Vivo Keyd Stars (BO3) - CBLOL Regular Season",
+        "market_id": "2985964",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "RED Canids",
+            "prob": 0.735,
+            "odd": 1.361
+          },
+          {
+            "name": "Vivo Keyd Stars",
+            "prob": 0.265,
+            "odd": 3.774
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: RED Canids vs Vivo Keyd Stars - Game 1 Winner",
+          "market_id": "2985962",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "RED Canids",
+              "prob": 0.675,
+              "odd": 1.481
+            },
+            {
+              "name": "Vivo Keyd Stars",
+              "prob": 0.325,
+              "odd": 3.077
+            }
+          ]
+        },
+        {
+          "question": "LoL: RED Canids vs Vivo Keyd Stars - Game 2 Winner",
+          "market_id": "2985963",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "RED Canids",
+              "prob": 0.675,
+              "odd": 1.481
+            },
+            {
+              "name": "Vivo Keyd Stars",
+              "prob": 0.325,
+              "odd": 3.077
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-red-vks-2026-07-26"
+    },
+    {
+      "slug": "lol-tl2-c9-2026-07-26",
+      "title": "LoL: Team Liquid vs Cloud9 (BO3) - LCS Regular Season",
+      "league": "LCS",
+      "team_a": "Team Liquid",
+      "team_b": "Cloud9",
+      "start_time_utc": "2026-07-26T20:00:00Z",
+      "event_date": "2026-07-26",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 346.441214,
+      "volume_24h_usd": 68.854544,
+      "moneyline_series": {
+        "question": "LoL: Team Liquid vs Cloud9 (BO3) - LCS Regular Season",
+        "market_id": "2898092",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Team Liquid",
+            "prob": 0.545,
+            "odd": 1.835
+          },
+          {
+            "name": "Cloud9",
+            "prob": 0.455,
+            "odd": 2.198
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Team Liquid vs Cloud9 - Game 1 Winner",
+          "market_id": "2898070",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Team Liquid",
+              "prob": 0.53,
+              "odd": 1.887
+            },
+            {
+              "name": "Cloud9",
+              "prob": 0.47,
+              "odd": 2.128
+            }
+          ]
+        },
+        {
+          "question": "LoL: Team Liquid vs Cloud9 - Game 2 Winner",
+          "market_id": "2898071",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Team Liquid",
+              "prob": 0.55,
+              "odd": 1.818
+            },
+            {
+              "name": "Cloud9",
+              "prob": 0.45,
+              "odd": 2.222
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-tl2-c9-2026-07-26"
+    },
+    {
+      "slug": "lol-sr-dsg-2026-07-26",
+      "title": "LoL: Shopify Rebellion vs Disguised (BO3) - LCS Regular Season",
+      "league": "LCS",
+      "team_a": "Shopify Rebellion",
+      "team_b": "Disguised",
+      "start_time_utc": "2026-07-26T23:00:00Z",
+      "event_date": "2026-07-26",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Shopify Rebellion vs Disguised (BO3) - LCS Regular Season",
+        "market_id": "2899903",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Shopify Rebellion",
+            "prob": 0.55,
+            "odd": 1.818
+          },
+          {
+            "name": "Disguised",
+            "prob": 0.45,
+            "odd": 2.222
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Shopify Rebellion vs Disguised - Game 1 Winner",
+          "market_id": "2899647",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Shopify Rebellion",
+              "prob": 0.565,
+              "odd": 1.77
+            },
+            {
+              "name": "Disguised",
+              "prob": 0.435,
+              "odd": 2.299
+            }
+          ]
+        },
+        {
+          "question": "LoL: Shopify Rebellion vs Disguised - Game 2 Winner",
+          "market_id": "2899648",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Shopify Rebellion",
+              "prob": 0.55,
+              "odd": 1.818
+            },
+            {
+              "name": "Disguised",
+              "prob": 0.45,
+              "odd": 2.222
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-sr-dsg-2026-07-26"
+    },
+    {
+      "slug": "lol-t1a-nsea-2026-07-27",
+      "title": "LoL: T1 Academy vs Nongshim Esports Academy (BO3) - LCK Challengers League Rounds 3-4 Challenge Group",
+      "league": "LCK Challengers League",
+      "team_a": "T1 Academy",
+      "team_b": "Nongshim Esports Academy",
+      "start_time_utc": "2026-07-27T08:00:00Z",
+      "event_date": "2026-07-27",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 21.939999999999998,
+      "volume_24h_usd": 10,
+      "moneyline_series": {
+        "question": "LoL: T1 Academy vs Nongshim Esports Academy (BO3) - LCK Challengers League Rounds 3-4 Challenge Group",
+        "market_id": "3029542",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "T1 Academy",
+            "prob": 0.63,
+            "odd": 1.587
+          },
+          {
+            "name": "Nongshim Esports Academy",
+            "prob": 0.37,
+            "odd": 2.703
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: T1 Academy vs Nongshim Esports Academy - Game 1 Winner",
+          "market_id": "3029540",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "T1 Academy",
+              "prob": 0.6,
+              "odd": 1.667
+            },
+            {
+              "name": "Nongshim Esports Academy",
+              "prob": 0.4,
+              "odd": 2.5
+            }
+          ]
+        },
+        {
+          "question": "LoL: T1 Academy vs Nongshim Esports Academy - Game 2 Winner",
+          "market_id": "3029541",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "T1 Academy",
+              "prob": 0.6,
+              "odd": 1.667
+            },
+            {
+              "name": "Nongshim Esports Academy",
+              "prob": 0.4,
+              "odd": 2.5
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-t1a-nsea-2026-07-27"
+    },
+    {
+      "slug": "lol-genga-foxy-2026-07-27",
+      "title": "LoL: Gen.G Global Academy vs BNK FearX Youth (BO3) - LCK Challengers League Rounds 3-4 Trial Group",
+      "league": "LCK Challengers League",
+      "team_a": "Gen.G Global Academy",
+      "team_b": "BNK FearX Youth",
+      "start_time_utc": "2026-07-27T10:00:00Z",
+      "event_date": "2026-07-27",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 33.815,
+      "volume_24h_usd": 19.88,
+      "moneyline_series": {
+        "question": "LoL: Gen.G Global Academy vs BNK FearX Youth (BO3) - LCK Challengers League Rounds 3-4 Trial Group",
+        "market_id": "3029565",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Gen.G Global Academy",
+            "prob": 0.31,
+            "odd": 3.226
+          },
+          {
+            "name": "BNK FearX Youth",
+            "prob": 0.69,
+            "odd": 1.449
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Gen.G Global Academy vs BNK FearX Youth - Game 1 Winner",
+          "market_id": "3029563",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Gen.G Global Academy",
+              "prob": 0.345,
+              "odd": 2.899
+            },
+            {
+              "name": "BNK FearX Youth",
+              "prob": 0.655,
+              "odd": 1.527
+            }
+          ]
+        },
+        {
+          "question": "LoL: Gen.G Global Academy vs BNK FearX Youth - Game 2 Winner",
+          "market_id": "3029564",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Gen.G Global Academy",
+              "prob": 0.345,
+              "odd": 2.899
+            },
+            {
+              "name": "BNK FearX Youth",
+              "prob": 0.655,
+              "odd": 1.527
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-genga-foxy-2026-07-27"
+    },
+    {
+      "slug": "lol-fue-kits-2026-07-27",
+      "title": "LoL: Fuego vs Kits Esports (BO5) - LRN Playoffs",
+      "league": "LRN",
+      "team_a": "Fuego",
+      "team_b": "Kits Esports",
+      "start_time_utc": "2026-07-27T23:00:00Z",
+      "event_date": "2026-07-27",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo5",
+      "volume_total_usd": 157.52,
+      "volume_24h_usd": 157.52,
+      "moneyline_series": {
+        "question": "LoL: Fuego vs Kits Esports (BO5) - LRN Playoffs",
+        "market_id": "3057559",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Fuego",
+            "prob": 0.87,
+            "odd": 1.149
+          },
+          {
+            "name": "Kits Esports",
+            "prob": 0.13,
+            "odd": 7.692
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Fuego vs Kits Esports - Game 1 Winner",
+          "market_id": "3056532",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Fuego",
+              "prob": 0.79,
+              "odd": 1.266
+            },
+            {
+              "name": "Kits Esports",
+              "prob": 0.21,
+              "odd": 4.762
+            }
+          ]
+        },
+        {
+          "question": "LoL: Fuego vs Kits Esports - Game 2 Winner",
+          "market_id": "3056540",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Fuego",
+              "prob": 0.79,
+              "odd": 1.266
+            },
+            {
+              "name": "Kits Esports",
+              "prob": 0.21,
+              "odd": 4.762
+            }
+          ]
+        },
+        {
+          "question": "LoL: Fuego vs Kits Esports - Game 3 Winner",
+          "market_id": "3056546",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Fuego",
+              "prob": 0.795,
+              "odd": 1.258
+            },
+            {
+              "name": "Kits Esports",
+              "prob": 0.205,
+              "odd": 4.878
+            }
+          ]
+        },
+        {
+          "question": "LoL: Fuego vs Kits Esports - Game 4 Winner",
+          "market_id": "3056547",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Fuego",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "Kits Esports",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-fue-kits-2026-07-27"
+    },
+    {
+      "slug": "lol-hle-bro1-2026-07-28",
+      "title": "LoL: Hanwha Life Esports Challengers vs HANJIN BRION Challengers (BO3) - LCK Challengers League Rounds 3-4 Trial Group",
+      "league": "LCK Challengers League",
+      "team_a": "Hanwha Life Esports Challengers",
+      "team_b": "HANJIN BRION Challengers",
+      "start_time_utc": "2026-07-28T08:00:00Z",
+      "event_date": "2026-07-28",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Hanwha Life Esports Challengers vs HANJIN BRION Challengers (BO3) - LCK Challengers League Rounds 3-4 Trial Group",
+        "market_id": "3029588",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Hanwha Life Esports Challengers",
+            "prob": 0.56,
+            "odd": 1.786
+          },
+          {
+            "name": "HANJIN BRION Challengers",
+            "prob": 0.44,
+            "odd": 2.273
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Hanwha Life Esports Challengers vs HANJIN BRION Challengers - Game 1 Winner",
+          "market_id": "3029586",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Hanwha Life Esports Challengers",
+              "prob": 0.4,
+              "odd": 2.5
+            },
+            {
+              "name": "HANJIN BRION Challengers",
+              "prob": 0.6,
+              "odd": 1.667
+            }
+          ]
+        },
+        {
+          "question": "LoL: Hanwha Life Esports Challengers vs HANJIN BRION Challengers - Game 2 Winner",
+          "market_id": "3029587",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Hanwha Life Esports Challengers",
+              "prob": 0.425,
+              "odd": 2.353
+            },
+            {
+              "name": "HANJIN BRION Challengers",
+              "prob": 0.575,
+              "odd": 1.739
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-hle-bro1-2026-07-28"
+    },
+    {
+      "slug": "lol-ktc-dkc-2026-07-28",
+      "title": "LoL: KT Rolster Challengers vs Dplus KIA Challengers (BO3) - LCK Challengers League Rounds 3-4 Challenge Group",
+      "league": "LCK Challengers League",
+      "team_a": "KT Rolster Challengers",
+      "team_b": "Dplus KIA Challengers",
+      "start_time_utc": "2026-07-28T10:00:00Z",
+      "event_date": "2026-07-28",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 314.855554,
+      "volume_24h_usd": 9.15,
+      "moneyline_series": {
+        "question": "LoL: KT Rolster Challengers vs Dplus KIA Challengers (BO3) - LCK Challengers League Rounds 3-4 Challenge Group",
+        "market_id": "3029611",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "KT Rolster Challengers",
+            "prob": 0.535,
+            "odd": 1.869
+          },
+          {
+            "name": "Dplus KIA Challengers",
+            "prob": 0.465,
+            "odd": 2.151
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: KT Rolster Challengers vs Dplus KIA Challengers - Game 1 Winner",
+          "market_id": "3029609",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "KT Rolster Challengers",
+              "prob": 0.445,
+              "odd": 2.247
+            },
+            {
+              "name": "Dplus KIA Challengers",
+              "prob": 0.555,
+              "odd": 1.802
+            }
+          ]
+        },
+        {
+          "question": "LoL: KT Rolster Challengers vs Dplus KIA Challengers - Game 2 Winner",
+          "market_id": "3029610",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "KT Rolster Challengers",
+              "prob": 0.35,
+              "odd": 2.857
+            },
+            {
+              "name": "Dplus KIA Challengers",
+              "prob": 0.65,
+              "odd": 1.538
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-ktc-dkc-2026-07-28"
+    },
+    {
+      "slug": "lol-9zg-maz-2026-07-28",
+      "title": "LoL: 9z Globant vs Maze Gaming (BO5) - LRS Playoffs",
+      "league": "LRS",
+      "team_a": "9z Globant",
+      "team_b": "Maze Gaming",
+      "start_time_utc": "2026-07-28T20:00:00Z",
+      "event_date": "2026-07-28",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo5",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: 9z Globant vs Maze Gaming (BO5) - LRS Playoffs",
+        "market_id": "3028828",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "9z Globant",
+            "prob": 0.495,
+            "odd": 2.02
+          },
+          {
+            "name": "Maze Gaming",
+            "prob": 0.505,
+            "odd": 1.98
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: 9z Globant vs Maze Gaming - Game 1 Winner",
+          "market_id": "3028824",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "9z Globant",
+              "prob": 0.49,
+              "odd": 2.041
+            },
+            {
+              "name": "Maze Gaming",
+              "prob": 0.51,
+              "odd": 1.961
+            }
+          ]
+        },
+        {
+          "question": "LoL: 9z Globant vs Maze Gaming - Game 2 Winner",
+          "market_id": "3028825",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "9z Globant",
+              "prob": 0.49,
+              "odd": 2.041
+            },
+            {
+              "name": "Maze Gaming",
+              "prob": 0.51,
+              "odd": 1.961
+            }
+          ]
+        },
+        {
+          "question": "LoL: 9z Globant vs Maze Gaming - Game 3 Winner",
+          "market_id": "3028826",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "9z Globant",
+              "prob": 0.49,
+              "odd": 2.041
+            },
+            {
+              "name": "Maze Gaming",
+              "prob": 0.51,
+              "odd": 1.961
+            }
+          ]
+        },
+        {
+          "question": "LoL: 9z Globant vs Maze Gaming - Game 4 Winner",
+          "market_id": "3028827",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "9z Globant",
+              "prob": 0.49,
+              "odd": 2.041
+            },
+            {
+              "name": "Maze Gaming",
+              "prob": 0.51,
+              "odd": 1.961
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-9zg-maz-2026-07-28"
+    },
+    {
+      "slug": "lol-nsea-dnsc-2026-07-29",
+      "title": "LoL: Nongshim Esports Academy vs DN SOOPers Challengers (BO3) - LCK Challengers League Rounds 3-4 Challenge Group",
+      "league": "LCK Challengers League",
+      "team_a": "Nongshim Esports Academy",
+      "team_b": "DN SOOPers Challengers",
+      "start_time_utc": "2026-07-29T05:00:00Z",
+      "event_date": "2026-07-29",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Nongshim Esports Academy vs DN SOOPers Challengers (BO3) - LCK Challengers League Rounds 3-4 Challenge Group",
+        "market_id": "3029636",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Nongshim Esports Academy",
+            "prob": 0.505,
+            "odd": 1.98
+          },
+          {
+            "name": "DN SOOPers Challengers",
+            "prob": 0.495,
+            "odd": 2.02
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Nongshim Esports Academy vs DN SOOPers Challengers - Game 1 Winner",
+          "market_id": "3029634",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Nongshim Esports Academy",
+              "prob": 0.525,
+              "odd": 1.905
+            },
+            {
+              "name": "DN SOOPers Challengers",
+              "prob": 0.475,
+              "odd": 2.105
+            }
+          ]
+        },
+        {
+          "question": "LoL: Nongshim Esports Academy vs DN SOOPers Challengers - Game 2 Winner",
+          "market_id": "3029635",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Nongshim Esports Academy",
+              "prob": 0.58,
+              "odd": 1.724
+            },
+            {
+              "name": "DN SOOPers Challengers",
+              "prob": 0.42,
+              "odd": 2.381
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-nsea-dnsc-2026-07-29"
+    },
+    {
+      "slug": "lol-drxc-genga-2026-07-29",
+      "title": "LoL: Kiwoom DRX Challengers vs Gen.G Global Academy (BO3) - LCK Challengers League Rounds 3-4 Trial Group",
+      "league": "LCK Challengers League",
+      "team_a": "Kiwoom DRX Challengers",
+      "team_b": "Gen.G Global Academy",
+      "start_time_utc": "2026-07-29T05:00:00Z",
+      "event_date": "2026-07-29",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 68.02,
+      "volume_24h_usd": 39,
+      "moneyline_series": {
+        "question": "LoL: Kiwoom DRX Challengers vs Gen.G Global Academy (BO3) - LCK Challengers League Rounds 3-4 Trial Group",
+        "market_id": "3029666",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Kiwoom DRX Challengers",
+            "prob": 0.725,
+            "odd": 1.379
+          },
+          {
+            "name": "Gen.G Global Academy",
+            "prob": 0.275,
+            "odd": 3.636
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Kiwoom DRX Challengers vs Gen.G Global Academy - Game 1 Winner",
+          "market_id": "3029664",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Kiwoom DRX Challengers",
+              "prob": 0.45,
+              "odd": 2.222
+            },
+            {
+              "name": "Gen.G Global Academy",
+              "prob": 0.55,
+              "odd": 1.818
+            }
+          ]
+        },
+        {
+          "question": "LoL: Kiwoom DRX Challengers vs Gen.G Global Academy - Game 2 Winner",
+          "market_id": "3029665",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Kiwoom DRX Challengers",
+              "prob": 0.43,
+              "odd": 2.326
+            },
+            {
+              "name": "Gen.G Global Academy",
+              "prob": 0.57,
+              "odd": 1.754
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-drxc-genga-2026-07-29"
+    },
+    {
+      "slug": "lol-drx-ns-2026-07-29",
+      "title": "LoL: Kiwoom DRX vs Nongshim Red Force (BO3) - LCK Round 3-4 Rise Group",
+      "league": "LCK",
+      "team_a": "Kiwoom DRX",
+      "team_b": "Nongshim Red Force",
+      "start_time_utc": "2026-07-29T08:00:00Z",
+      "event_date": "2026-07-29",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 485.8993089999999,
+      "volume_24h_usd": 20.07,
+      "moneyline_series": {
+        "question": "LoL: Kiwoom DRX vs Nongshim Red Force (BO3) - LCK Round 3-4 Rise Group",
+        "market_id": "2932574",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Kiwoom DRX",
+            "prob": 0.34,
+            "odd": 2.941
+          },
+          {
+            "name": "Nongshim Red Force",
+            "prob": 0.66,
+            "odd": 1.515
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Kiwoom DRX vs Nongshim Red Force - Game 1 Winner",
+          "market_id": "2932569",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Kiwoom DRX",
+              "prob": 0.29,
+              "odd": 3.448
+            },
+            {
+              "name": "Nongshim Red Force",
+              "prob": 0.71,
+              "odd": 1.408
+            }
+          ]
+        },
+        {
+          "question": "LoL: Kiwoom DRX vs Nongshim Red Force - Game 2 Winner",
+          "market_id": "2932570",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Kiwoom DRX",
+              "prob": 0.455,
+              "odd": 2.198
+            },
+            {
+              "name": "Nongshim Red Force",
+              "prob": 0.545,
+              "odd": 1.835
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-drx-ns-2026-07-29"
+    },
+    {
+      "slug": "lol-tes-al-2026-07-29",
+      "title": "LoL: Top Esports vs Anyone's Legend (BO3) - LPL Group Ascend",
+      "league": "LPL",
+      "team_a": "Top Esports",
+      "team_b": "Anyone's Legend",
+      "start_time_utc": "2026-07-29T09:00:00Z",
+      "event_date": "2026-07-29",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Top Esports vs Anyone's Legend (BO3) - LPL Group Ascend",
+        "market_id": "3077397",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Top Esports",
+            "prob": 0.54,
+            "odd": 1.852
+          },
+          {
+            "name": "Anyone's Legend",
+            "prob": 0.46,
+            "odd": 2.174
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Top Esports vs Anyone's Legend - Game 1 Winner",
+          "market_id": "3077395",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Top Esports",
+              "prob": 0.495,
+              "odd": 2.02
+            },
+            {
+              "name": "Anyone's Legend",
+              "prob": 0.505,
+              "odd": 1.98
+            }
+          ]
+        },
+        {
+          "question": "LoL: Top Esports vs Anyone's Legend - Game 2 Winner",
+          "market_id": "3077396",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Top Esports",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "Anyone's Legend",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-tes-al-2026-07-29"
+    },
+    {
+      "slug": "lol-t1-kt-2026-07-29",
+      "title": "LoL: T1 vs KT Rolster (BO3) - LCK Round 3-4 Legend Group",
+      "league": "LCK",
+      "team_a": "T1",
+      "team_b": "KT Rolster",
+      "start_time_utc": "2026-07-29T10:00:00Z",
+      "event_date": "2026-07-29",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 5014.464126,
+      "volume_24h_usd": 3129.662958,
+      "moneyline_series": {
+        "question": "LoL: T1 vs KT Rolster (BO3) - LCK Round 3-4 Legend Group",
+        "market_id": "2933034",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "T1",
+            "prob": 0.75,
+            "odd": 1.333
+          },
+          {
+            "name": "KT Rolster",
+            "prob": 0.25,
+            "odd": 4
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: T1 vs KT Rolster - Game 1 Winner",
+          "market_id": "2932972",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "T1",
+              "prob": 0.6,
+              "odd": 1.667
+            },
+            {
+              "name": "KT Rolster",
+              "prob": 0.4,
+              "odd": 2.5
+            }
+          ]
+        },
+        {
+          "question": "LoL: T1 vs KT Rolster - Game 2 Winner",
+          "market_id": "2932973",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "T1",
+              "prob": 0.58,
+              "odd": 1.724
+            },
+            {
+              "name": "KT Rolster",
+              "prob": 0.42,
+              "odd": 2.381
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-t1-kt-2026-07-29"
+    },
+    {
+      "slug": "lol-blg-lgd-2026-07-29",
+      "title": "LoL: Bilibili Gaming vs LGD Gaming (BO3) - LPL Group Ascend",
+      "league": "LPL",
+      "team_a": "Bilibili Gaming",
+      "team_b": "LGD Gaming",
+      "start_time_utc": "2026-07-29T11:00:00Z",
+      "event_date": "2026-07-29",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Bilibili Gaming vs LGD Gaming (BO3) - LPL Group Ascend",
+        "market_id": "3077420",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Bilibili Gaming",
+            "prob": 0.625,
+            "odd": 1.6
+          },
+          {
+            "name": "LGD Gaming",
+            "prob": 0.375,
+            "odd": 2.667
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Bilibili Gaming vs LGD Gaming - Game 1 Winner",
+          "market_id": "3077418",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Bilibili Gaming",
+              "prob": 0.505,
+              "odd": 1.98
+            },
+            {
+              "name": "LGD Gaming",
+              "prob": 0.495,
+              "odd": 2.02
+            }
+          ]
+        },
+        {
+          "question": "LoL: Bilibili Gaming vs LGD Gaming - Game 2 Winner",
+          "market_id": "3077419",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Bilibili Gaming",
+              "prob": 0.51,
+              "odd": 1.961
+            },
+            {
+              "name": "LGD Gaming",
+              "prob": 0.49,
+              "odd": 2.041
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-blg-lgd-2026-07-29"
+    },
+    {
+      "slug": "lol-dkc-t1a-2026-07-30",
+      "title": "LoL: Dplus KIA Challengers vs T1 Academy (BO3) - LCK Challengers League Rounds 3-4 Challenge Group",
+      "league": "LCK Challengers League",
+      "team_a": "Dplus KIA Challengers",
+      "team_b": "T1 Academy",
+      "start_time_utc": "2026-07-30T05:00:00Z",
+      "event_date": "2026-07-30",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Dplus KIA Challengers vs T1 Academy (BO3) - LCK Challengers League Rounds 3-4 Challenge Group",
+        "market_id": "3029689",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Dplus KIA Challengers",
+            "prob": 0.415,
+            "odd": 2.41
+          },
+          {
+            "name": "T1 Academy",
+            "prob": 0.585,
+            "odd": 1.709
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Dplus KIA Challengers vs T1 Academy - Game 1 Winner",
+          "market_id": "3029687",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Dplus KIA Challengers",
+              "prob": 0.485,
+              "odd": 2.062
+            },
+            {
+              "name": "T1 Academy",
+              "prob": 0.515,
+              "odd": 1.942
+            }
+          ]
+        },
+        {
+          "question": "LoL: Dplus KIA Challengers vs T1 Academy - Game 2 Winner",
+          "market_id": "3029688",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Dplus KIA Challengers",
+              "prob": 0.3,
+              "odd": 3.333
+            },
+            {
+              "name": "T1 Academy",
+              "prob": 0.7,
+              "odd": 1.429
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-dkc-t1a-2026-07-30"
+    },
+    {
+      "slug": "lol-foxy-hle-2026-07-30",
+      "title": "LoL: BNK FearX Youth vs Hanwha Life Esports Challengers (BO3) - LCK Challengers League Rounds 3-4 Trial Group",
+      "league": "LCK Challengers League",
+      "team_a": "BNK FearX Youth",
+      "team_b": "Hanwha Life Esports Challengers",
+      "start_time_utc": "2026-07-30T05:00:00Z",
+      "event_date": "2026-07-30",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 5.32314,
+      "volume_24h_usd": 2.66,
+      "moneyline_series": {
+        "question": "LoL: BNK FearX Youth vs Hanwha Life Esports Challengers (BO3) - LCK Challengers League Rounds 3-4 Trial Group",
+        "market_id": "3029712",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "BNK FearX Youth",
+            "prob": 0.525,
+            "odd": 1.905
+          },
+          {
+            "name": "Hanwha Life Esports Challengers",
+            "prob": 0.475,
+            "odd": 2.105
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: BNK FearX Youth vs Hanwha Life Esports Challengers - Game 1 Winner",
+          "market_id": "3029710",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "BNK FearX Youth",
+              "prob": 0.455,
+              "odd": 2.198
+            },
+            {
+              "name": "Hanwha Life Esports Challengers",
+              "prob": 0.545,
+              "odd": 1.835
+            }
+          ]
+        },
+        {
+          "question": "LoL: BNK FearX Youth vs Hanwha Life Esports Challengers - Game 2 Winner",
+          "market_id": "3029711",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "BNK FearX Youth",
+              "prob": 0.405,
+              "odd": 2.469
+            },
+            {
+              "name": "Hanwha Life Esports Challengers",
+              "prob": 0.595,
+              "odd": 1.681
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-foxy-hle-2026-07-30"
+    },
+    {
+      "slug": "lol-nip-wb-2026-07-30",
+      "title": "LoL: Ninjas in Pyjamas vs Weibo Gaming (BO3) - LPL Group Nirvana",
+      "league": "LPL",
+      "team_a": "Ninjas in Pyjamas",
+      "team_b": "Weibo Gaming",
+      "start_time_utc": "2026-07-30T07:00:00Z",
+      "event_date": "2026-07-30",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Ninjas in Pyjamas vs Weibo Gaming (BO3) - LPL Group Nirvana",
+        "market_id": "3077443",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Ninjas in Pyjamas",
+            "prob": 0.5,
+            "odd": 2
+          },
+          {
+            "name": "Weibo Gaming",
+            "prob": 0.5,
+            "odd": 2
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Ninjas in Pyjamas vs Weibo Gaming - Game 1 Winner",
+          "market_id": "3077441",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Ninjas in Pyjamas",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "Weibo Gaming",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        },
+        {
+          "question": "LoL: Ninjas in Pyjamas vs Weibo Gaming - Game 2 Winner",
+          "market_id": "3077442",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Ninjas in Pyjamas",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "Weibo Gaming",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-nip-wb-2026-07-30"
+    },
+    {
+      "slug": "lol-dnf-fox1-2026-07-30",
+      "title": "LoL: DN SOOPers vs BNK FEARX (BO3) - LCK Round 3-4 Rise Group",
+      "league": "LCK",
+      "team_a": "DN SOOPers",
+      "team_b": "BNK FEARX",
+      "start_time_utc": "2026-07-30T08:00:00Z",
+      "event_date": "2026-07-30",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 5378.72109,
+      "volume_24h_usd": 1152.500957,
+      "moneyline_series": {
+        "question": "LoL: DN SOOPers vs BNK FEARX (BO3) - LCK Round 3-4 Rise Group",
+        "market_id": "2943955",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "DN SOOPers",
+            "prob": 0.205,
+            "odd": 4.878
+          },
+          {
+            "name": "BNK FEARX",
+            "prob": 0.795,
+            "odd": 1.258
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: DN SOOPers vs BNK FEARX - Game 1 Winner",
+          "market_id": "2943953",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "DN SOOPers",
+              "prob": 0.56,
+              "odd": 1.786
+            },
+            {
+              "name": "BNK FEARX",
+              "prob": 0.44,
+              "odd": 2.273
+            }
+          ]
+        },
+        {
+          "question": "LoL: DN SOOPers vs BNK FEARX - Game 2 Winner",
+          "market_id": "2943954",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "DN SOOPers",
+              "prob": 0.53,
+              "odd": 1.887
+            },
+            {
+              "name": "BNK FEARX",
+              "prob": 0.47,
+              "odd": 2.128
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-dnf-fox1-2026-07-30"
+    },
+    {
+      "slug": "lol-edg-we-2026-07-30",
+      "title": "LoL: EDward Gaming vs Team WE (BO3) - LPL Group Ascend",
+      "league": "LPL",
+      "team_a": "EDward Gaming",
+      "team_b": "Team WE",
+      "start_time_utc": "2026-07-30T09:00:00Z",
+      "event_date": "2026-07-30",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: EDward Gaming vs Team WE (BO3) - LPL Group Ascend",
+        "market_id": "3077466",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "EDward Gaming",
+            "prob": 0.5,
+            "odd": 2
+          },
+          {
+            "name": "Team WE",
+            "prob": 0.5,
+            "odd": 2
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: EDward Gaming vs Team WE - Game 1 Winner",
+          "market_id": "3077464",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "EDward Gaming",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "Team WE",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        },
+        {
+          "question": "LoL: EDward Gaming vs Team WE - Game 2 Winner",
+          "market_id": "3077465",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "EDward Gaming",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "Team WE",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-edg-we-2026-07-30"
+    },
+    {
+      "slug": "lol-hle1-dk-2026-07-30",
+      "title": "LoL: Hanwha Life Esports vs Dplus KIA (BO3) - LCK Round 3-4 Legend Group",
+      "league": "LCK",
+      "team_a": "Hanwha Life Esports",
+      "team_b": "Dplus KIA",
+      "start_time_utc": "2026-07-30T10:00:00Z",
+      "event_date": "2026-07-30",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 370.23275799999993,
+      "volume_24h_usd": 12.310302,
+      "moneyline_series": {
+        "question": "LoL: Hanwha Life Esports vs Dplus KIA (BO3) - LCK Round 3-4 Legend Group",
+        "market_id": "2944991",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Hanwha Life Esports",
+            "prob": 0.705,
+            "odd": 1.418
+          },
+          {
+            "name": "Dplus KIA",
+            "prob": 0.295,
+            "odd": 3.39
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Hanwha Life Esports vs Dplus KIA - Game 1 Winner",
+          "market_id": "2944989",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Hanwha Life Esports",
+              "prob": 0.63,
+              "odd": 1.587
+            },
+            {
+              "name": "Dplus KIA",
+              "prob": 0.37,
+              "odd": 2.703
+            }
+          ]
+        },
+        {
+          "question": "LoL: Hanwha Life Esports vs Dplus KIA - Game 2 Winner",
+          "market_id": "2944990",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Hanwha Life Esports",
+              "prob": 0.64,
+              "odd": 1.563
+            },
+            {
+              "name": "Dplus KIA",
+              "prob": 0.36,
+              "odd": 2.778
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-hle1-dk-2026-07-30"
+    },
+    {
+      "slug": "lol-tt-jdg-2026-07-30",
+      "title": "LoL: ThunderTalk Gaming vs JD Gaming (BO3) - LPL Group Ascend",
+      "league": "LPL",
+      "team_a": "ThunderTalk Gaming",
+      "team_b": "JD Gaming",
+      "start_time_utc": "2026-07-30T11:00:00Z",
+      "event_date": "2026-07-30",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: ThunderTalk Gaming vs JD Gaming (BO3) - LPL Group Ascend",
+        "market_id": "3077489",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "ThunderTalk Gaming",
+            "prob": 0.5,
+            "odd": 2
+          },
+          {
+            "name": "JD Gaming",
+            "prob": 0.5,
+            "odd": 2
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: ThunderTalk Gaming vs JD Gaming - Game 1 Winner",
+          "market_id": "3077487",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "ThunderTalk Gaming",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "JD Gaming",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        },
+        {
+          "question": "LoL: ThunderTalk Gaming vs JD Gaming - Game 2 Winner",
+          "market_id": "3077488",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "ThunderTalk Gaming",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "JD Gaming",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-tt-jdg-2026-07-30"
+    },
+    {
+      "slug": "lol-ktc-dnsc-2026-07-31",
+      "title": "LoL: KT Rolster Challengers vs DN SOOPers Challengers (BO3) - LCK Challengers League Rounds 3-4 Challenge Group",
+      "league": "LCK Challengers League",
+      "team_a": "KT Rolster Challengers",
+      "team_b": "DN SOOPers Challengers",
+      "start_time_utc": "2026-07-31T05:00:00Z",
+      "event_date": "2026-07-31",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: KT Rolster Challengers vs DN SOOPers Challengers (BO3) - LCK Challengers League Rounds 3-4 Challenge Group",
+        "market_id": "3029736",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "KT Rolster Challengers",
+            "prob": 0.515,
+            "odd": 1.942
+          },
+          {
+            "name": "DN SOOPers Challengers",
+            "prob": 0.485,
+            "odd": 2.062
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: KT Rolster Challengers vs DN SOOPers Challengers - Game 1 Winner",
+          "market_id": "3029733",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "KT Rolster Challengers",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "DN SOOPers Challengers",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        },
+        {
+          "question": "LoL: KT Rolster Challengers vs DN SOOPers Challengers - Game 2 Winner",
+          "market_id": "3029734",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "KT Rolster Challengers",
+              "prob": 0.475,
+              "odd": 2.105
+            },
+            {
+              "name": "DN SOOPers Challengers",
+              "prob": 0.525,
+              "odd": 1.905
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-ktc-dnsc-2026-07-31"
+    },
+    {
+      "slug": "lol-drxc-bro1-2026-07-31",
+      "title": "LoL: Kiwoom DRX Challengers vs HANJIN BRION Challengers (BO3) - LCK Challengers League Rounds 3-4 Trial Group",
+      "league": "LCK Challengers League",
+      "team_a": "Kiwoom DRX Challengers",
+      "team_b": "HANJIN BRION Challengers",
+      "start_time_utc": "2026-07-31T05:00:00Z",
+      "event_date": "2026-07-31",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Kiwoom DRX Challengers vs HANJIN BRION Challengers (BO3) - LCK Challengers League Rounds 3-4 Trial Group",
+        "market_id": "3029759",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Kiwoom DRX Challengers",
+            "prob": 0.54,
+            "odd": 1.852
+          },
+          {
+            "name": "HANJIN BRION Challengers",
+            "prob": 0.46,
+            "odd": 2.174
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Kiwoom DRX Challengers vs HANJIN BRION Challengers - Game 1 Winner",
+          "market_id": "3029757",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Kiwoom DRX Challengers",
+              "prob": 0.51,
+              "odd": 1.961
+            },
+            {
+              "name": "HANJIN BRION Challengers",
+              "prob": 0.49,
+              "odd": 2.041
+            }
+          ]
+        },
+        {
+          "question": "LoL: Kiwoom DRX Challengers vs HANJIN BRION Challengers - Game 2 Winner",
+          "market_id": "3029758",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Kiwoom DRX Challengers",
+              "prob": 0.42,
+              "odd": 2.381
+            },
+            {
+              "name": "HANJIN BRION Challengers",
+              "prob": 0.58,
+              "odd": 1.724
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-drxc-bro1-2026-07-31"
+    },
+    {
+      "slug": "lol-gen-t1-2026-07-31",
+      "title": "LoL: Gen.G vs T1 (BO3) - LCK Round 3-4 Legend Group",
+      "league": "LCK",
+      "team_a": "Gen.G",
+      "team_b": "T1",
+      "start_time_utc": "2026-07-31T08:00:00Z",
+      "event_date": "2026-07-31",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 3782.572457000001,
+      "volume_24h_usd": 53.451902,
+      "moneyline_series": {
+        "question": "LoL: Gen.G vs T1 (BO3) - LCK Round 3-4 Legend Group",
+        "market_id": "2957328",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Gen.G",
+            "prob": 0.585,
+            "odd": 1.709
+          },
+          {
+            "name": "T1",
+            "prob": 0.415,
+            "odd": 2.41
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Gen.G vs T1 - Game 1 Winner",
+          "market_id": "2957326",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Gen.G",
+              "prob": 0.69,
+              "odd": 1.449
+            },
+            {
+              "name": "T1",
+              "prob": 0.31,
+              "odd": 3.226
+            }
+          ]
+        },
+        {
+          "question": "LoL: Gen.G vs T1 - Game 2 Winner",
+          "market_id": "2957327",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Gen.G",
+              "prob": 0.415,
+              "odd": 2.41
+            },
+            {
+              "name": "T1",
+              "prob": 0.585,
+              "odd": 1.709
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-gen-t1-2026-07-31"
+    },
+    {
+      "slug": "lol-bro2-drx-2026-07-31",
+      "title": "LoL: HANJIN BRION vs Kiwoom DRX (BO3) - LCK Round 3-4 Rise Group",
+      "league": "LCK",
+      "team_a": "HANJIN BRION",
+      "team_b": "Kiwoom DRX",
+      "start_time_utc": "2026-07-31T10:00:00Z",
+      "event_date": "2026-07-31",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 622.352253,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: HANJIN BRION vs Kiwoom DRX (BO3) - LCK Round 3-4 Rise Group",
+        "market_id": "2957931",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "HANJIN BRION",
+            "prob": 0.63,
+            "odd": 1.587
+          },
+          {
+            "name": "Kiwoom DRX",
+            "prob": 0.37,
+            "odd": 2.703
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: HANJIN BRION vs Kiwoom DRX - Game 1 Winner",
+          "market_id": "2957854",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "HANJIN BRION",
+              "prob": 0.49,
+              "odd": 2.041
+            },
+            {
+              "name": "Kiwoom DRX",
+              "prob": 0.51,
+              "odd": 1.961
+            }
+          ]
+        },
+        {
+          "question": "LoL: HANJIN BRION vs Kiwoom DRX - Game 2 Winner",
+          "market_id": "2957856",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "HANJIN BRION",
+              "prob": 0.49,
+              "odd": 2.041
+            },
+            {
+              "name": "Kiwoom DRX",
+              "prob": 0.51,
+              "odd": 1.961
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-bro2-drx-2026-07-31"
+    },
+    {
+      "slug": "lol-ns-fox1-2026-08-01",
+      "title": "LoL: Nongshim Red Force vs BNK FEARX (BO3) - LCK Round 3-4 Rise Group",
+      "league": "LCK",
+      "team_a": "Nongshim Red Force",
+      "team_b": "BNK FEARX",
+      "start_time_utc": "2026-08-01T08:00:00Z",
+      "event_date": "2026-08-01",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 806.191488,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Nongshim Red Force vs BNK FEARX (BO3) - LCK Round 3-4 Rise Group",
+        "market_id": "2970448",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Nongshim Red Force",
+            "prob": 0.375,
+            "odd": 2.667
+          },
+          {
+            "name": "BNK FEARX",
+            "prob": 0.625,
+            "odd": 1.6
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Nongshim Red Force vs BNK FEARX - Game 1 Winner",
+          "market_id": "2970446",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Nongshim Red Force",
+              "prob": 0.505,
+              "odd": 1.98
+            },
+            {
+              "name": "BNK FEARX",
+              "prob": 0.495,
+              "odd": 2.02
+            }
+          ]
+        },
+        {
+          "question": "LoL: Nongshim Red Force vs BNK FEARX - Game 2 Winner",
+          "market_id": "2970447",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Nongshim Red Force",
+              "prob": 0.475,
+              "odd": 2.105
+            },
+            {
+              "name": "BNK FEARX",
+              "prob": 0.525,
+              "odd": 1.905
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-ns-fox1-2026-08-01"
+    },
+    {
+      "slug": "lol-gen-dk-2026-08-01",
+      "title": "LoL: Gen.G vs Dplus KIA (BO3) - LCK Round 3-4 Legend Group",
+      "league": "LCK",
+      "team_a": "Gen.G",
+      "team_b": "Dplus KIA",
+      "start_time_utc": "2026-08-01T10:00:00Z",
+      "event_date": "2026-08-01",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 278.93124200000005,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Gen.G vs Dplus KIA (BO3) - LCK Round 3-4 Legend Group",
+        "market_id": "2971188",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Gen.G",
+            "prob": 0.71,
+            "odd": 1.408
+          },
+          {
+            "name": "Dplus KIA",
+            "prob": 0.29,
+            "odd": 3.448
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Gen.G vs Dplus KIA - Game 1 Winner",
+          "market_id": "2971123",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Gen.G",
+              "prob": 0.55,
+              "odd": 1.818
+            },
+            {
+              "name": "Dplus KIA",
+              "prob": 0.45,
+              "odd": 2.222
+            }
+          ]
+        },
+        {
+          "question": "LoL: Gen.G vs Dplus KIA - Game 2 Winner",
+          "market_id": "2971125",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Gen.G",
+              "prob": 0.48,
+              "odd": 2.083
+            },
+            {
+              "name": "Dplus KIA",
+              "prob": 0.52,
+              "odd": 1.923
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-gen-dk-2026-08-01"
+    },
+    {
+      "slug": "lol-dnf-bro2-2026-08-02",
+      "title": "LoL: DN SOOPers vs HANJIN BRION (BO3) - LCK Round 3-4 Rise Group",
+      "league": "LCK",
+      "team_a": "DN SOOPers",
+      "team_b": "HANJIN BRION",
+      "start_time_utc": "2026-08-02T08:00:00Z",
+      "event_date": "2026-08-02",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 110.369368,
+      "volume_24h_usd": 6.41,
+      "moneyline_series": {
+        "question": "LoL: DN SOOPers vs HANJIN BRION (BO3) - LCK Round 3-4 Rise Group",
+        "market_id": "2985833",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "DN SOOPers",
+            "prob": 0.225,
+            "odd": 4.444
+          },
+          {
+            "name": "HANJIN BRION",
+            "prob": 0.775,
+            "odd": 1.29
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: DN SOOPers vs HANJIN BRION - Game 1 Winner",
+          "market_id": "2985831",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "DN SOOPers",
+              "prob": 0.555,
+              "odd": 1.802
+            },
+            {
+              "name": "HANJIN BRION",
+              "prob": 0.445,
+              "odd": 2.247
+            }
+          ]
+        },
+        {
+          "question": "LoL: DN SOOPers vs HANJIN BRION - Game 2 Winner",
+          "market_id": "2985832",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "DN SOOPers",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "HANJIN BRION",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-dnf-bro2-2026-08-02"
+    },
+    {
+      "slug": "lol-kt-hle1-2026-08-02",
+      "title": "LoL: KT Rolster vs Hanwha Life Esports (BO3) - LCK Round 3-4 Legend Group",
+      "league": "LCK",
+      "team_a": "KT Rolster",
+      "team_b": "Hanwha Life Esports",
+      "start_time_utc": "2026-08-02T10:00:00Z",
+      "event_date": "2026-08-02",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo3",
+      "volume_total_usd": 3.225805,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: KT Rolster vs Hanwha Life Esports (BO3) - LCK Round 3-4 Legend Group",
+        "market_id": "2986372",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "KT Rolster",
+            "prob": 0.245,
+            "odd": 4.082
+          },
+          {
+            "name": "Hanwha Life Esports",
+            "prob": 0.755,
+            "odd": 1.325
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: KT Rolster vs Hanwha Life Esports - Game 1 Winner",
+          "market_id": "2986370",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "KT Rolster",
+              "prob": 0.395,
+              "odd": 2.532
+            },
+            {
+              "name": "Hanwha Life Esports",
+              "prob": 0.605,
+              "odd": 1.653
+            }
+          ]
+        },
+        {
+          "question": "LoL: KT Rolster vs Hanwha Life Esports - Game 2 Winner",
+          "market_id": "2986371",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "KT Rolster",
+              "prob": 0.41,
+              "odd": 2.439
+            },
+            {
+              "name": "Hanwha Life Esports",
+              "prob": 0.59,
+              "odd": 1.695
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-kt-hle1-2026-08-02"
+    },
+    {
+      "slug": "lol-z5-3v-2026-08-03",
+      "title": "LoL: Zeu5 Esports vs 3v Team (BO5) - LRN Playoffs",
+      "league": "LRN",
+      "team_a": "Zeu5 Esports",
+      "team_b": "3v Team",
+      "start_time_utc": "2026-08-03T23:00:00Z",
+      "event_date": "2026-08-03",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo5",
+      "volume_total_usd": 510.331738,
+      "volume_24h_usd": 510.331738,
+      "moneyline_series": {
+        "question": "LoL: Zeu5 Esports vs 3v Team (BO5) - LRN Playoffs",
+        "market_id": "3058273",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Zeu5 Esports",
+            "prob": 0.815,
+            "odd": 1.227
+          },
+          {
+            "name": "3v Team",
+            "prob": 0.185,
+            "odd": 5.405
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Zeu5 Esports vs 3v Team - Game 1 Winner",
+          "market_id": "3058041",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Zeu5 Esports",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "3v Team",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        },
+        {
+          "question": "LoL: Zeu5 Esports vs 3v Team - Game 2 Winner",
+          "market_id": "3058048",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Zeu5 Esports",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "3v Team",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        },
+        {
+          "question": "LoL: Zeu5 Esports vs 3v Team - Game 3 Winner",
+          "market_id": "3058054",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Zeu5 Esports",
+              "prob": 0.505,
+              "odd": 1.98
+            },
+            {
+              "name": "3v Team",
+              "prob": 0.495,
+              "odd": 2.02
+            }
+          ]
+        },
+        {
+          "question": "LoL: Zeu5 Esports vs 3v Team - Game 4 Winner",
+          "market_id": "3058064",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Zeu5 Esports",
+              "prob": 0.5,
+              "odd": 2
+            },
+            {
+              "name": "3v Team",
+              "prob": 0.5,
+              "odd": 2
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-z5-3v-2026-08-03"
+    },
+    {
+      "slug": "lol-vtc-doh-2026-08-04",
+      "title": "LoL: Volticons vs Docta Esports (BO5) - LRS Playoffs",
+      "league": "LRS",
+      "team_a": "Volticons",
+      "team_b": "Docta Esports",
+      "start_time_utc": "2026-08-04T20:00:00Z",
+      "event_date": "2026-08-04",
+      "live": false,
+      "ended": false,
+      "score": "0-0|0-0|Bo5",
+      "volume_total_usd": 0,
+      "volume_24h_usd": 0,
+      "moneyline_series": {
+        "question": "LoL: Volticons vs Docta Esports (BO5) - LRS Playoffs",
+        "market_id": "3029369",
+        "closed": false,
+        "outcomes": [
+          {
+            "name": "Volticons",
+            "prob": 0.425,
+            "odd": 2.353
+          },
+          {
+            "name": "Docta Esports",
+            "prob": 0.575,
+            "odd": 1.739
+          }
+        ]
+      },
+      "moneyline_maps": [
+        {
+          "question": "LoL: Volticons vs Docta Esports - Game 1 Winner",
+          "market_id": "3029365",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Volticons",
+              "prob": 0.495,
+              "odd": 2.02
+            },
+            {
+              "name": "Docta Esports",
+              "prob": 0.505,
+              "odd": 1.98
+            }
+          ]
+        },
+        {
+          "question": "LoL: Volticons vs Docta Esports - Game 2 Winner",
+          "market_id": "3029366",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Volticons",
+              "prob": 0.495,
+              "odd": 2.02
+            },
+            {
+              "name": "Docta Esports",
+              "prob": 0.505,
+              "odd": 1.98
+            }
+          ]
+        },
+        {
+          "question": "LoL: Volticons vs Docta Esports - Game 3 Winner",
+          "market_id": "3029367",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Volticons",
+              "prob": 0.49,
+              "odd": 2.041
+            },
+            {
+              "name": "Docta Esports",
+              "prob": 0.51,
+              "odd": 1.961
+            }
+          ]
+        },
+        {
+          "question": "LoL: Volticons vs Docta Esports - Game 4 Winner",
+          "market_id": "3029368",
+          "closed": false,
+          "outcomes": [
+            {
+              "name": "Volticons",
+              "prob": 0.49,
+              "odd": 2.041
+            },
+            {
+              "name": "Docta Esports",
+              "prob": 0.51,
+              "odd": 1.961
+            }
+          ]
+        }
+      ],
+      "polymarket_url": "https://polymarket.com/event/lol-vtc-doh-2026-08-04"
+    }
+  ]
+}

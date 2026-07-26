@@ -1,0 +1,48 @@
+# [stats-live] buscando bets do Supabase...
+# [stats-live] query=/rest/v1/bets?select=*&status=in.(green,red)&is_method_bet=eq.true&order=bet_datetime.desc&limit=2000
+# [stats-live] raw=673 → dedup=572 → filtered=572 → simulated=529
+# [stats-live] params: delta=0 odd=1.72 stake=1000 trigger=all
+# [stats-live] times n>=1: 68 | ligas n>=1: 8
+OK: fonte única (Supabase live)
+  query: /rest/v1/bets?select=*&status=in.(green,red)&is_method_bet=eq.true&order=bet_datetime.desc&limit=2000
+  raw=673 → dedup=572 → filtered=572 → simulated=529
+  params: delta=0 odd=1.72 stake=1000 trigger=all
+  times com n>=1: 68 | ligas com n>=1: 8
+# EWC-LCK liquipedia falhou: HTTP 429
+# EWC-LEC liquipedia falhou: HTTP 429
+# EWC-LPL liquipedia falhou: HTTP 429
+
+  TOP TIMES (hit% decrescente):
+    🟢 Heretics Academy: 100% n=4
+    ⚪ Skillcamp: 100% n=3
+    🟢 UCAM Esports Club: 86% n=7
+    🟢 UB Alma Mater: 86% n=7
+    🟢 DN SOOPers: 85% n=13
+    🟢 Dplus: 80% n=20
+    🟢 LGD GAMING: 80% n=10
+    🟢 TLN Pirates: 80% n=10
+    🟢 Joblife: 80% n=5
+    🟢 Oh My God: 78% n=9
+
+  LIGAS:
+    🟢 LFL: 67% n=33
+    🟢 LCK: 62% n=81
+    🟢 CBLOL: 62% n=42
+    ⚪ LPL: 59% n=116
+    ⚪ LEC: 55% n=66
+    ⚪ LCS: 54% n=41
+# Jogos de 2026-05-28 — briefing método 2peel
+
+| Liga | Hora BRT | Time A | Time B | Fair Pin | Fórmula | Diff |
+|---|---|---|---|---|---|---|
+| 🟢 LCK (62% n=81) | 05:00 | 🟢 DN SOOPers (85% n=13) _(completed)_ | 🔴 Nongshim (33% n=15) | **29.5** | **29.5** | 0 |
+| 🟢 LCK (62% n=81) | 07:00 | ⚪ T1 (59% n=17) _(completed)_ | 🟢 KT (67% n=21) | **28.5** | **29.5** | -1 |
+| 🟢 LFL (67% n=33) | 13:00 | ⚪ Galions (50% n=10) | 🟢 TLN Pirates (80% n=10) | **29.5** | **29.5** | 0 |
+
+**3 jogos no total.** Ligas: LCK, LFL.
+
+⚠️  **EWC QUALIFIERS NÃO CARREGARAM** — verificar manual:
+  - EWC-LCK (HTTP 429) → https://lol.fandom.com/wiki/Esports_World_Cup/2026/Korea
+  - EWC-LEC (HTTP 429) → https://lol.fandom.com/wiki/Esports_World_Cup/2026/EMEA
+  - EWC-LPL (HTTP 429) → https://lol.fandom.com/wiki/Esports_World_Cup/2026/China
+  Liquipedia rate-limita agressivo. Fonte alternativa: lol.fandom.com (Leaguepedia).

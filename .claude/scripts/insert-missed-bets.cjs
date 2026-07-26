@@ -7,10 +7,10 @@
 // Schema da bet simulada:
 //   bookmaker  = 'SIMULATED'  (filtrado fora do PnL real em compute_real_bets_method e rebuild_dashboard_stats_cron)
 //   stake      = 1000
-//   odd        = 1.74         (típica que CEO pega quando aposta linha+1)
-//   pick       = "Under {fair+1}" (linha 1 acima da fair, igual ao que CEO opera)
-//   status     = 'green' se kills<fair+1 senão 'red'  (sem passar por pending)
-//   profit     = +740 ou -1000
+//   odd        = 1.83         (2026-05-29 CEO: pegar fair exato, sem ajuste +1)
+//   pick       = "Under {fair}" (linha = fórmula, sem ajuste)
+//   status     = 'green' se kills<fair senão 'red'  (sem passar por pending)
+//   profit     = +830 ou -1000
 //   raw_extraction.simulated = true
 //   raw_extraction.missed_opportunity = true
 //
@@ -29,7 +29,7 @@ const { loadFairPinnacle } = require('../../lib/loadFairPinnacle.cjs');
 
 const STATS_PATH = path.join(__dirname, '..', '..', 'cron-data', 'dashboard_stats.json');
 const STAKE = 1000;
-const ODD = 1.74;
+const ODD = 1.83; // 2026-05-29 (CEO): linha = fair exato (sem +1). Odd 1.83 reflete pegar a fair sem ajuste.
 const DRY_RUN = process.argv.includes('--dry-run');
 
 function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
@@ -97,7 +97,7 @@ function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
 
   for (const m of missed) {
     if (existingGameIds.has(String(m.gameId))) { skipped++; continue; }
-    const simulatedLine = m.line + 1;  // CEO opera linha+1
+    const simulatedLine = m.line;  // 2026-05-29 (CEO): linha = fair exato, SEM +1
     const won = m.kills < simulatedLine;
     const profit = won ? +(STAKE * (ODD - 1)).toFixed(2) : -STAKE;
     const status = won ? 'green' : 'red';
@@ -113,11 +113,11 @@ function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
     const pinMap = getPinnacle(m.date);
     const fairPinnacle = m.matchId ? (pinMap.byMatchId.get(String(m.matchId)) ?? null) : null;
     const fairFormula = m.line != null ? m.line : null; // linha do método já é a formula calculada
+    // 2026-05-29 (CEO): removido fallback 29.5 — hierarquia agora é só pinnacle → formula
     const fairLineSource = fairPinnacle != null
       ? 'pinnacle_manual'
-      : fairFormula != null
-        ? 'formula'
-        : 'fallback_29.5';
+      : 'formula';
+    if (fairFormula == null) { skipped++; continue; } // sem fórmula = pula (não inventa fallback)
 
     const teamA = m.teams?.[0] || '?';
     const teamB = m.teams?.[1] || '?';
@@ -137,7 +137,7 @@ function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
       status,
       profit,
       settled_at: new Date().toISOString(),
-      settle_source: `SIMULATED — fair line ${m.line} + 1 = ${simulatedLine}, ${m.kills} kills, ${m.trigger}`,
+      settle_source: `SIMULATED — fair line ${simulatedLine} (= fórmula, sem ajuste), ${m.kills} kills, ${m.trigger}`,
       fair_pinnacle: fairPinnacle,
       fair_formula: fairFormula,
       fair_line_source: fairLineSource,

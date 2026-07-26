@@ -1,0 +1,30 @@
+{
+  "date": "2026-07-22",
+  "source": "pinnacle_manual_elvis",
+  "captured_at": "2026-07-22T09:05:00Z",
+  "note": "Abertura do split 3 da LPL. Print do Elvis 06:05 BRT: Under 32.5 @1.909 (TES x WE) e Under 28.5 @1.925 (LGD x EDG) — odds ~1.91-1.93 = linha fair. Pinnacle abriu +3 vs fórmula split2 nos 2 jogos (meta julho +3.9 kills precificado).",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "fair_lines": [
+    {
+      "liga": "LPL",
+      "hora_brt": "06:00",
+      "team_a": "LGD GAMING",
+      "team_b": "EDWARD GAMING",
+      "team_anchor": "LGD",
+      "fair_line": 28.5,
+      "lolesports_match_id": "116566854547769644",
+      "source_note": "Pinnacle manual Elvis — Under 28.5 @ 1.925"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "08:00",
+      "team_a": "TOP ESPORTS",
+      "team_b": "Team WE",
+      "team_anchor": "TES",
+      "fair_line": 32.5,
+      "lolesports_match_id": "116566854547769572",
+      "source_note": "Pinnacle manual Elvis — Under 32.5 @ 1.909"
+    }
+  ]
+}

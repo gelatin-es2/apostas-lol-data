@@ -1,0 +1,76 @@
+{
+  "alias": "TLAW",
+  "canonical": "TL",
+  "backed_up_at": "2026-06-28T19:04:43.330Z",
+  "rows_team_a": [],
+  "rows_team_b": [
+    {
+      "id": "be31c6bd-ae1f-4230-9e67-666ce1f4bc86",
+      "team_a": "FlyQuest",
+      "team_b": "TLAW",
+      "status": "green",
+      "profit": 3199.99,
+      "raw_extraction": {
+        "fair_formula": 26.5,
+        "match_context": {
+          "teams": [
+            "FLY",
+            "TLAW"
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 5,
+          "red_picks": {
+            "adc": "KogMaw",
+            "mid": "TwistedFate",
+            "top": "Renekton",
+            "jungle": "XinZhao",
+            "support": "Lulu"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Viktor",
+            "top": "Ornn",
+            "jungle": "Naafiri",
+            "support": "Milio"
+          },
+          "kills_blue": 10,
+          "red_barons": 1,
+          "red_towers": 4,
+          "settled_at": "2026-06-07T00:08:28.011Z",
+          "start_time": "2026-06-06T20:00:00Z",
+          "blue_barons": 1,
+          "blue_towers": 8,
+          "red_dragons": 3,
+          "red_team_id": "98926509892121852",
+          "total_kills": 15,
+          "winner_side": "blue",
+          "blue_dragons": 2,
+          "blue_team_id": "98926509885559666",
+          "league_short": "LCS",
+          "trigger_type": "2peel",
+          "kills_at_15min": null,
+          "red_total_gold": 56881,
+          "blue_total_gold": 62199,
+          "first_blood_team": "blue",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115564793879469322",
+          "match_state_at_bet": "inProgress",
+          "lolesports_match_id": "115564793879469318",
+          "series_score_at_bet": {
+            "current_map": 4,
+            "maps_completed_before": 3
+          }
+        },
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 23.5",
+          "raw_stake_text": "R$3.999,99"
+        },
+        "fair_line_source_note": "Sem Pinnacle manual para este match. fair_formula=26.5 via briefing."
+      }
+    }
+  ]
+}

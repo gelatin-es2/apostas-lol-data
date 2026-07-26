@@ -32,6 +32,10 @@ const LEAGUE_IDS = {
   lec: '98767991302996019',
   cblol: '98767991332355509',
   lcs: '98767991299243165',
+  // Torneios internacionais adicionados 2026-06-27
+  msi: '98767991325878492',
+  'first stand': '113464388705111224',
+  worlds: '98767975604431411',
 };
 
 function fetch(url, headers = {}) {

@@ -1,0 +1,19 @@
+{
+  "date": "2026-07-26",
+  "source": "pinnacle_manual_elvis",
+  "captured_at": "2026-07-26T10:30:00Z",
+  "note": "Fair completa do domingo — 9/9 jogos da agenda. Manhã: 3 LPL (AL×BLG Over 30.5 @1.793 → 30.5; TT×EDG Over 28.5 @1.654 = fair−1 → 29.5; LNG×NIP Over 29.5 map2 @1.840 → 29.5). 2º print (~10h BRT): VIT×MKOI Over 29.5 @1.819 → 29.5; KC×G2 Over 28.5 @1.740 = over ~1 linha barata → fair 29.5 (JULGAMENTO COO — odd fora do slot 1.78-1.89, conferir se linha mexer); FX×LEV Under 28.5 map2 @1.847 → 28.5; RED×VKS Over 29.5 @1.892 → 29.5; TL×C9 Over 26.5 @1.869 → 26.5; SR×DSG Over 27.5 @1.869 → 27.5.",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "fair_lines": [
+    { "liga": "LPL", "hora_brt": "04:00", "team_a": "LNG", "team_b": "Ninjas in Pyjamas", "team_anchor": "LNG", "fair_line": 29.5, "lolesports_match_id": "116566854547835316", "source_note": "Over 29.5 (map 2) @ 1.840 — fair slot" },
+    { "liga": "LPL", "hora_brt": "06:00", "team_a": "EDward Gaming", "team_b": "ThunderTalk Gaming", "team_anchor": "EDG", "fair_line": 29.5, "lolesports_match_id": "116566854547769652", "source_note": "Over 28.5 @ 1.654 — fair−1 → fair 29.5" },
+    { "liga": "LPL", "hora_brt": "08:00", "team_a": "Bilibili Gaming", "team_b": "Anyone's Legend", "team_anchor": "BLG", "fair_line": 30.5, "lolesports_match_id": "116566854547769552", "source_note": "Over 30.5 @ 1.793 — fair slot" },
+    { "liga": "LEC", "hora_brt": "11:30", "team_a": "Vitality", "team_b": "Movistar KOI", "team_anchor": "VIT", "fair_line": 29.5, "lolesports_match_id": "115548681803406191", "source_note": "Over 29.5 @ 1.819 — fair slot" },
+    { "liga": "LEC", "hora_brt": "14:30", "team_a": "Karmine Corp", "team_b": "G2 Esports", "team_anchor": "KC", "fair_line": 29.5, "lolesports_match_id": "115548681803406287", "source_note": "Over 28.5 @ 1.740 — over ~1 linha barata → fair 29.5 (julgamento COO, odd fora do slot)" },
+    { "liga": "CBLOL", "hora_brt": "13:00", "team_a": "Fluxo W7M", "team_b": "Leviatán", "team_anchor": "FX", "fair_line": 28.5, "lolesports_match_id": "115565671526403033", "source_note": "Under 28.5 (map 2) @ 1.847 — fair slot" },
+    { "liga": "CBLOL", "hora_brt": "16:00", "team_a": "RED Canids", "team_b": "Vivo Keyd Stars", "team_anchor": "RED", "fair_line": 29.5, "lolesports_match_id": "115565671526403053", "source_note": "Over 29.5 @ 1.892 — fair slot (borda alta)" },
+    { "liga": "LCS", "hora_brt": "17:00", "team_a": "Team Liquid", "team_b": "Cloud9", "team_anchor": "TL", "fair_line": 26.5, "lolesports_match_id": "115564797163886759", "source_note": "Over 26.5 @ 1.869 — fair slot" },
+    { "liga": "LCS", "hora_brt": "20:00", "team_a": "Disguised", "team_b": "Shopify Rebellion", "team_anchor": "DSG", "fair_line": 27.5, "lolesports_match_id": "115564797163952327", "source_note": "Over 27.5 @ 1.869 — fair slot" }
+  ]
+}

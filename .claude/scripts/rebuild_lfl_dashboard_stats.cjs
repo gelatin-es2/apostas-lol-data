@@ -12,7 +12,7 @@ const ROOT = path.resolve(__dirname, '../..');
 const LOLES = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 const SPLIT2_START = '2026-04-01';
 const PEEL = ['Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio'];
-const FLEX = ['Bard','Rakan','Alistar'];
+const FLEX = ['Bard','Rakan','Lux','Anivia']; // Alistar removido 2026-05-29 (CEO): -26.8% ROI n=21
 const STAKE = 100;
 const ODD = 1.85;
 const FAIR_ADJUSTMENT = -1;

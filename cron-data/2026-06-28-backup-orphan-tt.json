@@ -1,0 +1,329 @@
+{
+  "alias": "TT",
+  "canonical": "THUNDER TALK GAMING",
+  "backed_up_at": "2026-06-28T19:04:43.471Z",
+  "rows_team_a": [],
+  "rows_team_b": [
+    {
+      "id": "26d3da6a-6bd1-4939-b8b1-37332f5e67ad",
+      "team_a": "JDG",
+      "team_b": "TT",
+      "status": "red",
+      "profit": -1300,
+      "raw_extraction": {
+        "ladder_info": {
+          "note": "Ladder Map 3 JDG vs TT — Under 26.5 (Pinnacle) + Menos de 27.5 (EstrelaBet)",
+          "lines": [
+            26.5,
+            27.5
+          ],
+          "bookmakers": [
+            "Pinnacle",
+            "EstrelaBet"
+          ],
+          "total_bets": 2,
+          "total_stake": 2000,
+          "ladder_group_id": "3f26a4f9-4b82-4a37-be10-e585dea5819b",
+          "ladder_position": 1
+        },
+        "match_context": {
+          "teams": [
+            {
+              "code": "JDG",
+              "name": "Beijing JDG Esports"
+            },
+            {
+              "code": "TT",
+              "name": "THUNDER TALK GAMING"
+            }
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "fair_line": 26.5,
+          "fair_note": "Pinnacle Under 26.5 = fair exato (0 edge na linha)",
+          "kills_red": 8,
+          "league_id": "98767991314006698",
+          "red_picks": {
+            "adc": "Senna",
+            "mid": "Sylas",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Viktor",
+            "top": "Shen",
+            "jungle": "Nocturne",
+            "support": "Lulu"
+          },
+          "kills_blue": 27,
+          "red_barons": 0,
+          "red_towers": 0,
+          "settled_at": "2026-05-29T10:58:23.887Z",
+          "start_time": "2026-05-29T06:00:00Z",
+          "blue_barons": 1,
+          "blue_towers": 8,
+          "red_dragons": 0,
+          "red_team_id": "101388912911039804",
+          "total_kills": 35,
+          "winner_side": "blue",
+          "blue_dragons": 4,
+          "blue_team_id": "99566404852189289",
+          "league_short": "LPL",
+          "trigger_type": "2peel",
+          "kills_at_15min": null,
+          "red_total_gold": 50192,
+          "blue_total_gold": 66937,
+          "fair_line_source": "pinnacle_manual_elvis_2026-05-29",
+          "first_blood_team": "blue",
+          "method_match_note": "Auto-classified 2peel (Lulu+Seraphine) from auto-settle draft. Reverted from off-method.",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115616219464541910",
+          "lolesports_match_id": "115616219464541907",
+          "series_score_at_bet": {
+            "current_map": 3,
+            "maps_completed_before": 2
+          }
+        },
+        "bookmaker_native": {
+          "bet_id": "3058690154",
+          "raw_win_text": "BRL 921.70",
+          "raw_pick_text": "Under 26.5",
+          "raw_stake_text": "BRL 1300.00"
+        }
+      }
+    },
+    {
+      "id": "1f429378-09b6-4c7b-9284-0111f8ace3a7",
+      "team_a": "JDG",
+      "team_b": "TT",
+      "status": "red",
+      "profit": -700,
+      "raw_extraction": {
+        "ladder_info": {
+          "note": "Ladder Map 3 JDG vs TT — Under 26.5 (Pinnacle) + Menos de 27.5 (EstrelaBet)",
+          "lines": [
+            26.5,
+            27.5
+          ],
+          "bookmakers": [
+            "Pinnacle",
+            "EstrelaBet"
+          ],
+          "total_bets": 2,
+          "total_stake": 2000,
+          "ladder_group_id": "3f26a4f9-4b82-4a37-be10-e585dea5819b",
+          "ladder_position": 2
+        },
+        "match_context": {
+          "teams": [
+            {
+              "code": "JDG",
+              "name": "Beijing JDG Esports"
+            },
+            {
+              "code": "TT",
+              "name": "THUNDER TALK GAMING"
+            }
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "fair_line": 26.5,
+          "fair_note": "EstrelaBet Menos de 27.5 = fair +1 (edge favorável ao Under)",
+          "kills_red": 8,
+          "league_id": "98767991314006698",
+          "red_picks": {
+            "adc": "Senna",
+            "mid": "Sylas",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Seraphine"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ashe",
+            "mid": "Viktor",
+            "top": "Shen",
+            "jungle": "Nocturne",
+            "support": "Lulu"
+          },
+          "kills_blue": 27,
+          "red_barons": 0,
+          "red_towers": 0,
+          "settled_at": "2026-05-29T10:58:23.974Z",
+          "start_time": "2026-05-29T06:00:00Z",
+          "blue_barons": 1,
+          "blue_towers": 8,
+          "red_dragons": 0,
+          "red_team_id": "101388912911039804",
+          "total_kills": 35,
+          "winner_side": "blue",
+          "blue_dragons": 4,
+          "blue_team_id": "99566404852189289",
+          "league_short": "LPL",
+          "trigger_type": "2peel",
+          "kills_at_15min": null,
+          "red_total_gold": 50192,
+          "blue_total_gold": 66937,
+          "fair_line_source": "pinnacle_manual_elvis_2026-05-29",
+          "first_blood_team": "blue",
+          "method_match_note": "Auto-classified 2peel (Lulu+Seraphine) from auto-settle draft. Reverted from off-method.",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "115616219464541910",
+          "lolesports_match_id": "115616219464541907",
+          "series_score_at_bet": {
+            "current_map": 3,
+            "maps_completed_before": 2
+          }
+        },
+        "bookmaker_native": {
+          "bet_id": "4998363109",
+          "raw_pick_text": "Menos de 27.5",
+          "raw_stake_text": "R$ 700,00",
+          "raw_payout_text": "R$ 1.190,00",
+          "raw_datetime_text": "AO VIVO 29/05 03:08"
+        }
+      }
+    },
+    {
+      "id": "31f04cda-1557-40ec-9869-48a8242dd08c",
+      "team_a": "JDG",
+      "team_b": "TT",
+      "status": "green",
+      "profit": 344.5,
+      "raw_extraction": {
+        "fair_line": 26.5,
+        "ladder_info": {
+          "line": 26.5,
+          "num_bets": 2,
+          "bet_index": 1,
+          "total_stake": 2000,
+          "ladder_group_id": "867ee360-1158-4cb1-901d-bfad2e8dfeca"
+        },
+        "match_context": {
+          "teams": [
+            {
+              "code": "JDG",
+              "name": "Beijing JDG Esports"
+            },
+            {
+              "code": "TT",
+              "name": "THUNDER TALK GAMING"
+            }
+          ],
+          "fair_line": 25.5,
+          "kills_red": 16,
+          "league_id": "98767991314006698",
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "Vi",
+            "support": "Lux"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "TwistedFate",
+            "top": "Ambessa",
+            "jungle": "LeeSin",
+            "support": "Milio"
+          },
+          "kills_blue": 5,
+          "start_time": "2026-05-29T06:00:00Z",
+          "total_kills": 21,
+          "league_short": "LPL",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "not_in_lolesports_livestats",
+          "fair_line_source": "user_bet_backfill_2026-05-29",
+          "method_match_note": "LPL Playoffs sem cobertura livestats API — classificar manual quando souber draft",
+          "lolesports_game_id": "115616219464541908",
+          "settle_source_note": "Manual settle 2026-05-29 by Elvis — confirmed 21 kills (livestats stale CDN)",
+          "lolesports_match_id": "115616219464541907",
+          "fair_line_backfill_note": "Backfill from pickLine 26.5 (odd 1.689). Rule: odd<1.72 → pickLine-1 (=fair@1.83 ref); else pickLine exato."
+        },
+        "screenshot_path": null,
+        "bookmaker_native": {
+          "win": "BRL 344.50",
+          "bet_id": "3058657680",
+          "raw_pick_text": "Under 26.5",
+          "raw_stake_text": "BRL 500.00",
+          "settled_win_loss": "win"
+        },
+        "fair_line_source": "pinnacle_manual_elvis_2026-05-29"
+      }
+    },
+    {
+      "id": "7cdcaf0f-068c-496a-948e-e61c2b07ea7c",
+      "team_a": "JDG",
+      "team_b": "TT",
+      "status": "green",
+      "profit": 1086,
+      "raw_extraction": {
+        "fair_line": 26.5,
+        "ladder_info": {
+          "line": 26.5,
+          "num_bets": 2,
+          "bet_index": 2,
+          "total_stake": 2000,
+          "ladder_group_id": "867ee360-1158-4cb1-901d-bfad2e8dfeca"
+        },
+        "match_context": {
+          "teams": [
+            {
+              "code": "JDG",
+              "name": "Beijing JDG Esports"
+            },
+            {
+              "code": "TT",
+              "name": "THUNDER TALK GAMING"
+            }
+          ],
+          "fair_line": 26.5,
+          "kills_red": 16,
+          "league_id": "98767991314006698",
+          "red_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "Vi",
+            "support": "Lux"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "TwistedFate",
+            "top": "Ambessa",
+            "jungle": "LeeSin",
+            "support": "Milio"
+          },
+          "kills_blue": 5,
+          "start_time": "2026-05-29T06:00:00Z",
+          "total_kills": 21,
+          "league_short": "LPL",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "not_in_lolesports_livestats",
+          "fair_line_source": "user_bet_backfill_2026-05-29",
+          "method_match_note": "LPL Playoffs sem cobertura livestats API — classificar manual quando souber draft",
+          "lolesports_game_id": "115616219464541908",
+          "settle_source_note": "Manual settle 2026-05-29 by Elvis — confirmed 21 kills (livestats stale CDN)",
+          "lolesports_match_id": "115616219464541907",
+          "fair_line_backfill_note": "Backfill from pickLine 26.5 (odd 1.724). Rule: odd<1.72 → pickLine-1 (=fair@1.83 ref); else pickLine exato."
+        },
+        "screenshot_path": null,
+        "bookmaker_native": {
+          "win": "BRL 1086.00",
+          "bet_id": "3058659946",
+          "raw_pick_text": "Under 26.5",
+          "raw_stake_text": "BRL 1500.00",
+          "settled_win_loss": "win"
+        },
+        "fair_line_source": "pinnacle_manual_elvis_2026-05-29"
+      }
+    }
+  ]
+}

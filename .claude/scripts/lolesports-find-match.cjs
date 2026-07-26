@@ -51,6 +51,9 @@ const LEAGUE_IDS = {
   'Prime League': '105266091639104326',
   KCL: '98767991335774713',
   EUM: '100695891328981122',
+  // 2026-07-25: LCP (Pacific, tier 1) — teste Under 2peel stake 50% + janela Camille.
+  // Viabilidade: knowledge/reports/2026-07-25-lcp-viabilidade.md
+  LCP: '113476371197627891',
 };
 // Nota: EWC não está aqui (não é torneio Riot). Pra EWC qualifiers, daily_briefing.cjs
 // usa Liquipedia. Bet-logger pra EWC ainda precisa fallback manual.

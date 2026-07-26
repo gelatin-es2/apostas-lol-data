@@ -19,8 +19,8 @@ const ROOT = path.resolve(__dirname, '../..');
 const { loadConfig } = require('./_load-config.cjs');
 
 const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
-// FLEX expandido 2026-05-23 (CEO): Lux + Anivia
-const FLEX_ENGAGE = ['bard','rakan','alistar','lux','anivia'];
+// FLEX expandido 2026-05-23 (CEO): Lux + Anivia. Alistar REMOVIDO 2026-05-29 (CEO): -26.8% ROI n=21.
+const FLEX_ENGAGE = ['bard','rakan','lux','anivia'];
 const BARD_ONLY_IN = ['LEC']; // regra do método: Bardo só conta peel em LEC
 const SPLIT2_START = '2026-04-01';
 

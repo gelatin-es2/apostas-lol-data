@@ -1,0 +1,60 @@
+{
+  "alias": "Keyd Stars",
+  "canonical": "VKS",
+  "backed_up_at": "2026-06-28T19:04:43.561Z",
+  "rows_team_a": [],
+  "rows_team_b": [
+    {
+      "id": "5fc08ab6-ea16-4e1a-b38c-751c49f64352",
+      "team_a": "LOUD",
+      "team_b": "Keyd Stars",
+      "status": "red",
+      "profit": -1000.03,
+      "raw_extraction": {
+        "match_context": {
+          "draft": {
+            "VKS": [
+              "gnar",
+              "vi",
+              "viktor",
+              "lucian",
+              "milio"
+            ],
+            "LOUD": [
+              "sion",
+              "reksai",
+              "cassiopeia",
+              "xayah",
+              "rakan"
+            ]
+          },
+          "notes": "EWC SA/LATAM qualifier Bo3 Fearless Draft",
+          "teams": [
+            "LOUD",
+            "Keyd Stars"
+          ],
+          "coverage": "ewc_qualifier_manual_settle",
+          "supports": {
+            "VKS": "milio",
+            "LOUD": "rakan"
+          },
+          "under_hit": false,
+          "start_time": "2026-06-07T16:00:00Z",
+          "total_kills": 30,
+          "flex_engages": [
+            "rakan"
+          ],
+          "league_short": "EWC-CBLOL",
+          "trigger_type": "1peel+flex",
+          "manual_settle": true,
+          "lolesports_match_id": null
+        },
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Under 28.5",
+          "raw_stake_text": "R$1.000,03"
+        }
+      }
+    }
+  ]
+}

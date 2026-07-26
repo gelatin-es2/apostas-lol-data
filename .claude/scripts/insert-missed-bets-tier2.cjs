@@ -29,7 +29,7 @@ const { loadFairPinnacle } = require('../../lib/loadFairPinnacle.cjs');
 
 const STATS_PATH = path.join(__dirname, '..', '..', 'cron-data', 'tier2_lfl_les_stats.json');
 const STAKE = 1000;
-const ODD = 1.74;
+const ODD = 1.83; // 2026-05-29 (CEO): linha = fair exato (sem +1). Odd 1.83 reflete pegar a fair sem ajuste.
 const DRY_RUN = process.argv.includes('--dry-run');
 
 function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
@@ -97,7 +97,7 @@ function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
 
   for (const m of missed) {
     if (existingGameIds.has(String(m.gameId))) { skipped++; continue; }
-    const simulatedLine = m.line + 1;  // CEO opera linha+1
+    const simulatedLine = m.line;  // 2026-05-29 (CEO): linha = fair exato, SEM +1
     const won = m.kills < simulatedLine;
     const profit = won ? +(STAKE * (ODD - 1)).toFixed(2) : -STAKE;
     const status = won ? 'green' : 'red';
@@ -110,11 +110,11 @@ function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
     const pinMap = getPinnacle(m.date);
     const fairPinnacle = m.matchId ? (pinMap.byMatchId.get(String(m.matchId)) ?? null) : null;
     const fairFormula = m.line != null ? m.line : null;
+    // 2026-05-29 (CEO): removido fallback 29.5 — só pinnacle → formula
     const fairLineSource = fairPinnacle != null
       ? 'pinnacle_manual'
-      : fairFormula != null
-        ? 'formula'
-        : 'fallback_29.5';
+      : 'formula';
+    if (fairFormula == null) { skipped++; continue; }
 
     const teamA = m.teams?.[0] || '?';
     const teamB = m.teams?.[1] || '?';
@@ -134,7 +134,7 @@ function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
       status,
       profit,
       settled_at: new Date().toISOString(),
-      settle_source: `SIMULATED — fair line ${m.line} + 1 = ${simulatedLine}, ${m.kills} kills, ${m.trigger}`,
+      settle_source: `SIMULATED — fair line ${simulatedLine} (= fórmula, sem ajuste), ${m.kills} kills, ${m.trigger}`,
       fair_pinnacle: fairPinnacle,
       fair_formula: fairFormula,
       fair_line_source: fairLineSource,

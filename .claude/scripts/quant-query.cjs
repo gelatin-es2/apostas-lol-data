@@ -30,9 +30,9 @@ const https = require('https');
 const { loadConfig } = require('./_load-config.cjs');
 
 const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
-// FLEX expandido 2026-05-23 (CEO): Lux + Anivia
-const FLEX_ENGAGE = ['bard','rakan','alistar','lux','anivia'];
-const FLEX_CANON = { bard: 'Bard', rakan: 'Rakan', alistar: 'Alistar', lux: 'Lux', anivia: 'Anivia' };
+// FLEX expandido 2026-05-23 (CEO): Lux + Anivia. Alistar REMOVIDO 2026-05-29 (CEO): -26.8% ROI n=21.
+const FLEX_ENGAGE = ['bard','rakan','lux','anivia'];
+const FLEX_CANON = { bard: 'Bard', rakan: 'Rakan', lux: 'Lux', anivia: 'Anivia' };
 
 const BREAK_EVEN = 0.541; // referência (odd 1.85)
 

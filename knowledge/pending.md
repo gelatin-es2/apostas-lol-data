@@ -1,4 +1,27 @@
-# Pendências — atualizada 2026-05-22 fim da sessão
+# Pendências
+
+## ✅ ENTREGUE 2026-07-26 — BARD FLEX: reconciliação 67,2 × 58,1 FECHADA
+- **Veredito: Bard FICA no `FLEX_ENGAGE`** — 68,7% Under fair+1 (n=361, CI [63,7–73,3], ROI +18,2%), **melhor dos 4 flex** e empatado com o 2peel core (67,7%). Passa fair causal (67,3%), controle de liga (+10,3pp sobre o baseline da própria liga), out-of-sample e Benjamini-Hochberg.
+- **Reconciliação:** 67,2 = TODOS os jogos na linha sintética fair+1 · 58,1 = só os 124 mapas do split 2 que viraram bet, na linha efetivamente registrada. Não é escopo de liga (6 ligas = 66,9%) nem régua de fair (LOO 68,7 vs trailing causal 67,3). É **linha** (+5–7pp) + **quais mapas viraram bet** (36 mapas apostados dariam 55,6% pela própria régua do backtest, p=0,067 — alerta, não conclusão).
+- **Regra `skip Bard×Lulu / ×Karma` CAI:** Karma 69,1% (n=97), Lulu 63,8% (n=58) — as duas acima do BE; não sobrevive out-of-sample. Proposta: revogar o skip de Karma, rebaixar Lulu pra "sem boost + linha ≥ fair".
+- **O prejuízo real (−R$8.280 em 55 bets) é de LADDER, não do Bard:** mapas com 1 perna = 60% hit e **+R$3.406**; 12 mapas com ladder = 25% hit e **−R$11.686**. 3 mapas valem 74% do buraco.
+- **Split 3 = n=7. NÃO é base de dados.** Re-checar com ~4 semanas de volume.
+- 🟡 **AGUARDA DECISÃO ELVIS:** (a) tirar `1peel+BARD` do rebaixado e devolver stake cheia? (b) revogar skip Karma / rebaixar Lulu? (c) teto de 2 pernas de ladder em mapa de Bard flex? (d) proibir linha abaixo da fair quando a fair vier só da fórmula?
+- Relatório: `knowledge/reports/2026-07-26-bard-flex-definitivo.md` · Dados: `audit-output/34-bard-flex.json` · Script: `scripts/analysis/bard-flex-definitivo.cjs`
+
+## ✅ ENTREGUE 2026-07-25 — ANÁLISE COMPLETA DO SHEN
+- **Veredito: hipótese refutada.** Shen SUP não é under (48% Under na fair vs 54% baseline, delta +0.19, ROI −11%, consistente nos 3 splits; 74% dos jogos dele são vs engage/Camille). 1peel+shen: n=7, não é base de dados. Surpresa: Shen TOP 67% fair+1 (n=79, +15% ROI) mas reprova coerência no split 3 (45.5%, n=11) → observação simulada `under_shen_top`, sem dinheiro real.
+- Relatório: `knowledge/reports/2026-07-25-shen-under.md` · Dados: `audit-output/27-shen-under.json` · Script: `scripts/analysis/shen-under.cjs`
+
+## ✅ RESOLVIDO 2026-07-25 — settle KOI×G2 mapa 1
+- **Over 29.5 KOI×G2 mapa 1** (742d6b48 + f017d0ab): Elvis confirmou 28 kills pelo slip → settladas RED (−R$2.999,98). Hedge Under 35.5 live (+R$1.500) cortou o prejuízo do mapa pra −R$1.500.
+
+## 🟡 ADIADO POR DECISÃO ELVIS 2026-07-25 — Lux na FLEX_ENGAGE
+- Relatório Shen (2026-07-25) detectou Lux 56.3% fair+1, delta +2.5 vs fair (pior flex da lista, abaixo do BE 58.1%). **Elvis decidiu 25/07: cedo demais pra mexer** ("meio troll analisar agora"). Lux MANTIDA na FLEX_ENGAGE. Reavaliar quando houver amostra do split 3 (sugestão: n≥25 mapas Lux-flex no patch novo, ou no re-scan Over de setembro). Tribunal de domingo NÃO deve reabrir isso antes.
+
+---
+
+# Pendências antigas — atualizada 2026-05-22 fim da sessão
 
 ## Auditoria concluida -- Vitality.Bee (2026-05-25)
 

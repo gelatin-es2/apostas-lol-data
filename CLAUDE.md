@@ -21,7 +21,7 @@ Roda em GitHub Actions 2x/dia (cron) + Hook Claude Code a cada msg do CEO (settl
 | Cron horários | **`12:00 UTC = 09:00 BRT`** (único cron diário; slot 06:30 UTC descontinuado junto com Polymarket) |
 | Persistência | Supabase 2 tabelas: `bets` (apostas reais do CEO, ~120+ rows) + `method_reports` (backtest method, PK `(game_id, map_number)`) |
 | Frontend | **HTML estático** (não Next.js!) em `dashboard/index.html`, deployado no **Vercel** (`apostas-lol-dashboard.vercel.app`). Vercel conectado a este repo desde 2026-05-07, Root=`dashboard/`, push=auto-deploy. |
-| Dados externos | lolesports key pública + Liquipedia (gzip + UA). **Polymarket descontinuado 2026-05-23.** |
+| Dados externos | lolesports key pública + Liquipedia (gzip + UA). **Polymarket REATIVADA 2026-07-25** como coletor de curvas de odds (`scripts/polymarket-history.cjs` + `polymarket-chart.cjs`, dados em `cron-data/polymarket-history/`, manutenção diária `--days=2`). |
 | Fair line | Pinnacle manual (Elvis via `/log-fair`) como primária + fórmula `(blueAvg+redAvg)/2` sempre calculada em paralelo. Arquivos `cron-data/YYYY-MM-DD-fair-pinnacle.json`. |
 
 ---
@@ -165,18 +165,10 @@ Schema: `match_date, league, match_id, game_id, map_number, team_blue, team_red,
 
 ---
 
-## Cobertura por liga (Split 2 2026)
+## Ligas operadas
 
-| Liga | Cobertura cron | Hit% (fair dinâmica) | Operar? |
-|---|---|---|---|
-| **LCK** | ✅ Riot API | 66.7% | ✅ Sim |
-| **LPL** | ✅ Riot API | 55.6% | 🟡 Marginal — abaixo de breakeven 1.75 |
-| **LEC** | ✅ Riot API | 63.6% | ✅ Sim |
-| **CBLOL** | ✅ Riot API | 71.4% | ✅ Sim |
-| **LFL** (tier 2) | ✅ Riot API | 70% (2peel) / 63.6% (all) | ✅ Sim |
-| **LIT** (tier 2) | ✅ Riot API | 56.3% (all) | 🟡 Marginal @ odd 1.85, ❌ @ odd real 1.75 |
-| **LES** (tier 2) | ✅ Riot API | **43.5%** (all) | ❌ **SKIP** — sangra |
-| **EWC qualifier** | ❌ não-Riot | manual | settle manual via input do CEO |
+**Fonte canônica: `knowledge/reports/2026-07-26-set-ligas-definitivo.md`** (set aprovado pelo CEO). Resumo: OPERA = LCK/LPL/LEC/CBLOL/LCS/LFL · TESTE 1u = Prime/KCL/LES · TESTE recorte = LCP (só Milio vs peel/flex + janela Camille) · FORA = LIT/LRS/NACL. Stake: **1u tudo, 2u Milio/Camille** (playbook `knowledge/decisions/2026-07-21-metodo-under-split3.md`, bloco do topo).
+⚠️ O "LES 43.5% skip — sangra" que viveu aqui foi **REVOGADO 2026-07-26** (media all-games, não o método; trigger-only = 69.4% n=36).
 
 ---
 
@@ -196,20 +188,12 @@ Print de bet do CEO no chat:
 
 ---
 
-## Bugs / inconsistências resolvidos em 2026-05-07
+## Pendências técnicas vivas
 
-1. ~~**find-match com janela ±1d**~~ — Resolvido. Agora filtra data EXATA + match estrito de teams + prioriza LIVE/UNSTARTED próx 60min.
-2. ~~**bet-logger não populava bet_datetime e match_id**~~ — Resolvido. Subagent atualizado, settle tem guard pra null.
-3. ~~**Settle bloqueava com gameState='in_game' mesmo com eventDetails completed**~~ — Resolvido. `trustCompleted` flag em `extractGameData`.
-4. ~~**LFL/LES/LIT ausentes do LEAGUE_IDS de find-match**~~ — Resolvido em 2026-05-07.
-
-## Ainda pendentes
-
-1. ~~CBLOL leagueId divergente~~ — CORRIGIDO 2026-05-05 (ver knowledge/references/lolesports-league-ids.md); pendência removida 2026-07-22 após verificação.
-2. **README desatualizado** com horário cron (06:50/15:00 UTC vs real 06:30/14:00).
-3. **CSV Oracle deprecated** (decisão 2026-05-05) mas `capture_fair_lines.cjs` ainda tem `process.exit(1)` se não acha — dead code, remover.
-4. **Tier 2 EU não está no cron** (rebuild_tier2 e rebuild_lfl rodam manual). Adicionar ao workflow se quiser auto-update no dashboard.
-5. **EWC qualifier auto-settle** — não tem fonte API, settle manual via input do CEO.
+1. **`getEventDetails` serve estado velho com frequência** (6+ casos só em 25/07) — settle automático trava; fallback proposto no lote B da auditoria `knowledge/audits/2026-07-25-auditoria-sistema.md`. Até lá: settle manual com feed livestats como evidência (2 sinais).
+2. **Fixes de método de 21/07 não commitados** — cron do GitHub regenera stats com definição velha (lote A da auditoria, aguardando OK do CEO).
+3. Tier 2 EU fora do cron (rebuild_tier2/lfl manuais) · README com horário cron velho · dead code CSV Oracle em capture_fair_lines · EWC sem auto-settle (fonte manual).
+4. Histórico de bugs resolvidos: git log + `knowledge/audits/`.
 
 ---
 

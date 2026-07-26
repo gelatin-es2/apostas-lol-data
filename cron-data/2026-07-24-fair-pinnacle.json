@@ -1,0 +1,60 @@
+{
+  "date": "2026-07-24",
+  "source": "pinnacle_manual_elvis",
+  "captured_at": "2026-07-24T07:05:00Z",
+  "note": "3 jogos LPL. Print Pinnacle do Elvis (odds 1.85-1.91 = linha na fair): EDG x BLG Under 31.5 @1.909, WE x JDG Under 30.5 @1.877, AL x LGD Under 31.5 @1.854. LEC volta hoje (fair LEC a definir quando Elvis mandar).",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "fair_lines": [
+    {
+      "liga": "LPL",
+      "hora_brt": "04:00",
+      "team_a": "Anyone's Legend",
+      "team_b": "LGD GAMING",
+      "team_anchor": "AL",
+      "fair_line": 31.5,
+      "lolesports_match_id": "116566854547769620",
+      "source_note": "Pinnacle manual Elvis — Under 31.5 @ 1.854"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "06:00",
+      "team_a": "Team WE",
+      "team_b": "JD Gaming",
+      "team_anchor": "WE",
+      "fair_line": 30.5,
+      "lolesports_match_id": "116566854547769600",
+      "source_note": "Pinnacle manual Elvis — Under 30.5 @ 1.877 (match_id resolvido via códigos WE/JDG)"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "08:00",
+      "team_a": "Bilibili Gaming",
+      "team_b": "EDward Gaming",
+      "team_anchor": "EDG",
+      "fair_line": 31.5,
+      "lolesports_match_id": "116566854547769564",
+      "source_note": "Pinnacle manual Elvis — Under 31.5 @ 1.909"
+    },
+    {
+      "liga": "LEC",
+      "hora_brt": "11:30",
+      "team_a": "Movistar KOI",
+      "team_b": "G2 Esports",
+      "team_anchor": "MKOI",
+      "fair_line": 28.5,
+      "lolesports_match_id": "115548681803406275",
+      "source_note": "Elvis print LEC — Over 28.5 @ 1.763 (linha da casa; LEC volta hoje)"
+    },
+    {
+      "liga": "LEC",
+      "hora_brt": "14:30",
+      "team_a": "Vitality",
+      "team_b": "Karmine Corp",
+      "team_anchor": "VIT",
+      "fair_line": 28.5,
+      "lolesports_match_id": "115548681803406199",
+      "source_note": "Elvis print LEC — Over 28.5 @ 1.757 (linha da casa)"
+    }
+  ]
+}
