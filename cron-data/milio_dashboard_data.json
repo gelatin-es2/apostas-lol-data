@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-07-28T13:35:11.554Z",
+  "generated_at": "2026-07-29T13:50:29.945Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
-    "2026-07-26"
+    "2026-07-29"
   ],
-  "milio_count": 137,
+  "milio_count": 138,
   "games_with_full_picks": 106,
-  "baseline_under_hit_pct": 69.3,
+  "baseline_under_hit_pct": 68.8,
   "by_league": {
-    "LPL": 56,
+    "LPL": 57,
     "LCK": 35,
     "LEC": 15,
     "CBLOL": 16,
@@ -4306,6 +4306,31 @@
       "fair_source": "pinnacle_manual",
       "trigger": null,
       "game_id": "115564797164280009",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-07-29",
+      "league": "LPL",
+      "map": 2,
+      "team_blue": "AL",
+      "team_red": "TES",
+      "milio_side": "red",
+      "milio_team": "TES",
+      "opp_team": "AL",
+      "opp_sup": "Rell",
+      "sup_blue": "Rell",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "support": "Rell"
+      },
+      "red_picks": {
+        "support": "Milio"
+      },
+      "total_kills": 43,
+      "fair": 30.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": null,
+      "game_id": "116566854547769578",
       "src": "results.json"
     }
   ]
