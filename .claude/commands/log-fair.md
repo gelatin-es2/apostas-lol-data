@@ -60,6 +60,15 @@ we 27,5
    - Quais não foram encontradas
    - Arquivo gerado com path completo
 
+7. **Commitar e subir pro origin no mesmo dia** (fix 2026-07-30 — antes o arquivo ficava só
+   local e o cron caía na fórmula por dias seguidos, violando a hierarquia "Pinnacle
+   primário"):
+   - `git add cron-data/<data>-fair-pinnacle.json`
+   - `git commit -m "Add Pinnacle fair lines <data>"` (mensagem em inglês, imperativo)
+   - `git push origin main`
+   - Se o push falhar (ex: não fast-forward), reportar o erro e o arquivo continua salvo
+     local — não force push, não pular a etapa silenciosamente.
+
 ## Schema canônico do arquivo
 
 ```json
