@@ -565,39 +565,11 @@
       width: 90px;
       cursor: text;
     }
-    .filter-bar select#anChampion,
-    .filter-bar select#s1Champion {
-      max-width: 180px;
-    }
     .filter-bar .filter-summary {
       margin-left: auto;
       color: var(--muted);
       font-size: 12px;
       white-space: nowrap;
-    }
-
-    /* ===== PARTE 5 — Zona de simulação (não é dinheiro real) ===== */
-    .sim-zone {
-      border: 1px dashed #a78bfa;
-      border-radius: 14px;
-      padding: 16px;
-      background: rgba(167, 139, 250, 0.04);
-    }
-    .badge-sim {
-      position: sticky;
-      top: 0;
-      display: inline-block;
-      background: rgba(167, 139, 250, 0.18);
-      color: #c4b5fd;
-      border: 1px solid #a78bfa;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      z-index: 5;
     }
 
     /* ===== Ranking "ver todos" (PARTE 3) ===== */
@@ -850,11 +822,12 @@
   <nav class="tabs">
     <div class="tab active" data-tab="hoje">Hoje</div>
     <div class="tab" data-tab="tracker">Planilha</div>
-    <div class="tab" data-tab="under">Método Under</div>
-    <div class="tab" data-tab="overkill">Over Kill</div>
-    <div class="tab" data-tab="analise">Banco de dados</div>
-    <div class="tab" data-tab="milio">Método Milio</div>
-    <div class="tab" data-tab="split1">Split 1 + First Stand</div>
+    <div class="tab" data-tab="milio">Milio</div>
+    <div class="tab" data-tab="camille">Camille</div>
+    <div class="tab" data-tab="pyke">Pyke</div>
+    <div class="tab" data-tab="peel">2peel</div>
+    <div class="tab" data-tab="ml">ML</div>
+    <div class="tab" data-tab="outros">Outros métodos</div>
   </nav>
 
   <main class="container tab-pane active" data-pane="hoje">
@@ -990,258 +963,18 @@
     </div>
   </main>
 
-  <main class="container tab-pane" data-pane="under">
-    <div class="section-title" style="margin-top:0">Resumo — Método Under (bets reais, is_method_bet=true)</div>
-    <div class="filter-bar">
-      <label>PERÍODO:</label>
-      <select id="underPeriod">
-        <option value="all">Tudo</option>
-        <option value="split2">Split 2 (abr-jun)</option>
-        <option value="split3" selected>Split 3 (21/07+)</option>
-      </select>
-      <span class="filter-summary" id="underFilterSummary"></span>
-    </div>
-    <div id="underKpis" class="kpis"></div>
-
-    <div class="section-title">Por mês (só método)</div>
-    <div id="underMonths" class="days"></div>
-
-    <div class="section-title">Por dia (só método)</div>
-    <div id="underDays" class="days"></div>
-
-    <div class="section-title">Apostas</div>
-    <div id="underBetsList" class="bets">
-      <div class="loading">Carregando apostas</div>
-    </div>
-  </main>
-
-  <main class="container tab-pane" data-pane="overkill">
-    <div class="section-title" style="margin-top:0">Resumo — Over Kill (experimentos Over / avulsos fora do método)</div>
-    <div class="filter-bar">
-      <label>PERÍODO:</label>
-      <select id="overPeriod">
-        <option value="all">Tudo</option>
-        <option value="split2">Split 2 (abr-jun)</option>
-        <option value="split3" selected>Split 3 (21/07+)</option>
-      </select>
-      <span class="filter-summary" id="overFilterSummary"></span>
-    </div>
-    <div id="overKpis" class="kpis"></div>
-    <div id="overWindowLine" style="font-size:12px;color:var(--muted);margin:-8px 0 16px"></div>
-
-    <div class="section-title">Por mês (Over Kill)</div>
-    <div id="overMonths" class="days"></div>
-
-    <div class="section-title">Por dia (Over Kill)</div>
-    <div id="overDays" class="days"></div>
-
-    <div class="section-title">Apostas</div>
-    <div id="overBetsList" class="bets">
-      <div class="loading">Carregando apostas</div>
-    </div>
-  </main>
-
-  <main class="container tab-pane" data-pane="analise">
-    <div class="filter-bar">
-      <label>PERÍODO:</label>
-      <select id="anPeriod">
-        <option value="all" selected>Tudo</option>
-        <option value="split2">Split 2 (abr-jun)</option>
-        <option value="split3">Split 3 (21/07+)</option>
-      </select>
-      <label>Δ FAIR LINE:</label>
-      <select id="anFairDelta">
-        <option value="-4">−4 (linha 4 abaixo)</option>
-        <option value="-3">−3</option>
-        <option value="-2">−2</option>
-        <option value="-1">−1</option>
-        <option value="0" selected>0 (fair calculada)</option>
-        <option value="+1">+1</option>
-        <option value="+2">+2</option>
-        <option value="+3">+3</option>
-        <option value="+4">+4</option>
-      </select>
-      <label>ODD:</label>
-      <select id="anOdd">
-        <option value="real" selected>real (odd da bet)</option>
-        <option value="2.10">2.10</option>
-        <option value="2.00">2.00</option>
-        <option value="1.90">1.90</option>
-        <option value="1.85">1.85</option>
-        <option value="1.83">1.83 (fair)</option>
-        <option value="1.80">1.80</option>
-        <option value="1.77">1.77 (sua média real)</option>
-        <option value="1.74">1.74</option>
-        <option value="1.72">1.72 (conservadora)</option>
-        <option value="1.70">1.70</option>
-        <option value="1.65">1.65</option>
-        <option value="1.60">1.60</option>
-      </select>
-      <label>STAKE:</label>
-      <input id="anStake" type="number" value="1000" min="100" max="10000" step="100" />
-      <label>TRIGGER:</label>
-      <select id="anTrigger">
-        <option value="all" selected>todos</option>
-        <option value="2peel">só 2peel</option>
-        <option value="1peel+flex">só 1peel+flex</option>
-      </select>
-      <label>LIGA:</label>
-      <select id="anLeague">
-        <option value="all" selected>todas</option>
-      </select>
-      <label>CAMPEÃO:</label>
-      <select id="anChampion">
-        <option value="all" selected>todos</option>
-      </select>
-      <span class="filter-summary" id="anFilterSummary"></span>
-    </div>
-
-    <div class="sim-zone">
-      <div class="badge-sim">SIMULAÇÃO — não é dinheiro real</div>
-      <div style="background: linear-gradient(135deg, rgba(163,173,189,0.06), rgba(163,173,189,0.03)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
-        <div style="font-weight:700; font-size:14px; color:var(--accent-2)">Banco de dados — simulação adaptável</div>
-        <div style="font-size:12px; color:var(--muted); margin-top:6px">
-          Bets reais do CEO + missed opportunities simuladas. <strong>Ajuste a linha simulada</strong> acima pra ver como cada time/champ/sup performa em cenários diferentes. Útil pra identificar quem aguenta cenários adversos. <strong>Não é PnL real.</strong>
-        </div>
-      </div>
-
-      <div id="anKpis" class="kpis"></div>
-
-      <div class="section-title">Backtest por trigger (sob current Δ/odd)</div>
-      <div id="anByTrigger" class="days"></div>
-
-      <div class="section-title">Hit por liga (real + simulado)</div>
-      <div id="anByLeague" class="days"></div>
-
-      <div class="section-title">Hit por time (real + simulado)</div>
-      <div id="anByTeam" class="days"></div>
-
-      <div class="section-title">Hit por suporte (real + simulado)</div>
-      <div id="anBySupport" class="days"></div>
-
-      <div class="section-title">Hit por boneco — todas as lanes (real + simulado)</div>
-      <div id="anByChamp" class="days"></div>
-    </div>
-  </main>
-
-  <main class="container tab-pane" data-pane="milio">
-    <div class="filter-bar">
-      <label>Δ FAIR LINE:</label>
-      <select id="miFairDelta">
-        <option value="-4">−4</option><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option>
-        <option value="0" selected>0 (fair)</option>
-        <option value="+1">+1</option><option value="+2">+2</option><option value="+3">+3</option><option value="+4">+4</option>
-      </select>
-      <label>ODD:</label>
-      <select id="miOdd">
-        <option value="real" selected>real (odd da bet)</option>
-        <option value="2.10">2.10</option><option value="2.00">2.00</option><option value="1.90">1.90</option>
-        <option value="1.85">1.85</option><option value="1.83">1.83 (fair)</option><option value="1.80">1.80</option>
-        <option value="1.77">1.77</option><option value="1.74">1.74</option>
-        <option value="1.72">1.72</option>
-        <option value="1.70">1.70</option><option value="1.65">1.65</option><option value="1.60">1.60</option>
-      </select>
-      <label>STAKE:</label>
-      <input id="miStake" type="number" value="2000" min="100" max="10000" step="100" />
-      <span class="filter-summary" id="miFilterSummary"></span>
-    </div>
-
-    <div class="sim-zone">
-      <div class="badge-sim">SIMULAÇÃO — não é dinheiro real</div>
-      <div style="background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(16,185,129,0.06)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
-        <div style="font-weight:700; font-size:14px; color:var(--green)">🌟 Método Milio — sub-método dedicado</div>
-        <div style="font-size:12px; color:var(--muted); margin-top:6px">
-          <strong>TODOS os <span id="milioGameCount">–</span> jogos</strong> (LCK/LPL/LEC/CBLOL/LCS) onde <strong>Milio jogou de support</strong> — com ou sem bet, fonte results.json (dado atualizado em <span id="milioLastUpdate">–</span>). Under hit recalculado live com o slider Δ (<code>kills &lt; fair + Δ</code>). Profit teórico usa a odd do slider.
-        </div>
-        <div style="font-size:11px; color:var(--muted); margin-top:8px; line-height:1.6">
-          🟢 <strong>STACK</strong>: Milio vs Bard/Lulu (under detona) · 🔴 <strong>EVITAR</strong>: Milio vs Nautilus/Alistar/Renata (engage-tank fura) · ⚠️ amostra fraca (n&lt;5)
-        </div>
-      </div>
-
-      <div id="miKpis" class="kpis"></div>
-
-      <div class="section-title">Hit por trigger (Milio sozinho = coin-flip)</div>
-      <div id="miByTrigger" class="days"></div>
-
-      <div class="section-title">Hit por sup adversário 🟢 STACK / 🔴 EVITAR</div>
-      <div id="miByOpponentSup" class="days"></div>
-
-      <div class="section-title">Hit por liga</div>
-      <div id="miByLeague" class="days"></div>
-
-      <div class="section-title">Hit por time (Milio + adversário)</div>
-      <div id="miByTeam" class="days"></div>
-
-      <div class="section-title">Hit por boneco — todas as lanes</div>
-      <div id="miByChamp" class="days"></div>
-
-      <div class="section-title">Hit por mapa</div>
-      <div id="miByMap" class="days"></div>
-    </div>
-  </main>
-
-  <main class="container tab-pane" data-pane="split1">
-    <div class="filter-bar">
-      <label>Δ FAIR LINE:</label>
-      <select id="s1FairDelta">
-        <option value="-4">−4</option><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option>
-        <option value="0" selected>0 (fair)</option>
-        <option value="+1">+1</option><option value="+2">+2</option><option value="+3">+3</option><option value="+4">+4</option>
-      </select>
-      <label>ODD:</label>
-      <select id="s1Odd">
-        <option value="2.10">2.10</option><option value="2.00">2.00</option><option value="1.90">1.90</option>
-        <option value="1.85">1.85</option><option value="1.83">1.83 (fair)</option><option value="1.80">1.80</option>
-        <option value="1.77">1.77</option><option value="1.74">1.74</option>
-        <option value="1.72" selected>1.72</option>
-        <option value="1.70">1.70</option><option value="1.65">1.65</option><option value="1.60">1.60</option>
-      </select>
-      <label>STAKE:</label>
-      <input id="s1Stake" type="number" value="1000" min="100" max="10000" step="100" />
-      <label>TRIGGER:</label>
-      <select id="s1Trigger">
-        <option value="all" selected>todos</option>
-        <option value="2peel">só 2peel</option>
-        <option value="1peel+flex">só 1peel+flex</option>
-      </select>
-      <label>LIGA:</label>
-      <select id="s1League">
-        <option value="all" selected>todas</option>
-      </select>
-      <label>CAMPEÃO:</label>
-      <select id="s1Champion">
-        <option value="all" selected>todos</option>
-      </select>
-      <span class="filter-summary" id="s1FilterSummary"></span>
-    </div>
-
-    <div class="sim-zone">
-      <div class="badge-sim">SIMULAÇÃO — não é dinheiro real</div>
-      <div style="background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(139,92,246,0.06)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
-        <div style="font-weight:700; font-size:14px; color:#a78bfa">📜 Split 1 + First Stand 2026 (jan-mar)</div>
-        <div style="font-size:12px; color:var(--muted); margin-top:6px">
-          Backtest histórico em LCK/LPL/LEC/CBLOL/LCS + First Stand. CEO estava off. Ajuste os controles acima pra ver como o método teria performado com sua linha/odd/stake.
-        </div>
-      </div>
-
-      <div id="s1Backtest" class="kpis"></div>
-
-      <div class="section-title">Backtest por trigger (lado a lado)</div>
-      <div id="s1ByTrigger" class="days"></div>
-
-      <div class="section-title">Por liga</div>
-      <div id="s1ByLeague" class="days"></div>
-
-      <div class="section-title">Top times por hit (n≥4)</div>
-      <div id="s1Teams" class="days"></div>
-
-      <div class="section-title">Por suporte</div>
-      <div id="s1Supports" class="days"></div>
-
-      <div class="section-title">Por boneco (todas lanes, n≥6)</div>
-      <div id="s1Champs" class="days"></div>
-    </div>
-  </main>
+  <!-- RODADA 5 (2026-07-30): as 6 abas abaixo (Milio/Camille/Pyke/2peel/ML/Outros)
+       substituem "Banco de dados", "Método Milio" (sim antiga), "Split 1 + First
+       Stand", "Método Under" e "Over Kill" — o dono quer ver cada sub-método
+       separado em vez de "método vs fora do método". Cada pane é só um container
+       vazio: o markup inteiro (header/KPIs/curva/por-dia/lista) é gerado por UMA
+       função só, renderMethodTab(), chamada 6x — ver METHOD_TABS no script. -->
+  <main class="container tab-pane" data-pane="milio"><div id="mtdMilio"></div></main>
+  <main class="container tab-pane" data-pane="camille"><div id="mtdCamille"></div></main>
+  <main class="container tab-pane" data-pane="pyke"><div id="mtdPyke"></div></main>
+  <main class="container tab-pane" data-pane="peel"><div id="mtdPeel"></div></main>
+  <main class="container tab-pane" data-pane="ml"><div id="mtdMl"></div></main>
+  <main class="container tab-pane" data-pane="outros"><div id="mtdOutros"></div></main>
 
   <script type="module">
     import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
@@ -1681,27 +1414,6 @@
       });
     }
 
-    function renderExpandableList(containerId, rows, rowHtmlFn, opts = {}) {
-      const { limit = 12, emptyLabel = 'Sem dados.' } = opts;
-      const el = document.getElementById(containerId);
-      if (!el) return;
-      if (!rows.length) { el.innerHTML = `<div class="empty">${emptyLabel}</div>`; return; }
-      if (rows.length <= limit) { el.innerHTML = rows.map(rowHtmlFn).join(''); return; }
-      const shown = rows.slice(0, limit);
-      const rest = rows.slice(limit);
-      const restId = containerId + '-rest';
-      el.innerHTML = shown.map(rowHtmlFn).join('') +
-        `<button class="ver-todos-btn" type="button" data-target="${restId}">ver todos (${rows.length})</button>` +
-        `<div id="${restId}" class="days" style="display:none">${rest.map(rowHtmlFn).join('')}</div>`;
-      const btn = el.querySelector('.ver-todos-btn');
-      btn.addEventListener('click', () => {
-        const restEl = document.getElementById(restId);
-        const hidden = restEl.style.display === 'none';
-        restEl.style.display = hidden ? '' : 'none';
-        btn.textContent = hidden ? 'ver menos' : `ver todos (${rows.length})`;
-      });
-    }
-
     // ── Team name aliases → canônico ─────────────────────────────────────────
     // Quando bet-logger não normaliza na hora de salvar, o dashboard mostra
     // qualquer variação de nome que foi digitada/colada. Esse mapa corrige na exibição.
@@ -1839,10 +1551,11 @@
     let trkLeagueFilter = 'all';
 
     // ── Filtro de PERÍODO — global, compartilhado (pedido do dono 2026-07-23) ──────
-    // Afeta Planilha (resumo/KPIs/mês/dia/lista/off-método), Método Under e Over Kill.
-    // NÃO afeta Milio/Split1 (fonte própria, fora do escopo do pedido).
-    // Data de corte Split 2 → Split 3 (decisão do dono 2026-07-21). Mesma constante
-    // usada pelo seletor de período da aba "Banco de dados" (renderAnaliseTab).
+    // Afeta só a Planilha (resumo/KPIs/mês/dia/lista/off-método) — RODADA 5 removeu
+    // Método Under/Over Kill/Banco de dados/Método Milio antigo/Split1, únicos outros
+    // consumidores. As 6 abas de sub-método (RODADA 5) NÃO usam esse filtro — são
+    // sempre split 3, fixo (ver METHOD_TABS/methodTabsPool no fim do script).
+    // Data de corte Split 2 → Split 3 (decisão do dono 2026-07-21).
     const SPLIT3_START = '2026-07-21';
     let globalPeriodFilter = 'split3'; // 'all' | 'split2' | 'split3' — default Split 3 ao abrir
 
@@ -1865,10 +1578,8 @@
     // Os 3 selects de período (Planilha/Under/Over Kill) compartilham o mesmo estado —
     // mudar em qualquer aba reflete nas outras.
     function syncPeriodSelectors() {
-      for (const id of ['trkPeriod', 'underPeriod', 'overPeriod']) {
-        const el = document.getElementById(id);
-        if (el) el.value = globalPeriodFilter;
-      }
+      const el = document.getElementById('trkPeriod');
+      if (el) el.value = globalPeriodFilter;
     }
 
     function onPeriodChange(newVal) {
@@ -2106,15 +1817,6 @@
           render();
         });
       });
-    }
-
-    // Método Under / Over Kill: mesmo card, só leitura (sem clique nem filtro
-    // próprio — evita estado de filtro duplicado entre abas).
-    function renderMonthsReadOnly(containerId, bets) {
-      const el = document.getElementById(containerId);
-      if (!el) return;
-      const sorted = groupByMonth(bets);
-      el.innerHTML = monthsCardHtml(sorted, bets.length, null, false) || '<div class="empty">Sem dados</div>';
     }
 
     // Agrega bets por dia (YYYY-MM-DD). Pura — sem tocar DOM.
@@ -2488,6 +2190,11 @@
       } catch (e) {
         console.error('renderHojeTab falhou:', e);
       }
+      try {
+        renderAllMethodTabs();
+      } catch (e) {
+        console.error('renderAllMethodTabs falhou:', e);
+      }
 
       const lastBet = allReal[0];
       const lastDt = lastBet ? fmtDate(lastBet.bet_datetime || lastBet.created_at) : '—';
@@ -2501,9 +2208,8 @@
       document.getElementById('metaInfo').textContent =
         `${allBets.length} método · ${allOffBets.length} off · última em ${lastDt}${filterStr} · período: ${periodLabel(globalPeriodFilter)}`;
 
-      // PARTE 4 — resumo textual do recorte ativo nas filter-bars.
+      // PARTE 4 — resumo textual do recorte ativo na filter-bar.
       updateTrkFilterSummary();
-      updateSharedPeriodSummaries();
     }
 
     function updateTrkFilterSummary() {
@@ -2513,12 +2219,6 @@
       if (trkTriggerFilter !== 'all') parts.push(trkTriggerFilter);
       if (trkLeagueFilter !== 'all') parts.push(trkLeagueFilter);
       el.textContent = parts.join(' · ');
-    }
-
-    function updateSharedPeriodSummaries() {
-      const label = periodLabel(globalPeriodFilter);
-      const u = document.getElementById('underFilterSummary'); if (u) u.textContent = label;
-      const o = document.getElementById('overFilterSummary'); if (o) o.textContent = label;
     }
 
     // ===== Aba "Hoje" (PARTE 2 da reforma visual, 2026-07-30) =====
@@ -2804,11 +2504,13 @@
       btn.textContent = hidden ? '▾ ocultar tabela' : '▸ ver tabela';
     });
 
-    // Re-render dos gráficos da aba Hoje ao cruzar o breakpoint mobile/desktop
-    // (Fix 2026-07-30, BUG D) — svgLineChart/svgColumnChart escolhem W/marginL por
-    // window.innerWidth na hora do render, então girar o celular deixa o SVG com a
-    // geometria do modo antigo até algo forçar um re-render. Guarda o último modo
-    // aplicado e só re-renderiza ao cruzar 600px (não a cada pixel de resize).
+    // Re-render dos gráficos da aba Hoje (+ RODADA 5: as 6 abas de sub-método,
+    // que usam os mesmos svgLineChart/svgColumnChart) ao cruzar o breakpoint
+    // mobile/desktop (Fix 2026-07-30, BUG D) — svgLineChart/svgColumnChart
+    // escolhem W/marginL por window.innerWidth na hora do render, então girar o
+    // celular deixa o SVG com a geometria do modo antigo até algo forçar um
+    // re-render. Guarda o último modo aplicado e só re-renderiza ao cruzar 600px
+    // (não a cada pixel de resize).
     let hojeChartMode = window.innerWidth < CHART_NARROW_BP ? 'narrow' : 'wide';
     let hojeResizeTimer = null;
     window.addEventListener('resize', () => {
@@ -2818,6 +2520,7 @@
         if (mode === hojeChartMode) return;
         hojeChartMode = mode;
         if (hojeAllRealCache.length) renderHojeTab(hojeAllRealCache);
+        renderAllMethodTabs();
       }, 200);
     });
 
@@ -3001,12 +2704,9 @@
       });
     }
 
-    // ===== Abas "Método Under" e "Over Kill" — reusam computeKPIs + o mesmo
-    // template de card de bet (parametrizado), sem query extra: allBets/allOffBets
-    // (bets is_method_bet=true/false, ambas já sem SIMULATED) cobrem todas as bets reais.
-
     // Card de bet — mesmo markup visual de renderBetsWithToggle/renderOffMethodSection,
-    // sem o botão de toggle (essas abas são só leitura).
+    // sem o botão de toggle (reusado pelas 6 abas de sub-método, só leitura — ver
+    // renderMethodTab mais abaixo).
     function betCardHtml(b) {
       const profit = b.profit;
       const profitText = profit == null ? '—' : `${profit >= 0 ? '+' : ''}R$ ${fmtMoney(profit)}`;
@@ -3053,9 +2753,8 @@
       el.innerHTML = bets.map(betCardHtml).join('');
     }
 
-    // Markup de KPI card usado no resumo topo da Planilha (allRealKpis) e nas abas
-    // Método Under / Over Kill (underKpis/overKpis), parametrizado por container.
-    // Hit rate por mapa (auditoria HIGH-04) — mesmo critério de computeKPIs.
+    // Markup de KPI card usado no resumo topo da Planilha (allRealKpis), parametrizado
+    // por container. Hit rate por mapa (auditoria HIGH-04) — mesmo critério de computeKPIs.
     function kpisCardHtml(k) {
       const profitClass = k.profit >= 0 ? 'green' : 'red';
       const roiClass = k.roi >= 0 ? 'green' : 'red';
@@ -3089,47 +2788,175 @@
       el.innerHTML = kpisCardHtml(computeKPIs(bets));
     }
 
-    // Over Kill = experimentos Over (janela Camille) + avulsos de linha bugada do split 3
-    function isOverKillVariant(b) {
-      const mv = b.raw_extraction?.method_variant || '';
-      return mv.startsWith('over_experimental') || mv.startsWith('off_method');
-    }
-
-    function renderOverWindowLine(bets) {
-      const el = document.getElementById('overWindowLine');
-      if (!el) return;
-      const flagged = bets.filter((b) => typeof b.raw_extraction?.window_rules_ok === 'boolean');
-      if (!flagged.length) {
-        el.textContent = 'Sem dado de window_rules_ok nessas bets.';
-        return;
-      }
-      const inside = flagged.filter((b) => b.raw_extraction.window_rules_ok === true).length;
-      const outside = flagged.filter((b) => b.raw_extraction.window_rules_ok === false).length;
-      const noFlag = bets.length - flagged.length;
-      el.textContent = `Janela Camille: ${inside} dentro das regras · ${outside} fora` +
-        (noFlag ? ` · ${noFlag} sem flag` : '');
-    }
-
     // allReal (allBets ∪ allOffBets, já sem SIMULATED) vem calculado em render()
     // pra evitar recomputar/re-sortear a união duas vezes por ciclo de render.
     function renderNewTabs(allReal) {
       // Planilha: resumo combinado no topo (item 1 do pedido)
       renderSummaryInto('allRealKpis', allReal);
+    }
 
-      // Método Under: bets reais com is_method_bet=true — preserva a visão
-      // histórica só-método (Por mês/Por dia) que antes vivia na Planilha.
-      renderSummaryInto('underKpis', allBets);
-      renderBetsListInto('underBetsList', allBets);
-      renderMonthsReadOnly('underMonths', applyTrkFilters(allBets));
-      renderDaysReadOnly('underDays', betsForDaysScoped(allBets));
+    // ===== RODADA 5 (2026-07-30) — 8 abas por sub-método =====
+    // O dono quer parar de ver "método vs fora do método" e ver cada sub-método
+    // separado. Regra de classificação é LITERAL dele: "ml e qualquer aposta na
+    // vitoria de um time" · "se o pell for milio fica no milio se o pell for
+    // outro coloca no metodo 2 pell". Precedência ORDENADA — a 1ª que casar
+    // vence, cada bet cai em UMA aba só.
 
-      // Over Kill: bets reais com method_variant over_experimental*/off_method*
-      const overBets = allReal.filter(isOverKillVariant);
-      renderSummaryInto('overKpis', overBets);
-      renderBetsListInto('overBetsList', overBets);
-      renderOverWindowLine(overBets);
-      renderMonthsReadOnly('overMonths', applyTrkFilters(overBets));
-      renderDaysReadOnly('overDays', betsForDaysScoped(overBets));
+    // 1) ML = aposta na VITÓRIA de um time (mercado manda sobre campeão).
+    // Inclui moneyline/vencedor e handicap de MAPAS/série. NÃO inclui handicap
+    // de kills (mercado de kills, não de vitória).
+    function isWinBet(b) {
+      const m = b.market || '';
+      return /money\s*line|moneyline|vencedor/i.test(m)
+          || (/handicap/i.test(m) && /mapa|série|serie/i.test(m));
+    }
+
+    // hasSupport: true se `champ` é o suporte de qualquer um dos 2 lados —
+    // cobre os 2 formatos de match_context vistos no banco (blue_picks/red_picks
+    // novo, supBlue/supRed legado).
+    function hasSupport(b, champ) {
+      const mc = b.raw_extraction?.match_context || {};
+      return [mc.blue_picks?.support, mc.red_picks?.support, mc.supBlue, mc.supRed]
+        .filter(Boolean)
+        .some(s => String(s).toLowerCase().includes(champ));
+    }
+
+    function methodBucket(b) {
+      if (isWinBet(b)) return 'ml';
+      if (hasSupport(b, 'milio')) return 'milio';
+      if (hasSupport(b, 'camille')) return 'camille';
+      if (hasSupport(b, 'pyke')) return 'pyke';
+      // 2peel — gatilho de método com peel que NÃO é Milio (2peel e 1peel+flex juntos)
+      const t = b.raw_extraction?.match_context?.trigger_type;
+      if (t === '2peel' || t === '1peel+flex') return 'peel';
+      return 'outros';
+    }
+
+    // Definição de cada aba — 1 função de template (renderMethodTab), 6 chamadas.
+    const METHOD_TABS = [
+      { key: 'milio',   containerId: 'mtdMilio',   title: 'Milio',
+        desc: 'Bets em jogos com Milio de suporte · split 3 (desde 21/07)' },
+      { key: 'camille', containerId: 'mtdCamille', title: 'Camille',
+        desc: 'Bets em jogos com Camille de suporte · split 3 (desde 21/07)' },
+      { key: 'pyke',    containerId: 'mtdPyke',    title: 'Pyke',
+        desc: 'Bets em jogos com Pyke de suporte · split 3 (desde 21/07)' },
+      { key: 'peel',    containerId: 'mtdPeel',    title: '2peel',
+        desc: 'Gatilho 2peel e 1peel+flex, com peel que não é Milio · split 3' },
+      { key: 'ml',      containerId: 'mtdMl',      title: 'ML',
+        desc: 'Apostas na vitória de um time — moneyline e handicap de mapas · split 3' },
+      { key: 'outros',  containerId: 'mtdOutros',  title: 'Outros métodos',
+        desc: 'Tudo que não se encaixa nos demais — Over Kill, avulsos, handicap de kills · split 3' },
+    ];
+
+    // Pool bruto — método + off-método, já sem SIMULATED (garantido pela query de
+    // load()), sempre split 3. Independe do globalPeriodFilter (Planilha/etc): as
+    // 6 abas de sub-método são fixas em split 3, sem seletor de período (spec §4).
+    function methodTabsPool() {
+      return [...allBetsAll, ...allOffBetsAll].filter(b => (b.bet_datetime || '').slice(0, 10) >= SPLIT3_START);
+    }
+
+    // Template único das 6 abas: header + KPI row (Lucro/ROI/Hit por mapa c/ meter/
+    // Bets) + curva de banca + por dia + lista de apostas. bets já vem filtrado pro
+    // balde certo (methodBucket) — esta função só desenha.
+    function renderMethodTab(def, bets) {
+      const el = document.getElementById(def.containerId);
+      if (!el) return;
+
+      if (!bets.length) {
+        el.innerHTML = `
+          <div class="section-title" style="margin-top:0">${escHtml(def.title)}</div>
+          <div class="rank-note" style="margin:-6px 0 16px">${escHtml(def.desc)}</div>
+          <div class="empty">Sem bets nesse recorte no split 3.</div>
+        `;
+        return;
+      }
+
+      const k = computeKPIs(bets);
+      // Fallback 1.77 = odd média real do CEO → BE 56,5% (mesmo critério da aba Hoje).
+      const avgOdd = weightedAvgOdd(bets);
+      const breakeven = 100 / (avgOdd || 1.77);
+      const series = buildDailyProfitSeries(bets);
+      const byDayAsc = groupByDay(bets).slice().reverse(); // groupByDay vem desc; chart quer asc
+      const bars = byDayAsc.map(d => ({ label: dayLabelFromKey(d.date), value: d.profit }));
+
+      const curveId = 'mtd' + def.key + 'Curve';
+      const dailyId = 'mtd' + def.key + 'Daily';
+      const tableId = 'mtd' + def.key + 'Table';
+      const btnId = 'mtd' + def.key + 'VerTabelaBtn';
+      const listId = 'mtd' + def.key + 'BetsList';
+
+      el.innerHTML = `
+        <div class="section-title" style="margin-top:0">${escHtml(def.title)}</div>
+        <div class="rank-note" style="margin:-6px 0 16px">${escHtml(def.desc)}</div>
+
+        <div class="kpis">
+          <div class="kpi ${k.profit >= 0 ? 'green' : 'red'}">
+            <div class="label">Lucro</div>
+            <div class="value ${k.profit >= 0 ? 'green' : 'red'}">${k.profit >= 0 ? '+' : ''}${fmtMoney(k.profit)}</div>
+            <div class="sub">de R$ ${fmtMoney(k.turnover)} apostados</div>
+          </div>
+          <div class="kpi ${k.roi >= 0 ? 'green' : 'red'}">
+            <div class="label">ROI</div>
+            <div class="value ${k.roi >= 0 ? 'green' : 'red'}">${k.roi.toFixed(1)}%</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Hit por mapa</div>
+            <div class="value">${k.hitRateMapa.toFixed(1)}%</div>
+            ${svgMeter(k.hitRateMapa, breakeven, { id: 'mtd' + def.key + 'Meter' })}
+          </div>
+          <div class="kpi">
+            <div class="label">Bets</div>
+            <div class="value">${k.total}</div>
+            <div class="sub">${k.wins}G / ${k.losses}R${k.pending ? ` · ${k.pending} pend` : ''}</div>
+          </div>
+        </div>
+
+        <div class="section-title">Curva de banca</div>
+        <div id="${curveId}Wrap"></div>
+
+        <div class="section-head">
+          <div class="section-title" style="margin:0">Por dia</div>
+          <button class="ver-tabela-btn" id="${btnId}" type="button">▸ ver tabela</button>
+        </div>
+        <div id="${dailyId}Wrap"></div>
+        <div id="${tableId}" class="days" style="display:none;margin-top:10px"></div>
+
+        <div class="section-title">Apostas</div>
+        <div id="${listId}" class="bets"></div>
+      `;
+
+      const curveWrap = document.getElementById(curveId + 'Wrap');
+      curveWrap.innerHTML = svgLineChart(series, { height: 220, id: curveId });
+      wireLineChart(curveId, series, fmtMoney);
+
+      const dailyWrap = document.getElementById(dailyId + 'Wrap');
+      dailyWrap.innerHTML = svgColumnChart(bars, { height: 160, id: dailyId });
+      wireColumnChart(dailyId, bars, fmtMoney);
+
+      renderDaysReadOnly(tableId, bets);
+      document.getElementById(btnId).addEventListener('click', () => {
+        const tbl = document.getElementById(tableId);
+        const btn = document.getElementById(btnId);
+        const hidden = tbl.style.display === 'none';
+        tbl.style.display = hidden ? '' : 'none';
+        btn.textContent = hidden ? '▾ ocultar tabela' : '▸ ver tabela';
+      });
+
+      const listSorted = bets.slice().sort((a, b) => {
+        const da = new Date(a.bet_datetime || a.created_at);
+        const db = new Date(b.bet_datetime || b.created_at);
+        return db - da;
+      });
+      renderBetsListInto(listId, listSorted);
+    }
+
+    // Classifica o pool inteiro 1x e desenha as 6 abas. Chamado em render() e no
+    // re-render por breakpoint (junto com a aba Hoje — ver hojeResizeTimer).
+    function renderAllMethodTabs() {
+      const pool = methodTabsPool();
+      const buckets = new Map(METHOD_TABS.map(d => [d.key, []]));
+      for (const b of pool) buckets.get(methodBucket(b)).push(b);
+      for (const def of METHOD_TABS) renderMethodTab(def, buckets.get(def.key));
     }
 
     // Escopado a ".filters .chip" (não document-wide): a aba "Hoje" (PARTE 2) tem
@@ -3155,13 +2982,11 @@
       render();
     });
 
-    // Seletor de PERÍODO — 3 instâncias (Planilha/Under/Over Kill), 1 estado
-    // compartilhado (globalPeriodFilter). Mudar em qualquer uma reflete nas outras.
-    for (const id of ['trkPeriod', 'underPeriod', 'overPeriod']) {
-      document.getElementById(id).addEventListener('change', function() {
-        onPeriodChange(this.value);
-      });
-    }
+    // Seletor de PERÍODO da Planilha (RODADA 5 removeu Under/Over Kill, únicos
+    // outros consumidores do estado compartilhado globalPeriodFilter).
+    document.getElementById('trkPeriod').addEventListener('change', function() {
+      onPeriodChange(this.value);
+    });
 
     load();
     setInterval(load, 60_000);
@@ -3214,684 +3039,10 @@
     }
     loadMethodByLeague();
 
-    // ===== Aba "Banco de dados" — adaptável =====
-    // SPLIT3_START (data de corte Split 2 → Split 3) declarada no topo do script,
-    // junto do filtro de PERÍODO global — reaproveitada aqui pelo seletor desta aba.
-    let analiseRawBets = null;
-
-    // Normaliza nome de time: case-insensitive + remove punctuation pra agrupar dups
-    // (ex: "BILIBILI GAMING" + "Bilibili Gaming" → "Bilibili Gaming")
-    // Escopo módulo pra ser compartilhado entre renderAnaliseTab e renderMilioTab.
-    const teamNormCache = {};
-    const teamScoreCache = {};
-    function normTeamName(name) {
-      if (!name) return null;
-      const key = name.toLowerCase().replace(/[^a-z0-9]/g, '');
-      const hasLower = /[a-z]/.test(name);
-      const hasUpper = /[A-Z]/.test(name);
-      // Prefere mixed-case sobre all-upper sobre all-lower
-      const score = (hasLower && hasUpper) ? 3 : (hasLower ? 2 : 1);
-      if (!teamNormCache[key] || teamScoreCache[key] < score) {
-        teamNormCache[key] = name;
-        teamScoreCache[key] = score;
-      }
-      return teamNormCache[key];
-    }
-
-    async function loadAnaliseTab() {
-      if (!analiseRawBets) {
-        const { data, error } = await sb
-          .from('bets')
-          .select('*')
-          .in('status', ['green', 'red'])
-          .eq('is_method_bet', true)
-          .order('bet_datetime', { ascending: false })
-          .limit(2000);
-        if (error) { console.warn('analise fetch:', error); return; }
-        // DEDUP DEFENSIVA: se um gameId tem bet real, remove TODAS SIMULATED do mesmo game
-        // Garante "1 game = 1 entrada" no agregador (real tem prioridade)
-        const realGids = new Set();
-        for (const b of (data || [])) {
-          if (b.bookmaker !== 'SIMULATED') {
-            const gid = b.raw_extraction?.match_context?.lolesports_game_id;
-            if (gid) realGids.add(String(gid));
-          }
-        }
-        analiseRawBets = (data || []).filter(b => {
-          if (b.bookmaker !== 'SIMULATED') return true;
-          const gid = b.raw_extraction?.match_context?.lolesports_game_id;
-          return !gid || !realGids.has(String(gid));
-        });
-        populateAnaliseDropdowns();
-      }
-      renderAnaliseTab();
-    }
-
-    function populateAnaliseDropdowns() {
-      // Liga: lista única canonizada
-      const ligaSet = new Set();
-      for (const b of analiseRawBets) {
-        const lg = normalizeLeague(b.league);
-        if (lg) ligaSet.add(lg);
-      }
-      const ligaSel = document.getElementById('anLeague');
-      for (const lg of [...ligaSet].sort()) {
-        const opt = document.createElement('option');
-        opt.value = lg; opt.textContent = lg;
-        ligaSel.appendChild(opt);
-      }
-      // Champion: lista única
-      const champSet = new Set();
-      for (const b of analiseRawBets) {
-        const mc = b.raw_extraction?.match_context || {};
-        for (const side of ['blue_picks', 'red_picks']) {
-          const p = mc[side] || {};
-          for (const role of ['top','jungle','mid','adc','support']) {
-            if (p[role]) champSet.add(p[role]);
-          }
-        }
-      }
-      const champSel = document.getElementById('anChampion');
-      for (const c of [...champSet].sort()) {
-        const opt = document.createElement('option');
-        opt.value = c; opt.textContent = c;
-        champSel.appendChild(opt);
-      }
-    }
-
-    function renderAnaliseTab() {
-      const delta = parseInt(document.getElementById('anFairDelta').value);
-      const oddRaw = document.getElementById('anOdd').value;
-      // oddIsReal: usa odd real da bet pra bets reais; fallback 1.72 em SIMULATED sem odd
-      const oddIsReal = (oddRaw === 'real');
-      const odd = oddIsReal ? 1.72 : parseFloat(oddRaw); // fallback ref pra SIMULATED
-      // Retorna o odd a usar pro cálculo de profit de uma bet.
-      // Fix 2026-05-26: SIMULATED também tem b.odd gravado (1.74 ou 1.83) — usar real
-      // quando dropdown está em "real (odd da bet)". Antes forçava 1.72 pra SIM, deflava PnL.
-      function betOdd(b) {
-        if (!oddIsReal) return odd;
-        const ro = parseFloat(b.odd);
-        return (!isNaN(ro) && ro > 1) ? ro : 1.72;
-      }
-      const stake = parseFloat(document.getElementById('anStake').value) || 1000;
-      const triggerFilter = document.getElementById('anTrigger').value;
-      const leagueFilter = document.getElementById('anLeague').value;
-      const champFilter = document.getElementById('anChampion').value;
-      // Auditoria HIGH-01 (2026-07-23): seletor de período — sem filtro (default) o pool
-      // já misturava Split 2 (abr-jun) com Split 3 (começou 21/07) sem distinção nenhuma.
-      const periodFilter = document.getElementById('anPeriod').value; // 'all' | 'split2' | 'split3'
-      const allBetsRaw = analiseRawBets;
-      const bets = allBetsRaw.filter(b => {
-        if (triggerFilter !== 'all' && (b.raw_extraction?.match_context?.trigger_type) !== triggerFilter) return false;
-        if (leagueFilter !== 'all' && normalizeLeague(b.league) !== leagueFilter) return false;
-        if (periodFilter !== 'all') {
-          const dayKey = (b.bet_datetime || '').slice(0, 10);
-          const isSplit3 = dayKey >= SPLIT3_START;
-          if (periodFilter === 'split3' && !isSplit3) return false;
-          if (periodFilter === 'split2' && isSplit3) return false;
-        }
-        if (champFilter !== 'all') {
-          const mc = b.raw_extraction?.match_context || {};
-          let found = false;
-          for (const side of ['blue_picks', 'red_picks']) {
-            const p = mc[side] || {};
-            for (const role of ['top','jungle','mid','adc','support']) {
-              if (p[role] === champFilter) { found = true; break; }
-            }
-            if (found) break;
-          }
-          if (!found) return false;
-        }
-        return true;
-      });
-
-      // Pra cada bet, recomputa green/red baseado em (fair + delta) e (kills < linha simulada)
-      // Reais: usa pick line da bet + delta (interpreta como "se eu pegasse linha+delta na real")
-      // SIMULATED: usa raw_extraction.match_context.fair_line_calculated + delta
-      function getBetSimulation(b) {
-        const mc = b.raw_extraction?.match_context || {};
-        let baseLine = null;
-        if (b.bookmaker === 'SIMULATED') {
-          baseLine = mc.fair_line_calculated ?? null;
-          if (baseLine == null) {
-            // Fallback: extrai linha do pick (ex "Under 25.5")
-            const match = (b.pick || '').match(/(\d+(?:[.,]\d+)?)/);
-            if (match) baseLine = parseFloat(match[1].replace(',','.'));
-            // NÃO subtrair 1 — SIMULATED salva linha direta, sem delta de fair+1
-          }
-        } else {
-          // Reais: extrai linha do pick
-          const match = (b.pick || '').match(/(\d+(?:[.,]\d+)?)/);
-          if (match) baseLine = parseFloat(match[1].replace(',','.'));
-          // Subtrai delta porque a linha real JÁ tem delta embutido (ex CEO opera fair+1, então pickLine = fair+1, fair = pickLine-1)
-          // Pra simulação justa, voltamos pra fair primeiro
-          // Mas só temos pickLine. Aproximação: se odd<1.72, pickLine = fair+1 → fair = pickLine - 1
-          // Senão, pickLine = fair direto
-          const realOdd = parseFloat(b.odd);
-          if (!isNaN(realOdd) && realOdd < 1.72) baseLine = baseLine - 1;
-        }
-        // Fix 2026-05-26: se baseLine ou kills faltam (EWC sem cobertura LoLEsports API),
-        // fallback pro status do banco — antes essas 42 bets sumiam do display, levando R$9.667 de profit oculto.
-        const kills = mc.total_kills;
-        if (baseLine == null || kills == null) {
-          if (b.status === 'green') return { won: true, simLine: null, kills: null, fromStatus: true };
-          if (b.status === 'red') return { won: false, simLine: null, kills: null, fromStatus: true };
-          return null;
-        }
-        const simLine = baseLine + delta;
-        const isOver = /over|mais de/i.test(b.pick || '');
-        const won = isOver ? (kills > simLine) : (kills < simLine);
-        return { won, simLine, kills };
-      }
-
-      const simulated = bets.map(b => ({ b, sim: getBetSimulation(b) })).filter(x => x.sim);
-      const total = simulated.length;
-      const green = simulated.filter(x => x.sim.won).length;
-      const hitPct = total ? (100 * green / total) : 0;
-      const breakeven = (100 / odd).toFixed(1);
-      const realCount = simulated.filter(x => x.b.bookmaker !== 'SIMULATED').length;
-      const simCount = simulated.filter(x => x.b.bookmaker === 'SIMULATED').length;
-
-      // Profit: sempre TEÓRICO com params do dropdown (stake, odd) — esta seção é simulação.
-      // Não usa b.profit real nem b.stake real. Consistente com o que os cards de time mostram.
-      // Fix 2026-05-28: revertido bug introduzido em e386451 que misturava PnL real (b.profit)
-      // nos cards de time, tornando impossível ter PnL negativo com hit>BE (ex: Esprit Shonen 66.7%).
-      let profit = 0;
-      const totalStake = simulated.length * stake;
-      for (const { b, sim } of simulated) {
-        const o = betOdd(b);
-        profit += sim.won ? stake * (o - 1) : -stake;
-      }
-      const roi = totalStake ? (100 * profit / totalStake) : 0;
-
-      document.getElementById('anKpis').innerHTML = `
-        <div class="kpi"><div class="label">Bets totais</div><div class="value">${total}</div><div class="sub">${realCount} reais · ${simCount} simuladas</div></div>
-        <div class="kpi"><div class="label">Hit (Δ${delta >= 0 ? '+' : ''}${delta})</div><div class="value ${hitPct >= parseFloat(breakeven) ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div><div class="sub">BE ${breakeven}%</div></div>
-        <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profit >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profit)}</div></div>
-        <div class="kpi"><div class="label">ROI</div><div class="value ${roi >= 0 ? 'green' : 'red'}">${roi >= 0 ? '+' : ''}${roi.toFixed(1).replace('.',',')}%</div></div>
-      `;
-
-      // Side-by-side por trigger (sempre mostra os 2)
-      // Bugfix 2026-05-23: usa `bets` (já filtrado por liga/champ/trigger) em vez de
-      // `allBetsRaw` — antes a tabela mostrava dados de TODAS as ligas mesmo com filtro ativo.
-      function statsForTrigger(trig) {
-        const filtered = bets.filter(b => (b.raw_extraction?.match_context?.trigger_type) === trig);
-        const sims = filtered.map(b => ({ b, sim: getBetSimulation(b) })).filter(x => x.sim);
-        if (!sims.length) return null;
-        const g = sims.filter(x => x.sim.won).length;
-        // Profit teórico com params do dropdown (stake, odd) — consistente com aggBy e KPI global.
-        // Fix 2026-05-28: era b.profit real pra bets reais (bug e386451), causava ROI errado por trigger.
-        let p = 0;
-        for (const x of sims) {
-          const o = betOdd(x.b);
-          p += x.sim.won ? stake * (o - 1) : -stake;
-        }
-        const sStake = sims.length * stake;
-        return { n: sims.length, hit: 100*g/sims.length, profit: p, roi: sStake ? (100*p/sStake) : 0 };
-      }
-      const t2 = statsForTrigger('2peel');
-      const t1f = statsForTrigger('1peel+flex');
-      // Auditoria MED-01 (2026-07-23): antes o total do topo (Bets totais) não reconciliava
-      // com a soma dos 2 cards de trigger — bets com trigger_type fora de {2peel,1peel+flex}
-      // ("sem trigger", "ewc_unclassified") entravam no KPI global mas somiam daqui.
-      // Card 3 reconcilia mostrando esse resto agregado.
-      function statsForOther() {
-        const filtered = bets.filter(b => {
-          const t = b.raw_extraction?.match_context?.trigger_type;
-          return t !== '2peel' && t !== '1peel+flex';
-        });
-        const sims = filtered.map(b => ({ b, sim: getBetSimulation(b) })).filter(x => x.sim);
-        if (!sims.length) return null;
-        const g = sims.filter(x => x.sim.won).length;
-        let p = 0;
-        for (const x of sims) {
-          const o = betOdd(x.b);
-          p += x.sim.won ? stake * (o - 1) : -stake;
-        }
-        const sStake = sims.length * stake;
-        return { n: sims.length, hit: 100*g/sims.length, profit: p, roi: sStake ? (100*p/sStake) : 0 };
-      }
-      const tOther = statsForOther();
-      function trigCard(label, s) {
-        if (!s) return `<div class="day"><div><div class="date">${label}</div><div class="stats">sem dados</div></div></div>`;
-        const cls = s.roi >= 0 ? 'green' : 'red';
-        return `<div class="day"><div><div class="date">${label}</div><div class="stats">n=${s.n} · hit ${s.hit.toFixed(1)}%</div></div><div class="profit ${cls}">${s.roi >= 0 ? '+' : ''}${s.roi.toFixed(1).replace('.',',')}%<br><span style="font-size:11px;font-weight:600">R$ ${fmtMoney(s.profit)}</span></div></div>`;
-      }
-      document.getElementById('anByTrigger').innerHTML = trigCard('2peel puro', t2) + trigCard('1peel+flex', t1f) + trigCard('sem trigger / EWC não classificado', tOther);
-
-      // Fix 2026-05-25: agrega por (chave | game_id) antes de contar — elimina inflação por ladder.
-      // Múltiplas bets no mesmo mapa/linha contam como 1 entrada; status = green se PnL > 0.
-      // Bets sem game_id recebem ID sintético "NOID-<id>" → tratadas como mapa único.
-      // Fix 2026-05-28: profit SEMPRE teórico com params do dropdown (stake, odd).
-      //   Bug anterior (e386451): bets reais usavam b.profit do banco → PnL real misturado com hit
-      //   simulado, impossibilitando valores negativos com hit acima do BE (ex: Esprit Shonen 66.7% → -R$50).
-      // minN=3 (PARTE 3.2, reforma visual 2026-07-30): antes sem mínimo de amostra
-      // (n>=1) — 68 times/56 campeões renderizavam mesmo com n=1. anByTeam/anByChamp
-      // eram o pior caso.
-      function aggBy(keyFn, minN = 3) {
-        // 1ª passada: por (chave | game_id) — junta bets do mesmo mapa
-        const byMap = new Map();
-        const normKey = s => (s || '').toLowerCase().replace(/\s+/g, '-');
-        for (const { b, sim } of simulated) {
-          let gid;
-          if (b.raw_extraction?.match_context?.lolesports_game_id) {
-            gid = String(b.raw_extraction.match_context.lolesports_game_id);
-          } else {
-            // Fix 2026-05-28: NOID-<uuid> único por bet → cada ladder bet virava mapa independente.
-            // Chave determinística data+times+mapa resolve EWC sem lolesports_game_id.
-            const date = (b.bet_datetime || '').slice(0, 10);
-            gid = `EWC-${date}-${normKey(b.team_a)}-vs-${normKey(b.team_b)}-map${b.map_number || '?'}`;
-          }
-          const keys = keyFn(b);
-          const o = betOdd(b);
-          const betProfit = sim.won ? stake * (o - 1) : -stake;
-          for (const k of keys) {
-            if (!k) continue;
-            const mapKey = k + '|' + gid;
-            // 1 stake por mapa: skip se já existe — ladder (N bets no mesmo game_id) conta como 1.
-            if (!byMap.has(mapKey)) byMap.set(mapKey, { name: k, profit: betProfit });
-          }
-        }
-        // 2ª passada: por time/liga — cada mapa = 1 entrada; green se profit > 0
-        const m = {};
-        for (const { name, profit } of byMap.values()) {
-          if (!m[name]) m[name] = { name, n: 0, w: 0, profit: 0 };
-          m[name].n++;
-          if (profit > 0) m[name].w++;
-          m[name].profit += profit;
-        }
-        return Object.values(m)
-          .filter(x => x.n >= minN)
-          .map(x => ({...x, hit: 100 * x.w / x.n, small_sample: x.n < 4}))
-          .sort((a, b) => b.hit - a.hit);
-      }
-
-      // PARTE 3.2: .slice(0,12) + "ver todos" — anByTeam (68 itens) e anByChamp (56
-      // itens) renderizavam tudo sem limite.
-      function renderList(target, rows, label) {
-        const rowHtml = (r) => {
-          // n < 4 = amostra pequena → cor neutra (sem verde/vermelho)
-          const cls = r.small_sample ? '' : (r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red'));
-          return `<div class="day"><div><div class="date">${r.name}</div><div class="stats">n=${r.n} · R$ ${fmtMoney(r.profit)}</div></div><div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div></div>`;
-        };
-        renderExpandableList(target, rows, rowHtml, { limit: 12, emptyLabel: `Sem ${label}.` });
-      }
-
-      // Lista canônica de suports válidos do método (peel_pure + flex)
-      // Expandido 2026-05-23: Lux + Anivia adicionados como flex
-      // Alistar REMOVIDO 2026-05-29 (CEO): -26.8% ROI n=21 consistente em 2 amostragens
-      const VALID_SUPPORTS = new Set([
-        'Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio',
-        'Bard','Rakan','Lux','Anivia'
-      ]);
-
-      // Pré-popula cache uma passada com todos os times (normTeamName está no escopo módulo)
-      for (const b of bets) { normTeamName(b.team_a); normTeamName(b.team_b); }
-
-      renderList('anByLeague', aggBy(b => [normalizeLeague(b.league)]), 'dados de liga');
-      renderList('anByTeam', aggBy(b => [normTeamName(b.team_a), normTeamName(b.team_b)]), 'dados de time');
-      renderList('anBySupport', aggBy(b => {
-        const mc = b.raw_extraction?.match_context || {};
-        // Filtra: só conta suports válidos do método (exclui Neeko, Pantheon, etc que jogam sup mas não são peel/flex)
-        const sB = mc.blue_picks?.support;
-        const sR = mc.red_picks?.support;
-        return [
-          VALID_SUPPORTS.has(sB) ? sB : null,
-          VALID_SUPPORTS.has(sR) ? sR : null,
-        ];
-      }), 'dados de suporte');
-      renderList('anByChamp', aggBy(b => {
-        const mc = b.raw_extraction?.match_context || {};
-        const out = [];
-        for (const side of ['blue_picks', 'red_picks']) {
-          const p = mc[side] || {};
-          for (const role of ['top','jungle','mid','adc','support']) {
-            if (p[role]) out.push(p[role]);
-          }
-        }
-        return out;
-      }), 'dados de boneco');
-
-      updateAnFilterSummary();
-    }
-
-    // PARTE 4 — resumo textual do recorte ativo na filter-bar ("Split 3 · Δ0 · LCK").
-    function updateAnFilterSummary() {
-      const el = document.getElementById('anFilterSummary');
-      if (!el) return;
-      const period = periodLabel(document.getElementById('anPeriod').value);
-      const delta = document.getElementById('anFairDelta').value;
-      const trig = document.getElementById('anTrigger').value;
-      const lg = document.getElementById('anLeague').value;
-      const champ = document.getElementById('anChampion').value;
-      const parts = [period, `Δ${delta}`];
-      if (trig !== 'all') parts.push(trig);
-      if (lg !== 'all') parts.push(lg);
-      if (champ !== 'all') parts.push(champ);
-      el.textContent = parts.join(' · ');
-    }
-
-    // Listeners pros controles.
-    // Auditoria LOW-01 (2026-07-23): antes cada select registrava 'change' E 'input',
-    // disparando o render 2x por alteração (idempotente, mas desperdiça CPU). 'input'
-    // fica só no campo numérico (STAKE), igual ao padrão já usado na aba Milio.
-    for (const id of ['anFairDelta','anOdd','anTrigger','anLeague','anChampion','anPeriod']) {
-      document.getElementById(id).addEventListener('change', renderAnaliseTab);
-    }
-    document.getElementById('anStake').addEventListener('input', renderAnaliseTab);
-
-    loadAnaliseTab();
-
-    // ===== Aba "Método Milio" =====
-    // ===== Aba Milio — fonte: milio_dashboard_data.json =====
-    const MILIO_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/milio_dashboard_data.json';
-    let milioData = null;
-    // MILIO_FLAGS: flags de CAMPEÃO adversário (matchup), não de time — mantidas.
-    // Auditoria MED-02 (2026-07-23): removido avoid_team (flag de TIME, NIP) — decisão do
-    // dono 2026-07-21 aboliu flag de time como sinal de decisão (3 testes mostraram que não
-    // prediz). Flags de campeão são categoria diferente (matchup), não afetadas.
-    const MILIO_FLAGS = {
-      stack_opp_sup: ['Bard', 'Lulu'],
-      avoid_opp_sup: ['Nautilus', 'Alistar', 'Renata'],
-    };
-
-    async function loadMilioData() {
-      if (milioData) return;
-      try {
-        const res = await fetch(MILIO_URL + '?v=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) { document.getElementById('miKpis').innerHTML = '<div class="empty">Dados ainda não publicados (push pendente)</div>'; return; }
-        milioData = await res.json();
-      } catch (e) {
-        console.warn('milio fetch:', e);
-        document.getElementById('miKpis').innerHTML = '<div class="empty">Erro ao carregar — tenta refresh</div>';
-      }
-    }
-
-    // Auditoria HIGH-02 (2026-07-23): header da aba era texto fixo ("105 jogos",
-    // "audit 2026-05-31") que ficou 2 meses desatualizado enquanto o JSON (atualizado
-    // todo dia pelo cron) já tinha 118+ jogos. Preenche os spans a partir do próprio dado.
-    function updateMilioHeader() {
-      const countEl = document.getElementById('milioGameCount');
-      const updateEl = document.getElementById('milioLastUpdate');
-      if (!milioData || !countEl || !updateEl) return;
-      countEl.textContent = milioData.games?.length ?? '–';
-      const gen = milioData.generated_at ? new Date(milioData.generated_at) : null;
-      updateEl.textContent = gen
-        ? gen.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: TZ })
-        : (milioData.range?.[1] || '–');
-    }
-
-    function renderMilioTab() {
-      if (!milioData) return;
-      updateMilioHeader();
-      const delta = parseInt(document.getElementById('miFairDelta').value);
-      const miOddRaw = document.getElementById('miOdd').value;
-      const odd = (miOddRaw === 'real') ? 1.72 : parseFloat(miOddRaw); // jogos não têm odd real → ref 1.72
-      const stake = parseFloat(document.getElementById('miStake').value) || 2000;
-      const games = milioData.games || [];
-
-      // under_hit recalculado live: kills < fair + delta
-      const sim = games
-        .filter(g => g.fair != null && g.total_kills != null)
-        .map(g => ({ g, won: g.total_kills < (g.fair + delta) }));
-
-      const total = sim.length;
-      const green = sim.filter(x => x.won).length;
-      const profit = sim.reduce((s, x) => s + (x.won ? stake * (odd - 1) : -stake), 0);
-      const hitPct = total ? (100 * green / total) : 0;
-      const roi = total ? (100 * profit / (total * stake)) : 0;
-      const breakeven = (100 / odd).toFixed(1);
-
-      document.getElementById('miKpis').innerHTML = `
-        <div class="kpi"><div class="label">Jogos c/ Milio sup</div><div class="value">${total}</div><div class="sub">${milioData.range?.[0]} → ${milioData.range?.[1]}</div></div>
-        <div class="kpi"><div class="label">Under hit (Δ${delta >= 0 ? '+' : ''}${delta})</div><div class="value ${hitPct >= parseFloat(breakeven) ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div><div class="sub">BE ${breakeven}% @ odd ${odd}</div></div>
-        <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profit >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profit)}</div><div class="sub">stake R$ ${fmtMoney(stake)}/jogo</div></div>
-        <div class="kpi"><div class="label">ROI</div><div class="value ${roi >= 0 ? 'green' : 'red'}">${roi >= 0 ? '+' : ''}${roi.toFixed(1).replace('.',',')}%</div></div>
-      `;
-
-      // Agrega por chave; minN filtra amostra fraca; flag = fn(name) → 'stack'|'avoid'|null
-      function aggBy(keyFn, minN, flagFn) {
-        const m = {};
-        for (const { g, won } of sim) {
-          for (const k of keyFn(g)) {
-            if (!k) continue;
-            if (!m[k]) m[k] = { name: k, n: 0, w: 0, profit: 0, kills: 0 };
-            m[k].n++; m[k].kills += g.total_kills;
-            if (won) { m[k].w++; m[k].profit += stake * (odd - 1); } else m[k].profit -= stake;
-          }
-        }
-        return Object.values(m)
-          .map(x => ({ ...x, hit: 100 * x.w / x.n, avgK: x.kills / x.n, flag: flagFn ? flagFn(x.name) : null }))
-          .filter(x => x.n >= (minN || 1))
-          .sort((a, b) => b.hit - a.hit);
-      }
-
-      // PARTE 3.2: .slice(0,12) + "ver todos" (minN de cada aggBy mantido como já era).
-      function renderList(target, rows, label) {
-        const rowHtml = (r) => {
-          const weak = r.n < 5;
-          const cls = r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red');
-          const icon = r.flag === 'stack' ? '🟢 ' : (r.flag === 'avoid' ? '🔴 ' : '');
-          const weakTag = weak ? ' <span style="color:var(--muted);font-size:10px">⚠️n&lt;5</span>' : '';
-          const avgK = r.avgK != null ? ` · ${r.avgK.toFixed(1)}k` : '';
-          return `<div class="day"><div><div class="date">${icon}${r.name}${weakTag}</div><div class="stats">n=${r.n}${avgK} · R$ ${fmtMoney(r.profit)}</div></div><div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div></div>`;
-        };
-        renderExpandableList(target, rows, rowHtml, { limit: 12, emptyLabel: `Sem ${label}.` });
-      }
-
-      // 1. Por trigger (achado #1: Milio sozinho = coin-flip)
-      renderList('miByTrigger', aggBy(g => [g.trigger || 'sem trigger'], 1), 'trigger');
-
-      // 2. Por sup adversário com flags STACK/EVITAR
-      const oppFlag = (sup) => MILIO_FLAGS.stack_opp_sup.includes(sup) ? 'stack'
-        : (MILIO_FLAGS.avoid_opp_sup.includes(sup) ? 'avoid' : null);
-      renderList('miByOpponentSup', aggBy(g => [g.opp_sup], 1, oppFlag), 'sup adversário');
-
-      // 3. Por liga
-      renderList('miByLeague', aggBy(g => [g.league], 1), 'liga');
-
-      // 4. Por time — Milio E adversário (todos os times do jogo).
-      // Auditoria MED-02: sem flagFn — flag de time removida (informação neutra, sem
-      // ícone de recomendação), consistente com a decisão do dono 2026-07-21.
-      renderList('miByTeam', aggBy(g => [g.milio_team, g.opp_team], 3), 'time');
-
-      // 5. Por boneco — todas as lanes (top/jungle/mid/adc/support dos 2 times).
-      // Usa picks completos quando disponíveis (games_with_full_picks).
-      const ROLES = ['top', 'jungle', 'mid', 'adc', 'support'];
-      renderList('miByChamp', aggBy(g => {
-        const champs = [];
-        for (const side of [g.blue_picks, g.red_picks]) {
-          if (!side) continue;
-          for (const r of ROLES) if (side[r]) champs.push(side[r]);
-        }
-        return [...new Set(champs)]; // 1 jogo conta 1x por boneco mesmo se espelhado
-      }, 4), 'boneco');
-
-      // 6. Por mapa
-      renderList('miByMap', aggBy(g => ['Map ' + (g.map || '?')], 1), 'mapa');
-
-      updateMiFilterSummary();
-    }
-
-    // PARTE 4 — resumo textual do recorte ativo na filter-bar.
-    function updateMiFilterSummary() {
-      const el = document.getElementById('miFilterSummary');
-      if (!el) return;
-      const delta = document.getElementById('miFairDelta').value;
-      const odd = document.getElementById('miOdd').value;
-      el.textContent = `Δ${delta} · odd ${odd === 'real' ? 'real' : odd}`;
-    }
-
-    document.getElementById('miFairDelta').addEventListener('change', renderMilioTab);
-    document.getElementById('miOdd').addEventListener('change', renderMilioTab);
-    document.getElementById('miStake').addEventListener('input', renderMilioTab);
-
-    async function ensureBetsLoaded() {
-      await loadMilioData();
-      renderMilioTab();
-    }
-    ensureBetsLoaded();
-
-    // ===== Aba "Split 1 + First Stand" — interativo =====
-    const SPLIT1_URL = 'https://raw.githubusercontent.com/gelatin-es2/apostas-lol-data/main/cron-data/split1_dashboard_stats.json';
-    let split1Games = null;
-
-    async function loadSplit1Data() {
-      try {
-        const res = await fetch(SPLIT1_URL + '?v=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) { document.getElementById('s1Backtest').innerHTML = '<div class="empty">Dados ainda não publicados</div>'; return; }
-        const d = await res.json();
-        split1Games = d.missed_opportunities?.list || [];
-        // Popular dropdowns
-        const ligaSet = new Set(), champSet = new Set();
-        for (const g of split1Games) {
-          if (g.league) ligaSet.add(g.league);
-          for (const side of ['blue_picks','red_picks']) {
-            const p = g[side] || {};
-            for (const role of ['top','jungle','mid','adc','support']) if (p[role]) champSet.add(p[role]);
-          }
-        }
-        const ligaSel = document.getElementById('s1League');
-        for (const lg of [...ligaSet].sort()) { const o = document.createElement('option'); o.value = lg; o.textContent = lg; ligaSel.appendChild(o); }
-        const champSel = document.getElementById('s1Champion');
-        for (const c of [...champSet].sort()) { const o = document.createElement('option'); o.value = c; o.textContent = c; champSel.appendChild(o); }
-        renderSplit1();
-      } catch (e) {
-        console.warn('split1 fetch:', e);
-        document.getElementById('s1Backtest').innerHTML = '<div class="empty">Erro — tenta refresh</div>';
-      }
-    }
-
-    function renderSplit1() {
-      if (!split1Games) return;
-      const delta = parseInt(document.getElementById('s1FairDelta').value);
-      const odd = parseFloat(document.getElementById('s1Odd').value);
-      const stake = parseFloat(document.getElementById('s1Stake').value) || 1000;
-      const triggerFilter = document.getElementById('s1Trigger').value;
-      const leagueFilter = document.getElementById('s1League').value;
-      const champFilter = document.getElementById('s1Champion').value;
-      const breakeven = (100 / odd).toFixed(1);
-      const games = split1Games.filter(g => {
-        if (triggerFilter !== 'all' && g.trigger !== triggerFilter) return false;
-        if (leagueFilter !== 'all' && g.league !== leagueFilter) return false;
-        if (champFilter !== 'all') {
-          let found = false;
-          for (const side of ['blue_picks','red_picks']) {
-            const p = g[side] || {};
-            for (const role of ['top','jungle','mid','adc','support']) {
-              if (p[role] === champFilter) { found = true; break; }
-            }
-            if (found) break;
-          }
-          if (!found) return false;
-        }
-        return true;
-      });
-
-      function simHit(g) { return g.kills < g.line + delta; }
-      const total = games.length;
-      const green = games.filter(simHit).length;
-      const profit = games.reduce((s,g) => s + (simHit(g) ? stake*(odd-1) : -stake), 0);
-      const hitPct = total ? (100 * green / total) : 0;
-      const roi = total ? (100 * profit / (total * stake)) : 0;
-
-      document.getElementById('s1Backtest').innerHTML = `
-        <div class="kpi"><div class="label">Games (filtro)</div><div class="value">${total}</div></div>
-        <div class="kpi"><div class="label">Hit (Δ${delta>=0?'+':''}${delta})</div><div class="value ${hitPct >= parseFloat(breakeven) ? 'green' : 'red'}">${hitPct.toFixed(1).replace('.',',')}%</div><div class="sub">BE ${breakeven}%</div></div>
-        <div class="kpi"><div class="label">Profit teórico</div><div class="value ${profit >= 0 ? 'green' : 'red'}">R$ ${fmtMoney(profit)}</div></div>
-        <div class="kpi"><div class="label">ROI</div><div class="value ${roi >= 0 ? 'green' : 'red'}">${roi >= 0 ? '+' : ''}${roi.toFixed(1).replace('.',',')}%</div></div>
-      `;
-
-      // Lado a lado por trigger (sempre mostra os 2 pra comparação rápida)
-      // Bugfix 2026-05-23: usa `games` (já filtrado) em vez de `split1Games` (raw).
-      function statsForTrigger(trig) {
-        const filtered = games.filter(g => g.trigger === trig);
-        if (!filtered.length) return null;
-        const g = filtered.filter(simHit).length;
-        const r = filtered.length - g;
-        const p = g*stake*(odd-1) - r*stake;
-        return { n: filtered.length, hit: 100*g/filtered.length, profit: p, roi: 100*p/(filtered.length*stake) };
-      }
-      const t2 = statsForTrigger('2peel');
-      const t1f = statsForTrigger('1peel+flex');
-      function trigCard(label, s) {
-        if (!s) return `<div class="day"><div><div class="date">${label}</div><div class="stats">sem dados</div></div></div>`;
-        const cls = s.roi >= 0 ? 'green' : 'red';
-        return `<div class="day"><div><div class="date">${label}</div><div class="stats">n=${s.n} · hit ${s.hit.toFixed(1)}%</div></div><div class="profit ${cls}">${s.roi >= 0 ? '+' : ''}${s.roi.toFixed(1).replace('.',',')}%<br><span style="font-size:11px;font-weight:600">R$ ${fmtMoney(s.profit)}</span></div></div>`;
-      }
-      document.getElementById('s1ByTrigger').innerHTML = trigCard('2peel puro', t2) + trigCard('1peel+flex', t1f);
-
-      // Agregadores
-      function aggBy(keyFn, minN=4) {
-        const m = {};
-        for (const g of games) {
-          const keys = keyFn(g);
-          for (const k of keys) {
-            if (!k) continue;
-            if (!m[k]) m[k] = { name:k, n:0, w:0, profit:0 };
-            m[k].n++;
-            if (simHit(g)) { m[k].w++; m[k].profit += stake*(odd-1); } else m[k].profit -= stake;
-          }
-        }
-        return Object.values(m).filter(x => x.n >= minN).map(x => ({...x, hit:100*x.w/x.n})).sort((a,b) => b.hit - a.hit);
-      }
-
-      // PARTE 3.2: .slice(0,12) + "ver todos" no lugar do corte fixo anterior
-      // (s1Teams cortava em 30, s1Champs em 40, sem forma de ver o resto).
-      function renderList(target, rows, label) {
-        const rowHtml = (r) => {
-          const cls = r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red');
-          return `<div class="day"><div><div class="date">${r.name}</div><div class="stats">n=${r.n} · R$ ${fmtMoney(r.profit)}</div></div><div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div></div>`;
-        };
-        renderExpandableList(target, rows, rowHtml, { limit: 12, emptyLabel: `Sem ${label}.` });
-      }
-
-      // Split 1 preserva a definição HISTÓRICA de suporte válido (inclui Alistar, removido
-      // da lista atual em 2026-05-29 por -26,8% ROI n=21) — Split 1 é dado congelado de
-      // antes dessa decisão, não a definição vigente do método hoje (ver Banco de dados/Milio).
-      const VALID_SUPS = new Set(['Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio','Bard','Rakan','Alistar']);
-      renderList('s1ByLeague', aggBy(g => [g.league]), 'liga');
-      renderList('s1Teams', aggBy(g => g.teams || [], 4), 'time');
-      // Auditoria MED-04 (2026-07-23): rotula Alistar explicitamente como "lista da época"
-      // pra deixar claro na UI que essa lista diverge da definição atual do método.
-      const s1SupportRows = aggBy(g => {
-        const sB = g.blue_picks?.support, sR = g.red_picks?.support;
-        return [VALID_SUPS.has(sB) ? sB : null, VALID_SUPS.has(sR) ? sR : null];
-      }, 4).map(r => r.name === 'Alistar' ? { ...r, name: 'Alistar (lista da época)' } : r);
-      renderList('s1Supports', s1SupportRows, 'sup');
-      renderList('s1Champs', aggBy(g => {
-        const out = [];
-        for (const side of ['blue_picks', 'red_picks']) {
-          const p = g[side] || {};
-          for (const role of ['top','jungle','mid','adc','support']) if (p[role]) out.push(p[role]);
-        }
-        return out;
-      }, 6), 'boneco');
-
-      updateS1FilterSummary();
-    }
-
-    // PARTE 4 — resumo textual do recorte ativo na filter-bar.
-    function updateS1FilterSummary() {
-      const el = document.getElementById('s1FilterSummary');
-      if (!el) return;
-      const delta = document.getElementById('s1FairDelta').value;
-      const trig = document.getElementById('s1Trigger').value;
-      const lg = document.getElementById('s1League').value;
-      const champ = document.getElementById('s1Champion').value;
-      const parts = [`Δ${delta}`];
-      if (trig !== 'all') parts.push(trig);
-      if (lg !== 'all') parts.push(lg);
-      if (champ !== 'all') parts.push(champ);
-      el.textContent = parts.join(' · ');
-    }
-
-    // Auditoria LOW-01 (2026-07-23): mesmo fix de listener duplicado da aba Banco de dados.
-    for (const id of ['s1FairDelta','s1Odd','s1Trigger','s1League','s1Champion']) {
-      document.getElementById(id).addEventListener('change', renderSplit1);
-    }
-    document.getElementById('s1Stake').addEventListener('input', renderSplit1);
-    loadSplit1Data();
+    // RODADA 5 (2026-07-30): "Banco de dados", "Método Milio" (sim antiga) e
+    // "Split 1 + First Stand" foram removidas por completo (markup + CSS órfão +
+    // JS + fetch) — ver METHOD_TABS acima pelas 6 abas de sub-método que as
+    // substituem. loadMethodByLeague() (acima) continua servindo a Planilha.
 
   </script>
 </body>
