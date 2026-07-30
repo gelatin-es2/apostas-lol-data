@@ -1,6 +1,6 @@
 {
   "date": "2026-07-29",
-  "analyzed_at": "2026-07-29T13:45:43.099Z",
+  "analyzed_at": "2026-07-30T13:26:54.822Z",
   "ligas": [
     "LCK",
     "LPL",
@@ -8,7 +8,7 @@
     "CBLOL",
     "LCS"
   ],
-  "count": 8,
+  "count": 9,
   "results": [
     {
       "league": "LCK",
@@ -158,8 +158,8 @@
       "red_avg": 40.5,
       "blue_sample_n": 9,
       "red_sample_n": 6,
-      "league_baseline": 30.69,
-      "vs_league": 3.81,
+      "league_baseline": 30.57,
+      "vs_league": 3.93,
       "under_hit": true
     },
     {
@@ -188,8 +188,8 @@
       "red_avg": 36.17,
       "blue_sample_n": 9,
       "red_sample_n": 6,
-      "league_baseline": 30.69,
-      "vs_league": -0.19,
+      "league_baseline": 30.57,
+      "vs_league": -0.07,
       "under_hit": false
     },
     {
@@ -208,18 +208,18 @@
       "peel_bucket": "0peel",
       "flex_engages": [],
       "trigger_type": null,
-      "matchup_fair": 30.5,
+      "matchup_fair": 29.5,
       "fair_pinnacle": null,
-      "fair_formula": 30.5,
+      "fair_formula": 29.5,
       "fair_source": "formula(team+team)/2",
-      "fair_raw": 60.3,
-      "fair_adjusted": 30.5,
-      "blue_avg": 27,
-      "red_avg": 33.3,
-      "blue_sample_n": 7,
-      "red_sample_n": 10,
-      "league_baseline": 30.69,
-      "vs_league": -0.19,
+      "fair_raw": 59.51,
+      "fair_adjusted": 29.5,
+      "blue_avg": 26.88,
+      "red_avg": 32.64,
+      "blue_sample_n": 8,
+      "red_sample_n": 11,
+      "league_baseline": 30.57,
+      "vs_league": -1.07,
       "under_hit": false
     },
     {
@@ -244,14 +244,46 @@
       "fair_pinnacle": null,
       "fair_formula": 31.5,
       "fair_source": "formula(team+team)/2",
-      "fair_raw": 63.94,
+      "fair_raw": 62.75,
       "fair_adjusted": 31.5,
-      "blue_avg": 29.14,
-      "red_avg": 34.8,
-      "blue_sample_n": 7,
-      "red_sample_n": 10,
-      "league_baseline": 30.69,
-      "vs_league": 0.81,
+      "blue_avg": 28.75,
+      "red_avg": 34,
+      "blue_sample_n": 8,
+      "red_sample_n": 11,
+      "league_baseline": 30.57,
+      "vs_league": 0.93,
+      "under_hit": true
+    },
+    {
+      "league": "LPL",
+      "match_id": "116566854547769560",
+      "game_id": "116566854547769563",
+      "map_number": 3,
+      "team_blue": "LGD",
+      "team_red": "BLG",
+      "kills_blue": 9,
+      "kills_red": 17,
+      "total_kills": 26,
+      "sup_blue": "Seraphine",
+      "sup_red": "Lux",
+      "peel_count": 1,
+      "peel_bucket": "1peel",
+      "flex_engages": [
+        "Lux"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 31.5,
+      "fair_pinnacle": null,
+      "fair_formula": 31.5,
+      "fair_source": "formula(team+team)/2",
+      "fair_raw": 62.75,
+      "fair_adjusted": 31.5,
+      "blue_avg": 28.75,
+      "red_avg": 34,
+      "blue_sample_n": 8,
+      "red_sample_n": 11,
+      "league_baseline": 30.57,
+      "vs_league": 0.93,
       "under_hit": true
     }
   ]

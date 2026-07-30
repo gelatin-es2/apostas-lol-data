@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-29T13:50:51.228Z",
+  "generated_at": "2026-07-30T13:30:53.308Z",
   "league": "LFL",
   "split_start": "2026-04-01",
-  "total_games_fetched": 102,
+  "total_games_fetched": 107,
   "fair_method": "livestats_team_avg(blue+red)-1, fallback 29.5",
   "stake": 100,
   "odd": 1.85,
@@ -16,9 +16,9 @@
   },
   "backtest_all": {
     "n": 38,
-    "hit": 73.7,
-    "profit": 1380,
-    "roi": 36.3,
+    "hit": 71.1,
+    "profit": 1195,
+    "roi": 31.4,
     "breakeven_185": 54.1,
     "breakeven_175": 57.1
   },
@@ -68,12 +68,7 @@
     {
       "name": "TLN Pirates",
       "n": 12,
-      "hit": 91.7
-    },
-    {
-      "name": "Vitality.Bee",
-      "n": 8,
-      "hit": 87.5
+      "hit": 83.3
     },
     {
       "name": "Esprit Shonen",
@@ -84,6 +79,11 @@
       "name": "Joblife",
       "n": 5,
       "hit": 80
+    },
+    {
+      "name": "Vitality.Bee",
+      "n": 8,
+      "hit": 75
     },
     {
       "name": "Galions",
@@ -157,17 +157,17 @@
     {
       "name": "Bard",
       "n": 17,
-      "hit": 70.6
-    },
-    {
-      "name": "Karma",
-      "n": 9,
-      "hit": 66.7
+      "hit": 64.7
     },
     {
       "name": "Nami",
       "n": 10,
       "hit": 60
+    },
+    {
+      "name": "Karma",
+      "n": 9,
+      "hit": 55.6
     }
   ],
   "champs_2peel": [
@@ -306,12 +306,6 @@
       "hit": 90
     },
     {
-      "champ": "Vi",
-      "role": "jungle",
-      "n": 10,
-      "hit": 90
-    },
-    {
       "champ": "Azir",
       "role": "mid",
       "n": 7,
@@ -324,16 +318,16 @@
       "hit": 85.7
     },
     {
+      "champ": "Vi",
+      "role": "jungle",
+      "n": 10,
+      "hit": 80
+    },
+    {
       "champ": "Ashe",
       "role": "adc",
       "n": 19,
       "hit": 78.9
-    },
-    {
-      "champ": "Ezreal",
-      "role": "adc",
-      "n": 17,
-      "hit": 76.5
     },
     {
       "champ": "Ryze",
@@ -360,10 +354,10 @@
       "hit": 72.7
     },
     {
-      "champ": "JarvanIV",
-      "role": "jungle",
-      "n": 10,
-      "hit": 70
+      "champ": "Ezreal",
+      "role": "adc",
+      "n": 17,
+      "hit": 70.6
     },
     {
       "champ": "Gnar",
@@ -375,12 +369,6 @@
       "champ": "Aurora",
       "role": "mid",
       "n": 6,
-      "hit": 66.7
-    },
-    {
-      "champ": "Rumble",
-      "role": "top",
-      "n": 15,
       "hit": 66.7
     },
     {
@@ -404,6 +392,18 @@
     {
       "champ": "Ahri",
       "role": "mid",
+      "n": 10,
+      "hit": 60
+    },
+    {
+      "champ": "Rumble",
+      "role": "top",
+      "n": 15,
+      "hit": 60
+    },
+    {
+      "champ": "JarvanIV",
+      "role": "jungle",
       "n": 10,
       "hit": 60
     },

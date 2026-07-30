@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-07-29T13:50:29.945Z",
+  "generated_at": "2026-07-30T13:30:36.201Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
-    "2026-07-29"
+    "2026-07-30"
   ],
-  "milio_count": 138,
-  "games_with_full_picks": 106,
-  "baseline_under_hit_pct": 68.8,
+  "milio_count": 139,
+  "games_with_full_picks": 107,
+  "baseline_under_hit_pct": 69.1,
   "by_league": {
     "LPL": 57,
-    "LCK": 35,
+    "LCK": 36,
     "LEC": 15,
     "CBLOL": 16,
     "LCS": 11,
@@ -4331,6 +4331,39 @@
       "fair_source": "formula(team+team)/2",
       "trigger": null,
       "game_id": "116566854547769578",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-07-30",
+      "league": "LCK",
+      "map": 3,
+      "team_blue": "HLE",
+      "team_red": "DK",
+      "milio_side": "blue",
+      "milio_team": "HLE",
+      "opp_team": "DK",
+      "opp_sup": "Lulu",
+      "sup_blue": "Milio",
+      "sup_red": "Lulu",
+      "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Galio",
+        "top": "Gnar",
+        "jungle": "Qiyana",
+        "support": "Milio"
+      },
+      "red_picks": {
+        "adc": "Yunara",
+        "mid": "Syndra",
+        "top": "Jax",
+        "jungle": "JarvanIV",
+        "support": "Lulu"
+      },
+      "total_kills": 30,
+      "fair": 30.5,
+      "fair_source": "formula(league+league)/2",
+      "trigger": "2peel",
+      "game_id": "115548147900553456",
       "src": "results.json"
     }
   ]
