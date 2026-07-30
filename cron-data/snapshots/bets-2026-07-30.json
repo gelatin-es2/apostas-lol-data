@@ -1,6 +1,6 @@
 {
-  "exported_at": "2026-07-30T13:34:59.229Z",
-  "total_bets": 887,
+  "exported_at": "2026-07-30T20:56:22.209Z",
+  "total_bets": 894,
   "bets": [
     {
       "id": "5575e950-363f-4593-aea7-ca9944adf4cc",
@@ -69675,6 +69675,99 @@
       "is_method_bet": false
     },
     {
+      "id": "92a369f0-6ba3-4b10-baba-50bdbaa048ba",
+      "created_at": "2026-07-24T09:49:12.620614+00:00",
+      "bookmaker": "estrelabet",
+      "league": "LPL",
+      "team_a": "WE",
+      "team_b": "JDG",
+      "market": "Money Line — Map 1 (vencedor, incl. prorrogação)",
+      "pick": "JD Gaming (vencedor mapa 1)",
+      "odd": 3.62,
+      "stake": 500,
+      "bet_datetime": "2026-07-24T09:00:00+00:00",
+      "pandascore_match_id": 116566854547769600,
+      "pandascore_match_name": null,
+      "is_map_bet": true,
+      "map_number": 1,
+      "status": "red",
+      "profit": -500,
+      "settled_at": "2026-07-24T10:20:13.713+00:00",
+      "settle_source": "manual-ML-winner_side (WE won map1 22-13)",
+      "screenshot_path": null,
+      "raw_extraction": {
+        "notes": "PRIMEIRA ML do estudo. Entrada LIVE: JDG pré-jogo era 71.5% na Polymarket (~1.40); comprado @3.62 (27.6% implícito) com jogo empatado aos ~10min — tese de valor live. ATENÇÃO SETTLE: settle-pending-bets NÃO settla Money Line (moneyline_settle_not_implemented) — settle será MANUAL pelo orquestrador via winner_side quando o mapa fechar. | SETTLE MANUAL ML: WE venceu mapa1 (22x13, gameWins WE=1). RED",
+        "compositions": {
+          "source": "lolesports livestats game 116566854547769601",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "blue",
+            "picks": {
+              "adc": "Varus",
+              "mid": "Ryze",
+              "top": "Rumble",
+              "jungle": "Trundle",
+              "support": "Alistar"
+            }
+          },
+          "team_b": {
+            "name": "Beijing JDG Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Ziggs",
+              "mid": "Anivia",
+              "top": "KSante",
+              "jungle": "Vi",
+              "support": "Camille"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 13,
+          "pick_line": 1,
+          "red_picks": {
+            "adc": "Ziggs",
+            "mid": "Anivia",
+            "top": "KSante",
+            "jungle": "Vi",
+            "support": "Camille"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Varus",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "Trundle",
+            "support": "Alistar"
+          },
+          "kills_blue": 22,
+          "enriched_at": "2026-07-30T15:19:31.222Z",
+          "red_team_id": "99566404852189289",
+          "total_kills": 35,
+          "winner_side": "blue",
+          "blue_team_id": "98767991887166787",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "116566854547769601",
+          "lolesports_match_id": "116566854547769600",
+          "match_ambiguous_at_link": false
+        },
+        "method_variant": "ml_experimental_elvis",
+        "api_anomaly_note": "Cross-check 2026-07-24T09:47Z (lolesports-find-match.cjs + getEventDetails direto): schedule marca este match como state='completed' (outcome null, gameWins 0-0 para ambos os times) mas getEventDetails mostra os 3 games da série como 'unstarted'. getLive (endpoint global) não retorna nenhum match LPL ao vivo no momento — só LJL. Provável falha de sync da API lolesports pro feed da LPL (comum em ligas chinesas), NÃO indica match errado (times/liga/horário batem exatamente com o print). Settle manual deve confirmar resultado real via stream/Liquipedia antes de fechar, não confiar cegamente no campo 'state' da API pra este match_id.",
+        "bookmaker_native": {
+          "bet_id": "5226580966",
+          "raw_pick_text": "JD Gaming (vencedor mapa 1)",
+          "raw_stake_text": "500.00"
+        }
+      },
+      "notes": null,
+      "fair_pinnacle": 30.5,
+      "fair_formula": null,
+      "fair_line_source": "pinnacle_manual",
+      "is_method_bet": false
+    },
+    {
       "id": "073ac6f4-6e88-4bbc-8604-35dfe3bd2c59",
       "created_at": "2026-07-24T09:22:53.931195+00:00",
       "bookmaker": "pinnacle",
@@ -69885,60 +69978,6 @@
       "is_method_bet": false
     },
     {
-      "id": "92a369f0-6ba3-4b10-baba-50bdbaa048ba",
-      "created_at": "2026-07-24T09:49:12.620614+00:00",
-      "bookmaker": "estrelabet",
-      "league": "LPL",
-      "team_a": "WE",
-      "team_b": "JDG",
-      "market": "Money Line — Map 1 (vencedor, incl. prorrogação)",
-      "pick": "JD Gaming (vencedor mapa 1)",
-      "odd": 3.62,
-      "stake": 500,
-      "bet_datetime": "2026-07-24T09:00:00+00:00",
-      "pandascore_match_id": 116566854547769600,
-      "pandascore_match_name": null,
-      "is_map_bet": true,
-      "map_number": 1,
-      "status": "red",
-      "profit": -500,
-      "settled_at": "2026-07-24T10:20:13.713+00:00",
-      "settle_source": "manual-ML-winner_side (WE won map1 22-13)",
-      "screenshot_path": null,
-      "raw_extraction": {
-        "notes": "PRIMEIRA ML do estudo. Entrada LIVE: JDG pré-jogo era 71.5% na Polymarket (~1.40); comprado @3.62 (27.6% implícito) com jogo empatado aos ~10min — tese de valor live. ATENÇÃO SETTLE: settle-pending-bets NÃO settla Money Line (moneyline_settle_not_implemented) — settle será MANUAL pelo orquestrador via winner_side quando o mapa fechar. | SETTLE MANUAL ML: WE venceu mapa1 (22x13, gameWins WE=1). RED",
-        "match_context": {
-          "teams": [
-            {
-              "code": "WE",
-              "name": "Xi'an Team WE"
-            },
-            {
-              "code": "JDG",
-              "name": "Beijing JDG Esports"
-            }
-          ],
-          "league_id": "98767991314006698",
-          "start_time": "2026-07-24T09:00:00Z",
-          "league_short": "LPL",
-          "lolesports_game_id": "116566854547769601",
-          "lolesports_match_id": "116566854547769600"
-        },
-        "method_variant": "ml_experimental_elvis",
-        "api_anomaly_note": "Cross-check 2026-07-24T09:47Z (lolesports-find-match.cjs + getEventDetails direto): schedule marca este match como state='completed' (outcome null, gameWins 0-0 para ambos os times) mas getEventDetails mostra os 3 games da série como 'unstarted'. getLive (endpoint global) não retorna nenhum match LPL ao vivo no momento — só LJL. Provável falha de sync da API lolesports pro feed da LPL (comum em ligas chinesas), NÃO indica match errado (times/liga/horário batem exatamente com o print). Settle manual deve confirmar resultado real via stream/Liquipedia antes de fechar, não confiar cegamente no campo 'state' da API pra este match_id.",
-        "bookmaker_native": {
-          "bet_id": "5226580966",
-          "raw_pick_text": "JD Gaming (vencedor mapa 1)",
-          "raw_stake_text": "500.00"
-        }
-      },
-      "notes": null,
-      "fair_pinnacle": 30.5,
-      "fair_formula": null,
-      "fair_line_source": "pinnacle_manual",
-      "is_method_bet": false
-    },
-    {
       "id": "4ba7cab0-dd18-46ed-918b-f6b2c0b94839",
       "created_at": "2026-07-24T09:54:01.884291+00:00",
       "bookmaker": "clutch",
@@ -69965,22 +70004,61 @@
         "is_hedge": true,
         "fx_source": "exchangerate-api 2026-07-24",
         "fx_usd_brl": 5.0715,
-        "match_context": {
-          "teams": [
-            {
-              "code": "WE",
-              "name": "Xi'an Team WE"
-            },
-            {
-              "code": "JDG",
-              "name": "Beijing JDG Esports"
+        "compositions": {
+          "source": "lolesports livestats game 116566854547769601",
+          "team_a": {
+            "name": "Xi'an Team WE",
+            "side": "blue",
+            "picks": {
+              "adc": "Varus",
+              "mid": "Ryze",
+              "top": "Rumble",
+              "jungle": "Trundle",
+              "support": "Alistar"
             }
-          ],
-          "league_id": "98767991314006698",
-          "start_time": "2026-07-24T09:00:00Z",
-          "league_short": "LPL",
+          },
+          "team_b": {
+            "name": "Beijing JDG Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Ziggs",
+              "mid": "Anivia",
+              "top": "KSante",
+              "jungle": "Vi",
+              "support": "Camille"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 13,
+          "pick_line": 1,
+          "red_picks": {
+            "adc": "Ziggs",
+            "mid": "Anivia",
+            "top": "KSante",
+            "jungle": "Vi",
+            "support": "Camille"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Varus",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "Trundle",
+            "support": "Alistar"
+          },
+          "kills_blue": 22,
+          "enriched_at": "2026-07-30T15:19:31.622Z",
+          "red_team_id": "99566404852189289",
+          "total_kills": 35,
+          "winner_side": "blue",
+          "blue_team_id": "98767991887166787",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
           "lolesports_game_id": "116566854547769601",
-          "lolesports_match_id": "116566854547769600"
+          "lolesports_match_id": "116566854547769600",
+          "match_ambiguous_at_link": false
         },
         "method_variant": "ml_experimental_elvis",
         "bookmaker_native": {
@@ -70436,28 +70514,61 @@
       "screenshot_path": null,
       "raw_extraction": {
         "notes": "ML mapa 2 Karmine @1.793. Draft favoreceu Karmine (Vi jg 61% forte vs Elise sup 36.8% da Vitality). SETTLE MANUAL via winner_side (Money Line não coberto pelo settle-pending). Karmine=blue no mapa 2.",
-        "match_context": {
-          "teams": [
-            {
-              "code": "KC",
-              "name": "Karmine Corp",
-              "map2_side": "blue",
-              "esports_team_id": "111692118851466302"
-            },
-            {
-              "code": "VIT",
-              "name": "Team Vitality",
-              "map2_side": "red",
-              "esports_team_id": "99322214695067838"
+        "compositions": {
+          "source": "lolesports livestats game 115548681803406201",
+          "team_a": {
+            "name": "Team Vitality",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Anivia",
+              "top": "KSante",
+              "jungle": "Naafiri",
+              "support": "Elise"
             }
-          ],
-          "team_a": "Vitality",
-          "team_b": "Karmine",
-          "league_id": "98767991302996019",
-          "start_time": "2026-07-24T17:30:00Z",
-          "league_short": "LEC",
+          },
+          "team_b": {
+            "name": "Karmine Corp",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Ryze",
+              "top": "Rumble",
+              "jungle": "Vi",
+              "support": "Neeko"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 16,
+          "pick_line": 2,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Anivia",
+            "top": "KSante",
+            "jungle": "Naafiri",
+            "support": "Elise"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Ryze",
+            "top": "Rumble",
+            "jungle": "Vi",
+            "support": "Neeko"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-07-30T15:19:35.471Z",
+          "red_team_id": "99322214695067838",
+          "total_kills": 35,
+          "winner_side": "blue",
+          "blue_team_id": "111692118851466302",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
           "lolesports_game_id": "115548681803406201",
-          "lolesports_match_id": "115548681803406199"
+          "lolesports_match_id": "115548681803406199",
+          "match_ambiguous_at_link": false
         },
         "method_variant": "ml_experimental_elvis",
         "bookmaker_native": {
@@ -71544,43 +71655,61 @@
       "screenshot_path": null,
       "raw_extraction": {
         "notes": "Draft indisponivel no momento do registro (livestats 204, 3 tentativas). Se Camille sup aparecer depois, nao muda a classificacao off-method registrada aqui (decisao ja tomada sem confirmacao).",
-        "match_context": {
-          "state": "inProgress",
-          "teams": [
-            {
-              "code": "G2",
-              "name": "G2 Esports"
-            },
-            {
-              "code": "VIT",
-              "name": "Team Vitality"
+        "compositions": {
+          "source": "lolesports livestats game 115548681803406204",
+          "team_a": {
+            "name": "Team Vitality",
+            "side": "red",
+            "picks": {
+              "adc": "Cassiopeia",
+              "mid": "Sylas",
+              "top": "Renekton",
+              "jungle": "Nocturne",
+              "support": "Camille"
             }
-          ],
-          "team_a": "Vitality",
-          "team_b": "G2 Esports",
-          "sup_red": "Camille",
-          "sup_blue": "Shen",
-          "team_red": "Vitality",
-          "league_id": "98767991302996019",
-          "team_blue": "G2 Esports",
-          "start_time": "2026-07-25T14:30:00Z",
-          "draft_check": {
-            "detail": "livestats /window returned HTTP 204 (no frames) for esportsGameId 115548681803406204, 3 tentativas",
-            "result": "unavailable",
-            "attempted": true,
-            "consulted_at": "2026-07-25T14:47:59.211Z"
           },
-          "draft_source": "livestats window (frames apos inicio do mapa)",
-          "game_id_map1": "115548681803406204",
-          "league_short": "LEC",
-          "sup_confirmed": null,
-          "draft_confirmed_at": "2026-07-25T14:59:31.701Z",
+          "team_b": {
+            "name": "G2 Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Viktor",
+              "mid": "Orianna",
+              "top": "Kled",
+              "jungle": "JarvanIV",
+              "support": "Shen"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Cassiopeia",
+            "mid": "Sylas",
+            "top": "Renekton",
+            "jungle": "Nocturne",
+            "support": "Camille"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Viktor",
+            "mid": "Orianna",
+            "top": "Kled",
+            "jungle": "JarvanIV",
+            "support": "Shen"
+          },
+          "kills_blue": 26,
+          "enriched_at": "2026-07-30T15:19:36.571Z",
+          "red_team_id": "99322214695067838",
+          "total_kills": 34,
+          "winner_side": "blue",
+          "blue_team_id": "98767991926151025",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
           "lolesports_game_id": "115548681803406204",
           "lolesports_match_id": "115548681803406203",
-          "series_score_at_bet": {
-            "current_map": 1,
-            "maps_completed_before": 0
-          }
+          "match_ambiguous_at_link": false
         },
         "method_variant": "over_experimental_elvis",
         "bookmaker_native": {
@@ -71621,21 +71750,61 @@
         "notes": "BOOST odd de valor (Clutch). Mercado de SÉRIE (total mapas / handicap mapas), não de kills, sem método. Amanhã CBLOL. SETTLE MANUAL via placar da série (não coberto pelo settle-pending). Stake convertida de USD.",
         "fx_source": "open.er-api.com (2026-07-24)",
         "fx_usd_brl": 5.074167,
-        "match_context": {
-          "teams": [
-            {
-              "code": "FUR",
-              "name": "FURIA"
-            },
-            {
-              "code": "LOS",
-              "name": "LOS"
+        "compositions": {
+          "source": "lolesports livestats game 115565671526402946",
+          "team_a": {
+            "name": "FURIA",
+            "side": "blue",
+            "picks": {
+              "adc": "Cassiopeia",
+              "mid": "Akali",
+              "top": "Sion",
+              "jungle": "Vi",
+              "support": "Camille"
             }
-          ],
-          "league_id": "98767991332355509",
-          "start_time": "2026-07-25T16:00:00Z",
-          "league_short": "CBLOL",
-          "lolesports_match_id": "115565671526402945"
+          },
+          "team_b": {
+            "name": "LOS",
+            "side": "red",
+            "picks": {
+              "adc": "Syndra",
+              "mid": "Orianna",
+              "top": "DrMundo",
+              "jungle": "JarvanIV",
+              "support": "Shen"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 19,
+          "pick_line": 2.5,
+          "red_picks": {
+            "adc": "Syndra",
+            "mid": "Orianna",
+            "top": "DrMundo",
+            "jungle": "JarvanIV",
+            "support": "Shen"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Cassiopeia",
+            "mid": "Akali",
+            "top": "Sion",
+            "jungle": "Vi",
+            "support": "Camille"
+          },
+          "kills_blue": 8,
+          "enriched_at": "2026-07-30T15:19:33.165Z",
+          "red_team_id": "109480204628225868",
+          "total_kills": 27,
+          "winner_side": "red",
+          "blue_team_id": "100205576309502431",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565671526402946",
+          "lolesports_match_id": "115565671526402945",
+          "match_ambiguous_at_link": false
         },
         "method_variant": "boost_series_experimental",
         "bookmaker_native": {
@@ -71678,21 +71847,61 @@
         "notes": "BOOST odd de valor (Clutch). Mercado de SÉRIE (total mapas / handicap mapas), não de kills, sem método. Amanhã CBLOL. SETTLE MANUAL via placar da série (não coberto pelo settle-pending). Stake convertida de USD.",
         "fx_source": "open.er-api.com (2026-07-24)",
         "fx_usd_brl": 5.074167,
-        "match_context": {
-          "teams": [
-            {
-              "code": "LOUD",
-              "name": "LOUD"
-            },
-            {
-              "code": "PAIN",
-              "name": "paiN Gaming"
+        "compositions": {
+          "source": "lolesports livestats game 115565671526402998",
+          "team_a": {
+            "name": "LOUD",
+            "side": "red",
+            "picks": {
+              "adc": "Kaisa",
+              "mid": "Syndra",
+              "top": "Tristana",
+              "jungle": "LeeSin",
+              "support": "Shen"
             }
-          ],
-          "league_id": "98767991332355509",
-          "start_time": "2026-07-25T19:00:00Z",
-          "league_short": "CBLOL",
-          "lolesports_match_id": "115565671526402997"
+          },
+          "team_b": {
+            "name": "paiN Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Viktor",
+              "top": "Gnar",
+              "jungle": "Vi",
+              "support": "Rell"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 3,
+          "pick_line": 1.5,
+          "red_picks": {
+            "adc": "Kaisa",
+            "mid": "Syndra",
+            "top": "Tristana",
+            "jungle": "LeeSin",
+            "support": "Shen"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Viktor",
+            "top": "Gnar",
+            "jungle": "Vi",
+            "support": "Rell"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-07-30T15:19:34.207Z",
+          "red_team_id": "105397404796640412",
+          "total_kills": 17,
+          "winner_side": "blue",
+          "blue_team_id": "99566408217955692",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
+          "lolesports_game_id": "115565671526402998",
+          "lolesports_match_id": "115565671526402997",
+          "match_ambiguous_at_link": false
         },
         "method_variant": "boost_series_experimental",
         "bookmaker_native": {
@@ -71733,36 +71942,61 @@
       "screenshot_path": null,
       "raw_extraction": {
         "notes": "Bookmaker corrigido de betano para parimatch apos leitura literal dos termos do print (ver notes top-level). bet_id literal recebido do COO: 'NP1' (provavel OCR de 'Nº1').",
-        "match_context": {
-          "state": "inProgress",
-          "teams": [
-            {
-              "code": "LOUD",
-              "name": "LOUD"
-            },
-            {
-              "code": "PAIN",
-              "name": "paiN Gaming"
+        "compositions": {
+          "source": "lolesports livestats game 115565671526402999",
+          "team_a": {
+            "name": "LOUD",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Cassiopeia",
+              "top": "KSante",
+              "jungle": "Qiyana",
+              "support": "Nautilus"
             }
-          ],
-          "team_a": "LOUD",
-          "team_b": "paiN Gaming",
-          "league_id": "98767991332355509",
-          "start_time": "2026-07-25T19:00:00Z",
-          "game_id_map2": "115565671526402999",
-          "league_short": "CBLOL",
-          "sup_confirmed": null,
-          "live_kills_at_bet": {
-            "LOUD": 3,
-            "paiN": 14,
-            "total": 17
           },
+          "team_b": {
+            "name": "paiN Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Ziggs",
+              "mid": "Anivia",
+              "top": "Ambessa",
+              "jungle": "JarvanIV",
+              "support": "Leona"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 26,
+          "pick_line": 28.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Cassiopeia",
+            "top": "KSante",
+            "jungle": "Qiyana",
+            "support": "Nautilus"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ziggs",
+            "mid": "Anivia",
+            "top": "Ambessa",
+            "jungle": "JarvanIV",
+            "support": "Leona"
+          },
+          "kills_blue": 4,
+          "enriched_at": "2026-07-30T15:19:38.681Z",
+          "red_team_id": "105397404796640412",
+          "total_kills": 30,
+          "winner_side": "red",
+          "blue_team_id": "99566408217955692",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
           "lolesports_game_id": "115565671526402999",
           "lolesports_match_id": "115565671526402997",
-          "series_score_at_bet": {
-            "current_map": 2,
-            "maps_completed_before": 1
-          }
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": "NP1",
@@ -71773,94 +72007,6 @@
       },
       "notes": "Live/instinto (Elvis: 'metodo chimpa'). Elvis reportou linha equivalente @1.40 na Pinnacle pos-entrada (mercado correu na direcao dele). BOOKMAKER RECLASSIFICADO de 'betano' (sugestao inicial do COO) para 'parimatch': terminologia do print ('Soma da aposta'/'Ganhos possiveis'/botao laranja 'Retirada') + tema escuro batem exatamente com a assinatura Parimatch da tabela de bookmakers do bet-logger (Betano = tema claro/branco, botao 'CASH OUT', textos 'Aposta:'/'Ganhos Potenciais:'). Cross-check contra bets Parimatch existentes no banco confirma: mesmo padrao de bet_id Nº/N° sequencial (ex Nº216-226) — 'NP1' do print e provavelmente OCR de 'Nº1'.",
       "fair_pinnacle": 29.5,
-      "fair_formula": null,
-      "fair_line_source": "pinnacle_manual",
-      "is_method_bet": false
-    },
-    {
-      "id": "ab75218d-a57e-45c2-b3f4-addb723f97b4",
-      "created_at": "2026-07-25T20:13:17.682565+00:00",
-      "bookmaker": "thunderpick",
-      "league": "LCS",
-      "team_a": "FlyQuest",
-      "team_b": "LYON",
-      "market": "Total Kills — Map 1",
-      "pick": "Over 27.5",
-      "odd": 1.8,
-      "stake": 1000,
-      "bet_datetime": "2026-07-25T20:12:36.558+00:00",
-      "pandascore_match_id": null,
-      "pandascore_match_name": null,
-      "is_map_bet": true,
-      "map_number": 1,
-      "status": "red",
-      "profit": -1000,
-      "settled_at": "2026-07-25T22:56:39.494+00:00",
-      "settle_source": "manual-coo (map1 FLY x LYON finished 26 kills FLY 7x19 @20:41Z; 2o sinal: map2 window in_game; eventDetails stale unstarted — bug do dia)",
-      "screenshot_path": null,
-      "raw_extraction": {
-        "notes": "Pre-draft confirmado via getEventDetails: map1 esportsGameId 115564797164345552 state=unstarted no momento do registro. Sem confirmacao de Camille sup possivel.",
-        "ladder_info": {
-          "ladder_legs": [
-            "thunderpick @1.80 stake 1000.00 (Over 27.5, na fair)",
-            "thunderpick @1.65 stake 1000.00 (Over 29.5, fair+2)"
-          ],
-          "ladder_role": "step",
-          "ladder_group_id": "f70704b7-edfd-4837-8662-6e8e39378519",
-          "ladder_total_exposure": 2000,
-          "ladder_blended_odd_note": "~1.72"
-        },
-        "match_context": {
-          "state": "unstarted",
-          "teams": [
-            {
-              "code": "FLY",
-              "name": "FlyQuest"
-            },
-            {
-              "code": "LYON",
-              "name": "LYON"
-            }
-          ],
-          "team_a": "FlyQuest",
-          "team_b": "LYON",
-          "sup_red": "Camille",
-          "sup_blue": "Leona",
-          "team_red": "LYON",
-          "draft_red": "Gnar,JarvanIV,Leblanc,Cassiopeia,Camille",
-          "league_id": "98767991299243165",
-          "team_blue": "FlyQuest",
-          "draft_blue": "Ambessa,LeeSin,Akali,Ziggs,Leona",
-          "start_time": "2026-07-25T20:00:00Z",
-          "draft_check": {
-            "detail": "getEventDetails map1 state=unstarted — draft ainda nao comecou, livestats nem tentado (nao ha jogo pra consultar)",
-            "result": "pre_draft_confirmed",
-            "attempted": true,
-            "consulted_at": "2026-07-25T20:12:36.558Z"
-          },
-          "draft_source": "livestats window map1 (verificado 2x: COO + bet-logger)",
-          "game_id_map1": "115564797164345552",
-          "league_short": "LCS",
-          "sup_confirmed": null,
-          "ladder_group_id": "f70704b7-edfd-4837-8662-6e8e39378519",
-          "draft_confirmed_at": "2026-07-25T20:24:32.386Z",
-          "lolesports_game_id": "115564797164345552",
-          "lolesports_match_id": "115564797164345551",
-          "series_score_at_bet": {
-            "current_map": 1,
-            "maps_completed_before": 0
-          }
-        },
-        "method_variant": "over_experimental_elvis",
-        "bookmaker_native": {
-          "bet_id": null,
-          "potential_win": 1799.96,
-          "raw_pick_text": "Over 27.5",
-          "raw_stake_text": "R$1.000,00"
-        }
-      },
-      "notes": "Pre-draft (jogo 17:00 BRT / 20:00Z). Se draft vier com Camille sup, reclassificar pra over_experimental_elvis — MAS: leg 29.5 = fair+2 (janela proibe fair+2) e odd 1.65 < minimo 1.80 da janela; leg 27.5 na fair ta dentro da regua. COO vai reavaliar no draft. Sem bookmaker_bet_id visivel no print (Thunderpick nao mostra id nesse screen) — campo omitido. | Janela Camille CONFIRMADA pos-registro: Camille sup (LYON) vs Leona (FlyQuest) — engage, recorte MELHOR que vs Shen. Linha 27.5 NA fair, odd 1.80 = regua cheia da janela. Bet feita pre-draft e validada pelo draft.",
-      "fair_pinnacle": 27.5,
       "fair_formula": null,
       "fair_line_source": "pinnacle_manual",
       "is_method_bet": false
@@ -71898,46 +72044,61 @@
           "ladder_total_exposure": 2000,
           "ladder_blended_odd_note": "~1.72"
         },
-        "match_context": {
-          "state": "unstarted",
-          "teams": [
-            {
-              "code": "FLY",
-              "name": "FlyQuest"
-            },
-            {
-              "code": "LYON",
-              "name": "LYON"
+        "compositions": {
+          "source": "lolesports livestats game 115564797164345552",
+          "team_a": {
+            "name": "FlyQuest",
+            "side": "blue",
+            "picks": {
+              "adc": "Ziggs",
+              "mid": "Akali",
+              "top": "Ambessa",
+              "jungle": "LeeSin",
+              "support": "Leona"
             }
-          ],
-          "team_a": "FlyQuest",
-          "team_b": "LYON",
-          "sup_red": "Camille",
-          "sup_blue": "Leona",
-          "team_red": "LYON",
-          "draft_red": "Gnar,JarvanIV,Leblanc,Cassiopeia,Camille",
-          "league_id": "98767991299243165",
-          "team_blue": "FlyQuest",
-          "draft_blue": "Ambessa,LeeSin,Akali,Ziggs,Leona",
-          "start_time": "2026-07-25T20:00:00Z",
-          "draft_check": {
-            "detail": "getEventDetails map1 state=unstarted — draft ainda nao comecou, livestats nem tentado (nao ha jogo pra consultar)",
-            "result": "pre_draft_confirmed",
-            "attempted": true,
-            "consulted_at": "2026-07-25T20:12:36.558Z"
           },
-          "draft_source": "livestats window map1 (verificado 2x: COO + bet-logger)",
-          "game_id_map1": "115564797164345552",
-          "league_short": "LCS",
-          "sup_confirmed": null,
-          "ladder_group_id": "f70704b7-edfd-4837-8662-6e8e39378519",
-          "draft_confirmed_at": "2026-07-25T20:24:32.386Z",
+          "team_b": {
+            "name": "LYON",
+            "side": "red",
+            "picks": {
+              "adc": "Cassiopeia",
+              "mid": "Leblanc",
+              "top": "Gnar",
+              "jungle": "JarvanIV",
+              "support": "Camille"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 19,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Cassiopeia",
+            "mid": "Leblanc",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Camille"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ziggs",
+            "mid": "Akali",
+            "top": "Ambessa",
+            "jungle": "LeeSin",
+            "support": "Leona"
+          },
+          "kills_blue": 7,
+          "enriched_at": "2026-07-30T15:19:38.096Z",
+          "red_team_id": "99566405941863385",
+          "total_kills": 26,
+          "winner_side": "red",
+          "blue_team_id": "98926509892121852",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
           "lolesports_game_id": "115564797164345552",
           "lolesports_match_id": "115564797164345551",
-          "series_score_at_bet": {
-            "current_map": 1,
-            "maps_completed_before": 0
-          }
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": null,
@@ -71947,6 +72108,109 @@
         }
       },
       "notes": "Pre-draft (jogo 17:00 BRT / 20:00Z). Se draft vier com Camille sup, reclassificar pra over_experimental_elvis — MAS: leg 29.5 = fair+2 (janela proibe fair+2) e odd 1.65 < minimo 1.80 da janela; leg 27.5 na fair ta dentro da regua. COO vai reavaliar no draft. Sem bookmaker_bet_id visivel no print (Thunderpick nao mostra id nesse screen) — campo omitido. | Draft confirmado: Camille sup (LYON) vs Leona (FlyQuest). Camille presente MAS linha 29.5 = fair+2 (janela proibe) e odd 1.65 < minimo 1.80 → segue OFF-METHOD.",
+      "fair_pinnacle": 27.5,
+      "fair_formula": null,
+      "fair_line_source": "pinnacle_manual",
+      "is_method_bet": false
+    },
+    {
+      "id": "ab75218d-a57e-45c2-b3f4-addb723f97b4",
+      "created_at": "2026-07-25T20:13:17.682565+00:00",
+      "bookmaker": "thunderpick",
+      "league": "LCS",
+      "team_a": "FlyQuest",
+      "team_b": "LYON",
+      "market": "Total Kills — Map 1",
+      "pick": "Over 27.5",
+      "odd": 1.8,
+      "stake": 1000,
+      "bet_datetime": "2026-07-25T20:12:36.558+00:00",
+      "pandascore_match_id": null,
+      "pandascore_match_name": null,
+      "is_map_bet": true,
+      "map_number": 1,
+      "status": "red",
+      "profit": -1000,
+      "settled_at": "2026-07-25T22:56:39.494+00:00",
+      "settle_source": "manual-coo (map1 FLY x LYON finished 26 kills FLY 7x19 @20:41Z; 2o sinal: map2 window in_game; eventDetails stale unstarted — bug do dia)",
+      "screenshot_path": null,
+      "raw_extraction": {
+        "notes": "Pre-draft confirmado via getEventDetails: map1 esportsGameId 115564797164345552 state=unstarted no momento do registro. Sem confirmacao de Camille sup possivel.",
+        "ladder_info": {
+          "ladder_legs": [
+            "thunderpick @1.80 stake 1000.00 (Over 27.5, na fair)",
+            "thunderpick @1.65 stake 1000.00 (Over 29.5, fair+2)"
+          ],
+          "ladder_role": "step",
+          "ladder_group_id": "f70704b7-edfd-4837-8662-6e8e39378519",
+          "ladder_total_exposure": 2000,
+          "ladder_blended_odd_note": "~1.72"
+        },
+        "compositions": {
+          "source": "lolesports livestats game 115564797164345552",
+          "team_a": {
+            "name": "FlyQuest",
+            "side": "blue",
+            "picks": {
+              "adc": "Ziggs",
+              "mid": "Akali",
+              "top": "Ambessa",
+              "jungle": "LeeSin",
+              "support": "Leona"
+            }
+          },
+          "team_b": {
+            "name": "LYON",
+            "side": "red",
+            "picks": {
+              "adc": "Cassiopeia",
+              "mid": "Leblanc",
+              "top": "Gnar",
+              "jungle": "JarvanIV",
+              "support": "Camille"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 19,
+          "pick_line": 27.5,
+          "red_picks": {
+            "adc": "Cassiopeia",
+            "mid": "Leblanc",
+            "top": "Gnar",
+            "jungle": "JarvanIV",
+            "support": "Camille"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ziggs",
+            "mid": "Akali",
+            "top": "Ambessa",
+            "jungle": "LeeSin",
+            "support": "Leona"
+          },
+          "kills_blue": 7,
+          "enriched_at": "2026-07-30T15:19:37.693Z",
+          "red_team_id": "99566405941863385",
+          "total_kills": 26,
+          "winner_side": "red",
+          "blue_team_id": "98926509892121852",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
+          "lolesports_game_id": "115564797164345552",
+          "lolesports_match_id": "115564797164345551",
+          "match_ambiguous_at_link": false
+        },
+        "method_variant": "over_experimental_elvis",
+        "bookmaker_native": {
+          "bet_id": null,
+          "potential_win": 1799.96,
+          "raw_pick_text": "Over 27.5",
+          "raw_stake_text": "R$1.000,00"
+        }
+      },
+      "notes": "Pre-draft (jogo 17:00 BRT / 20:00Z). Se draft vier com Camille sup, reclassificar pra over_experimental_elvis — MAS: leg 29.5 = fair+2 (janela proibe fair+2) e odd 1.65 < minimo 1.80 da janela; leg 27.5 na fair ta dentro da regua. COO vai reavaliar no draft. Sem bookmaker_bet_id visivel no print (Thunderpick nao mostra id nesse screen) — campo omitido. | Janela Camille CONFIRMADA pos-registro: Camille sup (LYON) vs Leona (FlyQuest) — engage, recorte MELHOR que vs Shen. Linha 27.5 NA fair, odd 1.80 = regua cheia da janela. Bet feita pre-draft e validada pelo draft.",
       "fair_pinnacle": 27.5,
       "fair_formula": null,
       "fair_line_source": "pinnacle_manual",
@@ -72039,57 +72303,61 @@
       "screenshot_path": null,
       "raw_extraction": {
         "notes": "Ver nota de incerteza de bookmaker no notes top-level. Sem bookmaker_bet_id visivel no print (modal de confirmacao nao mostra id).",
-        "match_context": {
-          "state": "inProgress",
-          "teams": [
-            {
-              "code": "LOUD",
-              "name": "LOUD"
-            },
-            {
-              "code": "PAIN",
-              "name": "paiN Gaming"
+        "compositions": {
+          "source": "lolesports livestats game 115565671526402999",
+          "team_a": {
+            "name": "LOUD",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Cassiopeia",
+              "top": "KSante",
+              "jungle": "Qiyana",
+              "support": "Nautilus"
             }
-          ],
-          "team_a": "LOUD",
-          "team_b": "paiN Gaming",
-          "league_id": "98767991332355509",
-          "start_time": "2026-07-25T19:00:00Z",
-          "map1_result": {
-            "state": "finished",
-            "source": "livestats window, confirmado via summonerName prefixes (PAIN.../LOUD...) — nao apenas esportsTeamId",
-            "winner": "paiN Gaming",
-            "kills_LOUD": 3,
-            "kills_paiN": 14,
-            "inhibitors_LOUD": 0,
-            "inhibitors_paiN": 2
           },
-          "game_id_map1": "115565671526402998",
-          "game_id_map2": "115565671526402999",
-          "league_short": "CBLOL",
-          "api_anomaly_note": "getEventDetails reporta side map1 como LOUD=blue/paiN=red (provavelmente side agendado/pre-jogo), mas livestats window (ground truth via summonerName prefixes) mostra o INVERSO: paiN=blue/LOUD=red no map1 realmente jogado. Usado livestats como fonte de verdade pra apurar vencedor do map1. Mesma inversao pode valer p/ map2 — ja usado summonerName pra confirmar la tambem (paiN=blue, LOUD=red).",
+          "team_b": {
+            "name": "paiN Gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Ziggs",
+              "mid": "Anivia",
+              "top": "Ambessa",
+              "jungle": "JarvanIV",
+              "support": "Leona"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 26,
+          "pick_line": 2,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Cassiopeia",
+            "top": "KSante",
+            "jungle": "Qiyana",
+            "support": "Nautilus"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ziggs",
+            "mid": "Anivia",
+            "top": "Ambessa",
+            "jungle": "JarvanIV",
+            "support": "Leona"
+          },
+          "kills_blue": 4,
+          "enriched_at": "2026-07-30T15:19:39.058Z",
+          "red_team_id": "105397404796640412",
+          "total_kills": 30,
+          "winner_side": "red",
+          "blue_team_id": "99566408217955692",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
           "lolesports_game_id": "115565671526402999",
           "lolesports_match_id": "115565671526402997",
-          "series_score_at_bet": {
-            "LOUD_wins": 0,
-            "paiN_wins": 1,
-            "current_map": 2,
-            "maps_completed_before": 1
-          },
-          "map2_live_state_at_bet": {
-            "note": "paiN claramente atras (gold, kills, dragoes) apesar de mais torres — consistente com o punt de virada @7.13",
-            "gameState": "in_game",
-            "gold_LOUD": 45967,
-            "gold_paiN": 41512,
-            "kills_LOUD": 10,
-            "kills_paiN": 2,
-            "total_kills": 12,
-            "towers_LOUD": 2,
-            "towers_paiN": 3,
-            "consulted_at": "2026-07-25T20:43:09.628Z",
-            "dragons_LOUD": 3,
-            "dragons_paiN": 0
-          }
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": null,
@@ -72128,68 +72396,63 @@
       "screenshot_path": null,
       "raw_extraction": {
         "notes": "Draft indisponivel (livestats 204 x3) as 21:13:54Z, ~2min apos bet_datetime informado. Kills mapa2 confirmados de forma independente via livestats (nao so relay do COO) — bate exatamente com o relatado: LOUD 26 x paiN 4 = 30 kills, LOUD venceu (1 inibidor destruido).",
+        "compositions": {
+          "source": "lolesports livestats game 115565671526403000",
+          "team_a": {
+            "name": "LOUD",
+            "side": "blue",
+            "picks": {
+              "adc": "Caitlyn",
+              "mid": "Sylas",
+              "top": "Ornn",
+              "jungle": "MonkeyKing",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "paiN Gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Orianna",
+              "top": "Rumble",
+              "jungle": "Naafiri",
+              "support": "Milio"
+            }
+          }
+        },
         "trigger_type": "2peel",
         "is_method_bet": true,
         "match_context": {
-          "state": "inProgress",
-          "teams": [
-            {
-              "code": "LOUD",
-              "name": "LOUD"
-            },
-            {
-              "code": "PAIN",
-              "name": "paiN Gaming"
-            }
-          ],
-          "team_a": "LOUD",
-          "team_b": "paiN Gaming",
-          "sup_red": "Milio",
-          "sup_blue": "Karma",
-          "team_red": "paiN Gaming",
-          "draft_red": "Rumble,Naafiri,Orianna,Lucian,Milio",
-          "league_id": "98767991332355509",
-          "team_blue": "LOUD",
-          "draft_blue": "Ornn,MonkeyKing,Sylas,Caitlyn,Karma",
-          "start_time": "2026-07-25T19:00:00Z",
-          "draft_check": {
-            "detail": "livestats /window returned HTTP 204 (no frames) for esportsGameId 115565671526403000, 3 tentativas",
-            "result": "unavailable",
-            "attempted": true,
-            "consulted_at": "2026-07-25T21:13:54.162Z"
+          "kills_red": 1,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Orianna",
+            "top": "Rumble",
+            "jungle": "Naafiri",
+            "support": "Milio"
           },
-          "map1_result": {
-            "state": "finished",
-            "winner": "paiN Gaming",
-            "kills_LOUD": 3,
-            "kills_paiN": 14,
-            "total_kills": 17
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Caitlyn",
+            "mid": "Sylas",
+            "top": "Ornn",
+            "jungle": "MonkeyKing",
+            "support": "Karma"
           },
-          "map2_result": {
-            "state": "finished",
-            "source": "livestats window (blue=paiN 4 kills, red=LOUD 26 kills, red 1 inibidor destruido), confirmado independente do relay do COO — frame final rfc 2026-07-25T20:56:15.705Z",
-            "winner": "LOUD",
-            "for_settle": "usar pra settlar a51a6504 (Over 28.5 map2, GREEN — 30>28.5) e 1f6e1b8b (ML paiN vencedor map2, RED — LOUD venceu)",
-            "kills_LOUD": 26,
-            "kills_paiN": 4,
-            "total_kills": 30,
-            "consulted_at": "2026-07-25T21:13:19Z"
-          },
-          "draft_source": "livestats window map3 (summonerName LOUD*/PAIN* confirma times, nao side)",
-          "game_id_map1": "115565671526402998",
-          "game_id_map2": "115565671526402999",
-          "game_id_map3": "115565671526403000",
-          "league_short": "CBLOL",
-          "sup_confirmed": null,
-          "draft_confirmed_at": "2026-07-25T21:17:55.025Z",
+          "kills_blue": 13,
+          "enriched_at": "2026-07-30T15:19:39.601Z",
+          "red_team_id": "99566408217955692",
+          "total_kills": 14,
+          "winner_side": "blue",
+          "blue_team_id": "105397404796640412",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "CBLOL",
           "lolesports_game_id": "115565671526403000",
           "lolesports_match_id": "115565671526402997",
-          "series_score_at_bet": {
-            "LOUD_wins": 1,
-            "paiN_wins": 1,
-            "current_map": 3,
-            "maps_completed_before": 2
-          }
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": "NP4",
@@ -72237,59 +72500,63 @@
           "ladder_total_exposure": 2000,
           "ladder_blended_odd_note": "~1.80"
         },
+        "compositions": {
+          "source": "lolesports livestats game 115564797163821181",
+          "team_a": {
+            "name": "Dignitas",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Syndra",
+              "top": "Gnar",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Sentinels",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Viktor",
+              "top": "Malphite",
+              "jungle": "Qiyana",
+              "support": "Bard"
+            }
+          }
+        },
         "trigger_type": "1peel+flex",
         "is_method_bet": true,
         "match_context": {
-          "state": "inProgress",
-          "teams": [
-            {
-              "code": "DIG",
-              "name": "Dignitas"
-            },
-            {
-              "code": "SEN",
-              "name": "Sentinels"
-            }
-          ],
-          "team_a": "Dignitas",
-          "team_b": "Sentinels",
-          "sup_red": "Bard",
-          "sup_blue": "Milio",
-          "team_red": "Sentinels",
-          "draft_red": "Malphite,Qiyana,Viktor,Jhin,Bard",
-          "league_id": "98767991299243165",
-          "team_blue": "Dignitas",
-          "draft_blue": "Gnar,Pantheon,Syndra,Lucian,Milio",
-          "start_time": "2026-07-25T23:00:00Z",
-          "draft_check": {
-            "detail": "livestats /window returned HTTP 204 (no frames) for esportsGameId 115564797163821181, 3 tentativas",
-            "result": "unavailable",
-            "attempted": true,
-            "consulted_at": "2026-07-25T22:56:17.682Z"
+          "kills_red": 17,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Viktor",
+            "top": "Malphite",
+            "jungle": "Qiyana",
+            "support": "Bard"
           },
-          "map1_result": {
-            "state": "finished",
-            "source": "livestats window (blue=SEN 20 kills 0 inh, red=DIG 20 kills 1 inh destruido)",
-            "winner": "Dignitas",
-            "kills_DIG": 20,
-            "kills_SEN": 20,
-            "total_kills": 40
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Syndra",
+            "top": "Gnar",
+            "jungle": "Pantheon",
+            "support": "Milio"
           },
-          "draft_source": "livestats window map2 (summonerName DIG*/SEN*)",
-          "game_id_map1": "115564797163821180",
-          "game_id_map2": "115564797163821181",
-          "league_short": "LCS",
-          "sup_confirmed": null,
-          "ladder_group_id": "575c006b-dae4-48c3-9ac4-be98d807fe17",
-          "draft_confirmed_at": "2026-07-25T23:01:33.240Z",
+          "kills_blue": 4,
+          "enriched_at": "2026-07-30T15:19:41.196Z",
+          "red_team_id": "115688562107799886",
+          "total_kills": 21,
+          "winner_side": "red",
+          "blue_team_id": "98926509883054987",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
           "lolesports_game_id": "115564797163821181",
           "lolesports_match_id": "115564797163821179",
-          "series_score_at_bet": {
-            "DIG_wins": 1,
-            "SEN_wins": 0,
-            "current_map": 2,
-            "maps_completed_before": 1
-          }
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": "3091312938",
@@ -72337,59 +72604,63 @@
           "ladder_total_exposure": 2000,
           "ladder_blended_odd_note": "~1.80"
         },
+        "compositions": {
+          "source": "lolesports livestats game 115564797163821181",
+          "team_a": {
+            "name": "Dignitas",
+            "side": "blue",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Syndra",
+              "top": "Gnar",
+              "jungle": "Pantheon",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "Sentinels",
+            "side": "red",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Viktor",
+              "top": "Malphite",
+              "jungle": "Qiyana",
+              "support": "Bard"
+            }
+          }
+        },
         "trigger_type": "1peel+flex",
         "is_method_bet": true,
         "match_context": {
-          "state": "inProgress",
-          "teams": [
-            {
-              "code": "DIG",
-              "name": "Dignitas"
-            },
-            {
-              "code": "SEN",
-              "name": "Sentinels"
-            }
-          ],
-          "team_a": "Dignitas",
-          "team_b": "Sentinels",
-          "sup_red": "Bard",
-          "sup_blue": "Milio",
-          "team_red": "Sentinels",
-          "draft_red": "Malphite,Qiyana,Viktor,Jhin,Bard",
-          "league_id": "98767991299243165",
-          "team_blue": "Dignitas",
-          "draft_blue": "Gnar,Pantheon,Syndra,Lucian,Milio",
-          "start_time": "2026-07-25T23:00:00Z",
-          "draft_check": {
-            "detail": "livestats /window returned HTTP 204 (no frames) for esportsGameId 115564797163821181, 3 tentativas",
-            "result": "unavailable",
-            "attempted": true,
-            "consulted_at": "2026-07-25T22:56:17.682Z"
+          "kills_red": 17,
+          "pick_line": 26.5,
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Viktor",
+            "top": "Malphite",
+            "jungle": "Qiyana",
+            "support": "Bard"
           },
-          "map1_result": {
-            "state": "finished",
-            "source": "livestats window (blue=SEN 20 kills 0 inh, red=DIG 20 kills 1 inh destruido)",
-            "winner": "Dignitas",
-            "kills_DIG": 20,
-            "kills_SEN": 20,
-            "total_kills": 40
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Syndra",
+            "top": "Gnar",
+            "jungle": "Pantheon",
+            "support": "Milio"
           },
-          "draft_source": "livestats window map2 (summonerName DIG*/SEN*)",
-          "game_id_map1": "115564797163821180",
-          "game_id_map2": "115564797163821181",
-          "league_short": "LCS",
-          "sup_confirmed": null,
-          "ladder_group_id": "575c006b-dae4-48c3-9ac4-be98d807fe17",
-          "draft_confirmed_at": "2026-07-25T23:01:33.240Z",
+          "kills_blue": 4,
+          "enriched_at": "2026-07-30T15:19:40.838Z",
+          "red_team_id": "115688562107799886",
+          "total_kills": 21,
+          "winner_side": "red",
+          "blue_team_id": "98926509883054987",
+          "trigger_type": "1peel+flex",
+          "coverage_status": "enriched",
+          "league_inferred": "LCS",
           "lolesports_game_id": "115564797163821181",
           "lolesports_match_id": "115564797163821179",
-          "series_score_at_bet": {
-            "DIG_wins": 1,
-            "SEN_wins": 0,
-            "current_map": 2,
-            "maps_completed_before": 1
-          }
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": null,
@@ -72650,40 +72921,61 @@
         "notes": "Conversao USD->BRL: US$200,00 @5.0885 (awesomeapi ask, ultimo disponivel antes do fechamento FX de domingo) = R$1.017,70. Cross-check independente: open.er-api.com deu 5.079327 no mesmo momento — dentro de 0.2% de diferenca, taxa validada.",
         "fx_source": "awesomeapi (2026-07-24 18:30:14, ask)",
         "fx_usd_brl": 5.0885,
-        "match_context": {
-          "state": "inProgress",
-          "teams": [
-            {
-              "code": "TT",
-              "name": "THUNDER TALK GAMING"
-            },
-            {
-              "code": "EDG",
-              "name": "EDWARD GAMING"
+        "compositions": {
+          "source": "lolesports livestats game 116566854547769654",
+          "team_a": {
+            "name": "THUNDER TALK GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Jhin",
+              "mid": "Cassiopeia",
+              "top": "Ambessa",
+              "jungle": "Naafiri",
+              "support": "Seraphine"
             }
-          ],
-          "team_a": "THUNDER TALK GAMING",
-          "team_b": "EDG",
-          "league_id": "98767991314006698",
-          "start_time": "2026-07-26T09:00:00Z",
-          "game_id_map2": "116566854547769654",
-          "league_short": "LPL",
-          "trigger_type": "2peel",
-          "sup_confirmed": {
-            "TT": "Seraphine",
-            "EDG": "Karma",
-            "confirmed_at": "livestats window, fetch proprio + confirmado pelo COO",
-            "verified_via_livestats": true
           },
-          "api_anomaly_note": "getSchedule reporta state='unstarted' mesmo com o mapa 2 ja em andamento no livestats (0x0 kills, draft locked) — mesmo padrao de cache stale visto varias vezes nesta sessao.",
+          "team_b": {
+            "name": "EDWARD GAMING",
+            "side": "red",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Ahri",
+              "top": "Gnar",
+              "jungle": "Vi",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 8,
+          "pick_line": 30.5,
+          "red_picks": {
+            "adc": "Ezreal",
+            "mid": "Ahri",
+            "top": "Gnar",
+            "jungle": "Vi",
+            "support": "Karma"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Jhin",
+            "mid": "Cassiopeia",
+            "top": "Ambessa",
+            "jungle": "Naafiri",
+            "support": "Seraphine"
+          },
+          "kills_blue": 11,
+          "enriched_at": "2026-07-30T15:19:42.259Z",
+          "red_team_id": "98767991882270868",
+          "total_kills": 19,
+          "winner_side": "blue",
+          "blue_team_id": "101388912911039804",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
           "lolesports_game_id": "116566854547769654",
           "lolesports_match_id": "116566854547769652",
-          "series_score_at_bet": {
-            "TT_wins": 1,
-            "EDG_wins": 0,
-            "current_map": 2,
-            "maps_completed_before": 1
-          }
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": "2693106341303693501",
@@ -72910,48 +73202,63 @@
           "ladder_total_exposure": 1991.06,
           "ladder_blended_odd_note": "~1.80"
         },
+        "compositions": {
+          "source": "lolesports livestats game 116566854547769553",
+          "team_a": {
+            "name": "Anyone's Legend",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ryze",
+              "top": "Gnar",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "BILIBILI GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Anivia",
+              "top": "Ambessa",
+              "jungle": "Naafiri",
+              "support": "Karma"
+            }
+          }
+        },
         "trigger_type": "2peel",
         "is_method_bet": true,
         "match_context": {
-          "state": "unstarted",
-          "teams": [
-            {
-              "code": "BLG",
-              "name": "BILIBILI GAMING"
-            },
-            {
-              "code": "AL",
-              "name": "Anyone's Legend"
-            }
-          ],
-          "team_a": "AL",
-          "team_b": "BLG",
-          "sup_red": "Milio",
-          "sup_blue": "Karma",
-          "team_red": "Anyone's Legend",
-          "draft_red": "Gnar,Vi,Ryze,Lucian,Milio",
-          "league_id": "98767991314006698",
-          "team_blue": "Bilibili Gaming",
-          "draft_blue": "Ambessa,Naafiri,Anivia,Ezreal,Karma",
-          "start_time": "2026-07-26T11:00:00Z",
-          "draft_check": {
-            "detail": "getEventDetails OK (game_id resolvido), mas livestats /window returned HTTP 204 (no frames) for esportsGameId 116566854547769553, 3 tentativas",
-            "result": "unavailable",
-            "attempted": true,
-            "consulted_at": "2026-07-26T11:32:41.843Z"
+          "kills_red": 14,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Ryze",
+            "top": "Gnar",
+            "jungle": "Vi",
+            "support": "Milio"
           },
-          "draft_source": "livestats window map1 (2 checagens independentes)",
-          "game_id_map1": "116566854547769553",
-          "league_short": "LPL",
-          "sup_confirmed": null,
-          "ladder_group_id": "73003c27-540d-4faa-b275-9aa60ca1767a",
-          "draft_confirmed_at": "2026-07-26T12:12:13.856Z",
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Anivia",
+            "top": "Ambessa",
+            "jungle": "Naafiri",
+            "support": "Karma"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-07-30T15:19:44.127Z",
+          "red_team_id": "99566404856367466",
+          "total_kills": 28,
+          "winner_side": "blue",
+          "blue_team_id": "99566404853854212",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
           "lolesports_game_id": "116566854547769553",
           "lolesports_match_id": "116566854547769552",
-          "series_score_at_bet": {
-            "current_map": 1,
-            "maps_completed_before": 0
-          }
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": "3091590368",
@@ -73000,48 +73307,63 @@
           "ladder_total_exposure": 1991.06,
           "ladder_blended_odd_note": "~1.80"
         },
+        "compositions": {
+          "source": "lolesports livestats game 116566854547769553",
+          "team_a": {
+            "name": "Anyone's Legend",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ryze",
+              "top": "Gnar",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "BILIBILI GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Anivia",
+              "top": "Ambessa",
+              "jungle": "Naafiri",
+              "support": "Karma"
+            }
+          }
+        },
         "trigger_type": "2peel",
         "is_method_bet": true,
         "match_context": {
-          "state": "unstarted",
-          "teams": [
-            {
-              "code": "BLG",
-              "name": "BILIBILI GAMING"
-            },
-            {
-              "code": "AL",
-              "name": "Anyone's Legend"
-            }
-          ],
-          "team_a": "AL",
-          "team_b": "BLG",
-          "sup_red": "Milio",
-          "sup_blue": "Karma",
-          "team_red": "Anyone's Legend",
-          "draft_red": "Gnar,Vi,Ryze,Lucian,Milio",
-          "league_id": "98767991314006698",
-          "team_blue": "Bilibili Gaming",
-          "draft_blue": "Ambessa,Naafiri,Anivia,Ezreal,Karma",
-          "start_time": "2026-07-26T11:00:00Z",
-          "draft_check": {
-            "detail": "getEventDetails OK (game_id resolvido), mas livestats /window returned HTTP 204 (no frames) for esportsGameId 116566854547769553, 3 tentativas",
-            "result": "unavailable",
-            "attempted": true,
-            "consulted_at": "2026-07-26T11:32:41.843Z"
+          "kills_red": 14,
+          "pick_line": 29.5,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Ryze",
+            "top": "Gnar",
+            "jungle": "Vi",
+            "support": "Milio"
           },
-          "draft_source": "livestats window map1 (2 checagens independentes)",
-          "game_id_map1": "116566854547769553",
-          "league_short": "LPL",
-          "sup_confirmed": null,
-          "ladder_group_id": "73003c27-540d-4faa-b275-9aa60ca1767a",
-          "draft_confirmed_at": "2026-07-26T12:12:13.856Z",
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Anivia",
+            "top": "Ambessa",
+            "jungle": "Naafiri",
+            "support": "Karma"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-07-30T15:19:43.764Z",
+          "red_team_id": "99566404856367466",
+          "total_kills": 28,
+          "winner_side": "blue",
+          "blue_team_id": "99566404853854212",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
           "lolesports_game_id": "116566854547769553",
           "lolesports_match_id": "116566854547769552",
-          "series_score_at_bet": {
-            "current_map": 1,
-            "maps_completed_before": 0
-          }
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": "3091591107",
@@ -73131,92 +73453,6 @@
       "is_method_bet": false
     },
     {
-      "id": "ab4e2ffd-bb01-4a40-a4d8-b0ab90278eba",
-      "created_at": "2026-07-26T12:11:14.194884+00:00",
-      "bookmaker": "thunderpick",
-      "league": "LPL",
-      "team_a": "AL",
-      "team_b": "BLG",
-      "market": "Money Line — Map 1 (vencedor)",
-      "pick": "Bilibili Gaming (vencedor mapa 1)",
-      "odd": 1.95,
-      "stake": 1000,
-      "bet_datetime": "2026-07-26T12:10:27.154+00:00",
-      "pandascore_match_id": null,
-      "pandascore_match_name": null,
-      "is_map_bet": true,
-      "map_number": 1,
-      "status": "green",
-      "profit": 950,
-      "settled_at": "2026-07-26T14:11:10.741+00:00",
-      "settle_source": "manual-coo (AL x BLG map1 finished 28 kills 14x14 @feed; BLG venceu — 9 torres/2 inib vs 3 torres/0 inib do AL, sem inibidor nao ha nexus. eventDetails stale unstarted) — ML BLG vencedor",
-      "screenshot_path": null,
-      "raw_extraction": {
-        "notes": "Sem bet_id no slip Thunderpick. Cashout ofertado R$1.379,77 no print = so oferta, ignorado (nao realizado).",
-        "match_context": {
-          "state": "inProgress",
-          "teams": [
-            {
-              "code": "BLG",
-              "name": "BILIBILI GAMING"
-            },
-            {
-              "code": "AL",
-              "name": "Anyone's Legend"
-            }
-          ],
-          "team_a": "AL",
-          "team_b": "BLG",
-          "league_id": "98767991314006698",
-          "start_time": "2026-07-26T11:00:00Z",
-          "game_id_map1": "116566854547769553",
-          "league_short": "LPL",
-          "trigger_type": "2peel",
-          "sup_confirmed": {
-            "AL": "Milio",
-            "BLG": "Karma",
-            "note": "ambos PEEL_PURE -> 2peel confirmado. Anivia (BLG mid) e flex mas errada de role, nao conta.",
-            "confirmed_at": "livestats window, fetch proprio independente",
-            "verified_via_livestats": true
-          },
-          "live_state_at_bet": {
-            "gold_AL": 63861,
-            "gold_BLG": 65567,
-            "kills_AL": 12,
-            "barons_AL": 0,
-            "gold_diff": "BLG +1706",
-            "kills_BLG": 9,
-            "towers_AL": 3,
-            "barons_BLG": 1,
-            "dragons_AL": 1,
-            "towers_BLG": 7,
-            "dragons_BLG": 3,
-            "consulted_at": "2026-07-26T12:08:49.975Z",
-            "inhibitors_AL": 0,
-            "inhibitors_BLG": 1,
-            "correction_note": "Relay original do COO atribuiu esses numeros de objetivo a AL ('AL na frente'). Verificacao independente via livestats mostra que sao do BLG. AL lidera SO em kills."
-          },
-          "lolesports_game_id": "116566854547769553",
-          "lolesports_match_id": "116566854547769552",
-          "series_score_at_bet": {
-            "current_map": 1,
-            "maps_completed_before": 0
-          }
-        },
-        "bookmaker_native": {
-          "bet_id": null,
-          "potential_win": 1949.98,
-          "raw_pick_text": "Bilibili Gaming — Map 1 Winner",
-          "raw_stake_text": "R$1.000,00"
-        }
-      },
-      "notes": "Par de MLs opostos no mesmo mapa (BLG @1.95 Thunderpick R$1.000 + AL @5.13 Pinnacle R$250, live). Resultado combinado: BLG vence -> +R$699,98; AL vence -> +R$32,50. Exposicao liquida R$1.250. ML nao tem settle automatico — settle manual COO. Elvis: 'peguei uma odd alta e verei depois' — perna AL @5.13 e punt de zebra ao vivo, NAO hedge planejado. CORRECAO DE DADOS: o relay do COO atribuiu os numeros de objetivo (gold+3060, torres 7x3, dragoes 3x1, 1 baron) pra AL 'na frente', mas verifiquei de forma independente via livestats (esportsGameId 116566854547769553) e os numeros na verdade sao do BLG — BLG lidera gold/torres/dragoes/barao/inibidor, AL so lidera em kills (12x9 no momento do registro). Ou seja a perna cara (BLG @1.95, esta bet) NAO esta atras no jogo — esta estruturalmente na frente apesar do kill count menor. Ver match_context pros numeros corretos por time.",
-      "fair_pinnacle": 30.5,
-      "fair_formula": null,
-      "fair_line_source": "pinnacle_manual",
-      "is_method_bet": false
-    },
-    {
       "id": "ec6e4331-8ce0-4661-95a6-5b867b2c7413",
       "created_at": "2026-07-26T12:11:20.753608+00:00",
       "bookmaker": "pinnacle",
@@ -73239,55 +73475,61 @@
       "screenshot_path": null,
       "raw_extraction": {
         "notes": "Entrada marcada como LIVE no slip Pinnacle. bet_id #3091613357.",
-        "match_context": {
-          "state": "inProgress",
-          "teams": [
-            {
-              "code": "BLG",
-              "name": "BILIBILI GAMING"
-            },
-            {
-              "code": "AL",
-              "name": "Anyone's Legend"
+        "compositions": {
+          "source": "lolesports livestats game 116566854547769553",
+          "team_a": {
+            "name": "Anyone's Legend",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ryze",
+              "top": "Gnar",
+              "jungle": "Vi",
+              "support": "Milio"
             }
-          ],
-          "team_a": "AL",
-          "team_b": "BLG",
-          "league_id": "98767991314006698",
-          "start_time": "2026-07-26T11:00:00Z",
-          "game_id_map1": "116566854547769553",
-          "league_short": "LPL",
+          },
+          "team_b": {
+            "name": "BILIBILI GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Anivia",
+              "top": "Ambessa",
+              "jungle": "Naafiri",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 14,
+          "pick_line": 1,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Ryze",
+            "top": "Gnar",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Anivia",
+            "top": "Ambessa",
+            "jungle": "Naafiri",
+            "support": "Karma"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-07-30T15:19:44.836Z",
+          "red_team_id": "99566404856367466",
+          "total_kills": 28,
+          "winner_side": "blue",
+          "blue_team_id": "99566404853854212",
           "trigger_type": "2peel",
-          "sup_confirmed": {
-            "AL": "Milio",
-            "BLG": "Karma",
-            "note": "ambos PEEL_PURE -> 2peel confirmado. Anivia (BLG mid) e flex mas errada de role, nao conta.",
-            "confirmed_at": "livestats window, fetch proprio independente",
-            "verified_via_livestats": true
-          },
-          "live_state_at_bet": {
-            "gold_AL": 63861,
-            "gold_BLG": 65567,
-            "kills_AL": 12,
-            "barons_AL": 0,
-            "gold_diff": "BLG +1706",
-            "kills_BLG": 9,
-            "towers_AL": 3,
-            "barons_BLG": 1,
-            "dragons_AL": 1,
-            "towers_BLG": 7,
-            "dragons_BLG": 3,
-            "consulted_at": "2026-07-26T12:08:49.975Z",
-            "inhibitors_AL": 0,
-            "inhibitors_BLG": 1,
-            "correction_note": "Relay original do COO atribuiu esses numeros de objetivo a AL ('AL na frente'). Verificacao independente via livestats mostra que sao do BLG. AL lidera SO em kills."
-          },
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
           "lolesports_game_id": "116566854547769553",
           "lolesports_match_id": "116566854547769552",
-          "series_score_at_bet": {
-            "current_map": 1,
-            "maps_completed_before": 0
-          }
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": "3091613357",
@@ -73297,6 +73539,98 @@
         }
       },
       "notes": "Par de MLs opostos no mesmo mapa (BLG @1.95 Thunderpick R$1.000 + AL @5.13 Pinnacle R$250, live). Resultado combinado: BLG vence -> +R$699,98; AL vence -> +R$32,50. Exposicao liquida R$1.250. ML nao tem settle automatico — settle manual COO. Elvis: 'peguei uma odd alta e verei depois' — perna AL @5.13 e punt de zebra ao vivo, NAO hedge planejado. CORRECAO DE DADOS: o relay do COO atribuiu os numeros de objetivo (gold+3060, torres 7x3, dragoes 3x1, 1 baron) pra AL 'na frente', mas verifiquei de forma independente via livestats (esportsGameId 116566854547769553) e os numeros na verdade sao do BLG — BLG lidera gold/torres/dragoes/barao/inibidor, AL so lidera em kills (12x9 no momento do registro). Ou seja esta perna (AL @5.13, zebra) esta MAIS atras estruturalmente do que o relay sugeriu — so o kill count favorece AL. Ver match_context pros numeros corretos por time.",
+      "fair_pinnacle": 30.5,
+      "fair_formula": null,
+      "fair_line_source": "pinnacle_manual",
+      "is_method_bet": false
+    },
+    {
+      "id": "ab4e2ffd-bb01-4a40-a4d8-b0ab90278eba",
+      "created_at": "2026-07-26T12:11:14.194884+00:00",
+      "bookmaker": "thunderpick",
+      "league": "LPL",
+      "team_a": "AL",
+      "team_b": "BLG",
+      "market": "Money Line — Map 1 (vencedor)",
+      "pick": "Bilibili Gaming (vencedor mapa 1)",
+      "odd": 1.95,
+      "stake": 1000,
+      "bet_datetime": "2026-07-26T12:10:27.154+00:00",
+      "pandascore_match_id": null,
+      "pandascore_match_name": null,
+      "is_map_bet": true,
+      "map_number": 1,
+      "status": "green",
+      "profit": 950,
+      "settled_at": "2026-07-26T14:11:10.741+00:00",
+      "settle_source": "manual-coo (AL x BLG map1 finished 28 kills 14x14 @feed; BLG venceu — 9 torres/2 inib vs 3 torres/0 inib do AL, sem inibidor nao ha nexus. eventDetails stale unstarted) — ML BLG vencedor",
+      "screenshot_path": null,
+      "raw_extraction": {
+        "notes": "Sem bet_id no slip Thunderpick. Cashout ofertado R$1.379,77 no print = so oferta, ignorado (nao realizado).",
+        "compositions": {
+          "source": "lolesports livestats game 116566854547769553",
+          "team_a": {
+            "name": "Anyone's Legend",
+            "side": "red",
+            "picks": {
+              "adc": "Lucian",
+              "mid": "Ryze",
+              "top": "Gnar",
+              "jungle": "Vi",
+              "support": "Milio"
+            }
+          },
+          "team_b": {
+            "name": "BILIBILI GAMING",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Anivia",
+              "top": "Ambessa",
+              "jungle": "Naafiri",
+              "support": "Karma"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 14,
+          "pick_line": 1,
+          "red_picks": {
+            "adc": "Lucian",
+            "mid": "Ryze",
+            "top": "Gnar",
+            "jungle": "Vi",
+            "support": "Milio"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Anivia",
+            "top": "Ambessa",
+            "jungle": "Naafiri",
+            "support": "Karma"
+          },
+          "kills_blue": 14,
+          "enriched_at": "2026-07-30T15:19:44.479Z",
+          "red_team_id": "99566404856367466",
+          "total_kills": 28,
+          "winner_side": "blue",
+          "blue_team_id": "99566404853854212",
+          "trigger_type": "2peel",
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "116566854547769553",
+          "lolesports_match_id": "116566854547769552",
+          "match_ambiguous_at_link": false
+        },
+        "bookmaker_native": {
+          "bet_id": null,
+          "potential_win": 1949.98,
+          "raw_pick_text": "Bilibili Gaming — Map 1 Winner",
+          "raw_stake_text": "R$1.000,00"
+        }
+      },
+      "notes": "Par de MLs opostos no mesmo mapa (BLG @1.95 Thunderpick R$1.000 + AL @5.13 Pinnacle R$250, live). Resultado combinado: BLG vence -> +R$699,98; AL vence -> +R$32,50. Exposicao liquida R$1.250. ML nao tem settle automatico — settle manual COO. Elvis: 'peguei uma odd alta e verei depois' — perna AL @5.13 e punt de zebra ao vivo, NAO hedge planejado. CORRECAO DE DADOS: o relay do COO atribuiu os numeros de objetivo (gold+3060, torres 7x3, dragoes 3x1, 1 baron) pra AL 'na frente', mas verifiquei de forma independente via livestats (esportsGameId 116566854547769553) e os numeros na verdade sao do BLG — BLG lidera gold/torres/dragoes/barao/inibidor, AL so lidera em kills (12x9 no momento do registro). Ou seja a perna cara (BLG @1.95, esta bet) NAO esta atras no jogo — esta estruturalmente na frente apesar do kill count menor. Ver match_context pros numeros corretos por time.",
       "fair_pinnacle": 30.5,
       "fair_formula": null,
       "fair_line_source": "pinnacle_manual",
@@ -73702,30 +74036,61 @@
       "raw_extraction": {
         "fx_source": "awesomeapi (ask, último disponível — domingo)",
         "fx_usd_brl": 5.0885,
-        "match_context": {
-          "teams": [
-            {
-              "code": "KC",
-              "name": "Karmine Corp"
-            },
-            {
-              "code": "G2",
-              "name": "G2 Esports"
+        "compositions": {
+          "source": "lolesports livestats game 115548681803406289",
+          "team_a": {
+            "name": "G2 Esports",
+            "side": "red",
+            "picks": {
+              "adc": "Ziggs",
+              "mid": "Akali",
+              "top": "Kled",
+              "jungle": "Naafiri",
+              "support": "Shen"
             }
-          ],
-          "team_a": "G2 Esports",
-          "team_b": "Karmine",
-          "league_id": "98767991302996019",
-          "start_time": "2026-07-26T17:30:00Z",
-          "league_short": "LEC",
-          "api_anomaly_note": "getEventDetails reporta games[].state='unstarted' e gameWins 0-0 mesmo com map1 finalizado e map2 em andamento (draft locked confirmado via livestats window). Mesmo padrão de cache stale já documentado em bets anteriores da Clutch.",
+          },
+          "team_b": {
+            "name": "Karmine Corp",
+            "side": "blue",
+            "picks": {
+              "adc": "Kaisa",
+              "mid": "Orianna",
+              "top": "Renekton",
+              "jungle": "Qiyana",
+              "support": "Nautilus"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 19,
+          "pick_line": 2,
+          "red_picks": {
+            "adc": "Ziggs",
+            "mid": "Akali",
+            "top": "Kled",
+            "jungle": "Naafiri",
+            "support": "Shen"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Kaisa",
+            "mid": "Orianna",
+            "top": "Renekton",
+            "jungle": "Qiyana",
+            "support": "Nautilus"
+          },
+          "kills_blue": 9,
+          "enriched_at": "2026-07-30T15:19:46.697Z",
+          "red_team_id": "98767991926151025",
+          "total_kills": 28,
+          "winner_side": "red",
+          "blue_team_id": "111692118851466302",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LEC",
           "lolesports_game_id": "115548681803406289",
           "lolesports_match_id": "115548681803406287",
-          "series_score_at_bet": {
-            "G2_wins": 0,
-            "KC_wins": 1,
-            "current_map": 2
-          }
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": "2693239906087612918",
@@ -74339,16 +74704,61 @@
       "settle_source": "manual-coo-ml (Prime map2 finished: TOG 24x16 com 2 inibidores e 10 torres = TOG venceu)",
       "screenshot_path": null,
       "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116713163972559134",
+          "team_a": {
+            "name": "Unicorns of Love Sexy Edition",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Sylas",
+              "top": "KSante",
+              "jungle": "LeeSin",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "TeamOrangeGaming",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Yone",
+              "top": "Rumble",
+              "jungle": "Skarner",
+              "support": "Pyke"
+            }
+          }
+        },
         "match_context": {
-          "teams": [
-            "USE",
-            "TOG"
-          ],
-          "start_time": "2026-07-29T18:00:00Z",
-          "game_id_map2": "116713163972559134",
-          "league_short": "Prime League",
+          "kills_red": 24,
+          "pick_line": null,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Yone",
+            "top": "Rumble",
+            "jungle": "Skarner",
+            "support": "Pyke"
+          },
+          "under_hit": null,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Sylas",
+            "top": "KSante",
+            "jungle": "LeeSin",
+            "support": "Karma"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-07-30T15:19:48.618Z",
+          "red_team_id": "107133963320431195",
+          "total_kills": 40,
+          "winner_side": "red",
+          "blue_team_id": "105504044166670507",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "Prime League",
+          "lolesports_game_id": "116713163972559134",
           "lolesports_match_id": "116713163972559132",
-          "series_score_at_bet": "0:1 (UoL up 1-0)"
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": null,
@@ -74841,17 +75251,61 @@
       "settle_source": "manual-coo-ml (Prime map2 finished: TOG 24x16 com 2 inibidores e 10 torres = TOG venceu)",
       "screenshot_path": null,
       "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116713163972559134",
+          "team_a": {
+            "name": "Unicorns of Love Sexy Edition",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Sylas",
+              "top": "KSante",
+              "jungle": "LeeSin",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "TeamOrangeGaming",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Yone",
+              "top": "Rumble",
+              "jungle": "Skarner",
+              "support": "Pyke"
+            }
+          }
+        },
         "match_context": {
-          "teams": [
-            "USE",
-            "TOG"
-          ],
-          "start_time": "2026-07-29T18:00:00Z",
-          "game_id_map2": "116713163972559134",
-          "league_short": "Prime League",
-          "live_state_at_bet": "map2 inProgress, TOG ahead 15x12 kills",
+          "kills_red": 24,
+          "pick_line": null,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Yone",
+            "top": "Rumble",
+            "jungle": "Skarner",
+            "support": "Pyke"
+          },
+          "under_hit": null,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Sylas",
+            "top": "KSante",
+            "jungle": "LeeSin",
+            "support": "Karma"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-07-30T15:19:48.264Z",
+          "red_team_id": "107133963320431195",
+          "total_kills": 40,
+          "winner_side": "red",
+          "blue_team_id": "105504044166670507",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "Prime League",
+          "lolesports_game_id": "116713163972559134",
           "lolesports_match_id": "116713163972559132",
-          "series_score_at_bet": "0:1 (UoL up 1-0)"
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": "#3093239176",
@@ -74887,17 +75341,61 @@
       "settle_source": "manual-coo-ml (Prime map2 finished: TOG 24x16 com 2 inibidores e 10 torres = TOG venceu)",
       "screenshot_path": null,
       "raw_extraction": {
+        "compositions": {
+          "source": "lolesports livestats game 116713163972559134",
+          "team_a": {
+            "name": "Unicorns of Love Sexy Edition",
+            "side": "blue",
+            "picks": {
+              "adc": "Ezreal",
+              "mid": "Sylas",
+              "top": "KSante",
+              "jungle": "LeeSin",
+              "support": "Karma"
+            }
+          },
+          "team_b": {
+            "name": "TeamOrangeGaming",
+            "side": "red",
+            "picks": {
+              "adc": "Yunara",
+              "mid": "Yone",
+              "top": "Rumble",
+              "jungle": "Skarner",
+              "support": "Pyke"
+            }
+          }
+        },
         "match_context": {
-          "teams": [
-            "USE",
-            "TOG"
-          ],
-          "start_time": "2026-07-29T18:00:00Z",
-          "game_id_map2": "116713163972559134",
-          "league_short": "Prime League",
-          "live_state_at_bet": "map2 inProgress, TOG ahead 15x12 kills",
+          "kills_red": 24,
+          "pick_line": null,
+          "red_picks": {
+            "adc": "Yunara",
+            "mid": "Yone",
+            "top": "Rumble",
+            "jungle": "Skarner",
+            "support": "Pyke"
+          },
+          "under_hit": null,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Sylas",
+            "top": "KSante",
+            "jungle": "LeeSin",
+            "support": "Karma"
+          },
+          "kills_blue": 16,
+          "enriched_at": "2026-07-30T15:19:47.910Z",
+          "red_team_id": "107133963320431195",
+          "total_kills": 40,
+          "winner_side": "red",
+          "blue_team_id": "105504044166670507",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "Prime League",
+          "lolesports_game_id": "116713163972559134",
           "lolesports_match_id": "116713163972559132",
-          "series_score_at_bet": "0:1 (UoL up 1-0)"
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": "#3093241792",
@@ -75144,37 +75642,61 @@
       "settle_source": "manual-coo (LCP map1 SHG x DFM finished 23 kills, DFM 19x4 com 7 torres e 1 inibidor = DFM venceu)",
       "screenshot_path": null,
       "raw_extraction": {
-        "match_context": {
-          "teams": [
-            {
-              "id": "103535282119620510",
-              "code": "SHG",
-              "name": "Fukuoka SoftBank HAWKS gaming"
-            },
-            {
-              "id": "100285330168091787",
-              "code": "DFM",
-              "name": "DetonatioN FocusMe"
+        "compositions": {
+          "source": "lolesports livestats game 115570814727903846",
+          "team_a": {
+            "name": "Fukuoka SoftBank HAWKS gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Vladimir",
+              "mid": "Syndra",
+              "top": "KSante",
+              "jungle": "JarvanIV",
+              "support": "Camille"
             }
-          ],
-          "sup_red": "Camille",
-          "sup_blue": "Shen",
-          "team_red": "Fukuoka SoftBank HAWKS",
-          "draft_red": "KSante,JarvanIV,Syndra,Vladimir,Camille",
-          "league_id": "113476371197627891",
-          "team_blue": "DetonatioN FocusMe",
-          "draft_blue": "Gnar,Naafiri,Viktor,Cassiopeia,Shen",
-          "start_time": "2026-07-30T09:00:00Z",
-          "draft_check": {
-            "result": "no_frames_available",
-            "game_id": "115570814727903846",
-            "attempted": true,
-            "camille_confirmed": false
           },
-          "draft_source": "livestats window map1 (retry COO apos 204)",
-          "league_short": "LCP",
-          "draft_confirmed_at": "2026-07-30T09:41:17.850Z",
-          "lolesports_match_id": "115570814727903845"
+          "team_b": {
+            "name": "DetonatioN FocusMe",
+            "side": "blue",
+            "picks": {
+              "adc": "Cassiopeia",
+              "mid": "Viktor",
+              "top": "Gnar",
+              "jungle": "Naafiri",
+              "support": "Shen"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 4,
+          "pick_line": 25.5,
+          "red_picks": {
+            "adc": "Vladimir",
+            "mid": "Syndra",
+            "top": "KSante",
+            "jungle": "JarvanIV",
+            "support": "Camille"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Cassiopeia",
+            "mid": "Viktor",
+            "top": "Gnar",
+            "jungle": "Naafiri",
+            "support": "Shen"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-07-30T15:19:49.646Z",
+          "red_team_id": "103535282119620510",
+          "total_kills": 23,
+          "winner_side": "blue",
+          "blue_team_id": "100285330168091787",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LCP",
+          "lolesports_game_id": "115570814727903846",
+          "lolesports_match_id": "115570814727903845",
+          "match_ambiguous_at_link": false
         },
         "method_variant": "over_experimental_elvis",
         "bookmaker_native": {
@@ -75212,23 +75734,61 @@
       "settle_source": "manual-coo (LCP map1 SHG x DFM finished 23 kills, DFM 19x4 com 7 torres e 1 inibidor = DFM venceu)",
       "screenshot_path": null,
       "raw_extraction": {
-        "match_context": {
-          "teams": [
-            {
-              "code": "SHG",
-              "name": "Fukuoka SoftBank HAWKS gaming"
-            },
-            {
-              "code": "DFM",
-              "name": "DetonatioN FocusMe"
+        "compositions": {
+          "source": "lolesports livestats game 115570814727903846",
+          "team_a": {
+            "name": "Fukuoka SoftBank HAWKS gaming",
+            "side": "red",
+            "picks": {
+              "adc": "Vladimir",
+              "mid": "Syndra",
+              "top": "KSante",
+              "jungle": "JarvanIV",
+              "support": "Camille"
             }
-          ],
-          "league_id": "113476371197627891",
-          "start_time": "2026-07-30T09:00:00Z",
-          "league_short": "LCP",
+          },
+          "team_b": {
+            "name": "DetonatioN FocusMe",
+            "side": "blue",
+            "picks": {
+              "adc": "Cassiopeia",
+              "mid": "Viktor",
+              "top": "Gnar",
+              "jungle": "Naafiri",
+              "support": "Shen"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 4,
+          "pick_line": null,
+          "red_picks": {
+            "adc": "Vladimir",
+            "mid": "Syndra",
+            "top": "KSante",
+            "jungle": "JarvanIV",
+            "support": "Camille"
+          },
+          "under_hit": null,
+          "blue_picks": {
+            "adc": "Cassiopeia",
+            "mid": "Viktor",
+            "top": "Gnar",
+            "jungle": "Naafiri",
+            "support": "Shen"
+          },
+          "kills_blue": 19,
+          "enriched_at": "2026-07-30T15:19:50.002Z",
+          "red_team_id": "103535282119620510",
+          "total_kills": 23,
+          "winner_side": "blue",
+          "blue_team_id": "100285330168091787",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LCP",
+          "lolesports_game_id": "115570814727903846",
           "lolesports_match_id": "115570814727903845",
-          "state_at_registration": "inProgress",
-          "lolesports_game_id_map1": "115570814727903846"
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": "#3093506457",
@@ -75265,42 +75825,61 @@
       "settle_source": "manual-coo-ml (LCP map2 finished: SHG 12x4 com 9 torres e 1 inibidor = SHG venceu; 16 kills totais)",
       "screenshot_path": null,
       "raw_extraction": {
-        "match_context": {
-          "teams": [
-            {
-              "id": "103535282119620510",
-              "code": "SHG",
-              "name": "Fukuoka SoftBank HAWKS gaming"
-            },
-            {
-              "id": "100285330168091787",
-              "code": "DFM",
-              "name": "DetonatioN FocusMe"
-            }
-          ],
-          "league_id": "113476371197627891",
-          "map2_draft": {
-            "DFM": {
-              "mid": "Ryze",
-              "top": "Ambessa",
-              "bottom": "Kaisa",
-              "jungle": "Trundle",
-              "support": "Rell"
-            },
-            "SHG": {
+        "compositions": {
+          "source": "lolesports livestats game 115570814727903847",
+          "team_a": {
+            "name": "Fukuoka SoftBank HAWKS gaming",
+            "side": "blue",
+            "picks": {
+              "adc": "Sivir",
               "mid": "Yone",
               "top": "Rumble",
-              "bottom": "Sivir",
               "jungle": "Sejuani",
               "support": "Bard"
             }
           },
-          "start_time": "2026-07-30T09:00:00Z",
-          "league_short": "LCP",
-          "map2_game_id": "115570814727903847",
-          "map2_state_at_bet": "inProgress",
+          "team_b": {
+            "name": "DetonatioN FocusMe",
+            "side": "red",
+            "picks": {
+              "adc": "Kaisa",
+              "mid": "Ryze",
+              "top": "Ambessa",
+              "jungle": "Trundle",
+              "support": "Rell"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 4,
+          "pick_line": null,
+          "red_picks": {
+            "adc": "Kaisa",
+            "mid": "Ryze",
+            "top": "Ambessa",
+            "jungle": "Trundle",
+            "support": "Rell"
+          },
+          "under_hit": null,
+          "blue_picks": {
+            "adc": "Sivir",
+            "mid": "Yone",
+            "top": "Rumble",
+            "jungle": "Sejuani",
+            "support": "Bard"
+          },
+          "kills_blue": 12,
+          "enriched_at": "2026-07-30T15:19:50.595Z",
+          "red_team_id": "100285330168091787",
+          "total_kills": 16,
+          "winner_side": "blue",
+          "blue_team_id": "103535282119620510",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LCP",
+          "lolesports_game_id": "115570814727903847",
           "lolesports_match_id": "115570814727903845",
-          "series_state_at_bet": "0:1 (DFM venceu map 1)"
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": null,
@@ -75423,7 +76002,7 @@
       "fair_pinnacle": 29.5,
       "fair_formula": 29.5,
       "fair_line_source": "pinnacle_manual",
-      "is_method_bet": false
+      "is_method_bet": true
     },
     {
       "id": "f51cb386-7448-485f-9a79-c4cbdec937a5",
@@ -75447,23 +76026,61 @@
       "settle_source": "manual-coo-ml (map1 TT x JDG finished 36 kills: TT 23x13 com 9 torres e 2 inibidores = TT venceu; pick JDG perdeu)",
       "screenshot_path": null,
       "raw_extraction": {
-        "match_context": {
-          "teams": [
-            {
-              "code": "TT",
-              "name": "THUNDER TALK GAMING"
-            },
-            {
-              "code": "JDG",
-              "name": "Beijing JDG Esports"
+        "compositions": {
+          "source": "lolesports livestats game 116566854547769641",
+          "team_a": {
+            "name": "THUNDER TALK GAMING",
+            "side": "red",
+            "picks": {
+              "adc": "Draven",
+              "mid": "Orianna",
+              "top": "Rumble",
+              "jungle": "Pantheon",
+              "support": "Nautilus"
             }
-          ],
-          "league_id": "98767991314006698",
-          "start_time": "2026-07-30T11:00:00Z",
-          "league_short": "LPL",
+          },
+          "team_b": {
+            "name": "Beijing JDG Esports",
+            "side": "blue",
+            "picks": {
+              "adc": "Sivir",
+              "mid": "Locke",
+              "top": "Ambessa",
+              "jungle": "JarvanIV",
+              "support": "Camille"
+            }
+          }
+        },
+        "match_context": {
+          "kills_red": 23,
+          "pick_line": null,
+          "red_picks": {
+            "adc": "Draven",
+            "mid": "Orianna",
+            "top": "Rumble",
+            "jungle": "Pantheon",
+            "support": "Nautilus"
+          },
+          "under_hit": null,
+          "blue_picks": {
+            "adc": "Sivir",
+            "mid": "Locke",
+            "top": "Ambessa",
+            "jungle": "JarvanIV",
+            "support": "Camille"
+          },
+          "kills_blue": 13,
+          "enriched_at": "2026-07-30T15:19:51.510Z",
+          "red_team_id": "101388912911039804",
+          "total_kills": 36,
+          "winner_side": "red",
+          "blue_team_id": "99566404852189289",
+          "trigger_type": null,
+          "coverage_status": "enriched",
+          "league_inferred": "LPL",
+          "lolesports_game_id": "116566854547769641",
           "lolesports_match_id": "116566854547769640",
-          "series_score_at_bet": "0:0",
-          "lolesports_game_id_map1": "116566854547769641"
+          "match_ambiguous_at_link": false
         },
         "bookmaker_native": {
           "bet_id": null,
@@ -75595,7 +76212,7 @@
       "fair_pinnacle": 31.5,
       "fair_formula": 29.5,
       "fair_line_source": "pinnacle_manual",
-      "is_method_bet": false
+      "is_method_bet": true
     },
     {
       "id": "40722eab-0b38-490c-8f65-827a176d8530",
@@ -75712,6 +76329,608 @@
       },
       "notes": "posicao_dobrada:2_slips_identicos (A/B) | ladder_group_id:bca14990-574d-418f-a345-b33de4516f69 | exposicao_total:R$2000,06 (tier 2u) | bet_datetime deslocado +1s vs slip A APENAS pra satisfazer constraint unica bets_unique_natural_key (pick+bookmaker+stake+bet_datetime+odd) - sao 2 slips reais e distintos no print (ambos Open), nao duplicata de registro | is_method_bet=false: map3 game state=unstarted no momento do registro, 1 tentativa livestats retornou 204 (sem draft disponivel) - COO classifica no settle quando map3 rodar; tier 2u pendente de justificativa (Milio/Camille) | ATENCAO: API lolesports mostra serie 1-0 DK (map1 completed, DK venceu) com map2 EM ANDAMENTO no momento do registro, NAO 1:1 como descrito na instrucao - map3 so vira decider de fato se HLE vencer map2; se DK fechar 2-0 no map2, map3 nunca eh jogado e bet deve virar status=void no settle | fair do dia 31.5 (Under 32.5 map1 @1.740 Pinnacle) -> Under 32.5 = fair+1, odd 1.80 melhor que regua padrao 1.72",
       "fair_pinnacle": 31.5,
+      "fair_formula": 29.5,
+      "fair_line_source": "pinnacle_manual",
+      "is_method_bet": true
+    },
+    {
+      "id": "4e0686b2-9e3b-47fd-829f-902395506783",
+      "created_at": "2026-07-30T14:12:23.031764+00:00",
+      "bookmaker": "pinnacle",
+      "league": "LCP",
+      "team_a": "Relove Deep Cross Gaming",
+      "team_b": "Ground Zero Gaming",
+      "market": "Money Line — Map 2 (vencedor)",
+      "pick": "Ground Zero Gaming (vencedor mapa 2)",
+      "odd": 4.85,
+      "stake": 500,
+      "bet_datetime": "2026-07-30T14:12:06.975+00:00",
+      "pandascore_match_id": null,
+      "pandascore_match_name": null,
+      "is_map_bet": true,
+      "map_number": 2,
+      "status": "red",
+      "profit": -500,
+      "settled_at": "2026-07-30T16:11:24.746+00:00",
+      "settle_source": "manual-coo ML: Relove DCG venceu map2 (livestats frame finished 14:12Z: 10 torres/2 inib/+10k gold; GZ so venceu m1, serie 2x1 getEventDetails)",
+      "screenshot_path": null,
+      "raw_extraction": {
+        "notes": "Punt live de zebra @4.85 no Ground Zero (map 2, LCP). ML sem settle automático - settle manual COO. Fair do dia pra esse match = 31.5 (fonte Thunderpick, irrelevante pra ML).",
+        "match_context": {
+          "teams": [
+            {
+              "code": "DCG",
+              "name": "Relove Deep Cross Gaming",
+              "map2_side": "red",
+              "esports_team_id": "107700204561086446"
+            },
+            {
+              "code": "GZ",
+              "name": "Ground Zero Gaming",
+              "map2_side": "blue",
+              "esports_team_id": "109675490370327425"
+            }
+          ],
+          "team_a": "Relove Deep Cross Gaming",
+          "team_b": "Ground Zero Gaming",
+          "league_id": "113476371197627891",
+          "start_time": "2026-07-30T11:30:00Z",
+          "league_short": "LCP",
+          "lolesports_game_id": "115570814727903851",
+          "lolesports_match_id": "115570814727903849"
+        },
+        "bookmaker_native": {
+          "bet_id": "#3093633531",
+          "potential_win": 1925,
+          "raw_pick_text": "GROUND ZERO",
+          "raw_stake_text": "R$500,00",
+          "potential_payout": 2425,
+          "slip_status_label": "Live"
+        }
+      },
+      "notes": "Punt live de zebra @4.85 no Ground Zero (map 2, LCP). ML sem settle automático - settle manual COO. Fair do dia pra esse match = 31.5 (fonte Thunderpick, irrelevante pra ML).",
+      "fair_pinnacle": 31.5,
+      "fair_formula": null,
+      "fair_line_source": "pinnacle_manual",
+      "is_method_bet": false
+    },
+    {
+      "id": "9a77bba0-51e6-4d3c-aa33-2abc9eae6821",
+      "created_at": "2026-07-30T15:30:12.158922+00:00",
+      "bookmaker": "thunderpick",
+      "league": "Prime League",
+      "team_a": "Eintracht Spandau",
+      "team_b": "Rossmann Centaurs",
+      "market": "Money Line — Map 1 (vencedor)",
+      "pick": "Eintracht Spandau",
+      "odd": 1.9,
+      "stake": 250,
+      "bet_datetime": "2026-07-30T15:29:57.127+00:00",
+      "pandascore_match_id": 116713163972559100,
+      "pandascore_match_name": null,
+      "is_map_bet": true,
+      "map_number": 1,
+      "status": "red",
+      "profit": -250,
+      "settled_at": "2026-07-30T16:11:24.746+00:00",
+      "settle_source": "manual-coo ML: Rossmann venceu map1 (livestats frame finished 15:43Z: 10 torres/2 inib/+12k gold; serie 1x0 getEventDetails)",
+      "screenshot_path": null,
+      "raw_extraction": {
+        "match_context": {
+          "teams": [
+            {
+              "code": "ROSS",
+              "name": "Rossmann Centaurs"
+            },
+            {
+              "code": "EINS",
+              "name": "Eintracht Spandau"
+            }
+          ],
+          "league_id": "105266091639104326",
+          "start_time": "2026-07-30T15:00:00Z",
+          "league_short": "Prime League",
+          "state_at_link": "inProgress",
+          "selected_reason": "live",
+          "lolesports_match_id": "116713163972559112"
+        },
+        "bookmaker_native": {
+          "bet_id": null,
+          "payout": 474.95,
+          "raw_pick_text": "Vencedor: Eintracht Spandau (Map 1)",
+          "raw_stake_text": "R$250,00",
+          "cashout_available": false,
+          "series_score_at_bet": "0:0",
+          "slip_timestamp_local": "Thu, Jul 30th 12:04 PM"
+        }
+      },
+      "notes": "ML pré-jogo Prime League. Fair kills do dia pra esse jogo = fórmula 32.5 (sem Pinnacle no tier-2). ML sem settle automático — settle manual COO.",
+      "fair_pinnacle": null,
+      "fair_formula": null,
+      "fair_line_source": null,
+      "is_method_bet": false
+    },
+    {
+      "id": "7a4d1dcf-fd53-445a-9fda-3f3b6073ba66",
+      "created_at": "2026-07-30T16:55:37.427251+00:00",
+      "bookmaker": "thunderpick",
+      "league": "Prime League",
+      "team_a": "EINS",
+      "team_b": "ROSS",
+      "market": "Total Kills",
+      "pick": "Under 32.5",
+      "odd": 1.8,
+      "stake": 2000.02,
+      "bet_datetime": "2026-07-30T16:54:47.851+00:00",
+      "pandascore_match_id": 116713163972559100,
+      "pandascore_match_name": null,
+      "is_map_bet": true,
+      "map_number": 3,
+      "status": "green",
+      "profit": 1600.02,
+      "settled_at": "2026-07-30T17:36:36.06+00:00",
+      "settle_source": "lolesports api - 31 kills",
+      "screenshot_path": null,
+      "raw_extraction": {
+        "fair_context": {
+          "fair_line": 32.5,
+          "fair_source": "thunderpick_manual_2026-07-30",
+          "pick_vs_fair": "Under na fair (32.5), odd 1.80 levemente acima do slot padrão"
+        },
+        "method_check": {
+          "note": "COO classifica no settle; 2u pendente de justificativa",
+          "trigger_type": null,
+          "draft_probe_result": "http_204_no_data",
+          "draft_probe_attempted": true
+        },
+        "match_context": {
+          "teams": [
+            {
+              "code": "ROSS",
+              "name": "Rossmann Centaurs"
+            },
+            {
+              "code": "EINS",
+              "name": "Eintracht Spandau"
+            }
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 24,
+          "league_id": "105266091639104326",
+          "red_picks": {
+            "adc": "Jhin",
+            "mid": "Azir",
+            "top": "Sion",
+            "jungle": "Pantheon",
+            "support": "Bard"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Lucian",
+            "mid": "Aurora",
+            "top": "Gwen",
+            "jungle": "Aatrox",
+            "support": "Milio"
+          },
+          "kills_blue": 7,
+          "red_barons": 1,
+          "red_towers": 9,
+          "settled_at": "2026-07-30T17:36:36.052Z",
+          "start_time": "2026-07-30T15:00:00Z",
+          "blue_barons": 0,
+          "blue_towers": 3,
+          "red_dragons": 2,
+          "red_team_id": "107416483509696259",
+          "total_kills": 31,
+          "winner_side": "red",
+          "blue_dragons": 2,
+          "blue_team_id": "111726828176554327",
+          "league_short": "Prime League",
+          "map3_game_id": "116713163972559115",
+          "trigger_type": "1peel+flex",
+          "state_at_link": "inProgress",
+          "kills_at_15min": null,
+          "red_total_gold": 65773,
+          "blue_total_gold": 53233,
+          "selected_reason": "live",
+          "first_blood_team": "red",
+          "map3_state_at_bet": "inProgress",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "116713163972559115",
+          "lolesports_match_id": "116713163972559112",
+          "series_score_at_bet": {
+            "current_map": 3,
+            "maps_completed_before": 2
+          }
+        },
+        "bookmaker_native": {
+          "bet_id": null,
+          "raw_pick_text": "Total Kills Under 32.5",
+          "raw_stake_text": "R$2.000,02",
+          "raw_payout_text": "R$3.600,02",
+          "cashout_offer_ignored": "R$2.000,02"
+        }
+      },
+      "notes": "Map 3 decider (série 1:1). Stake 2u exige justificativa Milio/Camille — draft checado 1x via livestats (SEM loop): endpoint retornou 204 (dados de draft ainda não publicados no feed). COO classifica trigger/method no settle quando o draft estiver disponível; 2u pendente de justificativa. Cashout R$2.000,02 no print é OFERTA do bookmaker, não executado — ignorado.",
+      "fair_pinnacle": 32.5,
+      "fair_formula": 29.5,
+      "fair_line_source": "pinnacle_manual",
+      "is_method_bet": false
+    },
+    {
+      "id": "6a585aeb-1e7f-4376-bd2b-092355ac1d15",
+      "created_at": "2026-07-30T18:39:38.89776+00:00",
+      "bookmaker": "pinnacle",
+      "league": "LFL",
+      "team_a": "Joblife",
+      "team_b": "Skillcamp",
+      "market": "Money Line — Map 1 (vencedor)",
+      "pick": "Joblife",
+      "odd": 3.95,
+      "stake": 1000,
+      "bet_datetime": "2026-07-30T18:39:23.836+00:00",
+      "pandascore_match_id": 116912368899990110,
+      "pandascore_match_name": null,
+      "is_map_bet": true,
+      "map_number": 1,
+      "status": "pending",
+      "profit": null,
+      "settled_at": null,
+      "settle_source": null,
+      "screenshot_path": null,
+      "raw_extraction": {
+        "bet_context": {
+          "live_bet": true,
+          "scenario": "Joblife atrás no mapa 1, punt de virada ao vivo",
+          "fair_kills_note": "irrelevante para mercado Money Line",
+          "fair_kills_thunderpick_day": 32.5
+        },
+        "match_context": {
+          "teams": [
+            {
+              "code": "SC",
+              "name": "Skillcamp"
+            },
+            {
+              "code": "JL",
+              "name": "Joblife"
+            }
+          ],
+          "league_id": "105266103462388553",
+          "start_time": "2026-07-30T18:00:00Z",
+          "league_short": "LFL",
+          "map1_game_id": "116912368899990109",
+          "state_at_placement": "inProgress",
+          "lolesports_match_id": "116912368899990108"
+        },
+        "bookmaker_native": {
+          "bet_id": "#3093772766",
+          "slip_state": "Live",
+          "raw_pick_text": "vencedor JOBLIFE",
+          "raw_stake_text": "R$1.000,00",
+          "potential_return_text": "R$2.950,00"
+        }
+      },
+      "notes": "Punt live de virada @3.95 no Joblife (map 1 LFL). ML sem settle automático — settle manual COO.",
+      "fair_pinnacle": 32.5,
+      "fair_formula": null,
+      "fair_line_source": "pinnacle_manual",
+      "is_method_bet": false
+    },
+    {
+      "id": "7bb25b25-4e60-41d8-b188-8307c932f8df",
+      "created_at": "2026-07-30T19:06:41.459962+00:00",
+      "bookmaker": "pinnacle",
+      "league": "LFL",
+      "team_a": "ZYB",
+      "team_b": "Galions",
+      "market": "Total Kills",
+      "pick": "Over 33.5",
+      "odd": 1.84,
+      "stake": 1000,
+      "bet_datetime": "2026-07-30T19:06:22.106+00:00",
+      "pandascore_match_id": null,
+      "pandascore_match_name": null,
+      "is_map_bet": true,
+      "map_number": 1,
+      "status": "red",
+      "profit": -1000,
+      "settled_at": "2026-07-30T19:48:52.794+00:00",
+      "settle_source": "lolesports api - 33 kills",
+      "screenshot_path": null,
+      "raw_extraction": {
+        "draft_check": {
+          "loop": false,
+          "reason": "HTTP 400 disallowed window (window end time not 190s+ old yet) - single attempt per policy, no retry",
+          "result": "inconclusive",
+          "attempts": 1,
+          "attempted": true,
+          "camille_confirmed": null,
+          "requested_starting_time": "2026-07-30T19:05:00.000Z"
+        },
+        "match_context": {
+          "teams": [
+            {
+              "code": "ZYB",
+              "name": "ZYB"
+            },
+            {
+              "code": "GL",
+              "name": "Galions"
+            }
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 23,
+          "league_id": "105266103462388553",
+          "red_picks": {
+            "adc": "Viktor",
+            "mid": "Orianna",
+            "top": "Ambessa",
+            "jungle": "LeeSin",
+            "support": "Shen"
+          },
+          "under_hit": true,
+          "blue_picks": {
+            "adc": "Tristana",
+            "mid": "Syndra",
+            "top": "Sion",
+            "jungle": "MonkeyKing",
+            "support": "Camille"
+          },
+          "kills_blue": 10,
+          "red_barons": 1,
+          "red_towers": 7,
+          "settled_at": "2026-07-30T19:48:52.754Z",
+          "start_time": "2026-07-30T19:00:00Z",
+          "blue_barons": 0,
+          "blue_towers": 1,
+          "red_dragons": 3,
+          "red_team_id": "103935468920814040",
+          "total_kills": 33,
+          "winner_side": "red",
+          "blue_dragons": 0,
+          "blue_team_id": "115745558004231657",
+          "league_short": "LFL",
+          "trigger_type": null,
+          "kills_at_15min": null,
+          "red_total_gold": 52904,
+          "blue_total_gold": 41094,
+          "selected_reason": "live",
+          "first_blood_team": "red",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "116912368900055713",
+          "lolesports_match_id": "116912368900055712",
+          "series_score_at_bet": null,
+          "lolesports_game_id_map1": "116912368900055713"
+        },
+        "bookmaker_native": {
+          "bet_id": "#3093782236",
+          "raw_pick_text": "Over 33.5",
+          "raw_stake_text": "R$1.000,00"
+        },
+        "fair_source_detail": {
+          "note": "THUNDERPICK Under 33.5 @ 1.892 - fair slot (+1 sobre a formula 32.5). Pick placed Over NA fair @1.84.",
+          "value": 33.5,
+          "source": "thunderpick_manual",
+          "captured_at": "2026-07-30T11:00:00Z"
+        }
+      },
+      "notes": "Over off-method OU janela a confirmar - COO classifica no settle",
+      "fair_pinnacle": 33.5,
+      "fair_formula": 29.5,
+      "fair_line_source": "thunderpick_manual",
+      "is_method_bet": false
+    },
+    {
+      "id": "3e284374-32de-481f-ac19-2c051628f4c8",
+      "created_at": "2026-07-30T19:55:01.968107+00:00",
+      "bookmaker": "clutch",
+      "league": "LFL",
+      "team_a": "TLN Pirates",
+      "team_b": "Esprit Shonen",
+      "market": "Total Kills — Map 1",
+      "pick": "Over 34.5",
+      "odd": 1.6,
+      "stake": 975.9,
+      "bet_datetime": "2026-07-30T19:48:00+00:00",
+      "pandascore_match_id": null,
+      "pandascore_match_name": null,
+      "is_map_bet": true,
+      "map_number": 1,
+      "status": "green",
+      "profit": 585.54,
+      "settled_at": "2026-07-30T20:46:33.165+00:00",
+      "settle_source": "lolesports api - 42 kills",
+      "screenshot_path": null,
+      "raw_extraction": {
+        "notes": "Over em linha que o mercado moveu +2 sobre a fair da manhã (32.5→~34.5) — mesmo padrão de linha móvel pós-draft. Na régua da janela: linha ≤ fair da manhã NÃO ✗; vs fair ATUAL do mercado, está na fair. Clutch @1.60 abaixo do mínimo 1.80 da janela. COO classifica draft no settle.",
+        "fx_source": "awesomeapi USD-BRL 2026-07-30 bid",
+        "fx_usd_brl": 5.082,
+        "ladder_info": {
+          "map": 1,
+          "direction": "over",
+          "ladder_group": "TLNPvES_map1",
+          "ladder_group_id": "ladder_TLNPvES_2026-07-30_map1"
+        },
+        "match_context": {
+          "teams": [
+            {
+              "id": "109508365983748798",
+              "code": "ES",
+              "name": "Esprit Shonen"
+            },
+            {
+              "id": "115745361559907281",
+              "code": "TLNP",
+              "name": "TLN Pirates"
+            }
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 29,
+          "league_id": "105266103462388553",
+          "red_picks": {
+            "adc": "Mel",
+            "mid": "Kennen",
+            "top": "Ambessa",
+            "jungle": "LeeSin",
+            "support": "Rell"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Locke",
+            "top": "KSante",
+            "jungle": "Vi",
+            "support": "Camille"
+          },
+          "kills_blue": 13,
+          "red_barons": 1,
+          "red_towers": 11,
+          "settled_at": "2026-07-30T20:46:33.163Z",
+          "start_time": "2026-07-30T20:00:00Z",
+          "blue_barons": 0,
+          "blue_towers": 2,
+          "draft_check": "1 tentativa livestats window (startingTime ~200-210s antes do horario atual, rounded 10s) retornou 204 (sem dados) — game ainda em draft/loading no momento do registro. Sem retry (sem loop).",
+          "red_dragons": 5,
+          "red_team_id": "115745361559907281",
+          "total_kills": 42,
+          "winner_side": "red",
+          "blue_dragons": 0,
+          "blue_team_id": "109508365983748798",
+          "league_short": "LFL",
+          "trigger_type": null,
+          "kills_at_15min": null,
+          "red_total_gold": 65872,
+          "blue_total_gold": 55457,
+          "first_blood_team": "red",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "116912368900055699",
+          "map1_state_at_link": "inProgress",
+          "lolesports_match_id": "116912368900055698",
+          "series_score_at_bet": null
+        },
+        "method_variant": null,
+        "ladder_group_id": "ladder_TLNPvES_2026-07-30_map1",
+        "bookmaker_native": {
+          "bet_id": "2694699767409283197",
+          "possible_win": "US$307.25",
+          "raw_pick_text": "Over 34.5",
+          "raw_stake_text": "US$192.03"
+        },
+        "original_currency": "USD",
+        "original_stake_usd": 192.03
+      },
+      "notes": "Over em linha que o mercado moveu +2 sobre a fair da manhã (32.5→~34.5) — mesmo padrão de linha móvel pós-draft. Na régua da janela: linha ≤ fair da manhã NÃO ✗; vs fair ATUAL do mercado, está na fair. Clutch @1.60 abaixo do mínimo 1.80 da janela. COO classifica draft no settle.",
+      "fair_pinnacle": 32.5,
+      "fair_formula": 29.5,
+      "fair_line_source": "pinnacle_manual",
+      "is_method_bet": false
+    },
+    {
+      "id": "fc92be1f-d986-4fae-a5ab-4471adb74227",
+      "created_at": "2026-07-30T19:54:52.907827+00:00",
+      "bookmaker": "thunderpick",
+      "league": "LFL",
+      "team_a": "TLN Pirates",
+      "team_b": "Esprit Shonen",
+      "market": "Total Kills — Map 1",
+      "pick": "Over 34.5",
+      "odd": 1.8,
+      "stake": 1000.01,
+      "bet_datetime": "2026-07-30T19:48:00+00:00",
+      "pandascore_match_id": null,
+      "pandascore_match_name": null,
+      "is_map_bet": true,
+      "map_number": 1,
+      "status": "green",
+      "profit": 800.01,
+      "settled_at": "2026-07-30T20:46:32.945+00:00",
+      "settle_source": "lolesports api - 42 kills",
+      "screenshot_path": null,
+      "raw_extraction": {
+        "notes": "Over em linha que o mercado moveu +2 sobre a fair da manhã (32.5→~34.5) — mesmo padrão de linha móvel pós-draft. Na régua da janela: linha ≤ fair da manhã NÃO ✗; vs fair ATUAL do mercado, está na fair. Clutch @1.60 abaixo do mínimo 1.80 da janela. COO classifica draft no settle.",
+        "ladder_info": {
+          "map": 1,
+          "direction": "over",
+          "ladder_group": "TLNPvES_map1",
+          "ladder_group_id": "ladder_TLNPvES_2026-07-30_map1"
+        },
+        "match_context": {
+          "teams": [
+            {
+              "id": "109508365983748798",
+              "code": "ES",
+              "name": "Esprit Shonen"
+            },
+            {
+              "id": "115745361559907281",
+              "code": "TLNP",
+              "name": "TLN Pirates"
+            }
+          ],
+          "red_bans": null,
+          "blue_bans": null,
+          "kills_red": 29,
+          "league_id": "105266103462388553",
+          "red_picks": {
+            "adc": "Mel",
+            "mid": "Kennen",
+            "top": "Ambessa",
+            "jungle": "LeeSin",
+            "support": "Rell"
+          },
+          "under_hit": false,
+          "blue_picks": {
+            "adc": "Ezreal",
+            "mid": "Locke",
+            "top": "KSante",
+            "jungle": "Vi",
+            "support": "Camille"
+          },
+          "kills_blue": 13,
+          "red_barons": 1,
+          "red_towers": 11,
+          "settled_at": "2026-07-30T20:46:32.941Z",
+          "start_time": "2026-07-30T20:00:00Z",
+          "blue_barons": 0,
+          "blue_towers": 2,
+          "draft_check": "1 tentativa livestats window (startingTime ~200-210s antes do horario atual, rounded 10s) retornou 204 (sem dados) — game ainda em draft/loading no momento do registro. Sem retry (sem loop).",
+          "red_dragons": 5,
+          "red_team_id": "115745361559907281",
+          "total_kills": 42,
+          "winner_side": "red",
+          "blue_dragons": 0,
+          "blue_team_id": "109508365983748798",
+          "league_short": "LFL",
+          "trigger_type": null,
+          "kills_at_15min": null,
+          "red_total_gold": 65872,
+          "blue_total_gold": 55457,
+          "first_blood_team": "red",
+          "game_duration_secs": null,
+          "gold_diff_at_15min": null,
+          "lolesports_game_id": "116912368900055699",
+          "map1_state_at_link": "inProgress",
+          "lolesports_match_id": "116912368900055698",
+          "series_score_at_bet": null
+        },
+        "method_variant": null,
+        "ladder_group_id": "ladder_TLNPvES_2026-07-30_map1",
+        "bookmaker_native": {
+          "bet_id": null,
+          "possible_win": "R$1.799,99",
+          "raw_pick_text": "Over 34.5",
+          "raw_stake_text": "R$1.000,01"
+        }
+      },
+      "notes": "Over em linha que o mercado moveu +2 sobre a fair da manhã (32.5→~34.5) — mesmo padrão de linha móvel pós-draft. Na régua da janela: linha ≤ fair da manhã NÃO ✗; vs fair ATUAL do mercado, está na fair. Clutch @1.60 abaixo do mínimo 1.80 da janela. COO classifica draft no settle.",
+      "fair_pinnacle": 32.5,
       "fair_formula": 29.5,
       "fair_line_source": "pinnacle_manual",
       "is_method_bet": false
