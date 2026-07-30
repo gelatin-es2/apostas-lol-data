@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Apostas LoL — Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,27 +11,42 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #050b1a;
-      --bg-2: #0a1632;
-      --card: #0f1f44;
-      --card-2: #142855;
-      --border: #1e3a8a;
-      --border-soft: #1e2c5a;
-      --accent: #3b82f6;
-      --accent-2: #60a5fa;
-      --accent-glow: rgba(59, 130, 246, 0.25);
-      --text: #e6efff;
-      --muted: #7d92c2;
+      /* Paleta grafite neutro (RODADA 4 — PARTE B, 2026-07-30): antes era azul-marinho,
+         que competia visualmente com verde/vermelho de ganhou/perdeu num painel de
+         aposta. Grafite deixa cor = só sinal de resultado. Verde/vermelho/amarelo NÃO
+         mudam de hex — validados ≥3:1 de contraste contra --card (#17191e). */
+      --bg:          #0e0f12;
+      --bg-2:        #16181d;
+      --card:        #17191e;
+      --card-2:      #1d2026;
+      --border:      #333942;
+      --border-soft: #262a31;
+      --accent:      #8b95a5;   /* cromo: aba ativa, chip ativo, foco, borda de hover */
+      --accent-2:    #c3cad6;   /* texto de destaque + linha do gráfico */
+      --accent-glow: rgba(163,173,189,0.18);
+      --text:        #e8eaed;
+      --muted:       #8a929e;
       --green: #22c55e;
       --green-soft: rgba(34, 197, 94, 0.15);
       --red: #ef4444;
       --red-soft: rgba(239, 68, 68, 0.15);
       --yellow: #eab308;
       --yellow-soft: rgba(234, 179, 8, 0.15);
+
+      /* ===== Chart tokens (PARTE 1) ===== */
+      --chart-surface: #17191e;   /* = --card, superfície onde o gráfico vive */
+      --chart-grid:    #262a31;   /* = --border-soft, hairline 1px SOLID */
+      --chart-axis:    #8a929e;   /* = --muted, texto de eixo */
+      --chart-line:    #c3cad6;   /* = --accent-2, série única */
     }
 
     html, body {
-      background: radial-gradient(ellipse at top, #0a1632 0%, var(--bg) 60%);
+      /* Fix 2026-07-30 (BUG E): shorthand `background` sem background-color deixava
+         a área que o gradiente fixo não cobre cair pro branco do canvas do navegador
+         (visível como faixa branca fora da 1ª dobra em captura de página inteira).
+         Separado em color+image com fallback escuro — aparência do gradiente igual. */
+      background-color: var(--bg);
+      background-image: radial-gradient(ellipse at top, #16181d 0%, var(--bg) 60%);
       background-attachment: fixed;
       color: var(--text);
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -142,10 +157,10 @@
     .day .profit.muted { color: var(--muted); }
     .day-clickable { cursor: pointer; transition: border-color 0.15s, background 0.15s; }
     .day-clickable:hover { border-color: var(--accent); }
-    .day-active { border-color: var(--accent) !important; background: rgba(99, 102, 241, 0.08); }
+    .day-active { border-color: var(--accent) !important; background: rgba(163, 173, 189, 0.10); }
 
     /* Filters */
-    .filters {
+    .filters, .chip-row {
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
@@ -259,7 +274,7 @@
     .badge.green { background: var(--green-soft); color: var(--green); }
     .badge.red { background: var(--red-soft); color: var(--red); }
     .badge.pending { background: var(--yellow-soft); color: var(--yellow); }
-    .badge.void { background: rgba(125,146,194,0.15); color: var(--muted); }
+    .badge.void { background: rgba(138,146,158,0.15); color: var(--muted); }
     .badge.cashout { background: var(--accent-glow); color: var(--accent-2); }
     .badge.hedge { background: var(--accent-glow); color: var(--accent-2); margin-left: 4px; }
 
@@ -287,14 +302,6 @@
       vertical-align: middle;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    @media (max-width: 600px) {
-      .header { padding: 18px 16px 8px; }
-      .container { padding: 8px 16px 32px; }
-      .kpi .value { font-size: 20px; }
-      .bet { grid-template-columns: 1fr; }
-      .bet .right { text-align: left; }
-    }
 
     .tabs {
       display: flex; gap: 4px; padding: 0 24px;
@@ -518,6 +525,320 @@
     .off-method-section .section-title {
       color: var(--yellow);
     }
+
+    /* ===== PARTE 4 — Barra de filtros sticky ===== */
+    .filter-bar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 10px 24px;
+      margin: 0 -24px 16px;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      overflow-x: auto;
+    }
+    .filter-bar label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .filter-bar select,
+    .filter-bar input {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border-soft);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 13px;
+    }
+    .filter-bar input[type="number"] {
+      width: 90px;
+      cursor: text;
+    }
+    .filter-bar select#anChampion,
+    .filter-bar select#s1Champion {
+      max-width: 180px;
+    }
+    .filter-bar .filter-summary {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    /* ===== PARTE 5 — Zona de simulação (não é dinheiro real) ===== */
+    .sim-zone {
+      border: 1px dashed #a78bfa;
+      border-radius: 14px;
+      padding: 16px;
+      background: rgba(167, 139, 250, 0.04);
+    }
+    .badge-sim {
+      position: sticky;
+      top: 0;
+      display: inline-block;
+      background: rgba(167, 139, 250, 0.18);
+      color: #c4b5fd;
+      border: 1px solid #a78bfa;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      z-index: 5;
+    }
+
+    /* ===== Ranking "ver todos" (PARTE 3) ===== */
+    .ver-todos-btn {
+      grid-column: 1 / -1;
+      background: transparent;
+      border: 1px dashed var(--border-soft);
+      color: var(--accent-2);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .ver-todos-btn:hover { border-color: var(--accent); }
+
+    /* ===== Aba "Hoje" (PARTE 2) ===== */
+    .hero-figure {
+      text-align: center;
+      margin: 0;
+    }
+    .hero-figure .label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: none;
+    }
+    .hero-figure .value {
+      font-size: clamp(40px, 8vw, 56px);
+      font-weight: 800;
+      font-variant-numeric: normal; /* proporcionais — NUNCA tabular-nums aqui */
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-top: 4px;
+    }
+    .hero-figure .value.green { color: var(--green); }
+    .hero-figure .value.red { color: var(--red); }
+    .hero-figure .value.muted { color: var(--muted); }
+    .hero-figure .sub {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    /* RODADA 4 — PARTE A (2026-07-30): a aba "Hoje" virou 2 blocos rotulados —
+       HOJE (herói real do dia) e SPLIT (tiles acumulados). .hoje-hero-row deixa o
+       herói de hoje com as 2 mini-tiles "ao lado" no desktop e empilhado (flex-wrap)
+       em telas estreitas, sem overflow horizontal a 375px. */
+    .hoje-hero-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin: 8px 0 20px;
+    }
+    .hoje-mini-tiles {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hoje-mini-tiles .kpi {
+      min-width: 96px;
+      padding: 10px 14px;
+    }
+    .hoje-mini-tiles .kpi .value {
+      font-size: 20px;
+      margin-top: 4px;
+    }
+
+    .kpi.warn::before { background: var(--yellow); }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 28px 0 12px;
+      flex-wrap: wrap;
+    }
+    .section-head .section-title { margin: 0; }
+    .ver-tabela-btn {
+      background: transparent;
+      border: none;
+      color: var(--accent-2);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 2px 0;
+    }
+    .ver-tabela-btn:hover { text-decoration: underline; }
+
+    .rank-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .rank-note {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 6px;
+    }
+
+    /* ===== Biblioteca de charts SVG (PARTE 1) ===== */
+    .chart-wrap {
+      position: relative;
+      background: var(--chart-surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 12px;
+      transition: opacity 0.15s;
+    }
+    .chart-wrap svg { display: block; width: 100%; height: auto; }
+    .chart-svg-text {
+      fill: var(--chart-axis);
+      font-size: 10px;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-variant-numeric: tabular-nums;
+    }
+    .chart-svg-label {
+      fill: var(--text);
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-variant-numeric: tabular-nums;
+    }
+    .chart-tooltip {
+      position: absolute;
+      pointer-events: none;
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: var(--text);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+      white-space: nowrap;
+      z-index: 30;
+      opacity: 0;
+      transition: opacity 0.1s;
+    }
+    .chart-tooltip.visible { opacity: 1; }
+    .chart-crosshair {
+      stroke: var(--chart-axis);
+      stroke-width: 1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .hbar-rows { display: flex; flex-direction: column; gap: 6px; }
+    .hbar-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      align-items: center;
+      gap: 8px;
+      height: 26px;
+    }
+    .hbar-row .hbar-label {
+      font-size: 12px;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: right;
+    }
+    .hbar-track {
+      position: relative;
+      height: 26px;
+    }
+    .hbar-zero {
+      position: absolute;
+      top: 1px; bottom: 1px;
+      width: 1px;
+      background: var(--chart-grid);
+    }
+    .hbar-fill {
+      position: absolute;
+      top: 6px;
+      height: 14px; /* máx 24px de espessura — sobra é ar, nunca preenche o slot inteiro */
+      transition: width 0.15s, left 0.15s;
+    }
+    .hbar-tip {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text); /* nunca a cor da série */
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      padding: 0 4px;
+    }
+
+    /* Medidor hit vs breakeven */
+    .meter { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+    .meter-track {
+      position: relative;
+      height: 8px;
+      border-radius: 999px;
+      overflow: visible;
+    }
+    .meter-fill {
+      position: absolute;
+      top: 0; left: 0; height: 100%;
+      border-radius: 999px;
+      transition: width 0.2s;
+    }
+    .meter-target {
+      position: absolute;
+      top: -3px; bottom: -3px;
+      width: 2px;
+      background: var(--chart-axis);
+    }
+    .meter-target-label {
+      position: relative;
+      font-size: 10px;
+      color: var(--muted);
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ===== PARTE 6 — Mobile =====
+       Fica por ÚLTIMO no stylesheet de propósito: regras de mesma especificidade
+       (ex: .rank-grid, .kpis) definidas em blocos acima só vencem a cascata se
+       vierem depois — um media query declarado antes de uma regra base do mesmo
+       seletor PERDE pra ela em qualquer largura (bug real visto na validação
+       headless de 2026-07-30: .rank-grid ficava sempre 2 colunas no mobile
+       porque a versão 1fr 1fr, definida mais abaixo no arquivo, sobrescrevia). */
+    @media (max-width: 600px) {
+      .header { padding: 18px 16px 8px; }
+      .container { padding: 8px 16px 32px; }
+      .kpi .value { font-size: 20px; }
+      .bet { grid-template-columns: 1fr; }
+      .bet .right { text-align: left; }
+      .kpis { grid-template-columns: repeat(2, 1fr); }
+      .hero-figure .value { font-size: 40px; }
+      .filter-bar { overflow-x: auto; margin-inline: -16px; padding-inline: 16px; }
+      .rank-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -527,7 +848,8 @@
   </header>
 
   <nav class="tabs">
-    <div class="tab active" data-tab="tracker">Planilha</div>
+    <div class="tab active" data-tab="hoje">Hoje</div>
+    <div class="tab" data-tab="tracker">Planilha</div>
     <div class="tab" data-tab="under">Método Under</div>
     <div class="tab" data-tab="overkill">Over Kill</div>
     <div class="tab" data-tab="analise">Banco de dados</div>
@@ -535,27 +857,97 @@
     <div class="tab" data-tab="split1">Split 1 + First Stand</div>
   </nav>
 
-  <main class="container tab-pane active" data-pane="tracker">
+  <main class="container tab-pane active" data-pane="hoje">
+    <!-- RODADA 4 — PARTE A (2026-07-30): bug relatado pelo dono — aba "Hoje" mostrava
+         o lucro acumulado do split como se fosse o resultado do dia ("lucro do dia
+         ta falando que ganhei 20 mil hoje"). Cálculo estava certo, o rótulo mentia.
+         Agora são 2 blocos separados e rotulados: HOJE (herói = resultado do dia) e
+         SPLIT (tiles = acumulado), mais chips Tudo/Só método que re-escopam a aba
+         inteira (antes ela somava método+off sem avisar). -->
+    <div class="chip-row" id="hojeScopeChips">
+      <span class="chip active" data-scope="tudo">Tudo</span>
+      <span class="chip" data-scope="metodo">Só método</span>
+    </div>
+    <div class="rank-note" id="hojeScopeNote" style="margin:-6px 0 16px"></div>
+
+    <div class="section-title" style="margin-top:0" id="hojeTodayTitle">HOJE · —</div>
+    <div class="hoje-hero-row">
+      <div class="hero-figure">
+        <div class="label">Lucro hoje</div>
+        <div class="value" id="hojeHeroValue">—</div>
+        <div class="sub" id="hojeHeroSub"></div>
+      </div>
+      <div class="hoje-mini-tiles">
+        <div class="kpi">
+          <div class="label">Bets hoje</div>
+          <div class="value" id="hojeMiniBetsCount">0</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Pendentes</div>
+          <div class="value" id="hojeMiniPendCount">0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title" id="hojeSplitTitle">SPLIT 3 · desde 21/07</div>
+    <div id="hojeKpis" class="kpis"></div>
+
+    <div class="section-title" style="margin-top:28px" id="hojeCurveTitle">Curva de banca — acumulado no split 3</div>
+    <div id="hojeCurveWrap"><div class="loading">Carregando…</div></div>
+
+    <div id="hojePendentesSection" style="display:none">
+      <div class="section-title">Pendentes</div>
+      <div id="hojePendentesBets" class="bets"></div>
+    </div>
+
+    <div class="section-head">
+      <div class="section-title" style="margin:0">Últimos 14 dias</div>
+      <button class="ver-tabela-btn" id="hojeVerTabelaBtn" type="button">▸ ver tabela</button>
+    </div>
+    <div id="hoje14Wrap"><div class="loading">Carregando…</div></div>
+    <div id="hoje14Table" class="days" style="display:none;margin-top:10px"></div>
+
+    <div class="section-title" id="hojeRankTitle">Onde ganha / onde perde — no split 3</div>
+    <div class="chip-row" id="hojeDimChips">
+      <span class="chip active" data-dim="liga">Liga</span>
+      <span class="chip" data-dim="time">Time</span>
+      <span class="chip" data-dim="suporte">Suporte</span>
+    </div>
+    <div class="rank-grid">
+      <div>
+        <div class="section-title" style="margin-top:0">Onde ganha</div>
+        <div id="hojeGanha"></div>
+      </div>
+      <div>
+        <div class="section-title" style="margin-top:0">Onde perde</div>
+        <div id="hojePerde"></div>
+      </div>
+    </div>
+    <div class="rank-note" id="hojeRankNote"></div>
+  </main>
+
+  <main class="container tab-pane" data-pane="tracker">
     <div class="section-title" style="margin-top:0">Resumo — todas as bets reais (método + fora do método)</div>
     <div id="allRealKpis" class="kpis" style="margin-bottom:20px"></div>
 
-    <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
-      <label style="font-size:12px;color:var(--muted);font-weight:600">PERÍODO:</label>
-      <select id="trkPeriod" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+    <div class="filter-bar">
+      <label>PERÍODO:</label>
+      <select id="trkPeriod">
         <option value="all">Tudo</option>
         <option value="split2">Split 2 (abr-jun)</option>
         <option value="split3" selected>Split 3 (21/07+)</option>
       </select>
-      <label style="font-size:12px;color:var(--muted);font-weight:600">TRIGGER:</label>
-      <select id="trkTrigger" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+      <label>TRIGGER:</label>
+      <select id="trkTrigger">
         <option value="all" selected>todos</option>
         <option value="2peel">só 2peel</option>
         <option value="1peel+flex">só 1peel+flex</option>
       </select>
-      <label style="font-size:12px;color:var(--muted);font-weight:600">LIGA:</label>
-      <select id="trkLeague" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+      <label>LIGA:</label>
+      <select id="trkLeague">
         <option value="all" selected>todas</option>
       </select>
+      <span class="filter-summary" id="trkFilterSummary"></span>
     </div>
 
     <div id="kpis" class="kpis"></div>
@@ -600,13 +992,14 @@
 
   <main class="container tab-pane" data-pane="under">
     <div class="section-title" style="margin-top:0">Resumo — Método Under (bets reais, is_method_bet=true)</div>
-    <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
-      <label style="font-size:12px;color:var(--muted);font-weight:600">PERÍODO:</label>
-      <select id="underPeriod" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+    <div class="filter-bar">
+      <label>PERÍODO:</label>
+      <select id="underPeriod">
         <option value="all">Tudo</option>
         <option value="split2">Split 2 (abr-jun)</option>
         <option value="split3" selected>Split 3 (21/07+)</option>
       </select>
+      <span class="filter-summary" id="underFilterSummary"></span>
     </div>
     <div id="underKpis" class="kpis"></div>
 
@@ -624,13 +1017,14 @@
 
   <main class="container tab-pane" data-pane="overkill">
     <div class="section-title" style="margin-top:0">Resumo — Over Kill (experimentos Over / avulsos fora do método)</div>
-    <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
-      <label style="font-size:12px;color:var(--muted);font-weight:600">PERÍODO:</label>
-      <select id="overPeriod" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
+    <div class="filter-bar">
+      <label>PERÍODO:</label>
+      <select id="overPeriod">
         <option value="all">Tudo</option>
         <option value="split2">Split 2 (abr-jun)</option>
         <option value="split3" selected>Split 3 (21/07+)</option>
       </select>
+      <span class="filter-summary" id="overFilterSummary"></span>
     </div>
     <div id="overKpis" class="kpis"></div>
     <div id="overWindowLine" style="font-size:12px;color:var(--muted);margin:-8px 0 16px"></div>
@@ -648,190 +1042,205 @@
   </main>
 
   <main class="container tab-pane" data-pane="analise">
-    <div style="background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(99,102,241,0.04)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
-      <div style="font-weight:700; font-size:14px; color:var(--accent-2)">Banco de dados — simulação adaptável</div>
-      <div style="font-size:12px; color:var(--muted); margin-top:6px">
-        Bets reais do CEO + missed opportunities simuladas. <strong>Ajuste a linha simulada</strong> abaixo pra ver como cada time/champ/sup performa em cenários diferentes. Útil pra identificar quem aguenta cenários adversos. <strong>Não é PnL real.</strong>
-      </div>
-      <div style="display:flex;gap:16px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border-soft);flex-wrap:wrap">
-        <label style="font-size:12px;color:var(--muted);font-weight:600">PERÍODO:</label>
-        <select id="anPeriod" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-          <option value="all" selected>Tudo</option>
-          <option value="split2">Split 2 (abr-jun)</option>
-          <option value="split3">Split 3 (21/07+)</option>
-        </select>
-        <label style="font-size:12px;color:var(--muted);font-weight:600">Δ FAIR LINE:</label>
-        <select id="anFairDelta" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-          <option value="-4">−4 (linha 4 abaixo)</option>
-          <option value="-3">−3</option>
-          <option value="-2">−2</option>
-          <option value="-1">−1</option>
-          <option value="0" selected>0 (fair calculada)</option>
-          <option value="+1">+1</option>
-          <option value="+2">+2</option>
-          <option value="+3">+3</option>
-          <option value="+4">+4</option>
-        </select>
-        <label style="font-size:12px;color:var(--muted);font-weight:600">ODD:</label>
-        <select id="anOdd" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-          <option value="real" selected>real (odd da bet)</option>
-          <option value="2.10">2.10</option>
-          <option value="2.00">2.00</option>
-          <option value="1.90">1.90</option>
-          <option value="1.85">1.85</option>
-          <option value="1.83">1.83 (fair)</option>
-          <option value="1.80">1.80</option>
-          <option value="1.77">1.77 (sua média real)</option>
-          <option value="1.74">1.74</option>
-          <option value="1.72">1.72 (conservadora)</option>
-          <option value="1.70">1.70</option>
-          <option value="1.65">1.65</option>
-          <option value="1.60">1.60</option>
-        </select>
-        <label style="font-size:12px;color:var(--muted);font-weight:600">STAKE:</label>
-        <input id="anStake" type="number" value="1000" min="100" max="10000" step="100" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;width:90px;font-weight:600" />
-        <label style="font-size:12px;color:var(--muted);font-weight:600">TRIGGER:</label>
-        <select id="anTrigger" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-          <option value="all" selected>todos</option>
-          <option value="2peel">só 2peel</option>
-          <option value="1peel+flex">só 1peel+flex</option>
-        </select>
-        <label style="font-size:12px;color:var(--muted);font-weight:600">LIGA:</label>
-        <select id="anLeague" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-          <option value="all" selected>todas</option>
-        </select>
-        <label style="font-size:12px;color:var(--muted);font-weight:600">CAMPEÃO:</label>
-        <select id="anChampion" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer;max-width:180px">
-          <option value="all" selected>todos</option>
-        </select>
-      </div>
+    <div class="filter-bar">
+      <label>PERÍODO:</label>
+      <select id="anPeriod">
+        <option value="all" selected>Tudo</option>
+        <option value="split2">Split 2 (abr-jun)</option>
+        <option value="split3">Split 3 (21/07+)</option>
+      </select>
+      <label>Δ FAIR LINE:</label>
+      <select id="anFairDelta">
+        <option value="-4">−4 (linha 4 abaixo)</option>
+        <option value="-3">−3</option>
+        <option value="-2">−2</option>
+        <option value="-1">−1</option>
+        <option value="0" selected>0 (fair calculada)</option>
+        <option value="+1">+1</option>
+        <option value="+2">+2</option>
+        <option value="+3">+3</option>
+        <option value="+4">+4</option>
+      </select>
+      <label>ODD:</label>
+      <select id="anOdd">
+        <option value="real" selected>real (odd da bet)</option>
+        <option value="2.10">2.10</option>
+        <option value="2.00">2.00</option>
+        <option value="1.90">1.90</option>
+        <option value="1.85">1.85</option>
+        <option value="1.83">1.83 (fair)</option>
+        <option value="1.80">1.80</option>
+        <option value="1.77">1.77 (sua média real)</option>
+        <option value="1.74">1.74</option>
+        <option value="1.72">1.72 (conservadora)</option>
+        <option value="1.70">1.70</option>
+        <option value="1.65">1.65</option>
+        <option value="1.60">1.60</option>
+      </select>
+      <label>STAKE:</label>
+      <input id="anStake" type="number" value="1000" min="100" max="10000" step="100" />
+      <label>TRIGGER:</label>
+      <select id="anTrigger">
+        <option value="all" selected>todos</option>
+        <option value="2peel">só 2peel</option>
+        <option value="1peel+flex">só 1peel+flex</option>
+      </select>
+      <label>LIGA:</label>
+      <select id="anLeague">
+        <option value="all" selected>todas</option>
+      </select>
+      <label>CAMPEÃO:</label>
+      <select id="anChampion">
+        <option value="all" selected>todos</option>
+      </select>
+      <span class="filter-summary" id="anFilterSummary"></span>
     </div>
 
-    <div id="anKpis" class="kpis"></div>
+    <div class="sim-zone">
+      <div class="badge-sim">SIMULAÇÃO — não é dinheiro real</div>
+      <div style="background: linear-gradient(135deg, rgba(163,173,189,0.06), rgba(163,173,189,0.03)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
+        <div style="font-weight:700; font-size:14px; color:var(--accent-2)">Banco de dados — simulação adaptável</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:6px">
+          Bets reais do CEO + missed opportunities simuladas. <strong>Ajuste a linha simulada</strong> acima pra ver como cada time/champ/sup performa em cenários diferentes. Útil pra identificar quem aguenta cenários adversos. <strong>Não é PnL real.</strong>
+        </div>
+      </div>
 
-    <div class="section-title">Backtest por trigger (sob current Δ/odd)</div>
-    <div id="anByTrigger" class="days"></div>
+      <div id="anKpis" class="kpis"></div>
 
-    <div class="section-title">Hit por liga (real + simulado)</div>
-    <div id="anByLeague" class="days"></div>
+      <div class="section-title">Backtest por trigger (sob current Δ/odd)</div>
+      <div id="anByTrigger" class="days"></div>
 
-    <div class="section-title">Hit por time (real + simulado)</div>
-    <div id="anByTeam" class="days"></div>
+      <div class="section-title">Hit por liga (real + simulado)</div>
+      <div id="anByLeague" class="days"></div>
 
-    <div class="section-title">Hit por suporte (real + simulado)</div>
-    <div id="anBySupport" class="days"></div>
+      <div class="section-title">Hit por time (real + simulado)</div>
+      <div id="anByTeam" class="days"></div>
 
-    <div class="section-title">Hit por boneco — todas as lanes (real + simulado)</div>
-    <div id="anByChamp" class="days"></div>
+      <div class="section-title">Hit por suporte (real + simulado)</div>
+      <div id="anBySupport" class="days"></div>
+
+      <div class="section-title">Hit por boneco — todas as lanes (real + simulado)</div>
+      <div id="anByChamp" class="days"></div>
+    </div>
   </main>
 
   <main class="container tab-pane" data-pane="milio">
-    <div style="background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(16,185,129,0.06)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
-      <div style="font-weight:700; font-size:14px; color:var(--green)">🌟 Método Milio — sub-método dedicado</div>
-      <div style="font-size:12px; color:var(--muted); margin-top:6px">
-        <strong>TODOS os <span id="milioGameCount">–</span> jogos</strong> (LCK/LPL/LEC/CBLOL/LCS) onde <strong>Milio jogou de support</strong> — com ou sem bet, fonte results.json (dado atualizado em <span id="milioLastUpdate">–</span>). Under hit recalculado live com o slider Δ (<code>kills &lt; fair + Δ</code>). Profit teórico usa a odd do slider.
-      </div>
-      <div style="font-size:11px; color:var(--muted); margin-top:8px; line-height:1.6">
-        🟢 <strong>STACK</strong>: Milio vs Bard/Lulu (under detona) · 🔴 <strong>EVITAR</strong>: Milio vs Nautilus/Alistar/Renata (engage-tank fura) · ⚠️ amostra fraca (n&lt;5)
-      </div>
-      <div style="display:flex;gap:16px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border-soft);flex-wrap:wrap">
-        <label style="font-size:12px;color:var(--muted);font-weight:600">Δ FAIR LINE:</label>
-        <select id="miFairDelta" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-          <option value="-4">−4</option><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option>
-          <option value="0" selected>0 (fair)</option>
-          <option value="+1">+1</option><option value="+2">+2</option><option value="+3">+3</option><option value="+4">+4</option>
-        </select>
-        <label style="font-size:12px;color:var(--muted);font-weight:600">ODD:</label>
-        <select id="miOdd" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-          <option value="real" selected>real (odd da bet)</option>
-          <option value="2.10">2.10</option><option value="2.00">2.00</option><option value="1.90">1.90</option>
-          <option value="1.85">1.85</option><option value="1.83">1.83 (fair)</option><option value="1.80">1.80</option>
-          <option value="1.77">1.77</option><option value="1.74">1.74</option>
-          <option value="1.72">1.72</option>
-          <option value="1.70">1.70</option><option value="1.65">1.65</option><option value="1.60">1.60</option>
-        </select>
-        <label style="font-size:12px;color:var(--muted);font-weight:600">STAKE:</label>
-        <input id="miStake" type="number" value="2000" min="100" max="10000" step="100" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;width:90px;font-weight:600" />
-      </div>
+    <div class="filter-bar">
+      <label>Δ FAIR LINE:</label>
+      <select id="miFairDelta">
+        <option value="-4">−4</option><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option>
+        <option value="0" selected>0 (fair)</option>
+        <option value="+1">+1</option><option value="+2">+2</option><option value="+3">+3</option><option value="+4">+4</option>
+      </select>
+      <label>ODD:</label>
+      <select id="miOdd">
+        <option value="real" selected>real (odd da bet)</option>
+        <option value="2.10">2.10</option><option value="2.00">2.00</option><option value="1.90">1.90</option>
+        <option value="1.85">1.85</option><option value="1.83">1.83 (fair)</option><option value="1.80">1.80</option>
+        <option value="1.77">1.77</option><option value="1.74">1.74</option>
+        <option value="1.72">1.72</option>
+        <option value="1.70">1.70</option><option value="1.65">1.65</option><option value="1.60">1.60</option>
+      </select>
+      <label>STAKE:</label>
+      <input id="miStake" type="number" value="2000" min="100" max="10000" step="100" />
+      <span class="filter-summary" id="miFilterSummary"></span>
     </div>
 
-    <div id="miKpis" class="kpis"></div>
+    <div class="sim-zone">
+      <div class="badge-sim">SIMULAÇÃO — não é dinheiro real</div>
+      <div style="background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(16,185,129,0.06)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
+        <div style="font-weight:700; font-size:14px; color:var(--green)">🌟 Método Milio — sub-método dedicado</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:6px">
+          <strong>TODOS os <span id="milioGameCount">–</span> jogos</strong> (LCK/LPL/LEC/CBLOL/LCS) onde <strong>Milio jogou de support</strong> — com ou sem bet, fonte results.json (dado atualizado em <span id="milioLastUpdate">–</span>). Under hit recalculado live com o slider Δ (<code>kills &lt; fair + Δ</code>). Profit teórico usa a odd do slider.
+        </div>
+        <div style="font-size:11px; color:var(--muted); margin-top:8px; line-height:1.6">
+          🟢 <strong>STACK</strong>: Milio vs Bard/Lulu (under detona) · 🔴 <strong>EVITAR</strong>: Milio vs Nautilus/Alistar/Renata (engage-tank fura) · ⚠️ amostra fraca (n&lt;5)
+        </div>
+      </div>
 
-    <div class="section-title">Hit por trigger (Milio sozinho = coin-flip)</div>
-    <div id="miByTrigger" class="days"></div>
+      <div id="miKpis" class="kpis"></div>
 
-    <div class="section-title">Hit por sup adversário 🟢 STACK / 🔴 EVITAR</div>
-    <div id="miByOpponentSup" class="days"></div>
+      <div class="section-title">Hit por trigger (Milio sozinho = coin-flip)</div>
+      <div id="miByTrigger" class="days"></div>
 
-    <div class="section-title">Hit por liga</div>
-    <div id="miByLeague" class="days"></div>
+      <div class="section-title">Hit por sup adversário 🟢 STACK / 🔴 EVITAR</div>
+      <div id="miByOpponentSup" class="days"></div>
 
-    <div class="section-title">Hit por time (Milio + adversário)</div>
-    <div id="miByTeam" class="days"></div>
+      <div class="section-title">Hit por liga</div>
+      <div id="miByLeague" class="days"></div>
 
-    <div class="section-title">Hit por boneco — todas as lanes</div>
-    <div id="miByChamp" class="days"></div>
+      <div class="section-title">Hit por time (Milio + adversário)</div>
+      <div id="miByTeam" class="days"></div>
 
-    <div class="section-title">Hit por mapa</div>
-    <div id="miByMap" class="days"></div>
+      <div class="section-title">Hit por boneco — todas as lanes</div>
+      <div id="miByChamp" class="days"></div>
+
+      <div class="section-title">Hit por mapa</div>
+      <div id="miByMap" class="days"></div>
+    </div>
   </main>
 
   <main class="container tab-pane" data-pane="split1">
-    <div style="background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(139,92,246,0.06)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
-      <div style="font-weight:700; font-size:14px; color:#a78bfa">📜 Split 1 + First Stand 2026 (jan-mar)</div>
-      <div style="font-size:12px; color:var(--muted); margin-top:6px">
-        Backtest histórico em LCK/LPL/LEC/CBLOL/LCS + First Stand. CEO estava off. Ajuste os controles pra ver como o método teria performado com sua linha/odd/stake.
-      </div>
-      <div style="display:flex;gap:16px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border-soft);flex-wrap:wrap">
-        <label style="font-size:12px;color:var(--muted);font-weight:600">Δ FAIR LINE:</label>
-        <select id="s1FairDelta" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-          <option value="-4">−4</option><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option>
-          <option value="0" selected>0 (fair)</option>
-          <option value="+1">+1</option><option value="+2">+2</option><option value="+3">+3</option><option value="+4">+4</option>
-        </select>
-        <label style="font-size:12px;color:var(--muted);font-weight:600">ODD:</label>
-        <select id="s1Odd" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-          <option value="2.10">2.10</option><option value="2.00">2.00</option><option value="1.90">1.90</option>
-          <option value="1.85">1.85</option><option value="1.83">1.83 (fair)</option><option value="1.80">1.80</option>
-          <option value="1.77">1.77</option><option value="1.74">1.74</option>
-          <option value="1.72" selected>1.72</option>
-          <option value="1.70">1.70</option><option value="1.65">1.65</option><option value="1.60">1.60</option>
-        </select>
-        <label style="font-size:12px;color:var(--muted);font-weight:600">STAKE:</label>
-        <input id="s1Stake" type="number" value="1000" min="100" max="10000" step="100" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;width:90px;font-weight:600" />
-        <label style="font-size:12px;color:var(--muted);font-weight:600">TRIGGER:</label>
-        <select id="s1Trigger" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-          <option value="all" selected>todos</option>
-          <option value="2peel">só 2peel</option>
-          <option value="1peel+flex">só 1peel+flex</option>
-        </select>
-        <label style="font-size:12px;color:var(--muted);font-weight:600">LIGA:</label>
-        <select id="s1League" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer">
-          <option value="all" selected>todas</option>
-        </select>
-        <label style="font-size:12px;color:var(--muted);font-weight:600">CAMPEÃO:</label>
-        <select id="s1Champion" style="background:var(--card);color:var(--text);border:1px solid var(--border-soft);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer;max-width:180px">
-          <option value="all" selected>todos</option>
-        </select>
-      </div>
+    <div class="filter-bar">
+      <label>Δ FAIR LINE:</label>
+      <select id="s1FairDelta">
+        <option value="-4">−4</option><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option>
+        <option value="0" selected>0 (fair)</option>
+        <option value="+1">+1</option><option value="+2">+2</option><option value="+3">+3</option><option value="+4">+4</option>
+      </select>
+      <label>ODD:</label>
+      <select id="s1Odd">
+        <option value="2.10">2.10</option><option value="2.00">2.00</option><option value="1.90">1.90</option>
+        <option value="1.85">1.85</option><option value="1.83">1.83 (fair)</option><option value="1.80">1.80</option>
+        <option value="1.77">1.77</option><option value="1.74">1.74</option>
+        <option value="1.72" selected>1.72</option>
+        <option value="1.70">1.70</option><option value="1.65">1.65</option><option value="1.60">1.60</option>
+      </select>
+      <label>STAKE:</label>
+      <input id="s1Stake" type="number" value="1000" min="100" max="10000" step="100" />
+      <label>TRIGGER:</label>
+      <select id="s1Trigger">
+        <option value="all" selected>todos</option>
+        <option value="2peel">só 2peel</option>
+        <option value="1peel+flex">só 1peel+flex</option>
+      </select>
+      <label>LIGA:</label>
+      <select id="s1League">
+        <option value="all" selected>todas</option>
+      </select>
+      <label>CAMPEÃO:</label>
+      <select id="s1Champion">
+        <option value="all" selected>todos</option>
+      </select>
+      <span class="filter-summary" id="s1FilterSummary"></span>
     </div>
 
-    <div id="s1Backtest" class="kpis"></div>
+    <div class="sim-zone">
+      <div class="badge-sim">SIMULAÇÃO — não é dinheiro real</div>
+      <div style="background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(139,92,246,0.06)); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;">
+        <div style="font-weight:700; font-size:14px; color:#a78bfa">📜 Split 1 + First Stand 2026 (jan-mar)</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:6px">
+          Backtest histórico em LCK/LPL/LEC/CBLOL/LCS + First Stand. CEO estava off. Ajuste os controles acima pra ver como o método teria performado com sua linha/odd/stake.
+        </div>
+      </div>
 
-    <div class="section-title">Backtest por trigger (lado a lado)</div>
-    <div id="s1ByTrigger" class="days"></div>
+      <div id="s1Backtest" class="kpis"></div>
 
-    <div class="section-title">Por liga</div>
-    <div id="s1ByLeague" class="days"></div>
+      <div class="section-title">Backtest por trigger (lado a lado)</div>
+      <div id="s1ByTrigger" class="days"></div>
 
-    <div class="section-title">Top times por hit (n≥4)</div>
-    <div id="s1Teams" class="days"></div>
+      <div class="section-title">Por liga</div>
+      <div id="s1ByLeague" class="days"></div>
 
-    <div class="section-title">Por suporte</div>
-    <div id="s1Supports" class="days"></div>
+      <div class="section-title">Top times por hit (n≥4)</div>
+      <div id="s1Teams" class="days"></div>
 
-    <div class="section-title">Por boneco (todas lanes, n≥6)</div>
-    <div id="s1Champs" class="days"></div>
+      <div class="section-title">Por suporte</div>
+      <div id="s1Supports" class="days"></div>
+
+      <div class="section-title">Por boneco (todas lanes, n≥6)</div>
+      <div id="s1Champs" class="days"></div>
+    </div>
   </main>
 
   <script type="module">
@@ -865,6 +1274,433 @@
       const [, m, d] = key.split('-');
       return `${d}/${m}`;
     };
+
+    // ===== CHARTS (SVG puro) =====
+    // Biblioteca de gráficos SVG inline — zero dependência externa (PARTE 1 da
+    // reforma visual, 2026-07-30). Funções de render são puras (recebem dados,
+    // devolvem string de markup); a interação (crosshair/tooltip) é ligada depois
+    // da inserção no DOM pelas funções wireXxxChart(), chamadas com o mesmo id.
+    //
+    // Especificações de marca (design system, não são gosto):
+    //   linha 2px round · área 10% opacidade · marcador r>=4.5 + anel 2px na
+    //   superfície · barra máx 24px + ponta 4px + gap 2px · gridline 1px sólida ·
+    //   nunca rotular todo ponto (só final/máx/mín) · texto sempre --text/--muted.
+
+    const escHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
+      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+    ));
+
+    // Tooltip singleton reusado por todos os charts (evita 1 <div> por instância).
+    const CHART_TOOLTIP_ID = 'chartTooltip';
+    function ensureChartTooltip() {
+      let el = document.getElementById(CHART_TOOLTIP_ID);
+      if (!el) {
+        el = document.createElement('div');
+        el.id = CHART_TOOLTIP_ID;
+        el.className = 'chart-tooltip';
+        document.body.appendChild(el);
+      }
+      return el;
+    }
+    function showChartTooltip(html, clientX, clientY) {
+      const tt = ensureChartTooltip();
+      tt.innerHTML = html;
+      tt.style.left = (clientX + 14) + 'px';
+      tt.style.top = (clientY + 14) + 'px';
+      tt.classList.add('visible');
+    }
+    function hideChartTooltip() {
+      const tt = document.getElementById(CHART_TOOLTIP_ID);
+      if (tt) tt.classList.remove('visible');
+    }
+
+    // Ticks de eixo Y arredondados pra número "limpo" (0 / 5.000 / 10.000).
+    function niceStep(rough) {
+      const pow = Math.pow(10, Math.floor(Math.log10(Math.abs(rough) || 1)));
+      const norm = Math.abs(rough) / pow;
+      let step;
+      if (norm <= 1) step = 1;
+      else if (norm <= 2) step = 2;
+      else if (norm <= 5) step = 5;
+      else step = 10;
+      return step * pow;
+    }
+    function niceTicks(min, max, targetCount = 4) {
+      if (min === max) { min -= 1; max += 1; }
+      const step = niceStep((max - min) / targetCount) || 1;
+      const niceMin = Math.floor(min / step) * step;
+      const niceMax = Math.ceil(max / step) * step;
+      const ticks = [];
+      for (let v = niceMin; v <= niceMax + step * 0.001; v += step) ticks.push(Math.round(v * 100) / 100);
+      return ticks;
+    }
+
+    // Breakpoint de canvas dos charts — abaixo disso o .chart-wrap real tem largura
+    // insuficiente pro viewBox de 1000 (W desktop), o que espremia texto/traço
+    // declarados em px (Fix 2026-07-30, BUG D). Ver uso em svgLineChart/svgColumnChart.
+    const CHART_NARROW_BP = 600;
+
+    // Formato compacto de tick pro modo estreito (mobile) — "6k", "-2k", "0", "5,8k",
+    // "-99". O valor cheio (fmtMoney) continua disponível no tooltip e na table view;
+    // aqui é só o rótulo desenhado no SVG, onde não há espaço pra "6.000,00".
+    function fmtCompact(n) {
+      const v = n ?? 0;
+      const abs = Math.abs(v);
+      if (abs >= 1000) {
+        const k = Math.round(v / 100) / 10;
+        const kStr = Number.isInteger(k) ? String(k) : k.toFixed(1).replace('.', ',');
+        return `${kStr}k`;
+      }
+      return String(Math.round(v));
+    }
+
+    // Path de retângulo com só 1 par de cantos arredondados (o lado oposto à
+    // baseline) — reusado pelas colunas divergentes. side: 'top'|'bottom'.
+    function roundedRectPath(x, y, w, h, r, side) {
+      r = Math.max(0, Math.min(r, w / 2, h / 2));
+      if (side === 'top') {
+        return `M ${x} ${y + h} L ${x} ${y + r} Q ${x} ${y} ${x + r} ${y} L ${x + w - r} ${y} Q ${x + w} ${y} ${x + w} ${y + r} L ${x + w} ${y + h} Z`;
+      }
+      return `M ${x} ${y} L ${x + w} ${y} L ${x + w} ${y + h - r} Q ${x + w} ${y + h} ${x + w - r} ${y + h} L ${x + r} ${y + h} Q ${x} ${y + h} ${x} ${y + h - r} Z`;
+    }
+
+    // 1) Linha temporal — série única (curva de banca)
+    // points: [{ x: 'YYYY-MM-DD', y: Number }] já acumulado, ordenado asc.
+    function svgLineChart(points, opts = {}) {
+      const { height = 220, valueFmt = fmtMoney, id } = opts;
+      const uid = id || ('lc' + Math.random().toString(36).slice(2));
+      if (!points || !points.length) {
+        return `<div class="chart-wrap" id="${uid}"><div class="empty">Sem dados pra plotar.</div></div>`;
+      }
+      // W fixo (não depende do nº de pontos) — Fix 2026-07-30 (bug reportado na
+      // validação renderizada): W dinâmico + CSS width:100% gerava fator de escala
+      // >1 (texto/traços declarados em px inflavam 2-3x conforme o container
+      // esticava um viewBox mais estreito que ele). W=1000 casa com a largura
+      // típica do .chart-wrap no desktop → escala ≈1:1, tamanhos declarados honestos.
+      //
+      // Fix 2026-07-30 (BUG D): a 375px o .chart-wrap real renderiza ~317px de
+      // largura — viewBox de 1000 espreme pra escala ~0,32 e o texto de 10px
+      // declarado cai pra ~4px (ilegível). Canvas mais estreito no mobile (380)
+      // casa melhor com o container real (escala ~0,83 → texto ~8px). Desktop
+      // continua W=1000 (comentário acima segue valendo).
+      const narrow = window.innerWidth < CHART_NARROW_BP;
+      const W = narrow ? 380 : 1000;
+      const tickFmt = narrow ? fmtCompact : valueFmt;
+      const marginL = narrow ? 46 : 64, marginR = 16, marginT = 18, marginB = 26;
+      const innerW = W - marginL - marginR;
+      const innerH = height - marginT - marginB;
+      const ys = points.map(p => p.y);
+      const ticks = niceTicks(Math.min(...ys, 0), Math.max(...ys, 0), 4);
+      const yMin = ticks[0], yMax = ticks[ticks.length - 1];
+      const xAt = (i) => marginL + (points.length === 1 ? innerW / 2 : (i / (points.length - 1)) * innerW);
+      const yAt = (v) => marginT + innerH - ((v - yMin) / (yMax - yMin || 1)) * innerH;
+
+      const gridLines = ticks.map(t => {
+        const y = yAt(t);
+        return `<line x1="${marginL}" y1="${y.toFixed(1)}" x2="${W - marginR}" y2="${y.toFixed(1)}" stroke="var(--chart-grid)" stroke-width="1" />
+          <text x="${marginL - 8}" y="${(y + 3).toFixed(1)}" text-anchor="end" class="chart-svg-text">${tickFmt(t)}</text>`;
+      }).join('');
+
+      const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${xAt(i).toFixed(1)} ${yAt(p.y).toFixed(1)}`).join(' ');
+      const baseY = (marginT + innerH).toFixed(1);
+      const areaPath = `${linePath} L ${xAt(points.length - 1).toFixed(1)} ${baseY} L ${xAt(0).toFixed(1)} ${baseY} Z`;
+
+      // Regra de rótulo: NUNCA todo ponto — só ponto final, máximo e mínimo.
+      let maxIdx = 0, minIdx = 0;
+      points.forEach((p, i) => { if (p.y > points[maxIdx].y) maxIdx = i; if (p.y < points[minIdx].y) minIdx = i; });
+      const finalIdx = points.length - 1;
+      const markerIdxs = [...new Set([finalIdx, maxIdx, minIdx])];
+      const markers = markerIdxs.map(i => {
+        const cx = xAt(i), cy = yAt(points[i].y);
+        const nearTop = cy - 14 < marginT;
+        const labelY = nearTop ? cy + 16 : cy - 10;
+        const anchor = i === 0 ? 'start' : (i === finalIdx ? 'end' : 'middle');
+        return `
+          <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="5" fill="var(--chart-line)" stroke="var(--chart-surface)" stroke-width="2" />
+          <text x="${cx.toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="${anchor}" class="chart-svg-label">${tickFmt(points[i].y)}</text>
+        `;
+      }).join('');
+
+      // Eixo X: início/meio/fim (senão empilha texto — não é rótulo de valor, é categoria).
+      const xLabelIdxs = points.length <= 6 ? points.map((_, i) => i)
+        : [0, Math.floor((points.length - 1) / 2), points.length - 1];
+      const xLabels = xLabelIdxs.map(i => {
+        const x = xAt(i);
+        return `<text x="${x.toFixed(1)}" y="${height - 6}" text-anchor="middle" class="chart-svg-text">${escHtml(dayLabelFromKey(points[i].x))}</text>`;
+      }).join('');
+
+      const svg = `
+        <svg viewBox="0 0 ${W} ${height}" data-chart-id="${uid}">
+          ${gridLines}
+          <path d="${areaPath}" fill="var(--chart-line)" opacity="0.1" stroke="none" />
+          <path d="${linePath}" fill="none" stroke="var(--chart-line)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+          ${markers}
+          ${xLabels}
+          <line class="chart-crosshair" data-role="crosshair" x1="${marginL}" y1="${marginT}" x2="${marginL}" y2="${marginT + innerH}" />
+          <rect data-role="capture" x="${marginL}" y="${marginT}" width="${innerW}" height="${innerH}" fill="transparent" style="cursor:crosshair" />
+        </svg>
+      `;
+      return `<div class="chart-wrap" id="${uid}" data-margin-l="${marginL}" data-inner-w="${innerW}" data-viewbox-w="${W}">${svg}</div>`;
+    }
+
+    // Liga o crosshair + tooltip (largura de banda inteira, nunca exige mira no ponto).
+    function wireLineChart(id, points, valueFmt = fmtMoney) {
+      const wrap = document.getElementById(id);
+      if (!wrap || !points || !points.length) return;
+      const svg = wrap.querySelector('svg');
+      const capture = svg?.querySelector('[data-role="capture"]');
+      const crosshair = svg?.querySelector('[data-role="crosshair"]');
+      if (!capture) return;
+      const marginL = parseFloat(wrap.dataset.marginL);
+      const innerW = parseFloat(wrap.dataset.innerW);
+      const viewboxW = parseFloat(wrap.dataset.viewboxW);
+      capture.addEventListener('mousemove', (e) => {
+        const rect = svg.getBoundingClientRect();
+        if (!rect.width) return;
+        const scaleX = viewboxW / rect.width;
+        const svgX = (e.clientX - rect.left) * scaleX;
+        const ratio = Math.min(1, Math.max(0, (svgX - marginL) / innerW));
+        const idx = Math.round(ratio * (points.length - 1));
+        const p = points[idx];
+        if (!p) return;
+        const cx = (marginL + ratio * innerW).toFixed(1);
+        if (crosshair) { crosshair.setAttribute('x1', cx); crosshair.setAttribute('x2', cx); crosshair.style.opacity = '1'; }
+        showChartTooltip(`<strong>${escHtml(dayLabelFromKey(p.x))}</strong><br>${valueFmt(p.y)}`, e.clientX, e.clientY);
+      });
+      capture.addEventListener('mouseleave', () => {
+        if (crosshair) crosshair.style.opacity = '0';
+        hideChartTooltip();
+      });
+    }
+
+    // 2) Colunas divergentes em torno do zero (lucro por dia/mês)
+    // bars: [{ label, value }] — sinal codificado pela DIREÇÃO (cresce pra cima ou
+    // pra baixo da baseline), não só pela cor (requisito de daltonismo).
+    function svgColumnChart(bars, opts = {}) {
+      const { height = 160, valueFmt = fmtMoney, id } = opts;
+      const uid = id || ('cc' + Math.random().toString(36).slice(2));
+      if (!bars || !bars.length) {
+        return `<div class="chart-wrap" id="${uid}"><div class="empty">Sem dados pra plotar.</div></div>`;
+      }
+      // W fixo (Fix 2026-07-30, mesmo bug do svgLineChart): antes W = marginL +
+      // bars.length*32 + marginR variava com o nº de barras, e o CSS width:100%
+      // esticava esse viewBox estreito pra ~1030px — com 9 barras isso inflava
+      // texto/traço declarados em ~2,9x (rótulo de 10px renderizava ~29px, barra
+      // de 24 unidades renderizava ~70px). W=1000 fixo → escala ≈1:1 no desktop;
+      // slotW passa a ser DERIVADO da largura fixa (não o contrário).
+      //
+      // Fix 2026-07-30 (BUG D): mesma correção de canvas responsivo do svgLineChart
+      // — abaixo de CHART_NARROW_BP o container real é estreito demais pra W=1000
+      // sem espremer o texto. W=380 + marginL=46 + tick/rótulo compacto (fmtCompact).
+      const narrow = window.innerWidth < CHART_NARROW_BP;
+      const marginL = narrow ? 46 : 64, marginR = 16, marginT = 16, marginB = 26;
+      const W = narrow ? 380 : 1000;
+      const tickFmt = narrow ? fmtCompact : valueFmt;
+      const innerW = W - marginL - marginR;
+      const slotW = innerW / bars.length;
+      const innerH = height - marginT - marginB;
+      const values = bars.map(b => b.value);
+      const ticks = niceTicks(Math.min(0, ...values), Math.max(0, ...values), 4);
+      const tMin = ticks[0], tMax = ticks[ticks.length - 1];
+      const yAt = (v) => marginT + innerH - ((v - tMin) / (tMax - tMin || 1)) * innerH;
+      const baseY = yAt(0);
+
+      const gridLines = ticks.map(t => {
+        const y = yAt(t);
+        return `<line x1="${marginL}" y1="${y.toFixed(1)}" x2="${W - marginR}" y2="${y.toFixed(1)}" stroke="var(--chart-grid)" stroke-width="1" />
+          <text x="${marginL - 8}" y="${(y + 3).toFixed(1)}" text-anchor="end" class="chart-svg-text">${tickFmt(t)}</text>`;
+      }).join('');
+
+      const barW = Math.min(24, slotW - 2);
+      let maxIdx = 0, minIdx = 0;
+      bars.forEach((b, i) => { if (b.value > bars[maxIdx].value) maxIdx = i; if (b.value < bars[minIdx].value) minIdx = i; });
+
+      const barsHtml = bars.map((b, i) => {
+        const slotX = marginL + i * slotW;
+        const barX = slotX + (slotW - barW) / 2;
+        const isPos = b.value >= 0;
+        const color = isPos ? 'var(--green)' : 'var(--red)';
+        const top = Math.min(yAt(b.value), baseY);
+        const barH = Math.max(Math.abs(yAt(b.value) - baseY), 1);
+        const path = roundedRectPath(barX, top, barW, barH, 4, isPos ? 'top' : 'bottom');
+        // Regra de rótulo: NUNCA todo ponto — só a maior e a menor barra ganham valor.
+        const label = (i === maxIdx || i === minIdx)
+          ? `<text x="${(barX + barW / 2).toFixed(1)}" y="${(isPos ? top - 5 : top + barH + 12).toFixed(1)}" text-anchor="middle" class="chart-svg-label">${tickFmt(b.value)}</text>`
+          : '';
+        return `<path data-role="bar" d="${path}" fill="${color}" />${label}
+          <rect data-role="hit" data-idx="${i}" x="${slotX}" y="${marginT}" width="${slotW}" height="${innerH}" fill="transparent" style="cursor:pointer" />`;
+      }).join('');
+
+      const xLabels = bars.map((b, i) => {
+        const x = marginL + i * slotW + slotW / 2;
+        return `<text x="${x.toFixed(1)}" y="${height - 6}" text-anchor="middle" class="chart-svg-text">${escHtml(b.label)}</text>`;
+      }).join('');
+
+      const svg = `
+        <svg viewBox="0 0 ${W} ${height}" data-chart-id="${uid}">
+          ${gridLines}
+          <line x1="${marginL}" y1="${baseY.toFixed(1)}" x2="${W - marginR}" y2="${baseY.toFixed(1)}" stroke="var(--chart-grid)" stroke-width="1" />
+          ${barsHtml}
+          ${xLabels}
+        </svg>
+      `;
+      return `<div class="chart-wrap" id="${uid}">${svg}</div>`;
+    }
+
+    // Tooltip por marca (área de hit = slot inteiro, >= slotW incluindo o gap).
+    function wireColumnChart(id, bars, valueFmt = fmtMoney) {
+      const wrap = document.getElementById(id);
+      if (!wrap || !bars || !bars.length) return;
+      wrap.querySelectorAll('[data-role="hit"]').forEach((rect) => {
+        const idx = parseInt(rect.dataset.idx, 10);
+        const b = bars[idx];
+        if (!b) return;
+        rect.addEventListener('mousemove', (e) => {
+          showChartTooltip(`<strong>${escHtml(b.label)}</strong><br>${b.value >= 0 ? '+' : ''}${valueFmt(b.value)}`, e.clientX, e.clientY);
+        });
+        rect.addEventListener('mouseleave', hideChartTooltip);
+      });
+    }
+
+    // 3) Barras horizontais divergentes (ranking liga/time/suporte)
+    // rows: [{ label, value, sub }] — baseline vertical no zero, valor rotulado na
+    // ponta (fora da barra). Implementado em HTML/CSS (não SVG puro): garante
+    // border-radius de 4px e altura de barra exatas em qualquer largura de
+    // container — um <rect> com viewBox percentual + preserveAspectRatio="none"
+    // distorceria o raio do canto de forma não-uniforme conforme o container
+    // esticasse (ver nota na Parte 3 do relatório final).
+    function svgHBarChart(rows, opts = {}) {
+      const { valueFmt = fmtMoney, id } = opts;
+      const uid = id || ('hb' + Math.random().toString(36).slice(2));
+      if (!rows || !rows.length) {
+        return `<div class="hbar-rows" id="${uid}"><div class="empty">Sem dados.</div></div>`;
+      }
+      const values = rows.map(r => r.value);
+      const maxV = Math.max(0, ...values);
+      const minV = Math.min(0, ...values);
+      const range = (maxV - minV) || 1;
+      const zeroPct = ((0 - minV) / range) * 100;
+      // Reserva fixa de 72px (~largura de "-10.685,84" em 11px bold) entre a ponta
+      // do rótulo e a borda da track, via CSS min()/calc() — % pura não escala com
+      // largura de TEXTO: numa track estreita (mobile) um valor extremo (perto de
+      // 0%/100%) ou estourava a viewport (scroll horizontal) ou sobrepunha a coluna
+      // de nome à esquerda (2 bugs reais vistos na validação headless 2026-07-30).
+      // O preenchimento da barra em si (%, decorativo, sem texto) fica sem clamp —
+      // continua fiel à proporção real do valor.
+      const LABEL_RESERVE = '72px';
+
+      const rowsHtml = rows.map((r, i) => {
+        const valPct = ((r.value - minV) / range) * 100;
+        const isPos = r.value >= 0;
+        const left = Math.min(valPct, zeroPct);
+        const width = Math.max(Math.abs(valPct - zeroPct), 0.6);
+        const color = isPos ? 'var(--green)' : 'var(--red)';
+        const radiusCss = isPos ? '0 4px 4px 0' : '4px 0 0 4px';
+        // +5px de folga entre a ponta da barra e o rótulo — sem isso os dois
+        // ficam encostados e o texto parece "cortar" a barra (visto na validação).
+        const tipSide = isPos
+          ? `left:min(calc(${(left + width).toFixed(2)}% + 5px), calc(100% - ${LABEL_RESERVE}))`
+          : `right:min(calc(${(100 - left).toFixed(2)}% + 5px), calc(100% - ${LABEL_RESERVE}))`;
+        const valueText = `${r.value >= 0 ? '+' : ''}${valueFmt(r.value)}`;
+        return `
+          <div class="hbar-row" data-idx="${i}" title="${escHtml(r.label)}${r.sub ? ' · ' + escHtml(r.sub) : ''}">
+            <div class="hbar-label">${escHtml(r.label)}</div>
+            <div class="hbar-track" data-role="track" data-idx="${i}">
+              <div class="hbar-zero" style="left:${zeroPct.toFixed(2)}%"></div>
+              <div class="hbar-fill" style="left:${left.toFixed(2)}%;width:${width.toFixed(2)}%;background:${color};border-radius:${radiusCss}"></div>
+              <div class="hbar-tip" style="${tipSide}">${valueText}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+      return `<div class="hbar-rows" id="${uid}">${rowsHtml}</div>`;
+    }
+
+    function wireHBarChart(id, rows, valueFmt = fmtMoney) {
+      const wrap = document.getElementById(id);
+      if (!wrap || !rows || !rows.length) return;
+      wrap.querySelectorAll('[data-role="track"]').forEach((track) => {
+        const idx = parseInt(track.dataset.idx, 10);
+        const r = rows[idx];
+        if (!r) return;
+        track.addEventListener('mousemove', (e) => {
+          showChartTooltip(`<strong>${escHtml(r.label)}</strong>${r.sub ? '<br>' + escHtml(r.sub) : ''}<br>${r.value >= 0 ? '+' : ''}${valueFmt(r.value)}`, e.clientX, e.clientY);
+        });
+        track.addEventListener('mouseleave', hideChartTooltip);
+      });
+    }
+
+    // 4) Medidor hit vs breakeven — trilho = step mais claro da mesma rampa
+    // (green-soft/red-soft), linha de referência sólida no target.
+    function svgMeter(value, target, opts = {}) {
+      const { id } = opts;
+      const uid = id || ('mt' + Math.random().toString(36).slice(2));
+      const pct = Math.max(0, Math.min(100, value));
+      const targetPct = Math.max(0, Math.min(100, target));
+      const good = value >= target;
+      const fillColor = good ? 'var(--green)' : 'var(--red)';
+      const trackColor = good ? 'var(--green-soft)' : 'var(--red-soft)';
+      const targetLabel = `BE ${target.toFixed(1).replace('.', ',')}%`;
+      return `
+        <div class="meter" id="${uid}">
+          <div class="meter-track" style="background:${trackColor}">
+            <div class="meter-fill" style="width:${pct}%;background:${fillColor}"></div>
+            <div class="meter-target" style="left:${targetPct}%"></div>
+          </div>
+          <div class="meter-target-label" style="left:${targetPct}%">${targetLabel}</div>
+        </div>
+      `;
+    }
+
+    // ===== Ranking expansível "topN+bottomM" / "ver todos" (PARTE 3) =====
+    // rowHtmlFn: (item) => markup .day daquela linha. Idempotente — cada chamada
+    // substitui o innerHTML anterior e rebind o listener do botão.
+    function renderExpandableTopBottom(containerId, sorted, rowHtmlFn, opts = {}) {
+      const { top = 8, bottom = 5, emptyLabel = 'Sem dados.' } = opts;
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      if (!sorted.length) { el.innerHTML = `<div class="empty">${emptyLabel}</div>`; return; }
+      if (sorted.length <= top + bottom) {
+        el.innerHTML = sorted.map(rowHtmlFn).join('');
+        return;
+      }
+      const topRows = sorted.slice(0, top);
+      const bottomRows = sorted.slice(sorted.length - bottom);
+      const midRows = sorted.slice(top, sorted.length - bottom);
+      const midId = containerId + '-mid';
+      el.innerHTML = topRows.map(rowHtmlFn).join('') +
+        `<button class="ver-todos-btn" type="button" data-target="${midId}">ver todos (${sorted.length})</button>` +
+        `<div id="${midId}" class="days" style="display:none">${midRows.map(rowHtmlFn).join('')}</div>` +
+        bottomRows.map(rowHtmlFn).join('');
+      const btn = el.querySelector('.ver-todos-btn');
+      btn.addEventListener('click', () => {
+        const mid = document.getElementById(midId);
+        const hidden = mid.style.display === 'none';
+        mid.style.display = hidden ? '' : 'none';
+        btn.textContent = hidden ? 'ver menos' : `ver todos (${sorted.length})`;
+      });
+    }
+
+    function renderExpandableList(containerId, rows, rowHtmlFn, opts = {}) {
+      const { limit = 12, emptyLabel = 'Sem dados.' } = opts;
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      if (!rows.length) { el.innerHTML = `<div class="empty">${emptyLabel}</div>`; return; }
+      if (rows.length <= limit) { el.innerHTML = rows.map(rowHtmlFn).join(''); return; }
+      const shown = rows.slice(0, limit);
+      const rest = rows.slice(limit);
+      const restId = containerId + '-rest';
+      el.innerHTML = shown.map(rowHtmlFn).join('') +
+        `<button class="ver-todos-btn" type="button" data-target="${restId}">ver todos (${rows.length})</button>` +
+        `<div id="${restId}" class="days" style="display:none">${rest.map(rowHtmlFn).join('')}</div>`;
+      const btn = el.querySelector('.ver-todos-btn');
+      btn.addEventListener('click', () => {
+        const restEl = document.getElementById(restId);
+        const hidden = restEl.style.display === 'none';
+        restEl.style.display = hidden ? '' : 'none';
+        btn.textContent = hidden ? 'ver menos' : `ver todos (${rows.length})`;
+      });
+    }
 
     // ── Team name aliases → canônico ─────────────────────────────────────────
     // Quando bet-logger não normaliza na hora de salvar, o dashboard mostra
@@ -1187,10 +2023,10 @@
           <div class="label">ROI</div>
           <div class="value ${roiClass}">${k.roi.toFixed(1)}%</div>
         </div>
-        <div class="kpi">
+        <div class="kpi" title="${hitBetStr}% de hit por bet (sem dedup de mapa) · ${k.total} bets / ${k.totalMapas} mapas únicos">
           <div class="label">Hit rate (por mapa)</div>
           <div class="value">${k.hitRateMapa.toFixed(1)}%</div>
-          <div class="sub">${k.mapWins}W / ${k.mapLosses}L mapas · ${hitBetStr}% por bet · ${k.total} bets/${k.totalMapas} mapas</div>
+          <div class="sub">${k.mapWins}W / ${k.mapLosses}L mapas</div>
         </div>
         <div class="kpi">
           <div class="label">Apostas</div>
@@ -1575,23 +2411,23 @@
           else { byTeam[team].profit += Number(b.profit) || 0; }
         });
       });
-      const sorted = Object.values(byTeam).sort((a, b) => b.profit - a.profit);
-      const html = sorted
-        .map((t) => {
-          const cls = t.profit >= 0 ? 'green' : 'red';
-          return `
-            <div class="day">
-              <div>
-                <div class="date">${t.name}</div>
-                <div class="stats">${t.total} aposta${t.total !== 1 ? 's' : ''} · ${t.wins}W ${t.losses}L${t.pending ? ` · ${t.pending} pend` : ''}</div>
-              </div>
-              <div class="profit ${cls}">${t.profit >= 0 ? '+' : ''}${fmtMoney(t.profit)}</div>
+      const rowHtml = (t) => {
+        const cls = t.profit >= 0 ? 'green' : 'red';
+        return `
+          <div class="day">
+            <div>
+              <div class="date">${t.name}</div>
+              <div class="stats">${t.total} aposta${t.total !== 1 ? 's' : ''} · ${t.wins}W ${t.losses}L${t.pending ? ` · ${t.pending} pend` : ''}</div>
             </div>
-          `;
-        })
-        .join('');
-      document.getElementById('byTeam').innerHTML =
-        html || '<div class="empty">Sem dados de time.</div>';
+            <div class="profit ${cls}">${t.profit >= 0 ? '+' : ''}${fmtMoney(t.profit)}</div>
+          </div>
+        `;
+      };
+      // PARTE 3.1 (reforma visual 2026-07-30): sem filtro de amostra, 1 time com 1
+      // aposta e 100% hit inflava o topo do ranking sem significar nada. Filtra
+      // total>=3 e mostra só top 8 + bottom 5 (expandível via "ver todos").
+      const sorted = Object.values(byTeam).filter(t => t.total >= 3).sort((a, b) => b.profit - a.profit);
+      renderExpandableTopBottom('byTeam', sorted, rowHtml, { top: 8, bottom: 5, emptyLabel: 'Sem dados de time (mínimo 3 apostas).' });
     }
 
     function betsForView() {
@@ -1647,6 +2483,11 @@
       } catch (e) {
         console.error('renderNewTabs falhou:', e);
       }
+      try {
+        renderHojeTab(allReal);
+      } catch (e) {
+        console.error('renderHojeTab falhou:', e);
+      }
 
       const lastBet = allReal[0];
       const lastDt = lastBet ? fmtDate(lastBet.bet_datetime || lastBet.created_at) : '—';
@@ -1659,7 +2500,326 @@
       const filterStr = parts.length ? ` · vendo ${parts.join(' / ')}` : '';
       document.getElementById('metaInfo').textContent =
         `${allBets.length} método · ${allOffBets.length} off · última em ${lastDt}${filterStr} · período: ${periodLabel(globalPeriodFilter)}`;
+
+      // PARTE 4 — resumo textual do recorte ativo nas filter-bars.
+      updateTrkFilterSummary();
+      updateSharedPeriodSummaries();
     }
+
+    function updateTrkFilterSummary() {
+      const el = document.getElementById('trkFilterSummary');
+      if (!el) return;
+      const parts = [periodLabel(globalPeriodFilter)];
+      if (trkTriggerFilter !== 'all') parts.push(trkTriggerFilter);
+      if (trkLeagueFilter !== 'all') parts.push(trkLeagueFilter);
+      el.textContent = parts.join(' · ');
+    }
+
+    function updateSharedPeriodSummaries() {
+      const label = periodLabel(globalPeriodFilter);
+      const u = document.getElementById('underFilterSummary'); if (u) u.textContent = label;
+      const o = document.getElementById('overFilterSummary'); if (o) o.textContent = label;
+    }
+
+    // ===== Aba "Hoje" (PARTE 2 da reforma visual, 2026-07-30) =====
+    // allReal (método + off, já sem SIMULATED) é a mesma união usada no resumo
+    // combinado da Planilha (allRealKpis) — consistente com o resto do dashboard.
+    let hojeRankDim = 'liga';
+    let hojeAllRealCache = []; // último pool "tudo" recebido (método+off) — usado no resize e na nota de escopo
+
+    // RODADA 4 — PARTE A.2 (2026-07-30): chip Tudo/Só método re-escopa a aba inteira
+    // (herói, tiles, curva, 14 dias, rankings). hojePoolCache guarda o pool ATIVO
+    // (já filtrado pelo chip) — é o que renderHojeRankings usa.
+    let hojeScopeFilter = 'tudo'; // 'tudo' | 'metodo'
+    let hojePoolCache = [];
+
+    // Rótulo do bloco "SPLIT" — nunca hardcode o texto todo: a data vem de
+    // SPLIT3_START (mesma constante do filtro de período), então se o dono trocar
+    // o período global (Tracker/Under/Over Kill) o rótulo da aba Hoje não passa a
+    // mentir (era exatamente o bug da PARTE A: rótulo dizendo uma coisa, dado
+    // mostrando outra).
+    function hojePeriodBlockLabel() {
+      if (globalPeriodFilter === 'split3') return `SPLIT 3 · desde ${dayLabelFromKey(SPLIT3_START)}`;
+      if (globalPeriodFilter === 'split2') return 'SPLIT 2 · abr–jun';
+      return 'TUDO · todo o histórico';
+    }
+    function hojePeriodSuffixLabel() {
+      if (globalPeriodFilter === 'split3') return 'no split 3';
+      if (globalPeriodFilter === 'split2') return 'no split 2';
+      return 'em todo o histórico';
+    }
+
+    // Média de odd ponderada por stake (só bets liquidadas, exclui pending/void) —
+    // usada como fallback do breakeven quando não há odd calculável de outra forma.
+    function weightedAvgOdd(bets) {
+      const realized = bets.filter(b => b.status !== 'pending' && b.status !== 'void' && b.odd);
+      const totalStake = realized.reduce((s, b) => s + (Number(b.stake) || 0), 0);
+      if (!totalStake) return null;
+      const wsum = realized.reduce((s, b) => s + (Number(b.stake) || 0) * (Number(b.odd) || 0), 0);
+      return wsum / totalStake;
+    }
+
+    // Série diária de lucro acumulado — exclui pending/void (mesmo critério
+    // "realized" de computeKPIs). Ordenado asc por data (BRT).
+    function buildDailyProfitSeries(bets) {
+      const realized = bets.filter(b => b.status !== 'pending' && b.status !== 'void');
+      const byDay = {};
+      for (const b of realized) {
+        const dt = b.bet_datetime || b.created_at;
+        if (!dt) continue;
+        const k = dayKeyBRT(dt);
+        byDay[k] = (byDay[k] || 0) + (Number(b.profit) || 0);
+      }
+      const days = Object.keys(byDay).sort();
+      let acc = 0;
+      return days.map(k => { acc += byDay[k]; return { x: k, y: Math.round(acc * 100) / 100 }; });
+    }
+
+    // Drawdown = distância em R$ do pico da curva até o valor atual (0 na máxima).
+    function computeDrawdown(series) {
+      if (!series.length) return { dd: 0, peak: 0, peakDate: null, current: 0 };
+      let peak = -Infinity, peakDate = null;
+      for (const p of series) { if (p.y > peak) { peak = p.y; peakDate = p.x; } }
+      const current = series[series.length - 1].y;
+      return { dd: Math.round((peak - current) * 100) / 100, peak, peakDate, current };
+    }
+
+    // Agrega lucro por dimensão (liga/time/suporte) — usado por "Onde ganha/perde".
+    function aggregateProfitBy(bets, dim) {
+      const m = {};
+      const bump = (key, b) => {
+        if (!key) return;
+        if (!m[key]) m[key] = { name: key, n: 0, wins: 0, losses: 0, profit: 0 };
+        m[key].n++;
+        if (b.status === 'green') { m[key].wins++; m[key].profit += Number(b.profit) || 0; }
+        else if (b.status === 'red') { m[key].losses++; m[key].profit += Number(b.profit) || 0; }
+        else if (b.status !== 'pending') { m[key].profit += Number(b.profit) || 0; }
+      };
+      for (const b of bets) {
+        if (dim === 'liga') {
+          bump(normalizeLeagueGranular(b.league), b);
+        } else if (dim === 'time') {
+          bump(normalizeTeamName(b.team_a), b);
+          bump(normalizeTeamName(b.team_b), b);
+        } else {
+          const comp = normalizeComp(b);
+          if (comp) {
+            bump(comp.team_a?.picks?.support, b);
+            bump(comp.team_b?.picks?.support, b);
+          }
+        }
+      }
+      return Object.values(m);
+    }
+
+    function renderHojeTab(allReal) {
+      hojeAllRealCache = allReal;
+      // PARTE A.2 — chip "Tudo" usa a união método+off; "Só método" usa só allBets
+      // (mesmo array já escopado pelo período ativo). Nenhuma query nova.
+      const pool = hojeScopeFilter === 'metodo' ? allBets : allReal;
+      hojePoolCache = pool;
+
+      // Nota de escopo logo abaixo dos chips — explicita o que compõe o número,
+      // em vez de somar método+off calado (bug reportado: 17 método + 77 off = 94
+      // sem dizer isso em lugar nenhum).
+      const scopeNoteEl = document.getElementById('hojeScopeNote');
+      if (scopeNoteEl) {
+        scopeNoteEl.textContent = hojeScopeFilter === 'metodo'
+          ? `${allBets.length} bet${allBets.length === 1 ? '' : 's'} do método`
+          : `${allBets.length} do método + ${allOffBets.length} fora do método`;
+      }
+
+      // ===== Bloco 1 — HOJE · <data real> (PARTE A.1) =====
+      // Herói = resultado REALIZADO hoje (bet_datetime no dia BRT corrente, mesmo
+      // critério "realized" de computeKPIs) — nunca o acumulado do split.
+      const todayKey = dayKeyBRT(new Date());
+      const todayTitleEl = document.getElementById('hojeTodayTitle');
+      if (todayTitleEl) todayTitleEl.textContent = `HOJE · ${dayLabelFromKey(todayKey)}`;
+
+      const todayBets = pool.filter(b => dayKeyBRT(b.bet_datetime || b.created_at) === todayKey);
+      const todaySettled = todayBets.filter(b => b.status !== 'pending' && b.status !== 'void');
+      const todayPendingCount = todayBets.filter(b => b.status === 'pending').length;
+      const todayProfit = todaySettled.reduce((s, b) => s + (Number(b.profit) || 0), 0) + 0; // +0 normaliza -0
+
+      const heroEl = document.getElementById('hojeHeroValue');
+      const heroSubEl = document.getElementById('hojeHeroSub');
+      if (!todaySettled.length) {
+        // Zero settlado hoje NÃO é o mesmo que zero de lucro — nunca mostrar
+        // "R$ 0,00" como se fosse resultado do dia.
+        heroEl.textContent = '—';
+        heroEl.className = 'value muted';
+        if (heroSubEl) heroSubEl.textContent = 'sem bet settlada hoje';
+      } else {
+        const heroCls = todayProfit >= 0 ? 'green' : 'red';
+        heroEl.textContent = `${todayProfit >= 0 ? '+' : ''}R$ ${fmtMoney(todayProfit)}`;
+        heroEl.className = `value ${heroCls}`;
+        if (heroSubEl) {
+          heroSubEl.textContent =
+            `${todaySettled.length} bet${todaySettled.length === 1 ? '' : 's'} settlada${todaySettled.length === 1 ? '' : 's'} hoje · ` +
+            `${todayPendingCount} pendente${todayPendingCount === 1 ? '' : 's'}`;
+        }
+      }
+      const miniBetsEl = document.getElementById('hojeMiniBetsCount');
+      const miniPendEl = document.getElementById('hojeMiniPendCount');
+      if (miniBetsEl) miniBetsEl.textContent = todayBets.length;
+      if (miniPendEl) miniPendEl.textContent = todayPendingCount;
+
+      // ===== Bloco 2 — SPLIT · desde <split_start> (PARTE A.1) =====
+      const splitTitleEl = document.getElementById('hojeSplitTitle');
+      if (splitTitleEl) splitTitleEl.textContent = hojePeriodBlockLabel();
+      const curveTitleEl = document.getElementById('hojeCurveTitle');
+      if (curveTitleEl) curveTitleEl.textContent = `Curva de banca — acumulado ${hojePeriodSuffixLabel()}`;
+      const rankTitleEl = document.getElementById('hojeRankTitle');
+      if (rankTitleEl) rankTitleEl.textContent = `Onde ganha / onde perde — ${hojePeriodSuffixLabel()}`;
+
+      const k = computeKPIs(pool);
+      const avgOdd = weightedAvgOdd(pool);
+      // Fallback 1.77 = odd média real do CEO → BE 56,5% (spec PARTE 2.1).
+      const breakeven = 100 / (avgOdd || 1.77);
+      const series = buildDailyProfitSeries(pool);
+      const dd = computeDrawdown(series);
+
+      document.getElementById('hojeKpis').innerHTML = `
+        <div class="kpi ${k.profit >= 0 ? 'green' : 'red'}">
+          <div class="label">Acumulado no split</div>
+          <div class="value ${k.profit >= 0 ? 'green' : 'red'}">${k.profit >= 0 ? '+' : ''}R$ ${fmtMoney(k.profit)}</div>
+          <div class="sub">de R$ ${fmtMoney(k.turnover)} apostados</div>
+        </div>
+        <div class="kpi ${k.roi >= 0 ? 'green' : 'red'}">
+          <div class="label">ROI no split</div>
+          <div class="value ${k.roi >= 0 ? 'green' : 'red'}">${k.roi.toFixed(1)}%</div>
+          <div class="sub">de R$ ${fmtMoney(k.turnover)} apostados</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Hit por mapa no split</div>
+          <div class="value">${k.hitRateMapa.toFixed(1)}%</div>
+          ${svgMeter(k.hitRateMapa, breakeven, { id: 'hojeMeter' })}
+        </div>
+        <div class="kpi${dd.dd > 0 ? ' red' : ''}">
+          <div class="label">Drawdown atual</div>
+          <div class="value${dd.dd > 0 ? ' red' : ''}">R$ ${fmtMoney(dd.dd)}</div>
+          <div class="sub">${dd.peakDate ? `pico R$ ${fmtMoney(dd.peak)} em ${dayLabelFromKey(dd.peakDate)}` : '—'}</div>
+        </div>
+      `;
+
+      // 2.2 Curva de banca — gráfico principal.
+      const curveWrap = document.getElementById('hojeCurveWrap');
+      curveWrap.style.opacity = '0.5'; // nunca skeleton flash: mantém render anterior dimmed
+      curveWrap.innerHTML = svgLineChart(series, { height: 240, id: 'hojeCurveChart' });
+      wireLineChart('hojeCurveChart', series, fmtMoney);
+      requestAnimationFrame(() => { curveWrap.style.opacity = '1'; });
+
+      // 2.3 Pendentes — só renderiza a seção se houver pendente.
+      const pendentes = pool.filter(b => b.status === 'pending');
+      const pendSection = document.getElementById('hojePendentesSection');
+      if (pendentes.length) {
+        pendSection.style.display = '';
+        document.getElementById('hojePendentesBets').innerHTML = pendentes.map(betCardHtml).join('');
+      } else {
+        pendSection.style.display = 'none';
+      }
+
+      // 2.4 Últimos 14 dias com atividade.
+      const byDayDesc = groupByDay(pool); // já ordenado desc por data
+      const last14 = byDayDesc.slice(0, 14).slice().reverse(); // asc pro gráfico
+      const bars14 = last14.map(d => ({ label: dayLabelFromKey(d.date), value: d.profit }));
+      const wrap14 = document.getElementById('hoje14Wrap');
+      wrap14.style.opacity = '0.5';
+      wrap14.innerHTML = svgColumnChart(bars14, { height: 170, id: 'hoje14Chart' });
+      wireColumnChart('hoje14Chart', bars14, fmtMoney);
+      requestAnimationFrame(() => { wrap14.style.opacity = '1'; });
+
+      const last14Keys = new Set(last14.map(d => d.date));
+      const last14Bets = pool.filter(b => {
+        const dt = b.bet_datetime || b.created_at;
+        return dt && last14Keys.has(dayKeyBRT(dt));
+      });
+      renderDaysReadOnly('hoje14Table', last14Bets); // fica pronto, escondido até "ver tabela"
+
+      // 2.5 Onde ganha / onde perde.
+      renderHojeRankings();
+    }
+
+    function renderHojeRankings() {
+      const all = aggregateProfitBy(hojePoolCache, hojeRankDim);
+      // Filtro de amostra mínima n>=3 (spec PARTE 2.5) — sem isso 1 time com 1 bet e
+      // 100% hit aparecia no topo do ranking mentindo sobre robustez do sinal.
+      const filtered = all.filter(x => x.n >= 3);
+      const hiddenCount = all.length - filtered.length;
+      const toRow = (x) => ({ label: x.name, value: x.profit, sub: `${x.n} bets · ${x.wins}W ${x.losses}L` });
+
+      // Fix 2026-07-30 (bug reportado na validação renderizada): antes era top6 e
+      // bottom6 do MESMO pool sem filtrar sinal — com poucas categorias (ex: 7
+      // ligas) os 2 painéis mostravam quase os mesmos itens, e "onde perde" chegava
+      // a exibir barra VERDE (lucro positivo). Cada painel só entra com o sinal certo;
+      // se não sobrar nenhum, mostra mensagem em vez de emprestar do outro lado.
+      const ganhaRows = filtered.filter(x => x.profit > 0).sort((a, b) => b.profit - a.profit).slice(0, 6).map(toRow);
+      const perdeRows = filtered.filter(x => x.profit < 0).sort((a, b) => a.profit - b.profit).slice(0, 6).map(toRow);
+      const dimLabel = { liga: 'Nenhuma liga', time: 'Nenhum time', suporte: 'Nenhum suporte' }[hojeRankDim] || 'Nenhum item';
+
+      const ganhaWrap = document.getElementById('hojeGanha');
+      if (ganhaRows.length) {
+        ganhaWrap.innerHTML = svgHBarChart(ganhaRows, { id: 'hojeGanhaChart' });
+        wireHBarChart('hojeGanhaChart', ganhaRows, fmtMoney);
+      } else {
+        ganhaWrap.innerHTML = `<div class="empty">${dimLabel} no verde.</div>`;
+      }
+
+      const perdeWrap = document.getElementById('hojePerde');
+      if (perdeRows.length) {
+        perdeWrap.innerHTML = svgHBarChart(perdeRows, { id: 'hojePerdeChart' });
+        wireHBarChart('hojePerdeChart', perdeRows, fmtMoney);
+      } else {
+        perdeWrap.innerHTML = `<div class="empty">${dimLabel} no vermelho.</div>`;
+      }
+
+      document.getElementById('hojeRankNote').textContent =
+        `n≥3 · ${hiddenCount} ite${hiddenCount === 1 ? 'm' : 'ns'} oculto${hiddenCount === 1 ? '' : 's'} por amostra pequena`;
+    }
+
+    document.getElementById('hojeDimChips').querySelectorAll('.chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        document.getElementById('hojeDimChips').querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        hojeRankDim = chip.dataset.dim;
+        renderHojeRankings();
+      });
+    });
+
+    // PARTE A.2 — chips Tudo/Só método re-escopam a aba inteira.
+    document.getElementById('hojeScopeChips').querySelectorAll('.chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        document.getElementById('hojeScopeChips').querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        hojeScopeFilter = chip.dataset.scope;
+        if (hojeAllRealCache.length) renderHojeTab(hojeAllRealCache);
+      });
+    });
+
+    document.getElementById('hojeVerTabelaBtn').addEventListener('click', () => {
+      const tbl = document.getElementById('hoje14Table');
+      const btn = document.getElementById('hojeVerTabelaBtn');
+      const hidden = tbl.style.display === 'none';
+      tbl.style.display = hidden ? '' : 'none';
+      btn.textContent = hidden ? '▾ ocultar tabela' : '▸ ver tabela';
+    });
+
+    // Re-render dos gráficos da aba Hoje ao cruzar o breakpoint mobile/desktop
+    // (Fix 2026-07-30, BUG D) — svgLineChart/svgColumnChart escolhem W/marginL por
+    // window.innerWidth na hora do render, então girar o celular deixa o SVG com a
+    // geometria do modo antigo até algo forçar um re-render. Guarda o último modo
+    // aplicado e só re-renderiza ao cruzar 600px (não a cada pixel de resize).
+    let hojeChartMode = window.innerWidth < CHART_NARROW_BP ? 'narrow' : 'wide';
+    let hojeResizeTimer = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(hojeResizeTimer);
+      hojeResizeTimer = setTimeout(() => {
+        const mode = window.innerWidth < CHART_NARROW_BP ? 'narrow' : 'wide';
+        if (mode === hojeChartMode) return;
+        hojeChartMode = mode;
+        if (hojeAllRealCache.length) renderHojeTab(hojeAllRealCache);
+      }, 200);
+    });
 
     // ===== Seção "Bets fora do método" =====
     async function toggleMethodBet(betId, currentIsMethod) {
@@ -1703,10 +2863,10 @@
           <div class="label">ROI (off)</div>
           <div class="value ${roiClass}">${k.roi.toFixed(1)}%</div>
         </div>
-        <div class="kpi">
+        <div class="kpi" title="${offHitBetStr}% de hit por bet (sem dedup de mapa) · ${k.total} bets / ${k.totalMapas} mapas únicos">
           <div class="label">Hit rate (off, por mapa)</div>
           <div class="value">${k.hitRateMapa.toFixed(1)}%</div>
-          <div class="sub">${k.mapWins}W / ${k.mapLosses}L mapas · ${offHitBetStr}% por bet · ${k.total} bets/${k.totalMapas} mapas</div>
+          <div class="sub">${k.mapWins}W / ${k.mapLosses}L mapas</div>
         </div>
         <div class="kpi">
           <div class="label">Apostas off</div>
@@ -1910,10 +3070,10 @@
           <div class="label">ROI</div>
           <div class="value ${roiClass}">${k.roi.toFixed(1)}%</div>
         </div>
-        <div class="kpi">
+        <div class="kpi" title="${hitBetStr}% de hit por bet (sem dedup de mapa) · ${k.total} bets / ${k.totalMapas} mapas únicos">
           <div class="label">Hit rate (por mapa)</div>
           <div class="value">${k.hitRateMapa.toFixed(1)}%</div>
-          <div class="sub">${k.mapWins}W / ${k.mapLosses}L mapas · ${hitBetStr}% por bet · ${k.total} bets/${k.totalMapas} mapas</div>
+          <div class="sub">${k.mapWins}W / ${k.mapLosses}L mapas</div>
         </div>
         <div class="kpi">
           <div class="label">Apostas</div>
@@ -1972,9 +3132,13 @@
       renderDaysReadOnly('overDays', betsForDaysScoped(overBets));
     }
 
-    document.querySelectorAll('.chip').forEach((chip) => {
+    // Escopado a ".filters .chip" (não document-wide): a aba "Hoje" (PARTE 2) tem
+    // seus próprios chips de dimensão (.chip-row) — sem o escopo, o clique neles
+    // também disparava este handler (currentFilter = undefined, quebrava o filtro
+    // Todas/Pendentes/Greens/Reds da Planilha).
+    document.querySelectorAll('.filters .chip').forEach((chip) => {
       chip.addEventListener('click', () => {
-        document.querySelectorAll('.chip').forEach((c) => c.classList.remove('active'));
+        document.querySelectorAll('.filters .chip').forEach((c) => c.classList.remove('active'));
         chip.classList.add('active');
         currentFilter = chip.dataset.filter;
         renderBetsWithToggle(applyTrkFilters(allBets));
@@ -2301,7 +3465,10 @@
       // Fix 2026-05-28: profit SEMPRE teórico com params do dropdown (stake, odd).
       //   Bug anterior (e386451): bets reais usavam b.profit do banco → PnL real misturado com hit
       //   simulado, impossibilitando valores negativos com hit acima do BE (ex: Esprit Shonen 66.7% → -R$50).
-      function aggBy(keyFn) {
+      // minN=3 (PARTE 3.2, reforma visual 2026-07-30): antes sem mínimo de amostra
+      // (n>=1) — 68 times/56 campeões renderizavam mesmo com n=1. anByTeam/anByChamp
+      // eram o pior caso.
+      function aggBy(keyFn, minN = 3) {
         // 1ª passada: por (chave | game_id) — junta bets do mesmo mapa
         const byMap = new Map();
         const normKey = s => (s || '').toLowerCase().replace(/\s+/g, '-');
@@ -2334,18 +3501,20 @@
           m[name].profit += profit;
         }
         return Object.values(m)
-          .filter(x => x.n >= 1)
+          .filter(x => x.n >= minN)
           .map(x => ({...x, hit: 100 * x.w / x.n, small_sample: x.n < 4}))
           .sort((a, b) => b.hit - a.hit);
       }
 
+      // PARTE 3.2: .slice(0,12) + "ver todos" — anByTeam (68 itens) e anByChamp (56
+      // itens) renderizavam tudo sem limite.
       function renderList(target, rows, label) {
-        const html = rows.map(r => {
+        const rowHtml = (r) => {
           // n < 4 = amostra pequena → cor neutra (sem verde/vermelho)
           const cls = r.small_sample ? '' : (r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red'));
           return `<div class="day"><div><div class="date">${r.name}</div><div class="stats">n=${r.n} · R$ ${fmtMoney(r.profit)}</div></div><div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div></div>`;
-        }).join('');
-        document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
+        };
+        renderExpandableList(target, rows, rowHtml, { limit: 12, emptyLabel: `Sem ${label}.` });
       }
 
       // Lista canônica de suports válidos do método (peel_pure + flex)
@@ -2382,6 +3551,24 @@
         }
         return out;
       }), 'dados de boneco');
+
+      updateAnFilterSummary();
+    }
+
+    // PARTE 4 — resumo textual do recorte ativo na filter-bar ("Split 3 · Δ0 · LCK").
+    function updateAnFilterSummary() {
+      const el = document.getElementById('anFilterSummary');
+      if (!el) return;
+      const period = periodLabel(document.getElementById('anPeriod').value);
+      const delta = document.getElementById('anFairDelta').value;
+      const trig = document.getElementById('anTrigger').value;
+      const lg = document.getElementById('anLeague').value;
+      const champ = document.getElementById('anChampion').value;
+      const parts = [period, `Δ${delta}`];
+      if (trig !== 'all') parts.push(trig);
+      if (lg !== 'all') parts.push(lg);
+      if (champ !== 'all') parts.push(champ);
+      el.textContent = parts.join(' · ');
     }
 
     // Listeners pros controles.
@@ -2479,16 +3666,17 @@
           .sort((a, b) => b.hit - a.hit);
       }
 
+      // PARTE 3.2: .slice(0,12) + "ver todos" (minN de cada aggBy mantido como já era).
       function renderList(target, rows, label) {
-        const html = rows.map(r => {
+        const rowHtml = (r) => {
           const weak = r.n < 5;
           const cls = r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red');
           const icon = r.flag === 'stack' ? '🟢 ' : (r.flag === 'avoid' ? '🔴 ' : '');
           const weakTag = weak ? ' <span style="color:var(--muted);font-size:10px">⚠️n&lt;5</span>' : '';
           const avgK = r.avgK != null ? ` · ${r.avgK.toFixed(1)}k` : '';
           return `<div class="day"><div><div class="date">${icon}${r.name}${weakTag}</div><div class="stats">n=${r.n}${avgK} · R$ ${fmtMoney(r.profit)}</div></div><div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div></div>`;
-        }).join('');
-        document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
+        };
+        renderExpandableList(target, rows, rowHtml, { limit: 12, emptyLabel: `Sem ${label}.` });
       }
 
       // 1. Por trigger (achado #1: Milio sozinho = coin-flip)
@@ -2521,6 +3709,17 @@
 
       // 6. Por mapa
       renderList('miByMap', aggBy(g => ['Map ' + (g.map || '?')], 1), 'mapa');
+
+      updateMiFilterSummary();
+    }
+
+    // PARTE 4 — resumo textual do recorte ativo na filter-bar.
+    function updateMiFilterSummary() {
+      const el = document.getElementById('miFilterSummary');
+      if (!el) return;
+      const delta = document.getElementById('miFairDelta').value;
+      const odd = document.getElementById('miOdd').value;
+      el.textContent = `Δ${delta} · odd ${odd === 'real' ? 'real' : odd}`;
     }
 
     document.getElementById('miFairDelta').addEventListener('change', renderMilioTab);
@@ -2637,12 +3836,14 @@
         return Object.values(m).filter(x => x.n >= minN).map(x => ({...x, hit:100*x.w/x.n})).sort((a,b) => b.hit - a.hit);
       }
 
+      // PARTE 3.2: .slice(0,12) + "ver todos" no lugar do corte fixo anterior
+      // (s1Teams cortava em 30, s1Champs em 40, sem forma de ver o resto).
       function renderList(target, rows, label) {
-        const html = rows.map(r => {
+        const rowHtml = (r) => {
           const cls = r.hit >= 60 ? 'green' : (r.hit >= 50 ? '' : 'red');
           return `<div class="day"><div><div class="date">${r.name}</div><div class="stats">n=${r.n} · R$ ${fmtMoney(r.profit)}</div></div><div class="profit ${cls}">${r.hit.toFixed(1).replace('.',',')}%</div></div>`;
-        }).join('');
-        document.getElementById(target).innerHTML = html || `<div class="empty">Sem ${label}.</div>`;
+        };
+        renderExpandableList(target, rows, rowHtml, { limit: 12, emptyLabel: `Sem ${label}.` });
       }
 
       // Split 1 preserva a definição HISTÓRICA de suporte válido (inclui Alistar, removido
@@ -2650,7 +3851,7 @@
       // antes dessa decisão, não a definição vigente do método hoje (ver Banco de dados/Milio).
       const VALID_SUPS = new Set(['Soraka','Sona','Janna','Lulu','Yuumi','Karma','Seraphine','Renata','RenataGlasc','Nami','Milio','Bard','Rakan','Alistar']);
       renderList('s1ByLeague', aggBy(g => [g.league]), 'liga');
-      renderList('s1Teams', aggBy(g => g.teams || [], 4).slice(0, 30), 'time');
+      renderList('s1Teams', aggBy(g => g.teams || [], 4), 'time');
       // Auditoria MED-04 (2026-07-23): rotula Alistar explicitamente como "lista da época"
       // pra deixar claro na UI que essa lista diverge da definição atual do método.
       const s1SupportRows = aggBy(g => {
@@ -2665,7 +3866,24 @@
           for (const role of ['top','jungle','mid','adc','support']) if (p[role]) out.push(p[role]);
         }
         return out;
-      }, 6).slice(0, 40), 'boneco');
+      }, 6), 'boneco');
+
+      updateS1FilterSummary();
+    }
+
+    // PARTE 4 — resumo textual do recorte ativo na filter-bar.
+    function updateS1FilterSummary() {
+      const el = document.getElementById('s1FilterSummary');
+      if (!el) return;
+      const delta = document.getElementById('s1FairDelta').value;
+      const trig = document.getElementById('s1Trigger').value;
+      const lg = document.getElementById('s1League').value;
+      const champ = document.getElementById('s1Champion').value;
+      const parts = [`Δ${delta}`];
+      if (trig !== 'all') parts.push(trig);
+      if (lg !== 'all') parts.push(lg);
+      if (champ !== 'all') parts.push(champ);
+      el.textContent = parts.join(' · ');
     }
 
     // Auditoria LOW-01 (2026-07-23): mesmo fix de listener duplicado da aba Banco de dados.
