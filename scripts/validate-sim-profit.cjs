@@ -29,8 +29,10 @@ async function main() {
   console.log(`\nParams: delta=${DELTA}, odd=${ODD} (fixo), stake=${STAKE}, BE=${BE.toFixed(2)}%\n`);
 
   // Fetch + dedup
+  // Tie-break determinístico (fix 2026-07-30, ver lib/analiseStats.cjs) — bet_datetime
+  // sozinho tem grupos duplicados, sem 2º critério a ordem de empate varia entre execuções.
   const raw = await supabaseGet(supabaseUrl, supabaseKey,
-    '/rest/v1/bets?select=*&status=in.(green,red)&is_method_bet=eq.true&order=bet_datetime.desc&limit=2000'
+    '/rest/v1/bets?select=*&status=in.(green,red)&is_method_bet=eq.true&order=bet_datetime.desc,created_at.desc,id.desc&limit=2000'
   );
   const realGids = new Set();
   for (const b of raw) if (b.bookmaker !== 'SIMULATED') {

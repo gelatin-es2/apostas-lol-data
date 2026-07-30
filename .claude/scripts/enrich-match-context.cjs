@@ -246,9 +246,15 @@ function extractGameData(window) {
   };
 }
 
+// Fix 2026-07-30 (auditoria under/over, duplicado de lib/analiseStats.cjs): prioriza
+// padrão decimal N.5 — bug antigo pegava o número do "Mapa N" como linha.
 function parsePickLine(pickRaw) {
-  const numMatch = (pickRaw || '').match(/(\d+(?:[.,]\d+)?)/);
-  return numMatch ? parseFloat(numMatch[1].replace(',', '.')) : null;
+  const s = pickRaw || '';
+  const decimalMatch = s.match(/(\d+[.,]5)\b/);
+  if (decimalMatch) return parseFloat(decimalMatch[1].replace(',', '.'));
+  const afterTerm = s.match(/(?:menos de|under|mais de|over)\s+(\d+(?:[.,]\d+)?)/i);
+  if (afterTerm) return parseFloat(afterTerm[1].replace(',', '.'));
+  return null;
 }
 
 async function processBet(supabaseUrl, supabaseKey, cache, bet) {

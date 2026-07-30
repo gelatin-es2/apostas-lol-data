@@ -183,7 +183,12 @@ async function fetchUserBets() {
           for (const b of rows) {
             const mc = b.raw_extraction?.match_context;
             if (!mc?.lolesports_match_id) continue;
-            const m = (b.pick || '').match(/(\d+(?:[.,]\d+)?)/);
+            // Fix 2026-07-30 (auditoria under/over, duplicado de lib/analiseStats.cjs):
+            // prioriza padrão decimal N.5 — bug antigo pegava o número do "Mapa N" como linha.
+            const pickText = b.pick || '';
+            const decimalMatch = pickText.match(/(\d+[.,]5)\b/);
+            const afterTermMatch = !decimalMatch && pickText.match(/(?:menos de|under|mais de|over)\s+(\d+(?:[.,]\d+)?)/i);
+            const m = decimalMatch || afterTermMatch;
             if (!m) continue;
             const pickLine = parseFloat(m[1].replace(',', '.'));
             const odd = parseFloat(b.odd);

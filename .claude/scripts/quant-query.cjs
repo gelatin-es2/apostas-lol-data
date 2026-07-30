@@ -99,17 +99,31 @@ function inferLeagueShort(bet) {
   return null;
 }
 
+// Fix 2026-07-30 (auditoria under/over, duplicado de lib/analiseStats.cjs): decide
+// pelo TERMO do pick (início, ignorando prefixo "Mapa N"), nunca por substring do
+// nome do mercado (ex: "Under 28.5 Total Kills Over/Under, Map 4" tem "over" no
+// meio mas é uma aposta Under — under/menos sempre vence no empate).
 function inferMarketKind(bet) {
-  const lower = (bet.pick || '').toLowerCase();
-  if (/menos\s*de|under/i.test(bet.pick || '')) return 'under';
-  if (/mais\s*de|over/i.test(bet.pick || '')) return 'over';
+  const s = (bet.pick || '').replace(/^mapa\s*\d+\s*/i, '').trim();
+  if (/^(under|menos de)\b/i.test(s)) return 'under';
+  if (/^(over|mais de)\b/i.test(s)) return 'over';
+  // fallback (não começa com termo reconhecido): under/menos vence no empate
+  if (/\b(under|menos de)\b/i.test(s)) return 'under';
+  if (/\b(over|mais de)\b/i.test(s)) return 'over';
   if (/money\s*line|vencedor|resultado\s*final/i.test(bet.market || '')) return 'moneyline';
   return 'unknown';
 }
 
+// Fix 2026-07-30 (duplicado de lib/analiseStats.cjs): prioriza o padrão decimal N.5
+// (linha de kills) — bug antigo pegava o primeiro número da string ("Mapa 2 Menos de
+// 26.5" → 2, o número do mapa, não a linha).
 function parsePickLine(pickRaw) {
-  const m = (pickRaw || '').match(/(\d+(?:[.,]\d+)?)/);
-  return m ? parseFloat(m[1].replace(',', '.')) : null;
+  const s = pickRaw || '';
+  const decimalMatch = s.match(/(\d+[.,]5)\b/);
+  if (decimalMatch) return parseFloat(decimalMatch[1].replace(',', '.'));
+  const afterTerm = s.match(/(?:menos de|under|mais de|over)\s+(\d+(?:[.,]\d+)?)/i);
+  if (afterTerm) return parseFloat(afterTerm[1].replace(',', '.'));
+  return null;
 }
 
 function passesFilters(bet) {

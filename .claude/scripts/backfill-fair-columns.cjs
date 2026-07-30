@@ -50,11 +50,25 @@ function supaRequest(supabaseUrl, supabaseKey, method, urlPath, body = null) {
 }
 
 // Parser do pick — extrai linha numérica e under/over
+// Fix 2026-07-30 (auditoria under/over, duplicado de lib/analiseStats.cjs):
+// (1) linha: prioriza padrão decimal N.5 — bug antigo pegava o número do "Mapa N"
+//     como linha (ex "Mapa 2 Menos de 26.5" → 2).
+// (2) kind: decide pelo INÍCIO do pick (ignorando prefixo "Mapa N"), nunca por
+//     substring do nome do mercado (ex "Under 28.5 Total Kills Over/Under, Map 4"
+//     tem "over" no meio mas é Under) — under/menos vence só no empate/fallback.
 function parsePick(pickRaw) {
-  const lower = (pickRaw || '').toLowerCase();
-  const m = lower.match(/(\d+(?:[.,]\d+)?)/);
+  const raw = pickRaw || '';
+  const decimalMatch = raw.match(/(\d+[.,]5)\b/);
+  const afterTermMatch = !decimalMatch && raw.match(/(?:menos de|under|mais de|over)\s+(\d+(?:[.,]\d+)?)/i);
+  const m = decimalMatch || afterTermMatch;
   const line = m ? parseFloat(m[1].replace(',', '.')) : null;
-  const kind = /menos|under/.test(lower) ? 'under' : /mais|over/.test(lower) ? 'over' : null;
+
+  const s = raw.replace(/^mapa\s*\d+\s*/i, '').trim();
+  let kind = null;
+  if (/^(under|menos de)\b/i.test(s)) kind = 'under';
+  else if (/^(over|mais de)\b/i.test(s)) kind = 'over';
+  else if (/\b(under|menos de)\b/i.test(s)) kind = 'under';
+  else if (/\b(over|mais de)\b/i.test(s)) kind = 'over';
   return { kind, line };
 }
 
