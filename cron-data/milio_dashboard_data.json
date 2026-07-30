@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-07-30T13:30:36.201Z",
+  "generated_at": "2026-07-30T16:05:20.884Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
     "2026-07-30"
   ],
   "milio_count": 139,
-  "games_with_full_picks": 107,
+  "games_with_full_picks": 108,
   "baseline_under_hit_pct": 69.1,
   "by_league": {
     "LPL": 57,
@@ -1333,8 +1333,8 @@
         "support": "Milio"
       },
       "total_kills": 43,
-      "fair": 31.5,
-      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair": 29.5,
+      "fair_source": "formula(team+team)/2",
       "trigger": null,
       "game_id": "115548128963037561",
       "src": "results.json"
@@ -1366,8 +1366,8 @@
         "support": "Lulu"
       },
       "total_kills": 19,
-      "fair": 27.5,
-      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair": 28.5,
+      "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "115615926677896673",
       "src": "results.json"
@@ -1399,8 +1399,8 @@
         "support": "Milio"
       },
       "total_kills": 29,
-      "fair": 27.5,
-      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair": 28.5,
+      "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "115615926677831065",
       "src": "results.json"
@@ -1432,8 +1432,8 @@
         "support": "Lulu"
       },
       "total_kills": 21,
-      "fair": 29.5,
-      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair": 28.5,
+      "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "115548668059523715",
       "src": "results.json"
@@ -1458,7 +1458,7 @@
       },
       "total_kills": 14,
       "fair": 29.5,
-      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair_source": "formula(team+team)/2",
       "trigger": null,
       "game_id": "115565670260116234",
       "src": "results.json"
@@ -1490,8 +1490,8 @@
         "support": "Milio"
       },
       "total_kills": 35,
-      "fair": 28.5,
-      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair": 29.5,
+      "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "115565670260116219",
       "src": "results.json"
@@ -2019,8 +2019,8 @@
         "support": "Milio"
       },
       "total_kills": 37,
-      "fair": 29.5,
-      "fair_source": "polymarket_game2",
+      "fair": 28.5,
+      "fair_source": "formula(league+league)/2",
       "trigger": null,
       "game_id": "115548128962971901",
       "src": "results.json"
@@ -2052,8 +2052,8 @@
         "support": "Karma"
       },
       "total_kills": 33,
-      "fair": 25.5,
-      "fair_source": "polymarket_game1",
+      "fair": 27.5,
+      "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "115615926677896692",
       "src": "results.json"
@@ -2085,8 +2085,8 @@
         "support": "Milio"
       },
       "total_kills": 17,
-      "fair": 27.5,
-      "fair_source": "polymarket_game2",
+      "fair": 26.5,
+      "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "115615926677831069",
       "src": "results.json"
@@ -2118,8 +2118,8 @@
         "support": "Bard"
       },
       "total_kills": 19,
-      "fair": 28.5,
-      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair": 29.5,
+      "fair_source": "formula(team+team)/2",
       "trigger": "1peel+flex",
       "game_id": "115565670260181828",
       "src": "results.json"
@@ -2143,8 +2143,8 @@
         "support": "Neeko"
       },
       "total_kills": 29,
-      "fair": 26.5,
-      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair": 27.5,
+      "fair_source": "formula(team+team)/2",
       "trigger": null,
       "game_id": "115564793879469282",
       "src": "results.json"
@@ -2466,7 +2466,7 @@
       },
       "total_kills": 26,
       "fair": 31.5,
-      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "115548128962971937",
       "src": "results.json"
@@ -2498,8 +2498,8 @@
         "support": "Lulu"
       },
       "total_kills": 25,
-      "fair": 28.5,
-      "fair_source": "polymarket_match_level",
+      "fair": 27.5,
+      "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "115615926677896686",
       "src": "results.json"
@@ -2531,9 +2531,9 @@
         "support": "Milio"
       },
       "total_kills": 25,
-      "fair": 28.5,
-      "fair_source": "livestats_team_avg(team+team)/2",
-      "trigger": "1peel+flex",
+      "fair": 29.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": null,
       "game_id": "115565670260181843",
       "src": "results.json"
     },
@@ -2564,8 +2564,8 @@
         "support": "Seraphine"
       },
       "total_kills": 33,
-      "fair": 28.5,
-      "fair_source": "livestats_team_avg(team+team)/2",
+      "fair": 27.5,
+      "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "115564793879403721",
       "src": "results.json"
@@ -3524,7 +3524,7 @@
       },
       "total_kills": 21,
       "fair": 29.5,
-      "fair_source": "formula(team+team)/2",
+      "fair_source": "pinnacle_manual",
       "trigger": "2peel",
       "game_id": "115548128963037545",
       "src": "results.json"
@@ -3548,8 +3548,8 @@
         "support": "Rakan"
       },
       "total_kills": 21,
-      "fair": 29.5,
-      "fair_source": "formula(team+team)/2",
+      "fair": 28.5,
+      "fair_source": "pinnacle_manual",
       "trigger": "1peel+flex",
       "game_id": "115616219464541932",
       "src": "results.json"
@@ -3581,9 +3581,9 @@
         "support": "Milio"
       },
       "total_kills": 28,
-      "fair": 26.5,
-      "fair_source": "formula(team+team)/2",
-      "trigger": "1peel+flex",
+      "fair": 27.5,
+      "fair_source": "pinnacle_manual",
+      "trigger": null,
       "game_id": "115565670260181871",
       "src": "results.json"
     },
@@ -3614,8 +3614,8 @@
         "support": "Rakan"
       },
       "total_kills": 11,
-      "fair": 24.5,
-      "fair_source": "formula(league+team)/2",
+      "fair": 26.5,
+      "fair_source": "pinnacle_manual",
       "trigger": "1peel+flex",
       "game_id": "115564793879469313",
       "src": "results.json"
@@ -4020,9 +4020,9 @@
         "support": "Milio"
       },
       "total_kills": 28,
-      "fair": 32.5,
+      "fair": 31.5,
       "fair_source": "formula(team+team)/2",
-      "trigger": "1peel+flex",
+      "trigger": null,
       "game_id": "115616219464607511",
       "src": "results.json"
     },
@@ -4246,9 +4246,17 @@
       "sup_blue": "Karma",
       "sup_red": "Milio",
       "blue_picks": {
+        "adc": "Ezreal",
+        "mid": "Anivia",
+        "top": "Ambessa",
+        "jungle": "Naafiri",
         "support": "Karma"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Ryze",
+        "top": "Gnar",
+        "jungle": "Vi",
         "support": "Milio"
       },
       "total_kills": 28,
