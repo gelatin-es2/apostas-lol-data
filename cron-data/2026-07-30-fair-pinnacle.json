@@ -1,0 +1,17 @@
+{
+  "date": "2026-07-30",
+  "source": "pinnacle_manual_elvis",
+  "captured_at": "2026-07-30T11:00:00Z",
+  "note": "Fair via prints do Elvis. LPL/LCK = Pinnacle (derivadas da régua de odds: Under@fair≈1.83, fair+1≈1.72, fair−1≈1.95). LCP = THUNDERPICK como fonte de fair (Elvis: 'lcp a fair é thunderpick, pouca liquidez' na Pinnacle) — Under @1.80 = slot fair. Tier-2 da tarde (Prime/LES/LFL) = fórmula. ⚠️ BUG CONHECIDO: getSchedule marcou os 3 jogos de LPL como 'completed' de manhã, mas o NIP×WBG estava AO VIVO no mapa 1 (confirmado por frames do livestats) — não confiar no state do schedule.",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "fair_lines": [
+    { "liga": "LPL", "hora_brt": "04:00", "team_a": "Ninjas in Pyjamas", "team_b": "Weibo Gaming", "team_anchor": "NIP", "fair_line": 30.5, "lolesports_match_id": "116566854547835324", "source_note": "Under 30.5 (map 3) @ 1.862 — slot fair" },
+    { "liga": "LPL", "hora_brt": "06:00", "team_a": "EDward Gaming", "team_b": "Team WE", "team_anchor": "EDG", "fair_line": 30.5, "lolesports_match_id": "116566854547769608", "source_note": "Under 31.5 (map 2) @ 1.763 — fair+1 → fair 30.5" },
+    { "liga": "LPL", "hora_brt": "08:00", "team_a": "JD Gaming", "team_b": "ThunderTalk Gaming", "team_anchor": "JDG", "fair_line": 29.5, "lolesports_match_id": "116566854547769640", "source_note": "Under 30.5 (map 2) @ 1.746 — fair+1 → fair 29.5" },
+    { "liga": "LCK", "hora_brt": "05:00", "team_a": "BNK FEARX", "team_b": "DN SOOPers", "team_anchor": "FEARX", "fair_line": 30.5, "lolesports_match_id": "115548147900684657", "source_note": "Under 29.5 (map 1) @ 1.990 — fair−1 → fair 30.5" },
+    { "liga": "LCK", "hora_brt": "07:00", "team_a": "Hanwha Life", "team_b": "Dplus KIA", "team_anchor": "HLE", "fair_line": 31.5, "lolesports_match_id": "115548147900553453", "source_note": "Under 32.5 (map 1) @ 1.740 — fair+1 → fair 31.5" },
+    { "liga": "LCP", "hora_brt": "06:00", "team_a": "Fukuoka SoftBank HAWKS", "team_b": "DetonatioN FocusMe", "team_anchor": "SHG", "fair_line": 26.5, "lolesports_match_id": "115570814727903845", "source_note": "THUNDERPICK Under 26.5 @ 1.80 — slot fair (Pinnacle sem liquidez na LCP)" },
+    { "liga": "LCP", "hora_brt": "08:30", "team_a": "Relove Deep Cross Gaming", "team_b": "Ground Zero Gaming", "team_anchor": "DCG", "fair_line": 31.5, "lolesports_match_id": "115570814727903849", "source_note": "THUNDERPICK Under 31.5 @ 1.80 — slot fair (Pinnacle sem liquidez na LCP)" }
+  ]
+}

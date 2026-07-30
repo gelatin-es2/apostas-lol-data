@@ -1,0 +1,17 @@
+{
+  "date": "2026-07-28",
+  "source": "pinnacle_manual_elvis",
+  "captured_at": "2026-07-28T10:30:00Z",
+  "note": "Fair Pinnacle manual do Elvis (7 anchors via chat, manhã de 28/07) — cobre os 7 jogos operáveis do dia (LFL 5 + LES 2). KCL fora (inoperável desde 27/07). Deltas vs fórmula: Pirates +2, ZYB +2, Karmine +2, Joblife +1, Alma/Barça/Solary 0 — padrão 'Pinnacle acima da fórmula' segue no tier-2.",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "fair_lines": [
+    { "liga": "LES", "hora_brt": "12:00", "team_a": "UB Alma Mater", "team_b": "UCAM Esports Club", "team_anchor": "Alma Mater", "fair_line": 29.5, "lolesports_match_id": "116833506932259251", "source_note": "anchor Elvis: alma mater 29,5" },
+    { "liga": "LFL", "hora_brt": "13:00", "team_a": "TLN Pirates", "team_b": "Skillcamp", "team_anchor": "Pirates", "fair_line": 31.5, "lolesports_match_id": "116912368899990120", "source_note": "anchor Elvis: pirates 31,5" },
+    { "liga": "LFL", "hora_brt": "14:00", "team_a": "ZYB", "team_b": "Esprit Shonen", "team_anchor": "ZYB", "fair_line": 34.5, "lolesports_match_id": "116912368900055694", "source_note": "anchor Elvis: zyd 34,5 (ZYB)" },
+    { "liga": "LES", "hora_brt": "14:30", "team_a": "Barça Esports", "team_b": "GIANTX ITERO", "team_anchor": "Barça", "fair_line": 33.5, "lolesports_match_id": "116833506932128119", "source_note": "anchor Elvis: barca 33,5" },
+    { "liga": "LFL", "hora_brt": "15:00", "team_a": "Karmine Corp Blue", "team_b": "Galions", "team_anchor": "Karmine Blue", "fair_line": 35.5, "lolesports_match_id": "116912368900055718", "source_note": "anchor Elvis: karmine 35,5" },
+    { "liga": "LFL", "hora_brt": "16:00", "team_a": "Joblife", "team_b": "Vitality.Bee", "team_anchor": "Joblife", "fair_line": 32.5, "lolesports_match_id": "116912368899990124", "source_note": "anchor Elvis: job life 32,5" },
+    { "liga": "LFL", "hora_brt": "17:00", "team_a": "Solary", "team_b": "Ici Japon Corp", "team_anchor": "Solary", "fair_line": 32.5, "lolesports_match_id": "116912368900055706", "source_note": "anchor Elvis: solary 32,5" }
+  ]
+}

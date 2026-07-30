@@ -1,0 +1,14 @@
+{
+  "date": "2026-07-29",
+  "source": "pinnacle_manual_elvis",
+  "captured_at": "2026-07-29T09:50:00Z",
+  "note": "Fair Pinnacle manual via print do Elvis (manhã 29/07) — 4 jogos majors (LPL 2 + LCK 2). T1×KT: Under 30.5 @2.040 = under ~2 linhas caro → fair lida como 32.5 (JULGAMENTO COO — odd fora do slot 1.78-1.89; conferir se linha mexer). KRX×NS: linha enviada era do MAP 3 (@1.833, slot fair) — vale todos os mapas pela convenção. Tarde tier-2 (Prime/LES/LFL): fórmula cobre; Elvis pode mandar anchors depois.",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "fair_lines": [
+    { "liga": "LPL", "hora_brt": "06:00", "team_a": "Anyone's Legend", "team_b": "Top Esports", "team_anchor": "TES", "fair_line": 30.5, "lolesports_match_id": "116566854547769576", "source_note": "Under 30.5 @ 1.854 — fair slot" },
+    { "liga": "LPL", "hora_brt": "08:00", "team_a": "Bilibili Gaming", "team_b": "LGD Gaming", "team_anchor": "BLG", "fair_line": 31.5, "lolesports_match_id": "116566854547769560", "source_note": "Under 31.5 @ 1.800 — fair slot" },
+    { "liga": "LCK", "hora_brt": "05:00", "team_a": "KIWOOM DRX", "team_b": "Nongshim", "team_anchor": "KIWOOM", "fair_line": 31.5, "lolesports_match_id": "115548147900684661", "source_note": "Under 31.5 @ 1.833 (print do map 3) — fair slot" },
+    { "liga": "LCK", "hora_brt": "07:00", "team_a": "T1", "team_b": "KT Rolster", "team_anchor": "T1", "fair_line": 32.5, "lolesports_match_id": "115548147900553461", "source_note": "Under 30.5 @ 2.040 — under ~2 linhas caro → fair 32.5 (julgamento COO, odd fora do slot)" }
+  ]
+}
