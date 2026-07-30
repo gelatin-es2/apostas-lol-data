@@ -6,6 +6,7 @@
 //   node enrich-match-context.cjs            → roda pra TODAS bets sem match_context
 //   node enrich-match-context.cjs --dry-run  → diagnóstico sem PATCH
 //   node enrich-match-context.cjs --limit 5  → processa só as 5 primeiras (debug)
+//   node enrich-match-context.cjs --since 2026-07-21 --status green,red --missing-kills-only → escopo mínimo
 //
 // Stdout: JSON summary + samples de results
 
@@ -32,6 +33,13 @@ const LEAGUE_IDS = {
   LFL: '105266103462388553',
   LIT: '105266094998946936',
   EUM: '100695891328981122',
+  // FIX 2026-07-30: faltavam as 4 ligas de expansão 2026-07-21/25 (já presentes
+  // em lolesports-find-match.cjs) — bets dessas ligas nunca linkavam (leagueShort
+  // null → busca em todas as ligas cacheadas, nenhuma delas tinha o schedule certo).
+  'Prime League': '105266091639104326',
+  KCL: '98767991335774713',
+  LES: '105266074488398661',
+  LCP: '113476371197627891',
 };
 
 const argv = process.argv.slice(2);
@@ -39,6 +47,11 @@ const DRY_RUN = argv.includes('--dry-run');
 const FORCE = argv.includes('--force');
 const limitIdx = argv.indexOf('--limit');
 const LIMIT = limitIdx >= 0 ? parseInt(argv[limitIdx + 1], 10) : null;
+const sinceIdx = argv.indexOf('--since');
+const SINCE = sinceIdx >= 0 ? argv[sinceIdx + 1] : null; // filtra bet_datetime >= YYYY-MM-DD
+const statusIdx = argv.indexOf('--status');
+const STATUS = statusIdx >= 0 ? argv[statusIdx + 1].split(',') : null; // ex: green,red
+const MISSING_KILLS_ONLY = argv.includes('--missing-kills-only'); // só bets sem match_context.total_kills (não retrofita compositions de bets já ok)
 
 const norm = s => s ? s.toLowerCase().replace(/[\s.\-']/g, '') : '';
 const isPurePeel = sup => sup && PEEL_PURE.includes(norm(sup));
@@ -151,6 +164,10 @@ function inferLeagueShort(leagueText) {
   if (/\bLFL\b|LIGUE FRAN/.test(u)) return 'LFL';
   if (/\bLIT\b|ITALIAN TOURN/.test(u)) return 'LIT';
   if (/EMEA MASTERS|\bEUM\b/.test(u)) return 'EUM';
+  if (/PRIME LEAGUE/.test(u)) return 'Prime League';
+  if (/\bKCL\b|LCK CHALLENGERS/.test(u)) return 'KCL';
+  if (/\bLES\b/.test(u)) return 'LES';
+  if (/\bLCP\b/.test(u)) return 'LCP';
   return null;
 }
 
@@ -420,24 +437,35 @@ async function processBet(supabaseUrl, supabaseKey, cache, bet) {
   console.error('[1/3] Construindo cache de schedules das ligas operadas...');
   const cache = await buildScheduleCache();
 
-  console.error('[2/3] Lendo bets do Supabase...');
-  const all = await new Promise((resolve, reject) => {
-    const u = new URL(`${supabaseUrl}/rest/v1/bets?select=*&limit=500`);
-    https.get({
-      host: u.hostname, path: u.pathname + u.search,
-      headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` },
-    }, res => {
-      let b = ''; res.on('data', c => b += c);
-      res.on('end', () => { try { resolve(JSON.parse(b)); } catch (e) { reject(e); } });
-    }).on('error', reject);
-  });
+  console.error('[2/3] Lendo bets do Supabase (paginado)...');
+  // FIX 2026-07-30: limit=500 sem paginação/order cortava a tabela (888 rows) nas
+  // 500 mais antigas por ordem default do PostgREST — as bets recentes (as que mais
+  // precisam de enrich) nunca eram vistas. Pagina em blocos de 1000 por created_at.
+  const all = [];
+  for (let offset = 0; ; offset += 1000) {
+    const page = await new Promise((resolve, reject) => {
+      const u = new URL(`${supabaseUrl}/rest/v1/bets?select=*&order=created_at.asc&limit=1000&offset=${offset}`);
+      https.get({
+        host: u.hostname, path: u.pathname + u.search,
+        headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` },
+      }, res => {
+        let b = ''; res.on('data', c => b += c);
+        res.on('end', () => { try { resolve(JSON.parse(b)); } catch (e) { reject(e); } });
+      }).on('error', reject);
+    });
+    all.push(...page);
+    if (page.length < 1000) break;
+  }
 
   const target = FORCE ? all : all.filter(b => {
     // FIX 2026-05-22: pular SIMULATED bets — elas têm campos custom (fair_line_calculated,
     // simulated_line, simulation_v3 etc) que NÃO devem ser sobrescritos pelo enrich.
     // O enrich destrutivo já causou bug uma vez (217 de 224 SIMULATED perderam fair_line_calculated).
     if (b.bookmaker === 'SIMULATED') return false;
+    if (SINCE && (!b.bet_datetime || b.bet_datetime.slice(0, 10) < SINCE)) return false;
+    if (STATUS && !STATUS.includes(b.status)) return false;
     const mc = b.raw_extraction?.match_context;
+    if (MISSING_KILLS_ONLY && mc?.total_kills) return false;
     const hasComp = !!b.raw_extraction?.compositions?.team_a?.picks?.support;
     // Já totalmente enriquecida
     if (mc?.lolesports_match_id && mc.blue_picks?.support && hasComp) return false;
@@ -469,7 +497,7 @@ async function processBet(supabaseUrl, supabaseKey, cache, bet) {
     else if (r.status === 'enriched_ewc_marker' || r.status === 'dry_run_ewc') summary.enriched_ewc_marker++;
     else if (r.status === 'error') summary.errors++;
     else summary.skipped++;
-    if (summary.samples.length < 8) summary.samples.push(r);
+    if (summary.samples.length < 50) summary.samples.push(r);
     if ((i + 1) % 10 === 0) console.error(`  ${i + 1}/${toProcess.length}...`);
     // pequena pausa pra não martelar API
     await new Promise(r => setTimeout(r, 150));
