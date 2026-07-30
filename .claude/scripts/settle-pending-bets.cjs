@@ -175,19 +175,29 @@ function detectTrigger(supBlue, supRed) {
 }
 
 // Parser do pick: "Menos de 27.5" / "Under 27.5" / "Mais de 27.5" / "Over 27.5" / nome de time
-// Fix 2026-05-23: usa o ÚLTIMO número da string (evita capturar "Mapa 4" em "Total. Mapa 4 Menos de 27.5")
+// Fix 2026-05-23: usava o ÚLTIMO número da string (pra evitar capturar "Mapa 4" em "Total.
+// Mapa 4 Menos de 27.5") — mas isso quebra na ordem inversa: "Under 29.5 Map 4" extraía "4"
+// (o número do mapa) como linha, não 29.5. Mascarado até agora porque kills reais (15-45)
+// sempre são > que o número de mapa (1-5), então bets Under com essa linha corrompida
+// sempre resolviam pra loss de qualquer forma — mas uma Under-win legítima com linha
+// corrompida teria sido marcada red incorretamente.
+// Fix 2026-07-30 (auditoria under/over, duplicado de lib/analiseStats.cjs): prioriza o
+// padrão decimal N.5 (linha de kills sempre termina em .5), não a posição na string.
 function parsePick(pickRaw, market) {
-  const lower = (pickRaw || '').toLowerCase();
-  const allMatches = Array.from(lower.matchAll(/(\d+(?:[.,]\d+)?)/g));
-  const numMatch = allMatches.length ? allMatches[allMatches.length - 1] : null;
-  const line = numMatch ? parseFloat(numMatch[1].replace(',', '.')) : null;
+  const raw = pickRaw || '';
+  const decimalMatch = raw.match(/(\d+[.,]5)\b/);
+  const afterTerm = !decimalMatch && raw.match(/(?:menos de|under|mais de|over)\s+(\d+(?:[.,]\d+)?)/i);
+  const m = decimalMatch || afterTerm;
+  const line = m ? parseFloat(m[1].replace(',', '.')) : null;
 
-  if (/menos\s*de|under/i.test(pickRaw || '')) {
-    return { kind: 'under', line };
-  }
-  if (/mais\s*de|over/i.test(pickRaw || '')) {
-    return { kind: 'over', line };
-  }
+  // Decide kind pelo TERMO do pick (início, ignorando prefixo "Mapa N"), nunca por
+  // substring do nome do mercado (ex "Over 30.5 Total Kills Over/Under" tem "under"
+  // no meio mas é Over) — under/menos vence só no empate/fallback.
+  const s = raw.replace(/^mapa\s*\d+\s*/i, '').trim();
+  if (/^(under|menos de)\b/i.test(s)) return { kind: 'under', line };
+  if (/^(over|mais de)\b/i.test(s)) return { kind: 'over', line };
+  if (/\b(under|menos de)\b/i.test(s)) return { kind: 'under', line };
+  if (/\b(over|mais de)\b/i.test(s)) return { kind: 'over', line };
   if (/money\s*line|vencedor|resultado\s*final/i.test(market || '')) {
     return { kind: 'moneyline', team_pick: pickRaw };
   }
