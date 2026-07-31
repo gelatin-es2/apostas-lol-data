@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-30T13:30:54.589Z",
-  "total_bets_universe": 448,
-  "total_settled": 443,
+  "generated_at": "2026-07-31T13:45:31.450Z",
+  "total_bets_universe": 471,
+  "total_settled": 459,
   "method_rules": {
     "peel_pure": [
       "soraka",
@@ -29,13 +29,13 @@
   },
   "by_trigger": {
     "2peel": {
-      "n": 196,
-      "wins": 118,
-      "losses": 78,
-      "hit": 60.2,
-      "stake": 151174.54,
-      "profit": 12831.52,
-      "roi": 8.5,
+      "n": 203,
+      "wins": 124,
+      "losses": 79,
+      "hit": 61.1,
+      "stake": 159433.3,
+      "profit": 18996.36,
+      "roi": 11.9,
       "breakeven": 54.1
     },
     "1peel+flex": {
@@ -49,67 +49,67 @@
       "breakeven": 54.1
     },
     "method_total": {
-      "n": 241,
-      "wins": 142,
-      "losses": 99,
-      "hit": 58.9,
-      "stake": 180886.9,
-      "profit": 18019.06,
-      "roi": 10,
+      "n": 248,
+      "wins": 148,
+      "losses": 100,
+      "hit": 59.7,
+      "stake": 189145.66,
+      "profit": 24183.9,
+      "roi": 12.8,
       "breakeven": 54.1
     }
   },
   "discipline": {
     "following_method": {
-      "n": 241,
-      "wins": 142,
-      "losses": 99,
-      "hit": 58.9,
-      "stake": 180886.9,
-      "profit": 18019.06,
-      "roi": 10,
+      "n": 248,
+      "wins": 148,
+      "losses": 100,
+      "hit": 59.7,
+      "stake": 189145.66,
+      "profit": 24183.9,
+      "roi": 12.8,
       "breakeven": 54.1
     },
     "not_following_method": {
-      "n": 202,
-      "wins": 120,
-      "losses": 82,
-      "hit": 59.4,
-      "stake": 167348.56,
-      "profit": 17455.43,
-      "roi": 10.4,
+      "n": 211,
+      "wins": 124,
+      "losses": 87,
+      "hit": 58.8,
+      "stake": 173846.77,
+      "profit": 15896.82,
+      "roi": 9.1,
       "breakeven": 54.1
     },
-    "diff_profit": 563.63,
+    "diff_profit": 8287.08,
     "not_following_breakdown": {
       "under": {
-        "n": 132,
-        "wins": 78,
+        "n": 129,
+        "wins": 75,
         "losses": 54,
-        "hit": 59.1,
-        "stake": 103330.2,
-        "profit": 10310.25,
-        "roi": 10,
+        "hit": 58.1,
+        "stake": 100321.46,
+        "profit": 8025.43,
+        "roi": 8,
         "breakeven": 54.1
       },
       "over": {
-        "n": 54,
-        "wins": 35,
-        "losses": 19,
-        "hit": 64.8,
-        "stake": 51694.12,
-        "profit": 7552.49,
-        "roi": 14.6,
+        "n": 65,
+        "wins": 43,
+        "losses": 22,
+        "hit": 66.2,
+        "stake": 60701.07,
+        "profit": 10728.7,
+        "roi": 17.7,
         "breakeven": 54.1
       },
       "moneyline": {
-        "n": 14,
-        "wins": 5,
-        "losses": 9,
-        "hit": 35.7,
-        "stake": 10930.74,
-        "profit": -1615.03,
-        "roi": -14.8,
+        "n": 15,
+        "wins": 4,
+        "losses": 11,
+        "hit": 26.7,
+        "stake": 11430.74,
+        "profit": -4065.03,
+        "roi": -35.6,
         "breakeven": 54.1
       }
     }
@@ -167,24 +167,24 @@
       "roi": -20.1,
       "breakeven": 54.1
     },
-    "LPL": {
-      "n": 70,
-      "wins": 52,
-      "losses": 18,
-      "hit": 74.3,
-      "stake": 57780.29,
-      "profit": 10244.67,
-      "roi": 17.7,
+    "LCK": {
+      "n": 53,
+      "wins": 25,
+      "losses": 28,
+      "hit": 47.2,
+      "stake": 44869.36,
+      "profit": 2262.5,
+      "roi": 5,
       "breakeven": 54.1
     },
-    "LCK": {
-      "n": 52,
-      "wins": 24,
-      "losses": 28,
-      "hit": 46.2,
-      "stake": 42869.36,
-      "profit": 682.5,
-      "roi": 1.6,
+    "LPL": {
+      "n": 75,
+      "wins": 56,
+      "losses": 19,
+      "hit": 74.7,
+      "stake": 62039.05,
+      "profit": 13249.51,
+      "roi": 21.4,
       "breakeven": 54.1
     },
     "LFL": {
@@ -198,13 +198,13 @@
       "breakeven": 54.1
     },
     "CBLOL": {
-      "n": 41,
-      "wins": 22,
+      "n": 42,
+      "wins": 23,
       "losses": 19,
-      "hit": 53.7,
-      "stake": 20532.35,
-      "profit": 3592.81,
-      "roi": 17.5,
+      "hit": 54.8,
+      "stake": 22532.35,
+      "profit": 5172.81,
+      "roi": 23,
       "breakeven": 54.1
     },
     "LCS": {

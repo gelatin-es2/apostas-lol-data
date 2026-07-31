@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-07-30T16:05:20.884Z",
+  "generated_at": "2026-07-31T13:45:08.609Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
-    "2026-07-30"
+    "2026-07-31"
   ],
-  "milio_count": 139,
-  "games_with_full_picks": 108,
-  "baseline_under_hit_pct": 69.1,
+  "milio_count": 141,
+  "games_with_full_picks": 109,
+  "baseline_under_hit_pct": 69.5,
   "by_league": {
     "LPL": 57,
-    "LCK": 36,
+    "LCK": 38,
     "LEC": 15,
     "CBLOL": 16,
     "LCS": 11,
@@ -4368,10 +4368,68 @@
         "support": "Lulu"
       },
       "total_kills": 30,
-      "fair": 30.5,
-      "fair_source": "formula(league+league)/2",
+      "fair": 31.5,
+      "fair_source": "pinnacle_manual",
       "trigger": "2peel",
       "game_id": "115548147900553456",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-07-31",
+      "league": "LCK",
+      "map": 1,
+      "team_blue": "GEN",
+      "team_red": "T1",
+      "milio_side": "red",
+      "milio_team": "T1",
+      "opp_team": "GEN",
+      "opp_sup": "Rakan",
+      "sup_blue": "Rakan",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "support": "Rakan"
+      },
+      "red_picks": {
+        "support": "Milio"
+      },
+      "total_kills": 17,
+      "fair": 28.5,
+      "fair_source": "formula(league+league)/2",
+      "trigger": "1peel+flex",
+      "game_id": "115548147900553458",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-07-31",
+      "league": "LCK",
+      "map": 2,
+      "team_blue": "KRX",
+      "team_red": "BRO",
+      "milio_side": "red",
+      "milio_team": "BRO",
+      "opp_team": "KRX",
+      "opp_sup": "Karma",
+      "sup_blue": "Karma",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "adc": "Ezreal",
+        "mid": "Annie",
+        "top": "Yorick",
+        "jungle": "Pantheon",
+        "support": "Karma"
+      },
+      "red_picks": {
+        "adc": "Lucian",
+        "mid": "Aurora",
+        "top": "Anivia",
+        "jungle": "LeeSin",
+        "support": "Milio"
+      },
+      "total_kills": 19,
+      "fair": 28.5,
+      "fair_source": "formula(league+league)/2",
+      "trigger": "2peel",
+      "game_id": "115548147900684639",
       "src": "results.json"
     }
   ]
