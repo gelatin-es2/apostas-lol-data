@@ -89,7 +89,7 @@ const REQUIRED = ['bookmaker', 'team_a', 'team_b', 'market', 'pick', 'odd', 'sta
 // Lista canônica de bookmakers (lowercase). Qualquer valor fora dessa lista é rejeitado.
 // Sincronizar com normalize-bookmakers.cjs quando adicionar nova casa.
 const VALID_BOOKMAKERS = [
-  'pinnacle', 'estrelabet', 'parimatch', 'betano',
+  'pinnacle', 'estrelabet', 'parimatch', 'betano', 'clutch', 'girosbet',
   'thunderpick', 'novibet', 'polymarket', 'simulated',
 ];
 

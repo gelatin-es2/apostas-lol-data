@@ -1,5 +1,49 @@
 # Pendências
 
+## 🔴 HANDOFF DE SESSÃO — 2026-07-31 ~13h BRT (contexto do chat encerrado)
+
+### Settles ABERTOS (resolver primeiro na próxima sessão)
+1. **`87fa1df8` — WE×BLG (LPL) map 1, Over 32.5 @1.740, R$1.000** — feed do livestats CONGELADO (frame eterno gameState=in_game, gameTime=0s, kills=29). O mapa certamente acabou. Settlar manual: kills finais via gol.gg (WE vs BLG 31/07 map 1) ou re-tentar o window mais tarde (CDN às vezes cura). Precisa de 33+ pra green. Fair correta do mapa 1 era 33.5 (ver nota na bet).
+2. **`72edd2bd` — KOI×Shifters (LEC) map 1, PLAYER PROP: Supa Under 6.5 kills @1.80, R$500,03** — jogo 14:15 BRT de 31/07. **SETTLE MANUAL OBRIGATÓRIO**: contar kills do jogador Supa (participante do KOI, summonerName com "Supa") no frame final do livestats window/details do game 1 do match `115548681803406215`. O settle automático tem guard novo (`player_prop_settle_manual`) e vai pular — NÃO deixar o script settlar como total do mapa.
+
+### Estado financeiro no encerramento
+- **Sexta 31/07: +R$279,91 realizados** (manhã de método forte +R$4.370, ladder 4u CFO×GAM map2 red −R$4.090).
+- Semana (seg–sex): **+R$2.775,60**. Semana anterior (fim de semana incl.): +R$16.8k no split 3 acumulado até domingo.
+- Vivas: só as 2 acima.
+
+### REGIME NOVO em vigor desde 31/07 ~12h (decisão Elvis, já gravada no playbook e memória)
+**1u qualquer trigger em QUALQUER liga · 2u Camille (Over) · 4u MILIO (Under) · recorte LCP revogado.**
+⚠️ Tripwire ativo do COO: **2 reds de Milio em janela de 5 bets → voltar 2u até o tribunal** (o 4u foi contra a recomendação da auditoria de 30/07 — monitorar SEM precisar do Elvis lembrar).
+
+### 🏛️ TRIBUNAL DOMINGO 02/08 (Elvis marcou pra domingo À NOITE)
+1. **Over na LEC** — decisão formal (dado: com Camille 2/2 +R$2.246 · pré-draft sem Camille 0/2 −R$3.000). Proposta: "Over LEC só via janela Camille com draft confirmado".
+2. **Camille×Shen = 5/5 under na semana** (18, 26, 23, 28, 22 kills, todos ≤ fair) — Elvis pediu pra manter observando em 30/07, mas o 5º caso fechou no dia 31. Levar proposta de SKIP da fatia (ou Over só sem Shen do outro lado).
+3. **Checkpoint ligas-teste** (LES/Prime — contagem de settles; LCP agora sem recorte).
+4. **Revisar o 4u do Milio com uma semana de dado** + status do tripwire.
+5. Itens antigos que seguem: Clutch/GirosBet formalizados nos scripts ✓ (feito 31/07), `pandascore_match_id` trunca IDs (migrar coluna pra texto — bug conhecido, não afeta settle).
+
+## 🔜 FILA DE TAREFAS — pedida pelo Elvis 2026-07-30
+
+### 1. Over na LEC — decisão da diretriz (⏰ DOMINGO 02/08 À NOITE, agendado pelo Elvis)
+Diretriz "SKIP Over na LEC" (24/07) está contradita na prática. Dado da semana: Over LEC **com janela Camille = 2/2, +R$2.246** · Over LEC **pré-draft sem Camille = 0/2, −R$3.000**. Proposta a levar: *"Over na LEC só via janela Camille com draft confirmado"*. Elvis analisa domingo à noite — NÃO decidir sem ele.
+
+### 2. Análise de mercado de KILLS em DOTA 2 (mercado novo)
+Investigar se o método de total kills tem análogo operável em Dota 2. Escopo mínimo:
+- **Fonte de dados**: API pública com draft + kills por partida no pro-play? Candidatas: **OpenDota** (grátis, documentada, match details/picks/kills), STRATZ, Steam Web API `GetMatchDetails`. Confirmar cobertura de tier 1 e se dá dado AO VIVO ou só pós-jogo.
+- **Existe "peel" em Dota?** Mapear heróis/papéis com efeito análogo ao Milio (sustain/disengage que derruba o total). Dota tem pos 4/5 (soft/hard support) e média de kills MUITO maior (~50/partida vs ~28 no LoL) → a régua de linha é completamente outra.
+- **Mercado**: quais casas do Elvis abrem total kills de Dota e com que liquidez (Pinnacle/Thunderpick/Polymarket).
+- **Só depois**: replicar pipeline fair + trigger + backtest com a MESMA disciplina do LoL (Wilson CI, out-of-sample entre patches, n≥25 por célula).
+- ⚠️ Não prometer método antes do backtest — mesma trava do LoL.
+
+### 3. Economia de token — settle em HORÁRIOS ESPECÍFICOS, não a cada mensagem
+Hoje o hook `check-pending-bets.cjs` roda a cada mensagem (cache 5min) e o COO settla manual bet por bet. Objetivo: **agrupar settles em janelas de horário**.
+- Desenho a avaliar: scheduler rodando settle em horários fixos alinhados ao fim dos blocos de jogo (ex.: 10h, 13h, 16h, 19h, 22h BRT) + hook apenas REPORTA o que já foi settlado (sem disparar busca).
+- Alternativa mais simples: manter o hook com cache muito maior (30–60min) + settle sob demanda quando o Elvis pedir.
+- Ganho: menos chamada de API por mensagem e menos settle manual do COO (hoje é o maior custo variável junto com o registro de bet).
+- Cuidado: não perder settle de bet que o Elvis pergunta na hora → manter comando de settle imediato disponível.
+
+---
+
 ## ✅ ENTREGUE 2026-07-26 — BARD FLEX: reconciliação 67,2 × 58,1 FECHADA
 - **Veredito: Bard FICA no `FLEX_ENGAGE`** — 68,7% Under fair+1 (n=361, CI [63,7–73,3], ROI +18,2%), **melhor dos 4 flex** e empatado com o 2peel core (67,7%). Passa fair causal (67,3%), controle de liga (+10,3pp sobre o baseline da própria liga), out-of-sample e Benjamini-Hochberg.
 - **Reconciliação:** 67,2 = TODOS os jogos na linha sintética fair+1 · 58,1 = só os 124 mapas do split 2 que viraram bet, na linha efetivamente registrada. Não é escopo de liga (6 ligas = 66,9%) nem régua de fair (LOO 68,7 vs trailing causal 67,3). É **linha** (+5–7pp) + **quais mapas viraram bet** (36 mapas apostados dariam 55,6% pela própria régua do backtest, p=0,067 — alerta, não conclusão).

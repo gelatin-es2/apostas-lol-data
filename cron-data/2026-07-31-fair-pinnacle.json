@@ -1,0 +1,80 @@
+{
+  "date": "2026-07-31",
+  "source": "pinnacle_manual_elvis",
+  "captured_at": "2026-07-31T09:40:00Z",
+  "note": "Fair completa via prints do Elvis (~08h BRT). Régua de leitura CORRIGIDA pro Over: @1.71-1.75 = linha 1 ABAIXO da fair (over fácil) → fair = linha+1; slot 1.78-1.89 = na fair; Under @1.71-1.75 = linha 1 ACIMA da fair → fair = linha−1. Correção do dia: WE×BLG era 33.5 no mapa 1 (não 31.5 como logado cedo) — mapa 2 mostra 32.5 (mercado desceu 1 pós mapa 1, padrão). LCP/LEC/LCK via linhas Thunderpick/Pinnacle dos prints.",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "fair_lines": [
+    {
+      "liga": "LPL",
+      "hora_brt": "06:00",
+      "team_a": "Team WE",
+      "team_b": "Bilibili Gaming",
+      "team_anchor": "WE",
+      "fair_line": 32.5,
+      "lolesports_match_id": "116566854547769548",
+      "source_note": "map1: Over 32.5 @1.740 = fair−1 → 33.5; map2: Over 31.5 @1.740 = fair−1 → 32.5. Logada 32.5 (mais recente); bet do Elvis no map1 foi em linha BOA (fair−1)."
+    },
+    {
+      "liga": "LCK",
+      "hora_brt": "05:00",
+      "team_a": "Gen.G",
+      "team_b": "T1",
+      "team_anchor": "GenG",
+      "fair_line": 31.5,
+      "lolesports_match_id": "115548147900553457",
+      "source_note": "Under 31.5 (map 3) @1.862 — slot fair"
+    },
+    {
+      "liga": "LCK",
+      "hora_brt": "07:00",
+      "team_a": "Hanjin BRO",
+      "team_b": "KIWOOM",
+      "team_anchor": "BRO",
+      "fair_line": 30.5,
+      "lolesports_match_id": "115548147900684637",
+      "source_note": "Under 30.5 @1.847 — slot fair"
+    },
+    {
+      "liga": "LCP",
+      "hora_brt": "06:00",
+      "team_a": "Team Secret Whales",
+      "team_b": "MVK Esports",
+      "team_anchor": "TSW",
+      "fair_line": 28.5,
+      "lolesports_match_id": "115570814727903837",
+      "source_note": "map2: Under 28.5 @1.909 (levemente abaixo do slot → fair ~28); mantida 28.5 = fórmula + ladder do Elvis na linha"
+    },
+    {
+      "liga": "LCP",
+      "hora_brt": "08:30",
+      "team_a": "CTBC Flying Oyster",
+      "team_b": "GAM Esports",
+      "team_anchor": "CFO",
+      "fair_line": 30.5,
+      "lolesports_match_id": "115570814727903841",
+      "source_note": "Under 30.5 @1.854 — slot fair"
+    },
+    {
+      "liga": "LEC",
+      "hora_brt": "12:00",
+      "team_a": "Team Heretics",
+      "team_b": "Vitality",
+      "team_anchor": "Heretics",
+      "fair_line": 29.5,
+      "lolesports_match_id": "115548681803406115",
+      "source_note": "Under 30.5 @1.714 = under fair+1 → fair 29.5 (⚠️ fórmula dizia 25.5 — cega no roster novo, +4 de erro)"
+    },
+    {
+      "liga": "LEC",
+      "hora_brt": "14:15",
+      "team_a": "Shifters",
+      "team_b": "Movistar KOI",
+      "team_anchor": "KOI",
+      "fair_line": 31.5,
+      "lolesports_match_id": "115548681803406215",
+      "source_note": "map2: Over 30.5 @1.714 = fair−1 → 31.5"
+    }
+  ]
+}

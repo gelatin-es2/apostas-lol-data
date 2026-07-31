@@ -1,13 +1,15 @@
 # Método Under Kill — playbook operacional Split 3
 
-> ## 🔴 REGIME DE STAKE VIGENTE (decisão Elvis 2026-07-26) — SOBRESCREVE TUDO ABAIXO
-> **1u em TUDO. 2u só com Milio ou Camille. Fim.**
+> ## 🔴 REGIME DE STAKE VIGENTE (Elvis 2026-07-26, atualizado 2026-07-31) — SOBRESCREVE TUDO ABAIXO
+> **1u em tudo. 2u Camille. 4u Milio. MESMO MÉTODO EM TODAS AS LIGAS (sem recorte por liga).**
 >
 > | Situação | Stake |
 > |---|---|
-> | Qualquer entrada do método (2peel, 1peel+flex, janela Camille) | **1u** |
-> | **Milio** no jogo (Under) | **2u** |
+> | Qualquer entrada do método (2peel, 1peel+flex, janela Camille... trigger é trigger em QUALQUER liga operada) | **1u** |
+> | **Milio** no jogo (Under) | **4u** ⚠️ decisão Elvis 31/07 ("tá muito bom" — 8/9 no split 3). CONTRA a recomendação da auditoria 30/07 ("edge não validado, não aumentar stake") — registrado. **TRIPWIRE COO: 2 reds de Milio em janela de 5 bets → volta 2u até o tribunal.** |
 > | **Camille** sup (janela Over) | **2u** |
+>
+> **Recorte da LCP REVOGADO (Elvis 31/07: "todas as ligas, mesmo método")** — LCP opera igual às demais (trigger normal 1u, Milio 4u, Camille 2u). Nota de registro: o red de −R$4.090 de 31/07 (CFO×GAM m2, 1peel+flex sem Milio, 4 pernas) teria sido skip pelo recorte antigo; a decisão unifica assim mesmo, por simplicidade — checkpoint das ligas-teste segue contando pra revisão dominical.
 >
 > - **Sem stake por liga.** Toda liga usa o mesmo tier — inclusive as em teste (LES/Prime/KCL/LCP). Liga em teste se controla por CHECKPOINT (n de settles), não por stake menor.
 > - **Sem meia-stake, sem premium, sem tier por trigger/mapa/contexto.** 1peel+flex vale o mesmo que 2peel.

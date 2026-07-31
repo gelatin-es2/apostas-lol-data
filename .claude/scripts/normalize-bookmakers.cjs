@@ -25,6 +25,8 @@ const VALID_BOOKMAKERS = [
   'parimatch',
   'betano',
   'thunderpick',
+  'clutch',
+  'girosbet',
   'novibet',
   'polymarket',
   'simulated',

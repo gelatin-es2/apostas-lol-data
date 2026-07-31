@@ -185,6 +185,12 @@ function detectTrigger(supBlue, supRed) {
 // padrão decimal N.5 (linha de kills sempre termina em .5), não a posição na string.
 function parsePick(pickRaw, market) {
   const raw = pickRaw || '';
+  // Player props (kills de JOGADOR, ex "Supa Under 6.5") não são total do mapa —
+  // settlar automático compararia total_kills do mapa vs linha individual e marcaria
+  // red errado. Guard 2026-07-31 (1ª player prop do banco: 72edd2bd).
+  if (/player/i.test(market || '') || /\bkills?\s*\(mapa/i.test(raw)) {
+    return { kind: 'player_prop' };
+  }
   const decimalMatch = raw.match(/(\d+[.,]5)\b/);
   const afterTerm = !decimalMatch && raw.match(/(?:menos de|under|mais de|over)\s+(\d+(?:[.,]\d+)?)/i);
   const m = decimalMatch || afterTerm;
@@ -333,6 +339,10 @@ function decideOutcome(bet, gameData) {
   if (parsed.kind === 'over' && parsed.line != null) {
     const won = tk > parsed.line;
     return { won, under_hit: tk < parsed.line, parsed };
+  }
+  if (parsed.kind === 'player_prop') {
+    // Kills individuais de jogador — settle manual do COO via livestats participants.
+    return { skip_reason: 'player_prop_settle_manual', parsed };
   }
   if (parsed.kind === 'moneyline') {
     // Compara nome do pick com nome dos times via match_context (se tiver) ou heuristica
