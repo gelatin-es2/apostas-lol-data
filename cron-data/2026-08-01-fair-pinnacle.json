@@ -2,7 +2,7 @@
   "date": "2026-08-01",
   "source": "pinnacle_manual_elvis",
   "captured_at": "2026-08-01T06:50:47Z",
-  "note": "Prints do Elvis (~03:50 BRT). 11 de 13 jogos da agenda cobertos. FALTAM: TES vs LGD (LPL 06:00) e JDG vs BLG (LPL 08:00). Régua: slot 1.78-1.89 = na fair; Over @1.71-1.75 = fair-1 (fair=linha+1); Over @1.95+ = fair=linha-1; Under @1.71-1.75 = fair=linha-1.",
+  "note": "Prints do Elvis (~03:50 BRT, complemento LPL ~03:55). 13 de 13 jogos da agenda cobertos. Régua: slot 1.78-1.89 = na fair; Over @1.71-1.75 = fair-1 (fair=linha+1); Over @1.95+ = fair=linha-1; Under @1.71-1.75 = fair=linha-1.",
   "applies_to_all_maps": true,
   "market": "total_kills",
   "fair_lines": [
@@ -104,7 +104,7 @@
       "team_anchor": "C9",
       "fair_line": 28.5,
       "lolesports_match_id": "115564797163821203",
-      "source_note": "Over 28.5 @1.769 — gap entre slots (1.75/1.78), mais perto do slot fair → 28.5 (JULGAMENTO: leve tendencia a 29)"
+      "source_note": "map1: Over 28.5 @1.769; map2: Over 28.5 @1.775 — gap entre slots (1.75/1.78), mais perto do slot fair → 28.5 (JULGAMENTO: leve tendencia a 29; map2 reforca 28.5)"
     },
     {
       "liga": "LCS",
@@ -115,24 +115,26 @@
       "fair_line": 29.5,
       "lolesports_match_id": "115564797163886783",
       "source_note": "Over 30.5 @2.000 = over dificil → fair = linha-1 → 29.5"
-    }
-  ],
-  "missing": [
+    },
     {
       "liga": "LPL",
       "hora_brt": "06:00",
       "team_a": "TES",
       "team_b": "LGD Gaming",
+      "team_anchor": "TES",
+      "fair_line": 29.5,
       "lolesports_match_id": "116566854547769584",
-      "reason": "sem print — aguardando fair do Elvis"
+      "source_note": "Under 30.5 @1.763 (print Map 2) = under facil → fair = linha-1 → 29.5 (JULGAMENTO: gap 1.75/1.78, leve tendencia a 30; formula dizia 27.5, Pinnacle prevalece)"
     },
     {
       "liga": "LPL",
       "hora_brt": "08:00",
       "team_a": "JDG",
       "team_b": "Bilibili Gaming",
+      "team_anchor": "JDG",
+      "fair_line": 30.5,
       "lolesports_match_id": "116566854547769556",
-      "reason": "sem print — aguardando fair do Elvis"
+      "source_note": "Over 31.5 @1.952 (print Map 2) = over dificil → fair = linha-1 → 30.5 (formula 30.5 confirma)"
     }
   ]
 }
