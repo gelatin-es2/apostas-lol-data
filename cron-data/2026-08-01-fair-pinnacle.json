@@ -1,0 +1,138 @@
+{
+  "date": "2026-08-01",
+  "source": "pinnacle_manual_elvis",
+  "captured_at": "2026-08-01T06:50:47Z",
+  "note": "Prints do Elvis (~03:50 BRT). 11 de 13 jogos da agenda cobertos. FALTAM: TES vs LGD (LPL 06:00) e JDG vs BLG (LPL 08:00). Régua: slot 1.78-1.89 = na fair; Over @1.71-1.75 = fair-1 (fair=linha+1); Over @1.95+ = fair=linha-1; Under @1.71-1.75 = fair=linha-1.",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "fair_lines": [
+    {
+      "liga": "LPL",
+      "hora_brt": "04:00",
+      "team_a": "Anyone's Legend",
+      "team_b": "Thunder Talk Gaming",
+      "team_anchor": "AL",
+      "fair_line": 28.5,
+      "lolesports_match_id": "116566854547769628",
+      "source_note": "Under 29.5 @1.751 = fair+1 acima → fair = 28.5 (odd na borda 1.75; formula 28.5 confirma)"
+    },
+    {
+      "liga": "LCK",
+      "hora_brt": "05:00",
+      "team_a": "Nongshim Redforce",
+      "team_b": "BNK FearX",
+      "team_anchor": "NS",
+      "fair_line": 32.5,
+      "lolesports_match_id": "115548147900684653",
+      "source_note": "Under 32.5 @1.869 (print Map 2) — slot fair → 32.5"
+    },
+    {
+      "liga": "LCP",
+      "hora_brt": "06:00",
+      "team_a": "DetonatioN FocusMe",
+      "team_b": "Relove Deep Cross Gaming",
+      "team_anchor": "DFM",
+      "fair_line": 29.5,
+      "lolesports_match_id": "115570814727903859",
+      "source_note": "Over 29.5 @1.892 — borda superior do slot fair (1.89) → na fair 29.5"
+    },
+    {
+      "liga": "LCK",
+      "hora_brt": "07:00",
+      "team_a": "Gen.G",
+      "team_b": "Dplus KIA",
+      "team_anchor": "GENG",
+      "fair_line": 28.5,
+      "lolesports_match_id": "115548147900553473",
+      "source_note": "Over 28.5 @1.813 — slot fair → 28.5"
+    },
+    {
+      "liga": "LCP",
+      "hora_brt": "08:30",
+      "team_a": "GAM Esports",
+      "team_b": "MVK Esports",
+      "team_anchor": "GAM",
+      "fair_line": 29.5,
+      "lolesports_match_id": "115570814727903863",
+      "source_note": "Over 29.5 @1.847 — slot fair → 29.5"
+    },
+    {
+      "liga": "LEC",
+      "hora_brt": "12:00",
+      "team_a": "GIANTX",
+      "team_b": "SK Gaming",
+      "team_anchor": "GX",
+      "fair_line": 29.5,
+      "lolesports_match_id": "115548681803406231",
+      "source_note": "Over 30.5 @1.990 = over dificil → fair = linha-1 → 29.5 (formula 29.5 confirma)"
+    },
+    {
+      "liga": "CBLOL",
+      "hora_brt": "13:00",
+      "team_a": "Vivo Keyd Stars",
+      "team_b": "FURIA",
+      "team_anchor": "VKS",
+      "fair_line": 28.5,
+      "lolesports_match_id": "115565671526402969",
+      "source_note": "Over 28.5 @1.847 — slot fair → 28.5 (slip com stake preenchida, sem 'Accepted bet' → nao registrada como aposta)"
+    },
+    {
+      "liga": "LEC",
+      "hora_brt": "14:15",
+      "team_a": "Karmine Corp",
+      "team_b": "Natus Vincere",
+      "team_anchor": "KC",
+      "fair_line": 30.5,
+      "lolesports_match_id": "115548681803406171",
+      "source_note": "Over 30.5 @1.900 — 0.01 acima do slot fair → mantida na fair 30.5 (JULGAMENTO: pode ser ~30; formula dizia 28.5, Pinnacle prevalece)"
+    },
+    {
+      "liga": "CBLOL",
+      "hora_brt": "16:00",
+      "team_a": "Leviatan Esports",
+      "team_b": "paiN Gaming",
+      "team_anchor": "LEV",
+      "fair_line": 27.5,
+      "lolesports_match_id": "115565671526403021",
+      "source_note": "Over 27.5 @1.900 (print Map 2) — 0.01 acima do slot fair → mantida na fair 27.5"
+    },
+    {
+      "liga": "LCS",
+      "hora_brt": "17:00",
+      "team_a": "Cloud9",
+      "team_b": "Dignitas",
+      "team_anchor": "C9",
+      "fair_line": 28.5,
+      "lolesports_match_id": "115564797163821203",
+      "source_note": "Over 28.5 @1.769 — gap entre slots (1.75/1.78), mais perto do slot fair → 28.5 (JULGAMENTO: leve tendencia a 29)"
+    },
+    {
+      "liga": "LCS",
+      "hora_brt": "20:00",
+      "team_a": "Disguised",
+      "team_b": "FlyQuest",
+      "team_anchor": "FLY",
+      "fair_line": 29.5,
+      "lolesports_match_id": "115564797163886783",
+      "source_note": "Over 30.5 @2.000 = over dificil → fair = linha-1 → 29.5"
+    }
+  ],
+  "missing": [
+    {
+      "liga": "LPL",
+      "hora_brt": "06:00",
+      "team_a": "TES",
+      "team_b": "LGD Gaming",
+      "lolesports_match_id": "116566854547769584",
+      "reason": "sem print — aguardando fair do Elvis"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "08:00",
+      "team_a": "JDG",
+      "team_b": "Bilibili Gaming",
+      "lolesports_match_id": "116566854547769556",
+      "reason": "sem print — aguardando fair do Elvis"
+    }
+  ]
+}
