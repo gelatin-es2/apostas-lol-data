@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T13:45:30.309Z",
+  "generated_at": "2026-08-01T12:59:51.751Z",
   "league": "LFL",
   "split_start": "2026-04-01",
   "total_games_fetched": 112,
@@ -24,13 +24,13 @@
   },
   "teams_2peel": [
     {
-      "name": "TLN Pirates",
-      "n": 5,
+      "name": "Vitality.Bee",
+      "n": 4,
       "hit": 100
     },
     {
-      "name": "Vitality.Bee",
-      "n": 4,
+      "name": "TLN Pirates",
+      "n": 5,
       "hit": 100
     },
     {
@@ -49,13 +49,13 @@
       "hit": 66.7
     },
     {
-      "name": "Galions",
-      "n": 9,
+      "name": "Solary",
+      "n": 6,
       "hit": 66.7
     },
     {
-      "name": "Solary",
-      "n": 6,
+      "name": "Galions",
+      "n": 9,
       "hit": 66.7
     },
     {
@@ -172,15 +172,15 @@
   ],
   "champs_2peel": [
     {
-      "champ": "Vi",
-      "role": "jungle",
-      "n": 4,
-      "hit": 100
-    },
-    {
       "champ": "KSante",
       "role": "top",
       "n": 7,
+      "hit": 100
+    },
+    {
+      "champ": "Vi",
+      "role": "jungle",
+      "n": 4,
       "hit": 100
     },
     {
@@ -202,6 +202,12 @@
       "hit": 83.3
     },
     {
+      "champ": "Azir",
+      "role": "mid",
+      "n": 5,
+      "hit": 80
+    },
+    {
       "champ": "Yunara",
       "role": "adc",
       "n": 10,
@@ -214,21 +220,9 @@
       "hit": 80
     },
     {
-      "champ": "Azir",
-      "role": "mid",
-      "n": 5,
-      "hit": 80
-    },
-    {
       "champ": "XinZhao",
       "role": "jungle",
       "n": 16,
-      "hit": 75
-    },
-    {
-      "champ": "Ahri",
-      "role": "mid",
-      "n": 4,
       "hit": 75
     },
     {
@@ -244,20 +238,26 @@
       "hit": 75
     },
     {
+      "champ": "Ahri",
+      "role": "mid",
+      "n": 4,
+      "hit": 75
+    },
+    {
       "champ": "Ashe",
       "role": "adc",
       "n": 11,
       "hit": 72.7
     },
     {
-      "champ": "Pantheon",
-      "role": "jungle",
+      "champ": "Ryze",
+      "role": "mid",
       "n": 5,
       "hit": 60
     },
     {
-      "champ": "Ryze",
-      "role": "mid",
+      "champ": "Pantheon",
+      "role": "jungle",
       "n": 5,
       "hit": 60
     },
@@ -268,14 +268,14 @@
       "hit": 50
     },
     {
-      "champ": "Sion",
-      "role": "top",
+      "champ": "MonkeyKing",
+      "role": "jungle",
       "n": 5,
       "hit": 40
     },
     {
-      "champ": "MonkeyKing",
-      "role": "jungle",
+      "champ": "Sion",
+      "role": "top",
       "n": 5,
       "hit": 40
     }
@@ -300,14 +300,14 @@
       "hit": 91.7
     },
     {
-      "champ": "Renekton",
-      "role": "top",
+      "champ": "Vi",
+      "role": "jungle",
       "n": 10,
       "hit": 90
     },
     {
-      "champ": "Vi",
-      "role": "jungle",
+      "champ": "Renekton",
+      "role": "top",
       "n": 10,
       "hit": 90
     },
@@ -336,15 +336,15 @@
       "hit": 76.5
     },
     {
-      "champ": "Ryze",
-      "role": "mid",
-      "n": 12,
-      "hit": 75
-    },
-    {
       "champ": "Mel",
       "role": "mid",
       "n": 4,
+      "hit": 75
+    },
+    {
+      "champ": "Ryze",
+      "role": "mid",
+      "n": 12,
       "hit": 75
     },
     {
@@ -366,18 +366,6 @@
       "hit": 70
     },
     {
-      "champ": "Gnar",
-      "role": "top",
-      "n": 6,
-      "hit": 66.7
-    },
-    {
-      "champ": "Aurora",
-      "role": "mid",
-      "n": 6,
-      "hit": 66.7
-    },
-    {
       "champ": "Rumble",
       "role": "top",
       "n": 15,
@@ -393,6 +381,18 @@
       "champ": "Ambessa",
       "role": "top",
       "n": 9,
+      "hit": 66.7
+    },
+    {
+      "champ": "Gnar",
+      "role": "top",
+      "n": 6,
+      "hit": 66.7
+    },
+    {
+      "champ": "Aurora",
+      "role": "mid",
+      "n": 6,
       "hit": 66.7
     },
     {
