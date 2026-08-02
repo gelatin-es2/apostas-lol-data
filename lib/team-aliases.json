@@ -2,6 +2,11 @@
   "generated_at": "2026-05-24T00:00:00.000Z",
   "description": "Mapping alias → canonical team name. Used by supabase-save-bet.cjs to normalize team_a/team_b on insert. Update this file whenever a new alias appears in the wild. Canonical = nome curto (updated 2026-05-24).",
   "aliases": {
+    "TSW": "TSW",
+    "Team Secret Whales": "TSW",
+    "Secret Whales": "TSW",
+    "CFO": "CFO",
+    "CTBC Flying Oyster": "CFO",
     "WBG": "Weibo",
     "Weibo Gaming": "Weibo",
     "WeiboGaming": "Weibo",
