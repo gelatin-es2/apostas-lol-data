@@ -1,0 +1,12 @@
+{
+  "date": "2026-08-02",
+  "source": "pinnacle_manual_elvis",
+  "captured_at": "2026-08-02T00:10:00Z",
+  "note": "Fair derivada dos slips Pinnacle do Elvis (prints ~21:05 BRT 01/08, pré-jogo) via régua linha↔odd: TT×WE Under 30.5 @1.787 (slot 1.78-1.89 = na fair) → 30.5; DNS×BRO Over 29.5 @1.826 (slot) → 29.5. Ambas batem com captura auto sombra (30.5 @1.84/1.90 e ladder 29.5 @1.855/1.87 balanceada). Demais jogos do dia sem fair manual — fórmula cobre; Elvis pode mandar anchors depois (merge).",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "fair_lines": [
+    { "liga": "LPL", "hora_brt": "04:00", "team_a": "THUNDER TALK GAMING", "team_b": "Xi'an Team WE", "team_anchor": "TT", "fair_line": 30.5, "lolesports_match_id": "116566854547769612", "source_note": "Under 30.5 @ 1.787 (slip map 2) — fair slot" },
+    { "liga": "LCK", "hora_brt": "05:00", "team_a": "DN SOOPers", "team_b": "HANJIN BRION", "team_anchor": "DNS", "fair_line": 29.5, "lolesports_match_id": "115548147900684645", "source_note": "Over 29.5 @ 1.826 (slip map 1) — fair slot" }
+  ]
+}
