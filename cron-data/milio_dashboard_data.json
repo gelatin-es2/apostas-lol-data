@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-08-01T12:59:40.936Z",
+  "generated_at": "2026-08-02T13:04:16.554Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
-    "2026-08-01"
+    "2026-08-02"
   ],
-  "milio_count": 142,
-  "games_with_full_picks": 109,
-  "baseline_under_hit_pct": 69.7,
+  "milio_count": 145,
+  "games_with_full_picks": 112,
+  "baseline_under_hit_pct": 69,
   "by_league": {
-    "LPL": 58,
+    "LPL": 60,
     "LCK": 38,
     "LEC": 15,
     "CBLOL": 16,
-    "LCS": 11,
+    "LCS": 12,
     "LFL": 4
   },
   "flags": {
@@ -4455,6 +4455,105 @@
       "fair_source": "pinnacle_manual",
       "trigger": "2peel",
       "game_id": "116566854547769586",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-01",
+      "league": "LPL",
+      "map": 2,
+      "team_blue": "JDG",
+      "team_red": "BLG",
+      "milio_side": "red",
+      "milio_team": "BLG",
+      "opp_team": "JDG",
+      "opp_sup": "Rakan",
+      "sup_blue": "Rakan",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "adc": "Xayah",
+        "mid": "Cassiopeia",
+        "top": "KSante",
+        "jungle": "JarvanIV",
+        "support": "Rakan"
+      },
+      "red_picks": {
+        "adc": "Lucian",
+        "mid": "Galio",
+        "top": "Rumble",
+        "jungle": "Naafiri",
+        "support": "Milio"
+      },
+      "total_kills": 24,
+      "fair": 30.5,
+      "fair_source": "pinnacle_manual",
+      "trigger": "1peel+flex",
+      "game_id": "116566854547769558",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-01",
+      "league": "LCS",
+      "map": 1,
+      "team_blue": "DIG",
+      "team_red": "C9",
+      "milio_side": "blue",
+      "milio_team": "DIG",
+      "opp_team": "C9",
+      "opp_sup": "Camille",
+      "sup_blue": "Milio",
+      "sup_red": "Camille",
+      "blue_picks": {
+        "adc": "Lucian",
+        "mid": "TwistedFate",
+        "top": "Gnar",
+        "jungle": "JarvanIV",
+        "support": "Milio"
+      },
+      "red_picks": {
+        "adc": "Ezreal",
+        "mid": "Ryze",
+        "top": "Corki",
+        "jungle": "LeeSin",
+        "support": "Camille"
+      },
+      "total_kills": 40,
+      "fair": 28.5,
+      "fair_source": "pinnacle_manual",
+      "trigger": null,
+      "game_id": "115564797163821204",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-02",
+      "league": "LPL",
+      "map": 2,
+      "team_blue": "TT",
+      "team_red": "WE",
+      "milio_side": "red",
+      "milio_team": "WE",
+      "opp_team": "TT",
+      "opp_sup": "Seraphine",
+      "sup_blue": "Seraphine",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "adc": "Ezreal",
+        "mid": "Annie",
+        "top": "Vayne",
+        "jungle": "XinZhao",
+        "support": "Seraphine"
+      },
+      "red_picks": {
+        "adc": "Lucian",
+        "mid": "TwistedFate",
+        "top": "Renekton",
+        "jungle": "Vi",
+        "support": "Milio"
+      },
+      "total_kills": 40,
+      "fair": 30.5,
+      "fair_source": "pinnacle_manual",
+      "trigger": "2peel",
+      "game_id": "116566854547769614",
       "src": "results.json"
     }
   ]
