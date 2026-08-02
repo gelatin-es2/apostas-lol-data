@@ -102,4 +102,15 @@ O combinado de 31/07: 2 reds Milio em 5 bets → volta 2u. O dado:
 
 ---
 
+## 6. Decisões Elvis (02/08, após o relatório)
+
+1. **Tripwire Milio** — pendente: Elvis pediu explicação do termo; dado novo do próprio dia reforça (TT×WE M2 tinha Milio+Seraphine no draft, 2peel, 40 kills, ladder red −R$4.366 → 3º mapa Milio red dos últimos 5). Recomendação COO mantida: volta 2u.
+2. **ML = discricionário, gestão do Elvis** ("ml isso deixa comigo") — regra "parar ML" de 30/07 revogada; tribunal para de cobrar; ML nunca conta como método (`is_method_bet=false`).
+3. **Pré-draft: flag era artefato de timing de API** ("nunca fiz 1 bet pre draft") — Elvis vê draft por fonte própria antes da API (memória de 30/07 já dizia isso; falha do rito foi não passar o contexto aos agentes). Sem regra nova; perdas nesses mapas = variância em entrada confirmada. Corrigir prompts de auditoria futuros.
+4. **Piso odd 1.80** — contexto do Elvis: odd ≥1.80 só existe uma linha ACIMA da que ele pega. Estudo linha+1 @1.84-1.90 vs linha atual @1.72-1.77 em andamento; decisão adiada pro resultado.
+5. **Over LEC sem Camille = tilt reconhecido** ("só chapei") — skip mantido como está, sem reformulação.
+6. **LCP: continuar normal** — número confirmado no dado cru a pedido dele (semana −R$4.587,08 em 15 slips; desde 25/07 −R$2.167,70 em 23). Elvis lê como variância; COO monitora semanalmente.
+
+**Dia 02/08 (madrugada):** 4 bets settled, tudo red −R$5.366,23 (TT×WE M2 40 kills ladder 3 pernas; DNS×BRO 20 kills Over red).
+
 *Gerado pelo rito de domingo. Relatórios-fonte dos 7 agentes na sessão de 02/08; dados intermediários no scratchpad da sessão.*
