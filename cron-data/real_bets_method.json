@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-02T13:04:40.384Z",
-  "total_bets_universe": 489,
-  "total_settled": 480,
+  "generated_at": "2026-08-03T14:19:04.811Z",
+  "total_bets_universe": 494,
+  "total_settled": 487,
   "method_rules": {
     "peel_pure": [
       "soraka",
@@ -29,13 +29,13 @@
   },
   "by_trigger": {
     "2peel": {
-      "n": 206,
-      "wins": 124,
-      "losses": 82,
-      "hit": 60.2,
-      "stake": 163799.53,
-      "profit": 14630.13,
-      "roi": 8.9,
+      "n": 208,
+      "wins": 125,
+      "losses": 83,
+      "hit": 60.1,
+      "stake": 165799.51,
+      "profit": 14417.15,
+      "roi": 8.7,
       "breakeven": 54.1
     },
     "1peel+flex": {
@@ -49,57 +49,57 @@
       "breakeven": 54.1
     },
     "method_total": {
-      "n": 253,
-      "wins": 150,
-      "losses": 103,
-      "hit": 59.3,
-      "stake": 198511.87,
-      "profit": 23617.66,
-      "roi": 11.9,
+      "n": 255,
+      "wins": 151,
+      "losses": 104,
+      "hit": 59.2,
+      "stake": 200511.85,
+      "profit": 23404.68,
+      "roi": 11.7,
       "breakeven": 54.1
     }
   },
   "discipline": {
     "following_method": {
-      "n": 253,
-      "wins": 150,
-      "losses": 103,
-      "hit": 59.3,
-      "stake": 198511.87,
-      "profit": 23617.66,
-      "roi": 11.9,
+      "n": 255,
+      "wins": 151,
+      "losses": 104,
+      "hit": 59.2,
+      "stake": 200511.85,
+      "profit": 23404.68,
+      "roi": 11.7,
       "breakeven": 54.1
     },
     "not_following_method": {
-      "n": 227,
-      "wins": 130,
+      "n": 232,
+      "wins": 135,
       "losses": 97,
-      "hit": 57.3,
-      "stake": 189737.5,
-      "profit": 11797.04,
-      "roi": 6.2,
+      "hit": 58.2,
+      "stake": 193941.72,
+      "profit": 15197.24,
+      "roi": 7.8,
       "breakeven": 54.1
     },
-    "diff_profit": 11820.62,
+    "diff_profit": 8207.44,
     "not_following_breakdown": {
       "under": {
-        "n": 138,
-        "wins": 77,
+        "n": 140,
+        "wins": 79,
         "losses": 61,
-        "hit": 55.8,
-        "stake": 108912.24,
-        "profit": 2121.7,
-        "roi": 1.9,
+        "hit": 56.4,
+        "stake": 110116.46,
+        "profit": 3106.9,
+        "roi": 2.8,
         "breakeven": 54.1
       },
       "over": {
-        "n": 71,
-        "wins": 47,
+        "n": 74,
+        "wins": 50,
         "losses": 24,
-        "hit": 66.2,
-        "stake": 67501.02,
-        "profit": 13032.65,
-        "roi": 19.3,
+        "hit": 67.6,
+        "stake": 70501.02,
+        "profit": 15447.65,
+        "roi": 21.9,
         "breakeven": 54.1
       },
       "moneyline": {
@@ -158,13 +158,13 @@
   },
   "by_league": {
     "LEC": {
-      "n": 37,
+      "n": 38,
       "wins": 18,
-      "losses": 19,
-      "hit": 48.6,
-      "stake": 18174.27,
-      "profit": -2731.06,
-      "roi": -15,
+      "losses": 20,
+      "hit": 47.4,
+      "stake": 19174.25,
+      "profit": -3731.04,
+      "roi": -19.5,
       "breakeven": 54.1
     },
     "LCK": {
@@ -178,13 +178,13 @@
       "breakeven": 54.1
     },
     "LPL": {
-      "n": 79,
-      "wins": 57,
+      "n": 80,
+      "wins": 58,
       "losses": 22,
-      "hit": 72.2,
-      "stake": 70405.28,
-      "profit": 11963.28,
-      "roi": 17,
+      "hit": 72.5,
+      "stake": 71405.28,
+      "profit": 12750.28,
+      "roi": 17.9,
       "breakeven": 54.1
     },
     "LFL": {
