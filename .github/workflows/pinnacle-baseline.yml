@@ -1,0 +1,59 @@
+name: Pinnacle odds — baseline
+
+# Captura pré-jogo de TODAS as séries de LoL listadas na Pinnacle, a cada 30min,
+# 24/7, gravando no Supabase (odds_timeline/closing_lines/capture_runs).
+# Minutos deslocados ('7,37') de propósito: o topo da hora é pico de fila do
+# scheduler do GitHub (fonte de skip/delay documentada).
+# Se há jogo em <120min ou live agora, dispara o pinnacle-live.yml (loop de 60s).
+# Análise: knowledge/reports/2026-08-04-analise-captura-pinnacle-24-7.md
+
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch: {}
+
+concurrency:
+  group: pinnacle-baseline
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: write   # p/ disparar o pinnacle-live.yml (workflow_dispatch é exceção
+                   # documentada à regra anti-recursão do GITHUB_TOKEN)
+
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # secrets só no env DESTE step (não no job): steps de actions de terceiros
+      # não têm por que enxergar a service role key
+      - name: Capture baseline
+        id: capture
+        env:
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          SUPABASE_URL: https://yxhpopkxlupdpqkdaffg.supabase.co
+          HEALTHCHECK_PING_URL: ${{ secrets.HEALTHCHECK_PING_URL }}
+        run: node .claude/scripts/capture_pinnacle_to_supabase.cjs --mode=baseline
+
+      # Só dispara se não há live collector rodando/na fila (evita fila no
+      # concurrency group). Runner idle é grátis em repo público, mas fila suja o log.
+      - name: Dispatch live collector
+        if: steps.capture.outputs.dispatch_live == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ACTIVE=$(gh api "repos/${{ github.repository }}/actions/workflows/pinnacle-live.yml/runs?status=in_progress" --jq '.total_count')
+          QUEUED=$(gh api "repos/${{ github.repository }}/actions/workflows/pinnacle-live.yml/runs?status=queued" --jq '.total_count')
+          if [ "$ACTIVE" = "0" ] && [ "$QUEUED" = "0" ]; then
+            echo "Disparando live collector..."
+            gh workflow run pinnacle-live.yml --ref "${{ github.ref_name }}"
+          else
+            echo "Live collector já ativo (in_progress=$ACTIVE queued=$QUEUED) — não disparando."
+          fi

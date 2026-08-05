@@ -1,0 +1,45 @@
+name: Pinnacle odds — watchdog
+
+# Sensor de coleta parada: lê o heartbeat (capture_runs) no Supabase.
+# Última execução >75min atrás (baseline é 30min, 24/7) = coleta parada:
+# redispara o baseline E termina em FAILURE de propósito — workflow failure
+# gera e-mail automático do GitHub = alerta grátis, zero infra.
+# Minuto 52 deslocado dos baselines (7,37) pra medir o slot mais recente.
+# Análise: knowledge/reports/2026-08-04-analise-captura-pinnacle-24-7.md
+
+on:
+  schedule:
+    - cron: '52 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # secrets só no env DESTE step (não no job) — ver pinnacle-baseline.yml
+      - name: Check heartbeat
+        id: check
+        env:
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          SUPABASE_URL: https://yxhpopkxlupdpqkdaffg.supabase.co
+        run: node .claude/scripts/watchdog_check.cjs
+
+      - name: Restart baseline (coleta parada)
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Coleta parada — redisparando baseline."
+          gh workflow run pinnacle-baseline.yml --ref "${{ github.ref_name }}"
+          # o job permanece em failure (step anterior) → e-mail do GitHub

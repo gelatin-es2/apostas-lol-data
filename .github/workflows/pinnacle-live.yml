@@ -1,0 +1,46 @@
+name: Pinnacle odds — live collector
+
+# Loop contínuo de 60s durante janela de jogos (start <45min ou live agora):
+# timeline de odds live (kills + ML série/mapa) direto no Supabase.
+# Job contínuo de propósito — imune ao jitter de 5-30min+ do scheduler do GitHub.
+# Sai sozinho após 30min sem jogo na janela; perto do limite de 6h/job, se ainda
+# há jogo, se redispara (encadeamento cobre janelas longas tipo LCK+LEC+LFL no
+# mesmo dia). Disparado pelo pinnacle-baseline.yml (ou manual via gh workflow run).
+# Análise: knowledge/reports/2026-08-04-analise-captura-pinnacle-24-7.md
+
+on:
+  workflow_dispatch: {}
+
+concurrency:
+  group: pinnacle-live
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: write   # p/ se redisparar perto do limite de 6h
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # secrets só no env DESTE step (não no job) — ver pinnacle-baseline.yml
+      - name: Live capture loop (60s)
+        id: capture
+        env:
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          SUPABASE_URL: https://yxhpopkxlupdpqkdaffg.supabase.co
+          HEALTHCHECK_PING_URL: ${{ secrets.HEALTHCHECK_PING_URL }}
+        run: node .claude/scripts/capture_pinnacle_to_supabase.cjs --mode=live --max-minutes=320
+
+      - name: Re-dispatch (janela ainda ativa no limite do job)
+        if: steps.capture.outputs.redispatch == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run pinnacle-live.yml --ref "${{ github.ref_name }}"
