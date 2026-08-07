@@ -805,6 +805,27 @@
       opacity: 0.85;
     }
 
+    /* Selo honesto do modo de atualização (Realtime x polling de segurança,
+       2026-08-07). Reflete o status real do canal Supabase Realtime — nunca
+       um estado fixo. Sem cor nova: --accent-glow/--accent-2 quando "ao vivo",
+       mesmo rgba neutro de .badge.void quando caiu pro polling. */
+    .whale-live-badge {
+      display: inline-block;
+      margin-left: 4px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--accent-glow);
+      color: var(--accent-2);
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .whale-live-badge.polling {
+      background: rgba(138,146,158,0.15);
+      color: var(--muted);
+    }
+
     /* ===== PARTE 6 — Mobile =====
        Fica por ÚLTIMO no stylesheet de propósito: regras de mesma especificidade
        (ex: .rank-grid, .kpis) definidas em blocos acima só vencem a cascata se
@@ -976,13 +997,14 @@
     </div>
   </main>
 
-  <!-- Vigia de Baleias (Polymarket) — 2026-08-07. Lê a tabela whale_signals no
-       mesmo Supabase, só leitura. Tem intervalo próprio de 20s (ver script, fim
-       do arquivo) em vez do load() geral de 60s, e só faz polling com a aba
-       ativa e a página visível. -->
+  <!-- Vigia de Baleias (Polymarket) — 2026-08-07, Realtime desde 2026-08-07 (tarde).
+       Lê a tabela whale_signals no mesmo Supabase, só leitura. Tenta Supabase Realtime
+       (push na hora) e usa polling só como rede de segurança (5s sem Realtime, 60s com
+       Realtime ativo) — ver script, fim do arquivo. Só roda com a aba ativa e a página
+       visível. -->
   <main class="container tab-pane" data-pane="baleias">
     <div class="section-title" style="margin-top:0">Vigia de baleias — Polymarket</div>
-    <div class="rank-note" style="margin:-6px 0 16px">Apostas grandes detectadas na Polymarket, mais recentes primeiro. Atualiza sozinho a cada 20s.</div>
+    <div class="rank-note" style="margin:-6px 0 16px">Apostas grandes detectadas na Polymarket, mais recentes primeiro. <span class="whale-live-badge polling" id="whaleLiveBadge">atualizando a cada 5s</span></div>
     <div class="chip-row" id="whaleGameChips">
       <span class="chip active" data-game="all">Todos</span>
       <span class="chip" data-game="LoL">LoL</span>
@@ -1584,7 +1606,9 @@
     // ===== Aba "Baleias" — estado próprio, isolado do resto do dashboard =====
     let whaleSignalsAll = [];   // últimos 100 sinais, cru, como vieram do banco
     let whaleGameFilter = 'all'; // 'all' | 'LoL' | 'Dota 2'
-    let whalePollTimer = null;
+    let whalePollTimer = null;       // rede de segurança: 5s sem Realtime, 60s com Realtime ativo
+    let whaleRealtimeChannel = null; // canal Supabase Realtime da aba, null quando não inscrita
+    let whaleRealtimeActive = false; // true só depois do canal confirmar status SUBSCRIBED
 
     // ── Filtro de PERÍODO — global, compartilhado (pedido do dono 2026-07-23) ──────
     // Afeta só a Planilha (resumo/KPIs/mês/dia/lista/off-método) — RODADA 5 removeu
@@ -3153,6 +3177,19 @@
       return whaleSignalsAll.filter((s) => (s.game || '').trim().toLowerCase() === whaleGameFilter.toLowerCase());
     }
 
+    // Upsert por signal_key — o mesmo sinal chega de novo por UPDATE conforme a
+    // baleia completa a aposta em mais ordens; tem que ATUALIZAR a linha, nunca
+    // duplicar card. Mantém o mesmo limite de 100 do polling (limit(100) do select).
+    function upsertWhaleSignal(row) {
+      if (!row || !row.signal_key) return;
+      const idx = whaleSignalsAll.findIndex((s) => s.signal_key === row.signal_key);
+      if (idx === -1) whaleSignalsAll.unshift(row);
+      else whaleSignalsAll[idx] = row;
+      whaleSignalsAll.sort((a, b) => new Date(b.last_ts || 0) - new Date(a.last_ts || 0));
+      if (whaleSignalsAll.length > 100) whaleSignalsAll.length = 100;
+      renderWhaleSignals();
+    }
+
     function renderWhaleSignals() {
       const filtered = whaleFilteredSignals();
       const countEl = document.getElementById('whaleCount');
@@ -3209,15 +3246,82 @@
       });
     });
 
-    // Polling próprio (20s, não os 60s do load() geral) — só roda com a aba
-    // "Baleias" ativa e a página visível, pra não gastar request à toa.
+    // Selo do cabeçalho — reflete o status REAL do canal, nunca um texto fixo.
+    function setWhaleLiveBadge(active) {
+      const el = document.getElementById('whaleLiveBadge');
+      if (!el) return;
+      el.textContent = active ? '● ao vivo' : 'atualizando a cada 5s';
+      el.classList.toggle('polling', !active);
+    }
+
+    // Rede de segurança contra mensagem perdida: 5s enquanto o Realtime não
+    // confirmou (ou falhou), 60s quando ele já está ativo — a maior parte do
+    // trabalho de "avisar rápido" passa a ser do push, não do polling.
+    function restartWhaleSafetyPoll(intervalMs) {
+      if (whalePollTimer) clearInterval(whalePollTimer);
+      whalePollTimer = setInterval(loadWhaleSignals, intervalMs);
+    }
+
+    // Assina INSERT+UPDATE de whale_signals via Supabase Realtime. O banco pode
+    // ainda não ter a tabela na publication (`alter publication supabase_realtime
+    // add table whale_signals` — comando que o dono roda à parte): nesse caso o
+    // canal não entrega status SUBSCRIBED (fica CHANNEL_ERROR/TIMED_OUT/CLOSED) e
+    // o código cai pro polling rápido sozinho, sem console.error feio.
+    function startWhaleRealtime() {
+      if (whaleRealtimeChannel) return; // já inscrita — nunca duplica canal
+      whaleRealtimeChannel = sb.channel('whale-signals')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'whale_signals' }, (payload) => {
+          // Chegou evento de verdade: agora sim está provado que o push funciona.
+          // Só aqui o selo pode dizer "ao vivo" e o polling pode afrouxar pra 60s.
+          if (!whaleRealtimeActive) {
+            whaleRealtimeActive = true;
+            setWhaleLiveBadge(true);
+            restartWhaleSafetyPoll(60_000);
+          }
+          if (payload.eventType === 'INSERT' || payload.eventType === 'UPDATE') {
+            upsertWhaleSignal(payload.new);
+          }
+          // DELETE não é usado pelo produto (a tabela não expõe apagar pro site) — ignorado.
+        })
+        .subscribe((status) => {
+          // ATENÇÃO: 'SUBSCRIBED' só diz que o websocket conectou — NÃO que o banco
+          // publica mudanças desta tabela. Medido em 07/08: com a tabela fora da
+          // publication, o servidor confirma a inscrição e mesmo assim nenhum evento
+          // chega. Por isso o selo NÃO vira "ao vivo" aqui, e o polling rápido não
+          // afrouxa: quem promove é a chegada do primeiro evento de verdade, no
+          // callback do postgres_changes acima (que aí sim liga whaleRealtimeActive).
+          if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT' || status === 'CLOSED') {
+            whaleRealtimeActive = false;
+            setWhaleLiveBadge(false);
+            restartWhaleSafetyPoll(5_000);
+          }
+        });
+    }
+    function stopWhaleRealtime() {
+      if (whaleRealtimeChannel) {
+        sb.removeChannel(whaleRealtimeChannel);
+        whaleRealtimeChannel = null;
+      }
+      whaleRealtimeActive = false;
+    }
+
+    // Ponto de entrada da aba — chamado ao abrir "Baleias" e ao voltar de
+    // document.hidden. Carrega uma vez na hora, assume polling rápido (5s) como
+    // ponto de partida honesto e tenta o Realtime em paralelo; se ele confirmar,
+    // o próprio startWhaleRealtime() afrouxa o polling pra 60s e troca o selo.
     function startWhalePolling() {
       stopWhalePolling();
       loadWhaleSignals();
-      whalePollTimer = setInterval(loadWhaleSignals, 20_000);
+      setWhaleLiveBadge(false);
+      restartWhaleSafetyPoll(5_000);
+      startWhaleRealtime();
     }
+    // Desliga tudo: cancela o timer de segurança E desinscreve o canal —
+    // testado especificamente pra não acumular nem canal nem timer ao alternar
+    // de aba repetidas vezes (entra/sai 10x = no máx 1 canal vivo por vez).
     function stopWhalePolling() {
       if (whalePollTimer) { clearInterval(whalePollTimer); whalePollTimer = null; }
+      stopWhaleRealtime();
     }
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
