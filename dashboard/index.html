@@ -793,6 +793,18 @@
       font-variant-numeric: tabular-nums;
     }
 
+    /* ===== Aba "Baleias" (Vigia Polymarket, 2026-08-07) =====
+       Reusa .bet/.head/.teams/.market/.meta/.chip — só isso aqui é novo: o card
+       de saída de posição precisa ficar visualmente secundário (sem competir com
+       as entradas), e a paleta é grafite neutra (sem cor nova) — então "apagado"
+       vem só de opacidade, igual ao padrão já usado em .bet-off. */
+    .bet.whale-exit {
+      opacity: 0.55;
+    }
+    .bet.whale-exit:hover {
+      opacity: 0.85;
+    }
+
     /* ===== PARTE 6 — Mobile =====
        Fica por ÚLTIMO no stylesheet de propósito: regras de mesma especificidade
        (ex: .rank-grid, .kpis) definidas em blocos acima só vencem a cascata se
@@ -822,6 +834,7 @@
   <nav class="tabs">
     <div class="tab active" data-tab="hoje">Hoje</div>
     <div class="tab" data-tab="tracker">Planilha</div>
+    <div class="tab" data-tab="baleias">Baleias</div>
     <div class="tab" data-tab="milio">Milio</div>
     <div class="tab" data-tab="camille">Camille</div>
     <div class="tab" data-tab="pyke">Pyke</div>
@@ -960,6 +973,24 @@
       <div class="section-title">Bets fora do método</div>
       <div id="offMethodKpis" class="kpis" style="margin-bottom:12px"></div>
       <div id="offMethodBets" class="bets"></div>
+    </div>
+  </main>
+
+  <!-- Vigia de Baleias (Polymarket) — 2026-08-07. Lê a tabela whale_signals no
+       mesmo Supabase, só leitura. Tem intervalo próprio de 20s (ver script, fim
+       do arquivo) em vez do load() geral de 60s, e só faz polling com a aba
+       ativa e a página visível. -->
+  <main class="container tab-pane" data-pane="baleias">
+    <div class="section-title" style="margin-top:0">Vigia de baleias — Polymarket</div>
+    <div class="rank-note" style="margin:-6px 0 16px">Apostas grandes detectadas na Polymarket, mais recentes primeiro. Atualiza sozinho a cada 20s.</div>
+    <div class="chip-row" id="whaleGameChips">
+      <span class="chip active" data-game="all">Todos</span>
+      <span class="chip" data-game="LoL">LoL</span>
+      <span class="chip" data-game="Dota 2">Dota 2</span>
+    </div>
+    <div class="rank-note" id="whaleCount"></div>
+    <div id="whaleSignals" class="bets">
+      <div class="loading">Carregando sinais</div>
     </div>
   </main>
 
@@ -1549,6 +1580,11 @@
     let currentMonthFilter = null; // 'YYYY-MM' ou null
     let trkTriggerFilter = 'all';
     let trkLeagueFilter = 'all';
+
+    // ===== Aba "Baleias" — estado próprio, isolado do resto do dashboard =====
+    let whaleSignalsAll = [];   // últimos 100 sinais, cru, como vieram do banco
+    let whaleGameFilter = 'all'; // 'all' | 'LoL' | 'Dota 2'
+    let whalePollTimer = null;
 
     // ── Filtro de PERÍODO — global, compartilhado (pedido do dono 2026-07-23) ──────
     // Afeta só a Planilha (resumo/KPIs/mês/dia/lista/off-método) — RODADA 5 removeu
@@ -2545,6 +2581,23 @@
       const kpiEl = document.getElementById('offMethodKpis');
       if (!el || !kpiEl) return;
 
+      // Mesmo filtro de mês/dia aplicado em renderBetsWithToggle (bug 2026-08-06:
+      // este bloco ignorava currentMonthFilter/currentDayFilter e sempre mostrava
+      // tudo, mesmo com um dia específico selecionado no card "Por dia").
+      offBets = offBets || [];
+      if (currentMonthFilter) {
+        offBets = offBets.filter((b) => {
+          const dt = b.bet_datetime || b.created_at;
+          return dt && dayKeyBRT(dt).slice(0, 7) === currentMonthFilter;
+        });
+      }
+      if (currentDayFilter) {
+        offBets = offBets.filter((b) => {
+          const dt = b.bet_datetime || b.created_at;
+          return dt && dayKeyBRT(dt) === currentDayFilter;
+        });
+      }
+
       if (!offBets || !offBets.length) {
         kpiEl.innerHTML = '';
         el.innerHTML = '<div class="empty">Nenhuma bet fora do método.</div>';
@@ -2999,6 +3052,10 @@
         document.querySelectorAll('.tab-pane').forEach((p) => {
           p.classList.toggle('active', p.dataset.pane === target);
         });
+        // Aba "Baleias" tem intervalo próprio de 20s — só roda enquanto ela
+        // está visível, então liga/desliga o polling junto da troca de aba.
+        if (target === 'baleias') startWhalePolling();
+        else stopWhalePolling();
       });
     });
 
@@ -3043,6 +3100,132 @@
     // "Split 1 + First Stand" foram removidas por completo (markup + CSS órfão +
     // JS + fetch) — ver METHOD_TABS acima pelas 6 abas de sub-método que as
     // substituem. loadMethodByLeague() (acima) continua servindo a Planilha.
+
+    // ===== Aba "Baleias" (Vigia Polymarket, 2026-08-07) =====
+    // Lê whale_signals no mesmo Supabase (só SELECT, RLS já garante isso do lado
+    // do banco). A tabela pode ainda não existir (dono precisa rodar o SQL) — o
+    // erro do supabase-js nesse caso (42P01 / PGRST205, "does not exist" /
+    // "schema cache") é tratado como estado vazio normal, sem console feio e sem
+    // derrubar o resto do dashboard (nunca é chamado dentro do try/catch de
+    // render() porque roda no seu próprio ciclo — ver startWhalePolling).
+    const fmtOddBR = (n) => (Number(n) || 0).toFixed(2).replace('.', ',');
+
+    function whaleCardHtml(s) {
+      const isExit = s.position_kind === 'exit';
+      const oddLabel = s.mixed_prices ? 'odd média' : 'odd';
+      const oddValue = fmtOddBR(s.odd);
+      const rangeText = (s.mixed_prices && s.price_min != null && s.price_max != null)
+        ? ` (faixa ${fmtOddBR(s.price_min)}–${fmtOddBR(s.price_max)})`
+        : '';
+      const fillText = (s.fill_count || 1) > 1 ? ` · ${s.fill_count} ordens` : '';
+      const teamsLine = (s.team_a && s.team_b)
+        ? `${escHtml(s.team_a)} <span style="color:var(--muted);font-weight:500">vs</span> ${escHtml(s.team_b)}`
+        : '';
+      const stakeText = s.stake_usd != null ? `US$ ${fmtMoney(s.stake_usd)}` : '—';
+      const returnText = s.potential_return != null ? `US$ ${fmtMoney(s.potential_return)}` : '—';
+
+      return `
+        <div class="bet${isExit ? ' whale-exit' : ''}">
+          <div>
+            <div class="head">
+              <span class="teams">${escHtml(s.whale_name || 'baleia')}</span>
+              ${s.game ? `<span class="league">· ${escHtml(s.game)}</span>` : ''}
+              ${isExit ? '<span class="badge void">saída de posição</span>' : ''}
+            </div>
+            ${teamsLine ? `<div class="market" style="font-weight:600">${teamsLine}</div>` : ''}
+            <div class="market">
+              ${escHtml(s.market_label || 'mercado')} → <strong>${escHtml(s.pick_team || '?')}</strong>
+            </div>
+            <div class="meta">
+              ${fmtDate(s.last_ts)} · ${oddLabel} ${oddValue}${rangeText}${fillText}
+            </div>
+          </div>
+          <div class="right">
+            <div class="profit muted">${stakeText}</div>
+            <div class="meta">retorno pot. ${returnText}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function whaleFilteredSignals() {
+      if (whaleGameFilter === 'all') return whaleSignalsAll;
+      return whaleSignalsAll.filter((s) => (s.game || '').trim().toLowerCase() === whaleGameFilter.toLowerCase());
+    }
+
+    function renderWhaleSignals() {
+      const filtered = whaleFilteredSignals();
+      const countEl = document.getElementById('whaleCount');
+      if (countEl) {
+        countEl.textContent = !whaleSignalsAll.length ? '' :
+          (filtered.length === whaleSignalsAll.length
+            ? `${filtered.length} ${filtered.length === 1 ? 'sinal' : 'sinais'}`
+            : `${filtered.length} de ${whaleSignalsAll.length} sinais`);
+      }
+      const el = document.getElementById('whaleSignals');
+      if (!el) return;
+      if (!whaleSignalsAll.length) {
+        el.innerHTML = '<div class="empty">Ainda não há sinais — o vigia começa a publicar assim que estiver ligado.</div>';
+        return;
+      }
+      if (!filtered.length) {
+        el.innerHTML = '<div class="empty">Nenhum sinal nesse jogo ainda.</div>';
+        return;
+      }
+      el.innerHTML = filtered.map(whaleCardHtml).join('');
+    }
+
+    async function loadWhaleSignals() {
+      try {
+        const { data, error } = await sb
+          .from('whale_signals')
+          .select('*')
+          .order('last_ts', { ascending: false })
+          .limit(100);
+        if (error) {
+          // Tabela ainda não existe no banco (dono não rodou o SQL) — estado vazio
+          // calmo, não um erro. Só loga se for algo além disso (rede, RLS, etc).
+          const missingTable = error.code === '42P01' || /does not exist|schema cache/i.test(error.message || '');
+          if (!missingTable) console.warn('whale_signals:', error.message);
+          whaleSignalsAll = [];
+          renderWhaleSignals();
+          return;
+        }
+        whaleSignalsAll = data || [];
+        renderWhaleSignals();
+      } catch (e) {
+        console.warn('whale_signals fetch falhou:', e);
+        whaleSignalsAll = [];
+        renderWhaleSignals();
+      }
+    }
+
+    document.querySelectorAll('#whaleGameChips .chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('#whaleGameChips .chip').forEach((c) => c.classList.remove('active'));
+        chip.classList.add('active');
+        whaleGameFilter = chip.dataset.game;
+        renderWhaleSignals();
+      });
+    });
+
+    // Polling próprio (20s, não os 60s do load() geral) — só roda com a aba
+    // "Baleias" ativa e a página visível, pra não gastar request à toa.
+    function startWhalePolling() {
+      stopWhalePolling();
+      loadWhaleSignals();
+      whalePollTimer = setInterval(loadWhaleSignals, 20_000);
+    }
+    function stopWhalePolling() {
+      if (whalePollTimer) { clearInterval(whalePollTimer); whalePollTimer = null; }
+    }
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopWhalePolling();
+      } else if (document.querySelector('.tab[data-tab="baleias"]')?.classList.contains('active')) {
+        startWhalePolling();
+      }
+    });
 
   </script>
 </body>
