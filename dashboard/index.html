@@ -1669,21 +1669,40 @@
       return v;
     }
 
+    // Busca TODAS as linhas de uma query em blocos de 1000 via .range().
+    // Por quê: o Supabase corta cada request em 1000 linhas (max-rows), e o antigo
+    // .limit(500) fazia os totais mentirem EM SILÊNCIO quando o banco passasse de
+    // 500 bets. Paginar até a página vir incompleta garante que nada fica de fora.
+    // ATENÇÃO: a query passada aqui PRECISA de ordenação determinística (empate no
+    // order = linha pode duplicar/sumir entre páginas). Por isso as queries abaixo
+    // desempatam por id — várias bets compartilham o mesmo bet_datetime (ladder).
+    async function fetchAll(makeQuery) {
+      const PAGE = 1000;
+      const all = [];
+      for (let from = 0; ; from += PAGE) {
+        const { data, error } = await makeQuery().range(from, from + PAGE - 1);
+        if (error) return { data: all, error };
+        all.push(...(data || []));
+        if (!data || data.length < PAGE) break; // página incompleta = acabou
+      }
+      return { data: all, error: null };
+    }
+
     async function load() {
-      // Busca método e off-método em paralelo
+      // Busca método e off-método em paralelo (cada uma paginada por completo)
       const [{ data: methodData, error: methodErr }, { data: offData, error: offErr }] = await Promise.all([
-        sb.from('bets')
+        fetchAll(() => sb.from('bets')
           .select('*')
           .neq('bookmaker', 'SIMULATED')
           .eq('is_method_bet', true)
           .order('bet_datetime', { ascending: false })
-          .limit(500),
-        sb.from('bets')
+          .order('id', { ascending: false })),
+        fetchAll(() => sb.from('bets')
           .select('*')
           .neq('bookmaker', 'SIMULATED')
           .eq('is_method_bet', false)
           .order('bet_datetime', { ascending: false })
-          .limit(500),
+          .order('id', { ascending: false })),
       ]);
 
       if (methodErr) {
