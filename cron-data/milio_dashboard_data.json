@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-08-07T12:43:33.501Z",
+  "generated_at": "2026-08-08T12:34:15.092Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
     "2026-08-07"
   ],
-  "milio_count": 154,
-  "games_with_full_picks": 117,
-  "baseline_under_hit_pct": 68.8,
+  "milio_count": 155,
+  "games_with_full_picks": 118,
+  "baseline_under_hit_pct": 69,
   "by_league": {
     "LPL": 64,
     "LCK": 41,
     "LEC": 16,
-    "CBLOL": 16,
+    "CBLOL": 17,
     "LCS": 13,
     "LFL": 4
   },
@@ -4819,6 +4819,39 @@
       "fair_source": "formula(team+team)/2",
       "trigger": "1peel+flex",
       "game_id": "116566854547769637",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-07",
+      "league": "CBLOL",
+      "map": 3,
+      "team_blue": "VKS",
+      "team_red": "FX",
+      "milio_side": "red",
+      "milio_team": "FX",
+      "opp_team": "VKS",
+      "opp_sup": "Karma",
+      "sup_blue": "Karma",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "adc": "Caitlyn",
+        "mid": "Aurora",
+        "top": "Gnar",
+        "jungle": "MonkeyKing",
+        "support": "Karma"
+      },
+      "red_picks": {
+        "adc": "Lucian",
+        "mid": "Ahri",
+        "top": "Olaf",
+        "jungle": "Maokai",
+        "support": "Milio"
+      },
+      "total_kills": 14,
+      "fair": 23.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": "2peel",
+      "game_id": "115565671526403044",
       "src": "results.json"
     }
   ]
