@@ -1,0 +1,64 @@
+{
+  "date": "2026-08-10",
+  "captures": [
+    {
+      "captured_at": "2026-08-10T12:43:57.404Z",
+      "ligas": [
+        "LCK",
+        "LPL"
+      ],
+      "fair_lines": []
+    },
+    {
+      "captured_at": "2026-08-10T12:43:57.947Z",
+      "ligas": [
+        "LEC",
+        "CBLOL"
+      ],
+      "fair_lines": [
+        {
+          "league": "LEC",
+          "league_id": "98767991302996019",
+          "event_id": "115548681803406187",
+          "start_time": "2026-08-10T15:00:00Z",
+          "team_a": "VIT",
+          "team_b": "SK",
+          "team_a_avg": null,
+          "team_b_avg": null,
+          "fair_formula": null,
+          "fair_pinnacle": null,
+          "fair_source": "unavailable",
+          "bo": 3
+        },
+        {
+          "league": "LEC",
+          "league_id": "98767991302996019",
+          "event_id": "115548681803406175",
+          "start_time": "2026-08-10T17:15:00Z",
+          "team_a": "NAVI",
+          "team_b": "G2",
+          "team_a_avg": null,
+          "team_b_avg": null,
+          "fair_formula": null,
+          "fair_pinnacle": null,
+          "fair_source": "unavailable",
+          "bo": 3
+        },
+        {
+          "league": "CBLOL",
+          "league_id": "98767991332355509",
+          "event_id": "115565671526403045",
+          "start_time": "2026-08-10T21:00:00Z",
+          "team_a": "LEV",
+          "team_b": "RED",
+          "team_a_avg": null,
+          "team_b_avg": null,
+          "fair_formula": null,
+          "fair_pinnacle": null,
+          "fair_source": "unavailable",
+          "bo": 3
+        }
+      ]
+    }
+  ]
+}
