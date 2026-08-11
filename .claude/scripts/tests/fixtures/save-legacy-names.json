@@ -1,0 +1,19 @@
+{
+  "bookmaker": "Pinnacle",
+  "league": "LCK",
+  "team_a": "T1",
+  "team_b": "GEN",
+  "market": "Total Kills",
+  "pick": "Under 27.5",
+  "odd": 1.85,
+  "stake": 500,
+  "bet_datetime": "2027-01-15T07:40:00Z",
+  "raw_extraction": {
+    "bookmaker_native": { "bet_id": "123", "raw_pick_text": "Under 27.5", "raw_stake_text": "BRL 500.00" },
+    "match_context": {
+      "lolesports_match_id": "115548128962971919",
+      "startTime": "2027-01-15T08:00:00Z",
+      "leagueShort": "LCK"
+    }
+  }
+}

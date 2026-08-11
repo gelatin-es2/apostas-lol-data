@@ -1,0 +1,38 @@
+{
+  "bookmaker": "EstrelaBet",
+  "league": "LCK",
+  "team_a": "T1",
+  "team_b": "GEN",
+  "market": "Total de Abates",
+  "pick": "Menos de 27,5 — decisão do capitão José",
+  "odd": 1.72,
+  "stake": 1000,
+  "bet_datetime": "2027-01-15T07:40:00Z",
+  "is_map_bet": true,
+  "map_number": 1,
+  "screenshot_path": null,
+  "notes": "fixture UTF-8 com acentuação: ação, coração, Fênix, Grün",
+  "raw_extraction": {
+    "bookmaker_native": {
+      "bet_id": "4911527990",
+      "raw_pick_text": "Menos de 27,5",
+      "raw_stake_text": "R$1.000,00"
+    },
+    "match_context": {
+      "schema_version": 1,
+      "lolesports_match_id": "115548128962971919",
+      "league_short": "LCK",
+      "league_id": "98767991310872058",
+      "start_time": "2027-01-15T08:00:00Z",
+      "state": "unstarted",
+      "teams": [
+        { "code": "T1", "name": "T1" },
+        { "code": "GEN", "name": "Gen.G" }
+      ],
+      "selection_reason": "starting_soon",
+      "selection_source": "lolesports_schedule",
+      "selection_confidence": "high",
+      "ambiguous": false
+    }
+  }
+}

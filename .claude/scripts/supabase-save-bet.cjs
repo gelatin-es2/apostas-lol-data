@@ -1,17 +1,44 @@
-// Salva uma bet no Supabase (POST em /rest/v1/bets).
-// Uso: echo '<json>' | node supabase-save-bet.cjs
-//   ou: node supabase-save-bet.cjs <path-to-json-file>
-// Output: JSON da row criada (incluindo id gerado pelo Supabase)
+// Salva UMA bet no Supabase (POST em /rest/v1/bets). Nunca update/delete.
 //
-// Campos esperados no JSON de input (todos opcionais exceto bookmaker, team_a/b, market, pick, odd, stake):
-//   bookmaker, league, team_a, team_b, market, pick, odd, stake,
-//   bet_datetime, is_map_bet, map_number, status (default 'pending'),
-//   pandascore_match_id, screenshot_path, raw_extraction (objeto), notes
+// Uso:
+//   node supabase-save-bet.cjs <path-to-json-file>            → valida + insere 1 row
+//   node supabase-save-bet.cjs --validate-only <path>          → valida e mostra payload; ZERO rede,
+//                                                                ZERO leitura de credencial
+//   echo '<json>' | node supabase-save-bet.cjs                 → stdin (legado; preferir arquivo
+//                                                                gravado em UTF-8 via Node/Write tool)
+//
+// Output: JSON em stdout.
+//   sucesso insert:   { ok: true, id, row }
+//   validate-only:    { ok: true, validate_only: true, warnings: [...], would_insert: {...} }
+//   erro:             { ok: false, error } (+ exit code)
+//
+// Exit codes:
+//   1 = validação genérica (campo faltando, tipo errado, bookmaker inválido, input ilegível)
+//   2 = bet_datetime fora da janela [start_time - 24h, start_time + 12h]
+//   3 = ambiguidade não resolvida (match_context.ambiguous=true sem escolha explícita do usuário)
+//   4 = violação de contrato (nomes antigos tipo startTime, schema_version ausente/desconhecida,
+//       match_id ausente sem match_id_exception válida)
+//   5 = fair guard (Fase 3, 2026-08-11): fair do dia operacional ausente/inválida/de outro dia.
+//       Só no modo REAL (--validate-only não exige fair). Ver lib/fair-guard.cjs.
+//
+// ─── CONTRATO v1 do payload (Fase 2 runbook 2026-08-11) ─────────────────────
+// Campos obrigatórios: bookmaker, team_a, team_b, market, pick, odd, stake, bet_datetime.
+// raw_extraction.match_context (quando o match foi resolvido pelo finder) DEVE ter:
+//   { "schema_version": 1, "lolesports_match_id": "...", "start_time": "...Z",
+//     "league_short": "...", "league_id": "...", "teams": [...],
+//     "selection_reason": "...", "ambiguous": false }
+// Se ambiguous=true, write só é aceito com escolha explícita do usuário:
+//   "ambiguity_resolution": { "chosen_by": "user", "chosen_match_id": "<igual ao lolesports_match_id>" }
+// Se NÃO há lolesports_match_id (única exceção de negócio aprovada: EWC/qualifier),
+// o payload precisa carregar exceção auditável:
+//   raw_extraction.match_id_exception = { "reason": "<texto>", "case": "ewc_qualifier" }
+// O bypass antigo ALLOW_MISSING_MATCH_ID=1 foi REMOVIDO e agora é erro.
+//
+// Janela temporal canônica do pipeline: bet_datetime ∈ [start_time - 24h, start_time + 12h].
 
 const fs = require('fs');
 const https = require('https');
 const path = require('path');
-const { loadConfig } = require('./_load-config.cjs');
 const { loadFairPinnacle } = require('../../lib/loadFairPinnacle.cjs');
 
 // ─── Normalização de nomes de time ──────────────────────────────────────────
@@ -29,62 +56,47 @@ try {
 }
 
 /**
- * normalizeTeam: resolve alias → canônico.
- * Regras (em ordem):
- *  1. nome está em isolated_real_teams → retorna original (academy/sub-roster, não toca)
- *  2. nome está em aliases → retorna canônico
- *  3. caso contrário → retorna original e loga aviso (audit trail)
- */
-/**
  * normalizeLeague: converte formatos EWC fora-padrão pro canônico EWC-LCK/LEC/LPL.
  * Causa: bookmakers usam "EWC SK Qualifier", "EWC_SK_QUAL", "Esports World Cup Korea Q" etc.
- * Sem normalização, hook check-pending-bets (que filtra `/^EWC[-_ ]/`) pode pegar errado e
- * settle script só ignora EWC se prefix bate. Bet fica pending forever silencioso.
  */
 function normalizeLeague(league) {
   if (!league) return league;
   const l = String(league).trim();
-  // Detecta variantes EWC e mapeia região → canônico
-  // Padrões: EWC-X, EWC_X, EWC X, "Esports World Cup X"
   const m = l.match(/^(?:EWC[-_\s]+|Esports\s*World\s*Cup[-_\s]+)(.+)$/i);
   if (m) {
     const region = m[1].toLowerCase().replace(/[\s_-]/g, '');
-    // Korea / SK / Korean / LCK
     if (/^(sk|korea|korean|lck|kr|skquali|skqual|koreaquali)/i.test(region)) return 'EWC-LCK';
-    // EMEA / LEC / Europe
     if (/^(emea|eu|europe|european|lec|emeaquali)/i.test(region)) return 'EWC-LEC';
-    // China / LPL / Chinese
     if (/^(china|chinese|lpl|cn|chinaquali|lplquali)/i.test(region)) return 'EWC-LPL';
-    // NA / LCS / Americas
     if (/^(na|americas|lcs|northamerica)/i.test(region)) return 'EWC-LCS';
-    // APAC / Asia-Pacific
     if (/^(apac|asiapacific|asiapac)/i.test(region)) return 'EWC-APAC';
-    // SA / South America / Brazil / CBLOL
     if (/^(sa|southamerica|brazil|cblol|brasil)/i.test(region)) return 'EWC-CBLOL';
-    // Default: prefix EWC- + região original
     console.error(`[NORM-LEAGUE] EWC variant não-mapeada: "${league}" → mantendo com prefix EWC-`);
     return 'EWC-' + region.toUpperCase();
   }
   return l;
 }
 
+/**
+ * normalizeTeam: resolve alias → canônico.
+ *  1. isolated_real_teams → retorna original (academy/sub-roster, não toca)
+ *  2. aliases → canônico
+ *  3. desconhecido → original + aviso (audit trail)
+ */
 function normalizeTeam(name) {
   if (!name || !TEAM_ALIASES) return name;
-  // Regra 1: isolated (ex: Karmine Corp Blue, Vitality.Bee) — nunca unificar
   if (ISOLATED_TEAMS.has(name)) return name;
-  // Regra 2: alias map
   if (TEAM_ALIASES[name]) {
     if (TEAM_ALIASES[name] !== name) {
       console.error(`[NORM] ${name} → ${TEAM_ALIASES[name]}`);
     }
     return TEAM_ALIASES[name];
   }
-  // Regra 3: nome desconhecido — loga pra audit trail, salva original
   console.error(`[AVISO] time não encontrado no alias_map: "${name}". Salvando original. Considere adicionar em lib/team-aliases.json.`);
   return name;
 }
 
-const REQUIRED = ['bookmaker', 'team_a', 'team_b', 'market', 'pick', 'odd', 'stake'];
+const REQUIRED = ['bookmaker', 'team_a', 'team_b', 'market', 'pick', 'odd', 'stake', 'bet_datetime'];
 
 // Lista canônica de bookmakers (lowercase). Qualquer valor fora dessa lista é rejeitado.
 // Sincronizar com normalize-bookmakers.cjs quando adicionar nova casa.
@@ -93,14 +105,242 @@ const VALID_BOOKMAKERS = [
   'thunderpick', 'novibet', 'polymarket', 'simulated',
 ];
 
-// Flag de bypass pra casos legítimos (ex: teste, casa nova ainda não na lista).
+// Flag de bypass pra casas novas ainda não cadastradas (ex: Whale.io em teste).
 // Uso: ALLOW_UNKNOWN_BOOKMAKER=1 node supabase-save-bet.cjs <file>
 const ALLOW_UNKNOWN_BOOKMAKER = process.env.ALLOW_UNKNOWN_BOOKMAKER === '1';
 
-// Flag de bypass pra bets sem lolesports_match_id (ex: EWC, ligas não cobertas).
-// Uso: ALLOW_MISSING_MATCH_ID=1 node supabase-save-bet.cjs <file>
-const ALLOW_MISSING_MATCH_ID = process.env.ALLOW_MISSING_MATCH_ID === '1';
+// Única exceção de negócio aprovada pra bet sem lolesports_match_id.
+const VALID_MATCH_ID_EXCEPTION_CASES = ['ewc_qualifier'];
 
+// Versão máxima de contrato que este save entende.
+const SUPPORTED_SCHEMA_VERSION = 1;
+
+// Janela canônica bet_datetime vs start_time (horas).
+const WINDOW_BEFORE_H = -24;
+const WINDOW_AFTER_H = 12;
+
+class ValidationError extends Error {
+  constructor(message, exitCode) {
+    super(message);
+    this.exitCode = exitCode || 1;
+  }
+}
+
+// ─── Decodificação do input (UTF-8 confiável) ───────────────────────────────
+// Aceita: UTF-8 puro, UTF-8 com BOM (BOM removido, com warning).
+// Rejeita com explicação: UTF-16 LE/BE (com ou sem BOM) — típico de
+// `Set-Content` sem -Encoding no PowerShell 5.1. O gravador correto é a Write
+// tool do Claude ou Node fs.writeFileSync (ambos UTF-8 sem BOM).
+function decodeInput(buf) {
+  const warnings = [];
+  if (buf.length >= 2 && ((buf[0] === 0xFF && buf[1] === 0xFE) || (buf[0] === 0xFE && buf[1] === 0xFF))) {
+    throw new ValidationError(
+      'Input em UTF-16 (BOM FF FE / FE FF detectado). Provável Set-Content sem -Encoding utf8. ' +
+      'Regrave o JSON em UTF-8 sem BOM (Write tool do Claude ou Node fs.writeFileSync).', 1);
+  }
+  let start = 0;
+  if (buf.length >= 3 && buf[0] === 0xEF && buf[1] === 0xBB && buf[2] === 0xBF) {
+    start = 3;
+    warnings.push('BOM UTF-8 removido do input (tolerado; preferir UTF-8 sem BOM).');
+  }
+  const text = buf.slice(start).toString('utf8');
+  // UTF-16 sem BOM: JSON legítimo não tem byte NUL.
+  if (text.includes(String.fromCharCode(0))) {
+    throw new ValidationError(
+      'Input contém bytes NUL — provável UTF-16 sem BOM. Regrave o JSON em UTF-8.', 1);
+  }
+  return { text, warnings };
+}
+
+// ─── Validação + normalização (pura, sem rede) ─────────────────────────────
+// Retorna { bet, warnings }. Lança ValidationError em qualquer violação.
+function validateAndNormalize(inputRaw, opts = {}) {
+  const warnings = opts.warnings ? [...opts.warnings] : [];
+
+  let bet;
+  try { bet = JSON.parse(inputRaw); }
+  catch (e) { throw new ValidationError(`Input não é JSON válido: ${e.message}`, 1); }
+
+  if (bet === null || typeof bet !== 'object' || Array.isArray(bet)) {
+    throw new ValidationError('Payload deve ser UM objeto JSON (não array/escalar). Uma aprovação = exatamente um insert.', 1);
+  }
+  if (bet.id !== undefined) {
+    throw new ValidationError('Payload contém "id". Este script só INSERE bet nova — nunca update. Remova o campo.', 1);
+  }
+
+  // Rejeição clara do contrato antigo (nomes camelCase / campos pré-v1).
+  const mc = bet.raw_extraction?.match_context;
+  const legacyHits = [];
+  if (bet.startTime !== undefined) legacyHits.push('startTime (top-level)');
+  if (mc && typeof mc === 'object') {
+    for (const k of ['startTime', 'selectedReason', 'matchId', 'leagueShort']) {
+      if (mc[k] !== undefined) legacyHits.push(`match_context.${k}`);
+    }
+  }
+  if (bet.all !== undefined) legacyHits.push('all (top-level, output antigo do finder)');
+  if (legacyHits.length > 0) {
+    throw new ValidationError(
+      `Payload usa contrato ANTIGO (pré-v1): ${legacyHits.join(', ')}. ` +
+      'Use snake_case (start_time) e match_context com schema_version: 1. Nada foi salvo.', 4);
+  }
+
+  // Campos obrigatórios (bet_datetime agora é obrigatório: settle quebra silencioso sem ele)
+  const missing = REQUIRED.filter(k => bet[k] === undefined || bet[k] === null || bet[k] === '');
+  if (missing.length > 0) {
+    throw new ValidationError(`Campos obrigatórios faltando: ${missing.join(', ')}`, 1);
+  }
+
+  // Bookmaker canônico
+  const bookmakerNorm = (bet.bookmaker || '').toLowerCase().trim();
+  if (!VALID_BOOKMAKERS.includes(bookmakerNorm)) {
+    if (ALLOW_UNKNOWN_BOOKMAKER) {
+      warnings.push(`bookmaker "${bet.bookmaker}" fora da lista canônica — prosseguindo (ALLOW_UNKNOWN_BOOKMAKER=1).`);
+    } else {
+      throw new ValidationError(
+        `bookmaker "${bet.bookmaker}" não é canônico. Lista válida: ${VALID_BOOKMAKERS.join(', ')}. ` +
+        'Para casa nova em teste: ALLOW_UNKNOWN_BOOKMAKER=1.', 1);
+    }
+  }
+  bet.bookmaker = bookmakerNorm;
+
+  // ── Contrato do match_context ──
+  if (mc !== undefined && mc !== null) {
+    if (typeof mc !== 'object' || Array.isArray(mc)) {
+      throw new ValidationError('raw_extraction.match_context deve ser objeto.', 4);
+    }
+    if (mc.schema_version === undefined) {
+      throw new ValidationError(
+        'match_context sem schema_version. Contrato v1 exige "schema_version": 1 — atualize o orquestrador (agente/command) junto com o finder.', 4);
+    }
+    if (mc.schema_version !== SUPPORTED_SCHEMA_VERSION) {
+      throw new ValidationError(
+        `match_context.schema_version=${JSON.stringify(mc.schema_version)} não suportada por este save (suportada: ${SUPPORTED_SCHEMA_VERSION}). ` +
+        'Versão futura/desconhecida — atualize o script antes de salvar.', 4);
+    }
+  }
+
+  // ── match_id obrigatório OU exceção explícita auditável ──
+  const matchId = mc?.lolesports_match_id;
+  if (process.env.ALLOW_MISSING_MATCH_ID === '1') {
+    throw new ValidationError(
+      'ALLOW_MISSING_MATCH_ID foi REMOVIDO (Fase 2, 2026-08-11). Para EWC/qualifier, inclua no payload: ' +
+      'raw_extraction.match_id_exception = { "reason": "<motivo>", "case": "ewc_qualifier" }.', 4);
+  }
+  if (!matchId) {
+    const exc = bet.raw_extraction?.match_id_exception;
+    const excOk = exc && typeof exc === 'object' && !Array.isArray(exc)
+      && typeof exc.reason === 'string' && exc.reason.trim().length > 0
+      && VALID_MATCH_ID_EXCEPTION_CASES.includes(exc.case);
+    if (!excOk) {
+      throw new ValidationError(
+        'lolesports_match_id ausente em raw_extraction.match_context (obrigatório pro settle). ' +
+        `Única exceção aprovada: raw_extraction.match_id_exception = { "reason": "<motivo>", "case": ${VALID_MATCH_ID_EXCEPTION_CASES.map(c => `"${c}"`).join('|')} }. ` +
+        'Nada foi salvo.', 4);
+    }
+    warnings.push(`bet sem lolesports_match_id — exceção auditável aceita (case=${exc.case}). Settle será manual/fallback.`);
+  }
+
+  // ── Ambiguidade BLOQUEIA write sem escolha explícita do usuário ──
+  if (mc?.ambiguous === true) {
+    const res = mc.ambiguity_resolution;
+    const resolved = res && typeof res === 'object'
+      && res.chosen_by === 'user'
+      && res.chosen_match_id != null
+      && String(res.chosen_match_id) === String(matchId);
+    if (!resolved) {
+      throw new ValidationError(
+        'match_context.ambiguous=true sem resolução válida. NENHUM write com ambiguidade aberta. ' +
+        'Mostre os all_candidates ao usuário; após escolha explícita, inclua ' +
+        'match_context.ambiguity_resolution = { "chosen_by": "user", "chosen_match_id": "<id escolhido>" } ' +
+        '(chosen_match_id deve ser igual a lolesports_match_id).', 3);
+    }
+  }
+
+  // Defaults
+  if (!bet.status) bet.status = 'pending';
+  if (typeof bet.is_map_bet !== 'boolean') bet.is_map_bet = false;
+
+  // Map bet exige map_number válido (fixture 11 do runbook)
+  if (bet.is_map_bet === true) {
+    const mn = bet.map_number;
+    const mnInt = Number.isInteger(mn) ? mn : parseInt(mn, 10);
+    if (!Number.isInteger(mnInt) || mnInt < 1 || mnInt > 5) {
+      throw new ValidationError(
+        `is_map_bet=true exige map_number inteiro entre 1 e 5 (recebido: ${JSON.stringify(mn)}). ` +
+        'Map bet sem mapa identificado não pode ser salva — confirme o mapa no print.', 1);
+    }
+    bet.map_number = mnInt;
+  } else if (bet.map_number !== undefined && bet.map_number !== null) {
+    bet.map_number = parseInt(bet.map_number, 10);
+  }
+
+  // Coerção numérica
+  bet.odd = Number(bet.odd);
+  bet.stake = Number(bet.stake);
+  if (!Number.isFinite(bet.odd) || !Number.isFinite(bet.stake)) {
+    throw new ValidationError('odd e stake devem ser numéricos', 1);
+  }
+  if (bet.odd <= 1 || bet.stake <= 0) {
+    throw new ValidationError(`odd (${bet.odd}) deve ser > 1 e stake (${bet.stake}) deve ser > 0.`, 1);
+  }
+
+  // bet_datetime parseável
+  const betMs = new Date(bet.bet_datetime).getTime();
+  if (!Number.isFinite(betMs)) {
+    throw new ValidationError(`bet_datetime inválido: ${JSON.stringify(bet.bet_datetime)}. Use ISO 8601 (ex 2026-08-11T18:00:00Z).`, 1);
+  }
+
+  // Normaliza nomes de time: alias → canônico
+  bet.team_a = normalizeTeam(bet.team_a);
+  bet.team_b = normalizeTeam(bet.team_b);
+  if (mc) {
+    if (mc.team_a) mc.team_a = normalizeTeam(mc.team_a);
+    if (mc.team_b) mc.team_b = normalizeTeam(mc.team_b);
+  }
+
+  // Normaliza liga EWC fora-padrão (fix 2026-05-26)
+  bet.league = normalizeLeague(bet.league);
+
+  // ── Janela temporal canônica (única do pipeline): [-24h, +12h] vs start_time ──
+  // Guard 2026-05-20: bet_datetime inconsistente com o match = bet pending eterna.
+  const matchStartIso = mc?.start_time;
+  if (matchStartIso) {
+    const matchMs = new Date(matchStartIso).getTime();
+    if (!Number.isFinite(matchMs)) {
+      throw new ValidationError(`match_context.start_time inválido: ${JSON.stringify(matchStartIso)}`, 4);
+    }
+    const diffH = (betMs - matchMs) / 3600000;
+    if (diffH < WINDOW_BEFORE_H || diffH > WINDOW_AFTER_H) {
+      throw new ValidationError(
+        `bet_datetime fora de janela: bet=${bet.bet_datetime} match_start=${matchStartIso} diff=${diffH.toFixed(1)}h. ` +
+        `Esperado entre ${WINDOW_BEFORE_H}h e +${WINDOW_AFTER_H}h. Provável erro de data — REVISE antes de salvar.`, 2);
+    }
+  }
+
+  // Fair Pinnacle (arquivo local, sem rede). Se ainda não logada, fica NULL e settle popula.
+  if (bet.fair_pinnacle === undefined && bet.bet_datetime) {
+    const betDate = bet.bet_datetime.slice(0, 10);
+    const pinnacle = loadFairPinnacle(betDate);
+    const pinnacleVal = matchId ? (pinnacle.byMatchId.get(String(matchId)) ?? null) : null;
+    bet.fair_pinnacle = pinnacleVal;
+    bet.fair_formula = bet.fair_formula ?? null;
+    bet.fair_line_source = pinnacleVal != null ? 'pinnacle_manual' : null;
+  }
+
+  // Auto-settle quando a casa já confirmou resultado no print (Win/Lose visível)
+  const nativeWL = bet.raw_extraction?.bookmaker_native?.settled_win_loss;
+  if ((bet.status === 'green' || bet.status === 'red') && nativeWL != null && bet.profit == null) {
+    bet.profit = bet.status === 'green'
+      ? +((bet.stake * (bet.odd - 1)).toFixed(2))
+      : -bet.stake;
+    bet.settled_at = new Date().toISOString();
+    bet.settle_source = 'bookmaker_native_print';
+  }
+
+  return { bet, warnings };
+}
+
+// ─── Rede (só no modo real) ─────────────────────────────────────────────────
 function postJson(supabaseUrl, supabaseKey, urlPath, body) {
   return new Promise((resolve, reject) => {
     const u = new URL(supabaseUrl + urlPath);
@@ -128,137 +368,71 @@ function postJson(supabaseUrl, supabaseKey, urlPath, body) {
   });
 }
 
-(async () => {
-  const { supabaseUrl, supabaseKey } = loadConfig();
+module.exports = { validateAndNormalize, decodeInput, normalizeLeague, normalizeTeam, ValidationError, VALID_BOOKMAKERS, SUPPORTED_SCHEMA_VERSION };
 
-  // Lê input: stdin ou arquivo
-  let inputRaw;
-  const fileArg = process.argv[2];
-  if (fileArg && fileArg !== '-') {
-    inputRaw = fs.readFileSync(fileArg, 'utf8');
-  } else {
-    inputRaw = fs.readFileSync(0, 'utf8'); // stdin
-  }
+if (require.main === module) {
+  (async () => {
+    const args = process.argv.slice(2);
+    const VALIDATE_ONLY = args.includes('--validate-only');
+    const fileArg = args.find(a => a !== '--validate-only');
 
-  let bet;
-  try { bet = JSON.parse(inputRaw); }
-  catch (e) { console.error(`Input não é JSON válido: ${e.message}`); process.exit(1); }
-
-  // Validação dos campos obrigatórios
-  const missing = REQUIRED.filter(k => bet[k] === undefined || bet[k] === null || bet[k] === '');
-  if (missing.length > 0) {
-    console.error(`Campos obrigatórios faltando: ${missing.join(', ')}`);
-    process.exit(1);
-  }
-
-  // Validação: bookmaker deve estar na lista canônica (lowercase).
-  // Bypass: ALLOW_UNKNOWN_BOOKMAKER=1 (ex: casa nova ainda não cadastrada)
-  const bookmakerNorm = (bet.bookmaker || '').toLowerCase().trim();
-  if (!VALID_BOOKMAKERS.includes(bookmakerNorm)) {
-    if (ALLOW_UNKNOWN_BOOKMAKER) {
-      console.error(`[AVISO] bookmaker "${bet.bookmaker}" não está na lista canônica. Prosseguindo (ALLOW_UNKNOWN_BOOKMAKER=1).`);
-    } else {
-      console.error(`bookmaker "${bet.bookmaker}" não é canônico. Lista válida: ${VALID_BOOKMAKERS.join(', ')}`);
-      console.error('Para forçar: ALLOW_UNKNOWN_BOOKMAKER=1 node supabase-save-bet.cjs <file>');
+    // Lê input como BUFFER (decodificação controlada — nunca confiar em encoding implícito)
+    let inputBuf;
+    try {
+      if (fileArg && fileArg !== '-') inputBuf = fs.readFileSync(fileArg);
+      else inputBuf = fs.readFileSync(0); // stdin
+    } catch (e) {
+      console.log(JSON.stringify({ ok: false, error: `Falha lendo input: ${e.message}` }));
       process.exit(1);
     }
-  }
-  // Normaliza case antes de salvar (independente de bypass)
-  bet.bookmaker = bookmakerNorm;
 
-  // Validação: lolesports_match_id é obrigatório em bets de ligas cobertas pelo lolesports.
-  // Bets de EWC/ligas externas são isentas (settle usa fallback por design).
-  // Bypass: ALLOW_MISSING_MATCH_ID=1 (ex: EWC, ligas externas ao lolesports)
-  const matchId = bet.raw_extraction?.match_context?.lolesports_match_id;
-  if (!matchId) {
-    if (ALLOW_MISSING_MATCH_ID) {
-      console.error(`[AVISO] lolesports_match_id ausente. Prosseguindo (ALLOW_MISSING_MATCH_ID=1). Settle usará fallback por league+teams+date.`);
-    } else {
-      console.error(`lolesports_match_id ausente em raw_extraction.match_context. Campo obrigatório pra settle correto.`);
-      console.error('Para bets de EWC ou ligas externas: ALLOW_MISSING_MATCH_ID=1 node supabase-save-bet.cjs <file>');
-      process.exit(1);
+    let bet, warnings;
+    try {
+      const { text, warnings: decodeWarnings } = decodeInput(inputBuf);
+      ({ bet, warnings } = validateAndNormalize(text, { warnings: decodeWarnings }));
+    } catch (e) {
+      const code = e instanceof ValidationError ? e.exitCode : 1;
+      console.log(JSON.stringify({ ok: false, error: e.message }));
+      process.exit(code);
     }
-  }
 
-  // Defaults
-  if (!bet.status) bet.status = 'pending';
-  if (typeof bet.is_map_bet !== 'boolean') bet.is_map_bet = false;
+    if (VALIDATE_ONLY) {
+      // Modo comprovadamente offline: loadConfig (credenciais) NÃO é chamado e
+      // nenhuma função de rede é tocada. Testado com net-blocker em tests/.
+      console.log(JSON.stringify({ ok: true, validate_only: true, warnings, would_insert: bet }));
+      process.exit(0);
+    }
 
-  // Tenta popular fair_pinnacle/fair_formula/fair_line_source já na inserção.
-  // Se Pinnacle ainda não foi logado (caso comum — bet antes de /log-fair),
-  // fica NULL e settle popula depois quando Elvis já rodou /log-fair.
-  if (bet.fair_pinnacle === undefined && bet.bet_datetime) {
-    const betDate = bet.bet_datetime.slice(0, 10); // YYYY-MM-DD
-    const matchId = bet.raw_extraction?.match_context?.lolesports_match_id;
-    const pinnacle = loadFairPinnacle(betDate);
-    const pinnacleVal = matchId ? (pinnacle.byMatchId.get(String(matchId)) ?? null) : null;
-    bet.fair_pinnacle = pinnacleVal;
-    // fair_formula só é conhecida pelo analyze — não calcula aqui (requer histórico 21d)
-    // settle vai preencher fair_formula quando tiver o results.json disponível
-    bet.fair_formula = bet.fair_formula ?? null;
-    bet.fair_line_source = pinnacleVal != null ? 'pinnacle_manual' : null;
-  }
+    for (const w of warnings) console.error(`[AVISO] ${w}`);
 
-  // Coerção numérica
-  bet.odd = Number(bet.odd);
-  bet.stake = Number(bet.stake);
-  if (bet.map_number !== undefined && bet.map_number !== null) bet.map_number = parseInt(bet.map_number, 10);
-
-  if (isNaN(bet.odd) || isNaN(bet.stake)) {
-    console.error('odd e stake devem ser numéricos');
-    process.exit(1);
-  }
-
-  // Normaliza nomes de time: alias → canônico (ex: FX → Fluxo, WBG → WeiboGaming)
-  // Aplica em team_a, team_b e raw_extraction.match_context.team_a/team_b
-  bet.team_a = normalizeTeam(bet.team_a);
-  bet.team_b = normalizeTeam(bet.team_b);
-  if (bet.raw_extraction?.match_context) {
-    const mc = bet.raw_extraction.match_context;
-    if (mc.team_a) mc.team_a = normalizeTeam(mc.team_a);
-    if (mc.team_b) mc.team_b = normalizeTeam(mc.team_b);
-  }
-
-  // Fix 2026-05-26: normaliza liga EWC fora-padrão pra evitar "no_match_id" silencioso.
-  // EWC_SK_QUAL, EWC-SK-Qualifier, EWC SK Quali, etc → mapeia pro padrão EWC-LCK/LEC/LPL.
-  // Hook check-pending-bets filtra por /^EWC[-_ ]/ — entradas no formato canônico não poluem display.
-  bet.league = normalizeLeague(bet.league);
-
-  // Guard 2026-05-20: bet_datetime deve estar consistente com match start_time.
-  // Erro recorrente: agente passa "hoje" interpretando data errada e bet fica
-  // pending eterna porque settle não encontra na janela bet_datetime+6h.
-  // Regra: bet_datetime entre [start_time - 24h, start_time + 12h]. Fora disso = erro humano.
-  // (24h cobre bet placed na noite anterior; mais que isso é raro pra Total Kills e
-  // quase sempre indica confusão de data — bug KCB 2026-05-20 teve diff -40h.)
-  const matchStartIso = bet.raw_extraction?.match_context?.start_time;
-  if (bet.bet_datetime && matchStartIso) {
-    const betMs = new Date(bet.bet_datetime).getTime();
-    const matchMs = new Date(matchStartIso).getTime();
-    if (Number.isFinite(betMs) && Number.isFinite(matchMs)) {
-      const diffH = (betMs - matchMs) / 3600000;
-      if (diffH < -24 || diffH > 12) {
-        console.error(`bet_datetime fora de janela: bet=${bet.bet_datetime} match_start=${matchStartIso} diff=${diffH.toFixed(1)}h. Esperado entre -24h e +12h. Provável erro de data — REVISE antes de salvar.`);
-        process.exit(2);
+    // ── Fair guard (Fase 3A) — fronteira de segurança ANTES de credencial/rede ──
+    // Valida CONTEÚDO do arquivo de fair do dia operacional (America/Sao_Paulo).
+    // Inválido/ausente => exit 5, NADA é inserido. Skip do dia com motivo é aceito
+    // (bet discricionária em dia sem operação declarada continua possível, com aviso).
+    try {
+      const { assertFairReady } = require('./lib/fair-guard.cjs');
+      const fair = assertFairReady();
+      if (fair.skip) {
+        console.error(`[AVISO] fair do dia é SKIP (source=${fair.source}) — dia declarado sem operação; registrando mesmo assim (discricionária).`);
       }
+    } catch (e) {
+      if (e && e.name === 'FairGuardError') {
+        console.log(JSON.stringify({ ok: false, error: e.message, fair_guard: e.code }));
+        process.exit(5);
+      }
+      throw e;
     }
-  }
 
-  // Auto-settle quando a casa já confirmou resultado no print (Win/Lose visível)
-  const nativeWL = bet.raw_extraction?.bookmaker_native?.settled_win_loss;
-  if ((bet.status === 'green' || bet.status === 'red') && nativeWL != null && bet.profit == null) {
-    bet.profit = bet.status === 'green'
-      ? +((bet.stake * (bet.odd - 1)).toFixed(2))
-      : -bet.stake;
-    bet.settled_at = new Date().toISOString();
-    bet.settle_source = 'bookmaker_native_print';
-  }
-
-  try {
-    const result = await postJson(supabaseUrl, supabaseKey, '/rest/v1/bets', [bet]);
-    const row = Array.isArray(result) ? result[0] : result;
-    console.log(JSON.stringify({ ok: true, id: row.id, row }));
-  } catch (e) {
-    console.log(JSON.stringify({ ok: false, error: e.message }));
-    process.exit(1);
-  }
-})();
+    // Credenciais só aqui — modo real. Uma aprovação = exatamente um insert.
+    const { loadConfig } = require('./_load-config.cjs');
+    const { supabaseUrl, supabaseKey } = loadConfig();
+    try {
+      const result = await postJson(supabaseUrl, supabaseKey, '/rest/v1/bets', [bet]);
+      const row = Array.isArray(result) ? result[0] : result;
+      console.log(JSON.stringify({ ok: true, id: row.id, row }));
+    } catch (e) {
+      console.log(JSON.stringify({ ok: false, error: e.message }));
+      process.exit(1);
+    }
+  })();
+}

@@ -12,13 +12,14 @@ const path = require('path');
 
 try {
   const REPO = path.resolve(__dirname, '..', '..');
-  // data em BRT (UTC-3); override pra teste: WEEKLY_REVIEW_TEST_DATE=YYYY-MM-DD
+  // Dia operacional via lib central (America/Sao_Paulo, Intl — Fase 3B runbook
+  // 2026-08-11; antes era offset fixo -3h). Override pra teste:
+  // WEEKLY_REVIEW_TEST_DATE=YYYY-MM-DD (data tratada como o próprio dia operacional).
+  const { operationalDateYmd, operationalDayOfWeek } = require('./lib/operational-date.cjs');
   const test = process.env.WEEKLY_REVIEW_TEST_DATE;
-  const nowBrt = test ? new Date(test + 'T12:00:00Z') : new Date(Date.now() - 3 * 3600 * 1000);
-  const isSunday = nowBrt.getUTCDay() === 0;
-  if (!isSunday) process.exit(0);
-
-  const ymd = nowBrt.toISOString().slice(0, 10);
+  const ymd = test || operationalDateYmd();
+  const dow = test ? new Date(test + 'T12:00:00Z').getUTCDay() : operationalDayOfWeek();
+  if (dow !== 0) process.exit(0);
   const reportPath = path.join(REPO, 'knowledge', 'reports', `${ymd}-revisao-semanal.md`);
   if (fs.existsSync(reportPath)) process.exit(0);
 

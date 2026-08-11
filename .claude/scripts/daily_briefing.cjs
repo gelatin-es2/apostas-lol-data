@@ -79,13 +79,26 @@ const LEAGUE_IDS = {
   // janela Camille. Fair = fórmula (sem histórico em team_avg_kills → fallback,
   // igual às 3 ligas de 2026-07-21) até Elvis mandar fair Pinnacle da LCP.
   LCP:            '113476371197627891',
+  // NACL — no set desde 2026-08-05 (1u normal, decisão Elvis; era reserva nº 1 do
+  // set de 26/07). Fair = auto Pinnacle (captura 24/7 cobre NACL) > fórmula.
+  NACL:           '109511549831443335',
+  // TCL (Türkiye Şampiyonluk Ligi) — NÃO é liga operada pelo método (gatilho não
+  // dispara, 0/10 mapas na análise). Cadastrada só pra permitir agenda/registro/
+  // settle de bets discricionárias. Viabilidade: knowledge/reports/2026-08-05-tcl-viabilidade.md
+  TCL:            '98767991343597634',
 };
 
-// Dias úteis em ms (offset BRT = UTC -3)
-function ymd(d) { return d.toISOString().slice(0,10); }
+// TARGET e filtro de agenda são em data BRT (UTC-3), a mesma referência da hora
+// exibida na tabela — comparar em UTC incluía jogo de ontem 21h+ BRT e escondia
+// o de hoje 21h+ BRT (CBLOL sempre cai nessa janela)
+// Fase 3B (runbook 2026-08-11): data via lib central com IANA tz (Intl), nunca
+// offset fixo -3h — offset fixo quebraria se o Brasil voltar a ter horário de verão.
+const { operationalDateYmd } = require('./lib/operational-date.cjs');
+function ymdBrt(d) { return operationalDateYmd(d); }
+function isoToBrtDate(iso) { return ymdBrt(new Date(iso)); }
 
 const argv = process.argv.slice(2);
-const TARGET = argv[0] && /^\d{4}-\d{2}-\d{2}$/.test(argv[0]) ? argv[0] : ymd(new Date());
+const TARGET = argv[0] && /^\d{4}-\d{2}-\d{2}$/.test(argv[0]) ? argv[0] : ymdBrt(new Date());
 
 function fetchJson(host, urlPath) {
   return new Promise((resolve, reject) => {
@@ -280,7 +293,7 @@ function rehydrateCachedMatches(cachedParsed, qualifier, targetDateUtc, teamAvgD
     const utcMs = localToUtcEpoch(p.date_local_str, qualifier.tz_offset_h);
     if (utcMs == null) continue;
     const startTime = new Date(utcMs).toISOString();
-    if (startTime.slice(0, 10) !== targetDateUtc) continue;
+    if (isoToBrtDate(startTime) !== targetDateUtc) continue;
     const teamAName = canonicalTeamName(p.team_a_code);
     const teamBName = canonicalTeamName(p.team_b_code);
     const fair = fairForEwcMatch(teamAName, teamBName, qualifier.league_proxy, teamAvgData);
@@ -340,7 +353,7 @@ async function fetchEwcQualifierMatches(qualifier, targetDateUtc, teamAvgData) {
     const utcMs = localToUtcEpoch(p.date_local_str, qualifier.tz_offset_h);
     if (utcMs == null) continue;
     const startTime = new Date(utcMs).toISOString();
-    if (startTime.slice(0, 10) !== targetDateUtc) continue;
+    if (isoToBrtDate(startTime) !== targetDateUtc) continue;
     const teamAName = canonicalTeamName(p.team_a_code);
     const teamBName = canonicalTeamName(p.team_b_code);
     const fair = fairForEwcMatch(teamAName, teamBName, qualifier.league_proxy, teamAvgData);
@@ -522,7 +535,7 @@ function calcFormulaFair(teamAName, teamBName, teamAvgData, expansionAvgData) {
     const events = r?.data?.schedule?.events || [];
     for (const ev of events) {
       if (!ev.match?.id || !ev.startTime) continue;
-      if (ev.startTime.slice(0,10) !== TARGET) continue;
+      if (isoToBrtDate(ev.startTime) !== TARGET) continue;
       allMatches.push({
         league: lg,
         match_id: ev.match.id,
