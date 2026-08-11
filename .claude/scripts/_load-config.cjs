@@ -29,14 +29,14 @@ function loadConfig() {
   const settingsPath = path.join(repoRoot, '.claude', 'settings.local.json');
 
   let supabaseUrl = process.env.SUPABASE_URL;
-  // Aceita ambos os nomes (workflow GH Actions usa SUPABASE_SECRET_KEY; local e .env tipicamente SUPABASE_SERVICE_ROLE_KEY)
-  let supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY;
+  // Aceita ambos os nomes; SUPABASE_SECRET_KEY (sb_secret_..., rotacao 2026-08-11) tem precedencia sobre a service_role legada
+  let supabaseKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
   let source = 'process.env';
 
   if ((!supabaseUrl || !supabaseKey) && fs.existsSync(envPath)) {
     const env = parseDotEnv(fs.readFileSync(envPath, 'utf8'));
     supabaseUrl = supabaseUrl || env.SUPABASE_URL;
-    supabaseKey = supabaseKey || env.SUPABASE_SERVICE_ROLE_KEY;
+    supabaseKey = supabaseKey || env.SUPABASE_SECRET_KEY || env.SUPABASE_SERVICE_ROLE_KEY;
     source = '.env';
   }
 
@@ -47,7 +47,7 @@ function loadConfig() {
     catch (e) { throw new Error(`settings.local.json inválido: ${e.message}`); }
     const env = cfg.env || {};
     supabaseUrl = supabaseUrl || env.SUPABASE_URL;
-    supabaseKey = supabaseKey || env.SUPABASE_SERVICE_ROLE_KEY;
+    supabaseKey = supabaseKey || env.SUPABASE_SECRET_KEY || env.SUPABASE_SERVICE_ROLE_KEY;
     source = source === '.env' ? '.env+settings.local.json' : 'settings.local.json';
   }
 

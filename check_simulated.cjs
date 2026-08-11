@@ -1,7 +1,7 @@
 const { supabaseGet } = require('./lib/supabaseQuery.cjs');
 
-const SUPABASE_URL = 'https://yxhpopkxlupdpqkdaffg.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl4aHBvcGt4bHVwZHBxa2RhZmZnIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NzE0NzQ1NCwiZXhwIjoyMDkyNzIzNDU0fQ.DyjJGDGceLkiM95NIlbY8GtZaG9-0aK7-vx4SfZTyGI';
+const { loadConfig } = require('./.claude/scripts/_load-config.cjs');
+const { supabaseUrl: SUPABASE_URL, supabaseKey: SUPABASE_KEY } = loadConfig();
 
 async function check() {
   try {
