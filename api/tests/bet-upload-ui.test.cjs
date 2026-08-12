@@ -34,6 +34,15 @@ test('UI informa 14 dias e automacao executa purge restrito', () => {
   assert.match(registerApi, /purge_after,screenshot_deleted_at/);
 });
 
+test('automacao limpa somente o TEMP local exato depois de estado terminal', () => {
+  assert.match(prompt, /cron-data\/bet-upload-work\/<id>\.<ext>/);
+  assert.match(prompt, /Remove-Item -LiteralPath "cron-data\/bet-upload-work\/<id>\.<ext>" -Force/);
+  assert.match(prompt, /estado terminal `registered`, `rejected` ou `error`/);
+  assert.match(prompt, /Nunca use curingas, `-Recurse` nem remova outro path/);
+  assert.match(prompt, /Nunca apague o objeto do Storage diretamente/);
+  assert.match(prompt, /retencao privada de 14 dias/);
+});
+
 test('toggle existente continua direto no Supabase sem depender da nova API', () => {
   const start = dashboard.indexOf('async function toggleMethodBet(');
   const end = dashboard.indexOf('\n    function renderOffMethodSection', start);

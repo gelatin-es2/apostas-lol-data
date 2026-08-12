@@ -2,8 +2,10 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('fs');
+const path = require('path');
 
-const { createJobClient, purgeExpiredScreenshots, main } = require('../../scripts/bet-upload-jobs.cjs');
+const { createJobClient, purgeExpiredScreenshots, main, configFromEnv } = require('../../scripts/bet-upload-jobs.cjs');
 
 const TEST_ENV = {
   SUPABASE_URL: 'https://example.supabase.co',
@@ -17,6 +19,55 @@ function jsonResponse(body, status = 200) {
     async text() { return JSON.stringify(body); },
   };
 }
+
+test('config explicita ganha e nao chama fallback local', () => {
+  let fallbackCalls = 0;
+  const config = configFromEnv(TEST_ENV, {
+    loadConfig() {
+      fallbackCalls += 1;
+      return { supabaseUrl: 'https://fallback.invalid', supabaseKey: 'fallback-key' };
+    },
+  });
+  assert.deepEqual(config, { url: 'https://example.supabase.co', key: 'test-service-key' });
+  assert.equal(fallbackCalls, 0);
+});
+
+test('config incompleta usa loadConfig canonico sem sobrescrever valor explicito', () => {
+  let fallbackCalls = 0;
+  const config = configFromEnv({ SUPABASE_URL: 'https://explicit.supabase.co/' }, {
+    loadConfig() {
+      fallbackCalls += 1;
+      return {
+        supabaseUrl: 'https://from-dotenv.supabase.co',
+        supabaseKey: 'dotenv-service-key',
+        source: '.env',
+      };
+    },
+  });
+  assert.deepEqual(config, { url: 'https://explicit.supabase.co', key: 'dotenv-service-key' });
+  assert.equal(fallbackCalls, 1);
+});
+
+test('fallback padrao reutiliza o loader local que le .env', () => {
+  const source = fs.readFileSync(path.resolve(__dirname, '../../scripts/bet-upload-jobs.cjs'), 'utf8');
+  assert.match(source, /require\('\.\.\/\.claude\/scripts\/_load-config\.cjs'\)\.loadConfig\(\)/);
+});
+
+test('config ausente falha com mensagem sanitizada', () => {
+  let error;
+  try {
+    configFromEnv({}, {
+      loadConfig() {
+        throw new Error('C:\\Users\\operator\\private\\.env: raw loader failure');
+      },
+    });
+  } catch (caught) {
+    error = caught;
+  }
+  assert.ok(error);
+  assert.match(error.message, /Configuracao Supabase ausente/);
+  assert.doesNotMatch(error.message, /C:\\Users|raw loader failure|operator\\private/);
+});
 
 test('claim envia worker e lease ao RPC atomico', async () => {
   const calls = [];

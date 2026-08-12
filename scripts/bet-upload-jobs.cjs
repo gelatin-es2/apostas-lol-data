@@ -3,11 +3,35 @@
 const fs = require('fs');
 const path = require('path');
 
-function configFromEnv(env = process.env) {
-  if (!env.SUPABASE_URL || !env.SUPABASE_SECRET_KEY) {
-    throw new Error('SUPABASE_URL e SUPABASE_SECRET_KEY são obrigatórios');
+const MISSING_CONFIG_MESSAGE = 'Configuracao Supabase ausente: defina SUPABASE_URL e SUPABASE_SECRET_KEY no ambiente ou no .env local';
+
+function canonicalLoadConfig() {
+  return require('../.claude/scripts/_load-config.cjs').loadConfig();
+}
+
+function nonEmpty(value) {
+  return typeof value === 'string' && value.trim() ? value.trim() : null;
+}
+
+function configFromEnv(env = process.env, deps = {}) {
+  let url = nonEmpty(env?.SUPABASE_URL);
+  let key = nonEmpty(env?.SUPABASE_SECRET_KEY) || nonEmpty(env?.SUPABASE_SERVICE_ROLE_KEY);
+
+  if (!url || !key) {
+    let fallback;
+    try {
+      fallback = (deps.loadConfig || canonicalLoadConfig)();
+    } catch {
+      throw new Error(MISSING_CONFIG_MESSAGE);
+    }
+    url = url || nonEmpty(fallback?.supabaseUrl);
+    key = key || nonEmpty(fallback?.supabaseKey);
   }
-  return { url: env.SUPABASE_URL.replace(/\/$/, ''), key: env.SUPABASE_SECRET_KEY };
+
+  if (!url || !key) {
+    throw new Error(MISSING_CONFIG_MESSAGE);
+  }
+  return { url: url.replace(/\/$/, ''), key };
 }
 
 function headers(key, extra = {}) {
@@ -21,8 +45,8 @@ async function jsonResponse(response) {
   return body;
 }
 
-function createJobClient({ fetchImpl = fetch, env = process.env } = {}) {
-  const config = configFromEnv(env);
+function createJobClient({ fetchImpl = fetch, env = process.env, loadConfig } = {}) {
+  const config = configFromEnv(env, { loadConfig });
   return {
     async list() {
       const response = await fetchImpl(`${config.url}/rest/v1/bet_upload_jobs?select=id,status,storage_path,mime_type,attempts,created_at,purge_after,screenshot_deleted_at,updated_at,lease_expires_at,error_code&status=in.(queued,processing)&order=created_at.asc`, { headers: headers(config.key) });
