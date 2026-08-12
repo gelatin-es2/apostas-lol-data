@@ -51,6 +51,9 @@ _audit_*.json
 # Logs locais
 .claude/logs/
 
+# Watcher local da Pinnacle — log diário e estado do kill-switch de 403
+logs/
+
 # Auditoria Split 2 (scripts/audit/) — cache de API e output são artefatos locais,
 # read-only, regeneráveis a qualquer momento rodando os scripts de novo.
 audit-cache/
@@ -59,4 +62,7 @@ audit-output/
 # Gráficos Polymarket (scripts/polymarket-chart.cjs) — output local de análise, regenerável
 polymarket-charts/
 cron-data/polymarket-history/
+
+# Backups locais de produÃ§Ã£o â€” contÃªm dados completos e nunca sÃ£o versionados
+backups/
 .claude/scripts/tests/tmp/

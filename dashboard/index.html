@@ -826,6 +826,22 @@
       color: var(--muted);
     }
 
+    .register-card { max-width:620px; border:1px solid var(--border); border-radius:14px; padding:20px; background:var(--surface); }
+    .register-card h2 { margin:0 0 8px; font-size:20px; }
+    .register-card p { color:var(--muted); margin:0 0 16px; line-height:1.5; }
+    .register-auth-row { display:flex; gap:8px; align-items:end; }
+    .register-field { flex:1; }
+    .register-field label { display:block; color:var(--muted); font-size:12px; margin-bottom:6px; }
+    .register-field input { width:100%; box-sizing:border-box; border:1px solid var(--border); border-radius:9px; padding:11px 12px; background:var(--bg); color:var(--text); font:inherit; }
+    .register-button, .register-upload { border:0; border-radius:9px; padding:11px 16px; background:var(--accent); color:#fff; font:inherit; font-weight:700; cursor:pointer; }
+    .register-button:disabled { opacity:.55; cursor:wait; }
+    .register-upload { display:inline-block; text-align:center; }
+    .register-preview { display:none; width:100%; max-height:420px; object-fit:contain; margin-top:16px; border-radius:10px; background:#0d1015; }
+    .register-status { min-height:24px; margin-top:14px; font-weight:700; }
+    .register-status.error { color:var(--red); }
+    .register-status.success { color:var(--green); }
+    .register-session { color:var(--muted); font-size:13px; margin-bottom:14px; }
+
     /* ===== PARTE 6 — Mobile =====
        Fica por ÚLTIMO no stylesheet de propósito: regras de mesma especificidade
        (ex: .rank-grid, .kpis) definidas em blocos acima só vencem a cascata se
@@ -843,6 +859,9 @@
       .hero-figure .value { font-size: 40px; }
       .filter-bar { overflow-x: auto; margin-inline: -16px; padding-inline: 16px; }
       .rank-grid { grid-template-columns: 1fr; }
+      .register-card { padding:16px; }
+      .register-auth-row { align-items:stretch; flex-direction:column; }
+      .register-button, .register-upload { width:100%; box-sizing:border-box; }
     }
   </style>
 </head>
@@ -854,6 +873,7 @@
 
   <nav class="tabs">
     <div class="tab active" data-tab="hoje">Hoje</div>
+    <div class="tab" data-tab="registrar">Registrar bet</div>
     <div class="tab" data-tab="tracker">Planilha</div>
     <div class="tab" data-tab="baleias">Baleias</div>
     <div class="tab" data-tab="milio">Milio</div>
@@ -931,6 +951,30 @@
       </div>
     </div>
     <div class="rank-note" id="hojeRankNote"></div>
+  </main>
+
+  <main class="container tab-pane" data-pane="registrar">
+    <div class="register-card">
+      <h2>Registrar aposta</h2>
+      <p>O print fica privado por 14 dias e depois &#233; apagado automaticamente.</p>
+      <p>Envie o print. O Codex processa com as validações existentes e registra sem revisão manual.</p>
+      <div id="registerLoggedOut">
+        <div class="register-auth-row">
+          <div class="register-field">
+            <label for="registerEmail">Seu e-mail autorizado</label>
+            <input id="registerEmail" type="email" autocomplete="email" placeholder="voce@email.com">
+          </div>
+          <button class="register-button" id="registerMagicLink" type="button">Entrar por link</button>
+        </div>
+      </div>
+      <div id="registerLoggedIn" style="display:none">
+        <div class="register-session" id="registerSession"></div>
+        <label class="register-upload" for="registerImage">Enviar print da bet</label>
+        <input id="registerImage" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+        <img class="register-preview" id="registerPreview" alt="Prévia do comprovante enviado">
+      </div>
+      <div class="register-status" id="registerStatus" role="status" aria-live="polite"></div>
+    </div>
   </main>
 
   <main class="container tab-pane" data-pane="tracker">
@@ -1036,6 +1080,141 @@
     const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_wGL02eZiYN9RV37jK-rzWg_LznsLOko';
 
     const sb = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+    const registerLoggedOut = document.getElementById('registerLoggedOut');
+    const registerLoggedIn = document.getElementById('registerLoggedIn');
+    const registerStatus = document.getElementById('registerStatus');
+    const registerImage = document.getElementById('registerImage');
+    const registerPreview = document.getElementById('registerPreview');
+    let registerBusy = false;
+    let registerPollTimer = null;
+
+    function setRegisterStatus(text, type = '') {
+      registerStatus.textContent = text;
+      registerStatus.className = `register-status${type ? ` ${type}` : ''}`;
+    }
+
+    async function refreshRegisterSession() {
+      const { data } = await sb.auth.getSession();
+      const session = data.session;
+      registerLoggedOut.style.display = session ? 'none' : '';
+      registerLoggedIn.style.display = session ? '' : 'none';
+      document.getElementById('registerSession').textContent = session
+        ? `Conectado como ${session.user.email}`
+        : '';
+      return session;
+    }
+
+    async function pollRegisterJob(jobId, session) {
+      clearTimeout(registerPollTimer);
+      try {
+        const response = await fetch(`/api/bets/upload-status?id=${encodeURIComponent(jobId)}`, {
+          headers: { Authorization: `Bearer ${session.access_token}` },
+          cache: 'no-store',
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error(result.message || 'Falha ao consultar processamento.');
+        const job = result.job;
+        if (job.status === 'queued') {
+          setRegisterStatus('Enfileirada. Aguardando o Codex…');
+        } else if (job.status === 'processing') {
+          setRegisterStatus('Processando e validando…');
+        } else if (job.status === 'registered') {
+          localStorage.removeItem('betUploadJobId');
+          setRegisterStatus('Aposta registrada como pendente.', 'success');
+          currentFilter = 'pending';
+          document.querySelectorAll('.filters .chip').forEach((chip) => {
+            chip.classList.toggle('active', chip.dataset.filter === 'pending');
+          });
+          await load();
+          document.querySelector('.tab[data-tab="tracker"]')?.click();
+          return;
+        } else if (job.status === 'rejected') {
+          localStorage.removeItem('betUploadJobId');
+          setRegisterStatus(job.error_message || 'Não consegui confirmar. Envie outro print.', 'error');
+          return;
+        } else if (job.status === 'error') {
+          localStorage.removeItem('betUploadJobId');
+          setRegisterStatus('Falha técnica no processamento. Envie novamente.', 'error');
+          return;
+        }
+        registerPollTimer = setTimeout(() => pollRegisterJob(jobId, session), 3000);
+      } catch (error) {
+        setRegisterStatus(error.message || 'Falha ao consultar processamento.', 'error');
+        registerPollTimer = setTimeout(() => pollRegisterJob(jobId, session), 8000);
+      }
+    }
+
+    document.getElementById('registerMagicLink').addEventListener('click', async () => {
+      const button = document.getElementById('registerMagicLink');
+      const email = document.getElementById('registerEmail').value.trim();
+      if (!email) return setRegisterStatus('Digite seu e-mail.', 'error');
+      button.disabled = true;
+      const { error } = await sb.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: `${location.origin}${location.pathname}` },
+      });
+      button.disabled = false;
+      setRegisterStatus(
+        error ? `Não consegui enviar o link: ${error.message}` : 'Link enviado. Abra seu e-mail para entrar.',
+        error ? 'error' : 'success',
+      );
+    });
+
+    registerImage.addEventListener('change', async () => {
+      const file = registerImage.files?.[0];
+      if (!file || registerBusy) return;
+      if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type) || file.size > 3 * 1024 * 1024) {
+        registerImage.value = '';
+        return setRegisterStatus('Use PNG, JPEG ou WebP com no máximo 3 MB.', 'error');
+      }
+      const session = await refreshRegisterSession();
+      if (!session) return setRegisterStatus('Entre por e-mail antes de enviar o print.', 'error');
+
+      registerBusy = true;
+      registerImage.disabled = true;
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const dataUrl = String(reader.result);
+        registerPreview.src = dataUrl;
+        registerPreview.style.display = 'block';
+        setRegisterStatus('Enviando o comprovante…');
+        try {
+          const response = await fetch('/api/bets/register', {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${session.access_token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ image_data_url: dataUrl }),
+          });
+          const result = await response.json();
+          if (!response.ok || !result.ok) throw new Error(result.message || 'Envie outro print.');
+          localStorage.setItem('betUploadJobId', result.job.id);
+          setRegisterStatus(result.job.status === 'processing' ? 'Processando e validando…' : 'Enfileirada. Aguardando o Codex…');
+          pollRegisterJob(result.job.id, session);
+        } catch (error) {
+          setRegisterStatus(error.message || 'Não consegui confirmar. Envie outro print.', 'error');
+        } finally {
+          registerBusy = false;
+          registerImage.disabled = false;
+          registerImage.value = '';
+        }
+      };
+      reader.onerror = () => {
+        registerBusy = false;
+        registerImage.disabled = false;
+        registerImage.value = '';
+        setRegisterStatus('Não consegui abrir a imagem. Envie outro print.', 'error');
+      };
+      reader.readAsDataURL(file);
+    });
+
+    sb.auth.onAuthStateChange(() => refreshRegisterSession());
+    refreshRegisterSession().then((session) => {
+      const jobId = localStorage.getItem('betUploadJobId');
+      if (session && jobId) pollRegisterJob(jobId, session);
+    });
 
     const fmtMoney = (n) =>
       (n ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });

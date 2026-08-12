@@ -143,7 +143,7 @@ function computeFairFields(bet) {
   return { fairPinnacleSettle, fairFormulaSettle, fairLineSourceSettle };
 }
 
-const LOLES_KEY = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
+const LOLES_KEY = process.env.LOLESPORTS_API_KEY;
 
 // Manter sincronizado com analyze_yesterday.cjs:20-21
 const PEEL_PURE = ['soraka','sona','janna','lulu','yuumi','karma','seraphine','renataglasc','renata','nami','milio'];
@@ -152,6 +152,10 @@ const FLEX_ENGAGE = ['bard','rakan','lux','anivia'];
 
 function httpFetchJson(host, pathUrl, headers = {}) {
   return new Promise((resolve, reject) => {
+    if (!LOLES_KEY) {
+      reject(new Error('LOLESPORTS_API_KEY não configurada'));
+      return;
+    }
     const req = https.get({
       host, path: pathUrl,
       headers: {
@@ -734,7 +738,7 @@ async function settleSeriesMoneyline(ctx, bet, match) {
     settled_at: new Date().toISOString(),
   };
 
-  const { fairPinnacleSettle, fairFormulaSettle, fairLineSourceSettle } = computeFairFields(bet);
+  const fairFields = ctx.outcomeOnly ? null : computeFairFields(bet);
 
   const update = {
     status,
@@ -742,9 +746,9 @@ async function settleSeriesMoneyline(ctx, bet, match) {
     settled_at: new Date().toISOString(),
     settle_source: `lolesports api - series winner ${outcome.series_winner_name} (${outcome.series_score})`,
     raw_extraction: newRawExtraction,
-    ...(bet.fair_pinnacle == null && fairPinnacleSettle != null ? { fair_pinnacle: fairPinnacleSettle } : {}),
-    ...(bet.fair_formula == null && fairFormulaSettle != null ? { fair_formula: fairFormulaSettle } : {}),
-    ...(bet.fair_line_source == null ? { fair_line_source: fairLineSourceSettle } : {}),
+    ...(!ctx.outcomeOnly && bet.fair_pinnacle == null && fairFields.fairPinnacleSettle != null ? { fair_pinnacle: fairFields.fairPinnacleSettle } : {}),
+    ...(!ctx.outcomeOnly && bet.fair_formula == null && fairFields.fairFormulaSettle != null ? { fair_formula: fairFields.fairFormulaSettle } : {}),
+    ...(!ctx.outcomeOnly && bet.fair_line_source == null ? { fair_line_source: fairFields.fairLineSourceSettle } : {}),
   };
 
   if (ctx.dryRun) {
@@ -890,7 +894,7 @@ async function settleBet(ctx, bet, gameWindowCache) {
   };
 
   // Calcula fair_pinnacle/fair_formula pra popular as colunas dedicadas no settle.
-  const { fairPinnacleSettle, fairFormulaSettle, fairLineSourceSettle } = computeFairFields(bet);
+  const fairFields = ctx.outcomeOnly ? null : computeFairFields(bet);
 
   // Schema da tabela bets NÃO tem coluna under_hit (essa é da method_reports).
   // under_hit fica em raw_extraction.match_context (JSONB) acima.
@@ -903,9 +907,9 @@ async function settleBet(ctx, bet, gameWindowCache) {
       : `lolesports api - ${gd.totalKills} kills`,
     raw_extraction: newRawExtraction,
     // Popula colunas de fair só se ainda NULL no banco (bet não sobrescreve valor já presente)
-    ...(bet.fair_pinnacle == null && fairPinnacleSettle != null ? { fair_pinnacle: fairPinnacleSettle } : {}),
-    ...(bet.fair_formula == null && fairFormulaSettle != null ? { fair_formula: fairFormulaSettle } : {}),
-    ...(bet.fair_line_source == null ? { fair_line_source: fairLineSourceSettle } : {}),
+    ...(!ctx.outcomeOnly && bet.fair_pinnacle == null && fairFields.fairPinnacleSettle != null ? { fair_pinnacle: fairFields.fairPinnacleSettle } : {}),
+    ...(!ctx.outcomeOnly && bet.fair_formula == null && fairFields.fairFormulaSettle != null ? { fair_formula: fairFields.fairFormulaSettle } : {}),
+    ...(!ctx.outcomeOnly && bet.fair_line_source == null ? { fair_line_source: fairFields.fairLineSourceSettle } : {}),
   };
 
   if (ctx.dryRun) {
@@ -926,6 +930,7 @@ async function settleBet(ctx, bet, gameWindowCache) {
 // ─── Orquestração (testável: config e fair injetáveis, clientes via _setDeps) ─
 async function runSettle(opts = {}) {
   const dryRun = !!opts.dryRun;
+  const outcomeOnly = !!opts.outcomeOnly;
   const specificBetId = opts.specificBetId || null;
   const progress = opts.progress || {};
 
@@ -935,15 +940,15 @@ async function runSettle(opts = {}) {
     const { loadConfig } = require('./_load-config.cjs');
     config = loadConfig();
   }
-  const ctx = { supabaseUrl: config.supabaseUrl, supabaseKey: config.supabaseKey, dryRun };
+  const ctx = { supabaseUrl: config.supabaseUrl, supabaseKey: config.supabaseKey, dryRun, outcomeOnly };
 
-  const summary = { checked: 0, settled: 0, skipped: 0, errors: 0, dry_run: dryRun, results: [] };
+  const summary = { checked: 0, settled: 0, skipped: 0, errors: 0, dry_run: dryRun, outcome_only: outcomeOnly, results: [] };
   progress.summary = summary;
 
   // ── Fair guard (Fase 3A) — fronteira de segurança ANTES de qualquer PATCH ──
   // --dry-run é diagnóstico sem mutação → não exige fair.
   let fairGuard = null;
-  if (!dryRun) {
+  if (!dryRun && !outcomeOnly) {
     fairGuard = checkFairReady(opts.fairOpts || {});
     summary.fair_guard = fairGuard.ok
       ? { ok: true, skip: !!fairGuard.skip, source: fairGuard.source }
@@ -1029,7 +1034,8 @@ module.exports = {
 if (require.main === module) {
   const argv = process.argv.slice(2);
   const dryRun = argv.includes('--dry-run');
-  const specificBetId = argv.find(a => a !== '--dry-run' && /^[a-f0-9-]{36}$/i.test(a)) || null;
+  const outcomeOnly = argv.includes('--outcome-only');
+  const specificBetId = argv.find(a => !['--dry-run', '--outcome-only'].includes(a) && /^[a-f0-9-]{36}$/i.test(a)) || null;
 
   const envTimeout = parseInt(process.env.SETTLE_TIMEOUT_MS, 10);
   const timeoutMs = Number.isFinite(envTimeout) && envTimeout > 0 ? envTimeout : DEFAULT_TIMEOUT_MS;
@@ -1046,7 +1052,7 @@ if (require.main === module) {
     process.exit(3);
   });
 
-  runSettle({ dryRun, specificBetId, progress })
+  runSettle({ dryRun, outcomeOnly, specificBetId, progress })
     .then(summary => {
       console.log(JSON.stringify(sanitizeDeep(summary), null, 2));
       process.exit(0);

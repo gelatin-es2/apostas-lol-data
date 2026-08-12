@@ -1,0 +1,19 @@
+Processe no maximo um job de upload de aposta por execucao, de forma fail-closed.
+
+1. No repositorio apostas-lol-data, execute primeiro o purge. Ele so remove objetos de jobs terminais cujo prazo exato de 14 dias venceu; o job e o storage_path continuam auditaveis:
+   node scripts/bet-upload-jobs.cjs purge codex-bet-purge 600 25
+   Se falhar, nao tente apagar manualmente.
+2. Execute:
+   node scripts/bet-upload-jobs.cjs claim codex-bet-logger 3600
+   Se retornar null, encerre sem fazer nada.
+3. Guarde id e claim_token retornados. Baixe a imagem para um arquivo temporario dentro de cron-data/bet-upload-work/:
+   node scripts/bet-upload-jobs.cjs download <id> <claim_token> <arquivo>
+4. Invoque obrigatoriamente a skill `bet-logger-extract` para esse arquivo. Ela deve reaproveitar o agente bet-logger e todas as validacoes canonicas existentes (finder Riot, validacao de mapa, save-bet e dedup). Nao transcreva nem invente dados fora da skill.
+5. Se a skill registrar exatamente uma bet e retornar o UUID:
+   - grave um JSON minimo auditavel com bookmaker/times/pick/odd/stake/mapa e caminho do print, sem secrets;
+   - execute `node scripts/bet-upload-jobs.cjs finish <id> <claim_token> registered <bet_uuid> - - <result_json>`.
+6. Se o comprovante for ilegivel, resolvido, multiplo, nao-BRL, sem ticket, ambiguo ou nao for uma bet LoL suportada:
+   execute `node scripts/bet-upload-jobs.cjs finish <id> <claim_token> rejected - <codigo_curto> "Envie outro print mais claro" <result_json_ou_->`.
+7. Se houver falha tecnica antes de registrar:
+   execute `node scripts/bet-upload-jobs.cjs finish <id> <claim_token> error - <codigo_curto> "Falha tecnica sanitizada" -`.
+8. Nunca finalize `registered` sem UUID real da bet. Nunca repita o save se o job ja estiver terminal. Nunca exponha tokens, chaves ou respostas cruas com credenciais. Nunca apague o objeto diretamente: somente o comando purge pode remove-lo depois de `purge_after`.

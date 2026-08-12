@@ -1,0 +1,34 @@
+name: Settle pending bets
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: settle-pending-bets
+  cancel-in-progress: false
+
+jobs:
+  settle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      LOLESPORTS_API_KEY: ${{ secrets.LOLESPORTS_API_KEY }}
+      SETTLE_TIMEOUT_MS: '480000'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Liquida status/profit de forma idempotente sem depender do arquivo local
+      # de fair. Este modo não lê nem grava fair_pinnacle/fair_formula/source.
+      - name: Settle finished bets
+        run: node .claude/scripts/settle-pending-bets.cjs --outcome-only

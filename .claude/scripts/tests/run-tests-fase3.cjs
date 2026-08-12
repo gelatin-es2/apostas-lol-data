@@ -599,6 +599,56 @@ const FAKE_CONFIG = { supabaseUrl: FAKE_ENV.SUPABASE_URL, supabaseKey: FAKE_ENV.
 
   // ─── relatório ───
   console.log('\n══ Fase 3 — fair guard + timezone + settle — resultado dos testes ══\n');
+  await test('settle: outcome-only em dry-run usa o modo do cron e faz ZERO PATCH', async () => {
+    const sb = makeFakeSupabase([makeBet(b => {
+      b.fair_pinnacle = null;
+      b.fair_formula = null;
+      b.fair_line_source = null;
+    })]);
+    settle._setDeps({ fetchJson: makeFakeFetch(), supabaseRequest: sb.fn });
+    try {
+      const dir = mkTmpDir('settle-outcome-only-dry');
+      const sum = await settle.runSettle({
+        config: FAKE_CONFIG,
+        dryRun: true,
+        outcomeOnly: true,
+        fairOpts: { now: FIXED_NOW, fairDir: dir },
+      });
+      assertEq(sum.outcome_only, true, 'outcome_only visível');
+      assertEq(sum.fair_guard, undefined, 'não depende de fair local');
+      assertEq(sb.calls.patch.length, 0, 'ZERO PATCH em teste');
+      const update = sum.results[0].would_update;
+      assert(!('fair_pinnacle' in update), 'não grava fair_pinnacle');
+      assert(!('fair_formula' in update), 'não grava fair_formula');
+      assert(!('fair_line_source' in update), 'não grava fair_line_source');
+    } finally { armBoom(); }
+  });
+
+  await test('settle: outcome-only real liquida sem fair e preserva PATCH condicional', async () => {
+    const sb = makeFakeSupabase([makeBet(b => {
+      b.fair_pinnacle = null;
+      b.fair_formula = null;
+      b.fair_line_source = null;
+    })]);
+    settle._setDeps({ fetchJson: makeFakeFetch(), supabaseRequest: sb.fn });
+    try {
+      const dir = mkTmpDir('settle-outcome-only-real');
+      const sum = await settle.runSettle({
+        config: FAKE_CONFIG,
+        outcomeOnly: true,
+        fairOpts: { now: FIXED_NOW, fairDir: dir },
+      });
+      assertEq(sum.settled, 1, 'liquidou sem arquivo fair');
+      assertEq(sum.fair_guard, undefined, 'fair guard separado do outcome-only');
+      assertEq(sb.calls.patch.length, 1, 'um PATCH');
+      assert(sb.calls.patch[0].urlPath.includes('status=eq.pending'), 'idempotência preservada');
+      assertEq(sb.calls.patch[0].body.status, 'green', 'status calculado');
+      assertEq(sb.calls.patch[0].body.profit, 85, 'profit calculado');
+      assert(!('fair_pinnacle' in sb.calls.patch[0].body), 'fair não alterada');
+      assert(!('fair_formula' in sb.calls.patch[0].body), 'fórmula não alterada');
+    } finally { armBoom(); }
+  });
+
   for (const r of results) console.log(r);
   console.log(`\n${results.length - failures}/${results.length} passaram${failures ? ` — ${failures} FALHARAM` : ''}`);
   process.exit(failures ? 1 : 0);
