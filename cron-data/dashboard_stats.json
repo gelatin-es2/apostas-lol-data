@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-08-11T12:49:43.796Z",
+  "generated_at": "2026-08-12T12:52:20.238Z",
   "split_start": "2026-04-01",
   "line_fallback": 29.5,
   "line_sources": {
-    "livestats_team_avg(total+total)/2": 845,
+    "livestats_team_avg(total+total)/2": 853,
     "user_bet@1.71_minus1": 14,
     "user_bet@1.79": 15,
     "user_bet@1.85": 7,
@@ -27,12 +27,12 @@
     "user_bet@1.86": 1,
     "user_bet@1.77": 6,
     "user_bet@1.65_minus1": 7,
-    "user_bet@1.60_minus1": 3,
     "user_bet@1.91": 1,
     "user_bet@1.72_minus1": 5,
     "user_bet@1.88": 2,
     "user_bet@1.57_minus1": 1,
     "user_bet@1.64_minus1": 4,
+    "user_bet@1.60_minus1": 3,
     "user_bet@1.61_minus1": 1,
     "user_bet@1.89": 3,
     "user_bet@1.82": 2,
@@ -2177,18 +2177,18 @@
           "small_sample": true
         },
         {
-          "name": "Galions",
-          "lg": "LFL",
-          "n": 6,
-          "hit": 66.7,
-          "small_sample": false
-        },
-        {
           "name": "Ici Japon Corp",
           "lg": "LFL",
           "n": 3,
           "hit": 66.7,
           "small_sample": true
+        },
+        {
+          "name": "Galions",
+          "lg": "LFL",
+          "n": 6,
+          "hit": 66.7,
+          "small_sample": false
         },
         {
           "name": "GIANTX ITERO",
@@ -5701,7 +5701,7 @@
           "KT"
         ],
         "trigger": "2peel",
-        "line": 31.5,
+        "line": 30.5,
         "kills": 25,
         "hit_simulated": true,
         "profit_simulated": 850,
@@ -6661,7 +6661,7 @@
           "JDG"
         ],
         "trigger": "2peel",
-        "line": 27.5,
+        "line": 28.5,
         "kills": 17,
         "hit_simulated": true,
         "profit_simulated": 850,
@@ -12541,7 +12541,7 @@
           "AL"
         ],
         "trigger": "1peel+flex",
-        "line": 27.5,
+        "line": 28.5,
         "kills": 19,
         "hit_simulated": true,
         "profit_simulated": 850,
