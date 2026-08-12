@@ -13,17 +13,31 @@ test('Vercel publica somente dashboard e raiz aponta para index.html', () => {
   assert.deepEqual(config.rewrites, [{ source: '/', destination: '/index.html' }]);
 });
 
-test('funções mantêm api/** sem runtime legado explícito', () => {
-  assert.deepEqual(config.functions, { 'api/**/*.cjs': { maxDuration: 60 } });
-  assert.equal(config.functions['api/**/*.cjs'].runtime, undefined);
+test('funcoes Vercel apontam para entrypoints .js sem runtime legado explicito', () => {
+  assert.deepEqual(config.functions, { 'api/**/*.js': { maxDuration: 60 } });
+  assert.equal(config.functions['api/**/*.js'].runtime, undefined);
+  assert.equal('api/**/*.cjs' in config.functions, false);
 });
 
-test('rewrites não expõem diretórios internos do repositório', () => {
+test('rotas publicadas possuem entrypoint .js que delega ao core .cjs', () => {
+  for (const route of ['register', 'upload-status']) {
+    const entryPath = path.resolve(__dirname, `../bets/${route}.js`);
+    const corePath = path.resolve(__dirname, `../bets/${route}.cjs`);
+    assert.equal(fs.existsSync(entryPath), true, `entrypoint ausente: ${route}.js`);
+    assert.equal(fs.existsSync(corePath), true, `core ausente: ${route}.cjs`);
+    const entry = require(entryPath);
+    const core = require(corePath);
+    assert.equal(typeof entry, 'function');
+    assert.equal(entry, core);
+  }
+});
+
+test('rewrites nao expoem diretorios internos do repositorio', () => {
   const internalPaths = ['.claude', 'migrations', '.git', 'cron-data', 'knowledge'];
   for (const rewrite of config.rewrites || []) {
     const serialized = `${rewrite.source} ${rewrite.destination}`.toLowerCase();
     for (const internalPath of internalPaths) {
-      assert.equal(serialized.includes(internalPath), false, `rewrite expõe ${internalPath}`);
+      assert.equal(serialized.includes(internalPath), false, `rewrite expoe ${internalPath}`);
     }
   }
 });
