@@ -19,16 +19,27 @@ test('funcoes Vercel apontam para entrypoints .js sem runtime legado explicito',
   assert.equal('api/**/*.cjs' in config.functions, false);
 });
 
-test('rotas publicadas possuem entrypoint .js que delega ao core .cjs', () => {
+test('rotas publicadas possuem um unico handler .js sem basename conflitante', () => {
   for (const route of ['register', 'upload-status']) {
     const entryPath = path.resolve(__dirname, `../bets/${route}.js`);
-    const corePath = path.resolve(__dirname, `../bets/${route}.cjs`);
+    const conflictingPath = path.resolve(__dirname, `../bets/${route}.cjs`);
     assert.equal(fs.existsSync(entryPath), true, `entrypoint ausente: ${route}.js`);
-    assert.equal(fs.existsSync(corePath), true, `core ausente: ${route}.cjs`);
-    const entry = require(entryPath);
-    const core = require(corePath);
-    assert.equal(typeof entry, 'function');
-    assert.equal(entry, core);
+    assert.equal(fs.existsSync(conflictingPath), false, `handler conflitante: ${route}.cjs`);
+    assert.equal(typeof require(entryPath), 'function');
+  }
+});
+
+test('api nao possui basenames duplicados entre extensoes de funcoes', () => {
+  const apiRoot = path.resolve(__dirname, '..');
+  const functionExtensions = new Set(['.js', '.cjs', '.mjs', '.ts']);
+  const files = fs.readdirSync(path.join(apiRoot, 'bets'))
+    .filter((file) => functionExtensions.has(path.extname(file)));
+  const basenames = new Map();
+
+  for (const file of files) {
+    const basename = path.basename(file, path.extname(file)).toLowerCase();
+    assert.equal(basenames.has(basename), false, `${file} conflita com ${basenames.get(basename)}`);
+    basenames.set(basename, file);
   }
 });
 

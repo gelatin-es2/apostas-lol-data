@@ -7,7 +7,7 @@ const assert = require('node:assert/strict');
 
 const dashboard = fs.readFileSync(path.resolve(__dirname, '../../dashboard/index.html'), 'utf8');
 const prompt = fs.readFileSync(path.resolve(__dirname, '../../scripts/bet-upload-codex-prompt.txt'), 'utf8');
-const registerApi = fs.readFileSync(path.resolve(__dirname, '../bets/register.cjs'), 'utf8');
+const registerApi = fs.readFileSync(path.resolve(__dirname, '../bets/register.js'), 'utf8');
 
 test('dashboard enfileira e acompanha todos os estados sem revisao humana', () => {
   assert.match(dashboard, /fetch\('\/api\/bets\/register'/);

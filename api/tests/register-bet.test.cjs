@@ -5,8 +5,8 @@ const assert = require('node:assert/strict');
 
 const { enqueueBetUpload } = require('../lib/register-bet.cjs');
 const { RegistrationError, parseImageDataUrl } = require('../lib/bet-extraction-contract.cjs');
-const { createHandler, createSupabaseGateway } = require('../bets/register.cjs');
-const { createStatusHandler } = require('../bets/upload-status.cjs');
+const { createHandler, createSupabaseGateway } = require('../bets/register.js');
+const { createStatusHandler } = require('../bets/upload-status.js');
 
 const PNG_DATA_URL = `data:image/png;base64,${Buffer.from('89504e470d0a1a0a00000000', 'hex').toString('base64')}`;
 const JOB_ID = '123e4567-e89b-42d3-a456-426614174000';
