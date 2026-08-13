@@ -20,7 +20,7 @@ test('funcoes Vercel apontam para entrypoints .js sem runtime legado explicito',
 });
 
 test('rotas publicadas possuem um unico handler .js sem basename conflitante', () => {
-  for (const route of ['register', 'upload-status']) {
+  for (const route of ['access', 'register', 'upload-status']) {
     const entryPath = path.resolve(__dirname, `../bets/${route}.js`);
     const conflictingPath = path.resolve(__dirname, `../bets/${route}.cjs`);
     assert.equal(fs.existsSync(entryPath), true, `entrypoint ausente: ${route}.js`);

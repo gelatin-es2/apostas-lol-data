@@ -88,6 +88,19 @@ test('claim envia worker e lease ao RPC atomico', async () => {
   assert.equal(calls[0].options.headers.Authorization, 'Bearer test-service-key');
 });
 
+test('list inclui description como contexto auditavel do job', async () => {
+  let requestedUrl;
+  const client = createJobClient({
+    env: TEST_ENV,
+    fetchImpl: async (url) => {
+      requestedUrl = url;
+      return jsonResponse([]);
+    },
+  });
+  assert.deepEqual(await client.list(), []);
+  assert.match(requestedUrl, /select=[^&]*description/);
+});
+
 test('finish aceita repeticao idempotente do mesmo resultado terminal', async () => {
   const calls = [];
   const terminal = { id: 'job-1', status: 'registered', bet_id: 'bet-1' };

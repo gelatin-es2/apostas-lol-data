@@ -2,6 +2,7 @@
 
 const { enqueueBetUpload } = require('../lib/register-bet.cjs');
 const { RegistrationError } = require('../lib/bet-extraction-contract.cjs');
+const { authenticateAccessCredential, credentialFromRequest } = require('../lib/bet-upload-auth.cjs');
 
 function env(name) {
   const value = process.env[name];
@@ -28,18 +29,27 @@ async function parseResponse(response) {
 function createSupabaseGateway(fetchImpl = fetch) {
   const url = env('SUPABASE_URL').replace(/\/$/, '');
   const secret = env('SUPABASE_SECRET_KEY');
-  const publishable = env('SUPABASE_PUBLISHABLE_KEY');
+  const publishable = process.env.SUPABASE_PUBLISHABLE_KEY || '';
   return {
-    async authenticate(token) {
+    async authenticate(credential) {
+      if (typeof credential === 'string') credential = { type: 'supabase', token: credential };
+      if (credential?.type === 'access_cookie') {
+        const user = authenticateAccessCredential(credential, process.env);
+        if (!user) throw new RegistrationError('unauthorized', 'Acesso expirado. Informe o codigo novamente.', 401);
+        return user;
+      }
+      const token = credential?.type === 'supabase' ? credential.token : '';
+      if (!token) throw new RegistrationError('unauthorized', 'Acesso necessario.', 401);
+      if (!publishable) throw new RegistrationError('unauthorized', 'Acesso expirado. Informe o codigo novamente.', 401);
       const response = await fetchImpl(`${url}/auth/v1/user`, {
         headers: { apikey: publishable, Authorization: `Bearer ${token}` },
       });
-      if (!response.ok) throw new RegistrationError('unauthorized', 'Sessao expirada. Entre novamente.', 401);
+      if (!response.ok) throw new RegistrationError('unauthorized', 'Acesso expirado. Informe o codigo novamente.', 401);
       const user = await response.json();
       const allowlist = env('BET_UPLOAD_ALLOWED_EMAILS')
         .split(',').map((item) => item.trim().toLowerCase()).filter(Boolean);
       if (!user.email || !allowlist.includes(user.email.toLowerCase())) {
-        throw new RegistrationError('forbidden', 'Este e-mail nao pode registrar apostas.', 403);
+        throw new RegistrationError('forbidden', 'Acesso negado.', 403);
       }
       return user;
     },
@@ -49,7 +59,7 @@ function createSupabaseGateway(fetchImpl = fetch) {
       return rows?.[0] || null;
     },
     async getJobForOwner(id, ownerId) {
-      const response = await fetchImpl(`${url}/rest/v1/bet_upload_jobs?id=eq.${encodeURIComponent(id)}&owner_id=eq.${encodeURIComponent(ownerId)}&select=id,status,bet_id,error_code,error_message,result,created_at,purge_after,screenshot_deleted_at,updated_at&limit=1`, { headers: headers(secret) });
+      const response = await fetchImpl(`${url}/rest/v1/bet_upload_jobs?id=eq.${encodeURIComponent(id)}&owner_id=eq.${encodeURIComponent(ownerId)}&select=id,status,description,bet_id,error_code,error_message,result,created_at,purge_after,screenshot_deleted_at,updated_at&limit=1`, { headers: headers(secret) });
       const rows = await parseResponse(response);
       return rows?.[0] || null;
     },
@@ -89,6 +99,7 @@ function publicJob(job) {
   return {
     id: job.id,
     status: job.status,
+    description: job.description || null,
     bet_id: job.bet_id || null,
     error_code: job.error_code || null,
     error_message: job.error_message || null,
@@ -103,11 +114,11 @@ function publicJob(job) {
 function createHandler(dependenciesFactory = createSupabaseGateway) {
   return async function registerHandler(req, res) {
     if (req.method !== 'POST') return send(res, 405, { ok: false, code: 'method_not_allowed' });
-    const token = String(req.headers.authorization || '').match(/^Bearer\s+(.+)$/i)?.[1] || '';
-    if (!token) return send(res, 401, { ok: false, code: 'unauthorized', message: 'Entre para enviar a aposta.' });
+    const credential = credentialFromRequest(req);
+    if (!credential) return send(res, 401, { ok: false, code: 'unauthorized', message: 'Informe o codigo de acesso.' });
     try {
       const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-      const result = await enqueueBetUpload({ token, imageDataUrl: body?.image_data_url }, dependenciesFactory());
+      const result = await enqueueBetUpload({ credential, imageDataUrl: body?.image_data_url, description: body?.description }, dependenciesFactory());
       return send(res, result.duplicate ? 200 : 202, { ...result, job: publicJob(result.job) });
     } catch (error) {
       if (error instanceof SyntaxError) return send(res, 400, { ok: false, code: 'invalid_json' });

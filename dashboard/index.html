@@ -826,21 +826,32 @@
       color: var(--muted);
     }
 
-    .register-card { max-width:620px; border:1px solid var(--border); border-radius:14px; padding:20px; background:var(--surface); }
-    .register-card h2 { margin:0 0 8px; font-size:20px; }
-    .register-card p { color:var(--muted); margin:0 0 16px; line-height:1.5; }
-    .register-auth-row { display:flex; gap:8px; align-items:end; }
-    .register-field { flex:1; }
-    .register-field label { display:block; color:var(--muted); font-size:12px; margin-bottom:6px; }
-    .register-field input { width:100%; box-sizing:border-box; border:1px solid var(--border); border-radius:9px; padding:11px 12px; background:var(--bg); color:var(--text); font:inherit; }
-    .register-button, .register-upload { border:0; border-radius:9px; padding:11px 16px; background:var(--accent); color:#fff; font:inherit; font-weight:700; cursor:pointer; }
+    .register-card { max-width:720px; border:1px solid var(--border); border-radius:16px; background:var(--card); overflow:hidden; }
+    .register-chat-head { padding:18px 20px 14px; border-bottom:1px solid var(--border); }
+    .register-chat-head h2 { margin:0 0 5px; font-size:20px; }
+    .register-chat-head p { color:var(--muted); margin:0; font-size:13px; line-height:1.45; }
+    .register-chat-log { min-height:290px; max-height:52vh; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:10px; background:color-mix(in srgb, var(--bg) 55%, transparent); }
+    .register-bubble { max-width:82%; padding:10px 13px; border-radius:14px; line-height:1.45; white-space:pre-wrap; overflow-wrap:anywhere; }
+    .register-bubble.assistant { align-self:flex-start; background:var(--card-2); border:1px solid var(--border); border-bottom-left-radius:4px; }
+    .register-bubble.user { align-self:flex-end; background:var(--accent); color:#fff; border-bottom-right-radius:4px; }
+    .register-bubble.status { align-self:flex-start; color:var(--muted); background:transparent; border:1px dashed var(--border); }
+    .register-bubble.status.success { color:var(--green); border-style:solid; }
+    .register-bubble.status.error { color:var(--red); border-style:solid; }
+    .register-bubble img { display:block; max-width:260px; max-height:260px; object-fit:contain; border-radius:9px; margin-bottom:8px; background:#0d1015; }
+    .register-access { padding:14px 18px; border-top:1px solid var(--border); background:var(--card-2); }
+    .register-access p { margin:0 0 9px; color:var(--muted); font-size:13px; }
+    .register-access-row { display:flex; gap:8px; }
+    .register-access input, .register-description { width:100%; box-sizing:border-box; border:1px solid var(--border); border-radius:10px; padding:10px 12px; background:var(--bg); color:var(--text); font:inherit; }
+    .register-composer { padding:14px; border-top:1px solid var(--border); }
+    .register-preview-wrap { display:none; position:relative; width:max-content; max-width:100%; margin-bottom:10px; }
+    .register-preview { display:block; width:auto; max-width:180px; max-height:150px; object-fit:contain; border-radius:10px; background:#0d1015; }
+    .register-preview-remove { position:absolute; top:5px; right:5px; width:28px; height:28px; border:0; border-radius:50%; background:rgba(0,0,0,.72); color:#fff; cursor:pointer; }
+    .register-description { resize:vertical; min-height:68px; max-height:150px; }
+    .register-composer-actions { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:10px; }
+    .register-composer-hint { color:var(--muted); font-size:12px; }
+    .register-button { border:0; border-radius:10px; padding:10px 16px; background:var(--accent); color:#fff; font:inherit; font-weight:700; cursor:pointer; }
+    .register-button.secondary { background:var(--card-2); color:var(--text); border:1px solid var(--border); }
     .register-button:disabled { opacity:.55; cursor:wait; }
-    .register-upload { display:inline-block; text-align:center; }
-    .register-preview { display:none; width:100%; max-height:420px; object-fit:contain; margin-top:16px; border-radius:10px; background:#0d1015; }
-    .register-status { min-height:24px; margin-top:14px; font-weight:700; }
-    .register-status.error { color:var(--red); }
-    .register-status.success { color:var(--green); }
-    .register-session { color:var(--muted); font-size:13px; margin-bottom:14px; }
 
     /* ===== PARTE 6 — Mobile =====
        Fica por ÚLTIMO no stylesheet de propósito: regras de mesma especificidade
@@ -859,9 +870,12 @@
       .hero-figure .value { font-size: 40px; }
       .filter-bar { overflow-x: auto; margin-inline: -16px; padding-inline: 16px; }
       .rank-grid { grid-template-columns: 1fr; }
-      .register-card { padding:16px; }
-      .register-auth-row { align-items:stretch; flex-direction:column; }
-      .register-button, .register-upload { width:100%; box-sizing:border-box; }
+      .register-chat-head { padding:16px; }
+      .register-chat-log { min-height:260px; max-height:48vh; padding:14px; }
+      .register-bubble { max-width:90%; }
+      .register-access-row { flex-direction:column; }
+      .register-composer-actions { align-items:stretch; flex-wrap:wrap; }
+      .register-composer-hint { width:100%; }
     }
   </style>
 </head>
@@ -954,26 +968,34 @@
   </main>
 
   <main class="container tab-pane" data-pane="registrar">
-    <div class="register-card">
-      <h2>Registrar aposta</h2>
-      <p>O print fica privado por 14 dias e depois &#233; apagado automaticamente.</p>
-      <p>Envie o print. O Codex processa com as validações existentes e registra sem revisão manual.</p>
-      <div id="registerLoggedOut">
-        <div class="register-auth-row">
-          <div class="register-field">
-            <label for="registerEmail">Seu e-mail autorizado</label>
-            <input id="registerEmail" type="email" autocomplete="email" placeholder="voce@email.com">
-          </div>
-          <button class="register-button" id="registerMagicLink" type="button">Entrar por link</button>
+    <div class="register-card" id="registerChat">
+      <div class="register-chat-head">
+        <h2>Registrar aposta</h2>
+        <p>Conversa privada. O print fica salvo por 14 dias e depois é apagado.</p>
+      </div>
+      <div class="register-chat-log" id="registerChatLog" role="log" aria-live="polite">
+        <div class="register-bubble assistant">Mande o print da bet aqui. Você pode colar com Ctrl+V ou selecionar a imagem. Se quiser, escreva uma informação extra antes de enviar.</div>
+      </div>
+      <div class="register-access" id="registerAccess" hidden>
+        <p>Este navegador ainda não está autorizado.</p>
+        <div class="register-access-row">
+          <input id="registerAccessCode" type="password" autocomplete="one-time-code" maxlength="256" placeholder="Código de acesso" aria-label="Código de acesso">
+          <button class="register-button" id="registerUnlock" type="button">Liberar</button>
         </div>
       </div>
-      <div id="registerLoggedIn" style="display:none">
-        <div class="register-session" id="registerSession"></div>
-        <label class="register-upload" for="registerImage">Enviar print da bet</label>
+      <div class="register-composer" id="registerComposer">
+        <div class="register-preview-wrap" id="registerPreviewWrap">
+          <img class="register-preview" id="registerPreview" alt="Prévia do comprovante">
+          <button class="register-preview-remove" id="registerRemoveImage" type="button" aria-label="Remover imagem">×</button>
+        </div>
+        <textarea class="register-description" id="registerDescription" maxlength="500" placeholder="Informação extra (opcional)" aria-label="Informação extra"></textarea>
         <input id="registerImage" type="file" accept="image/png,image/jpeg,image/webp" hidden>
-        <img class="register-preview" id="registerPreview" alt="Prévia do comprovante enviado">
+        <div class="register-composer-actions">
+          <button class="register-button secondary" id="registerAttach" type="button">+ Imagem</button>
+          <span class="register-composer-hint">Cole com Ctrl+V · PNG, JPEG ou WebP · até 3 MB</span>
+          <button class="register-button" id="registerSend" type="button">Enviar</button>
+        </div>
       </div>
-      <div class="register-status" id="registerStatus" role="status" aria-live="polite"></div>
     </div>
   </main>
 
@@ -1081,139 +1103,224 @@
 
     const sb = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
-    const registerLoggedOut = document.getElementById('registerLoggedOut');
-    const registerLoggedIn = document.getElementById('registerLoggedIn');
-    const registerStatus = document.getElementById('registerStatus');
+    const registerChat = document.getElementById('registerChat');
+    const registerChatLog = document.getElementById('registerChatLog');
+    const registerAccess = document.getElementById('registerAccess');
+    const registerAccessCode = document.getElementById('registerAccessCode');
+    const registerComposer = document.getElementById('registerComposer');
     const registerImage = document.getElementById('registerImage');
     const registerPreview = document.getElementById('registerPreview');
+    const registerPreviewWrap = document.getElementById('registerPreviewWrap');
+    const registerDescription = document.getElementById('registerDescription');
+    const registerSend = document.getElementById('registerSend');
     let registerBusy = false;
     let registerPollTimer = null;
+    let registerDataUrl = '';
+    let registerAuthHeaders = null;
+    let registerLastJobStatus = '';
 
-    function setRegisterStatus(text, type = '') {
-      registerStatus.textContent = text;
-      registerStatus.className = `register-status${type ? ` ${type}` : ''}`;
+    function addRegisterBubble(text, type = 'status', statusKey = '') {
+      if (statusKey && statusKey === registerLastJobStatus) return;
+      if (statusKey) registerLastJobStatus = statusKey;
+      const bubble = document.createElement('div');
+      bubble.className = `register-bubble ${type}`;
+      bubble.textContent = text;
+      registerChatLog.appendChild(bubble);
+      registerChatLog.scrollTop = registerChatLog.scrollHeight;
+      return bubble;
     }
 
-    async function refreshRegisterSession() {
-      const { data } = await sb.auth.getSession();
-      const session = data.session;
-      registerLoggedOut.style.display = session ? 'none' : '';
-      registerLoggedIn.style.display = session ? '' : 'none';
-      document.getElementById('registerSession').textContent = session
-        ? `Conectado como ${session.user.email}`
-        : '';
-      return session;
+    function setRegisterComposerEnabled(enabled) {
+      for (const control of registerComposer.querySelectorAll('button, textarea, input')) control.disabled = !enabled || registerBusy;
     }
 
-    async function pollRegisterJob(jobId, session) {
+    async function refreshRegisterAccess() {
+      registerAuthHeaders = null;
+      try {
+        const response = await fetch('/api/bets/access', { credentials: 'same-origin', cache: 'no-store' });
+        if (response.ok) registerAuthHeaders = {};
+      } catch {}
+      if (!registerAuthHeaders) {
+        const { data } = await sb.auth.getSession();
+        if (data.session?.access_token) registerAuthHeaders = { Authorization: `Bearer ${data.session.access_token}` };
+      }
+      registerAccess.hidden = Boolean(registerAuthHeaders);
+      setRegisterComposerEnabled(Boolean(registerAuthHeaders));
+      return registerAuthHeaders;
+    }
+
+    function clearRegisterImage() {
+      registerDataUrl = '';
+      registerImage.value = '';
+      registerPreview.removeAttribute('src');
+      registerPreviewWrap.style.display = 'none';
+    }
+
+    async function selectRegisterImage(file) {
+      if (!file || registerBusy) return;
+      if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type) || file.size > 3 * 1024 * 1024) {
+        clearRegisterImage();
+        return addRegisterBubble('Use PNG, JPEG ou WebP com no máximo 3 MB.', 'status error');
+      }
+      try {
+        registerDataUrl = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(String(reader.result));
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+        registerPreview.src = registerDataUrl;
+        registerPreviewWrap.style.display = 'block';
+      } catch {
+        clearRegisterImage();
+        addRegisterBubble('Não consegui abrir a imagem. Tente outro print.', 'status error');
+      }
+    }
+
+    function addRegisterUserMessage(dataUrl, description) {
+      const bubble = document.createElement('div');
+      bubble.className = 'register-bubble user';
+      const image = document.createElement('img');
+      image.src = dataUrl;
+      image.alt = 'Print da aposta enviado';
+      bubble.appendChild(image);
+      if (description) bubble.appendChild(document.createTextNode(description));
+      registerChatLog.appendChild(bubble);
+      registerChatLog.scrollTop = registerChatLog.scrollHeight;
+    }
+
+    async function pollRegisterJob(jobId) {
       clearTimeout(registerPollTimer);
       try {
         const response = await fetch(`/api/bets/upload-status?id=${encodeURIComponent(jobId)}`, {
-          headers: { Authorization: `Bearer ${session.access_token}` },
+          headers: registerAuthHeaders || {},
+          credentials: 'same-origin',
           cache: 'no-store',
         });
         const result = await response.json();
+        if (response.status === 401) {
+          await refreshRegisterAccess();
+          addRegisterBubble('A autorização expirou. Informe o código para continuar.', 'status error', 'unauthorized');
+          return;
+        }
         if (!response.ok || !result.ok) throw new Error(result.message || 'Falha ao consultar processamento.');
         const job = result.job;
         if (job.status === 'queued') {
-          setRegisterStatus('Enfileirada. Aguardando o Codex…');
+          addRegisterBubble('Recebi. Sua aposta está na fila.', 'status', 'queued');
         } else if (job.status === 'processing') {
-          setRegisterStatus('Processando e validando…');
+          addRegisterBubble('Estou lendo o print e validando a partida…', 'status', 'processing');
         } else if (job.status === 'registered') {
           localStorage.removeItem('betUploadJobId');
-          setRegisterStatus('Aposta registrada como pendente.', 'success');
+          addRegisterBubble('Aposta registrada como pendente.', 'status success', 'registered');
           currentFilter = 'pending';
           document.querySelectorAll('.filters .chip').forEach((chip) => {
             chip.classList.toggle('active', chip.dataset.filter === 'pending');
           });
           await load();
-          document.querySelector('.tab[data-tab="tracker"]')?.click();
+          setTimeout(() => document.querySelector('.tab[data-tab="tracker"]')?.click(), 900);
           return;
         } else if (job.status === 'rejected') {
           localStorage.removeItem('betUploadJobId');
-          setRegisterStatus(job.error_message || 'Não consegui confirmar. Envie outro print.', 'error');
+          addRegisterBubble(job.error_message || 'Não consegui confirmar. Envie outro print mais claro.', 'status error', 'rejected');
           return;
         } else if (job.status === 'error') {
           localStorage.removeItem('betUploadJobId');
-          setRegisterStatus('Falha técnica no processamento. Envie novamente.', 'error');
+          addRegisterBubble('Falha técnica no processamento. Envie novamente.', 'status error', 'error');
           return;
         }
-        registerPollTimer = setTimeout(() => pollRegisterJob(jobId, session), 3000);
+        registerPollTimer = setTimeout(() => pollRegisterJob(jobId), 3000);
       } catch (error) {
-        setRegisterStatus(error.message || 'Falha ao consultar processamento.', 'error');
-        registerPollTimer = setTimeout(() => pollRegisterJob(jobId, session), 8000);
+        addRegisterBubble(error.message || 'Falha ao consultar processamento. Vou tentar novamente.', 'status error', 'poll_error');
+        registerPollTimer = setTimeout(() => pollRegisterJob(jobId), 8000);
       }
     }
 
-    document.getElementById('registerMagicLink').addEventListener('click', async () => {
-      const button = document.getElementById('registerMagicLink');
-      const email = document.getElementById('registerEmail').value.trim();
-      if (!email) return setRegisterStatus('Digite seu e-mail.', 'error');
+    document.getElementById('registerUnlock').addEventListener('click', async () => {
+      const button = document.getElementById('registerUnlock');
+      const code = registerAccessCode.value.trim();
+      if (!code) return addRegisterBubble('Informe o código de acesso.', 'status error');
       button.disabled = true;
-      const { error } = await sb.auth.signInWithOtp({
-        email,
-        options: { emailRedirectTo: `${location.origin}${location.pathname}` },
-      });
-      button.disabled = false;
-      setRegisterStatus(
-        error ? `Não consegui enviar o link: ${error.message}` : 'Link enviado. Abra seu e-mail para entrar.',
-        error ? 'error' : 'success',
-      );
-    });
-
-    registerImage.addEventListener('change', async () => {
-      const file = registerImage.files?.[0];
-      if (!file || registerBusy) return;
-      if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type) || file.size > 3 * 1024 * 1024) {
-        registerImage.value = '';
-        return setRegisterStatus('Use PNG, JPEG ou WebP com no máximo 3 MB.', 'error');
+      try {
+        const response = await fetch('/api/bets/access', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code }),
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error(result.message || 'Código inválido.');
+        registerAccessCode.value = '';
+        await refreshRegisterAccess();
+        addRegisterBubble('Acesso liberado. Pode mandar o print.', 'assistant');
+        const jobId = localStorage.getItem('betUploadJobId');
+        if (jobId) pollRegisterJob(jobId);
+      } catch (error) {
+        addRegisterBubble(error.message || 'Não consegui liberar o acesso.', 'status error');
+      } finally {
+        button.disabled = false;
       }
-      const session = await refreshRegisterSession();
-      if (!session) return setRegisterStatus('Entre por e-mail antes de enviar o print.', 'error');
-
-      registerBusy = true;
-      registerImage.disabled = true;
-      const reader = new FileReader();
-      reader.onload = async () => {
-        const dataUrl = String(reader.result);
-        registerPreview.src = dataUrl;
-        registerPreview.style.display = 'block';
-        setRegisterStatus('Enviando o comprovante…');
-        try {
-          const response = await fetch('/api/bets/register', {
-            method: 'POST',
-            headers: {
-              Authorization: `Bearer ${session.access_token}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ image_data_url: dataUrl }),
-          });
-          const result = await response.json();
-          if (!response.ok || !result.ok) throw new Error(result.message || 'Envie outro print.');
-          localStorage.setItem('betUploadJobId', result.job.id);
-          setRegisterStatus(result.job.status === 'processing' ? 'Processando e validando…' : 'Enfileirada. Aguardando o Codex…');
-          pollRegisterJob(result.job.id, session);
-        } catch (error) {
-          setRegisterStatus(error.message || 'Não consegui confirmar. Envie outro print.', 'error');
-        } finally {
-          registerBusy = false;
-          registerImage.disabled = false;
-          registerImage.value = '';
-        }
-      };
-      reader.onerror = () => {
-        registerBusy = false;
-        registerImage.disabled = false;
-        registerImage.value = '';
-        setRegisterStatus('Não consegui abrir a imagem. Envie outro print.', 'error');
-      };
-      reader.readAsDataURL(file);
     });
 
-    sb.auth.onAuthStateChange(() => refreshRegisterSession());
-    refreshRegisterSession().then((session) => {
+    document.getElementById('registerAttach').addEventListener('click', () => registerImage.click());
+    document.getElementById('registerRemoveImage').addEventListener('click', clearRegisterImage);
+    registerImage.addEventListener('change', () => selectRegisterImage(registerImage.files?.[0]));
+    document.addEventListener('paste', (event) => {
+      const registerPane = document.querySelector('.tab-pane[data-pane="registrar"]');
+      if (!registerPane?.classList.contains('active')) return;
+      const imageItem = [...(event.clipboardData?.items || [])].find((item) => item.kind === 'file' && item.type.startsWith('image/'));
+      if (!imageItem) return;
+      event.preventDefault();
+      selectRegisterImage(imageItem.getAsFile());
+    });
+
+    registerSend.addEventListener('click', async () => {
+      if (registerBusy) return;
+      if (!registerAuthHeaders && !(await refreshRegisterAccess())) {
+        registerAccessCode.focus();
+        return addRegisterBubble('Informe o código de acesso para enviar.', 'status error');
+      }
+      if (!registerDataUrl) return addRegisterBubble('Cole ou selecione o print da bet primeiro.', 'status error');
+      const description = registerDescription.value.trim();
+      const dataUrl = registerDataUrl;
+      addRegisterUserMessage(dataUrl, description);
+      registerLastJobStatus = '';
+      registerBusy = true;
+      setRegisterComposerEnabled(true);
+      addRegisterBubble('Enviando o comprovante…', 'status', 'sending');
+      try {
+        const response = await fetch('/api/bets/register', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { ...(registerAuthHeaders || {}), 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image_data_url: dataUrl, description }),
+        });
+        const result = await response.json();
+        if (response.status === 401) {
+          await refreshRegisterAccess();
+          throw new Error('A autorização expirou. Informe o código novamente.');
+        }
+        if (!response.ok || !result.ok) throw new Error(result.message || 'Envie outro print.');
+        localStorage.setItem('betUploadJobId', result.job.id);
+        clearRegisterImage();
+        registerDescription.value = '';
+        registerLastJobStatus = '';
+        addRegisterBubble(result.job.status === 'processing' ? 'Estou lendo o print e validando a partida…' : 'Recebi. Sua aposta está na fila.', 'status', result.job.status);
+        pollRegisterJob(result.job.id);
+      } catch (error) {
+        addRegisterBubble(error.message || 'Não consegui enviar. Tente novamente.', 'status error', 'send_error');
+      } finally {
+        registerBusy = false;
+        setRegisterComposerEnabled(Boolean(registerAuthHeaders));
+      }
+    });
+
+    registerAccessCode.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') document.getElementById('registerUnlock').click();
+    });
+    sb.auth.onAuthStateChange(() => refreshRegisterAccess());
+    refreshRegisterAccess().then((authHeaders) => {
       const jobId = localStorage.getItem('betUploadJobId');
-      if (session && jobId) pollRegisterJob(jobId, session);
+      if (authHeaders && jobId) pollRegisterJob(jobId);
     });
 
     const fmtMoney = (n) =>

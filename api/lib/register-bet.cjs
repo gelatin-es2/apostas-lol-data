@@ -1,15 +1,17 @@
 'use strict';
 
-const { parseImageDataUrl, RegistrationError } = require('./bet-extraction-contract.cjs');
+const { parseImageDataUrl, RegistrationError, sanitizeDescription } = require('./bet-extraction-contract.cjs');
 
 async function enqueueBetUpload(input, deps) {
   if (!deps || typeof deps !== 'object') throw new TypeError('deps são obrigatórias');
-  const token = typeof input?.token === 'string' ? input.token.trim() : '';
-  if (!token) throw new RegistrationError('unauthorized', 'Entre com seu e-mail para enviar.', 401);
-  const user = await deps.authenticate(token);
-  if (!user?.id || !user?.email) throw new RegistrationError('forbidden', 'Usuário não autorizado.', 403);
+  const legacyToken = typeof input?.token === 'string' ? input.token.trim() : '';
+  const credential = input?.credential || (legacyToken ? { type: 'supabase', token: legacyToken } : null);
+  if (!credential) throw new RegistrationError('unauthorized', 'Informe o codigo de acesso.', 401);
+  const user = await deps.authenticate(credential);
+  if (!user?.id) throw new RegistrationError('forbidden', 'Usuario nao autorizado.', 403);
 
   const image = parseImageDataUrl(input.imageDataUrl);
+  const description = sanitizeDescription(input.description);
   const existing = await deps.findJobByHash(image.hash);
   if (existing) {
     if (existing.owner_id !== user.id) {
@@ -28,6 +30,7 @@ async function enqueueBetUpload(input, deps) {
       ingestion_hash: image.hash,
       storage_path: storagePath,
       mime_type: image.mimeType,
+      description,
       status: 'queued',
     });
     return { ok: true, duplicate: false, job };

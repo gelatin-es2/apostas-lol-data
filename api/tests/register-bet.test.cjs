@@ -4,9 +4,10 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const { enqueueBetUpload } = require('../lib/register-bet.cjs');
-const { RegistrationError, parseImageDataUrl } = require('../lib/bet-extraction-contract.cjs');
+const { RegistrationError, parseImageDataUrl, sanitizeDescription } = require('../lib/bet-extraction-contract.cjs');
 const { createHandler, createSupabaseGateway } = require('../bets/register.js');
 const { createStatusHandler } = require('../bets/upload-status.js');
+const { createAccessSession } = require('../lib/bet-upload-auth.cjs');
 
 const PNG_DATA_URL = `data:image/png;base64,${Buffer.from('89504e470d0a1a0a00000000', 'hex').toString('base64')}`;
 const JOB_ID = '123e4567-e89b-42d3-a456-426614174000';
@@ -50,9 +51,23 @@ test('enqueue salva print privado e cria somente job queued', async () => {
   assert.equal(calls.upload.length, 1);
   assert.equal(calls.create.length, 1);
   assert.match(calls.create[0].storage_path, /^user-1\/[a-f0-9]{64}\.png$/);
-  assert.deepEqual(Object.keys(calls.create[0]).sort(), ['ingestion_hash', 'mime_type', 'owner_id', 'status', 'storage_path']);
+  assert.deepEqual(Object.keys(calls.create[0]).sort(), ['description', 'ingestion_hash', 'mime_type', 'owner_id', 'status', 'storage_path']);
+  assert.equal(calls.create[0].description, null);
   assert.equal('insertBet' in deps, false);
   assert.equal('extract' in deps, false);
+});
+
+test('descricao opcional e sanitizada e armazenada separada da imagem', async () => {
+  const { deps, calls } = makeDeps();
+  await enqueueBetUpload({
+    token: 'valid',
+    imageDataUrl: PNG_DATA_URL,
+    description: '  mapa 2\u0000   depois do draft  ',
+  }, deps);
+  assert.equal(calls.create[0].description, 'mapa 2 depois do draft');
+  assert.equal(sanitizeDescription('   '), null);
+  assert.throws(() => sanitizeDescription('a'.repeat(501)), (error) => error.code === 'invalid_description');
+  assert.throws(() => sanitizeDescription({ text: 'unsafe' }), (error) => error.code === 'invalid_description');
 });
 
 test('mesmo hash do mesmo owner retorna job existente sem novo upload', async () => {
@@ -135,7 +150,7 @@ test('endpoint retorna 202 com job, sem processar aposta no request', async () =
   assert.equal(response.body.job.owner_id, undefined);
 });
 
-test('endpoint sem bearer retorna 401 antes de criar dependencias', async () => {
+test('endpoint sem cookie nem bearer retorna 401 antes de criar dependencias', async () => {
   let created = false;
   const response = fakeResponse();
   await createHandler(() => { created = true; return {}; })({
@@ -143,6 +158,25 @@ test('endpoint sem bearer retorna 401 antes de criar dependencias', async () => 
   }, response);
   assert.equal(response.statusCode, 401);
   assert.equal(created, false);
+});
+
+test('endpoint aceita cookie HttpOnly como credencial e repassa descricao', async () => {
+  let authenticatedWith;
+  const { deps, calls } = makeDeps({
+    authenticate: async (credential) => {
+      authenticatedWith = credential;
+      return { id: 'user-1' };
+    },
+  });
+  const response = fakeResponse();
+  await createHandler(() => deps)({
+    method: 'POST',
+    headers: { cookie: 'bet_upload_session=signed-cookie' },
+    body: { image_data_url: PNG_DATA_URL, description: '  contexto  ' },
+  }, response);
+  assert.equal(response.statusCode, 202);
+  assert.deepEqual(authenticatedWith, { type: 'access_cookie', token: 'signed-cookie' });
+  assert.equal(calls.create[0].description, 'contexto');
 });
 
 test('gateway autentica pelo bearer e aplica allowlist de email', async () => {
@@ -170,6 +204,35 @@ test('gateway autentica pelo bearer e aplica allowlist de email', async () => {
       json: async () => ({ id: 'user-2', email: 'outsider@example.com' }),
     }));
     await assert.rejects(denied.authenticate('other-token'), (error) => error.code === 'forbidden');
+  } finally {
+    for (const name of names) {
+      if (previous[name] === undefined) delete process.env[name];
+      else process.env[name] = previous[name];
+    }
+  }
+});
+
+test('gateway valida cookie assinado localmente sem chamar Supabase Auth', async () => {
+  const names = ['SUPABASE_URL', 'SUPABASE_SECRET_KEY', 'BET_UPLOAD_OWNER_ID', 'BET_UPLOAD_SESSION_SECRET'];
+  const previous = Object.fromEntries(names.map((name) => [name, process.env[name]]));
+  const ownerId = '123e4567-e89b-42d3-a456-426614174000';
+  const secret = '0123456789abcdef0123456789abcdef';
+  Object.assign(process.env, {
+    SUPABASE_URL: 'https://fake.supabase.test',
+    SUPABASE_SECRET_KEY: 'fake-secret',
+    BET_UPLOAD_OWNER_ID: ownerId,
+    BET_UPLOAD_SESSION_SECRET: secret,
+  });
+  let fetchCalls = 0;
+  try {
+    const gateway = createSupabaseGateway(async () => { fetchCalls += 1; throw new Error('nao deveria chamar rede'); });
+    const token = createAccessSession({ ownerId, secret });
+    assert.deepEqual(await gateway.authenticate({ type: 'access_cookie', token }), { id: ownerId, source: 'access_cookie' });
+    assert.equal(fetchCalls, 0);
+    await assert.rejects(
+      gateway.authenticate({ type: 'access_cookie', token: `${token}tampered` }),
+      (error) => error.code === 'unauthorized',
+    );
   } finally {
     for (const name of names) {
       if (previous[name] === undefined) delete process.env[name];

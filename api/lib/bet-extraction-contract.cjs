@@ -3,6 +3,7 @@
 const crypto = require('crypto');
 
 const MAX_IMAGE_BYTES = 3 * 1024 * 1024;
+const MAX_DESCRIPTION_LENGTH = 500;
 const ALLOWED_IMAGES = {
   'image/png': { extension: 'png', signature: (b) => b.length >= 8 && b.subarray(0, 8).equals(Buffer.from('89504e470d0a1a0a', 'hex')) },
   'image/jpeg': { extension: 'jpg', signature: (b) => b.length >= 3 && b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff },
@@ -42,4 +43,23 @@ function parseImageDataUrl(value) {
   };
 }
 
-module.exports = { MAX_IMAGE_BYTES, RegistrationError, parseImageDataUrl };
+function sanitizeDescription(value) {
+  if (value === undefined || value === null || value === '') return null;
+  if (typeof value !== 'string') {
+    throw new RegistrationError('invalid_description', 'A informacao extra precisa ser texto.', 400);
+  }
+  const sanitized = value
+    .normalize('NFKC')
+    .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '')
+    .replace(/\r\n?/g, '\n')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+  if (!sanitized) return null;
+  if ([...sanitized].length > MAX_DESCRIPTION_LENGTH) {
+    throw new RegistrationError('invalid_description', `A informacao extra pode ter no maximo ${MAX_DESCRIPTION_LENGTH} caracteres.`, 400);
+  }
+  return sanitized;
+}
+
+module.exports = { MAX_DESCRIPTION_LENGTH, MAX_IMAGE_BYTES, RegistrationError, parseImageDataUrl, sanitizeDescription };

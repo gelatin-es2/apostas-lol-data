@@ -49,7 +49,7 @@ function createJobClient({ fetchImpl = fetch, env = process.env, loadConfig } = 
   const config = configFromEnv(env, { loadConfig });
   return {
     async list() {
-      const response = await fetchImpl(`${config.url}/rest/v1/bet_upload_jobs?select=id,status,storage_path,mime_type,attempts,created_at,purge_after,screenshot_deleted_at,updated_at,lease_expires_at,error_code&status=in.(queued,processing)&order=created_at.asc`, { headers: headers(config.key) });
+      const response = await fetchImpl(`${config.url}/rest/v1/bet_upload_jobs?select=id,status,storage_path,mime_type,description,attempts,created_at,purge_after,screenshot_deleted_at,updated_at,lease_expires_at,error_code&status=in.(queued,processing)&order=created_at.asc`, { headers: headers(config.key) });
       return jsonResponse(response);
     },
     async claim(workerId, leaseSeconds = 900) {

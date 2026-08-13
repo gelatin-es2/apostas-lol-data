@@ -35,6 +35,7 @@ _change-log.md
 
 # Bet screenshots (Bet Logger) — fica local, não commita
 cron-data/bet-screenshots/
+cron-data/bet-upload-work/
 
 # Gerado por rebuild_dashboard_stats_cron.cjs — não versionar
 cron-data/ml_picks.js
@@ -66,3 +67,4 @@ cron-data/polymarket-history/
 # Backups locais de produÃ§Ã£o â€” contÃªm dados completos e nunca sÃ£o versionados
 backups/
 .claude/scripts/tests/tmp/
+.vercel

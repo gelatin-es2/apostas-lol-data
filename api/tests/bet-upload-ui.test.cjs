@@ -8,6 +8,10 @@ const assert = require('node:assert/strict');
 const dashboard = fs.readFileSync(path.resolve(__dirname, '../../dashboard/index.html'), 'utf8');
 const prompt = fs.readFileSync(path.resolve(__dirname, '../../scripts/bet-upload-codex-prompt.txt'), 'utf8');
 const registerApi = fs.readFileSync(path.resolve(__dirname, '../bets/register.js'), 'utf8');
+const registerMarkup = dashboard.slice(
+  dashboard.indexOf('<main class="container tab-pane" data-pane="registrar">'),
+  dashboard.indexOf('<main class="container tab-pane" data-pane="tracker">'),
+);
 
 test('dashboard enfileira e acompanha todos os estados sem revisao humana', () => {
   assert.match(dashboard, /fetch\('\/api\/bets\/register'/);
@@ -28,10 +32,50 @@ test('feature nao depende de OpenAI e prompt obriga skill canonica', () => {
 });
 
 test('UI informa 14 dias e automacao executa purge restrito', () => {
-  assert.match(dashboard, /privado por 14 dias/);
+  assert.match(dashboard, /salvo por 14 dias/);
   assert.match(prompt, /bet-upload-jobs\.cjs purge codex-bet-purge 600 25/);
   assert.match(prompt, /somente o comando purge/);
   assert.match(registerApi, /purge_after,screenshot_deleted_at/);
+});
+
+test('registrar e chat com paste, fallback de arquivo, preview e descricao opcional', () => {
+  assert.match(registerMarkup, /register-chat-log/);
+  assert.match(registerMarkup, /Informação extra \(opcional\)/);
+  assert.match(registerMarkup, /registerPreview/);
+  assert.match(registerMarkup, /\+ Imagem/);
+  assert.match(dashboard, /document\.addEventListener\('paste'/);
+  assert.match(dashboard, /event\.clipboardData/);
+  assert.match(dashboard, /body: JSON\.stringify\(\{ image_data_url: dataUrl, description \}\)/);
+  for (const message of ['Enviando o comprovante', 'está na fila', 'lendo o print', 'registrada como pendente', 'Envie outro print', 'Falha técnica']) {
+    assert.match(dashboard, new RegExp(message), `bolha ausente: ${message}`);
+  }
+});
+
+test('paste global so captura imagem quando a pane registrar esta ativa', () => {
+  const pasteStart = dashboard.indexOf("document.addEventListener('paste'");
+  const pasteEnd = dashboard.indexOf('\n    });', pasteStart) + '\n    });'.length;
+  const pasteHandler = dashboard.slice(pasteStart, pasteEnd);
+  assert.ok(pasteStart > 0, 'listener global de paste ausente');
+  assert.match(pasteHandler, /\.tab-pane\[data-pane="registrar"\]/);
+  assert.match(pasteHandler, /if \(!registerPane\?\.classList\.contains\('active'\)\) return/);
+  assert.match(pasteHandler, /item\.kind === 'file' && item\.type\.startsWith\('image\/'\)/);
+  assert.match(pasteHandler, /if \(!imageItem\) return;\s*event\.preventDefault\(\)/);
+  assert.doesNotMatch(pasteHandler, /preventDefault\(\)[\s\S]*if \(!imageItem\)/);
+});
+
+test('aba nao contem magic link/email e usa codigo trocado por cookie server-side', () => {
+  assert.doesNotMatch(registerMarkup, /e-mail|email|magic|link de acesso/i);
+  assert.doesNotMatch(dashboard, /signInWithOtp|registerMagicLink|registerEmail/);
+  assert.match(dashboard, /fetch\('\/api\/bets\/access'/);
+  assert.match(dashboard, /credentials: 'same-origin'/);
+  assert.doesNotMatch(dashboard, /BET_UPLOAD_ACCESS_CODE|BET_UPLOAD_SESSION_SECRET|BET_UPLOAD_OWNER_ID/);
+});
+
+test('descricao e contexto auxiliar e nunca substitui evidencia do print', () => {
+  assert.match(prompt, /description.*somente contexto auxiliar/);
+  assert.match(prompt, /nunca substitui evidencia do print/);
+  assert.match(prompt, /nunca relaxa validacoes/);
+  assert.match(prompt, /JSON minimo auditavel[\s\S]*description recebida/);
 });
 
 test('automacao limpa somente o TEMP local exato depois de estado terminal', () => {
