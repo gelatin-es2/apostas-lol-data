@@ -20,13 +20,15 @@ test('funcoes Vercel apontam para entrypoints .js sem runtime legado explicito',
 });
 
 test('rotas publicadas possuem um unico handler .js sem basename conflitante', () => {
-  for (const route of ['access', 'register', 'upload-status']) {
+  for (const route of ['register', 'upload-status']) {
     const entryPath = path.resolve(__dirname, `../bets/${route}.js`);
     const conflictingPath = path.resolve(__dirname, `../bets/${route}.cjs`);
     assert.equal(fs.existsSync(entryPath), true, `entrypoint ausente: ${route}.js`);
     assert.equal(fs.existsSync(conflictingPath), false, `handler conflitante: ${route}.cjs`);
     assert.equal(typeof require(entryPath), 'function');
   }
+  assert.equal(fs.existsSync(path.resolve(__dirname, '../bets/access.js')), false, 'rota de acesso removida nao pode voltar');
+  assert.equal(fs.existsSync(path.resolve(__dirname, '../lib/bet-upload-auth.cjs')), false, 'auth sem uso nao pode voltar');
 });
 
 test('api nao possui basenames duplicados entre extensoes de funcoes', () => {

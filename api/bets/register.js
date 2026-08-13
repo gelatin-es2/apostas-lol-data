@@ -2,7 +2,6 @@
 
 const { enqueueBetUpload } = require('../lib/register-bet.cjs');
 const { RegistrationError } = require('../lib/bet-extraction-contract.cjs');
-const { authenticateAccessCredential, credentialFromRequest } = require('../lib/bet-upload-auth.cjs');
 
 function env(name) {
   const value = process.env[name];
@@ -12,6 +11,27 @@ function env(name) {
 
 function headers(secret, extra = {}) {
   return { apikey: secret, Authorization: `Bearer ${secret}`, ...extra };
+}
+
+function requestIsSameSite(req) {
+  const fetchSite = String(req?.headers?.['sec-fetch-site'] || '').toLowerCase();
+  if (fetchSite && !['same-origin', 'same-site', 'none'].includes(fetchSite)) return false;
+  const origin = String(req?.headers?.origin || '').trim();
+  if (!origin) return true;
+  const host = String(req?.headers?.['x-forwarded-host'] || req?.headers?.host || '').split(',')[0].trim().toLowerCase();
+  try {
+    return Boolean(host) && new URL(origin).host.toLowerCase() === host;
+  } catch {
+    return false;
+  }
+}
+
+function ownerIdFromEnv(environment = process.env) {
+  const ownerId = typeof environment.BET_UPLOAD_OWNER_ID === 'string' ? environment.BET_UPLOAD_OWNER_ID.trim() : '';
+  if (!/^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(ownerId)) {
+    throw new Error('BET_UPLOAD_OWNER_ID invalido');
+  }
+  return ownerId;
 }
 
 async function parseResponse(response) {
@@ -29,30 +49,8 @@ async function parseResponse(response) {
 function createSupabaseGateway(fetchImpl = fetch) {
   const url = env('SUPABASE_URL').replace(/\/$/, '');
   const secret = env('SUPABASE_SECRET_KEY');
-  const publishable = process.env.SUPABASE_PUBLISHABLE_KEY || '';
   return {
-    async authenticate(credential) {
-      if (typeof credential === 'string') credential = { type: 'supabase', token: credential };
-      if (credential?.type === 'access_cookie') {
-        const user = authenticateAccessCredential(credential, process.env);
-        if (!user) throw new RegistrationError('unauthorized', 'Acesso expirado. Informe o codigo novamente.', 401);
-        return user;
-      }
-      const token = credential?.type === 'supabase' ? credential.token : '';
-      if (!token) throw new RegistrationError('unauthorized', 'Acesso necessario.', 401);
-      if (!publishable) throw new RegistrationError('unauthorized', 'Acesso expirado. Informe o codigo novamente.', 401);
-      const response = await fetchImpl(`${url}/auth/v1/user`, {
-        headers: { apikey: publishable, Authorization: `Bearer ${token}` },
-      });
-      if (!response.ok) throw new RegistrationError('unauthorized', 'Acesso expirado. Informe o codigo novamente.', 401);
-      const user = await response.json();
-      const allowlist = env('BET_UPLOAD_ALLOWED_EMAILS')
-        .split(',').map((item) => item.trim().toLowerCase()).filter(Boolean);
-      if (!user.email || !allowlist.includes(user.email.toLowerCase())) {
-        throw new RegistrationError('forbidden', 'Acesso negado.', 403);
-      }
-      return user;
-    },
+    ownerId: ownerIdFromEnv(),
     async findJobByHash(hash) {
       const response = await fetchImpl(`${url}/rest/v1/bet_upload_jobs?ingestion_hash=eq.${encodeURIComponent(hash)}&select=*&limit=1`, { headers: headers(secret) });
       const rows = await parseResponse(response);
@@ -91,6 +89,7 @@ function createSupabaseGateway(fetchImpl = fetch) {
 function send(res, status, body) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-store');
   res.end(JSON.stringify(body));
 }
 
@@ -114,11 +113,15 @@ function publicJob(job) {
 function createHandler(dependenciesFactory = createSupabaseGateway) {
   return async function registerHandler(req, res) {
     if (req.method !== 'POST') return send(res, 405, { ok: false, code: 'method_not_allowed' });
-    const credential = credentialFromRequest(req);
-    if (!credential) return send(res, 401, { ok: false, code: 'unauthorized', message: 'Informe o codigo de acesso.' });
+    if (!requestIsSameSite(req)) return send(res, 403, { ok: false, code: 'cross_site_request' });
     try {
       const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-      const result = await enqueueBetUpload({ credential, imageDataUrl: body?.image_data_url, description: body?.description }, dependenciesFactory());
+      const dependencies = dependenciesFactory();
+      const result = await enqueueBetUpload({
+        ownerId: dependencies.ownerId,
+        imageDataUrl: body?.image_data_url,
+        description: body?.description,
+      }, dependencies);
       return send(res, result.duplicate ? 200 : 202, { ...result, job: publicJob(result.job) });
     } catch (error) {
       if (error instanceof SyntaxError) return send(res, 400, { ok: false, code: 'invalid_json' });
@@ -134,3 +137,5 @@ module.exports.createHandler = createHandler;
 module.exports.createSupabaseGateway = createSupabaseGateway;
 module.exports.parseResponse = parseResponse;
 module.exports.publicJob = publicJob;
+module.exports.ownerIdFromEnv = ownerIdFromEnv;
+module.exports.requestIsSameSite = requestIsSameSite;

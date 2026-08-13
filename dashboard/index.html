@@ -975,14 +975,14 @@
       <div class="register-composer" id="registerComposer">
         <div class="register-preview-wrap" id="registerPreviewWrap">
           <img class="register-preview" id="registerPreview" alt="Prévia do comprovante">
-          <button class="register-preview-remove" id="registerRemoveImage" type="button" aria-label="Remover imagem" disabled>×</button>
+          <button class="register-preview-remove" id="registerRemoveImage" type="button" aria-label="Remover imagem">×</button>
         </div>
-        <textarea class="register-description" id="registerDescription" maxlength="500" placeholder="Informação extra (opcional)" aria-label="Informação extra" disabled></textarea>
-        <input id="registerImage" type="file" accept="image/png,image/jpeg,image/webp" hidden disabled>
+        <textarea class="register-description" id="registerDescription" maxlength="500" placeholder="Informação extra (opcional)" aria-label="Informação extra"></textarea>
+        <input id="registerImage" type="file" accept="image/png,image/jpeg,image/webp" hidden>
         <div class="register-composer-actions">
-          <button class="register-button secondary" id="registerAttach" type="button" disabled>+ Imagem</button>
+          <button class="register-button secondary" id="registerAttach" type="button">+ Imagem</button>
           <span class="register-composer-hint">Cole com Ctrl+V · PNG, JPEG ou WebP · até 3 MB</span>
-          <button class="register-button" id="registerSend" type="button" disabled>Enviar</button>
+          <button class="register-button" id="registerSend" type="button">Enviar</button>
         </div>
       </div>
     </div>
@@ -1103,7 +1103,6 @@
     let registerBusy = false;
     let registerPollTimer = null;
     let registerDataUrl = '';
-    let registerAuthHeaders = null;
     let registerLastJobStatus = '';
 
     function addRegisterBubble(text, type = 'status', statusKey = '') {
@@ -1119,21 +1118,6 @@
 
     function setRegisterComposerEnabled(enabled) {
       for (const control of registerComposer.querySelectorAll('button, textarea, input')) control.disabled = !enabled || registerBusy;
-    }
-
-    async function refreshRegisterAccess() {
-      registerAuthHeaders = null;
-      try {
-        const response = await fetch('/api/bets/access', { credentials: 'same-origin', cache: 'no-store' });
-        if (response.ok) registerAuthHeaders = {};
-      } catch {}
-      setRegisterComposerEnabled(Boolean(registerAuthHeaders));
-      if (!registerAuthHeaders) {
-        addRegisterBubble('Este navegador precisa ser liberado.', 'status', 'access_required');
-      } else if (registerLastJobStatus === 'access_required') {
-        registerLastJobStatus = '';
-      }
-      return registerAuthHeaders;
     }
 
     function clearRegisterImage() {
@@ -1180,16 +1164,9 @@
       clearTimeout(registerPollTimer);
       try {
         const response = await fetch(`/api/bets/upload-status?id=${encodeURIComponent(jobId)}`, {
-          headers: registerAuthHeaders || {},
-          credentials: 'same-origin',
           cache: 'no-store',
         });
         const result = await response.json();
-        if (response.status === 401) {
-          await refreshRegisterAccess();
-          addRegisterBubble('Este navegador precisa ser liberado.', 'status', 'access_required');
-          return;
-        }
         if (!response.ok || !result.ok) throw new Error(result.message || 'Falha ao consultar processamento.');
         const job = result.job;
         if (job.status === 'queued') {
@@ -1228,7 +1205,6 @@
     document.addEventListener('paste', (event) => {
       const registerPane = document.querySelector('.tab-pane[data-pane="registrar"]');
       if (!registerPane?.classList.contains('active')) return;
-      if (!registerAuthHeaders) return;
       const imageItem = [...(event.clipboardData?.items || [])].find((item) => item.kind === 'file' && item.type.startsWith('image/'));
       if (!imageItem) return;
       event.preventDefault();
@@ -1237,9 +1213,6 @@
 
     registerSend.addEventListener('click', async () => {
       if (registerBusy) return;
-      if (!registerAuthHeaders && !(await refreshRegisterAccess())) {
-        return addRegisterBubble('Este navegador precisa ser liberado.', 'status', 'access_required');
-      }
       if (!registerDataUrl) return addRegisterBubble('Cole ou selecione o print da bet primeiro.', 'status error');
       const description = registerDescription.value.trim();
       const dataUrl = registerDataUrl;
@@ -1251,15 +1224,10 @@
       try {
         const response = await fetch('/api/bets/register', {
           method: 'POST',
-          credentials: 'same-origin',
-          headers: { ...(registerAuthHeaders || {}), 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ image_data_url: dataUrl, description }),
         });
         const result = await response.json();
-        if (response.status === 401) {
-          await refreshRegisterAccess();
-          throw new Error('Este navegador precisa ser liberado.');
-        }
         if (!response.ok || !result.ok) throw new Error(result.message || 'Envie outro print.');
         localStorage.setItem('betUploadJobId', result.job.id);
         clearRegisterImage();
@@ -1271,14 +1239,12 @@
         addRegisterBubble(error.message || 'Não consegui enviar. Tente novamente.', 'status error', 'send_error');
       } finally {
         registerBusy = false;
-        setRegisterComposerEnabled(Boolean(registerAuthHeaders));
+        setRegisterComposerEnabled(true);
       }
     });
 
-    refreshRegisterAccess().then((authHeaders) => {
-      const jobId = localStorage.getItem('betUploadJobId');
-      if (authHeaders && jobId) pollRegisterJob(jobId);
-    });
+    const existingRegisterJobId = localStorage.getItem('betUploadJobId');
+    if (existingRegisterJobId) pollRegisterJob(existingRegisterJobId);
 
     const fmtMoney = (n) =>
       (n ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
