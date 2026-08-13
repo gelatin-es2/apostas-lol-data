@@ -1,6 +1,6 @@
 {
   "date": "2026-08-12",
-  "analyzed_at": "2026-08-12T12:47:01.064Z",
+  "analyzed_at": "2026-08-13T12:46:24.834Z",
   "ligas": [
     "LCK",
     "LPL",
@@ -8,7 +8,7 @@
     "CBLOL",
     "LCS"
   ],
-  "count": 7,
+  "count": 9,
   "results": [
     {
       "league": "LCK",
@@ -220,6 +220,68 @@
       "red_sample_n": 17,
       "league_baseline": 31.57,
       "vs_league": -1.07,
+      "under_hit": false
+    },
+    {
+      "league": "LPL",
+      "match_id": "116566854547769668",
+      "game_id": "116566854547769670",
+      "map_number": 2,
+      "team_blue": "JDG",
+      "team_red": "BLG",
+      "kills_blue": 7,
+      "kills_red": 15,
+      "total_kills": 22,
+      "sup_blue": "Milio",
+      "sup_red": "Rakan",
+      "peel_count": 1,
+      "peel_bucket": "1peel",
+      "flex_engages": [
+        "Rakan"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 32.5,
+      "fair_pinnacle": null,
+      "fair_formula": 32.5,
+      "fair_source": "formula(team+team)/2",
+      "fair_raw": 64.86,
+      "fair_adjusted": 32.5,
+      "blue_avg": 28.81,
+      "red_avg": 36.05,
+      "blue_sample_n": 21,
+      "red_sample_n": 19,
+      "league_baseline": 31.57,
+      "vs_league": 0.93,
+      "under_hit": true
+    },
+    {
+      "league": "LPL",
+      "match_id": "116566854547769668",
+      "game_id": "116566854547769671",
+      "map_number": 3,
+      "team_blue": "JDG",
+      "team_red": "BLG",
+      "kills_blue": 27,
+      "kills_red": 15,
+      "total_kills": 42,
+      "sup_blue": "Seraphine",
+      "sup_red": "Alistar",
+      "peel_count": 1,
+      "peel_bucket": "1peel",
+      "flex_engages": [],
+      "trigger_type": null,
+      "matchup_fair": 31.5,
+      "fair_pinnacle": null,
+      "fair_formula": 31.5,
+      "fair_source": "formula(team+team)/2",
+      "fair_raw": 62.86,
+      "fair_adjusted": 31.5,
+      "blue_avg": 27.86,
+      "red_avg": 35,
+      "blue_sample_n": 21,
+      "red_sample_n": 19,
+      "league_baseline": 31.57,
+      "vs_league": -0.07,
       "under_hit": false
     }
   ]
