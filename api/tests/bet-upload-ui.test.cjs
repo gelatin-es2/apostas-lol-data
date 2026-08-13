@@ -63,11 +63,15 @@ test('paste global so captura imagem quando a pane registrar esta ativa', () => 
   assert.doesNotMatch(pasteHandler, /preventDefault\(\)[\s\S]*if \(!imageItem\)/);
 });
 
-test('aba nao contem magic link/email e usa codigo trocado por cookie server-side', () => {
-  assert.doesNotMatch(registerMarkup, /e-mail|email|magic|link de acesso/i);
-  assert.doesNotMatch(dashboard, /signInWithOtp|registerMagicLink|registerEmail/);
+test('aba nao aceita segredo e exige cookie server-side invisivel', () => {
+  assert.doesNotMatch(registerMarkup, /e-mail|email|magic|link de acesso|código de acesso|type="password"|registerAccessCode|registerUnlock|>Liberar</i);
+  assert.doesNotMatch(dashboard, /signInWithOtp|registerMagicLink|registerEmail|method:\s*'POST'[\s\S]{0,300}\/api\/bets\/access/);
   assert.match(dashboard, /fetch\('\/api\/bets\/access'/);
   assert.match(dashboard, /credentials: 'same-origin'/);
+  assert.match(dashboard, /Este navegador precisa ser liberado\./);
+  assert.match(registerMarkup, /id="registerDescription"[^>]*disabled/);
+  assert.match(registerMarkup, /id="registerSend"[^>]*disabled/);
+  assert.match(dashboard, /setRegisterComposerEnabled\(Boolean\(registerAuthHeaders\)\)/);
   assert.doesNotMatch(dashboard, /BET_UPLOAD_ACCESS_CODE|BET_UPLOAD_SESSION_SECRET|BET_UPLOAD_OWNER_ID/);
 });
 

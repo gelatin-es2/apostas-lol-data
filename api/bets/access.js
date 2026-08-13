@@ -21,6 +21,7 @@ function createAccessHandler(env = process.env) {
       if (req.method === 'GET') {
         const credential = credentialFromRequest(req);
         const user = authenticateAccessCredential(credential, env);
+        if (user) res.setHeader('Set-Cookie', issueAccessCookie(env));
         return send(res, user ? 200 : 401, { ok: Boolean(user) });
       }
       if (req.method === 'DELETE') {

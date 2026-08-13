@@ -32,15 +32,20 @@ test('codigo forte vira cookie HttpOnly sem retornar segredo no body', async () 
   assert.equal(response.statusCode, 200);
   assert.deepEqual(response.body, { ok: true });
   assert.match(response.headers['Set-Cookie'], new RegExp(`^${COOKIE_NAME}=`));
-  for (const attribute of ['HttpOnly', 'Secure', 'SameSite=Lax', 'Path=/api/bets', 'Max-Age=2592000']) {
+  for (const attribute of ['HttpOnly', 'Secure', 'SameSite=Lax', 'Path=/api/bets', 'Max-Age=31536000']) {
     assert.match(response.headers['Set-Cookie'], new RegExp(attribute));
   }
   assert.doesNotMatch(JSON.stringify(response), new RegExp(ENV.BET_UPLOAD_ACCESS_CODE));
 });
 
-test('cookie assinado autoriza GET e adulteracao falha fechada', async () => {
+test('cookie assinado autoriza GET, e renovado silenciosamente por 365 dias', async () => {
   const now = Date.now();
-  const issued = createAccessSession({ ownerId: OWNER_ID, secret: ENV.BET_UPLOAD_SESSION_SECRET, now });
+  const issued = createAccessSession({
+    ownerId: OWNER_ID,
+    secret: ENV.BET_UPLOAD_SESSION_SECRET,
+    now,
+    maxAgeSeconds: 30 * 24 * 60 * 60,
+  });
   assert.deepEqual(verifyAccessSession(issued, { ownerId: OWNER_ID, secret: ENV.BET_UPLOAD_SESSION_SECRET, now: now + 1000 }), {
     id: OWNER_ID, source: 'access_cookie',
   });
@@ -49,9 +54,15 @@ test('cookie assinado autoriza GET e adulteracao falha fechada', async () => {
   const allowed = fakeResponse();
   await createAccessHandler(ENV)({ method: 'GET', headers: { cookie: `${COOKIE_NAME}=${issued}` } }, allowed);
   assert.equal(allowed.statusCode, 200);
+  assert.match(allowed.headers['Set-Cookie'], /^bet_upload_session=/);
+  assert.match(allowed.headers['Set-Cookie'], /Max-Age=31536000/);
+  for (const attribute of ['HttpOnly', 'Secure', 'SameSite=Lax', 'Path=/api/bets']) {
+    assert.match(allowed.headers['Set-Cookie'], new RegExp(attribute));
+  }
   const denied = fakeResponse();
   await createAccessHandler(ENV)({ method: 'GET', headers: { cookie: `${COOKIE_NAME}=${issued}x` } }, denied);
   assert.equal(denied.statusCode, 401);
+  assert.equal(denied.headers['Set-Cookie'], undefined);
 });
 
 test('credential prefere bearer existente e aceita cookie sem expor valor', () => {

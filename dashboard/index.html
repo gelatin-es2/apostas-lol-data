@@ -838,10 +838,7 @@
     .register-bubble.status.success { color:var(--green); border-style:solid; }
     .register-bubble.status.error { color:var(--red); border-style:solid; }
     .register-bubble img { display:block; max-width:260px; max-height:260px; object-fit:contain; border-radius:9px; margin-bottom:8px; background:#0d1015; }
-    .register-access { padding:14px 18px; border-top:1px solid var(--border); background:var(--card-2); }
-    .register-access p { margin:0 0 9px; color:var(--muted); font-size:13px; }
-    .register-access-row { display:flex; gap:8px; }
-    .register-access input, .register-description { width:100%; box-sizing:border-box; border:1px solid var(--border); border-radius:10px; padding:10px 12px; background:var(--bg); color:var(--text); font:inherit; }
+    .register-description { width:100%; box-sizing:border-box; border:1px solid var(--border); border-radius:10px; padding:10px 12px; background:var(--bg); color:var(--text); font:inherit; }
     .register-composer { padding:14px; border-top:1px solid var(--border); }
     .register-preview-wrap { display:none; position:relative; width:max-content; max-width:100%; margin-bottom:10px; }
     .register-preview { display:block; width:auto; max-width:180px; max-height:150px; object-fit:contain; border-radius:10px; background:#0d1015; }
@@ -873,7 +870,6 @@
       .register-chat-head { padding:16px; }
       .register-chat-log { min-height:260px; max-height:48vh; padding:14px; }
       .register-bubble { max-width:90%; }
-      .register-access-row { flex-direction:column; }
       .register-composer-actions { align-items:stretch; flex-wrap:wrap; }
       .register-composer-hint { width:100%; }
     }
@@ -976,24 +972,17 @@
       <div class="register-chat-log" id="registerChatLog" role="log" aria-live="polite">
         <div class="register-bubble assistant">Mande o print da bet aqui. Você pode colar com Ctrl+V ou selecionar a imagem. Se quiser, escreva uma informação extra antes de enviar.</div>
       </div>
-      <div class="register-access" id="registerAccess" hidden>
-        <p>Este navegador ainda não está autorizado.</p>
-        <div class="register-access-row">
-          <input id="registerAccessCode" type="password" autocomplete="one-time-code" maxlength="256" placeholder="Código de acesso" aria-label="Código de acesso">
-          <button class="register-button" id="registerUnlock" type="button">Liberar</button>
-        </div>
-      </div>
       <div class="register-composer" id="registerComposer">
         <div class="register-preview-wrap" id="registerPreviewWrap">
           <img class="register-preview" id="registerPreview" alt="Prévia do comprovante">
-          <button class="register-preview-remove" id="registerRemoveImage" type="button" aria-label="Remover imagem">×</button>
+          <button class="register-preview-remove" id="registerRemoveImage" type="button" aria-label="Remover imagem" disabled>×</button>
         </div>
-        <textarea class="register-description" id="registerDescription" maxlength="500" placeholder="Informação extra (opcional)" aria-label="Informação extra"></textarea>
-        <input id="registerImage" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+        <textarea class="register-description" id="registerDescription" maxlength="500" placeholder="Informação extra (opcional)" aria-label="Informação extra" disabled></textarea>
+        <input id="registerImage" type="file" accept="image/png,image/jpeg,image/webp" hidden disabled>
         <div class="register-composer-actions">
-          <button class="register-button secondary" id="registerAttach" type="button">+ Imagem</button>
+          <button class="register-button secondary" id="registerAttach" type="button" disabled>+ Imagem</button>
           <span class="register-composer-hint">Cole com Ctrl+V · PNG, JPEG ou WebP · até 3 MB</span>
-          <button class="register-button" id="registerSend" type="button">Enviar</button>
+          <button class="register-button" id="registerSend" type="button" disabled>Enviar</button>
         </div>
       </div>
     </div>
@@ -1105,8 +1094,6 @@
 
     const registerChat = document.getElementById('registerChat');
     const registerChatLog = document.getElementById('registerChatLog');
-    const registerAccess = document.getElementById('registerAccess');
-    const registerAccessCode = document.getElementById('registerAccessCode');
     const registerComposer = document.getElementById('registerComposer');
     const registerImage = document.getElementById('registerImage');
     const registerPreview = document.getElementById('registerPreview');
@@ -1140,12 +1127,12 @@
         const response = await fetch('/api/bets/access', { credentials: 'same-origin', cache: 'no-store' });
         if (response.ok) registerAuthHeaders = {};
       } catch {}
-      if (!registerAuthHeaders) {
-        const { data } = await sb.auth.getSession();
-        if (data.session?.access_token) registerAuthHeaders = { Authorization: `Bearer ${data.session.access_token}` };
-      }
-      registerAccess.hidden = Boolean(registerAuthHeaders);
       setRegisterComposerEnabled(Boolean(registerAuthHeaders));
+      if (!registerAuthHeaders) {
+        addRegisterBubble('Este navegador precisa ser liberado.', 'status', 'access_required');
+      } else if (registerLastJobStatus === 'access_required') {
+        registerLastJobStatus = '';
+      }
       return registerAuthHeaders;
     }
 
@@ -1200,7 +1187,7 @@
         const result = await response.json();
         if (response.status === 401) {
           await refreshRegisterAccess();
-          addRegisterBubble('A autorização expirou. Informe o código para continuar.', 'status error', 'unauthorized');
+          addRegisterBubble('Este navegador precisa ser liberado.', 'status', 'access_required');
           return;
         }
         if (!response.ok || !result.ok) throw new Error(result.message || 'Falha ao consultar processamento.');
@@ -1235,38 +1222,13 @@
       }
     }
 
-    document.getElementById('registerUnlock').addEventListener('click', async () => {
-      const button = document.getElementById('registerUnlock');
-      const code = registerAccessCode.value.trim();
-      if (!code) return addRegisterBubble('Informe o código de acesso.', 'status error');
-      button.disabled = true;
-      try {
-        const response = await fetch('/api/bets/access', {
-          method: 'POST',
-          credentials: 'same-origin',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ code }),
-        });
-        const result = await response.json();
-        if (!response.ok || !result.ok) throw new Error(result.message || 'Código inválido.');
-        registerAccessCode.value = '';
-        await refreshRegisterAccess();
-        addRegisterBubble('Acesso liberado. Pode mandar o print.', 'assistant');
-        const jobId = localStorage.getItem('betUploadJobId');
-        if (jobId) pollRegisterJob(jobId);
-      } catch (error) {
-        addRegisterBubble(error.message || 'Não consegui liberar o acesso.', 'status error');
-      } finally {
-        button.disabled = false;
-      }
-    });
-
     document.getElementById('registerAttach').addEventListener('click', () => registerImage.click());
     document.getElementById('registerRemoveImage').addEventListener('click', clearRegisterImage);
     registerImage.addEventListener('change', () => selectRegisterImage(registerImage.files?.[0]));
     document.addEventListener('paste', (event) => {
       const registerPane = document.querySelector('.tab-pane[data-pane="registrar"]');
       if (!registerPane?.classList.contains('active')) return;
+      if (!registerAuthHeaders) return;
       const imageItem = [...(event.clipboardData?.items || [])].find((item) => item.kind === 'file' && item.type.startsWith('image/'));
       if (!imageItem) return;
       event.preventDefault();
@@ -1276,8 +1238,7 @@
     registerSend.addEventListener('click', async () => {
       if (registerBusy) return;
       if (!registerAuthHeaders && !(await refreshRegisterAccess())) {
-        registerAccessCode.focus();
-        return addRegisterBubble('Informe o código de acesso para enviar.', 'status error');
+        return addRegisterBubble('Este navegador precisa ser liberado.', 'status', 'access_required');
       }
       if (!registerDataUrl) return addRegisterBubble('Cole ou selecione o print da bet primeiro.', 'status error');
       const description = registerDescription.value.trim();
@@ -1297,7 +1258,7 @@
         const result = await response.json();
         if (response.status === 401) {
           await refreshRegisterAccess();
-          throw new Error('A autorização expirou. Informe o código novamente.');
+          throw new Error('Este navegador precisa ser liberado.');
         }
         if (!response.ok || !result.ok) throw new Error(result.message || 'Envie outro print.');
         localStorage.setItem('betUploadJobId', result.job.id);
@@ -1314,10 +1275,6 @@
       }
     });
 
-    registerAccessCode.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') document.getElementById('registerUnlock').click();
-    });
-    sb.auth.onAuthStateChange(() => refreshRegisterAccess());
     refreshRegisterAccess().then((authHeaders) => {
       const jobId = localStorage.getItem('betUploadJobId');
       if (authHeaders && jobId) pollRegisterJob(jobId);

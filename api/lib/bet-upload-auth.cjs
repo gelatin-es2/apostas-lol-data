@@ -3,7 +3,7 @@
 const crypto = require('crypto');
 
 const COOKIE_NAME = 'bet_upload_session';
-const SESSION_MAX_AGE_SECONDS = 30 * 24 * 60 * 60;
+const SESSION_MAX_AGE_SECONDS = 365 * 24 * 60 * 60;
 
 function requiredEnv(env, name, minLength = 1) {
   const value = typeof env?.[name] === 'string' ? env[name].trim() : '';
