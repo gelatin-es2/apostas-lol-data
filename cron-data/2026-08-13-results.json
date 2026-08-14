@@ -1,6 +1,6 @@
 {
   "date": "2026-08-13",
-  "analyzed_at": "2026-08-13T12:47:56.412Z",
+  "analyzed_at": "2026-08-14T12:42:09.244Z",
   "ligas": [
     "LCK",
     "LPL",
@@ -8,7 +8,7 @@
     "CBLOL",
     "LCS"
   ],
-  "count": 10,
+  "count": 12,
   "results": [
     {
       "league": "LCK",
@@ -312,6 +312,70 @@
       "red_sample_n": 15,
       "league_baseline": 31.08,
       "vs_league": -0.58,
+      "under_hit": true
+    },
+    {
+      "league": "LPL",
+      "match_id": "116566854547769680",
+      "game_id": "116566854547769681",
+      "map_number": 1,
+      "team_blue": "BLG",
+      "team_red": "TT",
+      "kills_blue": 25,
+      "kills_red": 5,
+      "total_kills": 30,
+      "sup_blue": "Karma",
+      "sup_red": "Bard",
+      "peel_count": 1,
+      "peel_bucket": "1peel",
+      "flex_engages": [
+        "Bard"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 34.5,
+      "fair_pinnacle": null,
+      "fair_formula": 34.5,
+      "fair_source": "formula(team+team)/2",
+      "fair_raw": 68.19,
+      "fair_adjusted": 34.5,
+      "blue_avg": 35.19,
+      "red_avg": 33,
+      "blue_sample_n": 21,
+      "red_sample_n": 23,
+      "league_baseline": 31.08,
+      "vs_league": 3.42,
+      "under_hit": true
+    },
+    {
+      "league": "LPL",
+      "match_id": "116566854547769680",
+      "game_id": "116566854547769682",
+      "map_number": 2,
+      "team_blue": "BLG",
+      "team_red": "TT",
+      "kills_blue": 26,
+      "kills_red": 6,
+      "total_kills": 32,
+      "sup_blue": "Seraphine",
+      "sup_red": "Rakan",
+      "peel_count": 1,
+      "peel_bucket": "1peel",
+      "flex_engages": [
+        "Rakan"
+      ],
+      "trigger_type": "1peel+flex",
+      "matchup_fair": 34.5,
+      "fair_pinnacle": null,
+      "fair_formula": 34.5,
+      "fair_source": "formula(team+team)/2",
+      "fair_raw": 68.01,
+      "fair_adjusted": 34.5,
+      "blue_avg": 35.1,
+      "red_avg": 32.91,
+      "blue_sample_n": 21,
+      "red_sample_n": 23,
+      "league_baseline": 31.08,
+      "vs_league": 3.42,
       "under_hit": true
     }
   ]

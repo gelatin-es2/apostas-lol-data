@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-13T12:54:25.750Z",
+  "generated_at": "2026-08-14T12:45:50.630Z",
   "league": "LFL",
   "split_start": "2026-04-01",
-  "total_games_fetched": 131,
+  "total_games_fetched": 136,
   "fair_method": "livestats_team_avg(blue+red)-1, fallback 29.5",
   "stake": 100,
   "odd": 1.85,
@@ -24,22 +24,22 @@
   },
   "teams_2peel": [
     {
-      "name": "Vitality.Bee",
-      "n": 4,
-      "hit": 100
-    },
-    {
       "name": "TLN Pirates",
       "n": 5,
       "hit": 100
     },
     {
-      "name": "Esprit Shonen",
+      "name": "Vitality.Bee",
+      "n": 4,
+      "hit": 100
+    },
+    {
+      "name": "Joblife",
       "n": 4,
       "hit": 75
     },
     {
-      "name": "Joblife",
+      "name": "Esprit Shonen",
       "n": 4,
       "hit": 75
     },
@@ -118,13 +118,13 @@
       "hit": 83.3
     },
     {
-      "name": "Lulu",
-      "n": 10,
+      "name": "Karma",
+      "n": 5,
       "hit": 80
     },
     {
-      "name": "Karma",
-      "n": 5,
+      "name": "Lulu",
+      "n": 10,
       "hit": 80
     },
     {
@@ -172,18 +172,6 @@
   ],
   "champs_2peel": [
     {
-      "champ": "KSante",
-      "role": "top",
-      "n": 7,
-      "hit": 100
-    },
-    {
-      "champ": "Viktor",
-      "role": "mid",
-      "n": 5,
-      "hit": 100
-    },
-    {
       "champ": "Vi",
       "role": "jungle",
       "n": 4,
@@ -193,6 +181,18 @@
       "champ": "Lucian",
       "role": "adc",
       "n": 4,
+      "hit": 100
+    },
+    {
+      "champ": "KSante",
+      "role": "top",
+      "n": 7,
+      "hit": 100
+    },
+    {
+      "champ": "Viktor",
+      "role": "mid",
+      "n": 5,
       "hit": 100
     },
     {
@@ -220,12 +220,6 @@
       "hit": 80
     },
     {
-      "champ": "Ezreal",
-      "role": "adc",
-      "n": 8,
-      "hit": 75
-    },
-    {
       "champ": "Ambessa",
       "role": "top",
       "n": 4,
@@ -241,6 +235,12 @@
       "champ": "Ahri",
       "role": "mid",
       "n": 4,
+      "hit": 75
+    },
+    {
+      "champ": "Ezreal",
+      "role": "adc",
+      "n": 8,
       "hit": 75
     },
     {
@@ -268,28 +268,28 @@
       "hit": 50
     },
     {
-      "champ": "MonkeyKing",
-      "role": "jungle",
+      "champ": "Sion",
+      "role": "top",
       "n": 5,
       "hit": 40
     },
     {
-      "champ": "Sion",
-      "role": "top",
+      "champ": "MonkeyKing",
+      "role": "jungle",
       "n": 5,
       "hit": 40
     }
   ],
   "champs_all": [
     {
-      "champ": "Viktor",
-      "role": "mid",
+      "champ": "Nocturne",
+      "role": "jungle",
       "n": 6,
       "hit": 100
     },
     {
-      "champ": "Nocturne",
-      "role": "jungle",
+      "champ": "Viktor",
+      "role": "mid",
       "n": 6,
       "hit": 100
     },
@@ -336,15 +336,15 @@
       "hit": 76.5
     },
     {
-      "champ": "Mel",
-      "role": "mid",
-      "n": 4,
-      "hit": 75
-    },
-    {
       "champ": "Ryze",
       "role": "mid",
       "n": 12,
+      "hit": 75
+    },
+    {
+      "champ": "Mel",
+      "role": "mid",
+      "n": 4,
       "hit": 75
     },
     {
@@ -366,15 +366,15 @@
       "hit": 70
     },
     {
-      "champ": "Rumble",
-      "role": "top",
-      "n": 15,
-      "hit": 66.7
-    },
-    {
       "champ": "Ambessa",
       "role": "top",
       "n": 9,
+      "hit": 66.7
+    },
+    {
+      "champ": "Rumble",
+      "role": "top",
+      "n": 15,
       "hit": 66.7
     },
     {

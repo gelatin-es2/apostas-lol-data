@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-13T12:53:56.224Z",
+  "generated_at": "2026-08-14T12:45:37.631Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
-    "2026-08-13"
+    "2026-08-14"
   ],
-  "milio_count": 169,
-  "games_with_full_picks": 119,
-  "baseline_under_hit_pct": 71.6,
+  "milio_count": 170,
+  "games_with_full_picks": 117,
+  "baseline_under_hit_pct": 71.8,
   "by_league": {
-    "LPL": 69,
+    "LPL": 70,
     "LCK": 44,
     "LEC": 17,
     "CBLOL": 19,
@@ -4644,17 +4644,9 @@
       "sup_blue": "Milio",
       "sup_red": "Yuumi",
       "blue_picks": {
-        "adc": "Xayah",
-        "mid": "Viktor",
-        "top": "Jayce",
-        "jungle": "Trundle",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Lucian",
-        "mid": "Annie",
-        "top": "Yorick",
-        "jungle": "XinZhao",
         "support": "Yuumi"
       },
       "total_kills": 23,
@@ -4677,17 +4669,9 @@
       "sup_blue": "Milio",
       "sup_red": "Camille",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Viktor",
-        "top": "Renekton",
-        "jungle": "Skarner",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Ziggs",
-        "mid": "Syndra",
-        "top": "Aatrox",
-        "jungle": "DrMundo",
         "support": "Camille"
       },
       "total_kills": 30,
@@ -4710,17 +4694,9 @@
       "sup_blue": "Milio",
       "sup_red": "Lux",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Ryze",
-        "top": "Jayce",
-        "jungle": "Sejuani",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Caitlyn",
-        "mid": "Syndra",
-        "top": "Olaf",
-        "jungle": "JarvanIV",
         "support": "Lux"
       },
       "total_kills": 24,
@@ -5200,9 +5176,17 @@
       "sup_blue": "Milio",
       "sup_red": "Karma",
       "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Akali",
+        "top": "Zaahen",
+        "jungle": "Nocturne",
         "support": "Milio"
       },
       "red_picks": {
+        "adc": "Caitlyn",
+        "mid": "Aurora",
+        "top": "Renekton",
+        "jungle": "JarvanIV",
         "support": "Karma"
       },
       "total_kills": 24,
@@ -5210,6 +5194,31 @@
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "116566854547769698",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-14",
+      "league": "LPL",
+      "map": 2,
+      "team_blue": "EDG",
+      "team_red": "LGD",
+      "milio_side": "blue",
+      "milio_team": "EDG",
+      "opp_team": "LGD",
+      "opp_sup": "Nautilus",
+      "sup_blue": "Milio",
+      "sup_red": "Nautilus",
+      "blue_picks": {
+        "support": "Milio"
+      },
+      "red_picks": {
+        "support": "Nautilus"
+      },
+      "total_kills": 25,
+      "fair": 30.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": null,
+      "game_id": "116566854547835294",
       "src": "results.json"
     }
   ]
