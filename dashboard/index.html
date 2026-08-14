@@ -3169,7 +3169,7 @@
     // de kills (mercado de kills, não de vitória).
     function isWinBet(b) {
       const m = b.market || '';
-      return /money\s*line|moneyline|vencedor/i.test(m)
+      return /money\s*line|moneyline|vencedor|\bml\b|winner|resultado\s+da\s+partida/i.test(m)
           || (/handicap/i.test(m) && /mapa|série|serie/i.test(m));
     }
 
