@@ -1,7 +1,7 @@
 'use strict';
 
 const { RegistrationError } = require('../lib/bet-extraction-contract.cjs');
-const { createSupabaseGateway, publicJob } = require('./register.js');
+const { createSupabaseGateway, publicJob, requestIsSameSiteRead } = require('./register.js');
 
 function send(res, status, body) {
   res.statusCode = status;
@@ -13,6 +13,7 @@ function send(res, status, body) {
 function createStatusHandler(dependenciesFactory = createSupabaseGateway) {
   return async function statusHandler(req, res) {
     if (req.method !== 'GET') return send(res, 405, { ok: false, code: 'method_not_allowed' });
+    if (!requestIsSameSiteRead(req)) return send(res, 403, { ok: false, code: 'cross_site_request' });
     const id = typeof req.query?.id === 'string' ? req.query.id : '';
     if (!/^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(id)) {
       return send(res, 400, { ok: false, code: 'invalid_job_id' });

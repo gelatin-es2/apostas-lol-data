@@ -181,11 +181,33 @@ function quietStderr(on) {
     expectReject(() => decodeInput(utf16), 1, 'NUL');
   });
 
-  await test('save: fixture 9 — os 4 bookmakers aceitos (EstrelaBet, Pinnacle, Parimatch, Betano)', () => {
-    for (const bk of ['EstrelaBet', 'Pinnacle', 'Parimatch', 'Betano']) {
-      const { bet } = validate(basePayload(p => { p.bookmaker = bk; }));
-      assertEq(bet.bookmaker, bk.toLowerCase(), `bookmaker ${bk}`);
+  await test('save: fixture 9 — casas BRL e aliases Whale.io aceitos; Betano legado preservado', () => {
+    const expected = new Map([
+      ['EstrelaBet', 'estrelabet'], ['Pinnacle', 'pinnacle'], ['Parimatch', 'parimatch'],
+      ['Betano', 'betano'], ['Whale.io', 'whale'], ['whale io', 'whale'],
+    ]);
+    for (const [bk, canonical] of expected) {
+      const { bet } = validate(basePayload(p => {
+        p.bookmaker = bk;
+        if (canonical === 'whale') {
+          p.odd = 1.704;
+          p.stake = 1599.62;
+          p.raw_extraction.bookmaker_native.raw_stake_text = 'BRL 1599.62';
+          p.raw_extraction.bookmaker_native.raw_win_text = 'BRL 1126.13';
+        }
+      }));
+      assertEq(bet.bookmaker, canonical, `bookmaker ${bk}`);
     }
+  });
+
+  await test('save: Whale rejeita OCR 1509.62 quando Win 1126.13 @ 1.704 prova stake 1599.62', () => {
+    expectReject(() => validate(basePayload(p => {
+      p.bookmaker = 'Whale.io';
+      p.odd = 1.704;
+      p.stake = 1509.62;
+      p.raw_extraction.bookmaker_native.raw_stake_text = 'BRL 1509.62';
+      p.raw_extraction.bookmaker_native.raw_win_text = 'BRL 1126.13';
+    })), 1, 'inconsistentes');
   });
 
   function polymarketPayload(mut) {

@@ -5,6 +5,9 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
+    "test": "node --test api/tests/*.test.cjs api/tests/*.test.mjs",
+    "worker:once": "node scripts/bet-upload-watcher.cjs --once",
+    "worker:watch": "node scripts/bet-upload-watcher.cjs",
     "capture:lck-lpl": "node .claude/scripts/capture_fair_lines.cjs lck,lpl",
     "capture:lec-cblol": "node .claude/scripts/capture_fair_lines.cjs lec,cblol",
     "analyze:yesterday": "node .claude/scripts/analyze_yesterday.cjs",

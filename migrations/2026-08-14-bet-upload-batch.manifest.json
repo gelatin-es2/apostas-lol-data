@@ -1,0 +1,41 @@
+{
+  "feature": "bet-upload-batch-whale",
+  "migration": "migrations/2026-08-14-bet-upload-batch.sql",
+  "preflight": "migrations/2026-08-14-bet-upload-batch.preflight.sql",
+  "postflight": "migrations/2026-08-14-bet-upload-batch.postflight.sql",
+  "postflight_summary": "migrations/2026-08-14-bet-upload-batch.postflight-summary.sql",
+  "rollback": "migrations/2026-08-14-bet-upload-batch.rollback.sql",
+  "backup_script": "scripts/prepare-bet-upload-batch-migration.ps1",
+  "rest_backup_script": "scripts/prepare-bet-upload-batch-rest-backup.cjs",
+  "deployment_executed": false,
+  "artifacts": [
+    { "path": "migrations/2026-08-14-bet-upload-batch.sql", "bytes": 24781, "sha256": "e0bceb23c72931be6979367a042a0917716ce1c80431e4f2872f33f5a4c0852c" },
+    { "path": "migrations/2026-08-14-bet-upload-batch.preflight.sql", "bytes": 7556, "sha256": "2ecebc1dd1708b7912a71ee3eb0725c8c73a37cbc421683f0ddb9fe83e1dea8b" },
+    { "path": "migrations/2026-08-14-bet-upload-batch.postflight.sql", "bytes": 1914, "sha256": "a7f3d88689c45acc20f3b92ff6145f6599934d7e7aa0bbb649be5584d143bdd7" },
+    { "path": "migrations/2026-08-14-bet-upload-batch.postflight-summary.sql", "bytes": 2521, "sha256": "30df9fa8a64403ee62389cc1ee037e4c1ede3406994b651619cff145145a390d" },
+    { "path": "migrations/2026-08-14-bet-upload-batch.rollback.sql", "bytes": 753, "sha256": "d85d786f8d2a07e4fba074fd9376481b072ecd576a4fff4fca0e344e8b8ad781" },
+    { "path": "scripts/prepare-bet-upload-batch-migration.ps1", "bytes": 2871, "sha256": "44f119bb4911264c24dfa97912e18e9ab305975729a41b2adc2d9d10eed35fc3" },
+    { "path": "scripts/prepare-bet-upload-batch-rest-backup.cjs", "bytes": 7790, "sha256": "9e27a2d36650098955e66aba79a33d7c911a8406922db71f58838f4ef63a6b5e" }
+  ],
+  "required_order": [
+    "run read-only preflight and create local backup",
+    "review preflight findings and backup manifest",
+    "apply SQL migration in one transaction",
+    "run read-only postflight before any RPC or job write",
+    "deploy worker and legacy writer together",
+    "run one controlled canary and verify job/items/bets",
+    "enable normal worker schedule"
+  ],
+  "rollback_guard": "abort when public.bet_upload_job_items contains any row",
+  "legacy_writer": {
+    "mitigation": "supabase-save-bet.cjs uses register_canonical_bet after migration deployment",
+    "residual_race": "other direct REST writers remain outside the advisory lock; they are offline/backfill tools and must not run concurrently with upload ingestion"
+  },
+  "prohibited_without_new_approval": [
+    "production migration",
+    "deploy",
+    "job reprocessing",
+    "write to production",
+    "unique index on public.bets"
+  ]
+}

@@ -837,12 +837,15 @@
     .register-bubble.status { align-self:flex-start; color:var(--muted); background:transparent; border:1px dashed var(--border); }
     .register-bubble.status.success { color:var(--green); border-style:solid; }
     .register-bubble.status.error { color:var(--red); border-style:solid; }
-    .register-bubble img { display:block; max-width:260px; max-height:260px; object-fit:contain; border-radius:9px; margin-bottom:8px; background:#0d1015; }
+    .register-bubble img { display:block; max-width:260px; max-height:260px; object-fit:contain; border-radius:9px; background:#0d1015; }
+    .register-message-images { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:8px; }
     .register-description { width:100%; box-sizing:border-box; border:1px solid var(--border); border-radius:10px; padding:10px 12px; background:var(--bg); color:var(--text); font:inherit; }
     .register-composer { padding:14px; border-top:1px solid var(--border); }
-    .register-preview-wrap { display:none; position:relative; width:max-content; max-width:100%; margin-bottom:10px; }
+    .register-preview-list { display:none; grid-template-columns:repeat(2,minmax(0,180px)); gap:10px; max-width:100%; margin-bottom:10px; }
+    .register-preview-wrap { position:relative; min-width:0; padding:7px; border:1px solid var(--border); border-radius:11px; background:var(--card-2); }
     .register-preview { display:block; width:auto; max-width:180px; max-height:150px; object-fit:contain; border-radius:10px; background:#0d1015; }
     .register-preview-remove { position:absolute; top:5px; right:5px; width:28px; height:28px; border:0; border-radius:50%; background:rgba(0,0,0,.72); color:#fff; cursor:pointer; }
+    .register-preview-number { display:block; margin-top:5px; color:var(--muted); font-size:11px; font-weight:700; }
     .register-description { resize:vertical; min-height:68px; max-height:150px; }
     .register-composer-actions { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:10px; }
     .register-composer-hint { color:var(--muted); font-size:12px; }
@@ -970,18 +973,15 @@
         <p>Conversa privada. O print fica salvo por 14 dias e depois é apagado.</p>
       </div>
       <div class="register-chat-log" id="registerChatLog" role="log" aria-live="polite">
-        <div class="register-bubble assistant">Mande o print da bet aqui. Você pode colar com Ctrl+V ou selecionar a imagem. Se quiser, escreva uma informação extra antes de enviar.</div>
+        <div class="register-bubble assistant">Mande 1 ou 2 prints da bet aqui. Você pode colar com Ctrl+V quantas vezes precisar ou selecionar as imagens juntas. Se quiser, escreva uma informação extra antes de enviar.</div>
       </div>
       <div class="register-composer" id="registerComposer">
-        <div class="register-preview-wrap" id="registerPreviewWrap">
-          <img class="register-preview" id="registerPreview" alt="Prévia do comprovante">
-          <button class="register-preview-remove" id="registerRemoveImage" type="button" aria-label="Remover imagem">×</button>
-        </div>
+        <div class="register-preview-list" id="registerPreviewList" aria-live="polite"></div>
         <textarea class="register-description" id="registerDescription" maxlength="500" placeholder="Informação extra (opcional)" aria-label="Informação extra"></textarea>
-        <input id="registerImage" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+        <input id="registerImage" type="file" accept="image/png,image/jpeg,image/webp" multiple hidden>
         <div class="register-composer-actions">
           <button class="register-button secondary" id="registerAttach" type="button">+ Imagem</button>
-          <span class="register-composer-hint">Cole com Ctrl+V · PNG, JPEG ou WebP · até 3 MB</span>
+          <span class="register-composer-hint">Até 2 prints · PNG, JPEG ou WebP · 3 MB cada</span>
           <button class="register-button" id="registerSend" type="button">Enviar</button>
         </div>
       </div>
@@ -1086,6 +1086,9 @@
 
   <script type="module">
     import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
+    import {
+      composeRegisterImages, removeRegisterImageAt, validateRegisterImageFiles,
+    } from './register-image-composer.mjs';
 
     const SUPABASE_URL = 'https://yxhpopkxlupdpqkdaffg.supabase.co';
     const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_wGL02eZiYN9RV37jK-rzWg_LznsLOko';
@@ -1096,13 +1099,12 @@
     const registerChatLog = document.getElementById('registerChatLog');
     const registerComposer = document.getElementById('registerComposer');
     const registerImage = document.getElementById('registerImage');
-    const registerPreview = document.getElementById('registerPreview');
-    const registerPreviewWrap = document.getElementById('registerPreviewWrap');
+    const registerPreviewList = document.getElementById('registerPreviewList');
     const registerDescription = document.getElementById('registerDescription');
     const registerSend = document.getElementById('registerSend');
     let registerBusy = false;
     let registerPollTimer = null;
-    let registerDataUrl = '';
+    let registerImages = [];
     let registerLastJobStatus = '';
 
     function addRegisterBubble(text, type = 'status', statusKey = '') {
@@ -1120,41 +1122,72 @@
       for (const control of registerComposer.querySelectorAll('button, textarea, input')) control.disabled = !enabled || registerBusy;
     }
 
-    function clearRegisterImage() {
-      registerDataUrl = '';
+    function renderRegisterImages() {
+      registerPreviewList.replaceChildren();
+      registerImages.forEach((entry, index) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'register-preview-wrap';
+        const preview = document.createElement('img');
+        preview.className = 'register-preview';
+        preview.src = entry.dataUrl;
+        preview.alt = `Prévia do comprovante ${index + 1}`;
+        const remove = document.createElement('button');
+        remove.className = 'register-preview-remove';
+        remove.type = 'button';
+        remove.dataset.registerRemoveIndex = String(index);
+        remove.setAttribute('aria-label', `Remover imagem ${index + 1}`);
+        remove.textContent = '×';
+        const number = document.createElement('span');
+        number.className = 'register-preview-number';
+        number.textContent = `Print ${index + 1}`;
+        wrap.append(preview, remove, number);
+        registerPreviewList.appendChild(wrap);
+      });
+      registerPreviewList.style.display = registerImages.length ? 'grid' : 'none';
+    }
+
+    function clearRegisterImages() {
+      registerImages = [];
       registerImage.value = '';
-      registerPreview.removeAttribute('src');
-      registerPreviewWrap.style.display = 'none';
+      renderRegisterImages();
     }
 
-    async function selectRegisterImage(file) {
-      if (!file || registerBusy) return;
-      if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type) || file.size > 3 * 1024 * 1024) {
-        clearRegisterImage();
-        return addRegisterBubble('Use PNG, JPEG ou WebP com no máximo 3 MB.', 'status error');
-      }
+    function readRegisterImage(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve({ file, dataUrl: String(reader.result) });
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function selectRegisterImages(files) {
+      if (registerBusy) return;
       try {
-        registerDataUrl = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(String(reader.result));
-          reader.onerror = reject;
-          reader.readAsDataURL(file);
-        });
-        registerPreview.src = registerDataUrl;
-        registerPreviewWrap.style.display = 'block';
-      } catch {
-        clearRegisterImage();
-        addRegisterBubble('Não consegui abrir a imagem. Tente outro print.', 'status error');
+        const selected = validateRegisterImageFiles(files, registerImages.length);
+        if (!selected.length) return;
+        const entries = await Promise.all(selected.map(readRegisterImage));
+        registerImages = [...registerImages, ...entries];
+        renderRegisterImages();
+      } catch (error) {
+        addRegisterBubble(error.message || 'Não consegui abrir uma das imagens. Tente outro print.', 'status error');
+      } finally {
+        registerImage.value = '';
       }
     }
 
-    function addRegisterUserMessage(dataUrl, description) {
+    function addRegisterUserMessage(dataUrls, description) {
       const bubble = document.createElement('div');
       bubble.className = 'register-bubble user';
-      const image = document.createElement('img');
-      image.src = dataUrl;
-      image.alt = 'Print da aposta enviado';
-      bubble.appendChild(image);
+      const images = document.createElement('div');
+      images.className = 'register-message-images';
+      dataUrls.forEach((dataUrl, index) => {
+        const image = document.createElement('img');
+        image.src = dataUrl;
+        image.alt = `Print da aposta enviado ${index + 1}`;
+        images.appendChild(image);
+      });
+      bubble.appendChild(images);
       if (description) bubble.appendChild(document.createTextNode(description));
       registerChatLog.appendChild(bubble);
       registerChatLog.scrollTop = registerChatLog.scrollHeight;
@@ -1175,7 +1208,23 @@
           addRegisterBubble('Estou lendo o print e validando a partida…', 'status', 'processing');
         } else if (job.status === 'registered') {
           localStorage.removeItem('betUploadJobId');
-          addRegisterBubble('Aposta registrada como pendente.', 'status success', 'registered');
+          const registeredCount = Number(job.bet_count || job.result?.total || (job.bet_id ? 1 : 0));
+          const reusedCount = Number(job.result?.reused || 0);
+          const insertedCount = Number.isInteger(job.result?.inserted)
+            ? job.result.inserted
+            : Math.max(registeredCount - reusedCount, 0);
+          let registeredMessage;
+          if (reusedCount > 0) {
+            const processedLabel = registeredCount === 1 ? 'aposta processada' : 'apostas processadas';
+            const insertedLabel = insertedCount === 1 ? 'registrada como pendente' : 'registradas como pendentes';
+            const reusedLabel = reusedCount === 1 ? 'já existente reutilizada' : 'já existentes reutilizadas';
+            registeredMessage = `${registeredCount} ${processedLabel}: ${insertedCount} ${insertedLabel} e ${reusedCount} ${reusedLabel}.`;
+          } else {
+            registeredMessage = registeredCount > 1
+              ? `${registeredCount} apostas registradas como pendentes.`
+              : 'Aposta registrada como pendente.';
+          }
+          addRegisterBubble(registeredMessage, 'status success', 'registered');
           currentFilter = 'pending';
           document.querySelectorAll('.filters .chip').forEach((chip) => {
             chip.classList.toggle('active', chip.dataset.filter === 'pending');
@@ -1200,28 +1249,36 @@
     }
 
     document.getElementById('registerAttach').addEventListener('click', () => registerImage.click());
-    document.getElementById('registerRemoveImage').addEventListener('click', clearRegisterImage);
-    registerImage.addEventListener('change', () => selectRegisterImage(registerImage.files?.[0]));
+    registerPreviewList.addEventListener('click', (event) => {
+      const remove = event.target.closest('[data-register-remove-index]');
+      if (!remove || registerBusy) return;
+      registerImages = removeRegisterImageAt(registerImages, Number(remove.dataset.registerRemoveIndex));
+      renderRegisterImages();
+    });
+    registerImage.addEventListener('change', () => selectRegisterImages(registerImage.files));
     document.addEventListener('paste', (event) => {
       const registerPane = document.querySelector('.tab-pane[data-pane="registrar"]');
       if (!registerPane?.classList.contains('active')) return;
-      const imageItem = [...(event.clipboardData?.items || [])].find((item) => item.kind === 'file' && item.type.startsWith('image/'));
-      if (!imageItem) return;
+      const imageItems = [...(event.clipboardData?.items || [])]
+        .filter((item) => item.kind === 'file' && item.type.startsWith('image/'));
+      if (!imageItems.length) return;
       event.preventDefault();
-      selectRegisterImage(imageItem.getAsFile());
+      selectRegisterImages(imageItems.map((item) => item.getAsFile()).filter(Boolean));
     });
 
     registerSend.addEventListener('click', async () => {
       if (registerBusy) return;
-      if (!registerDataUrl) return addRegisterBubble('Cole ou selecione o print da bet primeiro.', 'status error');
+      if (!registerImages.length) return addRegisterBubble('Cole ou selecione o print da bet primeiro.', 'status error');
       const description = registerDescription.value.trim();
-      const dataUrl = registerDataUrl;
-      addRegisterUserMessage(dataUrl, description);
+      const selectedImages = [...registerImages];
       registerLastJobStatus = '';
       registerBusy = true;
       setRegisterComposerEnabled(true);
-      addRegisterBubble('Enviando o comprovante…', 'status', 'sending');
+      addRegisterBubble(selectedImages.length === 2 ? 'Juntando os 2 prints…' : 'Preparando o comprovante…', 'status', 'preparing');
       try {
+        const dataUrl = await composeRegisterImages(selectedImages);
+        addRegisterUserMessage(selectedImages.map((entry) => entry.dataUrl), description);
+        addRegisterBubble('Enviando o comprovante…', 'status', 'sending');
         const response = await fetch('/api/bets/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1230,7 +1287,7 @@
         const result = await response.json();
         if (!response.ok || !result.ok) throw new Error(result.message || 'Envie outro print.');
         localStorage.setItem('betUploadJobId', result.job.id);
-        clearRegisterImage();
+        clearRegisterImages();
         registerDescription.value = '';
         registerLastJobStatus = '';
         addRegisterBubble(result.job.status === 'processing' ? 'Estou lendo o print e validando a partida…' : 'Recebi. Sua aposta está na fila.', 'status', result.job.status);

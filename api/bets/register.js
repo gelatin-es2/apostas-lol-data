@@ -14,17 +14,42 @@ function headers(secret, extra = {}) {
   return { apikey: secret, Authorization: `Bearer ${secret}`, ...extra };
 }
 
-function requestIsSameSite(req) {
-  const fetchSite = String(req?.headers?.['sec-fetch-site'] || '').toLowerCase();
-  if (fetchSite && !['same-origin', 'same-site', 'none'].includes(fetchSite)) return false;
-  const origin = String(req?.headers?.origin || '').trim();
-  if (!origin) return true;
-  const host = String(req?.headers?.['x-forwarded-host'] || req?.headers?.host || '').split(',')[0].trim().toLowerCase();
+function requestHost(req) {
+  return String(req?.headers?.['x-forwarded-host'] || req?.headers?.host || '').split(',')[0].trim().toLowerCase();
+}
+
+function originMatchesHost(origin, host) {
+  if (!origin || !host) return false;
   try {
-    return Boolean(host) && new URL(origin).host.toLowerCase() === host;
+    return new URL(origin).host.toLowerCase() === host;
   } catch {
     return false;
   }
+}
+
+// POST (register): fail-closed. Um fetch POST de navegador SEMPRE manda Origin — a
+// ausencia dela indica um cliente que nao e um navegador comum (curl, script, replay
+// forjado), entao trata como cross-site em vez de assumir same-site como antes.
+function requestIsSameSite(req) {
+  const fetchSite = String(req?.headers?.['sec-fetch-site'] || '').toLowerCase();
+  if (fetchSite) return ['same-origin', 'same-site', 'none'].includes(fetchSite);
+  const origin = String(req?.headers?.origin || '').trim();
+  if (!origin) return false;
+  return originMatchesHost(origin, requestHost(req));
+}
+
+// GET (status): fetch GET same-origin de navegador nem sempre manda Origin (so em modo
+// cors), entao aceita sec-fetch-site OU Origin/Referer batendo com o host. So fecha em
+// 403 quando NENHUM dos tres sinais existe.
+function requestIsSameSiteRead(req) {
+  const fetchSite = String(req?.headers?.['sec-fetch-site'] || '').toLowerCase();
+  if (fetchSite) return ['same-origin', 'same-site'].includes(fetchSite);
+  const host = requestHost(req);
+  const origin = String(req?.headers?.origin || '').trim();
+  if (origin) return originMatchesHost(origin, host);
+  const referer = String(req?.headers?.referer || req?.headers?.referrer || '').trim();
+  if (referer) return originMatchesHost(referer, host);
+  return false;
 }
 
 function ownerIdFromEnv(environment = process.env) {
@@ -96,6 +121,18 @@ function send(res, status, body) {
 
 function publicJob(job) {
   if (!job) return null;
+  const rawBetIds = Array.isArray(job.result?.bet_ids) ? job.result.bet_ids : [];
+  const betIds = rawBetIds.filter((id) => typeof id === 'string' && /^[a-f0-9-]{36}$/i.test(id)).slice(0, 10);
+  if (betIds.length === 0 && job.bet_id) betIds.push(job.bet_id);
+  const total = Number.isInteger(job.result?.total) && job.result.total >= 1 && job.result.total <= 10
+    ? job.result.total
+    : betIds.length;
+  const publicResult = job.status === 'registered' ? {
+    total,
+    inserted: Number.isInteger(job.result?.inserted) ? job.result.inserted : null,
+    reused: Number.isInteger(job.result?.reused) ? job.result.reused : null,
+    bet_ids: betIds,
+  } : null;
   return {
     id: job.id,
     status: job.status,
@@ -103,7 +140,9 @@ function publicJob(job) {
     bet_id: job.bet_id || null,
     error_code: job.error_code || null,
     error_message: publicJobErrorMessage(job),
-    result: job.result || null,
+    bet_ids: betIds,
+    bet_count: total,
+    result: publicResult,
     created_at: job.created_at || null,
     purge_after: job.purge_after || null,
     screenshot_deleted_at: job.screenshot_deleted_at || null,
@@ -140,3 +179,4 @@ module.exports.parseResponse = parseResponse;
 module.exports.publicJob = publicJob;
 module.exports.ownerIdFromEnv = ownerIdFromEnv;
 module.exports.requestIsSameSite = requestIsSameSite;
+module.exports.requestIsSameSiteRead = requestIsSameSiteRead;

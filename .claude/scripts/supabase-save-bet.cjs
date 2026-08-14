@@ -1,4 +1,4 @@
-// Salva UMA bet no Supabase (POST em /rest/v1/bets). Nunca update/delete.
+// Salva UMA bet no Supabase pela RPC canonica transacional. Nunca update/delete.
 //
 // Uso:
 //   node supabase-save-bet.cjs <path-to-json-file>            → valida + insere 1 row
@@ -101,9 +101,15 @@ const REQUIRED = ['bookmaker', 'team_a', 'team_b', 'market', 'pick', 'odd', 'sta
 // Lista canônica de bookmakers (lowercase). Qualquer valor fora dessa lista é rejeitado.
 // Sincronizar com normalize-bookmakers.cjs quando adicionar nova casa.
 const VALID_BOOKMAKERS = [
-  'pinnacle', 'estrelabet', 'parimatch', 'betano', 'clutch', 'girosbet',
+  'pinnacle', 'estrelabet', 'parimatch', 'betano', 'whale', 'clutch', 'girosbet',
   'thunderpick', 'novibet', 'polymarket', 'simulated',
 ];
+
+// Aliases aceitos somente na borda de entrada. O banco recebe sempre o slug canonico.
+const BOOKMAKER_ALIASES = new Map([
+  ['whale.io', 'whale'],
+  ['whale io', 'whale'],
+]);
 
 // Flag de bypass pra casas novas ainda não cadastradas (ex: Whale.io em teste).
 // Uso: ALLOW_UNKNOWN_BOOKMAKER=1 node supabase-save-bet.cjs <file>
@@ -181,6 +187,33 @@ function validatePolymarketExecution(bet) {
   }
 }
 
+function parseWhaleBrl(value, field) {
+  const text = typeof value === 'string' ? value.trim() : '';
+  const match = text.match(/^(?:BRL|R\$)\s*([0-9]+(?:[.,][0-9]{1,2})?)$/i);
+  const amount = match ? Number(match[1].replace(',', '.')) : NaN;
+  if (!Number.isFinite(amount) || amount <= 0) {
+    throw new ValidationError(`Whale exige ${field} legivel no formato BRL.`, 1);
+  }
+  return amount;
+}
+
+function validateWhaleExecution(bet) {
+  if (bet.bookmaker !== 'whale') return;
+  const native = bet.raw_extraction?.bookmaker_native;
+  const ticket = String(native?.bet_id ?? '').trim().replace(/^#+\s*/, '');
+  if (!ticket) throw new ValidationError('Whale exige ticket numerico legivel.', 1);
+  const stakeFromPrint = parseWhaleBrl(native?.raw_stake_text, 'raw_stake_text');
+  const winFromPrint = parseWhaleBrl(native?.raw_win_text, 'raw_win_text');
+  if (!decimalClose(stakeFromPrint, bet.stake, 0.01)) {
+    throw new ValidationError('Whale stake diverge de raw_stake_text.', 1);
+  }
+  const expectedWin = Math.round(bet.stake * (bet.odd - 1) * 100) / 100;
+  if (!decimalClose(winFromPrint, expectedWin, 0.02)) {
+    throw new ValidationError(
+      `Whale Stake/Win/odd inconsistentes (esperado Win BRL ${expectedWin.toFixed(2)}). Releia o card.`, 1);
+  }
+}
+
 // ─── Decodificação do input (UTF-8 confiável) ───────────────────────────────
 // Aceita: UTF-8 puro, UTF-8 com BOM (BOM removido, com warning).
 // Rejeita com explicação: UTF-16 LE/BE (com ou sem BOM) — típico de
@@ -246,7 +279,8 @@ function validateAndNormalize(inputRaw, opts = {}) {
   }
 
   // Bookmaker canônico
-  const bookmakerNorm = (bet.bookmaker || '').toLowerCase().trim();
+  const bookmakerInput = (bet.bookmaker || '').toLowerCase().trim();
+  const bookmakerNorm = BOOKMAKER_ALIASES.get(bookmakerInput) || bookmakerInput;
   if (!VALID_BOOKMAKERS.includes(bookmakerNorm)) {
     if (ALLOW_UNKNOWN_BOOKMAKER) {
       warnings.push(`bookmaker "${bet.bookmaker}" fora da lista canônica — prosseguindo (ALLOW_UNKNOWN_BOOKMAKER=1).`);
@@ -339,6 +373,7 @@ function validateAndNormalize(inputRaw, opts = {}) {
     throw new ValidationError(`odd (${bet.odd}) deve ser > 1 e stake (${bet.stake}) deve ser > 0.`, 1);
   }
   validatePolymarketExecution(bet);
+  validateWhaleExecution(bet);
 
   // bet_datetime parseável
   const betMs = new Date(bet.bet_datetime).getTime();
@@ -424,7 +459,7 @@ function postJson(supabaseUrl, supabaseKey, urlPath, body) {
   });
 }
 
-module.exports = { validateAndNormalize, validatePolymarketExecution, decodeInput, normalizeLeague, normalizeTeam, ValidationError, VALID_BOOKMAKERS, SUPPORTED_SCHEMA_VERSION };
+module.exports = { validateAndNormalize, validatePolymarketExecution, validateWhaleExecution, decodeInput, normalizeLeague, normalizeTeam, ValidationError, VALID_BOOKMAKERS, BOOKMAKER_ALIASES, SUPPORTED_SCHEMA_VERSION };
 
 if (require.main === module) {
   (async () => {
@@ -479,13 +514,24 @@ if (require.main === module) {
       throw e;
     }
 
-    // Credenciais só aqui — modo real. Uma aprovação = exatamente um insert.
+    // Credenciais só aqui — modo real. A RPC compartilha o advisory lock/dedup
+    // com o upload batch; deploy da migration batch deve anteceder este writer.
     const { loadConfig } = require('./_load-config.cjs');
     const { supabaseUrl, supabaseKey } = loadConfig();
     try {
-      const result = await postJson(supabaseUrl, supabaseKey, '/rest/v1/bets', [bet]);
-      const row = Array.isArray(result) ? result[0] : result;
-      console.log(JSON.stringify({ ok: true, id: row.id, row }));
+      const result = await postJson(supabaseUrl, supabaseKey, '/rest/v1/rpc/register_canonical_bet', {
+        p_bet: bet,
+        p_screenshot_path: bet.screenshot_path || null,
+      });
+      const payload = Array.isArray(result) ? result[0] : result;
+      if (!payload?.bet_id) throw new Error('RPC canonica nao retornou bet_id');
+      console.log(JSON.stringify({
+        ok: true,
+        id: payload.bet_id,
+        inserted: payload.inserted === true,
+        reused: payload.inserted === false,
+        row: payload.inserted === true ? { ...bet, id: payload.bet_id } : null,
+      }));
     } catch (e) {
       console.log(JSON.stringify({ ok: false, error: e.message }));
       process.exit(1);

@@ -1,6 +1,6 @@
 // Normaliza campo `bookmaker` de todas as bets para lowercase canônico.
 //
-// Lista canônica: pinnacle, estrelabet, parimatch, betano, thunderpick, novibet, polymarket, simulated
+// Lista canônica: pinnacle, estrelabet, parimatch, betano, whale, thunderpick, novibet, polymarket, simulated
 // Bets cujo bookmaker (após lowercase) NÃO está na lista → alerta, não corrige automático.
 //
 // Modos:
@@ -24,6 +24,7 @@ const VALID_BOOKMAKERS = [
   'estrelabet',
   'parimatch',
   'betano',
+  'whale',
   'thunderpick',
   'clutch',
   'girosbet',
@@ -31,6 +32,10 @@ const VALID_BOOKMAKERS = [
   'polymarket',
   'simulated',
 ];
+const BOOKMAKER_ALIASES = new Map([
+  ['whale.io', 'whale'],
+  ['whale io', 'whale'],
+]);
 
 function supaGetRange(supabaseUrl, supabaseKey, urlPath, rangeStart, rangeEnd) {
   return new Promise((resolve, reject) => {
@@ -121,14 +126,15 @@ async function fetchAllBets(supabaseUrl, supabaseKey) {
   for (const bet of bets) {
     const raw = bet.bookmaker || '';
     const lower = raw.toLowerCase().trim();
-    if (raw === lower && VALID_BOOKMAKERS.includes(lower)) {
+    const canonical = BOOKMAKER_ALIASES.get(lower) || lower;
+    if (raw === canonical && VALID_BOOKMAKERS.includes(canonical)) {
       alreadyOk.push(bet);
-    } else if (VALID_BOOKMAKERS.includes(lower)) {
+    } else if (VALID_BOOKMAKERS.includes(canonical)) {
       // Apenas case diferente — normalizar
-      toNormalize.push({ ...bet, bookmaker_original: raw, bookmaker_normalized: lower });
+      toNormalize.push({ ...bet, bookmaker_original: raw, bookmaker_normalized: canonical });
     } else {
       // Não canônico (mesmo após lowercase)
-      outOfCanonical.push({ ...bet, bookmaker_original: raw, bookmaker_normalized: lower });
+      outOfCanonical.push({ ...bet, bookmaker_original: raw, bookmaker_normalized: canonical });
     }
   }
 

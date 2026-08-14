@@ -5,9 +5,11 @@ const assert = require('node:assert/strict');
 
 const { enqueueBetUpload } = require('../lib/register-bet.cjs');
 const { parseImageDataUrl, sanitizeDescription } = require('../lib/bet-extraction-contract.cjs');
-const { createHandler, createSupabaseGateway, ownerIdFromEnv, publicJob, requestIsSameSite } = require('../bets/register.js');
+const { createHandler, createSupabaseGateway, ownerIdFromEnv, publicJob, requestIsSameSite, requestIsSameSiteRead } = require('../bets/register.js');
 const { REJECTION_MESSAGES } = require('../lib/bet-upload-public-errors.cjs');
 const { createStatusHandler } = require('../bets/upload-status.js');
+
+const SAME_ORIGIN_HEADERS = { host: 'apostas.example', 'sec-fetch-site': 'same-origin' };
 
 const PNG_DATA_URL = `data:image/png;base64,${Buffer.from('89504e470d0a1a0a00000000', 'hex').toString('base64')}`;
 const JOB_ID = '123e4567-e89b-42d3-a456-426614174000';
@@ -140,7 +142,7 @@ test('endpoint retorna 202 com job, sem processar aposta no request', async () =
   const { deps } = makeDeps();
   const response = fakeResponse();
   await createHandler(() => deps)({
-    method: 'POST', headers: {}, body: { image_data_url: PNG_DATA_URL },
+    method: 'POST', headers: SAME_ORIGIN_HEADERS, body: { image_data_url: PNG_DATA_URL },
   }, response);
   assert.equal(response.statusCode, 202);
   assert.equal(response.body.job.status, 'queued');
@@ -153,15 +155,16 @@ test('endpoint publico valida imagem sem exigir cookie ou bearer', async () => {
   const { deps } = makeDeps();
   const response = fakeResponse();
   await createHandler(() => deps)({
-    method: 'POST', headers: {}, body: {},
+    method: 'POST', headers: SAME_ORIGIN_HEADERS, body: {},
   }, response);
   assert.equal(response.statusCode, 400);
   assert.equal(response.body.code, 'invalid_image');
 });
 
-test('endpoint publico aceita uso normal same-origin e barra browser cross-site', async () => {
+test('endpoint publico aceita uso normal same-origin e barra cross-site ou sem Origin', async () => {
   assert.equal(requestIsSameSite({ headers: { host: 'apostas.example', origin: 'https://apostas.example', 'sec-fetch-site': 'same-origin' } }), true);
-  assert.equal(requestIsSameSite({ headers: {} }), true);
+  assert.equal(requestIsSameSite({ headers: { host: 'apostas.example', origin: 'https://apostas.example' } }), true);
+  assert.equal(requestIsSameSite({ headers: {} }), false, 'POST sem Origin nem sec-fetch-site precisa fechar 403');
   assert.equal(requestIsSameSite({ headers: { host: 'apostas.example', origin: 'https://evil.example', 'sec-fetch-site': 'cross-site' } }), false);
   const response = fakeResponse();
   await createHandler(() => { throw new Error('nao deve criar deps'); })({
@@ -173,12 +176,23 @@ test('endpoint publico aceita uso normal same-origin e barra browser cross-site'
   assert.equal(response.body.code, 'cross_site_request');
 });
 
+test('endpoint publico fecha 403 fail-closed quando o POST nao manda Origin', async () => {
+  const response = fakeResponse();
+  await createHandler(() => { throw new Error('nao deve criar deps'); })({
+    method: 'POST',
+    headers: {},
+    body: { image_data_url: PNG_DATA_URL },
+  }, response);
+  assert.equal(response.statusCode, 403);
+  assert.equal(response.body.code, 'cross_site_request');
+});
+
 test('endpoint publico usa owner server-side e repassa descricao', async () => {
   const { deps, calls } = makeDeps();
   const response = fakeResponse();
   await createHandler(() => deps)({
     method: 'POST',
-    headers: {},
+    headers: SAME_ORIGIN_HEADERS,
     body: { image_data_url: PNG_DATA_URL, description: '  contexto  ' },
   }, response);
   assert.equal(response.statusCode, 202);
@@ -223,7 +237,7 @@ test('status publico consulta UUID opaco no owner server-side e filtra resposta'
         screenshot_deleted_at: null,
       };
     },
-  }))({ method: 'GET', headers: {}, query: { id: JOB_ID } }, response);
+  }))({ method: 'GET', headers: SAME_ORIGIN_HEADERS, query: { id: JOB_ID } }, response);
   assert.equal(response.statusCode, 200);
   assert.deepEqual(lookup, { id: JOB_ID, ownerId: OWNER_ID });
   assert.equal(response.body.job.status, 'registered');
@@ -236,10 +250,56 @@ test('status publico consulta UUID opaco no owner server-side e filtra resposta'
 test('status publico retorna 404 para UUID opaco inexistente', async () => {
   const response = fakeResponse();
   await createStatusHandler(() => ({ ownerId: OWNER_ID, getJobForOwner: async () => null }))({
-    method: 'GET', headers: {}, query: { id: JOB_ID },
+    method: 'GET', headers: SAME_ORIGIN_HEADERS, query: { id: JOB_ID },
   }, response);
   assert.equal(response.statusCode, 404);
   assert.equal(response.body.code, 'job_not_found');
+});
+
+test('status publico aceita GET same-origin sem Origin (fetch nao manda em same-origin)', async () => {
+  const response = fakeResponse();
+  await createStatusHandler(() => ({ ownerId: OWNER_ID, getJobForOwner: async () => ({ id: JOB_ID, status: 'queued' }) }))({
+    method: 'GET', headers: { host: 'apostas.example', origin: 'https://apostas.example' }, query: { id: JOB_ID },
+  }, response);
+  assert.equal(response.statusCode, 200);
+});
+
+test('status publico aceita Referer same-host quando nao ha sec-fetch-site nem Origin', async () => {
+  const response = fakeResponse();
+  await createStatusHandler(() => ({ ownerId: OWNER_ID, getJobForOwner: async () => ({ id: JOB_ID, status: 'queued' }) }))({
+    method: 'GET', headers: { host: 'apostas.example', referer: 'https://apostas.example/dashboard' }, query: { id: JOB_ID },
+  }, response);
+  assert.equal(response.statusCode, 200);
+});
+
+test('status publico fecha 403 sem nenhum sinal same-site (sec-fetch-site, Origin ou Referer)', async () => {
+  const response = fakeResponse();
+  await createStatusHandler(() => { throw new Error('nao deve criar deps'); })({
+    method: 'GET', headers: {}, query: { id: JOB_ID },
+  }, response);
+  assert.equal(response.statusCode, 403);
+  assert.equal(response.body.code, 'cross_site_request');
+});
+
+test('status publico fecha 403 quando sec-fetch-site diz cross-site', async () => {
+  const response = fakeResponse();
+  await createStatusHandler(() => { throw new Error('nao deve criar deps'); })({
+    method: 'GET', headers: { host: 'apostas.example', 'sec-fetch-site': 'cross-site' }, query: { id: JOB_ID },
+  }, response);
+  assert.equal(response.statusCode, 403);
+  assert.equal(response.body.code, 'cross_site_request');
+});
+
+test('requestIsSameSiteRead cobre sec-fetch-site, Origin, Referer e ausencia total', () => {
+  assert.equal(requestIsSameSiteRead({ headers: { host: 'apostas.example', 'sec-fetch-site': 'same-origin' } }), true);
+  assert.equal(requestIsSameSiteRead({ headers: { host: 'apostas.example', 'sec-fetch-site': 'same-site' } }), true);
+  assert.equal(requestIsSameSiteRead({ headers: { host: 'apostas.example', 'sec-fetch-site': 'none' } }), false);
+  assert.equal(requestIsSameSiteRead({ headers: { host: 'apostas.example', 'sec-fetch-site': 'cross-site' } }), false);
+  assert.equal(requestIsSameSiteRead({ headers: { host: 'apostas.example', origin: 'https://apostas.example' } }), true);
+  assert.equal(requestIsSameSiteRead({ headers: { host: 'apostas.example', origin: 'https://evil.example' } }), false);
+  assert.equal(requestIsSameSiteRead({ headers: { host: 'apostas.example', referer: 'https://apostas.example/dashboard' } }), true);
+  assert.equal(requestIsSameSiteRead({ headers: { host: 'apostas.example', referer: 'https://evil.example/x' } }), false);
+  assert.equal(requestIsSameSiteRead({ headers: {} }), false);
 });
 
 test('mensagem publica separa casa invalida de comprovante ilegivel', () => {
@@ -256,4 +316,26 @@ test('erro tecnico nao expoe mensagem interna do worker', () => {
   const job = publicJob({ status: 'error', error_code: 'worker_error', error_message: 'stack ou segredo interno' });
   assert.equal(job.error_message, 'Falha técnica no processamento. Tente novamente.');
   assert.doesNotMatch(JSON.stringify(job), /stack ou segredo/);
+});
+
+test('status publico resume batch sem expor result interno', () => {
+  const first = '11111111-1111-4111-8111-111111111111';
+  const second = '22222222-2222-4222-8222-222222222222';
+  const job = publicJob({
+    status: 'registered',
+    bet_id: first,
+    result: {
+      total: 2,
+      inserted: 1,
+      reused: 1,
+      bet_ids: [first, second],
+      items: [{ raw_extraction: { private: 'nao expor' } }],
+      storage_path: 'private/path.png',
+    },
+  });
+  assert.equal(job.bet_count, 2);
+  assert.deepEqual(job.bet_ids, [first, second]);
+  assert.deepEqual(job.result, { total: 2, inserted: 1, reused: 1, bet_ids: [first, second] });
+  assert.equal(JSON.stringify(job).includes('private/path'), false);
+  assert.equal(JSON.stringify(job).includes('raw_extraction'), false);
 });
