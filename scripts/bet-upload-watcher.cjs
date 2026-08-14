@@ -14,7 +14,7 @@ const PROMPT_PATH = path.join(REPO_ROOT, 'scripts', 'bet-upload-worker-prompt.tx
 const DEFAULT_INTERVAL_MS = 60_000;
 const STALE_LOCK_MS = 2 * 60 * 60 * 1000;
 
-const DEFAULT_WORKER_TIMEOUT_MS = 480_000; // 8 min
+const DEFAULT_WORKER_TIMEOUT_MS = 720_000; // 12 min — composto de 4+ cards com finder/getEventDetails passa de 8; kill da task fica em 15
 const LOG_RETENTION_MS = 14 * 24 * 60 * 60 * 1000; // 14 dias
 const ORPHAN_MAX_AGE_MS = 48 * 60 * 60 * 1000; // 48h
 
