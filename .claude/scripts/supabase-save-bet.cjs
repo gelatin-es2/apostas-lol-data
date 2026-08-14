@@ -126,6 +126,61 @@ class ValidationError extends Error {
   }
 }
 
+function decimalClose(actual, expected, tolerance) {
+  return Number.isFinite(actual) && Number.isFinite(expected)
+    && Math.abs(actual - expected) <= tolerance;
+}
+
+function validatePolymarketExecution(bet) {
+  if (bet.bookmaker !== 'polymarket') return;
+
+  const raw = bet.raw_extraction;
+  const totals = raw?.execution_totals;
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)
+      || !totals || typeof totals !== 'object' || Array.isArray(totals)) {
+    throw new ValidationError(
+      'Polymarket exige raw_extraction.execution_totals auditável com cost_usd, shares, payout_usd, odd_display e odd_exact.', 1);
+  }
+  if (raw.original_currency !== 'USD') {
+    throw new ValidationError('Polymarket exige raw_extraction.original_currency="USD".', 1);
+  }
+
+  const costUsd = Number(totals.cost_usd);
+  const originalStakeUsd = Number(raw.original_stake_usd);
+  const shares = Number(totals.shares);
+  const payoutUsd = Number(totals.payout_usd);
+  const oddDisplay = Number(totals.odd_display);
+  const oddExact = Number(totals.odd_exact);
+  const fxUsdBrl = Number(raw.fx_usd_brl);
+  const fxSource = typeof raw.fx_source === 'string' ? raw.fx_source.trim() : '';
+
+  if (![costUsd, originalStakeUsd, shares, payoutUsd, oddDisplay, oddExact, fxUsdBrl]
+    .every(value => Number.isFinite(value) && value > 0)) {
+    throw new ValidationError('Polymarket exige valores USD, shares, odds e câmbio positivos e numéricos.', 1);
+  }
+  if (!fxSource || !/\b\d{4}-\d{2}-\d{2}(?:T|\b)/.test(fxSource)) {
+    throw new ValidationError('Polymarket exige fx_source com fonte e data auditáveis.', 1);
+  }
+  if (!decimalClose(originalStakeUsd, costUsd, 0.01)) {
+    throw new ValidationError('Polymarket original_stake_usd deve ser igual a execution_totals.cost_usd.', 1);
+  }
+  if (!decimalClose(payoutUsd, shares, 0.01)) {
+    throw new ValidationError('Polymarket payout_usd deve ser igual ao total de shares da posição.', 1);
+  }
+  const expectedOddExact = payoutUsd / costUsd;
+  if (!decimalClose(oddExact, expectedOddExact, 0.000001)) {
+    throw new ValidationError('Polymarket odd_exact deve ser payout_usd / cost_usd.', 1);
+  }
+  if (!decimalClose(bet.odd, oddDisplay, 0.001)) {
+    throw new ValidationError('Polymarket odd deve preservar execution_totals.odd_display.', 1);
+  }
+  const expectedStakeBrl = Math.round(costUsd * fxUsdBrl * 100) / 100;
+  if (!decimalClose(bet.stake, expectedStakeBrl, 0.01)) {
+    throw new ValidationError(
+      `Polymarket stake deve ser cost_usd x fx_usd_brl em BRL (esperado R$${expectedStakeBrl.toFixed(2)}).`, 1);
+  }
+}
+
 // ─── Decodificação do input (UTF-8 confiável) ───────────────────────────────
 // Aceita: UTF-8 puro, UTF-8 com BOM (BOM removido, com warning).
 // Rejeita com explicação: UTF-16 LE/BE (com ou sem BOM) — típico de
@@ -283,6 +338,7 @@ function validateAndNormalize(inputRaw, opts = {}) {
   if (bet.odd <= 1 || bet.stake <= 0) {
     throw new ValidationError(`odd (${bet.odd}) deve ser > 1 e stake (${bet.stake}) deve ser > 0.`, 1);
   }
+  validatePolymarketExecution(bet);
 
   // bet_datetime parseável
   const betMs = new Date(bet.bet_datetime).getTime();
@@ -368,7 +424,7 @@ function postJson(supabaseUrl, supabaseKey, urlPath, body) {
   });
 }
 
-module.exports = { validateAndNormalize, decodeInput, normalizeLeague, normalizeTeam, ValidationError, VALID_BOOKMAKERS, SUPPORTED_SCHEMA_VERSION };
+module.exports = { validateAndNormalize, validatePolymarketExecution, decodeInput, normalizeLeague, normalizeTeam, ValidationError, VALID_BOOKMAKERS, SUPPORTED_SCHEMA_VERSION };
 
 if (require.main === module) {
   (async () => {

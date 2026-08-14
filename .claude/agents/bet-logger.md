@@ -32,6 +32,7 @@ Scripts em `<projeto>\.claude\scripts\`. Credenciais Supabase em `<projeto>\.env
 | **Pinnacle** | Cores azul/branco, "Accepted bet" como confirmação, prefixo "BRL" antes do valor. Ex: "BRL 1.00". Botão laranja com odd. |
 | **Parimatch** | Tabs "Aberta"/"Concluída" no topo, texto "Soma da aposta", "Ganhos possíveis", botão "Retirada R$X". Visual escuro com acentos amarelos. |
 | **Betano** | Tabs "Em Aberto"/"Resolvidas", botão "CASH OUT R$X", texto "Aposta:" e "Ganhos Potenciais:". Visual claro/branco. Datetime em texto natural ("Hoje 16:00", "Esta noite 20:30"). |
+| **Polymarket** | Mercado "Game N Winner", ação "Buy", `Filled`, `Avg. Price`, `Shares`, `Total` em USD. Pode não exibir ticket/order ID. |
 
 # Contrato v1 (finder → payload → save)
 
@@ -75,18 +76,20 @@ Em ambos os casos, sempre cross-check `map_number` com estado da série na loles
 ## 2. Extrai os campos
 
 Mínimos obrigatórios:
-- `bookmaker` (um dos 4 nomes canônicos: EstrelaBet, Pinnacle, Parimatch, Betano)
+- `bookmaker` (um dos 5 nomes canônicos: EstrelaBet, Pinnacle, Parimatch, Betano, Polymarket)
 - `team_a`, `team_b` (códigos curtos preferidos: FNC, T1, etc; senão nome completo)
 - `market` (string literal do print — ex "Total Kills", "Money Line", "Vencedor")
 - `pick` (string literal — ex "Under 27.5", "Menos de 27.5", "Karmine Corp")
 - `odd` (número decimal)
-- `stake` (número decimal — em BRL/R$)
+- `stake` (número decimal em BRL; na Polymarket, `round(cost_usd * fx_usd_brl, 2)`)
 - `is_map_bet` (true se mencionar "Mapa"/"Map"; false se "Match" ou apenas a série)
 - `map_number` (1–5 se `is_map_bet=true`; senão null). **O save REJEITA map bet sem map_number** — se o mapa não está legível/confirmável, pare e retorne falha pedindo confirmação.
 
 Também preserve em `raw_extraction.bookmaker_native`:
-- `bet_id` (ID interno do bookmaker — ex "4911527990", "#3040996209", "Nº205")
+- `bet_id` (ID interno do bookmaker; obrigatório nas quatro casas BRL e opcional somente na Polymarket)
 - `raw_pick_text` e `raw_stake_text` (literais do print)
+
+Para Polymarket, nunca trate USD como BRL nem shares como stake. Preserve `original_currency: "USD"`, `original_stake_usd`, `fx_usd_brl`, `fx_source` com timestamp e `execution_totals` com `cost_usd`, `shares`, `payout_usd`, `odd_display` e `odd_exact = payout_usd / cost_usd`. Se custo, shares, payout ou câmbio diário auditável faltarem/divergirem, retorne falha sem write.
 
 ## 3. Linka ao match via lolesports
 
@@ -194,9 +197,9 @@ Se o finder retornou `ambiguous: true`:
 # Regras invioláveis
 
 1. **Nunca inventar valores.** Se odd não está visível, retornar erro. Não chutar.
-2. **Bookmaker tem que ser exato** (um dos 4 canônicos). Se não identificar, falhar.
+2. **Bookmaker tem que ser exato** (um dos 5 canônicos). Se não identificar, falhar.
 3. **Ler `pick` literal do print.** Não traduzir "Menos de 27.5" pra "Under 27.5".
-4. **`stake` em BRL.** "BRL 1.00" / "R$1,00" → número decimal `1.00`.
+4. **`stake` em BRL.** Nas quatro casas BRL, normalize o valor exibido. Na Polymarket, converta `cost_usd` por FX diário auditável e preserve todos os valores originais.
 5. **Não mexer no Supabase além de INSERIR UMA bet por invocação** — nunca update, nunca delete, nunca segundo insert, nunca outra tabela.
 6. **Ambiguidade NÃO é ressalva — é bloqueio.** Sem escolha explícita do Elvis, nenhum write.
 

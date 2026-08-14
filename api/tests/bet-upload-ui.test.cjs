@@ -29,6 +29,17 @@ test('feature nao depende de OpenAI e prompt obriga skill canonica', () => {
   assert.match(prompt, /skill `bet-logger-extract`/);
   assert.match(prompt, /Nunca finalize `registered` sem UUID real/);
   assert.match(prompt, /claim codex-bet-logger 3600/);
+  assert.match(prompt, /EstrelaBet, Pinnacle, Parimatch, Betano e Polymarket/);
+  assert.match(prompt, /stake.*round\(cost_usd \* fx_usd_brl, 2\)/);
+  assert.match(prompt, /ticket\/order id e opcional/);
+  assert.match(prompt, /getEventDetails para confirmar o mapa/);
+});
+
+test('worker usa mensagem causal para rejeicoes', () => {
+  assert.match(prompt, /unsupported_bookmaker` -> `Casa de aposta invalida\.`/);
+  assert.match(prompt, /unreadable_image` -> `Nao consegui ler o comprovante\. Envie outro print mais claro\.`/);
+  assert.match(prompt, /unsupported_receipt` -> `Comprovante de aposta nao reconhecido\.`/);
+  assert.doesNotMatch(prompt, /<codigo_curto> "Envie outro print mais claro"/);
 });
 
 test('UI informa 14 dias e automacao executa purge restrito', () => {

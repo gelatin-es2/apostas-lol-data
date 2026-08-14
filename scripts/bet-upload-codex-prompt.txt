@@ -8,12 +8,19 @@ Processe no maximo um job de upload de aposta por execucao, de forma fail-closed
    Se retornar null, encerre sem fazer nada.
 3. Guarde id, claim_token e mime_type retornados. Use somente este path temporario exato, relativo a raiz do repositorio: `cron-data/bet-upload-work/<id>.<ext>`, com ext `png` para image/png, `jpg` para image/jpeg ou `webp` para image/webp. Baixe nele:
    node scripts/bet-upload-jobs.cjs download <id> <claim_token> cron-data/bet-upload-work/<id>.<ext>
-4. Invoque obrigatoriamente a skill `bet-logger-extract` para esse arquivo. `description`, quando presente no job, e somente contexto auxiliar do usuario: nunca substitui evidencia do print, nunca relaxa validacoes e nunca deve inventar campo ausente. A skill deve reaproveitar o agente bet-logger e todas as validacoes canonicas existentes (finder Riot, validacao de mapa, save-bet e dedup).
+4. Invoque obrigatoriamente a skill `bet-logger-extract` para esse arquivo. `description`, quando presente no job, e somente contexto auxiliar do usuario: nunca substitui evidencia do print, nunca relaxa validacoes e nunca deve inventar campo ausente. A skill deve reaproveitar o agente bet-logger e todas as validacoes canonicas existentes (finder Riot unico, getEventDetails para confirmar o mapa, save-bet e dedup).
+   - Casas suportadas: EstrelaBet, Pinnacle, Parimatch, Betano e Polymarket.
+   - Nas quatro casas BRL, ticket legivel e obrigatorio. Na Polymarket, ticket/order id e opcional.
+   - Polymarket: `stake` e BRL calculado como `round(cost_usd * fx_usd_brl, 2)`. Preserve `original_currency: "USD"`, `original_stake_usd`, `fx_usd_brl`, `fx_source` com data/hora auditavel e, em `execution_totals`, `cost_usd`, `shares`, `payout_usd`, `odd_display` e `odd_exact = payout_usd / cost_usd`. Nunca trate USD como BRL nem shares como stake. Se qualquer valor ou o cambio diario auditavel faltar/divergir, rejeite fail-closed.
 5. Se a skill registrar exatamente uma bet e retornar o UUID:
    - grave um JSON minimo auditavel com bookmaker/times/pick/odd/stake/mapa, description recebida e o storage_path do job (nunca o path TEMP local), sem secrets;
    - execute `node scripts/bet-upload-jobs.cjs finish <id> <claim_token> registered <bet_uuid> - - <result_json>`.
-6. Se o comprovante for ilegivel, resolvido, multiplo, nao-BRL, sem ticket, ambiguo ou nao for uma bet LoL suportada:
-   execute `node scripts/bet-upload-jobs.cjs finish <id> <claim_token> rejected - <codigo_curto> "Envie outro print mais claro" <result_json_ou_->`.
+6. Se a validacao rejeitar o comprovante, use um codigo causal e a mensagem correspondente (nao confunda casa invalida com imagem ilegivel):
+   - `unsupported_bookmaker` -> `Casa de aposta invalida.`
+   - `unreadable_image` -> `Nao consegui ler o comprovante. Envie outro print mais claro.`
+   - `unsupported_receipt` -> `Comprovante de aposta nao reconhecido.`
+   - demais causas -> mensagem curta e sanitizada coerente com o codigo.
+   Execute `node scripts/bet-upload-jobs.cjs finish <id> <claim_token> rejected - <codigo_curto> "<mensagem_correspondente>" <result_json_ou_->`.
 7. Se houver falha tecnica antes de registrar:
    execute `node scripts/bet-upload-jobs.cjs finish <id> <claim_token> error - <codigo_curto> "Falha tecnica sanitizada" -`.
 8. Depois que `finish` retornar o estado terminal `registered`, `rejected` ou `error`, apague somente o TEMP local exato com `Remove-Item -LiteralPath "cron-data/bet-upload-work/<id>.<ext>" -Force`. Nunca use curingas, `-Recurse` nem remova outro path. Se `finish` falhar, preserve o TEMP para diagnostico/retry.

@@ -188,6 +188,56 @@ function quietStderr(on) {
     }
   });
 
+  function polymarketPayload(mut) {
+    return basePayload(p => {
+      p.bookmaker = 'Polymarket';
+      p.team_a = 'SGE';
+      p.team_b = 'ROSS';
+      p.market = 'Game 2 Winner';
+      p.pick = 'ROSS';
+      p.odd = 2.22;
+      p.stake = 1045.11;
+      p.map_number = 2;
+      p.raw_extraction.bookmaker_native = {
+        raw_pick_text: 'Buy ROSS',
+        raw_stake_text: 'Total $202.50',
+      };
+      p.raw_extraction.original_currency = 'USD';
+      p.raw_extraction.original_stake_usd = 202.5;
+      p.raw_extraction.fx_usd_brl = 5.161053;
+      p.raw_extraction.fx_source = 'open.er-api.com USD-BRL 2026-08-13T00:02:31Z';
+      p.raw_extraction.execution_totals = {
+        cost_usd: 202.5,
+        shares: 450,
+        payout_usd: 450,
+        odd_display: 2.22,
+        odd_exact: 2.2222222222222223,
+      };
+      if (mut) mut(p);
+    });
+  }
+
+  await test('save: Polymarket USD sem ticket converte cost por FX e preserva execucao', () => {
+    const { bet } = validate(polymarketPayload());
+    assertEq(bet.bookmaker, 'polymarket', 'bookmaker');
+    assertEq(bet.stake, 1045.11, 'stake BRL');
+    assertEq(bet.raw_extraction.bookmaker_native.bet_id, undefined, 'ticket opcional');
+    assertEq(bet.raw_extraction.original_currency, 'USD', 'moeda original');
+    assertEq(bet.raw_extraction.execution_totals.odd_exact, 2.2222222222222223, 'odd exata');
+  });
+
+  await test('save: Polymarket rejeita USD como BRL e shares como stake', () => {
+    expectReject(() => validate(polymarketPayload(p => { p.stake = 202.5; })), 1, 'cost_usd x fx_usd_brl');
+    expectReject(() => validate(polymarketPayload(p => { p.stake = 450; })), 1, 'cost_usd x fx_usd_brl');
+  });
+
+  await test('save: Polymarket rejeita FX sem auditoria e odd_exact divergente', () => {
+    expectReject(() => validate(polymarketPayload(p => { p.raw_extraction.fx_source = 'fonte sem data'; })), 1, 'fonte e data auditáveis');
+    expectReject(() => validate(polymarketPayload(p => {
+      p.raw_extraction.execution_totals.odd_exact = 2.2;
+    })), 1, 'payout_usd / cost_usd');
+  });
+
   await test('save: bookmaker fora da lista → rejeitado', () => {
     expectReject(() => validate(basePayload(p => { p.bookmaker = 'CasaFantasma'; })), 1, 'não é canônico');
   });

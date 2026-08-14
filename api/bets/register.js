@@ -2,6 +2,7 @@
 
 const { enqueueBetUpload } = require('../lib/register-bet.cjs');
 const { RegistrationError } = require('../lib/bet-extraction-contract.cjs');
+const { publicJobErrorMessage } = require('../lib/bet-upload-public-errors.cjs');
 
 function env(name) {
   const value = process.env[name];
@@ -101,7 +102,7 @@ function publicJob(job) {
     description: job.description || null,
     bet_id: job.bet_id || null,
     error_code: job.error_code || null,
-    error_message: job.error_message || null,
+    error_message: publicJobErrorMessage(job),
     result: job.result || null,
     created_at: job.created_at || null,
     purge_after: job.purge_after || null,

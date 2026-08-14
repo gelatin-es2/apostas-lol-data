@@ -5,7 +5,8 @@ const assert = require('node:assert/strict');
 
 const { enqueueBetUpload } = require('../lib/register-bet.cjs');
 const { parseImageDataUrl, sanitizeDescription } = require('../lib/bet-extraction-contract.cjs');
-const { createHandler, createSupabaseGateway, ownerIdFromEnv, requestIsSameSite } = require('../bets/register.js');
+const { createHandler, createSupabaseGateway, ownerIdFromEnv, publicJob, requestIsSameSite } = require('../bets/register.js');
+const { REJECTION_MESSAGES } = require('../lib/bet-upload-public-errors.cjs');
 const { createStatusHandler } = require('../bets/upload-status.js');
 
 const PNG_DATA_URL = `data:image/png;base64,${Buffer.from('89504e470d0a1a0a00000000', 'hex').toString('base64')}`;
@@ -239,4 +240,20 @@ test('status publico retorna 404 para UUID opaco inexistente', async () => {
   }, response);
   assert.equal(response.statusCode, 404);
   assert.equal(response.body.code, 'job_not_found');
+});
+
+test('mensagem publica separa casa invalida de comprovante ilegivel', () => {
+  assert.equal(REJECTION_MESSAGES.unsupported_bookmaker, 'Casa de aposta inválida.');
+  assert.equal(publicJob({ status: 'rejected', error_code: 'unsupported_bookmaker', error_message: 'mensagem interna' }).error_message,
+    'Casa de aposta inválida.');
+  assert.equal(publicJob({ status: 'rejected', error_code: 'unreadable_image' }).error_message,
+    'Não consegui ler o comprovante. Envie outro print mais claro.');
+  assert.equal(publicJob({ status: 'rejected', error_code: 'unsupported_receipt' }).error_message,
+    'Comprovante de aposta não reconhecido.');
+});
+
+test('erro tecnico nao expoe mensagem interna do worker', () => {
+  const job = publicJob({ status: 'error', error_code: 'worker_error', error_message: 'stack ou segredo interno' });
+  assert.equal(job.error_message, 'Falha técnica no processamento. Tente novamente.');
+  assert.doesNotMatch(JSON.stringify(job), /stack ou segredo/);
 });
