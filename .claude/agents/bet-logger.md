@@ -38,10 +38,11 @@ Scripts em `<projeto>\.claude\scripts\`. Credenciais Supabase em `<projeto>\.env
 | **Pinnacle** | Cores azul/branco, "Accepted bet" como confirmação, prefixo "BRL" antes do valor. Ex: "BRL 1.00". Botão laranja com odd. |
 | **Parimatch** | Tabs "Aberta"/"Concluída" no topo, texto "Soma da aposta", "Ganhos possíveis", botão "Retirada R$X". Visual escuro com acentos amarelos. |
 | **Betano** | Tabs "Em Aberto"/"Resolvidas", botão "CASH OUT R$X", texto "Aposta:" e "Ganhos Potenciais:". Visual claro/branco. Datetime em texto natural ("Hoje 16:00", "Esta noite 20:30"). |
-| **Whale.io** | Card azul-escuro, faixa verde-clara `Accepted bet: #<ticket>`, `Stake`/`Win` em BRL, `Total - Map N - League of Legends - <liga>`, pick Over/Under e odd em selo laranja. Normalize como `whale`; `Win` é lucro potencial. Não confunda com Pinnacle ou Betano. |
-
-Para cada card Whale, confirme `Win ~= round(Stake * (odd - 1), 2)` com tolerância de R$0,02. Se não fechar, releia Stake/Win/odd e falhe com `Aposta N` se persistir. Exemplo real: `BRL 1599.62 @ 1.704 -> BRL 1126.13` (não `1509.62`). No batch, cada match_context continua obrigado a carregar o contrato v1 completo, inclusive `schema_version: 1`, `selection_reason` e `ambiguous`.
+| **Whale.io** | Branding explícito "whale.io" no card + valores em USD/cripto. Normalize como `whale.io` (NUNCA `whale` sem o `.io`). ⚠️ `Accepted bet: #` é SEMPRE Pinnacle, NUNCA Whale.io — slip em BRL com "Accepted bet" = Pinnacle. Sem o branding whale.io visível + moeda cripto/USD, NÃO classifique como Whale.io. |
+| **Thunderpick** | Logo/marca-d'água "THUNDERPICK" no slip, abas "Open / Cash out / Live / Settled", campos `Odds`/`Wager`/`Payout` em BRL, chip "Open"/"Single". Ticket é OPCIONAL (painel de aposta aberta não mostra bilhete). Números em formato pt-BR: `2.130,50 BRL` = `2130.50`. Botão "Cash Out R$X" é só o valor de cashout disponível — NUNCA é stake nem payout. Normalize como `thunderpick`. |
 | **Polymarket** | Mercado "Game N Winner", ação "Buy", `Filled`, `Avg. Price`, `Shares`, `Total` em USD. Pode não exibir ticket/order ID. |
+
+Identifique a casa SEMPRE pelos termos literais do bilhete (tabela acima), por CARD — um print composto pode misturar casas. Na dúvida entre casas, NÃO chute: falhe com `Aposta N: casa não identificada`. Em qualquer casa, confirme `Win/Ganhos ~= round(Stake * (odd - 1), 2)` com tolerância de R$0,02 (Win é lucro potencial, nunca stake). Se não fechar, releia Stake/Win/odd e falhe com `Aposta N` se persistir. Exemplo real: `BRL 1599.62 @ 1.704 -> BRL 1126.13` (não `1509.62`). No batch, cada match_context continua obrigado a carregar o contrato v1 completo, inclusive `schema_version: 1`, `selection_reason` e `ambiguous`.
 
 # Contrato v1 (finder → payload → save)
 

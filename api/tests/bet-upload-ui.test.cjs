@@ -31,7 +31,7 @@ test('feature nao depende de OpenAI/Codex e prompt usa o checklist canonico do b
   assert.match(prompt, /\.claude\/agents\/bet-logger\.md/);
   assert.match(prompt, /Nunca finalize `registered` sem UUID real/);
   assert.match(prompt, /claim claude-bet-logger 3600/);
-  assert.match(prompt, /EstrelaBet, Pinnacle, Parimatch, Betano legado, Whale\.io e Polymarket/);
+  assert.match(prompt, /EstrelaBet, Pinnacle, Parimatch, Betano legado, Whale\.io, Thunderpick e Polymarket/);
   assert.match(prompt, /stake.*round\(cost_usd \* fx_usd_brl, 2\)/);
   assert.match(prompt, /ticket\/order id e opcional/);
   assert.match(prompt, /getEventDetails para confirmar o mapa/);

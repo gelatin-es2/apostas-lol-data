@@ -1,6 +1,6 @@
 // Normaliza campo `bookmaker` de todas as bets para lowercase canônico.
 //
-// Lista canônica: pinnacle, estrelabet, parimatch, betano, whale, thunderpick, novibet, polymarket, simulated
+// Lista canônica: pinnacle, estrelabet, parimatch, betano, whale.io, thunderpick, novibet, polymarket, simulated
 // Bets cujo bookmaker (após lowercase) NÃO está na lista → alerta, não corrige automático.
 //
 // Modos:
@@ -24,7 +24,7 @@ const VALID_BOOKMAKERS = [
   'estrelabet',
   'parimatch',
   'betano',
-  'whale',
+  'whale.io',
   'thunderpick',
   'clutch',
   'girosbet',
@@ -32,9 +32,14 @@ const VALID_BOOKMAKERS = [
   'polymarket',
   'simulated',
 ];
+// Whale.io é o rótulo canônico completo (com .io) — bug 2026-08-14: worker gravou
+// "whale" (sem .io) e confundiu prints reais da Pinnacle com Whale.io. Aliases
+// abaixo só CONVERGEM pra whale.io; nenhum termo de Pinnacle ("accepted bet" etc.)
+// tem alias pra whale/whale.io — identificação de casa é sempre pelos termos do
+// bilhete, feita a montante (worker/agent), nunca aqui.
 const BOOKMAKER_ALIASES = new Map([
-  ['whale.io', 'whale'],
-  ['whale io', 'whale'],
+  ['whale', 'whale.io'],
+  ['whale io', 'whale.io'],
 ]);
 
 function supaGetRange(supabaseUrl, supabaseKey, urlPath, rangeStart, rangeEnd) {

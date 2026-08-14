@@ -18,7 +18,7 @@ const postflightSummary = fs.readFileSync(path.resolve(__dirname, '../../migrati
 const manifest = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../migrations/2026-08-14-bet-upload-batch.manifest.json'), 'utf8'));
 const restBackup = fs.readFileSync(path.resolve(__dirname, '../../scripts/prepare-bet-upload-batch-rest-backup.cjs'), 'utf8');
 const legacyWriter = fs.readFileSync(path.resolve(__dirname, '../../.claude/scripts/supabase-save-bet.cjs'), 'utf8');
-const whaleFixture = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'whale-ee5776e3.fixture.json'), 'utf8'));
+const pinnacleFixture = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'pinnacle-ee5776e3.fixture.json'), 'utf8'));
 const batchWorkDir = path.resolve(__dirname, '../../cron-data/bet-upload-work');
 
 function workBatchPath(label) {
@@ -97,18 +97,18 @@ test('hash do item e estavel e ladders diferentes nao colapsam', () => {
   );
 });
 
-test('fixture real ee5776e3 preserva os 3 tickets/stakes/ladders Whale em ordem visual', (t) => {
-  if (fs.existsSync(whaleFixture.source_path)) {
-    const image = fs.readFileSync(whaleFixture.source_path);
-    assert.equal(require('crypto').createHash('sha256').update(image).digest('hex'), whaleFixture.sha256);
-    assert.equal(image.readUInt32BE(16), whaleFixture.width);
-    assert.equal(image.readUInt32BE(20), whaleFixture.height);
+test('fixture real ee5776e3 preserva os 3 tickets/stakes/ladders Pinnacle em ordem visual', (t) => {
+  if (fs.existsSync(pinnacleFixture.source_path)) {
+    const image = fs.readFileSync(pinnacleFixture.source_path);
+    assert.equal(require('crypto').createHash('sha256').update(image).digest('hex'), pinnacleFixture.sha256);
+    assert.equal(image.readUInt32BE(16), pinnacleFixture.width);
+    assert.equal(image.readUInt32BE(20), pinnacleFixture.height);
   } else {
-    t.diagnostic(`fixture visual externa ausente; validando sidecar auditavel: ${whaleFixture.job_id}`);
+    t.diagnostic(`fixture visual externa ausente; validando sidecar auditavel: ${pinnacleFixture.job_id}`);
   }
 
-  const items = whaleFixture.cards.map((card) => bet({
-    bookmaker: whaleFixture.bookmaker_visual,
+  const items = pinnacleFixture.cards.map((card) => bet({
+    bookmaker: pinnacleFixture.bookmaker_visual,
     pick: card.pick,
     odd: card.odd,
     stake: card.stake,
@@ -128,16 +128,16 @@ test('fixture real ee5776e3 preserva os 3 tickets/stakes/ladders Whale em ordem 
   }));
   const prepared = prepareBatch({ items });
   assert.equal(prepared.length, 3);
-  assert.deepEqual(prepared.map((item) => item.bet.bookmaker), ['whale', 'whale', 'whale']);
-  assert.deepEqual(prepared.map((item) => item.bet.raw_extraction.bookmaker_native.bet_id), whaleFixture.cards.map((card) => card.ticket));
+  assert.deepEqual(prepared.map((item) => item.bet.bookmaker), ['pinnacle', 'pinnacle', 'pinnacle']);
+  assert.deepEqual(prepared.map((item) => item.bet.raw_extraction.bookmaker_native.bet_id), pinnacleFixture.cards.map((card) => card.ticket));
   assert.deepEqual(prepared.map((item) => item.bet.stake), [400, 1599.62, 1000]);
   assert.deepEqual(prepared.map((item) => item.bet.pick), ['Over 31.5', 'Over 30.5', 'Over 29.5']);
   assert.equal(new Set(prepared.map((item) => item.dedup_key)).size, 3);
 });
 
-test('concorrencia simulada serializa assinatura sem colapsar as 3 ladders Whale', async () => {
-  const prepared = whaleFixture.cards.map((card) => prepareBatch({ items: [bet({
-    bookmaker: 'whale', pick: card.pick, odd: card.odd, stake: card.stake,
+test('concorrencia simulada serializa assinatura sem colapsar as 3 ladders Pinnacle', async () => {
+  const prepared = pinnacleFixture.cards.map((card) => prepareBatch({ items: [bet({
+    bookmaker: 'pinnacle', pick: card.pick, odd: card.odd, stake: card.stake,
     raw_extraction: {
       bookmaker_native: {
         bet_id: card.ticket,
@@ -410,4 +410,59 @@ test('prompt proibe inserts individuais e exige array 1..10 e erro por card', ()
   assert.match(prompt, /Nunca chame `supabase-save-bet\.cjs` individualmente/);
   assert.match(prompt, /Aposta N: motivo/);
   assert.match(prompt, /total`, `inserted`, `reused` e todos os `bet_ids`/);
+});
+
+test('prompt identifica casa pelos termos do bilhete — "Accepted bet" e sempre Pinnacle, nunca Whale.io', () => {
+  // Pinnacle e reconhecida pela faixa literal do bilhete, nao por cor/estilo.
+  assert.match(prompt, /Pinnacle = faixa `Accepted bet: #<ticket>`/);
+  assert.match(prompt, /`Accepted bet: #` e SEMPRE Pinnacle, NUNCA Whale\.io/);
+
+  // A descricao de identificacao da Whale.io (isolada ate "USD/cripto;") nao pode
+  // conter "Accepted bet" — essa era a causa raiz do bug de 12 bets Pinnacle
+  // registradas como whale em 2026-08-14.
+  const whaleIdentification = prompt.match(/Whale\.io = branding explicito[\s\S]*?USD\/cripto;/);
+  assert.ok(whaleIdentification, 'descricao de identificacao da Whale.io nao encontrada no prompt');
+  assert.doesNotMatch(whaleIdentification[0], /Accepted bet/i);
+  assert.doesNotMatch(whaleIdentification[0], /card azul-escuro|faixa verde-clara/i);
+
+  // fail-closed: sem certeza de branding whale.io + valores cripto/USD, rejeita.
+  assert.match(prompt, /sem essa certeza, rejeite com `unsupported_bookmaker` \(fail-closed/);
+
+  // Normalizacao correta — pinnacle e whale.io (com .io), nunca "whale" sozinho.
+  assert.match(prompt, /Pinnacle -> `pinnacle`/);
+  assert.match(prompt, /Whale\.io -> `whale\.io`/);
+  assert.match(prompt, /NUNCA `whale` sem o `\.io`/);
+  assert.doesNotMatch(prompt, /Normalize para `whale`/);
+
+  // Cross-check Win ~= round(Stake*(odd-1)) e regra geral de slip, nao so da Whale.io.
+  assert.match(prompt, /Em qualquer casa, trate o campo Win\/Ganhos/);
+  assert.match(prompt, /Win ~= round\(Stake \* \(odd - 1\), 2\)/);
+});
+
+test('prompt cobre Thunderpick: ticket opcional, identificacao propria, formato pt-BR e casas mistas no mesmo print', () => {
+  // Thunderpick entra na enumeracao de casas e normaliza pro slug canonico.
+  assert.match(prompt, /Whale\.io, Thunderpick e Polymarket/);
+  assert.match(prompt, /Thunderpick -> `thunderpick`/);
+
+  // Ticket e opcional na Thunderpick (mesmo tratamento da Polymarket) — as demais
+  // 5 casas BRL continuam exigindo ticket legivel.
+  assert.match(prompt, /Ticket legivel e obrigatorio em EstrelaBet\/Pinnacle\/Parimatch\/Betano\/Whale\.io/);
+  assert.match(prompt, /na Polymarket e na Thunderpick, ticket\/order id e opcional/);
+
+  // Identificacao propria pelos termos do bilhete (nao por cor/estilo).
+  assert.match(prompt, /Thunderpick = logo\/marca-dagua "THUNDERPICK" no slip/);
+  assert.match(prompt, /abas "Open \/ Cash out \/ Live \/ Settled"/);
+  assert.match(prompt, /`Odds`\/`Wager`\/`Payout` em BRL/);
+
+  // Formato numerico pt-BR (milhar com ponto, decimal com virgula) — exemplo concreto.
+  assert.match(prompt, /formato numerico pt-BR/);
+  assert.match(prompt, /`2\.130,50 BRL` = `2130\.50`/);
+  assert.match(prompt, /nunca `2\.13` nem `213050`/);
+
+  // "Cash Out R$X" e so oferta de cashout, nunca stake/payout.
+  assert.match(prompt, /"Cash Out R\$X" no slip da Thunderpick e somente o valor de cashout disponivel/);
+  assert.match(prompt, /NUNCA e stake nem payout, ignore-o no registro/);
+
+  // Casas mistas no mesmo print/painel sao uso legitimo — identificacao e por CARD.
+  assert.match(prompt, /sempre por CARD — cards do mesmo print\/painel podem ser de casas diferentes/);
 });

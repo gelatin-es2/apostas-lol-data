@@ -1,0 +1,115 @@
+{
+  "date": "2026-08-14",
+  "source": "pinnacle-auto-promoted",
+  "captured_at": "2026-08-14T11:00:22.002Z",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "derived_from": [
+    "cron-data\\2026-08-13-fair-pinnacle-auto.json",
+    "cron-data\\2026-08-14-fair-pinnacle-auto.json"
+  ],
+  "note": "Fair Pinnacle promovida a fonte primária automática (decisão Elvis 2026-08-05: \"nao preciso mas de fair ela e puxada sozinha pelo sistema todo dia\"). Gerada por .claude/scripts/promote_fair_pinnacle_auto.cjs a partir da captura automática (Task Scheduler LolFairAutoCapture, a cada 30min, closing line = leitura mais próxima do início do jogo). Fair manual do Elvis via /log-fair, se enviada, sobrescreve este arquivo — nunca o contrário.",
+  "history": [],
+  "fair_lines": [
+    {
+      "liga": "KCL",
+      "hora_brt": "00:00",
+      "team_a": "T1 Academy",
+      "team_b": "Dplus KIA Challengers",
+      "team_anchor": null,
+      "fair_line": 32.5,
+      "lolesports_match_id": null,
+      "source_note": "pinnacle-auto matchup_id=1633578329; frozen=false; minutes_before_start=240; lolesports_match_id NÃO resolvido (sem candidato no schedule oficial)"
+    },
+    {
+      "liga": "KCL",
+      "hora_brt": "02:00",
+      "team_a": "BNK FearX Youth",
+      "team_b": "HANJIN BRION Challengers",
+      "team_anchor": null,
+      "fair_line": 30.5,
+      "lolesports_match_id": null,
+      "source_note": "pinnacle-auto matchup_id=1633578219; frozen=false; minutes_before_start=360; lolesports_match_id NÃO resolvido (sem candidato no schedule oficial)"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "04:00",
+      "team_a": "EDward Gaming",
+      "team_b": "LGD",
+      "team_anchor": "EDG",
+      "fair_line": 30.5,
+      "lolesports_match_id": "116566854547835292",
+      "source_note": "pinnacle-auto matchup_id=1633548720; frozen=true; minutes_before_start=480"
+    },
+    {
+      "liga": "LCK",
+      "hora_brt": "05:30",
+      "team_a": "T1",
+      "team_b": "Dplus KIA",
+      "team_anchor": "DK",
+      "fair_line": 28.5,
+      "lolesports_match_id": "115548147900619041",
+      "source_note": "pinnacle-auto matchup_id=1633559958; frozen=true; minutes_before_start=30"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "06:15",
+      "team_a": "Team WE",
+      "team_b": "Top Esports",
+      "team_anchor": null,
+      "fair_line": 33.5,
+      "lolesports_match_id": null,
+      "source_note": "pinnacle-auto matchup_id=1633552620; frozen=true; minutes_before_start=45; lolesports_match_id NÃO resolvido (sem candidato no schedule oficial)"
+    },
+    {
+      "liga": "LCP",
+      "hora_brt": "06:30",
+      "team_a": "CTBC Flying Oyster",
+      "team_b": "MVK",
+      "team_anchor": "CFO",
+      "fair_line": 28.5,
+      "lolesports_match_id": "116769725389404173",
+      "source_note": "pinnacle-auto matchup_id=1633746732; frozen=true; minutes_before_start=30"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "08:15",
+      "team_a": "Anyone's Legend",
+      "team_b": "JD Gaming",
+      "team_anchor": "JDG",
+      "fair_line": 28.5,
+      "lolesports_match_id": "116566854547769728",
+      "source_note": "pinnacle-auto matchup_id=1633559654; frozen=true; minutes_before_start=45"
+    },
+    {
+      "liga": "LCK",
+      "hora_brt": "08:30",
+      "team_a": "Nongshim Redforce",
+      "team_b": "HANJIN BRION",
+      "team_anchor": "NS",
+      "fair_line": 30.5,
+      "lolesports_match_id": "115548147900684681",
+      "source_note": "pinnacle-auto matchup_id=1633559969; frozen=false; minutes_before_start=30"
+    },
+    {
+      "liga": "LEC",
+      "hora_brt": "12:00",
+      "team_a": "Shifters",
+      "team_b": "SK Gaming",
+      "team_anchor": "SHFT",
+      "fair_line": 32.5,
+      "lolesports_match_id": "115548681803406211",
+      "source_note": "pinnacle-auto matchup_id=1633797499; frozen=false; minutes_before_start=240"
+    },
+    {
+      "liga": "LEC",
+      "hora_brt": "14:15",
+      "team_a": "GIANTX",
+      "team_b": "Vitality",
+      "team_anchor": "VIT",
+      "fair_line": 30.5,
+      "lolesports_match_id": "115548681803406183",
+      "source_note": "pinnacle-auto matchup_id=1633804887; frozen=false; minutes_before_start=375"
+    }
+  ]
+}

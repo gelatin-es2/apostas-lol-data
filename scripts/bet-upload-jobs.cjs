@@ -7,7 +7,7 @@ const { validateAndNormalize } = require('../.claude/scripts/supabase-save-bet.c
 const { isKnownErrorCode, coerceErrorCode } = require('../api/lib/bet-upload-error-codes.cjs');
 
 const MAX_BATCH_ITEMS = 10;
-const SUPPORTED_UPLOAD_BOOKMAKERS = new Set(['estrelabet', 'pinnacle', 'parimatch', 'betano', 'whale', 'polymarket']);
+const SUPPORTED_UPLOAD_BOOKMAKERS = new Set(['estrelabet', 'pinnacle', 'parimatch', 'betano', 'whale.io', 'thunderpick', 'polymarket']);
 const BATCH_WORK_DIR = path.resolve(__dirname, '..', 'cron-data', 'bet-upload-work');
 const JOB_ID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const CLEANUP_SUFFIXES = ['.png', '.jpg', '.webp', '-batch.json', '-result.json'];
@@ -163,7 +163,7 @@ function prepareBatch(input, deps = {}) {
       if (!SUPPORTED_UPLOAD_BOOKMAKERS.has(normalized.bookmaker)) {
         throw new Error('Casa de aposta invalida.');
       }
-      if (normalized.bookmaker !== 'polymarket' && !ticketFromBet(normalized)) {
+      if (normalized.bookmaker !== 'polymarket' && normalized.bookmaker !== 'thunderpick' && !ticketFromBet(normalized)) {
         throw new Error('ticket da casa obrigatorio e ilegivel');
       }
     } catch (error) {
