@@ -11,21 +11,30 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* Paleta grafite neutro (RODADA 4 — PARTE B, 2026-07-30): antes era azul-marinho,
-         que competia visualmente com verde/vermelho de ganhou/perdeu num painel de
-         aposta. Grafite deixa cor = só sinal de resultado. Verde/vermelho/amarelo NÃO
-         mudam de hex — validados ≥3:1 de contraste contra --card (#17191e). */
-      --bg:          #0e0f12;
-      --bg-2:        #16181d;
-      --card:        #17191e;
-      --card-2:      #1d2026;
-      --border:      #333942;
-      --border-soft: #262a31;
-      --accent:      #8b95a5;   /* cromo: aba ativa, chip ativo, foco, borda de hover */
-      --accent-2:    #c3cad6;   /* texto de destaque + linha do gráfico */
+      /* Paleta "terminal financeiro premium" (RESKIN v2, 2026-08-14): base mais
+         preta que a v1 (#0a0b0e vs #0e0f12) + superfícies de card com folga maior
+         de brilho em relação ao fundo, pra elevação carregar no box-shadow (var
+         --shadow-elev) em vez de depender só de borda. Verde/vermelho/amarelo
+         seguem intocados — exclusivos de sinal de resultado, nunca decoração. */
+      --bg:          #0a0b0e;
+      --bg-2:        #111319;
+      --card:        #16181f;
+      --card-2:      #1c1f28;
+      --border:      #333a4d;
+      --border-soft: #23262f;
+      --accent:      #8b95a5;   /* cromo: borda de hover, foco genérico — NÃO é mais aba/chip ativo */
+      --accent-2:    #c3cad6;   /* texto de destaque em card menor (method/ml) */
       --accent-glow: rgba(163,173,189,0.18);
+      /* Azul = "isso é clicável/ativo" (fase 1) — na v2 também é a cor de
+         identidade visual: linha da curva de banca, marcador de section-title,
+         acento default de KPI, pill de aba ativa. Continua fora do território
+         de verde/vermelho (resultado). */
+      --brand:       #60a5fa;
+      --brand-ink:   #0e0f12;   /* texto sobre fundo brand (contraste ~7,5:1, AA/AAA) */
+      --brand-glow:  rgba(96,165,250,0.35);
       --text:        #e8eaed;
       --muted:       #8a929e;
+      --muted-soft:  rgba(138,146,158,0.15); /* = --muted em 15% — badge.void e whale-live-badge.polling repetiam o literal (faxina Fase 4) */
       --green: #22c55e;
       --green-soft: rgba(34, 197, 94, 0.15);
       --red: #ef4444;
@@ -33,20 +42,58 @@
       --yellow: #eab308;
       --yellow-soft: rgba(234, 179, 8, 0.15);
 
-      /* ===== Chart tokens (PARTE 1) ===== */
-      --chart-surface: #17191e;   /* = --card, superfície onde o gráfico vive */
-      --chart-grid:    #262a31;   /* = --border-soft, hairline 1px SOLID */
+      /* Elevação (RESKIN v2): borda quase invisível + sombra em 2 camadas —
+         cards "flutuam" sobre o fundo em vez de só terem contorno. Hover soma
+         uma 2ª variante com um toque de --brand na sombra (glow discreto). */
+      --elev-border:       rgba(255,255,255,0.06);
+      --shadow-elev:        0 10px 28px -12px rgba(0,0,0,0.55), 0 2px 8px -4px rgba(0,0,0,0.4);
+      --shadow-elev-hover:  0 18px 40px -14px rgba(0,0,0,0.6), 0 6px 18px -6px rgba(96,165,250,0.2);
+
+      /* ===== Chart tokens (PARTE 1, cor atualizada no RESKIN v2) ===== */
+      --chart-surface: #16181f;   /* = --card, superfície onde o gráfico vive */
+      --chart-grid:    #23262f;   /* = --border-soft, hairline 1px SOLID */
       --chart-axis:    #8a929e;   /* = --muted, texto de eixo */
-      --chart-line:    #c3cad6;   /* = --accent-2, série única */
+      --chart-line:    var(--brand); /* era grafite (--accent-2) — curva de banca agora é a cor de marca */
+
+      /* Fallback antes do JS medir a altura real de .tabs e sobrescrever
+         (ver syncTabsHeight) — usado por .filter-bar sticky. */
+      --tabs-h: 50px;
+    }
+
+    /* Scrollbar dark (RESKIN v2, microdetalhe) — Firefox via scrollbar-color,
+       Chromium/Edge via ::-webkit-scrollbar. Fina o bastante pra não competir
+       com o conteúdo, mas visível o suficiente pra não parecer bug. */
+    * { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 999px;
+      border: 2px solid var(--bg);
+      background-clip: padding-box;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    /* Acessibilidade de teclado (fase 1): só aparece em navegação por teclado —
+       :focus-visible não dispara em clique de mouse, então não muda o visual
+       pra quem usa o mouse. */
+    :focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
     }
 
     html, body {
       /* Fix 2026-07-30 (BUG E): shorthand `background` sem background-color deixava
          a área que o gradiente fixo não cobre cair pro branco do canvas do navegador
          (visível como faixa branca fora da 1ª dobra em captura de página inteira).
-         Separado em color+image com fallback escuro — aparência do gradiente igual. */
+         Separado em color+image com fallback escuro — aparência do gradiente igual.
+         RESKIN v2: 2 camadas — glow azulado sutil no topo (identidade de marca,
+         "profundidade") por cima do radial neutro original (mantém o resto da
+         página sem tingimento, só a 1ª dobra ganha o halo). */
       background-color: var(--bg);
-      background-image: radial-gradient(ellipse at top, #16181d 0%, var(--bg) 60%);
+      background-image:
+        radial-gradient(ellipse 900px 480px at 50% -8%, rgba(96,165,250,0.16) 0%, transparent 70%),
+        radial-gradient(ellipse at top, #12141a 0%, var(--bg) 60%);
       background-attachment: fixed;
       color: var(--text);
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -84,9 +131,17 @@
       color: var(--muted);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       margin: 28px 0 12px;
+    }
+    /* Marcador de marca (RESKIN v2) — glifo "▎" antes de todo título de seção,
+       em --brand. Repetição intencional: reforça a identidade visual em cada
+       divisor de bloco da página, sem precisar tocar o HTML (é só ::before). */
+    .section-title::before {
+      content: '▎';
+      color: var(--brand);
+      margin-right: 2px;
     }
 
     /* KPI cards */
@@ -96,42 +151,73 @@
       gap: 12px;
     }
     .kpi {
-      background: linear-gradient(135deg, var(--card) 0%, var(--card-2) 100%);
-      border: 1px solid var(--border-soft);
-      border-radius: 12px;
-      padding: 16px 18px;
+      background: linear-gradient(155deg, var(--card) 0%, var(--card-2) 100%);
+      border: 1px solid var(--elev-border);
+      border-radius: 16px;
+      padding: 18px 20px;
       position: relative;
       overflow: hidden;
+      box-shadow: var(--shadow-elev);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
+    .kpi:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-elev-hover);
+    }
+    /* Barra de acento (RESKIN v2): era uma linha lateral sólida de 3px — virou
+       gradiente de 4px que esmaece pro fim + um glow desfocado no canto oposto
+       ("ícone/glifo discreto" pedido no brief, sem precisar de asset novo). Cor
+       default é --brand (KPI neutro "ganha tom"); verde/vermelho/amarelo/laranja
+       seguem sinalizando resultado como sempre. */
     .kpi::before {
       content: '';
       position: absolute;
       top: 0; left: 0;
-      width: 3px; height: 100%;
-      background: var(--accent);
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, var(--brand) 0%, transparent 140%);
     }
-    .kpi.green::before { background: var(--green); }
-    .kpi.red::before { background: var(--red); }
-    .kpi.orange::before { background: #f97316; }
+    .kpi::after {
+      content: '';
+      position: absolute;
+      z-index: 0; /* ::after é o último no DOM — sem isso pintaria por cima do texto */
+      top: -35%; right: -15%;
+      width: 130px; height: 130px;
+      border-radius: 50%;
+      background: var(--brand);
+      opacity: 0.07;
+      filter: blur(32px);
+      pointer-events: none;
+    }
+    .kpi.green::before { background: linear-gradient(180deg, var(--green) 0%, transparent 140%); }
+    .kpi.red::before { background: linear-gradient(180deg, var(--red) 0%, transparent 140%); }
+    .kpi.green::after { background: var(--green); }
+    .kpi.red::after { background: var(--red); }
     .kpi .label {
       color: var(--muted);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      opacity: 0.75;
+      position: relative;
+      z-index: 1;
     }
     .kpi .value {
-      font-size: 24px;
+      font-size: 30px;
       font-weight: 800;
-      margin-top: 6px;
+      margin-top: 8px;
       letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
     }
     .kpi .value.green { color: var(--green); }
     .kpi .value.red { color: var(--red); }
     .kpi .sub {
       color: var(--muted);
       font-size: 12px;
-      margin-top: 2px;
+      margin-top: 3px;
+      position: relative;
+      z-index: 1;
     }
 
     /* Daily summary */
@@ -142,12 +228,14 @@
     }
     .day {
       background: var(--card);
-      border: 1px solid var(--border-soft);
-      border-radius: 10px;
+      border: 1px solid var(--elev-border);
+      border-radius: 12px;
       padding: 12px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: var(--shadow-elev);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s;
     }
     .day .date { color: var(--muted); font-size: 12px; font-weight: 600; }
     .day .stats { font-size: 12px; color: var(--muted); margin-top: 2px; }
@@ -155,9 +243,9 @@
     .day .profit.green { color: var(--green); }
     .day .profit.red { color: var(--red); }
     .day .profit.muted { color: var(--muted); }
-    .day-clickable { cursor: pointer; transition: border-color 0.15s, background 0.15s; }
-    .day-clickable:hover { border-color: var(--accent); }
-    .day-active { border-color: var(--accent) !important; background: rgba(163, 173, 189, 0.10); }
+    .day-clickable { cursor: pointer; }
+    .day-clickable:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-elev-hover); }
+    .day-active { border-color: var(--brand) !important; background: rgba(96,165,250,0.08); }
 
     /* Filters */
     .filters, .chip-row {
@@ -172,9 +260,11 @@
       color: var(--muted);
       padding: 6px 12px;
       border-radius: 999px;
+      font-family: inherit;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
+      outline: none;
       transition: all 0.15s;
     }
     .chip:hover {
@@ -182,9 +272,9 @@
       border-color: var(--accent);
     }
     .chip.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: white;
+      background: var(--brand);
+      border-color: var(--brand);
+      color: var(--brand-ink);
     }
 
     /* Bet rows */
@@ -195,16 +285,17 @@
     }
     .bet {
       background: var(--card);
-      border: 1px solid var(--border-soft);
-      border-radius: 10px;
-      padding: 14px 16px;
+      border: 1px solid var(--elev-border);
+      border-radius: 14px;
+      padding: 18px 20px;
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 12px;
+      gap: 16px;
       align-items: center;
-      transition: border-color 0.15s;
+      box-shadow: var(--shadow-elev);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s;
     }
-    .bet:hover { border-color: var(--accent); }
+    .bet:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-elev-hover); }
     .bet .head {
       display: flex;
       align-items: center;
@@ -255,8 +346,9 @@
       text-align: right;
     }
     .bet .profit {
-      font-size: 16px;
+      font-size: 22px;
       font-weight: 800;
+      letter-spacing: -0.01em;
     }
     .bet .profit.green { color: var(--green); }
     .bet .profit.red { color: var(--red); }
@@ -264,19 +356,24 @@
 
     .badge {
       display: inline-block;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 999px;
       font-size: 10px;
       font-weight: 800;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
+      border: 1px solid transparent;
     }
-    .badge.green { background: var(--green-soft); color: var(--green); }
-    .badge.red { background: var(--red-soft); color: var(--red); }
-    .badge.pending { background: var(--yellow-soft); color: var(--yellow); }
-    .badge.void { background: rgba(138,146,158,0.15); color: var(--muted); }
+    .badge.green { background: var(--green-soft); color: var(--green); border-color: rgba(34,197,94,0.35); }
+    .badge.red { background: var(--red-soft); color: var(--red); border-color: rgba(239,68,68,0.35); }
+    .badge.pending { background: var(--yellow-soft); color: var(--yellow); border-color: rgba(234,179,8,0.35); }
+    .badge.void { background: var(--muted-soft); color: var(--muted); }
     .badge.cashout { background: var(--accent-glow); color: var(--accent-2); }
     .badge.hedge { background: var(--accent-glow); color: var(--accent-2); margin-left: 4px; }
+
+    /* Separador "vs" entre times — repetido cru via style="" inline em 5 lugares
+       (3 templates de card de bet + baleias) antes da faxina Fase 4. */
+    .vs-sep { color: var(--muted); font-weight: 500; }
 
     .empty {
       text-align: center;
@@ -303,176 +400,62 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
+    /* Sticky (fase 1) + vidro de verdade (RESKIN v2): fundo TRANSLÚCIDO +
+       backdrop-filter — antes o fundo era opaco sólido, então o blur já
+       declarado no CSS não tinha nada "atrás" pra borrar (no-op visual).
+       --tabs-h guarda a altura real renderizada, medida via JS no load/resize,
+       pra .filter-bar (Planilha) grudar logo ABAIXO das abas em vez de
+       sobrepor. z-index 25 fica entre o conteúdo normal (auto) e o tooltip de
+       chart (30). Único uso de backdrop-filter da v2 (custo de perf contido). */
     .tabs {
-      display: flex; gap: 4px; padding: 0 24px;
-      background: var(--bg-2);
-      border-bottom: 1px solid var(--border-soft);
-      overflow-x: auto;
+      background: rgba(10,11,14,0.72);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      backdrop-filter: blur(14px) saturate(140%);
+      border-bottom: 1px solid var(--elev-border);
+      position: sticky;
+      top: 0;
+      z-index: 25;
     }
+    .tabs-inner {
+      display: flex; gap: 6px; padding: 0 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      overflow-x: auto;
+      position: relative;
+    }
+    /* Indicador de overflow (Fase 3 mobile, 2026-08-15): 10 abas não cabem
+       <900px (cabem ~3 a 375px) e .tabs-inner rola sem nenhuma pista visual
+       disso. ::after é filho fora de fluxo (position:absolute) — sua caixa de
+       posicionamento é a padding box ESTÁVEL de .tabs-inner (não o conteúdo
+       que rola), então ele fica fixo colado na borda direita durante o scroll,
+       nunca "voa" junto com as abas. JS (wireTabsOverflowFade) alterna
+       .tabs-inner.at-scroll-end pra sumir quando não sobra mais nada pra rolar. */
+    .tabs-inner::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 32px;
+      background: linear-gradient(to right, transparent, rgba(10,11,14,0.92));
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.15s ease;
+    }
+    .tabs-inner.at-scroll-end::after { opacity: 0; }
+    /* Aba ativa = pill preenchida (RESKIN v2), não mais underline — fundo
+       brand translúcido + texto brand + radius alto. */
     .tab {
-      padding: 14px 20px; cursor: pointer; color: var(--muted);
-      font-weight: 700; font-size: 13px;
-      border-bottom: 2px solid transparent;
-      transition: color 0.15s, border-color 0.15s;
+      padding: 10px 18px; margin: 9px 0; cursor: pointer; color: var(--muted);
+      font-family: inherit; font-weight: 700; font-size: 13px;
+      background: none; border: none; border-radius: 999px;
+      outline: none;
+      transition: color 0.15s, background-color 0.15s;
       white-space: nowrap;
     }
-    .tab:hover { color: var(--text); }
-    .tab.active { color: var(--accent-2); border-bottom-color: var(--accent); }
+    .tab:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .tab.active { color: var(--brand); background: rgba(96,165,250,0.16); }
+    .tab.active:hover { background: rgba(96,165,250,0.22); }
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
-
-    .method-summary {
-      background: linear-gradient(135deg, var(--card), var(--card-2));
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px 24px;
-      margin-bottom: 20px;
-    }
-    .method-summary h2 {
-      font-size: 11px; color: var(--accent-2);
-      text-transform: uppercase; letter-spacing: 0.1em;
-      font-weight: 800;
-    }
-    .method-summary .desc {
-      color: var(--muted); font-size: 13px; margin-top: 4px;
-    }
-    .method-summary .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 16px; margin-top: 16px;
-    }
-    .method-summary .stat .label {
-      color: var(--muted); font-size: 10px;
-      text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;
-    }
-    .method-summary .stat .value {
-      color: var(--text); font-size: 22px; font-weight: 800; margin-top: 2px;
-    }
-    .method-summary .stat .value.green { color: var(--green); }
-
-    .method-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-    }
-    .method-card {
-      background: var(--card);
-      border: 1px solid var(--border-soft);
-      border-radius: 12px;
-      padding: 16px 18px;
-    }
-    .method-card h3 {
-      font-size: 11px; color: var(--accent-2);
-      text-transform: uppercase; letter-spacing: 0.1em;
-      font-weight: 800; margin-bottom: 12px;
-    }
-    .method-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 7px 0;
-      border-bottom: 1px solid var(--border-soft);
-      font-size: 13px;
-    }
-    .method-row:last-child { border-bottom: none; }
-    .method-row .name { color: var(--text); font-weight: 600; }
-    .method-row .name .liga {
-      color: var(--muted); font-size: 11px; font-weight: 500; margin-left: 4px;
-    }
-    .method-row .pct {
-      font-weight: 800; font-family: ui-monospace, monospace;
-    }
-    .method-row .pct.green { color: var(--green); }
-    .method-row .pct.yellow { color: var(--yellow); }
-    .method-row .pct.red { color: var(--red); }
-    .method-row .n {
-      color: var(--muted); font-size: 11px; margin-left: 6px;
-    }
-    .method-dot {
-      display: inline-block; width: 8px; height: 8px;
-      border-radius: 50%; margin-right: 8px; vertical-align: middle;
-    }
-    .method-dot.green { background: var(--green); }
-    .method-dot.yellow { background: var(--yellow); }
-    .method-dot.red { background: var(--red); }
-    .legend {
-      margin-top: 20px; padding: 14px 18px;
-      background: var(--card); border: 1px solid var(--border-soft);
-      border-radius: 10px;
-      font-size: 12px; color: var(--muted); line-height: 1.7;
-    }
-    .legend strong { color: var(--text); }
-
-    /* ===== Aba ML ===== */
-    .ml-header { margin-bottom: 18px; }
-    .ml-header h2 { font-size: 18px; font-weight: 800; }
-    .ml-header .meta { color: var(--muted); font-size: 12px; margin-top: 4px; }
-
-    .ml-pos-nav {
-      display: flex; flex-wrap: wrap; gap: 6px;
-      margin: 16px 0 12px;
-    }
-    .ml-pos-nav .ml-pos {
-      padding: 6px 12px; border-radius: 999px;
-      background: var(--card); border: 1px solid var(--border-soft);
-      font-size: 12px; font-weight: 600; cursor: pointer;
-      color: var(--muted);
-      user-select: none;
-    }
-    .ml-pos-nav .ml-pos.active {
-      background: var(--accent-glow);
-      border-color: var(--accent);
-      color: var(--accent-2);
-    }
-
-    .ml-section { display: none; }
-    .ml-section.active { display: block; }
-    .ml-section h3 {
-      font-size: 11px; color: var(--accent-2);
-      text-transform: uppercase; letter-spacing: 0.1em;
-      font-weight: 800; margin: 18px 0 8px;
-    }
-
-    .ml-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 10px;
-    }
-    .ml-card {
-      display: flex; align-items: center; gap: 12px;
-      background: var(--card); border: 1px solid var(--border-soft);
-      border-radius: 10px;
-      padding: 10px 12px;
-    }
-    .ml-card.win { border-left: 3px solid var(--green); }
-    .ml-card.loss { border-left: 3px solid var(--red); }
-    .ml-card.neutral { border-left: 3px solid var(--yellow); }
-    .ml-card img {
-      width: 48px; height: 48px; border-radius: 6px;
-      background: var(--bg-2);
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-    .ml-card .info { flex: 1; min-width: 0; }
-    .ml-card .name {
-      font-size: 14px; font-weight: 700;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .ml-card .stats-line {
-      font-size: 11px; color: var(--muted);
-      margin-top: 2px;
-      font-family: ui-monospace, monospace;
-    }
-    .ml-card .wr {
-      font-size: 16px; font-weight: 800;
-      font-family: ui-monospace, monospace;
-      flex-shrink: 0;
-    }
-    .ml-card .wr.green { color: var(--green); }
-    .ml-card .wr.red { color: var(--red); }
-    .ml-card .wr.yellow { color: var(--yellow); }
-    .ml-card .ligas {
-      font-size: 10px; color: var(--muted);
-      margin-top: 2px;
-    }
 
     /* ===== Bets fora do método ===== */
     .bet-off {
@@ -526,17 +509,25 @@
       color: var(--yellow);
     }
 
-    /* ===== PARTE 4 — Barra de filtros sticky ===== */
+    /* ===== PARTE 4 — Barra de filtros sticky =====
+       top = var(--tabs-h) (fase 1): antes grudava em top:0 por baixo de .tabs
+       (que também é sticky) — agora encosta logo abaixo das abas. "-1px" (ajuste
+       pós-review 2026-08-14): sobrepõe 1px de propósito — subpixel de layout faz
+       --tabs-h (medido via JS) e a borda visual renderizada de .tabs divergirem
+       por fração de px, o que deixava uma fresta rolando conteúdo por trás na
+       emenda. Como os 2 têm o mesmo fundo (--bg-2), a sobreposição é invisível. */
     .filter-bar {
+      /* RESKIN v2: backdrop-filter removido (era no-op mesmo antes — fundo opaco
+       sólido não tem o que borrar; "performance: backdrop-filter só na tab bar"
+       do brief). Fundo segue opaco de propósito: cobre a fresta de 1px do
+       overlap com .tabs (ver comentário histórico abaixo, ainda válido). */
       position: sticky;
-      top: 0;
+      top: calc(var(--tabs-h) - 1px);
       z-index: 20;
       background: var(--bg-2);
-      border-bottom: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--elev-border);
       padding: 10px 24px;
       margin: 0 -24px 16px;
-      -webkit-backdrop-filter: blur(6px);
-      backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
       gap: 16px;
@@ -591,20 +582,43 @@
     .hero-figure {
       text-align: center;
       margin: 0;
+      position: relative;
     }
+    /* Glow atrás do hero (RESKIN v2): mancha grande borrada, opacidade baixa,
+       cor de sinal (verde/vermelho) via :has() lendo a classe do .value —
+       neutro (sem green/red, ex: "carregando…") cai no --muted, discreto.
+       z-index -1 fica só dentro do stacking context do próprio .hero-figure
+       (position:relative acima) — não vaza pra fora do bloco. */
+    .hero-figure::before {
+      content: '';
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 360px; height: 190px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: var(--muted);
+      opacity: 0.16;
+      filter: blur(64px);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .hero-figure:has(.value.green)::before { background: var(--green); }
+    .hero-figure:has(.value.red)::before { background: var(--red); }
     .hero-figure .label {
       color: var(--muted);
       font-size: 12px;
       font-weight: 600;
+      letter-spacing: 0.04em;
       text-transform: none;
+      opacity: 0.8;
     }
     .hero-figure .value {
-      font-size: clamp(40px, 8vw, 56px);
+      font-size: clamp(48px, 9vw, 72px);
       font-weight: 800;
       font-variant-numeric: normal; /* proporcionais — NUNCA tabular-nums aqui */
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
       line-height: 1.1;
-      margin-top: 4px;
+      margin-top: 6px;
     }
     .hero-figure .value.green { color: var(--green); }
     .hero-figure .value.red { color: var(--red); }
@@ -612,7 +626,7 @@
     .hero-figure .sub {
       color: var(--muted);
       font-size: 12px;
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
     /* RODADA 4 — PARTE A (2026-07-30): a aba "Hoje" virou 2 blocos rotulados —
@@ -638,11 +652,12 @@
       padding: 10px 14px;
     }
     .hoje-mini-tiles .kpi .value {
-      font-size: 20px;
+      font-size: 22px;
       margin-top: 4px;
     }
 
-    .kpi.warn::before { background: var(--yellow); }
+    .kpi.warn::before { background: linear-gradient(180deg, var(--yellow) 0%, transparent 140%); }
+    .kpi.warn::after { background: var(--yellow); }
 
     .section-head {
       display: flex;
@@ -679,9 +694,10 @@
     .chart-wrap {
       position: relative;
       background: var(--chart-surface);
-      border: 1px solid var(--border-soft);
-      border-radius: 12px;
+      border: 1px solid var(--elev-border);
+      border-radius: 14px;
       padding: 12px;
+      box-shadow: var(--shadow-elev);
       transition: opacity 0.15s;
     }
     .chart-wrap svg { display: block; width: 100%; height: auto; }
@@ -748,8 +764,9 @@
     }
     .hbar-fill {
       position: absolute;
-      top: 6px;
-      height: 14px; /* máx 24px de espessura — sobra é ar, nunca preenche o slot inteiro */
+      top: 4px;
+      height: 18px; /* RESKIN v2: era 14px — barra mais grossa, ainda com ar (slot de 26px) */
+      border-radius: 4px;
       transition: width 0.15s, left 0.15s;
     }
     .hbar-tip {
@@ -768,7 +785,7 @@
     .meter { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
     .meter-track {
       position: relative;
-      height: 8px;
+      height: 10px; /* RESKIN v2: era 8px */
       border-radius: 999px;
       overflow: visible;
     }
@@ -822,18 +839,18 @@
       white-space: nowrap;
     }
     .whale-live-badge.polling {
-      background: rgba(138,146,158,0.15);
+      background: var(--muted-soft);
       color: var(--muted);
     }
 
-    .register-card { max-width:720px; border:1px solid var(--border); border-radius:16px; background:var(--card); overflow:hidden; }
+    .register-card { max-width:720px; border:1px solid var(--elev-border); border-radius:16px; background:var(--card); overflow:hidden; box-shadow: var(--shadow-elev); }
     .register-chat-head { padding:18px 20px 14px; border-bottom:1px solid var(--border); }
     .register-chat-head h2 { margin:0 0 5px; font-size:20px; }
     .register-chat-head p { color:var(--muted); margin:0; font-size:13px; line-height:1.45; }
     .register-chat-log { min-height:290px; max-height:52vh; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:10px; background:color-mix(in srgb, var(--bg) 55%, transparent); }
     .register-bubble { max-width:82%; padding:10px 13px; border-radius:14px; line-height:1.45; white-space:pre-wrap; overflow-wrap:anywhere; }
     .register-bubble.assistant { align-self:flex-start; background:var(--card-2); border:1px solid var(--border); border-bottom-left-radius:4px; }
-    .register-bubble.user { align-self:flex-end; background:var(--accent); color:#fff; border-bottom-right-radius:4px; }
+    .register-bubble.user { align-self:flex-end; background:var(--brand); color:var(--brand-ink); border-bottom-right-radius:4px; }
     .register-bubble.status { align-self:flex-start; color:var(--muted); background:transparent; border:1px dashed var(--border); }
     .register-bubble.status.success { color:var(--green); border-style:solid; }
     .register-bubble.status.error { color:var(--red); border-style:solid; }
@@ -849,9 +866,26 @@
     .register-description { resize:vertical; min-height:68px; max-height:150px; }
     .register-composer-actions { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:10px; }
     .register-composer-hint { color:var(--muted); font-size:12px; }
-    .register-button { border:0; border-radius:10px; padding:10px 16px; background:var(--accent); color:#fff; font:inherit; font-weight:700; cursor:pointer; }
+    .register-button { border:0; border-radius:10px; padding:10px 16px; background:var(--brand); color:var(--brand-ink); font:inherit; font-weight:700; cursor:pointer; outline:none; }
     .register-button.secondary { background:var(--card-2); color:var(--text); border:1px solid var(--border); }
     .register-button:disabled { opacity:.55; cursor:wait; }
+
+    /* ===== PARTE 6B — Tablet (Fase 3, 2026-08-15) =====
+       Só existia o breakpoint de 600px — entre 601 e 900px (notebook pequeno/
+       tablet) o layout ficava "desktop cheio espremido". Validado por render
+       real (CDP 620/650/768/900px): .rank-grid (Onde ganha/perde) e o .kpis
+       auto-fit NÃO quebram sozinhos nessa faixa — só .kpi .value CLIPA de
+       verdade (overflow:hidden do card corta o último dígito, ex: "+62.675,0"
+       perdendo o "0") quando o auto-fit cai pra 4 colunas de ~170px de largura.
+       Fix: minmax mínimo maior força 2-3 colunas mais largas — sem tocar no
+       font-size (RESKIN v2 quer número grande, ver comentário da PARTE 6 logo
+       abaixo). Fica ANTES do bloco de 600px por conta própria (mesma regra de
+       cascata: só importa vir depois das regras BASE do seletor — 600px e
+       601-900px não se sobrepõem entre si, então a ordem entre os dois não
+       muda nada). */
+    @media (min-width: 601px) and (max-width: 900px) {
+      .kpis { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+    }
 
     /* ===== PARTE 6 — Mobile =====
        Fica por ÚLTIMO no stylesheet de propósito: regras de mesma especificidade
@@ -863,13 +897,23 @@
     @media (max-width: 600px) {
       .header { padding: 18px 16px 8px; }
       .container { padding: 8px 16px 32px; }
-      .kpi .value { font-size: 20px; }
+      /* RESKIN v2 — degradação mobile da tipografia/elevação mais ousada do
+         desktop: números continuam grandes (é o ponto do reskin), mas um
+         degrau abaixo, e cards com menos padding/radius pra caber na tela. */
+      .kpi { padding: 16px 18px; border-radius: 14px; }
+      .kpi .value { font-size: 24px; }
+      .bet { padding: 16px 18px; }
+      .bet .profit { font-size: 20px; }
       .bet { grid-template-columns: 1fr; }
       .bet .right { text-align: left; }
       .kpis { grid-template-columns: repeat(2, 1fr); }
-      .hero-figure .value { font-size: 40px; }
+      .hero-figure .value { font-size: 44px; }
+      .hero-figure::before { width: 260px; height: 150px; filter: blur(48px); }
       .filter-bar { overflow-x: auto; margin-inline: -16px; padding-inline: 16px; }
       .rank-grid { grid-template-columns: 1fr; }
+      /* Composição dos times (Fase 3 mobile, 2026-08-15): 2 colunas de 11px
+         ficavam espremidas — 1 coluna empilhada + 1px a mais de fonte. */
+      .bet .comp { grid-template-columns: 1fr; font-size: 12px; }
       .register-chat-head { padding:16px; }
       .register-chat-log { min-height:260px; max-height:48vh; padding:14px; }
       .register-bubble { max-width:90%; }
@@ -885,16 +929,18 @@
   </header>
 
   <nav class="tabs">
-    <div class="tab active" data-tab="hoje">Hoje</div>
-    <div class="tab" data-tab="registrar">Registrar bet</div>
-    <div class="tab" data-tab="tracker">Planilha</div>
-    <div class="tab" data-tab="baleias">Baleias</div>
-    <div class="tab" data-tab="milio">Milio</div>
-    <div class="tab" data-tab="camille">Camille</div>
-    <div class="tab" data-tab="pyke">Pyke</div>
-    <div class="tab" data-tab="peel">2peel</div>
-    <div class="tab" data-tab="ml">ML</div>
-    <div class="tab" data-tab="outros">Outros métodos</div>
+    <div class="tabs-inner">
+      <button class="tab active" type="button" data-tab="hoje">Hoje</button>
+      <button class="tab" type="button" data-tab="registrar">Registrar bet</button>
+      <button class="tab" type="button" data-tab="tracker">Planilha</button>
+      <button class="tab" type="button" data-tab="baleias">Baleias</button>
+      <button class="tab" type="button" data-tab="milio">Milio</button>
+      <button class="tab" type="button" data-tab="camille">Camille</button>
+      <button class="tab" type="button" data-tab="pyke">Pyke</button>
+      <button class="tab" type="button" data-tab="peel">2peel</button>
+      <button class="tab" type="button" data-tab="ml">ML</button>
+      <button class="tab" type="button" data-tab="outros">Outros métodos</button>
+    </div>
   </nav>
 
   <main class="container tab-pane active" data-pane="hoje">
@@ -905,8 +951,8 @@
          SPLIT (tiles = acumulado), mais chips Tudo/Só método que re-escopam a aba
          inteira (antes ela somava método+off sem avisar). -->
     <div class="chip-row" id="hojeScopeChips">
-      <span class="chip active" data-scope="tudo">Tudo</span>
-      <span class="chip" data-scope="metodo">Só método</span>
+      <button class="chip active" type="button" data-scope="tudo">Tudo</button>
+      <button class="chip" type="button" data-scope="metodo">Só método</button>
     </div>
     <div class="rank-note" id="hojeScopeNote" style="margin:-6px 0 16px"></div>
 
@@ -949,9 +995,9 @@
 
     <div class="section-title" id="hojeRankTitle">Onde ganha / onde perde — no split 3</div>
     <div class="chip-row" id="hojeDimChips">
-      <span class="chip active" data-dim="liga">Liga</span>
-      <span class="chip" data-dim="time">Time</span>
-      <span class="chip" data-dim="suporte">Suporte</span>
+      <button class="chip active" type="button" data-dim="liga">Liga</button>
+      <button class="chip" type="button" data-dim="time">Time</button>
+      <button class="chip" type="button" data-dim="suporte">Suporte</button>
     </div>
     <div class="rank-grid">
       <div>
@@ -1014,32 +1060,44 @@
 
     <div id="kpis" class="kpis"></div>
 
-    <div class="section-title">Por mês</div>
-    <div id="months" class="days"></div>
+    <div class="section-title">PnL por dia</div>
+    <div id="trkPnlChartWrap"><div class="loading">Carregando…</div></div>
 
-    <div class="section-title">Por dia</div>
+    <!-- Reorganização Planilha (2026-08-14): as 5 seções "Por mês/dia/suporte/liga/
+         time" (antes empilhadas, cada uma com seu próprio grid) viram 1 seção só com
+         chips pill trocando a view — as 5 funções geradoras (renderMonths/renderDays/
+         renderBySupport/renderByLeague/renderByTeam) continuam intactas e rodam a
+         CADA render() (preserva clique/filtro de cada card); só a exibição é
+         orquestrada via display:none/'' no clique do chip (ver trkGroupChips). -->
+    <div class="section-title">Agrupado por</div>
+    <div class="chip-row" id="trkGroupChips">
+      <button class="chip" type="button" data-group="months">Mês</button>
+      <button class="chip active" type="button" data-group="days">Dia</button>
+      <button class="chip" type="button" data-group="bySupport">Suporte</button>
+      <button class="chip" type="button" data-group="byLeague">Liga</button>
+      <button class="chip" type="button" data-group="byTeam">Time</button>
+    </div>
+    <div class="rank-note" id="trkGroupNote" style="margin:-6px 0 12px"></div>
+    <div id="months" class="days" style="display:none"></div>
     <div id="days" class="days"></div>
+    <div id="bySupport" class="days" style="display:none"></div>
+    <div id="byLeague" class="days" style="display:none"></div>
+    <div id="byTeam" class="days" style="display:none"></div>
 
-    <div class="section-title">Lucro por suporte (apostas Under)</div>
-    <div id="bySupport" class="days"></div>
-
-    <div class="section-title">Lucro por liga</div>
-    <div id="byLeague" class="days"></div>
-
-    <div class="section-title">Lucro por time</div>
-    <div id="byTeam" class="days"></div>
-
-    <div class="section-title">Hit do método por liga (backtest, simulação)</div>
-    <div id="methodByLeague" class="days">
+    <div class="section-head">
+      <div class="section-title" style="margin:0">Hit do método por liga (backtest, simulação)</div>
+      <button class="ver-tabela-btn" id="methodByLeagueToggleBtn" type="button">▸ ver tabela</button>
+    </div>
+    <div id="methodByLeague" class="days" style="display:none">
       <div class="loading">Carregando…</div>
     </div>
 
     <div class="section-title">Apostas</div>
     <div class="filters">
-      <span class="chip active" data-filter="all">Todas</span>
-      <span class="chip" data-filter="pending">Pendentes</span>
-      <span class="chip" data-filter="green">Greens</span>
-      <span class="chip" data-filter="red">Reds</span>
+      <button class="chip active" type="button" data-filter="all">Todas</button>
+      <button class="chip" type="button" data-filter="pending">Pendentes</button>
+      <button class="chip" type="button" data-filter="green">Greens</button>
+      <button class="chip" type="button" data-filter="red">Reds</button>
     </div>
     <div id="bets" class="bets">
       <div class="loading">Carregando apostas</div>
@@ -1061,9 +1119,9 @@
     <div class="section-title" style="margin-top:0">Vigia de baleias — Polymarket</div>
     <div class="rank-note" style="margin:-6px 0 16px">Apostas grandes detectadas na Polymarket, mais recentes primeiro. <span class="whale-live-badge polling" id="whaleLiveBadge">atualizando a cada 5s</span></div>
     <div class="chip-row" id="whaleGameChips">
-      <span class="chip active" data-game="all">Todos</span>
-      <span class="chip" data-game="LoL">LoL</span>
-      <span class="chip" data-game="Dota 2">Dota 2</span>
+      <button class="chip active" type="button" data-game="all">Todos</button>
+      <button class="chip" type="button" data-game="LoL">LoL</button>
+      <button class="chip" type="button" data-game="Dota 2">Dota 2</button>
     </div>
     <div class="rank-note" id="whaleCount"></div>
     <div id="whaleSignals" class="bets">
@@ -1462,14 +1520,32 @@
       points.forEach((p, i) => { if (p.y > points[maxIdx].y) maxIdx = i; if (p.y < points[minIdx].y) minIdx = i; });
       const finalIdx = points.length - 1;
       const markerIdxs = [...new Set([finalIdx, maxIdx, minIdx])];
+      const finalCx = xAt(finalIdx), finalCy = yAt(points[finalIdx].y);
+      // Anti-colisão (fase 1 + ajuste pós-review 2026-08-14): rótulo de máx/mín a
+      // menos de 90 (viewBox) do rótulo do final vira só círculo, sem texto — mas
+      // aí sobra um problema novo: o TEXTO do final usa a altura do PRÓPRIO ponto,
+      // e pode passar por cima do círculo suprimido (que ficou perto na
+      // horizontal). Quando isso acontece, o label do final sobe pra ficar acima
+      // dos dois pontos. Se subir esbarraria no topo do chart (os 2 pontos já
+      // estão perto do pico do eixo Y), inverte e desce pra abaixo dos dois em
+      // vez de ficar preso num meio-termo que ainda cruzaria os círculos.
+      const suppressedNearFinal = markerIdxs.filter(i => i !== finalIdx && Math.hypot(xAt(i) - finalCx, yAt(points[i].y) - finalCy) < 90);
+      let finalLabelY = null;
+      if (suppressedNearFinal.length) {
+        const collidingCys = [finalCy, ...suppressedNearFinal.map(i => yAt(points[i].y))];
+        const above = Math.min(...collidingCys) - 14;
+        finalLabelY = above >= marginT + 8 ? above : Math.max(...collidingCys) + 16;
+      }
       const markers = markerIdxs.map(i => {
         const cx = xAt(i), cy = yAt(points[i].y);
         const nearTop = cy - 14 < marginT;
-        const labelY = nearTop ? cy + 16 : cy - 10;
+        const labelY = i === finalIdx && finalLabelY !== null ? finalLabelY : (nearTop ? cy + 16 : cy - 10);
         const anchor = i === 0 ? 'start' : (i === finalIdx ? 'end' : 'middle');
+        const tooCloseToFinal = suppressedNearFinal.includes(i);
+        const label = tooCloseToFinal ? '' : `<text x="${cx.toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="${anchor}" class="chart-svg-label">${tickFmt(points[i].y)}</text>`;
         return `
           <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="5" fill="var(--chart-line)" stroke="var(--chart-surface)" stroke-width="2" />
-          <text x="${cx.toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="${anchor}" class="chart-svg-label">${tickFmt(points[i].y)}</text>
+          ${label}
         `;
       }).join('');
 
@@ -1481,11 +1557,21 @@
         return `<text x="${x.toFixed(1)}" y="${height - 6}" text-anchor="middle" class="chart-svg-text">${escHtml(dayLabelFromKey(points[i].x))}</text>`;
       }).join('');
 
+      // RESKIN v2: fill da área virou gradiente de verdade (era cor sólida +
+      // opacity 0.1 flat) — <defs> + <linearGradient> local ao chart (id com
+      // uid, não colide entre charts na mesma página). Só isso muda na lib:
+      // geometria/pontos/eixos continuam exatamente iguais.
       const svg = `
         <svg viewBox="0 0 ${W} ${height}" data-chart-id="${uid}">
+          <defs>
+            <linearGradient id="areaGrad-${uid}" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--chart-line)" stop-opacity="0.32" />
+              <stop offset="100%" stop-color="var(--chart-line)" stop-opacity="0" />
+            </linearGradient>
+          </defs>
           ${gridLines}
-          <path d="${areaPath}" fill="var(--chart-line)" opacity="0.1" stroke="none" />
-          <path d="${linePath}" fill="none" stroke="var(--chart-line)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+          <path d="${areaPath}" fill="url(#areaGrad-${uid})" stroke="none" />
+          <path d="${linePath}" fill="none" stroke="var(--chart-line)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
           ${markers}
           ${xLabels}
           <line class="chart-crosshair" data-role="crosshair" x1="${marginL}" y1="${marginT}" x2="${marginL}" y2="${marginT + innerH}" />
@@ -1583,7 +1669,30 @@
           <rect data-role="hit" data-idx="${i}" x="${slotX}" y="${marginT}" width="${slotW}" height="${innerH}" fill="transparent" style="cursor:pointer" />`;
       }).join('');
 
+      // Eixo X: acima de 8 colunas os rótulos se sobrepõem (viram texto ilegível
+      // no mobile) — mostra 1 a cada ceil(n/8), sempre com a 1ª e a última. Ajuste
+      // pós-review (2026-08-14): a última posição é SEMPRE forçada mesmo quando
+      // não é múltiplo do step, o que pode deixar o penúltimo rótulo colado nela.
+      // Critério de remoção é em PIXEL (gap de índice × slotW), não em contagem
+      // de índice pura — testado com dado real da Camille (21 barras, step 3):
+      // no viewBox largo do desktop (1000) o gap de 2 índices ainda sobra ~88px
+      // (rótulo cabe folgado); só no viewBox estreito do mobile (380) esse mesmo
+      // gap de 2 índices vira ~30px e cola. Critério só por índice removia o
+      // rótulo à toa no desktop (confirmado via screenshot antes deste ajuste).
+      const lastBarIdx = bars.length - 1;
+      const xLabelStep = bars.length > 8 ? Math.ceil(bars.length / 8) : 1;
+      const MIN_LABEL_GAP_PX = 40; // ~"DD/MM" (5 char) + folga, na fonte de 11px do eixo
+      const xLabelIdxs = [];
+      for (let i = 0; i <= lastBarIdx; i++) {
+        if (i === 0 || i === lastBarIdx || i % xLabelStep === 0) xLabelIdxs.push(i);
+      }
+      if (xLabelIdxs.length >= 2) {
+        const penultimate = xLabelIdxs[xLabelIdxs.length - 2];
+        if ((lastBarIdx - penultimate) * slotW < MIN_LABEL_GAP_PX) xLabelIdxs.splice(xLabelIdxs.length - 2, 1);
+      }
+      const xLabelIdxSet = new Set(xLabelIdxs);
       const xLabels = bars.map((b, i) => {
+        if (!xLabelIdxSet.has(i)) return '';
         const x = marginL + i * slotW + slotW / 2;
         return `<text x="${x.toFixed(1)}" y="${height - 6}" text-anchor="middle" class="chart-svg-text">${escHtml(b.label)}</text>`;
       }).join('');
@@ -1731,6 +1840,47 @@
         mid.style.display = hidden ? '' : 'none';
         btn.textContent = hidden ? 'ver menos' : `ver todos (${sorted.length})`;
       });
+    }
+
+    // ===== Paginação de listas de bets (reorganização Planilha, 2026-08-14) =====
+    // Helper compartilhado pela lista principal da Planilha (#bets), "fora do
+    // método" (#offMethodBets) e as 6 listas das abas de sub-método (renderMethodTab).
+    // Mostra PAGE_SIZE itens + botão "mostrar mais" (reusa o visual .ver-todos-btn
+    // já usado em "ver todos" de Por time). Estado (quantos itens visíveis) fica
+    // em listPageState por containerId — cresce só no clique do botão; toda
+    // re-chamada vinda de filtro/chip novo passa reset:true (default) e volta pra
+    // PAGE_SIZE. O clique em "mostrar mais" NUNCA dispara render() — só re-desenha
+    // a própria lista (reset:false), senão o clique se autodestruiria. Cada chamada
+    // troca o innerHTML inteiro do container (velhos listeners somem com os nós
+    // removidos) — sem risco de duplicar bind em "mostrar mais" nem nos botões
+    // internos de cada card (toggle método, etc).
+    const LIST_PAGE_SIZE = 20;
+    const listPageState = new Map();
+    function renderPaginatedList(containerId, items, itemHtmlFn, opts = {}) {
+      const { emptyLabel = 'Nenhuma aposta.', reset = true, bindFn = null } = opts;
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      if (reset) listPageState.set(containerId, LIST_PAGE_SIZE);
+      if (!items.length) {
+        listPageState.delete(containerId);
+        el.innerHTML = `<div class="empty">${emptyLabel}</div>`;
+        return;
+      }
+      const visibleCount = Math.min(listPageState.get(containerId) || LIST_PAGE_SIZE, items.length);
+      const visible = items.slice(0, visibleCount);
+      const remaining = items.length - visibleCount;
+      el.innerHTML = visible.map(itemHtmlFn).join('') +
+        (remaining > 0
+          ? `<button class="ver-todos-btn" type="button" data-list-page-more="1">mostrar mais ${Math.min(LIST_PAGE_SIZE, remaining)} (${remaining} restante${remaining === 1 ? '' : 's'})</button>`
+          : '');
+      if (bindFn) bindFn(el);
+      const moreBtn = el.querySelector('[data-list-page-more]');
+      if (moreBtn) {
+        moreBtn.addEventListener('click', () => {
+          listPageState.set(containerId, visibleCount + LIST_PAGE_SIZE);
+          renderPaginatedList(containerId, items, itemHtmlFn, { ...opts, reset: false });
+        });
+      }
     }
 
     // ── Team name aliases → canônico ─────────────────────────────────────────
@@ -2300,69 +2450,6 @@
       return `<div class="comp">${fmtSide(comp.team_a)}${fmtSide(comp.team_b)}</div>`;
     };
 
-    function renderBets(bets) {
-      let filtered = currentFilter === 'all' ? bets : bets.filter((b) => b.status === currentFilter);
-      if (currentMonthFilter) {
-        filtered = filtered.filter((b) => {
-          const dt = b.bet_datetime || b.created_at;
-          return dt && dayKeyBRT(dt).slice(0, 7) === currentMonthFilter;
-        });
-      }
-      if (currentDayFilter) {
-        filtered = filtered.filter((b) => {
-          const dt = b.bet_datetime || b.created_at;
-          return dt && dayKeyBRT(dt) === currentDayFilter;
-        });
-      }
-
-      if (!filtered.length) {
-        document.getElementById('bets').innerHTML =
-          '<div class="empty">Nenhuma aposta nessa filtragem.</div>';
-        return;
-      }
-
-      const html = filtered
-        .map((b) => {
-          const profit = b.profit;
-          const profitText =
-            profit == null ? '—' : `${profit >= 0 ? '+' : ''}R$ ${fmtMoney(profit)}`;
-          const profitCls = profit == null ? 'muted' : profit >= 0 ? 'green' : 'red';
-          const isHedge = b.raw_extraction?.strategy === 'hedge';
-          const mapInfo = b.is_map_bet ? ` · M${b.map_number ?? '?'}` : '';
-          const compHtml = renderComp(normalizeComp(b));
-
-          const teamADisplay  = normalizeTeamName(b.team_a);
-          const teamBDisplay  = normalizeTeamName(b.team_b);
-          const marketDisplay = normalizeMarket(b.market, b.is_map_bet, b.map_number);
-          const leagueDisplay = normalizeLeague(b.league);
-
-          return `
-            <div class="bet">
-              <div>
-                <div class="head">
-                  <span class="teams">${teamADisplay} <span style="color:var(--muted);font-weight:500">vs</span> ${teamBDisplay}</span>
-                  ${leagueDisplay ? `<span class="league">· ${leagueDisplay}</span>` : ''}
-                  <span class="badge ${b.status}">${b.status}</span>
-                  ${isHedge ? '<span class="badge hedge">hedge</span>' : ''}
-                </div>
-                <div class="market">
-                  ${marketDisplay} → <strong>${b.pick ?? '?'}</strong>${mapInfo}
-                </div>
-                <div class="meta">
-                  ${fmtDate(b.bet_datetime || b.created_at)} · ${b.bookmaker ?? '?'} · Odd ${(Number(b.odd) || 0).toFixed(2)} · Stake R$ ${fmtMoney(b.stake)}
-                </div>
-                ${compHtml}
-              </div>
-              <div class="right">
-                <div class="profit ${profitCls}">${profitText}</div>
-              </div>
-            </div>
-          `;
-        })
-        .join('');
-      document.getElementById('bets').innerHTML = html;
-    }
-
     function renderBySupport(bets) {
       const underBets = bets.filter(
         (b) => /under|menos/i.test(b.pick ?? '') && normalizeComp(b)
@@ -2477,6 +2564,59 @@
       renderExpandableTopBottom('byTeam', sorted, rowHtml, { top: 8, bottom: 5, emptyLabel: 'Sem dados de time (mínimo 3 apostas).' });
     }
 
+    // ===== "Agrupado por" — sub-navegação por chip (2026-08-14) =====
+    // As 5 funções geradoras acima (renderMonths/Days/BySupport/ByLeague/ByTeam)
+    // continuam rodando a cada render() — só o container ativo fica visível.
+    // Trocar de chip NÃO chama render(): é troca de visibilidade pura, os 5
+    // containers já estão com o dado mais recente desde o último render().
+    let trkGroupView = 'days';
+    const TRK_GROUP_IDS = ['months', 'days', 'bySupport', 'byLeague', 'byTeam'];
+    const TRK_GROUP_NOTES = {
+      months: 'Lucro agrupado por mês.',
+      days: 'Lucro agrupado por dia.',
+      bySupport: 'Lucro por suporte — só apostas Under, com composição identificada.',
+      byLeague: 'Lucro agrupado por liga.',
+      byTeam: 'Lucro agrupado por time (mínimo 3 apostas na amostra).',
+    };
+    function applyTrkGroupView() {
+      TRK_GROUP_IDS.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = id === trkGroupView ? '' : 'none';
+      });
+      const note = document.getElementById('trkGroupNote');
+      if (note) note.textContent = TRK_GROUP_NOTES[trkGroupView] || '';
+    }
+    document.getElementById('trkGroupChips').querySelectorAll('.chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        document.getElementById('trkGroupChips').querySelectorAll('.chip').forEach((c) => c.classList.remove('active'));
+        chip.classList.add('active');
+        trkGroupView = chip.dataset.group;
+        applyTrkGroupView();
+      });
+    });
+    applyTrkGroupView(); // estado inicial (default: Dia)
+
+    document.getElementById('methodByLeagueToggleBtn').addEventListener('click', () => {
+      const tbl = document.getElementById('methodByLeague');
+      const btn = document.getElementById('methodByLeagueToggleBtn');
+      const hidden = tbl.style.display === 'none';
+      tbl.style.display = hidden ? '' : 'none';
+      btn.textContent = hidden ? '▾ ocultar tabela' : '▸ ver tabela';
+    });
+
+    // Column chart de PnL por dia da Planilha (PARTE novo item 3, 2026-08-14) —
+    // mesmo recorte de filtros do bloco #kpis logo acima (view = betsForView()):
+    // período + trigger + liga + drill-down de mês/dia, só bets do método (mesmo
+    // pool que os KPIs mostram, pra o gráfico nunca "discordar" do número ao lado).
+    function renderTrkPnlChart(bets) {
+      const wrap = document.getElementById('trkPnlChartWrap');
+      if (!wrap) return;
+      const byDayAsc = groupByDay(bets).slice().reverse();
+      const bars = byDayAsc.map((d) => ({ label: dayLabelFromKey(d.date), value: d.profit }));
+      wrap.innerHTML = svgColumnChart(bars, { height: 180, id: 'trkPnlChart' });
+      wireColumnChart('trkPnlChart', bars, fmtMoney);
+    }
+
     function betsForView() {
       let v = applyTrkFilters(allBets);
       if (currentMonthFilter) {
@@ -2516,6 +2656,7 @@
       const view = betsForView();
       const k = computeKPIs(view);
       renderKPIs(k);
+      renderTrkPnlChart(view);
       renderMonths(applyTrkFilters(allReal));
       renderDays(betsForDaysScoped(allReal));
       renderBySupport(view);
@@ -2759,7 +2900,7 @@
       const pendSection = document.getElementById('hojePendentesSection');
       if (pendentes.length) {
         pendSection.style.display = '';
-        document.getElementById('hojePendentesBets').innerHTML = pendentes.map(betCardHtml).join('');
+        document.getElementById('hojePendentesBets').innerHTML = pendentes.map((b) => betCardHtml(b)).join('');
       } else {
         pendSection.style.display = 'none';
       }
@@ -2940,55 +3081,20 @@
         </div>
       `;
 
-      const html = offBets.map((b) => {
-        const profit = b.profit;
-        const profitText = profit == null ? '—' : `${profit >= 0 ? '+' : ''}R$ ${fmtMoney(profit)}`;
-        const profitCls = profit == null ? 'muted' : profit >= 0 ? 'green' : 'red';
-        const isHedge = b.raw_extraction?.strategy === 'hedge';
-        const mapInfo = b.is_map_bet ? ` · M${b.map_number ?? '?'}` : '';
-        const compHtml = renderComp(normalizeComp(b));
-        const teamADisplay  = normalizeTeamName(b.team_a);
-        const teamBDisplay  = normalizeTeamName(b.team_b);
-        const marketDisplay = normalizeMarket(b.market, b.is_map_bet, b.map_number);
-        const leagueDisplay = normalizeLeague(b.league);
-
-        return `
-          <div class="bet bet-off" data-bet-id="${b.id}">
-            <div>
-              <div class="head">
-                <span class="teams">${teamADisplay} <span style="color:var(--muted);font-weight:500">vs</span> ${teamBDisplay}</span>
-                ${leagueDisplay ? `<span class="league">· ${leagueDisplay}</span>` : ''}
-                <span class="badge ${b.status}">${b.status}</span>
-                ${isHedge ? '<span class="badge hedge">hedge</span>' : ''}
-                <span class="badge-off">fora do método</span>
-              </div>
-              <div class="market">
-                ${marketDisplay} → <strong>${b.pick ?? '?'}</strong>${mapInfo}
-              </div>
-              <div class="meta">
-                ${fmtDate(b.bet_datetime || b.created_at)} · ${b.bookmaker ?? '?'} · Odd ${(Number(b.odd) || 0).toFixed(2)} · Stake R$ ${fmtMoney(b.stake)}
-              </div>
-              ${compHtml}
-            </div>
-            <div class="right">
-              <div class="profit ${profitCls}">${profitText}</div>
-              <button class="toggle-method-btn" title="Restaurar para o método" data-id="${b.id}" data-method="false">↩ restaurar</button>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      el.innerHTML = html;
-
-      // Bind dos botões de restaurar
-      el.querySelectorAll('.toggle-method-btn').forEach((btn) => {
-        btn.addEventListener('click', async (e) => {
-          e.stopPropagation();
-          const id = btn.dataset.id;
-          btn.disabled = true;
-          btn.textContent = '...';
-          await toggleMethodBet(id, false);
+      const bindRestoreButtons = (container) => {
+        container.querySelectorAll('.toggle-method-btn').forEach((btn) => {
+          btn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const id = btn.dataset.id;
+            btn.disabled = true;
+            btn.textContent = '...';
+            await toggleMethodBet(id, false);
+          });
         });
+      };
+      renderPaginatedList('offMethodBets', offBets, (b) => betCardHtml(b, { toggleMode: 'restore' }), {
+        emptyLabel: 'Nenhuma bet fora do método.',
+        bindFn: bindRestoreButtons,
       });
     }
 
@@ -3008,111 +3114,89 @@
         });
       }
 
-      if (!filtered.length) {
-        document.getElementById('bets').innerHTML =
-          '<div class="empty">Nenhuma aposta nessa filtragem.</div>';
-        return;
-      }
-
-      const html = filtered.map((b) => {
-        const profit = b.profit;
-        const profitText = profit == null ? '—' : `${profit >= 0 ? '+' : ''}R$ ${fmtMoney(profit)}`;
-        const profitCls = profit == null ? 'muted' : profit >= 0 ? 'green' : 'red';
-        const isHedge = b.raw_extraction?.strategy === 'hedge';
-        const mapInfo = b.is_map_bet ? ` · M${b.map_number ?? '?'}` : '';
-        const compHtml = renderComp(normalizeComp(b));
-        const teamADisplay  = normalizeTeamName(b.team_a);
-        const teamBDisplay  = normalizeTeamName(b.team_b);
-        const marketDisplay = normalizeMarket(b.market, b.is_map_bet, b.map_number);
-        const leagueDisplay = normalizeLeague(b.league);
-
-        return `
-          <div class="bet" data-bet-id="${b.id}">
-            <div>
-              <div class="head">
-                <span class="teams">${teamADisplay} <span style="color:var(--muted);font-weight:500">vs</span> ${teamBDisplay}</span>
-                ${leagueDisplay ? `<span class="league">· ${leagueDisplay}</span>` : ''}
-                <span class="badge ${b.status}">${b.status}</span>
-                ${isHedge ? '<span class="badge hedge">hedge</span>' : ''}
-              </div>
-              <div class="market">
-                ${marketDisplay} → <strong>${b.pick ?? '?'}</strong>${mapInfo}
-              </div>
-              <div class="meta">
-                ${fmtDate(b.bet_datetime || b.created_at)} · ${b.bookmaker ?? '?'} · Odd ${(Number(b.odd) || 0).toFixed(2)} · Stake R$ ${fmtMoney(b.stake)}
-              </div>
-              ${compHtml}
-            </div>
-            <div class="right">
-              <div class="profit ${profitCls}">${profitText}</div>
-              <button class="toggle-method-btn toggle-method-off" title="Mover para fora do método" data-id="${b.id}" data-method="true">🎯 fora do método</button>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      const betsEl = document.getElementById('bets');
-      betsEl.innerHTML = html;
-
-      // Bind dos botões toggle
-      betsEl.querySelectorAll('.toggle-method-btn').forEach((btn) => {
-        btn.addEventListener('click', async (e) => {
-          e.stopPropagation();
-          const id = btn.dataset.id;
-          btn.disabled = true;
-          btn.textContent = '...';
-          await toggleMethodBet(id, true);
+      const bindOffToggleButtons = (container) => {
+        container.querySelectorAll('.toggle-method-btn').forEach((btn) => {
+          btn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const id = btn.dataset.id;
+            btn.disabled = true;
+            btn.textContent = '...';
+            await toggleMethodBet(id, true);
+          });
         });
+      };
+      renderPaginatedList('bets', filtered, (b) => betCardHtml(b, { toggleMode: 'markOff' }), {
+        emptyLabel: 'Nenhuma aposta nessa filtragem.',
+        bindFn: bindOffToggleButtons,
       });
     }
 
-    // Card de bet — mesmo markup visual de renderBetsWithToggle/renderOffMethodSection,
-    // sem o botão de toggle (reusado pelas 6 abas de sub-método, só leitura — ver
-    // renderMethodTab mais abaixo).
-    function betCardHtml(b) {
+    // Card de bet — template único (unificação Fase 4, 2026-08-15): existiam 4
+    // cópias quase idênticas (renderBets morta + offMethodBetCardHtml +
+    // methodBetCardHtml + betCardHtml). `toggleMode` cobre as únicas 2 variações
+    // reais de comportamento:
+    //   null (default) → read-only — Hoje/pendentes, abas de sub-método, listas paginadas
+    //   'markOff'      → card do método na Planilha, botão "🎯 fora do método"
+    //   'restore'      → card fora do método: classe .bet-off, badge estático
+    //                     "fora do método" e botão "↩ restaurar"
+    // escHtml() (item 4 da faxina) nos campos textuais crus do Supabase que
+    // passam pelos normalizeX — pick/bookmaker/times/liga podem vir sem
+    // normalização nenhuma (fallback retorna o valor literal do banco).
+    function betCardHtml(b, { toggleMode = null } = {}) {
       const profit = b.profit;
       const profitText = profit == null ? '—' : `${profit >= 0 ? '+' : ''}R$ ${fmtMoney(profit)}`;
       const profitCls = profit == null ? 'muted' : profit >= 0 ? 'green' : 'red';
       const isHedge = b.raw_extraction?.strategy === 'hedge';
       const mapInfo = b.is_map_bet ? ` · M${b.map_number ?? '?'}` : '';
       const compHtml = renderComp(normalizeComp(b));
-      const teamADisplay  = normalizeTeamName(b.team_a);
-      const teamBDisplay  = normalizeTeamName(b.team_b);
-      const marketDisplay = normalizeMarket(b.market, b.is_map_bet, b.map_number);
-      const leagueDisplay = normalizeLeague(b.league);
+      const teamADisplay  = escHtml(normalizeTeamName(b.team_a));
+      const teamBDisplay  = escHtml(normalizeTeamName(b.team_b));
+      const marketDisplay = escHtml(normalizeMarket(b.market, b.is_map_bet, b.map_number));
+      const leagueDisplay = escHtml(normalizeLeague(b.league));
+      const isOff = toggleMode === 'restore';
       const mv = b.raw_extraction?.method_variant;
-      const variantTag = mv ? `<span class="badge-off">${mv}</span>` : '';
+      // variantTag só existia no betCardHtml original (read-only, toggleMode
+      // null) — methodBetCardHtml (markOff) nunca mostrava, preservado aqui.
+      const variantTag = isOff
+        ? '<span class="badge-off">fora do método</span>'
+        : (toggleMode === null && mv ? `<span class="badge-off">${escHtml(mv)}</span>` : '');
+      const toggleBtn = toggleMode === 'markOff'
+        ? `<button class="toggle-method-btn toggle-method-off" title="Mover para fora do método" data-id="${b.id}" data-method="true">🎯 fora do método</button>`
+        : toggleMode === 'restore'
+        ? `<button class="toggle-method-btn" title="Restaurar para o método" data-id="${b.id}" data-method="false">↩ restaurar</button>`
+        : '';
 
       return `
-        <div class="bet" data-bet-id="${b.id}">
+        <div class="bet${isOff ? ' bet-off' : ''}" data-bet-id="${b.id}">
           <div>
             <div class="head">
-              <span class="teams">${teamADisplay} <span style="color:var(--muted);font-weight:500">vs</span> ${teamBDisplay}</span>
+              <span class="teams">${teamADisplay} <span class="vs-sep">vs</span> ${teamBDisplay}</span>
               ${leagueDisplay ? `<span class="league">· ${leagueDisplay}</span>` : ''}
               <span class="badge ${b.status}">${b.status}</span>
               ${isHedge ? '<span class="badge hedge">hedge</span>' : ''}
               ${variantTag}
             </div>
             <div class="market">
-              ${marketDisplay} → <strong>${b.pick ?? '?'}</strong>${mapInfo}
+              ${marketDisplay} → <strong>${escHtml(b.pick ?? '?')}</strong>${mapInfo}
             </div>
             <div class="meta">
-              ${fmtDate(b.bet_datetime || b.created_at)} · ${b.bookmaker ?? '?'} · Odd ${(Number(b.odd) || 0).toFixed(2)} · Stake R$ ${fmtMoney(b.stake)}
+              ${fmtDate(b.bet_datetime || b.created_at)} · ${escHtml(b.bookmaker ?? '?')} · Odd ${(Number(b.odd) || 0).toFixed(2)} · Stake R$ ${fmtMoney(b.stake)}
             </div>
             ${compHtml}
           </div>
           <div class="right">
             <div class="profit ${profitCls}">${profitText}</div>
+            ${toggleBtn}
           </div>
         </div>
       `;
     }
 
+    // Paginado (20 + "mostrar mais") — mesmo helper da lista principal/off-método.
+    // Cards read-only (betCardHtml sem toggleMode), sem bindFn: nenhum botão
+    // interno pra religar.
     function renderBetsListInto(containerId, bets) {
-      const el = document.getElementById(containerId);
-      if (!el) return;
-      if (!bets.length) { el.innerHTML = '<div class="empty">Nenhuma aposta.</div>'; return; }
-      el.innerHTML = bets.map(betCardHtml).join('');
+      renderPaginatedList(containerId, bets, (b) => betCardHtml(b), { emptyLabel: 'Nenhuma aposta.' });
     }
 
     // Markup de KPI card usado no resumo topo da Planilha (allRealKpis), parametrizado
@@ -3365,8 +3449,54 @@
         // está visível, então liga/desliga o polling junto da troca de aba.
         if (target === 'baleias') startWhalePolling();
         else stopWhalePolling();
+        scrollActiveTabIntoView();
       });
     });
+
+    // Indicador de overflow das abas (Fase 3 mobile, 2026-08-15) — ver
+    // .tabs-inner::after no CSS. Roda no load, no resize (troca de breakpoint
+    // pode fazer as 10 abas caberem ou não) e no scroll do próprio wrapper.
+    // Threshold de 2px absorve arredondamento subpixel (mesmo cuidado do
+    // syncTabsHeight logo abaixo).
+    function updateTabsFade() {
+      const wrap = document.querySelector('.tabs-inner');
+      if (!wrap) return;
+      const atEnd = wrap.scrollWidth - wrap.scrollLeft - wrap.clientWidth <= 2;
+      wrap.classList.toggle('at-scroll-end', atEnd);
+    }
+    document.querySelector('.tabs-inner')?.addEventListener('scroll', updateTabsFade, { passive: true });
+
+    // Garante que a aba ativa esteja visível no wrapper que rola — no load
+    // (aba padrão "Hoje" já começa visível, mas cobre o auto-clique na
+    // Planilha após registrar bet, ver setTimeout mais acima) e a cada troca
+    // manual de aba (ex: tocar em "Camille" a 375px, fora das ~3 abas visíveis).
+    function scrollActiveTabIntoView() {
+      const activeTab = document.querySelector('.tab.active');
+      const wrap = document.querySelector('.tabs-inner');
+      if (!activeTab || !wrap) return;
+      const tabRect = activeTab.getBoundingClientRect();
+      const wrapRect = wrap.getBoundingClientRect();
+      const outOfView = tabRect.left < wrapRect.left || tabRect.right > wrapRect.right;
+      if (outOfView) activeTab.scrollIntoView({ inline: 'center', block: 'nearest' });
+    }
+
+    // Sticky coerente (fase 1): mede a altura real de .tabs e escreve em
+    // --tabs-h pra .filter-bar (Planilha) grudar logo abaixo delas, não por
+    // baixo. Roda no load e no resize (padding/quebra de linha pode mudar).
+    // Math.ceil (ajuste pós-review 2026-08-14): getBoundingClientRect().height
+    // pode vir fracionário (layout subpixel) — arredondar pra CIMA garante que
+    // --tabs-h nunca fique menor que a altura real (senão sobra fresta de 1-2px
+    // vazando o conteúdo que rola por trás na emenda com .filter-bar).
+    function syncTabsHeight() {
+      const tabsEl = document.querySelector('.tabs');
+      if (!tabsEl) return;
+      const h = Math.ceil(tabsEl.getBoundingClientRect().height);
+      document.documentElement.style.setProperty('--tabs-h', `${h}px`);
+    }
+    syncTabsHeight();
+    updateTabsFade();
+    scrollActiveTabIntoView();
+    window.addEventListener('resize', () => { syncTabsHeight(); updateTabsFade(); });
 
     // ===== Hit do método por liga =====
     // Auditoria CRIT-01 (2026-07-23): removida a concatenação com tier2_dashboard_stats.json.
@@ -3428,7 +3558,7 @@
         : '';
       const fillText = (s.fill_count || 1) > 1 ? ` · ${s.fill_count} ordens` : '';
       const teamsLine = (s.team_a && s.team_b)
-        ? `${escHtml(s.team_a)} <span style="color:var(--muted);font-weight:500">vs</span> ${escHtml(s.team_b)}`
+        ? `${escHtml(s.team_a)} <span class="vs-sep">vs</span> ${escHtml(s.team_b)}`
         : '';
       const stakeText = s.stake_usd != null ? `US$ ${fmtMoney(s.stake_usd)}` : '—';
       const returnText = s.potential_return != null ? `US$ ${fmtMoney(s.potential_return)}` : '—';
