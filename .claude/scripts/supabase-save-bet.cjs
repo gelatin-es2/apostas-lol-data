@@ -348,6 +348,12 @@ function validateAndNormalize(inputRaw, opts = {}) {
   // Defaults
   if (!bet.status) bet.status = 'pending';
   if (typeof bet.is_map_bet !== 'boolean') bet.is_map_bet = false;
+  // is_method_bet ausente → true (decisão do dono, 2026-08-14: "tudo tem método
+  // agora" — a coluna continua existindo pro histórico analítico, só o default
+  // muda). Antes ficava ausente e a RPC register_canonical_bet fazia
+  // coalesce(is_method_bet, false); setando aqui garante true independente do
+  // fallback do banco.
+  if (typeof bet.is_method_bet !== 'boolean') bet.is_method_bet = true;
 
   // Map bet exige map_number válido (fixture 11 do runbook)
   if (bet.is_map_bet === true) {

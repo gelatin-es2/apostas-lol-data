@@ -70,6 +70,8 @@ test('workerCommand sobe Claude Code headless e remove OPENAI_API_KEY/ANTHROPIC_
   assert.ok(spec.args.includes('Read,Write,Glob,Bash(node *)'));
   assert.ok(spec.args.includes('--max-turns'));
   assert.ok(spec.args.includes('120'));
+  assert.ok(spec.args.includes('--fallback-model'));
+  assert.ok(spec.args.includes('claude-opus-5'));
   assert.doesNotMatch(JSON.stringify(spec.args), /codex|exec|ephemeral|sandbox/i);
   if (process.platform === 'win32') {
     assert.equal(spec.command, 'cmd.exe');

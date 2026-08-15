@@ -99,7 +99,9 @@ function workerCommand(options = {}) {
   env.SUPABASE_SECRET_KEY = config.supabaseKey;
   delete env.OPENAI_API_KEY;
   delete env.ANTHROPIC_API_KEY;
-  const claudeArgs = ['-p', '--allowedTools', 'Read,Write,Glob,Bash(node *)', '--max-turns', '120'];
+  // Fallback pro Opus quando o modelo primário bate limite de uso (15/08: ciclos 11:52-11:59
+  // falharam com "You've reached your Fable 5 limit" e queimaram attempts dos jobs).
+  const claudeArgs = ['-p', '--fallback-model', 'claude-opus-5', '--allowedTools', 'Read,Write,Glob,Bash(node *)', '--max-turns', '120'];
   return {
     command: process.platform === 'win32' ? 'cmd.exe' : 'claude',
     args: process.platform === 'win32' ? ['/d', '/s', '/c', 'claude', ...claudeArgs] : claudeArgs,
