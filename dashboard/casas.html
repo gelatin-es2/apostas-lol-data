@@ -77,6 +77,7 @@
     border-left:3px solid var(--neutra); padding:13px 15px;
     box-shadow:var(--sombra); }
   .a-segura { border-left-color:var(--segura); }
+  .a-media { border-left-color:var(--media); }
   .a-arriscada { border-left-color:var(--arriscada); }
   .a-evitar { border-left-color:var(--evitar); }
   .a-casa { font-family:var(--serif); font-size:18px; font-weight:600;
@@ -175,42 +176,42 @@
 
 <div class="env">
   <header class="topo">
-    <p class="eyebrow">LoL · under kills por mapa · 13 ago 2026</p>
+    <p class="eyebrow">LoL · under kills por mapa · 16 ago 2026</p>
     <h1>Onde dá pra apostar kills — e quem vai te pagar</h1>
-    <p class="sub">As 156 casas agrupadas pelo oddsmaker que roda a linha.
+    <p class="sub">As 157 casas agrupadas pelo oddsmaker que roda a linha.
       Casas do mesmo bloco cotam igual: o valor está em ter uma conta por
       motor <em>diferente</em>, escolhendo a mais segura de cada bloco.</p>
     <div class="placar">
       <div class="p-segura"><b>5</b><span>Segura</span></div>
-      <div class="p-media"><b>14</b><span>Média</span></div>
-      <div class="p-arriscada"><b>22</b><span>Arriscada</span></div>
-      <div class="p-evitar"><b>22</b><span>Evitar</span></div>
-      <div class="p-neutra"><b>19</b><span>Sem nota</span></div>
-      <div><b>82</b><span>com linha de kill</span></div>
+      <div class="p-media"><b>17</b><span>Média</span></div>
+      <div class="p-arriscada"><b>21</b><span>Arriscada</span></div>
+      <div class="p-evitar"><b>25</b><span>Evitar</span></div>
+      <div class="p-neutra"><b>20</b><span>Sem nota</span></div>
+      <div><b>88</b><span>com linha de kill</span></div>
     </div>
   </header>
 
-  <h2 class="secao">O que mudou nesta revisão</h2>
+  <h2 class="secao">O que mudou nesta revisão (16/08/2026)</h2>
   <ul class="achados">
-      <li class="achado a-segura">
+      <li class="achado a-evitar">
         <span class="a-casa">Winna</span>
-        <span class="a-tit">CORRIGIDO 15/08: NÃO é Betby</span>
-        <p>Casino Guru 9,3, licença Tobique, saque cripto em ~2 min — segue boa casa. Mas o fingerprint de 14/08 achou api2.winna.com: motor próprio/desconhecido. A linha dela NÃO é a do bloco Betby.</p>
-      </li>
-      <li class="achado a-segura">
-        <span class="a-casa">Midnite</span>
-        <span class="a-tit">A única com regulador de verdade</span>
-        <p>Licença UKGC 42647 ativa e zero punição. Estava no seu balde “não sei”. Reclamação lá tem pra quem apelar.</p>
-      </li>
-      <li class="achado a-arriscada">
-        <span class="a-casa">Whale.io</span>
-        <span class="a-tit">Você tem conta lá</span>
-        <p>Dois casos abertos no Casino Guru em jun/2026: 1.000 USDT bloqueados há 6+ meses, e conta fechada após ganhar torneio. Não acumule saldo.</p>
+        <span class="a-tit">RE-CORRIGIDO 16/08: É Betby — e não é segura</span>
+        <p>O api2.winna.com é proxy próprio NA FRENTE do feed Betby (bundle JS tem isBetbyRoute; review confirma esports “powered by BETBY”). E a reputação ruiu: +€380 mil em saques recusados (BitcoinTalk out/2025, não resolvido), reguladora da Lituânia lista como operador ilegal, conta restrita pra sports mas liberada pra cassino. SEGURA → EVITAR.</p>
       </li>
       <li class="achado a-evitar">
-        <span class="a-casa">BC.Game</span>
-        <span class="a-tit">Estava marcada VERDE na sua lista</span>
-        <p>As operadoras faliram no Curaçao em nov/2024 com US$ 2,1 mi de jogador não pago. Seu score 68,2 é anterior a isso.</p>
+        <span class="a-casa">Duel.com</span>
+        <span class="a-tit">LIMITOU O ELVIS 16/08</span>
+        <p>Caso vivido: conta limitada em 16/08. Já tinha confisco documentado (BitcoinTalk fev/2026: bets anuladas por “sportsbook abuse” depois do KYC aprovado). Pagava melhor na linha Betby, mas casa que corta winner não serve. EVITAR — saldo zero entre sessões.</p>
+      </li>
+      <li class="achado a-evitar">
+        <span class="a-casa">Rede Betby</span>
+        <span class="a-tit">Clutch confiscou (15/08), Duel limitou (16/08)</span>
+        <p>O flag de winner é do PROVEDOR (Betby), não da casa — vale pra todas as skins da linha: Roobet, Rakebit, Thrill, Realbet e agora a Winna. Nessas casas: saque imediato pós-green e saldo mínimo parado.</p>
+      </li>
+      <li class="achado a-media">
+        <span class="a-casa">Shuffle</span>
+        <span class="a-tit">AVALIADA 16/08 — em uso</span>
+        <p>Motor achado: Sportradar/Betradar MTS + Oddin.gg pros esports (mesma linha da Thunderpick) — fora da rede Betby. Paga COM ATRITO: hold de KYC/review pós-win recorrente. MÉDIA — saque rápido pós-green, sem acumular saldo.</p>
       </li></ul>
 
   <div class="filtros">
@@ -226,10 +227,10 @@
   </div>
 
     <section class="bloco">
-      <header class="bloco-cab t-segura">
+      <header class="bloco-cab t-media">
         <h2>BETBY - BLAZE</h2>
         <span class="qtd">22 casas</span>
-        <span class="tag">melhor nota do bloco: SEGURA</span>
+        <span class="tag">melhor nota do bloco: MEDIA</span>
       </header>
       <div class="linhas">
       <article class="linha n-media" data-nota="media" data-kill="1">
@@ -239,7 +240,7 @@
         <div class="c-kill"><span class="pill k1">por mapa</span></div>
         <div class="c-motor">Betby  (CONFIRMEI no HTML) <span class="bate b-confere">confere</span></div>
         <div class="c-nota"><span class="pill nmedia">MEDIA</span></div>
-        <div class="c-porque">Betby CONFIRMADO por mim no HTML. Score 68,0 e nao achei escandalo de saque.</div>
+        <div class="c-porque">Betby CONFIRMADO por mim no HTML. Score 68,0 e nao achei escandalo de saque. ⚠️ Pro metodo e INUTIL: FILTRA o mercado 726 (total kills por mapa) do feed Betby.</div>
       </article>
       <article class="linha n-arriscada" data-nota="arriscada" data-kill="1">
         <div class="c-casa"><span class="nome">Rainbet</span>
@@ -268,14 +269,14 @@
         <div class="c-nota"><span class="pill nevitar">EVITAR</span></div>
         <div class="c-porque">ACHADO GRAVE: as empresas dela (Blockdance/Small House) FALIRAM no Curacao em nov/2024 com US$2,1 mi de jogador nao pago. Migrou pra Anjouan. 85% de review negativa e incidente de seguranca em jan/2026. Seu 68,2 esta velho.</div>
       </article>
-      <article class="linha n-segura" data-nota="segura" data-kill="1">
+      <article class="linha n-evitar" data-nota="evitar" data-kill="1">
         <div class="c-casa"><span class="nome">Winna</span>
           <a class="site" href="https://winna.com" target="_blank"
              rel="noopener">winna.com</a></div>
         <div class="c-kill"><span class="pill k3">você viu</span></div>
-        <div class="c-motor">NAO e Betby - fingerprint 14/08 achou api2.winna.com (motor proprio/desconhecido) <span class="bate b-confere">confere</span></div>
-        <div class="c-nota"><span class="pill nsegura">SEGURA</span></div>
-        <div class="c-porque">ACHADO: Casino Guru 9,3 (muito alta), licenca Tobique, saque cripto em ~2 min, teto US$10 mil/24h e nenhuma clausula abusiva no T&amp;C. CORRIGIDO 15/08: nao e skin Betby - a linha dela e outra.</div>
+        <div class="c-motor">Betby (proxy proprio api2.winna.com NA FRENTE do feed) - RE-CORRIGIDO 16/08: bundle JS de winna.com tem isBetbyRoute nas rotas de sportsbook; review cryptogamble confirma esports powered by BETBY <span class="bate b-confere">confere</span></div>
+        <div class="c-nota"><span class="pill nevitar">EVITAR</span></div>
+        <div class="c-porque">RE-AUDITADA 16/08: BitcoinTalk out/2025 (topic 5560841) soma +€380 mil em saques recusados (&quot;manutencao na Solana&quot;), nao resolvido, e o dono ameacou processar o player; reguladora da Lituania lista a Winna como operador ILEGAL; AskGamblers 3,7/10 com relato de conta RESTRITA pra sports mas liberada pra cassino (corte de winner esportivo); Trustpilot ~3,2 (~744 reviews) com batch de reviews FAKE removido pela Trustpilot. Casino Guru segue 9,3 (conferido 16/08) - mas o score agregado nao capturou os complaints: confisco (&quot;funds confiscated due to a malfunction&quot;) + disputa de US$7,3M no forum. Licenca Tobique (fraca). Agravante <strong>[VIVIDO]</strong>: a Duel (mesma rede Betby) limitou o Elvis em 16/08 - flag de rede pode contaminar a Winna.</div>
       </article>
       <article class="linha n-media" data-nota="media" data-kill="1">
         <div class="c-casa"><span class="nome">JustBit</span>
@@ -293,16 +294,16 @@
         <div class="c-kill"><span class="pill k3">você viu</span></div>
         <div class="c-motor">Betby  (CONFIRMEI no HTML) <span class="bate b-confere">confere</span></div>
         <div class="c-nota"><span class="pill nmedia">MEDIA</span></div>
-        <div class="c-porque">Betby CONFIRMADO por mim no HTML. Reviews citam trava de verificacao quando o ganho e grande.</div>
+        <div class="c-porque">Betby CONFIRMADO por mim no HTML. Reviews citam trava de verificacao quando o ganho e grande. ⚠️ 16/08: rede Betby FLAGADA (Clutch confiscou 15/08, Duel limitou o Elvis 16/08) - linha identica a da Duel com margem ~2,3pp pior; se usar, saque imediato pos-green.</div>
       </article>
       <article class="linha n-media" data-nota="media" data-kill="1">
         <div class="c-casa"><span class="nome">Thrill</span>
           <a class="site" href="https://thrill.com" target="_blank"
              rel="noopener">thrill.com</a></div>
         <div class="c-kill"><span class="pill k3">você viu</span></div>
-        <div class="c-motor">abriu, mas o sportsbook carrega por JS - nao deu assinatura </div>
+        <div class="c-motor">Betby (pesquisa 16/08: skin da mesma linha da Duel/Blaze) <span class="bate b-novo">novo</span></div>
         <div class="c-nota"><span class="pill nmedia">MEDIA</span></div>
-        <div class="c-porque">Gravity Unleashed Limitada (Costa Rica), aberta em 2025. Nada contra, mas historico curto demais pra saldo alto.</div>
+        <div class="c-porque">Gravity Unleashed Limitada (Costa Rica), aberta em 2025. Nada contra, mas historico curto demais pra saldo alto. ⚠️ 16/08: rede Betby FLAGADA (Clutch confiscou 15/08, Duel limitou o Elvis 16/08) - linha identica a da Duel com margem ~2,3pp pior; se usar, saque imediato pos-green.</div>
       </article>
       <article class="linha n-arriscada" data-nota="arriscada" data-kill="1">
         <div class="c-casa"><span class="nome">Betcoin.ag</span>
@@ -356,7 +357,7 @@
         <div class="c-kill"><span class="pill k3">você viu</span></div>
         <div class="c-motor">site nao abriu daqui </div>
         <div class="c-nota"><span class="pill nneutra">nao avaliei</span></div>
-        <div class="c-porque">Sem score seu e sem historico publico que eu tenha achado. Fila de pesquisa.</div>
+        <div class="c-porque">Sem score seu e sem historico publico que eu tenha achado. Fila de pesquisa. NAO confundir com a Clutch (clutch.app), que confiscou saldo do Elvis em 15/08 - esta ClutchBet e outra empresa (BlueBet, Australia; operou Colorado/Iowa e encerrou a operacao nos EUA em 2024).</div>
       </article>
       <article class="linha n-neutra" data-nota="neutra" data-kill="1">
         <div class="c-casa"><span class="nome">Crashino</span>
@@ -385,14 +386,14 @@
         <div class="c-nota"><span class="pill nneutra">nao avaliei</span></div>
         <div class="c-porque">Sem score seu e sem historico publico que eu tenha achado. Fila de pesquisa.</div>
       </article>
-      <article class="linha n-neutra" data-nota="neutra" data-kill="1">
+      <article class="linha n-evitar" data-nota="evitar" data-kill="1">
         <div class="c-casa"><span class="nome">Duel.com</span>
           <a class="site" href="https://duel.com" target="_blank"
              rel="noopener">duel.com</a></div>
         <div class="c-kill"><span class="pill k3">você viu</span></div>
-        <div class="c-motor">abriu, mas o sportsbook carrega por JS - nao deu assinatura </div>
-        <div class="c-nota"><span class="pill nneutra">nao avaliei</span></div>
-        <div class="c-porque">Sem score seu e sem historico publico que eu tenha achado. Fila de pesquisa.</div>
+        <div class="c-motor">Betby (Elvis operou na linha - pagava ~2,3pp melhor que as outras skins) <span class="bate b-confere">confere</span></div>
+        <div class="c-nota"><span class="pill nevitar">EVITAR</span></div>
+        <div class="c-porque"><strong>[VIVIDO] LIMITOU O ELVIS 16/08.</strong> Ja tinha confisco documentado (BitcoinTalk fev/2026: bets anuladas por &quot;sportsbook abuse&quot; DEPOIS do KYC aprovado, conta deixada em -$76). Pagava melhor na linha Betby, mas casa que limita/confisca winner nao serve pro metodo. Se sobrar uso residual: saldo ZERO entre sessoes.</div>
       </article>
       <article class="linha n-neutra" data-nota="neutra" data-kill="1">
         <div class="c-casa"><span class="nome">Instant Casino</span>
@@ -410,7 +411,7 @@
         <div class="c-kill"><span class="pill k3">você viu</span></div>
         <div class="c-motor">Betby  (CONFIRMEI no HTML) <span class="bate b-confere">confere</span></div>
         <div class="c-nota"><span class="pill nneutra">nao avaliei</span></div>
-        <div class="c-porque">Sem score seu e sem historico publico que eu tenha achado. Fila de pesquisa.</div>
+        <div class="c-porque">Sem score seu e sem historico publico que eu tenha achado. Fila de pesquisa. ⚠️ 16/08: rede Betby FLAGADA (Clutch confiscou 15/08, Duel limitou o Elvis 16/08) - linha identica a da Duel com margem ~2,3pp pior; se usar, saque imediato pos-green.</div>
       </article>
       <article class="linha n-neutra" data-nota="neutra" data-kill="0">
         <div class="c-casa"><span class="nome">FortuneJack</span>
@@ -421,14 +422,14 @@
         <div class="c-nota"><span class="pill nneutra">nao avaliei</span></div>
         <div class="c-porque">Sem linha de kill - fora do escopo, nao gastei pesquisa nela.</div>
       </article>
-      <article class="linha n-neutra" data-nota="neutra" data-kill="0">
+      <article class="linha n-media" data-nota="media" data-kill="0">
         <div class="c-casa"><span class="nome">Roobet</span>
           <a class="site" href="https://roobet.com" target="_blank"
              rel="noopener">roobet.com</a></div>
         <div class="c-kill"><span class="pill kx">não</span></div>
         <div class="c-motor">Betby (linha da Blaze) - ELVIS CONFERIU NA PRATICA 15/08. Reviews que diziam "esports = Betsy" estavam defasadas <span class="bate b-confere">confere</span></div>
         <div class="c-nota"><span class="pill nmedia">MEDIA</span></div>
-        <div class="c-porque">AVALIADA 15/08: Casino Guru 7,9. Tem caso documentado de conta travada/confisco sem explicacao (forum AskGamblers); Reclame Aqui e mais deposito PIX preso em gateway do que saque negado. Como outlet Betby, Duel.com paga mais na mesma linha - Roobet so vale como volume extra.</div>
+        <div class="c-porque">AVALIADA 15/08: Casino Guru 7,9. Tem caso documentado de conta travada/confisco sem explicacao (forum AskGamblers); Reclame Aqui e mais deposito PIX preso em gateway do que saque negado. ⚠️ 16/08: rede Betby FLAGADA (Clutch confiscou 15/08, Duel limitou o Elvis 16/08) - o flag e do PROVEDOR e pode contaminar a Roobet: saque imediato pos-green, saldo minimo parado.</div>
       </article></div>
     </section>
     <section class="bloco">
@@ -643,7 +644,7 @@
     <section class="bloco">
       <header class="bloco-cab t-media">
         <h2>ODDIN.GG</h2>
-        <span class="qtd">1 casa</span>
+        <span class="qtd">2 casas</span>
         <span class="tag">melhor nota do bloco: MEDIA</span>
       </header>
       <div class="linhas">
@@ -654,7 +655,16 @@
         <div class="c-kill"><span class="pill k2">kills</span></div>
         <div class="c-motor">site nao abriu daqui </div>
         <div class="c-nota"><span class="pill nmedia">MEDIA</span></div>
-        <div class="c-porque">Oddin.gg confirmado, especialista em esports, mas pagamento fraco (59,4).</div>
+        <div class="c-porque"><strong>[EM USO - Elvis]</strong> Oddin.gg confirmado, especialista em esports, mas pagamento fraco (59,4).</div>
+      </article>
+      <article class="linha n-media" data-nota="media" data-kill="1">
+        <div class="c-casa"><span class="nome">Shuffle</span>
+          <a class="site" href="https://shuffle.com" target="_blank"
+             rel="noopener">shuffle.com</a></div>
+        <div class="c-kill"><span class="pill k1">por mapa</span></div>
+        <div class="c-motor">Sportradar/Betradar MTS + Oddin.gg pros esports (strings no codigo de shuffle.com/sports) - NAO e Betby nem Hub88/Betsy; movida do bloco &quot;nao sei&quot; 16/08 <span class="bate b-novo">novo</span></div>
+        <div class="c-nota"><span class="pill nmedia">MEDIA</span></div>
+        <div class="c-porque"><strong>[EM USO - Elvis desde 16/08]</strong> Paga COM ATRITO: hold de KYC/review pos-win recorrente (dias a semanas); confisco so registrado sob acusacao de multi-conta/AML. Natural Nine B.V., licenca Curacao GCB. Trustpilot com score SUSPENSO por fake reviews (~54% de 1 estrela); BitcoinTalk: 205 USDT presos 60h+ mesmo com KYC nivel 3; T&amp;C tem teto de ganho de US$500 mil em sports. Operar com saque rapido pos-green e sem acumular saldo.</div>
       </article></div>
     </section>
     <section class="bloco">
@@ -965,7 +975,7 @@
         <div class="c-kill"><span class="pill k3">você viu</span></div>
         <div class="c-motor">Betsy Games via Hub88  (CONFIRMEI 15/08: gameCode btsg_sportbetting &#8594; launcher gsplauncher.de &#8594; SDK whale-mfi4u7q.echo-cd.com). NAO e Betby (betsy != betby, empresas diferentes). LINHA: Elvis fechou na pratica 15/08 - familia PARIMATCH/GR8 (whale e Weiss batem com a Parimatch; fornecedor formal do feed segue sem prova documental) <span class="bate b-confere">confere</span></div>
         <div class="c-nota"><span class="pill narriscada">ARRISCADA</span></div>
-        <div class="c-porque">ATENCAO, VOCE TEM CONTA LA: 2 casos ABERTOS no Casino Guru em jun/2026 - 1.000 USDT bloqueados ha mais de 6 meses, e conta fechada depois de ganhar torneio. Licenca Anjouan nao te protege.</div>
+        <div class="c-porque"><strong>[CONTA ABERTA - Elvis]</strong> ATENCAO: 2 casos ABERTOS no Casino Guru em jun/2026 - 1.000 USDT bloqueados ha mais de 6 meses, e conta fechada depois de ganhar torneio. Licenca Anjouan nao te protege. Fora da whitelist: testar saque pequeno antes de qualquer volume.</div>
       </article>
       <article class="linha n-evitar" data-nota="evitar" data-kill="1">
         <div class="c-casa"><span class="nome">Weiss.bet</span>
@@ -1048,8 +1058,8 @@
     <section class="bloco">
       <header class="bloco-cab t-neutra">
         <h2>NAO SEI AINDA  -  falta descobrir o oddsmaker</h2>
-        <span class="qtd">81 casas</span>
-        <span class="tag">17 tem linha de kill</span>
+        <span class="qtd">80 casas</span>
+        <span class="tag">16 tem linha de kill</span>
       </header>
       <div class="linhas">
       <article class="linha n-media" data-nota="media" data-kill="1">
@@ -1060,15 +1070,6 @@
         <div class="c-motor">Motor proprio do grupo Bodog (troya.xyz/wicket-keeper) <span class="bate b-novo">novo</span></div>
         <div class="c-nota"><span class="pill nmedia">MEDIA</span></div>
         <div class="c-porque">Grupo Bodog, motor proprio, anos de casa. 59,0. Bloqueia por regiao.</div>
-      </article>
-      <article class="linha n-arriscada" data-nota="arriscada" data-kill="1">
-        <div class="c-casa"><span class="nome">Shuffle</span>
-          <a class="site" href="https://shuffle.com" target="_blank"
-             rel="noopener">shuffle.com</a></div>
-        <div class="c-kill"><span class="pill k1">por mapa</span></div>
-        <div class="c-motor">abriu, mas o sportsbook carrega por JS - nao deu assinatura </div>
-        <div class="c-nota"><span class="pill narriscada">ARRISCADA</span></div>
-        <div class="c-porque">Saque grande fica &#x27;em review&#x27; por semanas. Tem site inteiro (shuffle.wiki) so de reclamacao.</div>
       </article>
       <article class="linha n-arriscada" data-nota="arriscada" data-kill="1">
         <div class="c-casa"><span class="nome">GG.BET</span>
