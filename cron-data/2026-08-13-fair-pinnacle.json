@@ -1,0 +1,116 @@
+{
+  "date": "2026-08-13",
+  "source": "pinnacle-auto-promoted",
+  "captured_at": "2026-08-13T23:00:35.030Z",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "derived_from": [
+    "cron-data\\2026-08-12-fair-pinnacle-auto.json",
+    "cron-data\\2026-08-13-fair-pinnacle-auto.json",
+    "cron-data\\2026-08-14-fair-pinnacle-auto.json"
+  ],
+  "note": "Fair Pinnacle promovida a fonte primária automática (decisão Elvis 2026-08-05: \"nao preciso mas de fair ela e puxada sozinha pelo sistema todo dia\"). Gerada por .claude/scripts/promote_fair_pinnacle_auto.cjs a partir da captura automática (Task Scheduler LolFairAutoCapture, a cada 30min, closing line = leitura mais próxima do início do jogo). Fair manual do Elvis via /log-fair, se enviada, sobrescreve este arquivo — nunca o contrário.",
+  "history": [],
+  "fair_lines": [
+    {
+      "liga": "KCL",
+      "hora_brt": "02:00",
+      "team_a": "KT Rolster Challengers",
+      "team_b": "Nongshim RedForce Challengers",
+      "team_anchor": null,
+      "fair_line": 34.5,
+      "lolesports_match_id": null,
+      "source_note": "pinnacle-auto matchup_id=1633578096; frozen=false; minutes_before_start=420; lolesports_match_id NÃO resolvido (sem candidato no schedule oficial)"
+    },
+    {
+      "liga": "KCL",
+      "hora_brt": "02:00",
+      "team_a": "Gen.G Global Academy",
+      "team_b": "Kiwoom DRX Challengers",
+      "team_anchor": null,
+      "fair_line": 32.5,
+      "lolesports_match_id": null,
+      "source_note": "pinnacle-auto matchup_id=1633794347; frozen=false; minutes_before_start=420; lolesports_match_id NÃO resolvido (sem candidato no schedule oficial)"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "04:00",
+      "team_a": "Weibo",
+      "team_b": "Ninjas in Pyjamas",
+      "team_anchor": null,
+      "fair_line": 28.5,
+      "lolesports_match_id": null,
+      "source_note": "pinnacle-auto matchup_id=1633473819; frozen=true; minutes_before_start=30; lolesports_match_id NÃO resolvido (sem candidato no schedule oficial)"
+    },
+    {
+      "liga": "LCK",
+      "hora_brt": "05:00",
+      "team_a": "Kiwoom DRX",
+      "team_b": "BNK FearX",
+      "team_anchor": "KRX",
+      "fair_line": 30.5,
+      "lolesports_match_id": "115548147900750225",
+      "source_note": "pinnacle-auto matchup_id=1633772533; frozen=true; minutes_before_start=30"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "06:00",
+      "team_a": "Top Esports",
+      "team_b": "LGD",
+      "team_anchor": "LGD",
+      "fair_line": 30.5,
+      "lolesports_match_id": "116566854547769696",
+      "source_note": "pinnacle-auto matchup_id=1633488383; frozen=true; minutes_before_start=30"
+    },
+    {
+      "liga": "LCP",
+      "hora_brt": "06:00",
+      "team_a": "Deep Cross",
+      "team_b": "GAM",
+      "team_anchor": null,
+      "fair_line": 30.5,
+      "lolesports_match_id": null,
+      "source_note": "pinnacle-auto matchup_id=1633717088; frozen=true; minutes_before_start=30; lolesports_match_id NÃO resolvido (sem candidato no schedule oficial)"
+    },
+    {
+      "liga": "LCK",
+      "hora_brt": "07:00",
+      "team_a": "Gen.G",
+      "team_b": "Hanwha Life",
+      "team_anchor": "HLE",
+      "fair_line": 28.5,
+      "lolesports_match_id": "115548147900619021",
+      "source_note": "pinnacle-auto matchup_id=1633559968; frozen=true; minutes_before_start=30"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "09:30",
+      "team_a": "ThunderTalk",
+      "team_b": "Bilibili",
+      "team_anchor": "BLG",
+      "fair_line": 33.5,
+      "lolesports_match_id": "116566854547769680",
+      "source_note": "pinnacle-auto matchup_id=1633493762; frozen=true; minutes_before_start=30"
+    },
+    {
+      "liga": "LFL",
+      "hora_brt": "13:05",
+      "team_a": "Skillcamp",
+      "team_b": "Karmine Corp Blue",
+      "team_anchor": "KCB",
+      "fair_line": 33.5,
+      "lolesports_match_id": "116912368900121280",
+      "source_note": "pinnacle-auto matchup_id=1633895130; frozen=true; minutes_before_start=-85"
+    },
+    {
+      "liga": "LFL",
+      "hora_brt": "16:00",
+      "team_a": "Solary",
+      "team_b": "Vitality.Bee",
+      "team_anchor": "VITB",
+      "fair_line": 32.5,
+      "lolesports_match_id": "116912368900055732",
+      "source_note": "pinnacle-auto matchup_id=1633895123; frozen=true; minutes_before_start=60"
+    }
+  ]
+}

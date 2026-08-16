@@ -1,0 +1,66 @@
+{
+  "date": "2026-08-11",
+  "source": "pinnacle-auto-promoted",
+  "captured_at": "2026-08-11T23:30:28.915Z",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "derived_from": [
+    "cron-data\\2026-08-10-fair-pinnacle-auto.json",
+    "cron-data\\2026-08-11-fair-pinnacle-auto.json",
+    "cron-data\\2026-08-12-fair-pinnacle-auto.json"
+  ],
+  "note": "Fair Pinnacle promovida a fonte primária automática (decisão Elvis 2026-08-05: \"nao preciso mas de fair ela e puxada sozinha pelo sistema todo dia\"). Gerada por .claude/scripts/promote_fair_pinnacle_auto.cjs a partir da captura automática (Task Scheduler LolFairAutoCapture, a cada 30min, closing line = leitura mais próxima do início do jogo). Fair manual do Elvis via /log-fair, se enviada, sobrescreve este arquivo — nunca o contrário.",
+  "history": [],
+  "fair_lines": [
+    {
+      "liga": "CBLOL",
+      "hora_brt": "21:00",
+      "team_a": "LOS",
+      "team_b": "paiN",
+      "team_anchor": "LOS",
+      "fair_line": 27.5,
+      "lolesports_match_id": "115565671526402977",
+      "source_note": "pinnacle-auto matchup_id=1633699868; frozen=true; minutes_before_start=60"
+    },
+    {
+      "liga": "KCL",
+      "hora_brt": "05:00",
+      "team_a": "Kiwoom DRX Challengers",
+      "team_b": "BNK FearX Youth",
+      "team_anchor": null,
+      "fair_line": 31.5,
+      "lolesports_match_id": null,
+      "source_note": "pinnacle-auto matchup_id=1633578168; frozen=false; minutes_before_start=300; lolesports_match_id NÃO resolvido (sem candidato no schedule oficial)"
+    },
+    {
+      "liga": "KCL",
+      "hora_brt": "07:00",
+      "team_a": "Nongshim RedForce Challengers",
+      "team_b": "Dplus KIA Challengers",
+      "team_anchor": null,
+      "fair_line": 33.5,
+      "lolesports_match_id": null,
+      "source_note": "pinnacle-auto matchup_id=1633578545; frozen=true; minutes_before_start=420; lolesports_match_id NÃO resolvido (sem candidato no schedule oficial)"
+    },
+    {
+      "liga": "Prime League",
+      "hora_brt": "12:43",
+      "team_a": "Kaufland Hangry Knights",
+      "team_b": "G2 NORD",
+      "team_anchor": "KHK",
+      "fair_line": 34.5,
+      "lolesports_match_id": "116713163972559140",
+      "source_note": "pinnacle-auto matchup_id=1633715494; frozen=true; minutes_before_start=13"
+    },
+    {
+      "liga": "Prime League",
+      "hora_brt": "15:30",
+      "team_a": "VfB",
+      "team_b": "Orange",
+      "team_anchor": null,
+      "fair_line": 37.5,
+      "lolesports_match_id": null,
+      "source_note": "pinnacle-auto matchup_id=1633717698; frozen=true; minutes_before_start=30; lolesports_match_id NÃO resolvido (sem candidato no schedule oficial)"
+    }
+  ]
+}

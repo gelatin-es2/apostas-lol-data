@@ -1,0 +1,126 @@
+{
+  "date": "2026-08-12",
+  "source": "pinnacle-auto-promoted",
+  "captured_at": "2026-08-12T22:00:29.776Z",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "derived_from": [
+    "cron-data\\2026-08-11-fair-pinnacle-auto.json",
+    "cron-data\\2026-08-12-fair-pinnacle-auto.json",
+    "cron-data\\2026-08-13-fair-pinnacle-auto.json"
+  ],
+  "note": "Fair Pinnacle promovida a fonte primária automática (decisão Elvis 2026-08-05: \"nao preciso mas de fair ela e puxada sozinha pelo sistema todo dia\"). Gerada por .claude/scripts/promote_fair_pinnacle_auto.cjs a partir da captura automática (Task Scheduler LolFairAutoCapture, a cada 30min, closing line = leitura mais próxima do início do jogo). Fair manual do Elvis via /log-fair, se enviada, sobrescreve este arquivo — nunca o contrário.",
+  "history": [],
+  "fair_lines": [
+    {
+      "liga": "KCL",
+      "hora_brt": "02:00",
+      "team_a": "HANJIN BRION Challengers",
+      "team_b": "Hanwha Life Challengers",
+      "team_anchor": null,
+      "fair_line": 31.5,
+      "lolesports_match_id": null,
+      "source_note": "pinnacle-auto matchup_id=1633578093; frozen=false; minutes_before_start=150; lolesports_match_id NÃO resolvido (sem candidato no schedule oficial)"
+    },
+    {
+      "liga": "LCK",
+      "hora_brt": "05:00",
+      "team_a": "DN SOOPers",
+      "team_b": "Nongshim Redforce",
+      "team_anchor": "NS",
+      "fair_line": 30.5,
+      "lolesports_match_id": "115548147900750245",
+      "source_note": "pinnacle-auto matchup_id=1633559956; frozen=true; minutes_before_start=330"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "06:15",
+      "team_a": "EDward Gaming",
+      "team_b": "Anyone's Legend",
+      "team_anchor": "AL",
+      "fair_line": 28.5,
+      "lolesports_match_id": "116566854547769736",
+      "source_note": "pinnacle-auto matchup_id=1633431661; frozen=true; minutes_before_start=15"
+    },
+    {
+      "liga": "LCK",
+      "hora_brt": "08:00",
+      "team_a": "KT Rolster",
+      "team_b": "Dplus KIA",
+      "team_anchor": "DK",
+      "fair_line": 27.5,
+      "lolesports_match_id": "115548147900684589",
+      "source_note": "pinnacle-auto matchup_id=1633559945; frozen=true; minutes_before_start=30"
+    },
+    {
+      "liga": "LPL",
+      "hora_brt": "08:15",
+      "team_a": "Bilibili",
+      "team_b": "JD Gaming",
+      "team_anchor": "JDG",
+      "fair_line": 30.5,
+      "lolesports_match_id": "116566854547769668",
+      "source_note": "pinnacle-auto matchup_id=1633457220; frozen=true; minutes_before_start=15"
+    },
+    {
+      "liga": "Prime League",
+      "hora_brt": "12:30",
+      "team_a": "Eintracht Spandau",
+      "team_b": "E WIE EINFACH",
+      "team_anchor": "EWI",
+      "fair_line": 33.5,
+      "lolesports_match_id": "116713163972559104",
+      "source_note": "pinnacle-auto matchup_id=1633746341; frozen=true; minutes_before_start=30"
+    },
+    {
+      "liga": "LES",
+      "hora_brt": "12:30",
+      "team_a": "Barca",
+      "team_b": "UB Alma Mater",
+      "team_anchor": "UB",
+      "fair_line": 31.5,
+      "lolesports_match_id": "116833506932193663",
+      "source_note": "pinnacle-auto matchup_id=1633746330; frozen=true; minutes_before_start=30"
+    },
+    {
+      "liga": "LFL",
+      "hora_brt": "13:00",
+      "team_a": "Ici Japon Corp",
+      "team_b": "TLN Pirates",
+      "team_anchor": "TLNP",
+      "fair_line": 30.5,
+      "lolesports_match_id": "116912368900121272",
+      "source_note": "pinnacle-auto matchup_id=1633817849; frozen=true; minutes_before_start=30"
+    },
+    {
+      "liga": "LES",
+      "hora_brt": "14:30",
+      "team_a": "UCAM",
+      "team_b": "LUA",
+      "team_anchor": "UCAM",
+      "fair_line": 31.5,
+      "lolesports_match_id": "116833506932259263",
+      "source_note": "pinnacle-auto matchup_id=1633750338; frozen=true; minutes_before_start=30"
+    },
+    {
+      "liga": "Prime League",
+      "hora_brt": "15:30",
+      "team_a": "Eintracht Frankfurt",
+      "team_b": "ROSSMANN Centaurs",
+      "team_anchor": "SGE",
+      "fair_line": 33.5,
+      "lolesports_match_id": "116713163972559116",
+      "source_note": "pinnacle-auto matchup_id=1633747698; frozen=true; minutes_before_start=30"
+    },
+    {
+      "liga": "LFL",
+      "hora_brt": "16:00",
+      "team_a": "Galions",
+      "team_b": "Joblife",
+      "team_anchor": "JL",
+      "fair_line": 31.5,
+      "lolesports_match_id": "116912368900121276",
+      "source_note": "pinnacle-auto matchup_id=1633817836; frozen=true; minutes_before_start=60"
+    }
+  ]
+}

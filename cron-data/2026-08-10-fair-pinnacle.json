@@ -1,0 +1,46 @@
+{
+  "date": "2026-08-10",
+  "source": "pinnacle-auto-promoted",
+  "captured_at": "2026-08-10T23:30:25.812Z",
+  "applies_to_all_maps": true,
+  "market": "total_kills",
+  "derived_from": [
+    "cron-data\\2026-08-09-fair-pinnacle-auto.json",
+    "cron-data\\2026-08-10-fair-pinnacle-auto.json",
+    "cron-data\\2026-08-11-fair-pinnacle-auto.json"
+  ],
+  "note": "Fair Pinnacle promovida a fonte primária automática (decisão Elvis 2026-08-05: \"nao preciso mas de fair ela e puxada sozinha pelo sistema todo dia\"). Gerada por .claude/scripts/promote_fair_pinnacle_auto.cjs a partir da captura automática (Task Scheduler LolFairAutoCapture, a cada 30min, closing line = leitura mais próxima do início do jogo). Fair manual do Elvis via /log-fair, se enviada, sobrescreve este arquivo — nunca o contrário.",
+  "history": [],
+  "fair_lines": [
+    {
+      "liga": "LEC",
+      "hora_brt": "12:07",
+      "team_a": "SK Gaming",
+      "team_b": "Vitality",
+      "team_anchor": "SK",
+      "fair_line": 32.5,
+      "lolesports_match_id": "115548681803406187",
+      "source_note": "pinnacle-auto matchup_id=1633468805; frozen=true; minutes_before_start=-22"
+    },
+    {
+      "liga": "LEC",
+      "hora_brt": "14:15",
+      "team_a": "Natus Vincere",
+      "team_b": "G2",
+      "team_anchor": "G2",
+      "fair_line": 29.5,
+      "lolesports_match_id": "115548681803406175",
+      "source_note": "pinnacle-auto matchup_id=1633678621; frozen=true; minutes_before_start=15"
+    },
+    {
+      "liga": "CBLOL",
+      "hora_brt": "18:00",
+      "team_a": "Leviatan",
+      "team_b": "RED Canids",
+      "team_anchor": "LEV",
+      "fair_line": 27.5,
+      "lolesports_match_id": "115565671526403045",
+      "source_note": "pinnacle-auto matchup_id=1633693901; frozen=true; minutes_before_start=30"
+    }
+  ]
+}
