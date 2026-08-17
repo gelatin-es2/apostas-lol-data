@@ -1,0 +1,50 @@
+{
+  "date": "2026-08-17",
+  "captures": [
+    {
+      "captured_at": "2026-08-17T12:21:53.428Z",
+      "ligas": [
+        "LCK",
+        "LPL"
+      ],
+      "fair_lines": []
+    },
+    {
+      "captured_at": "2026-08-17T12:21:54.100Z",
+      "ligas": [
+        "LEC",
+        "CBLOL"
+      ],
+      "fair_lines": [
+        {
+          "league": "LEC",
+          "league_id": "98767991302996019",
+          "event_id": "115548681803340575",
+          "start_time": "2026-08-17T15:00:00Z",
+          "team_a": "TH",
+          "team_b": "NAVI",
+          "team_a_avg": null,
+          "team_b_avg": null,
+          "fair_formula": null,
+          "fair_pinnacle": null,
+          "fair_source": "unavailable",
+          "bo": 3
+        },
+        {
+          "league": "LEC",
+          "league_id": "98767991302996019",
+          "event_id": "115548681803406243",
+          "start_time": "2026-08-17T17:15:00Z",
+          "team_a": "GX",
+          "team_b": "KC",
+          "team_a_avg": null,
+          "team_b_avg": null,
+          "fair_formula": null,
+          "fair_pinnacle": null,
+          "fair_source": "unavailable",
+          "bo": 3
+        }
+      ]
+    }
+  ]
+}

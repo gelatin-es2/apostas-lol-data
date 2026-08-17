@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-08-16T12:28:24.994Z",
+  "generated_at": "2026-08-17T12:31:38.833Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
     "2026-08-16"
   ],
-  "milio_count": 179,
-  "games_with_full_picks": 120,
-  "baseline_under_hit_pct": 72.6,
+  "milio_count": 183,
+  "games_with_full_picks": 121,
+  "baseline_under_hit_pct": 72.7,
   "by_league": {
-    "LPL": 74,
-    "LCK": 45,
-    "LEC": 19,
-    "CBLOL": 20,
+    "LPL": 75,
+    "LCK": 46,
+    "LEC": 20,
+    "CBLOL": 21,
     "LCS": 17,
     "LFL": 4
   },
@@ -5447,6 +5447,31 @@
     },
     {
       "date": "2026-08-16",
+      "league": "LCK",
+      "map": 2,
+      "team_blue": "BRO",
+      "team_red": "KRX",
+      "milio_side": "red",
+      "milio_team": "KRX",
+      "opp_team": "BRO",
+      "opp_sup": "Karma",
+      "sup_blue": "Karma",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "support": "Karma"
+      },
+      "red_picks": {
+        "support": "Milio"
+      },
+      "total_kills": 11,
+      "fair": 29.5,
+      "fair_source": "pinnacle_manual",
+      "trigger": "2peel",
+      "game_id": "115548147900684679",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-16",
       "league": "LPL",
       "map": 1,
       "team_blue": "JDG",
@@ -5468,6 +5493,89 @@
       "fair_source": "pinnacle_manual",
       "trigger": "2peel",
       "game_id": "116566854547769745",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-16",
+      "league": "LPL",
+      "map": 3,
+      "team_blue": "WBG",
+      "team_red": "IG",
+      "milio_side": "blue",
+      "milio_team": "WBG",
+      "opp_team": "IG",
+      "opp_sup": "Lulu",
+      "sup_blue": "Milio",
+      "sup_red": "Lulu",
+      "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Rumble",
+        "top": "Yorick",
+        "jungle": "Skarner",
+        "support": "Milio"
+      },
+      "red_picks": {
+        "adc": "Yunara",
+        "mid": "Aurora",
+        "top": "KSante",
+        "jungle": "LeeSin",
+        "support": "Lulu"
+      },
+      "total_kills": 33,
+      "fair": 29.5,
+      "fair_source": "pinnacle_manual",
+      "trigger": "2peel",
+      "game_id": "116566854547835339",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-16",
+      "league": "LEC",
+      "map": 1,
+      "team_blue": "FNC",
+      "team_red": "G2",
+      "milio_side": "red",
+      "milio_team": "G2",
+      "opp_team": "FNC",
+      "opp_sup": "Karma",
+      "sup_blue": "Karma",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "support": "Karma"
+      },
+      "red_picks": {
+        "support": "Milio"
+      },
+      "total_kills": 26,
+      "fair": 29.5,
+      "fair_source": "pinnacle_manual",
+      "trigger": "2peel",
+      "game_id": "115548681803406284",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-16",
+      "league": "CBLOL",
+      "map": 2,
+      "team_blue": "LEV",
+      "team_red": "LOUD",
+      "milio_side": "red",
+      "milio_team": "LOUD",
+      "opp_team": "LEV",
+      "opp_sup": "Rakan",
+      "sup_blue": "Rakan",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "support": "Rakan"
+      },
+      "red_picks": {
+        "support": "Milio"
+      },
+      "total_kills": 18,
+      "fair": 26.5,
+      "fair_source": "pinnacle_manual",
+      "trigger": "1peel+flex",
+      "game_id": "115565671526403007",
       "src": "results.json"
     }
   ]
