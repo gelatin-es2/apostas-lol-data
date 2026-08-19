@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-18T12:33:54.998Z",
+  "generated_at": "2026-08-19T12:28:41.272Z",
   "league": "LFL",
   "split_start": "2026-04-01",
-  "total_games_fetched": 136,
+  "total_games_fetched": 140,
   "fair_method": "livestats_team_avg(blue+red)-1, fallback 29.5",
   "stake": 100,
   "odd": 1.85,
@@ -15,10 +15,10 @@
     "breakeven_175": 57.1
   },
   "backtest_all": {
-    "n": 38,
-    "hit": 73.7,
-    "profit": 1380,
-    "roi": 36.3,
+    "n": 39,
+    "hit": 74.4,
+    "profit": 1465,
+    "roi": 37.6,
     "breakeven_185": 54.1,
     "breakeven_175": 57.1
   },
@@ -67,8 +67,8 @@
   "teams_all": [
     {
       "name": "TLN Pirates",
-      "n": 12,
-      "hit": 91.7
+      "n": 13,
+      "hit": 92.3
     },
     {
       "name": "Vitality.Bee",
@@ -91,14 +91,14 @@
       "hit": 73.3
     },
     {
-      "name": "Skillcamp",
-      "n": 3,
+      "name": "Solary",
+      "n": 12,
       "hit": 66.7
     },
     {
-      "name": "Solary",
-      "n": 11,
-      "hit": 63.6
+      "name": "Skillcamp",
+      "n": 3,
+      "hit": 66.7
     },
     {
       "name": "Karmine Corp Blue",
@@ -141,8 +141,8 @@
   "supports_all": [
     {
       "name": "Milio",
-      "n": 7,
-      "hit": 85.7
+      "n": 8,
+      "hit": 87.5
     },
     {
       "name": "Seraphine",
@@ -156,8 +156,8 @@
     },
     {
       "name": "Bard",
-      "n": 17,
-      "hit": 70.6
+      "n": 18,
+      "hit": 72.2
     },
     {
       "name": "Karma",
@@ -296,8 +296,8 @@
     {
       "champ": "KSante",
       "role": "top",
-      "n": 12,
-      "hit": 91.7
+      "n": 13,
+      "hit": 92.3
     },
     {
       "champ": "Vi",
@@ -314,14 +314,14 @@
     {
       "champ": "Azir",
       "role": "mid",
-      "n": 7,
-      "hit": 85.7
+      "n": 8,
+      "hit": 87.5
     },
     {
       "champ": "Lucian",
       "role": "adc",
-      "n": 7,
-      "hit": 85.7
+      "n": 8,
+      "hit": 87.5
     },
     {
       "champ": "Ashe",
@@ -360,16 +360,22 @@
       "hit": 72.7
     },
     {
+      "champ": "Ambessa",
+      "role": "top",
+      "n": 10,
+      "hit": 70
+    },
+    {
       "champ": "JarvanIV",
       "role": "jungle",
       "n": 10,
       "hit": 70
     },
     {
-      "champ": "Ambessa",
-      "role": "top",
-      "n": 9,
-      "hit": 66.7
+      "champ": "Caitlyn",
+      "role": "adc",
+      "n": 10,
+      "hit": 70
     },
     {
       "champ": "Rumble",
@@ -387,12 +393,6 @@
       "champ": "Aurora",
       "role": "mid",
       "n": 6,
-      "hit": 66.7
-    },
-    {
-      "champ": "Caitlyn",
-      "role": "adc",
-      "n": 9,
       "hit": 66.7
     },
     {
