@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-19T12:28:41.272Z",
+  "generated_at": "2026-08-20T12:36:47.357Z",
   "league": "LFL",
   "split_start": "2026-04-01",
-  "total_games_fetched": 140,
+  "total_games_fetched": 144,
   "fair_method": "livestats_team_avg(blue+red)-1, fallback 29.5",
   "stake": 100,
   "odd": 1.85,
@@ -15,10 +15,10 @@
     "breakeven_175": 57.1
   },
   "backtest_all": {
-    "n": 39,
-    "hit": 74.4,
-    "profit": 1465,
-    "roi": 37.6,
+    "n": 40,
+    "hit": 72.5,
+    "profit": 1365,
+    "roi": 34.1,
     "breakeven_185": 54.1,
     "breakeven_175": 57.1
   },
@@ -34,19 +34,14 @@
       "hit": 100
     },
     {
-      "name": "Joblife",
-      "n": 4,
-      "hit": 75
-    },
-    {
       "name": "Esprit Shonen",
       "n": 4,
       "hit": 75
     },
     {
-      "name": "Ici Japon Corp",
-      "n": 3,
-      "hit": 66.7
+      "name": "Joblife",
+      "n": 4,
+      "hit": 75
     },
     {
       "name": "Solary",
@@ -56,6 +51,11 @@
     {
       "name": "Galions",
       "n": 9,
+      "hit": 66.7
+    },
+    {
+      "name": "Ici Japon Corp",
+      "n": 3,
       "hit": 66.7
     },
     {
@@ -81,11 +81,6 @@
       "hit": 83.3
     },
     {
-      "name": "Joblife",
-      "n": 5,
-      "hit": 80
-    },
-    {
       "name": "Galions",
       "n": 15,
       "hit": 73.3
@@ -96,8 +91,8 @@
       "hit": 66.7
     },
     {
-      "name": "Skillcamp",
-      "n": 3,
+      "name": "Joblife",
+      "n": 6,
       "hit": 66.7
     },
     {
@@ -108,6 +103,11 @@
     {
       "name": "Ici Japon Corp",
       "n": 6,
+      "hit": 50
+    },
+    {
+      "name": "Skillcamp",
+      "n": 4,
       "hit": 50
     }
   ],
@@ -140,14 +140,14 @@
   ],
   "supports_all": [
     {
-      "name": "Milio",
-      "n": 8,
-      "hit": 87.5
-    },
-    {
       "name": "Seraphine",
       "n": 19,
       "hit": 78.9
+    },
+    {
+      "name": "Milio",
+      "n": 9,
+      "hit": 77.8
     },
     {
       "name": "Lulu",
@@ -202,15 +202,15 @@
       "hit": 83.3
     },
     {
-      "champ": "Yunara",
-      "role": "adc",
-      "n": 10,
-      "hit": 80
-    },
-    {
       "champ": "Azir",
       "role": "mid",
       "n": 5,
+      "hit": 80
+    },
+    {
+      "champ": "Yunara",
+      "role": "adc",
+      "n": 10,
       "hit": 80
     },
     {
@@ -220,9 +220,9 @@
       "hit": 80
     },
     {
-      "champ": "Ambessa",
-      "role": "top",
-      "n": 4,
+      "champ": "Ezreal",
+      "role": "adc",
+      "n": 8,
       "hit": 75
     },
     {
@@ -238,9 +238,9 @@
       "hit": 75
     },
     {
-      "champ": "Ezreal",
-      "role": "adc",
-      "n": 8,
+      "champ": "Ambessa",
+      "role": "top",
+      "n": 4,
       "hit": 75
     },
     {
@@ -294,18 +294,6 @@
       "hit": 100
     },
     {
-      "champ": "KSante",
-      "role": "top",
-      "n": 13,
-      "hit": 92.3
-    },
-    {
-      "champ": "Vi",
-      "role": "jungle",
-      "n": 10,
-      "hit": 90
-    },
-    {
       "champ": "Renekton",
       "role": "top",
       "n": 10,
@@ -318,16 +306,28 @@
       "hit": 87.5
     },
     {
-      "champ": "Lucian",
-      "role": "adc",
-      "n": 8,
-      "hit": 87.5
+      "champ": "KSante",
+      "role": "top",
+      "n": 14,
+      "hit": 85.7
+    },
+    {
+      "champ": "Vi",
+      "role": "jungle",
+      "n": 11,
+      "hit": 81.8
     },
     {
       "champ": "Ashe",
       "role": "adc",
       "n": 19,
       "hit": 78.9
+    },
+    {
+      "champ": "Lucian",
+      "role": "adc",
+      "n": 9,
+      "hit": 77.8
     },
     {
       "champ": "Ezreal",
@@ -366,22 +366,10 @@
       "hit": 70
     },
     {
-      "champ": "JarvanIV",
-      "role": "jungle",
-      "n": 10,
-      "hit": 70
-    },
-    {
       "champ": "Caitlyn",
       "role": "adc",
       "n": 10,
       "hit": 70
-    },
-    {
-      "champ": "Rumble",
-      "role": "top",
-      "n": 15,
-      "hit": 66.7
     },
     {
       "champ": "Gnar",
@@ -400,6 +388,18 @@
       "role": "jungle",
       "n": 23,
       "hit": 65.2
+    },
+    {
+      "champ": "JarvanIV",
+      "role": "jungle",
+      "n": 11,
+      "hit": 63.6
+    },
+    {
+      "champ": "Rumble",
+      "role": "top",
+      "n": 16,
+      "hit": 62.5
     },
     {
       "champ": "Ahri",
