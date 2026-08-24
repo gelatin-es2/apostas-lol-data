@@ -19,7 +19,31 @@ Scripts Node.js do projeto `apostas-lol-data`.
 | `supabase-save-bet.cjs` | HELPER | Salva/atualiza bet individual no Supabase | Invocado pelo bet-logger skill |
 | `settle-pending-bets.cjs` | HELPER | Settla bets pendentes consultando resultados | Invocado pelo bet-logger skill |
 | `enrich-match-context.cjs` | HELPER | Enriquece bet com contexto do match (picks, gameId) | Invocado pelo bet-logger skill |
+| `link-odds-to-riot.cjs` | ATIVO | Preenche `odds_timeline.riot_game_id` + `game_clock_s` casando série Pinnacle → match Riot. Ambiguidade = skip, nunca chuta | Cron diário (janela de 4 dias) — **entrou na agenda em 2026-08-23**; antes rodava só à mão e tinha parado em 15/08 |
+| `backfill-bet-phase.cjs` | MANUAL | Marca `raw_extraction.bet_phase` = `pre`/`live` (fase do MAPA apostado) por evidência explícita. Sem evidência = deixa NULL | Manual / após lote grande de bets novas |
 | `_load-config.cjs` | HELPER | Carrega config do `.env` local — fallback pra quando não há env vars | Importado por outros scripts |
+
+## Armadilhas de consulta — ler antes de escrever query
+
+**1. `bets` inclui backtest.** 439 linhas têm `bookmaker='SIMULATED'` e somam
+R$51.230,00 de lucro que não é dinheiro. Toda query de PnL/banca/ROI precisa excluí-las
+(`bookmaker <> 'SIMULATED'`, ou a view `bets_real`, ou a coluna `is_simulated` depois da
+migration `2026-08-23-fase3-flags.sql`). `quant-query.cjs` exclui por padrão desde 23/08
+— antes reportava R$203.810 onde o real era R$152.580. A view `bets_summary` **ainda
+soma** as simuladas (corrigir junto com a migration).
+
+**2. `odds_timeline.phase` é a fase da SÉRIE, não do MAPA.** Filtrar `phase='live'` pra
+estudar mercado ao vivo pega 31,6% de linha que ainda era pré-jogo do mapa (705 de 2.228
+linhas com âncora, medido 23/08). Use `lib/mapPhase.cjs`. Detalhe em
+`.claude/scripts/sql/2026-08-04-odds-capture.sql`.
+
+**3. `raw_extraction.match_context.state` (`inProgress`/`completed`) não diz se a APOSTA
+foi ao vivo.** É o estado da série no schedule no momento do registro — bet de mapa 2
+feita pós-draft aparece com a série `inProgress` e é PRÉ. Pra isso existe
+`raw_extraction.bet_phase` (e a coluna `bet_phase` depois da migration).
+
+**4. `bet_datetime` NÃO é a hora da aposta** — é o `startTime` do match. Não dá pra
+inferir pré/live comparando com o relógio do jogo.
 
 ## Path convention
 

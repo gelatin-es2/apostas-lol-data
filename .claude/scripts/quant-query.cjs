@@ -19,6 +19,14 @@
 //   --status <green|red|all>  (default: settled = green+red)
 //   --flex <Bard|Rakan|Alistar>   (mantém só bets onde aquele flex está no draft)
 //   --market <under|over|moneyline>
+//   --include-simulated   (ver abaixo — por padrão as bets de backtest ficam FORA)
+//
+// SIMULATED: as 439 linhas com bookmaker='SIMULATED' são backtest, não dinheiro. Até
+// 2026-08-23 este script somava elas junto com as reais e reportava, sem filtro nenhum,
+// profit R$199.346,11 quando o dinheiro real era R$148.116,11 — R$51.230,00 de lucro
+// que não existe (+34,6%). Agora saem por padrão; `--include-simulated` traz de volta
+// pra quem quiser olhar o backtest de propósito. A saída sempre diz quantas foram
+// excluídas, pra nenhum número sair daqui sem contexto.
 //
 // Breakdowns (--by):
 //   trigger | league | team | bookmaker | map_number | flex_engage |
@@ -58,16 +66,28 @@ const filters = {
   market: getArg('market'),
   by: getArg('by'),
   include_pending: argv.includes('--include-pending'),
+  include_simulated: argv.includes('--include-simulated'),
 };
+
+// Uma bet é de backtest se QUALQUER um dos 3 marcadores bater. Medido em 23/08:
+// os três concordam em 439/439 e não dão falso positivo em nenhuma das 870 reais.
+// Redundância de propósito — se um marcador se perder num backfill futuro, os outros
+// dois seguram. Mesmo critério de scripts/audit/split3-integrity.cjs.
+const isSimulated = (b) =>
+  String(b.bookmaker || '').trim().toUpperCase() === 'SIMULATED' ||
+  b.raw_extraction?.simulated === true ||
+  /^SIMULATED/i.test(b.notes || '');
 
 // Normalize trigger filter: 1peel-flex (shell-friendly) → 1peel+flex (canonical)
 if (filters.trigger === '1peel-flex') filters.trigger = '1peel+flex';
 
 const norm = s => s ? String(s).toLowerCase().replace(/[\s.\-']/g, '') : '';
 
-function fetchAllBets(supabaseUrl, supabaseKey) {
+const PAGE_SIZE = 1000; // teto do PostgREST (db-max-rows); `limit` maior é ignorado
+
+function fetchPage(supabaseUrl, supabaseKey, offset) {
   return new Promise((resolve, reject) => {
-    const u = new URL(`${supabaseUrl}/rest/v1/bets?select=*&limit=2000`);
+    const u = new URL(`${supabaseUrl}/rest/v1/bets?select=*&order=id.asc&limit=${PAGE_SIZE}&offset=${offset}`);
     https.get({
       host: u.hostname, path: u.pathname + u.search,
       headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` },
@@ -80,6 +100,19 @@ function fetchAllBets(supabaseUrl, supabaseKey) {
       });
     }).on('error', reject);
   });
+}
+
+// Bug 2026-08-16: o `limit=2000` de antes era silenciosamente cortado em 1000 pelo
+// PostgREST. Com o banco acima de 1000 linhas, TODA análise saía truncada — e sem
+// `order` o corte era não-determinístico. Agora pagina até o fim, ordenado por id.
+async function fetchAllBets(supabaseUrl, supabaseKey) {
+  const out = [];
+  for (let offset = 0; ; offset += PAGE_SIZE) {
+    const page = await fetchPage(supabaseUrl, supabaseKey, offset);
+    out.push(...page);
+    if (page.length < PAGE_SIZE) break;
+  }
+  return out;
 }
 
 function inferLeagueShort(bet) {
@@ -127,6 +160,9 @@ function parsePickLine(pickRaw) {
 }
 
 function passesFilters(bet) {
+  // Backtest fora por padrão — ver bloco SIMULATED no cabeçalho.
+  if (!filters.include_simulated && isSimulated(bet)) return false;
+
   const mc = bet.raw_extraction?.match_context || {};
   const trigger = mc.trigger_type || null;
 
@@ -263,8 +299,14 @@ function finalize(metric) {
   const { supabaseUrl, supabaseKey } = loadConfig();
   const all = await fetchAllBets(supabaseUrl, supabaseKey);
 
+  const sims = all.filter(isSimulated);
   const universe = {
     total_bets: all.length,
+    simulated_no_banco: sims.length,
+    simulated_excluidas: filters.include_simulated ? 0 : sims.length,
+    simulated_profit_fora_da_conta: filters.include_simulated
+      ? 0
+      : +sims.reduce((s, b) => s + (parseFloat(b.profit) || 0), 0).toFixed(2),
     by_status: {},
   };
   for (const b of all) {

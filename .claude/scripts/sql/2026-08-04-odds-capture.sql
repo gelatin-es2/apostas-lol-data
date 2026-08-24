@@ -10,6 +10,20 @@
 -- 1. odds_timeline — 1 row por (série, mapa, leitura QUE MUDOU)
 --    map_number 0 = série inteira (moneyline da série, spread de mapas)
 --    map_number 1..5 = mapa (kills totals + ladder + team totals + ML do mapa)
+--
+--    ⚠️ LEIA ANTES DE FILTRAR POR `phase` (documentado 2026-08-23, item 3.4 da fase 3)
+--    `phase` é a fase da SÉRIE na leitura da Pinnacle — NÃO a fase do mapa desta
+--    linha. Numa BO3, enquanto o mapa 1 rola a Pinnacle já cota o mapa 2; essa
+--    leitura entra aqui com phase='live' e, pro mapa 2, é PRÉ-JOGO.
+--    Medido em 23/08 sobre as linhas phase='live' desde 13/08 que têm âncora:
+--        1.303 são de fato live no mapa
+--          705 são PRÉ do mapa  ← 31,6% de contaminação
+--            9 são pós-mapa
+--    Ou seja: `where phase='live'` pra estudar mercado ao vivo mistura linha
+--    pré-mapa com in-play, e foi assim que se produziu conclusão sobre "under ao
+--    vivo" em cima de linha que ainda era pré-jogo.
+--    Fase correta POR MAPA: lib/mapPhase.cjs (game_drafts.first_frame_utc, com
+--    closing_lines.first_seen_live_at de fallback; sem âncora devolve null).
 -- ============================================================================
 create table public.odds_timeline (
   id               bigint generated always as identity primary key,

@@ -20,6 +20,9 @@ jobs:
     env:
       SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
       SUPABASE_URL: https://yxhpopkxlupdpqkdaffg.supabase.co
+      # Necessário pro link-odds-to-riot (lolesports-find-match lê do env; os outros
+      # scripts trazem a key pública hardcoded). Secret já existia no repo.
+      LOLESPORTS_API_KEY: ${{ secrets.LOLESPORTS_API_KEY }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -89,6 +92,17 @@ jobs:
       # Importante pra Qua/Qui (dias que essas ligas jogam, antes das 12h BRT)
       - name: Analyze Tier 2 EU (LFL/LES/LIT)
         run: node .claude/scripts/analyze_tier2_eu.cjs
+        continue-on-error: true
+
+      # Liga odds_timeline -> riot_game_id/game_clock_s (colunas reservadas na DDL de
+      # 04/08). Adicionado 2026-08-23 (fase 3): o script existia desde 12/08 e NUNCA
+      # esteve em agenda nenhuma — rodou à mão 2x e parou, deixando 94% das odds ao
+      # vivo sem link. Janela de 4 dias porque só é possível linkar depois que
+      # game_drafts recebe o draft do mapa; é idempotente (alvo = riot_game_id is null),
+      # então sobreposição entre execuções não custa nada.
+      - name: Link odds_timeline to Riot game_id (últimos 4 dias)
+        if: env.SUPABASE_SECRET_KEY != ''
+        run: node .claude/scripts/link-odds-to-riot.cjs --from=$(date -u -d '4 days ago' +%Y-%m-%d) --to=$(date -u +%Y-%m-%d)
         continue-on-error: true
 
       # Export snapshot diário do banco pra backup em cron-data/snapshots/

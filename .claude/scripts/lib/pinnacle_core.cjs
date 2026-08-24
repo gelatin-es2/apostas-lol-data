@@ -14,6 +14,9 @@
 //    (série, mapa) — motores do delta-gating no banco
 
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
+const { spawnSync } = require('child_process');
 
 const BASE_URL = 'https://guest.api.arcadia.pinnacle.com/0.1';
 // Chave PÚBLICA do frontend da Pinnacle (exposta em qualquer request do site).
@@ -23,13 +26,167 @@ const MATCHUP_PAUSE_MS = 300;
 const RETRY_STATUS = new Set([429, 500, 502, 503, 504]);
 const RETRY_DELAYS_MS = [2000, 4000, 8000];
 
+// Raiz do repo: este arquivo mora em .claude/scripts/lib/ (3 níveis acima).
+const REPO = path.resolve(__dirname, '..', '..', '..');
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// --- Proxy SOCKS5 opcional --------------------------------------------------
+// Mesmo padrão provado em capture_pinnacle_kills_auto.cjs: sem PINNACLE_PROXY_HOST
+// configurado, segue 100% como antes (fetch direto, IP de casa). parseDotEnv é
+// cópia do parser de lá (não importado pra não acoplar os dois scripts).
+function parseDotEnv(content) {
+  const env = {};
+  for (const line of content.split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const eqIdx = trimmed.indexOf('=');
+    if (eqIdx === -1) continue;
+    const key = trimmed.slice(0, eqIdx).trim();
+    let value = trimmed.slice(eqIdx + 1).trim();
+    if ((value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
+    }
+    env[key] = value;
+  }
+  return env;
+}
+
+function loadProxyConfig() {
+  let type = process.env.PINNACLE_PROXY_TYPE;
+  let host = process.env.PINNACLE_PROXY_HOST;
+  let port = process.env.PINNACLE_PROXY_PORT;
+  let user = process.env.PINNACLE_PROXY_USER;
+  let pass = process.env.PINNACLE_PROXY_PASS;
+
+  if (!host) {
+    const envPath = path.join(REPO, '.env');
+    if (fs.existsSync(envPath)) {
+      const env = parseDotEnv(fs.readFileSync(envPath, 'utf8'));
+      type = type || env.PINNACLE_PROXY_TYPE;
+      host = host || env.PINNACLE_PROXY_HOST;
+      port = port || env.PINNACLE_PROXY_PORT;
+      user = user || env.PINNACLE_PROXY_USER;
+      pass = pass || env.PINNACLE_PROXY_PASS;
+    }
+  }
+
+  if (!host) return null; // sem host configurado → sem proxy, caminho de sempre
+  return { type: type || 'socks5', host, port: port || '1080', user, pass };
+}
+
+const PROXY = loadProxyConfig();
+let proxyModeLogged = false;
+
+function logProxyModeOnce() {
+  if (proxyModeLogged) return;
+  proxyModeLogged = true;
+  // Log de diagnóstico: host/porta não são credencial, só user/pass são — nunca
+  // logados aqui nem em nenhum outro ponto deste módulo.
+  if (PROXY) console.log(`[pinnacle_core] saindo via proxy SOCKS5 ${PROXY.host}:${PROXY.port}`);
+  else console.log('[pinnacle_core] saindo direto (sem proxy configurado)');
+}
+
+// Info de diagnóstico segura pra logar em outros scripts — nunca inclui user/pass.
+function proxyInfo() {
+  return { enabled: !!PROXY, host: PROXY ? PROXY.host : null, port: PROXY ? PROXY.port : null };
+}
+
+// Uma tentativa de request direto via fetch() — sem retry (retry é responsabilidade
+// de fetchJson, por cima de qualquer transporte).
+async function directRequest(url, timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'X-API-Key': API_KEY,
+        Accept: 'application/json',
+        Referer: 'https://www.pinnacle.com/',
+      },
+      signal: controller.signal,
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return { ok: true, status: res.status, data };
+    }
+    const out = { ok: false, status: res.status, error: `HTTP ${res.status}` };
+    const ra = Number(res.headers.get('retry-after'));
+    if (Number.isFinite(ra) && ra > 0) out.retryAfterMs = Math.min(ra * 1000, 30000);
+    return out;
+  } catch (err) {
+    return { ok: false, status: 0, error: err.message || String(err) };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// Uma tentativa de request via curl.exe roteado por SOCKS5 (curl resolve o DNS do
+// lado do proxy com --socks5-hostname — evita vazar a query pro DNS local). A
+// senha só entra nos args do processo filho — NUNCA em log/stdout/stderr aqui.
+// -D - despeja os headers de resposta no stdout (antes do body) pra dar pra ler
+// Retry-After; -w acrescenta o http_code numa última linha pra separar do body.
+function curlRequest(url, timeoutMs) {
+  const timeoutSec = Math.max(1, Math.round(timeoutMs / 1000));
+  const args = [
+    '-s',
+    '-D', '-',
+    '--max-time', String(timeoutSec),
+    '--socks5-hostname', `${PROXY.host}:${PROXY.port}`,
+  ];
+  if (PROXY.user) args.push('--proxy-user', `${PROXY.user}:${PROXY.pass || ''}`);
+  args.push(
+    '-H', `X-API-Key: ${API_KEY}`,
+    '-H', 'Accept: application/json',
+    '-H', 'Referer: https://www.pinnacle.com/',
+    '-w', '\n%{http_code}',
+    url
+  );
+
+  const result = spawnSync('curl.exe', args, { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
+
+  if (result.error) return { ok: false, status: 0, error: result.error.message || String(result.error) };
+  if (result.status !== 0) return { ok: false, status: 0, error: `curl exit ${result.status}` };
+
+  const stdout = result.stdout || '';
+  const lastNlIdx = stdout.lastIndexOf('\n');
+  const head = lastNlIdx === -1 ? '' : stdout.slice(0, lastNlIdx);
+  const statusStr = (lastNlIdx === -1 ? stdout : stdout.slice(lastNlIdx + 1)).trim();
+  const status = Number(statusStr);
+
+  const sepIdx = head.search(/\r?\n\r?\n/);
+  const headerBlock = sepIdx === -1 ? head : head.slice(0, sepIdx);
+  const body = sepIdx === -1 ? '' : head.slice(sepIdx).replace(/^\r?\n\r?\n/, '');
+
+  let retryAfterMs;
+  const raMatch = headerBlock.match(/^Retry-After:\s*(\d+)/im);
+  if (raMatch) {
+    const ra = Number(raMatch[1]);
+    if (Number.isFinite(ra) && ra > 0) retryAfterMs = Math.min(ra * 1000, 30000);
+  }
+
+  if (!Number.isFinite(status) || status < 100) {
+    return { ok: false, status: 0, error: 'curl: status parse falhou', retryAfterMs };
+  }
+  if (status < 200 || status >= 300) {
+    return { ok: false, status, error: `HTTP ${status}`, retryAfterMs };
+  }
+  try {
+    return { ok: true, status, data: JSON.parse(body) };
+  } catch (err) {
+    return { ok: false, status, error: `JSON parse: ${err.message}` };
+  }
+}
+
 // Fetch com retry: 3 tentativas extras em 429/5xx/erro de rede, backoff
 // exponencial honrando Retry-After quando presente. 4xx (menos 429) não re-tenta.
+// Transporte: curl.exe via SOCKS5 quando há proxy configurado, fetch() direto
+// senão — a lógica de retry/backoff abaixo é a mesma nos dois casos.
 async function fetchJson(urlPath, { timeoutMs = 15000 } = {}) {
+  logProxyModeOnce();
   const url = `${BASE_URL}${urlPath}`;
   let lastErr = null;
   for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
@@ -37,30 +194,13 @@ async function fetchJson(urlPath, { timeoutMs = 15000 } = {}) {
       const retryAfterMs = lastErr && lastErr.retryAfterMs;
       await sleep(retryAfterMs || RETRY_DELAYS_MS[attempt - 1]);
     }
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeoutMs);
-    try {
-      const res = await fetch(url, {
-        headers: {
-          'X-API-Key': API_KEY,
-          Accept: 'application/json',
-          Referer: 'https://www.pinnacle.com/',
-        },
-        signal: controller.signal,
-      });
-      if (res.ok) {
-        const data = await res.json();
-        return { ok: true, status: res.status, data, attempts: attempt + 1 };
-      }
-      lastErr = { status: res.status, error: `HTTP ${res.status}` };
-      const ra = Number(res.headers.get('retry-after'));
-      if (Number.isFinite(ra) && ra > 0) lastErr.retryAfterMs = Math.min(ra * 1000, 30000);
-      if (!RETRY_STATUS.has(res.status)) break; // 4xx (menos 429): não adianta re-tentar
-    } catch (err) {
-      lastErr = { status: 0, error: err.message || String(err) };
-    } finally {
-      clearTimeout(timer);
+    const result = PROXY ? curlRequest(url, timeoutMs) : await directRequest(url, timeoutMs);
+    if (result.ok) {
+      return { ok: true, status: result.status, data: result.data, attempts: attempt + 1 };
     }
+    lastErr = { status: result.status, error: result.error };
+    if (result.retryAfterMs) lastErr.retryAfterMs = result.retryAfterMs;
+    if (!RETRY_STATUS.has(result.status)) break; // 4xx (menos 429): não adianta re-tentar
   }
   return { ok: false, status: lastErr ? lastErr.status : 0, error: lastErr ? lastErr.error : 'unknown', url };
 }
@@ -122,11 +262,39 @@ function seriesMlMatchupIds(allMatchups, seriesId) {
   return ids;
 }
 
+// Ids aceitáveis como fonte de TOTAL DE KILLS da série: o matchup consultado + os
+// matchups IRMÃOS de Kills do mesmo pai (pré-jogo e live são matchups distintos).
+//
+// BUG REAL (medido 14/08, dumps crus em cron-data/diag-live-kills/): quando o jogo
+// começa, a Pinnacle cria um matchup de Kills LIVE (ex. 1633983129) irmão do
+// pré-jogo (1633983128). Consultando o LIVE, os 17 totals vêm TODOS carimbados com
+// o matchupId do PRÉ-JOGO — nenhum com o id consultado. O filtro antigo
+// (`row.matchupId === killsMatchupId`) descartava os 17, e a leitura ia pro banco
+// com main_line/ladder null (só o moneyline sobrevivia, porque vinha via
+// seriesMlIds). Resultado: 75% das rows phase='live' sem linha, e a conclusão
+// errada de que "a Pinnacle suspende o mercado de kills ao vivo".
+//
+// ⚠️ NUNCA aceitar o matchup PAI aqui: ele carrega o total de MAPAS da série
+// (period 0, points 2.5 = over/under 2.5 mapas). Entrar como kills gravaria uma
+// linha de 2.5 kills. Por isso o filtro exige units === 'Kills'.
+function seriesKillsMatchupIds(allMatchups, seriesId, killsMatchupId) {
+  const ids = new Set([killsMatchupId]);
+  if (!Array.isArray(allMatchups)) return ids;
+  for (const x of allMatchups) {
+    if (x.type === 'matchup' && x.units === 'Kills'
+      && (x.id === seriesId || x.parentId === seriesId)) ids.add(x.id);
+  }
+  return ids;
+}
+
 // Parseia o response de /matchups/{id}/markets/related/straight.
 // Os rows misturam matchups: o de Kills (totals/team_totals/spreads de kills)
 // e o PRINCIPAL da série (moneyline período 0 = série e período N = mapa,
 // spread período 0 = handicap de mapas). Separa por matchupId.
-function parseRelatedMarkets(rawRows, killsMatchupId, seriesMlIds) {
+// `killsIds` aceita um Set (ids de Kills da série, ver seriesKillsMatchupIds) ou um
+// número solto (compatibilidade com chamadas antigas).
+function parseRelatedMarkets(rawRows, killsIds, seriesMlIds) {
+  const killsIdSet = killsIds instanceof Set ? killsIds : new Set([killsIds]);
   const byMap = {}; // map_number → dados agregados
 
   const ensure = (p) => {
@@ -134,7 +302,7 @@ function parseRelatedMarkets(rawRows, killsMatchupId, seriesMlIds) {
       byMap[p] = {
         totals: [], teamTotals: [], killsSpreads: [],
         ml: null, seriesSpread: null, maxVersion: 0,
-        mlVersion: -1, spreadVersion: -1,
+        mlVersion: -1, spreadVersion: -1, mainTotalVersion: -1,
       };
     }
     return byMap[p];
@@ -145,7 +313,7 @@ function parseRelatedMarkets(rawRows, killsMatchupId, seriesMlIds) {
     const period = Number(row.period);
     if (!Number.isFinite(period) || period < 0 || period > 5) continue;
     if (!Array.isArray(row.prices)) continue; // market suspenso/malformado com HTTP 200
-    const fromKills = row.matchupId === killsMatchupId;
+    const fromKills = killsIdSet.has(row.matchupId);
     const fromSeries = seriesMlIds.has(row.matchupId);
     if (!fromKills && !fromSeries) continue; // outros irmãos (specials) fora
 
@@ -157,9 +325,25 @@ function parseRelatedMarkets(rawRows, killsMatchupId, seriesMlIds) {
       const over = row.prices.find((pr) => pr.designation === 'over');
       const under = row.prices.find((pr) => pr.designation === 'under');
       if (!over || !under) continue;
+      const isAlt = !!row.isAlternate;
+      if (!isAlt) {
+        // Tiebreak por version pra linha PRINCIPAL — mesmo critério já usado em
+        // moneyline/spread. Bug medido 23/08: em série ao vivo, sub-matchups
+        // concorrentes (ver seriesKillsMatchupIds) publicam totals "principais"
+        // conflitantes ao mesmo tempo (3 sub-matchups, mesmo period, isAlternate=false
+        // nos 3). Sem isso, o main line vinha por ordem de chegada/pontos, instável.
+        if (rowVersion < slot.mainTotalVersion) continue; // challenger velho — descarta
+        if (rowVersion > slot.mainTotalVersion) {
+          // versão nova vence — descarta candidato(s) principal(is) anterior(es)
+          slot.totals = slot.totals.filter((t) => t.isAlternate);
+          slot.mainTotalVersion = rowVersion;
+        } else if (slot.totals.some((t) => !t.isAlternate)) {
+          continue; // empate de version — mantém o 1º principal já visto (determinístico)
+        }
+      }
       slot.totals.push({
         points: over.points,
-        isAlternate: !!row.isAlternate,
+        isAlternate: isAlt,
         overUS: over.price,
         underUS: under.price,
       });
@@ -276,11 +460,13 @@ module.exports = {
   MATCHUP_PAUSE_MS,
   sleep,
   fetchJson,
+  proxyInfo,
   americanToDecimal,
   calcJuicePct,
   filterLolKillsMatchups,
   matchupMeta,
   seriesMlMatchupIds,
+  seriesKillsMatchupIds,
   parseRelatedMarkets,
   buildTimelineEntries,
   contentHash,
