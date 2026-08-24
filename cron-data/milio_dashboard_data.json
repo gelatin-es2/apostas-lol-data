@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-08-23T12:24:01.230Z",
+  "generated_at": "2026-08-24T12:37:28.895Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
     "2026-08-23"
   ],
-  "milio_count": 199,
-  "games_with_full_picks": 121,
-  "baseline_under_hit_pct": 73.4,
+  "milio_count": 203,
+  "games_with_full_picks": 111,
+  "baseline_under_hit_pct": 72.9,
   "by_league": {
     "LPL": 80,
-    "LCK": 50,
-    "LEC": 24,
+    "LCK": 51,
+    "LEC": 25,
     "CBLOL": 22,
-    "LCS": 19,
+    "LCS": 21,
     "LFL": 4
   },
   "flags": {
@@ -48,17 +48,9 @@
       "sup_blue": "Milio",
       "sup_red": "Nami",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Azir",
-        "top": "Renekton",
-        "jungle": "Pantheon",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Corki",
-        "mid": "Orianna",
-        "top": "Sion",
-        "jungle": "MonkeyKing",
         "support": "Nami"
       },
       "total_kills": 14,
@@ -147,17 +139,9 @@
       "sup_blue": "Milio",
       "sup_red": "Rakan",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Mel",
-        "top": "Aurora",
-        "jungle": "Naafiri",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Xayah",
-        "mid": "Ahri",
-        "top": "Gnar",
-        "jungle": "Vi",
         "support": "Rakan"
       },
       "total_kills": 33,
@@ -345,17 +329,9 @@
       "sup_blue": "Bard",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Ezreal",
-        "mid": "Akali",
-        "top": "Ambessa",
-        "jungle": "Skarner",
         "support": "Bard"
       },
       "red_picks": {
-        "adc": "Lucian",
-        "mid": "Azir",
-        "top": "Rumble",
-        "jungle": "JarvanIV",
         "support": "Milio"
       },
       "total_kills": 17,
@@ -378,17 +354,9 @@
       "sup_blue": "Milio",
       "sup_red": "Bard",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Ryze",
-        "top": "Gnar",
-        "jungle": "LeeSin",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Ezreal",
-        "mid": "Anivia",
-        "top": "Jax",
-        "jungle": "XinZhao",
         "support": "Bard"
       },
       "total_kills": 28,
@@ -444,17 +412,9 @@
       "sup_blue": "Milio",
       "sup_red": "Bard",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Viktor",
-        "top": "Gnar",
-        "jungle": "Skarner",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Yunara",
-        "mid": "Sylas",
-        "top": "Jayce",
-        "jungle": "XinZhao",
         "support": "Bard"
       },
       "total_kills": 22,
@@ -510,17 +470,9 @@
       "sup_blue": "Milio",
       "sup_red": "Nami",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Galio",
-        "top": "Aurora",
-        "jungle": "Zaahen",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Corki",
-        "mid": "Ryze",
-        "top": "Rumble",
-        "jungle": "LeeSin",
         "support": "Nami"
       },
       "total_kills": 23,
@@ -609,17 +561,9 @@
       "sup_blue": "Milio",
       "sup_red": "Lulu",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Azir",
-        "top": "Sion",
-        "jungle": "Qiyana",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Yunara",
-        "mid": "Orianna",
-        "top": "Gwen",
-        "jungle": "Trundle",
         "support": "Lulu"
       },
       "total_kills": 23,
@@ -642,17 +586,9 @@
       "sup_blue": "Lulu",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Yunara",
-        "mid": "Akali",
-        "top": "Naafiri",
-        "jungle": "Maokai",
         "support": "Lulu"
       },
       "red_picks": {
-        "adc": "Lucian",
-        "mid": "Annie",
-        "top": "Varus",
-        "jungle": "MonkeyKing",
         "support": "Milio"
       },
       "total_kills": 22,
@@ -675,17 +611,9 @@
       "sup_blue": "Nami",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Orianna",
-        "top": "Yorick",
-        "jungle": "Malphite",
         "support": "Nami"
       },
       "red_picks": {
-        "adc": "Aphelios",
-        "mid": "Ryze",
-        "top": "Jayce",
-        "jungle": "XinZhao",
         "support": "Milio"
       },
       "total_kills": 26,
@@ -708,17 +636,9 @@
       "sup_blue": "Milio",
       "sup_red": "Nami",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Annie",
-        "top": "Gragas",
-        "jungle": "Nocturne",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Corki",
-        "mid": "Akali",
-        "top": "Jayce",
-        "jungle": "XinZhao",
         "support": "Nami"
       },
       "total_kills": 31,
@@ -741,17 +661,9 @@
       "sup_blue": "Milio",
       "sup_red": "Lulu",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Lissandra",
-        "top": "KSante",
-        "jungle": "XinZhao",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Yunara",
-        "mid": "Ahri",
-        "top": "Rumble",
-        "jungle": "Vi",
         "support": "Lulu"
       },
       "total_kills": 15,
@@ -807,17 +719,9 @@
       "sup_blue": "Milio",
       "sup_red": "Renata",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Aurora",
-        "top": "Gnar",
-        "jungle": "Nocturne",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Kalista",
-        "mid": "Annie",
-        "top": "Sion",
-        "jungle": "LeeSin",
         "support": "Renata"
       },
       "total_kills": 24,
@@ -873,17 +777,9 @@
       "sup_blue": "Milio",
       "sup_red": "Nami",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Anivia",
-        "top": "Irelia",
-        "jungle": "Viego",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Corki",
-        "mid": "Ryze",
-        "top": "Aurora",
-        "jungle": "MonkeyKing",
         "support": "Nami"
       },
       "total_kills": 38,
@@ -906,17 +802,9 @@
       "sup_blue": "Seraphine",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Ashe",
-        "mid": "Aurora",
-        "top": "Yorick",
-        "jungle": "XinZhao",
         "support": "Seraphine"
       },
       "red_picks": {
-        "adc": "Lucian",
-        "mid": "Syndra",
-        "top": "Gnar",
-        "jungle": "JarvanIV",
         "support": "Milio"
       },
       "total_kills": 17,
@@ -1038,17 +926,9 @@
       "sup_blue": "Milio",
       "sup_red": "Lulu",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Ahri",
-        "top": "Jax",
-        "jungle": "JarvanIV",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Yunara",
-        "mid": "Anivia",
-        "top": "Renekton",
-        "jungle": "XinZhao",
         "support": "Lulu"
       },
       "total_kills": 28,
@@ -1203,17 +1083,9 @@
       "sup_blue": "Milio",
       "sup_red": "Lulu",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Annie",
-        "top": "Gnar",
-        "jungle": "XinZhao",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Yunara",
-        "mid": "Aurora",
-        "top": "Renekton",
-        "jungle": "JarvanIV",
         "support": "Lulu"
       },
       "total_kills": 15,
@@ -1236,17 +1108,9 @@
       "sup_blue": "Alistar",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Anivia",
-        "top": "Gwen",
-        "jungle": "XinZhao",
         "support": "Alistar"
       },
       "red_picks": {
-        "adc": "Aphelios",
-        "mid": "TwistedFate",
-        "top": "Sion",
-        "jungle": "LeeSin",
         "support": "Milio"
       },
       "total_kills": 26,
@@ -1509,17 +1373,9 @@
       "sup_blue": "Milio",
       "sup_red": "Seraphine",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Annie",
-        "top": "Gnar",
-        "jungle": "Pantheon",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Ashe",
-        "mid": "Aurora",
-        "top": "Renekton",
-        "jungle": "JarvanIV",
         "support": "Seraphine"
       },
       "total_kills": 26,
@@ -1542,17 +1398,9 @@
       "sup_blue": "Lulu",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Yunara",
-        "mid": "Orianna",
-        "top": "KSante",
-        "jungle": "Trundle",
         "support": "Lulu"
       },
       "red_picks": {
-        "adc": "Lucian",
-        "mid": "Viktor",
-        "top": "Ambessa",
-        "jungle": "MonkeyKing",
         "support": "Milio"
       },
       "total_kills": 41,
@@ -1633,17 +1481,9 @@
       "sup_blue": "Milio",
       "sup_red": "Lulu",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Annie",
-        "top": "Varus",
-        "jungle": "Aatrox",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Yunara",
-        "mid": "Taliyah",
-        "top": "Gnar",
-        "jungle": "Naafiri",
         "support": "Lulu"
       },
       "total_kills": 25,
@@ -1666,17 +1506,9 @@
       "sup_blue": "Renata",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Kalista",
-        "mid": "Azir",
-        "top": "Jayce",
-        "jungle": "JarvanIV",
         "support": "Renata"
       },
       "red_picks": {
-        "adc": "Lucian",
-        "mid": "Taliyah",
-        "top": "Irelia",
-        "jungle": "Pantheon",
         "support": "Milio"
       },
       "total_kills": 27,
@@ -1848,17 +1680,9 @@
       "sup_blue": "Milio",
       "sup_red": "Karma",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Annie",
-        "top": "Sion",
-        "jungle": "XinZhao",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Ezreal",
-        "mid": "Ryze",
-        "top": "Yorick",
-        "jungle": "JarvanIV",
         "support": "Karma"
       },
       "total_kills": 15,
@@ -1914,17 +1738,9 @@
       "sup_blue": "Milio",
       "sup_red": "Bard",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Ryze",
-        "top": "Rumble",
-        "jungle": "XinZhao",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Caitlyn",
-        "mid": "Annie",
-        "top": "Ambessa",
-        "jungle": "JarvanIV",
         "support": "Bard"
       },
       "total_kills": 20,
@@ -2038,17 +1854,9 @@
       "sup_blue": "Milio",
       "sup_red": "Karma",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Ryze",
-        "top": "Anivia",
-        "jungle": "Qiyana",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Ezreal",
-        "mid": "Azir",
-        "top": "Varus",
-        "jungle": "Trundle",
         "support": "Karma"
       },
       "total_kills": 33,
@@ -2071,17 +1879,9 @@
       "sup_blue": "Seraphine",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Ashe",
-        "mid": "Ryze",
-        "top": "Vayne",
-        "jungle": "XinZhao",
         "support": "Seraphine"
       },
       "red_picks": {
-        "adc": "Lucian",
-        "mid": "Orianna",
-        "top": "Ambessa",
-        "jungle": "Malphite",
         "support": "Milio"
       },
       "total_kills": 17,
@@ -2162,17 +1962,9 @@
       "sup_blue": "Nami",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Corki",
-        "mid": "Cassiopeia",
-        "top": "Gnar",
-        "jungle": "Nocturne",
         "support": "Nami"
       },
       "red_picks": {
-        "adc": "Lucian",
-        "mid": "Annie",
-        "top": "Ambessa",
-        "jungle": "LeeSin",
         "support": "Milio"
       },
       "total_kills": 20,
@@ -2195,17 +1987,9 @@
       "sup_blue": "Milio",
       "sup_red": "Karma",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "TwistedFate",
-        "top": "Gnar",
-        "jungle": "Pantheon",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Caitlyn",
-        "mid": "Ryze",
-        "top": "Jax",
-        "jungle": "JarvanIV",
         "support": "Karma"
       },
       "total_kills": 32,
@@ -2228,17 +2012,9 @@
       "sup_blue": "Nami",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Corki",
-        "mid": "Viktor",
-        "top": "Rumble",
-        "jungle": "Pantheon",
         "support": "Nami"
       },
       "red_picks": {
-        "adc": "Lucian",
-        "mid": "Akali",
-        "top": "KSante",
-        "jungle": "MonkeyKing",
         "support": "Milio"
       },
       "total_kills": 37,
@@ -2418,17 +2194,9 @@
       "sup_blue": "Milio",
       "sup_red": "Lulu",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Anivia",
-        "top": "Gnar",
-        "jungle": "Pantheon",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Yunara",
-        "mid": "Ryze",
-        "top": "Ambessa",
-        "jungle": "LeeSin",
         "support": "Lulu"
       },
       "total_kills": 32,
@@ -2451,17 +2219,9 @@
       "sup_blue": "Milio",
       "sup_red": "Lulu",
       "blue_picks": {
-        "adc": "Yunara",
-        "mid": "Cassiopeia",
-        "top": "Olaf",
-        "jungle": "Naafiri",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "KogMaw",
-        "mid": "Galio",
-        "top": "Gnar",
-        "jungle": "Nocturne",
         "support": "Lulu"
       },
       "total_kills": 26,
@@ -2550,17 +2310,9 @@
       "sup_blue": "Milio",
       "sup_red": "Seraphine",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Annie",
-        "top": "Rumble",
-        "jungle": "Olaf",
         "support": "Milio"
       },
       "red_picks": {
-        "adc": "Ashe",
-        "mid": "Cassiopeia",
-        "top": "KSante",
-        "jungle": "Vi",
         "support": "Seraphine"
       },
       "total_kills": 33,
@@ -2583,17 +2335,9 @@
       "sup_blue": "Nami",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Lucian",
-        "mid": "Viktor",
-        "top": "Renekton",
-        "jungle": "Skarner",
         "support": "Nami"
       },
       "red_picks": {
-        "adc": "Draven",
-        "mid": "Aurora",
-        "top": "Olaf",
-        "jungle": "Nocturne",
         "support": "Milio"
       },
       "total_kills": 25,
@@ -2674,17 +2418,9 @@
       "sup_blue": "Bard",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Ezreal",
-        "mid": "Akali",
-        "top": "Yorick",
-        "jungle": "Pantheon",
         "support": "Bard"
       },
       "red_picks": {
-        "adc": "Lucian",
-        "mid": "Annie",
-        "top": "Gnar",
-        "jungle": "Poppy",
         "support": "Milio"
       },
       "total_kills": 29,
@@ -3120,17 +2856,9 @@
       "sup_blue": "Seraphine",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Ashe",
-        "mid": "Anivia",
-        "top": "Yorick",
-        "jungle": "XinZhao",
         "support": "Seraphine"
       },
       "red_picks": {
-        "adc": "Lucian",
-        "mid": "Aurora",
-        "top": "Jayce",
-        "jungle": "JarvanIV",
         "support": "Milio"
       },
       "total_kills": 29,
@@ -3567,17 +3295,9 @@
       "sup_blue": "Alistar",
       "sup_red": "Milio",
       "blue_picks": {
-        "adc": "Senna",
-        "mid": "Aurora",
-        "top": "Rumble",
-        "jungle": "Pantheon",
         "support": "Alistar"
       },
       "red_picks": {
-        "adc": "Lucian",
-        "mid": "Annie",
-        "top": "Yorick",
-        "jungle": "LeeSin",
         "support": "Milio"
       },
       "total_kills": 28,
@@ -4644,9 +4364,17 @@
       "sup_blue": "Milio",
       "sup_red": "Yuumi",
       "blue_picks": {
+        "adc": "Xayah",
+        "mid": "Viktor",
+        "top": "Jayce",
+        "jungle": "Trundle",
         "support": "Milio"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Annie",
+        "top": "Yorick",
+        "jungle": "XinZhao",
         "support": "Yuumi"
       },
       "total_kills": 23,
@@ -4669,9 +4397,17 @@
       "sup_blue": "Milio",
       "sup_red": "Camille",
       "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Viktor",
+        "top": "Renekton",
+        "jungle": "Skarner",
         "support": "Milio"
       },
       "red_picks": {
+        "adc": "Ziggs",
+        "mid": "Syndra",
+        "top": "Aatrox",
+        "jungle": "DrMundo",
         "support": "Camille"
       },
       "total_kills": 30,
@@ -4694,9 +4430,17 @@
       "sup_blue": "Milio",
       "sup_red": "Lux",
       "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Ryze",
+        "top": "Jayce",
+        "jungle": "Sejuani",
         "support": "Milio"
       },
       "red_picks": {
+        "adc": "Caitlyn",
+        "mid": "Syndra",
+        "top": "Olaf",
+        "jungle": "JarvanIV",
         "support": "Lux"
       },
       "total_kills": 24,
@@ -4777,9 +4521,17 @@
       "sup_blue": "Milio",
       "sup_red": "Rakan",
       "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Ryze",
+        "top": "Ambessa",
+        "jungle": "JarvanIV",
         "support": "Milio"
       },
       "red_picks": {
+        "adc": "Xayah",
+        "mid": "Akali",
+        "top": "Gnar",
+        "jungle": "Vi",
         "support": "Rakan"
       },
       "total_kills": 27,
@@ -4893,9 +4645,17 @@
       "sup_blue": "Rakan",
       "sup_red": "Milio",
       "blue_picks": {
+        "adc": "Viktor",
+        "mid": "Annie",
+        "top": "Zaahen",
+        "jungle": "MonkeyKing",
         "support": "Rakan"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Ryze",
+        "top": "Renekton",
+        "jungle": "Nocturne",
         "support": "Milio"
       },
       "total_kills": 18,
@@ -4943,9 +4703,17 @@
       "sup_blue": "Milio",
       "sup_red": "Camille",
       "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Syndra",
+        "top": "Nidalee",
+        "jungle": "Nocturne",
         "support": "Milio"
       },
       "red_picks": {
+        "adc": "Ziggs",
+        "mid": "Ryze",
+        "top": "Jayce",
+        "jungle": "JarvanIV",
         "support": "Camille"
       },
       "total_kills": 22,
@@ -5051,9 +4819,17 @@
       "sup_blue": "Karma",
       "sup_red": "Milio",
       "blue_picks": {
+        "adc": "Caitlyn",
+        "mid": "Galio",
+        "top": "Volibear",
+        "jungle": "JarvanIV",
         "support": "Karma"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Ahri",
+        "top": "Ambessa",
+        "jungle": "XinZhao",
         "support": "Milio"
       },
       "total_kills": 17,
@@ -5076,9 +4852,17 @@
       "sup_blue": "Milio",
       "sup_red": "Nautilus",
       "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Lissandra",
+        "top": "Gnar",
+        "jungle": "MonkeyKing",
         "support": "Milio"
       },
       "red_picks": {
+        "adc": "Senna",
+        "mid": "Annie",
+        "top": "Ambessa",
+        "jungle": "Nocturne",
         "support": "Nautilus"
       },
       "total_kills": 21,
@@ -5151,9 +4935,17 @@
       "sup_blue": "Lulu",
       "sup_red": "Milio",
       "blue_picks": {
+        "adc": "KogMaw",
+        "mid": "Viktor",
+        "top": "Varus",
+        "jungle": "Trundle",
         "support": "Lulu"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Locke",
+        "top": "Yorick",
+        "jungle": "Nocturne",
         "support": "Milio"
       },
       "total_kills": 22,
@@ -5259,9 +5051,17 @@
       "sup_blue": "Rakan",
       "sup_red": "Milio",
       "blue_picks": {
+        "adc": "Xayah",
+        "mid": "Akali",
+        "top": "Ambessa",
+        "jungle": "Vi",
         "support": "Rakan"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Galio",
+        "top": "Rumble",
+        "jungle": "Trundle",
         "support": "Milio"
       },
       "total_kills": 19,
@@ -5342,9 +5142,17 @@
       "sup_blue": "Lulu",
       "sup_red": "Milio",
       "blue_picks": {
+        "adc": "Yunara",
+        "mid": "Locke",
+        "top": "Jayce",
+        "jungle": "JarvanIV",
         "support": "Lulu"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Ahri",
+        "top": "Yorick",
+        "jungle": "Nocturne",
         "support": "Milio"
       },
       "total_kills": 32,
@@ -5433,9 +5241,17 @@
       "sup_blue": "Milio",
       "sup_red": "Karma",
       "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Ahri",
+        "top": "Jayce",
+        "jungle": "XinZhao",
         "support": "Milio"
       },
       "red_picks": {
+        "adc": "Ezreal",
+        "mid": "Cassiopeia",
+        "top": "KSante",
+        "jungle": "Naafiri",
         "support": "Karma"
       },
       "total_kills": 17,
@@ -5458,9 +5274,17 @@
       "sup_blue": "Karma",
       "sup_red": "Milio",
       "blue_picks": {
+        "adc": "Ezreal",
+        "mid": "Viktor",
+        "top": "KSante",
+        "jungle": "MonkeyKing",
         "support": "Karma"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Akali",
+        "top": "Jayce",
+        "jungle": "XinZhao",
         "support": "Milio"
       },
       "total_kills": 11,
@@ -5483,9 +5307,17 @@
       "sup_blue": "Karma",
       "sup_red": "Milio",
       "blue_picks": {
+        "adc": "Ezreal",
+        "mid": "Syndra",
+        "top": "Rumble",
+        "jungle": "JarvanIV",
         "support": "Karma"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Ryze",
+        "top": "Ambessa",
+        "jungle": "Skarner",
         "support": "Milio"
       },
       "total_kills": 27,
@@ -5541,9 +5373,17 @@
       "sup_blue": "Karma",
       "sup_red": "Milio",
       "blue_picks": {
+        "adc": "Ezreal",
+        "mid": "Ryze",
+        "top": "Gnar",
+        "jungle": "MonkeyKing",
         "support": "Karma"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Anivia",
+        "top": "TwistedFate",
+        "jungle": "Pantheon",
         "support": "Milio"
       },
       "total_kills": 26,
@@ -5591,9 +5431,17 @@
       "sup_blue": "Seraphine",
       "sup_red": "Milio",
       "blue_picks": {
+        "adc": "Ashe",
+        "mid": "Cassiopeia",
+        "top": "Rumble",
+        "jungle": "XinZhao",
         "support": "Seraphine"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Orianna",
+        "top": "KSante",
+        "jungle": "JarvanIV",
         "support": "Milio"
       },
       "total_kills": 10,
@@ -5616,9 +5464,17 @@
       "sup_blue": "Rakan",
       "sup_red": "Milio",
       "blue_picks": {
+        "adc": "Xayah",
+        "mid": "Viktor",
+        "top": "Ambessa",
+        "jungle": "Qiyana",
         "support": "Rakan"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Syndra",
+        "top": "Poppy",
+        "jungle": "MonkeyKing",
         "support": "Milio"
       },
       "total_kills": 15,
@@ -5641,9 +5497,17 @@
       "sup_blue": "Milio",
       "sup_red": "Seraphine",
       "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Locke",
+        "top": "Zaahen",
+        "jungle": "Trundle",
         "support": "Milio"
       },
       "red_picks": {
+        "adc": "Ashe",
+        "mid": "Galio",
+        "top": "KSante",
+        "jungle": "Nocturne",
         "support": "Seraphine"
       },
       "total_kills": 21,
@@ -5666,9 +5530,17 @@
       "sup_blue": "Milio",
       "sup_red": "Seraphine",
       "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Ryze",
+        "top": "Gnar",
+        "jungle": "LeeSin",
         "support": "Milio"
       },
       "red_picks": {
+        "adc": "Ashe",
+        "mid": "Galio",
+        "top": "Ambessa",
+        "jungle": "JarvanIV",
         "support": "Seraphine"
       },
       "total_kills": 22,
@@ -5716,9 +5588,17 @@
       "sup_blue": "Milio",
       "sup_red": "Lulu",
       "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Annie",
+        "top": "Ornn",
+        "jungle": "Poppy",
         "support": "Milio"
       },
       "red_picks": {
+        "adc": "Yunara",
+        "mid": "Galio",
+        "top": "Rumble",
+        "jungle": "LeeSin",
         "support": "Lulu"
       },
       "total_kills": 21,
@@ -5816,9 +5696,17 @@
       "sup_blue": "Bard",
       "sup_red": "Milio",
       "blue_picks": {
+        "adc": "Caitlyn",
+        "mid": "Aurora",
+        "top": "Jayce",
+        "jungle": "Nocturne",
         "support": "Bard"
       },
       "red_picks": {
+        "adc": "Lucian",
+        "mid": "Locke",
+        "top": "Renekton",
+        "jungle": "Naafiri",
         "support": "Milio"
       },
       "total_kills": 27,
@@ -5955,6 +5843,39 @@
     },
     {
       "date": "2026-08-23",
+      "league": "LCK",
+      "map": 2,
+      "team_blue": "NS",
+      "team_red": "BFX",
+      "milio_side": "red",
+      "milio_team": "BFX",
+      "opp_team": "NS",
+      "opp_sup": "Lulu",
+      "sup_blue": "Lulu",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "adc": "Yunara",
+        "mid": "Annie",
+        "top": "Vayne",
+        "jungle": "Trundle",
+        "support": "Lulu"
+      },
+      "red_picks": {
+        "adc": "Lucian",
+        "mid": "Azir",
+        "top": "Olaf",
+        "jungle": "XinZhao",
+        "support": "Milio"
+      },
+      "total_kills": 45,
+      "fair": 29.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": "2peel",
+      "game_id": "115548147900750231",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-23",
       "league": "LPL",
       "map": 2,
       "team_blue": "TT",
@@ -5976,6 +5897,105 @@
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "116566854547835298",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-23",
+      "league": "LEC",
+      "map": 3,
+      "team_blue": "SHFT",
+      "team_red": "KC",
+      "milio_side": "blue",
+      "milio_team": "SHFT",
+      "opp_team": "KC",
+      "opp_sup": "Thresh",
+      "sup_blue": "Milio",
+      "sup_red": "Thresh",
+      "blue_picks": {
+        "adc": "Lucian",
+        "mid": "Sylas",
+        "top": "Akali",
+        "jungle": "MonkeyKing",
+        "support": "Milio"
+      },
+      "red_picks": {
+        "adc": "Kalista",
+        "mid": "Tristana",
+        "top": "Rumble",
+        "jungle": "Maokai",
+        "support": "Thresh"
+      },
+      "total_kills": 25,
+      "fair": 29.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": null,
+      "game_id": "115548681803406226",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-23",
+      "league": "LCS",
+      "map": 1,
+      "team_blue": "SEN",
+      "team_red": "DSG",
+      "milio_side": "red",
+      "milio_team": "DSG",
+      "opp_team": "SEN",
+      "opp_sup": "Seraphine",
+      "sup_blue": "Seraphine",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "adc": "Ezreal",
+        "mid": "Ryze",
+        "top": "KSante",
+        "jungle": "LeeSin",
+        "support": "Seraphine"
+      },
+      "red_picks": {
+        "adc": "Lucian",
+        "mid": "Ahri",
+        "top": "Gnar",
+        "jungle": "JarvanIV",
+        "support": "Milio"
+      },
+      "total_kills": 24,
+      "fair": 26.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": "2peel",
+      "game_id": "115564797163821184",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-23",
+      "league": "LCS",
+      "map": 2,
+      "team_blue": "DIG",
+      "team_red": "FLY",
+      "milio_side": "red",
+      "milio_team": "FLY",
+      "opp_team": "DIG",
+      "opp_sup": "Nautilus",
+      "sup_blue": "Nautilus",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "adc": "Senna",
+        "mid": "Azir",
+        "top": "Ambessa",
+        "jungle": "Ivern",
+        "support": "Nautilus"
+      },
+      "red_picks": {
+        "adc": "Lucian",
+        "mid": "Ryze",
+        "top": "Camille",
+        "jungle": "Trundle",
+        "support": "Milio"
+      },
+      "total_kills": 34,
+      "fair": 24.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": null,
+      "game_id": "115564797163886769",
       "src": "results.json"
     }
   ]
