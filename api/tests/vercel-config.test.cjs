@@ -20,15 +20,20 @@ test('funcoes Vercel apontam para entrypoints .js sem runtime legado explicito',
 });
 
 test('rotas publicadas possuem um unico handler .js sem basename conflitante', () => {
-  for (const route of ['register', 'upload-status']) {
+  for (const route of ['register', 'upload-status', 'access']) {
     const entryPath = path.resolve(__dirname, `../bets/${route}.js`);
     const conflictingPath = path.resolve(__dirname, `../bets/${route}.cjs`);
     assert.equal(fs.existsSync(entryPath), true, `entrypoint ausente: ${route}.js`);
     assert.equal(fs.existsSync(conflictingPath), false, `handler conflitante: ${route}.cjs`);
     assert.equal(typeof require(entryPath), 'function');
   }
-  assert.equal(fs.existsSync(path.resolve(__dirname, '../bets/access.js')), false, 'rota de acesso removida nao pode voltar');
-  assert.equal(fs.existsSync(path.resolve(__dirname, '../lib/bet-upload-auth.cjs')), false, 'auth sem uso nao pode voltar');
+  // 2026-08-30: a trava de acesso VOLTOU por ordem do CEO. Em 13/08 (71ba801) ela
+  // tinha sido removida como codigo morto — a UI de codigo ja estava escondida desde
+  // 9c82028, entao a auth ficou "sem uso" e os guards abaixo diziam que nao podia
+  // voltar. Agora ela esta ligada de ponta a ponta (campo de codigo no dashboard ->
+  // /api/bets/access -> cookie -> register/upload-status), entao o guard inverte:
+  // o que nao pode e a rota sumir e deixar o upload aberto de novo.
+  assert.equal(fs.existsSync(path.resolve(__dirname, '../lib/bet-upload-auth.cjs')), true, 'lib de auth do bet upload ausente');
 });
 
 test('api nao possui basenames duplicados entre extensoes de funcoes', () => {
