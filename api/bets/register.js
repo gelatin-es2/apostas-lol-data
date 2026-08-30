@@ -1,5 +1,6 @@
 'use strict';
 
+const { authenticateAccessCredential, credentialFromRequest } = require('../lib/bet-upload-auth.cjs');
 const { enqueueBetUpload } = require('../lib/register-bet.cjs');
 const { RegistrationError } = require('../lib/bet-extraction-contract.cjs');
 const { publicJobErrorMessage } = require('../lib/bet-upload-public-errors.cjs');
@@ -112,6 +113,26 @@ function createSupabaseGateway(fetchImpl = fetch) {
   };
 }
 
+// Trava de acesso do bet upload. O same-site check acima so barra requisicao de
+// outro site; sem isto, qualquer um que abrisse a URL do dashboard gravava bet no
+// banco. Credencial unica: o cookie emitido por /api/bets/access em troca do codigo.
+// Retorna true quando o pedido pode seguir; ja responde 401 quando nao pode.
+function denyWithoutAccess(req, res, sender = send) {
+  try {
+    const credential = credentialFromRequest(req);
+    if (credential?.type === 'access_cookie' && authenticateAccessCredential(credential, process.env)) return false;
+  } catch (error) {
+    // authenticateAccessCredential lanca quando BET_UPLOAD_SESSION_SECRET/OWNER_ID
+    // faltam no ambiente. Nunca liberar por falha de config — nega com codigo proprio
+    // pra o erro aparecer no log em vez de virar 500 opaco.
+    console.error('bet_upload_access_misconfigured', { name: error.name });
+    sender(res, 401, { ok: false, code: 'access_unavailable', message: 'Acesso indisponivel.' });
+    return true;
+  }
+  sender(res, 401, { ok: false, code: 'unauthorized', message: 'Informe o codigo de acesso.' });
+  return true;
+}
+
 function send(res, status, body) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -154,6 +175,7 @@ function createHandler(dependenciesFactory = createSupabaseGateway) {
   return async function registerHandler(req, res) {
     if (req.method !== 'POST') return send(res, 405, { ok: false, code: 'method_not_allowed' });
     if (!requestIsSameSite(req)) return send(res, 403, { ok: false, code: 'cross_site_request' });
+    if (denyWithoutAccess(req, res)) return;
     try {
       const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
       const dependencies = dependenciesFactory();
@@ -175,6 +197,7 @@ function createHandler(dependenciesFactory = createSupabaseGateway) {
 module.exports = createHandler();
 module.exports.createHandler = createHandler;
 module.exports.createSupabaseGateway = createSupabaseGateway;
+module.exports.denyWithoutAccess = denyWithoutAccess;
 module.exports.parseResponse = parseResponse;
 module.exports.publicJob = publicJob;
 module.exports.ownerIdFromEnv = ownerIdFromEnv;

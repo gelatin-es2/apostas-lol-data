@@ -869,6 +869,10 @@
     .register-bubble img { display:block; max-width:260px; max-height:260px; object-fit:contain; border-radius:9px; background:#0d1015; }
     .register-message-images { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:8px; }
     .register-description { width:100%; box-sizing:border-box; border:1px solid var(--border); border-radius:10px; padding:10px 12px; background:var(--bg); color:var(--text); font:inherit; }
+    .register-access { padding:14px 18px; border-top:1px solid var(--border); background:var(--card-2); }
+    .register-access p { margin:0 0 9px; color:var(--muted); font-size:13px; }
+    .register-access-row { display:flex; gap:8px; }
+    .register-access input { width:100%; box-sizing:border-box; border:1px solid var(--border); border-radius:10px; padding:10px 12px; background:var(--bg); color:var(--text); font:inherit; }
     .register-composer { padding:14px; border-top:1px solid var(--border); }
     .register-preview-list { display:none; grid-template-columns:repeat(2,minmax(0,180px)); gap:10px; max-width:100%; margin-bottom:10px; }
     .register-preview-wrap { position:relative; min-width:0; padding:7px; border:1px solid var(--border); border-radius:11px; background:var(--card-2); }
@@ -1040,6 +1044,13 @@
       <div class="register-chat-log" id="registerChatLog" role="log" aria-live="polite">
         <div class="register-bubble assistant">Mande 1 ou 2 prints da bet aqui. Você pode colar com Ctrl+V quantas vezes precisar ou selecionar as imagens juntas. Se quiser, escreva uma informação extra antes de enviar.</div>
       </div>
+      <div class="register-access" id="registerAccess" hidden>
+        <p>Este navegador ainda não está autorizado.</p>
+        <div class="register-access-row">
+          <input id="registerAccessCode" type="password" autocomplete="one-time-code" maxlength="256" placeholder="Código de acesso" aria-label="Código de acesso">
+          <button class="register-button" id="registerUnlock" type="button">Liberar</button>
+        </div>
+      </div>
       <div class="register-composer" id="registerComposer">
         <div class="register-preview-list" id="registerPreviewList" aria-live="polite"></div>
         <textarea class="register-description" id="registerDescription" maxlength="500" placeholder="Informação extra (opcional)" aria-label="Informação extra"></textarea>
@@ -1179,10 +1190,15 @@
     const registerPreviewList = document.getElementById('registerPreviewList');
     const registerDescription = document.getElementById('registerDescription');
     const registerSend = document.getElementById('registerSend');
+    const registerAccess = document.getElementById('registerAccess');
+    const registerAccessCode = document.getElementById('registerAccessCode');
     let registerBusy = false;
     let registerPollTimer = null;
     let registerImages = [];
     let registerLastJobStatus = '';
+    // null = navegador nao autorizado. {} = cookie de acesso vale. {Authorization:...}
+    // = sessao Supabase logada. A API aceita as duas credenciais (api/bets/register.js).
+    let registerAuthHeaders = null;
 
     function addRegisterBubble(text, type = 'status', statusKey = '') {
       if (statusKey && statusKey === registerLastJobStatus) return;
@@ -1197,6 +1213,20 @@
 
     function setRegisterComposerEnabled(enabled) {
       for (const control of registerComposer.querySelectorAll('button, textarea, input')) control.disabled = !enabled || registerBusy;
+    }
+
+    // Descobre se este navegador pode registrar bet. Credencial UNICA: o cookie de
+    // acesso, trocado pelo codigo em /api/bets/access e valido por 30 dias. Sem ele,
+    // mostra o campo de codigo e trava o composer.
+    async function refreshRegisterAccess() {
+      registerAuthHeaders = null;
+      try {
+        const response = await fetch('/api/bets/access', { credentials: 'same-origin', cache: 'no-store' });
+        if (response.ok) registerAuthHeaders = {};
+      } catch {}
+      registerAccess.hidden = Boolean(registerAuthHeaders);
+      setRegisterComposerEnabled(Boolean(registerAuthHeaders));
+      return registerAuthHeaders;
     }
 
     function renderRegisterImages() {
@@ -1274,9 +1304,16 @@
       clearTimeout(registerPollTimer);
       try {
         const response = await fetch(`/api/bets/upload-status?id=${encodeURIComponent(jobId)}`, {
+          headers: registerAuthHeaders || {},
+          credentials: 'same-origin',
           cache: 'no-store',
         });
         const result = await response.json();
+        if (response.status === 401) {
+          await refreshRegisterAccess();
+          addRegisterBubble('Este navegador precisa ser liberado.', 'status', 'access_required');
+          return;
+        }
         if (!response.ok || !result.ok) throw new Error(result.message || 'Falha ao consultar processamento.');
         const job = result.job;
         if (job.status === 'queued') {
@@ -1333,9 +1370,40 @@
       renderRegisterImages();
     });
     registerImage.addEventListener('change', () => selectRegisterImages(registerImage.files));
+    document.getElementById('registerUnlock').addEventListener('click', async () => {
+      const button = document.getElementById('registerUnlock');
+      const code = registerAccessCode.value.trim();
+      if (!code) return addRegisterBubble('Informe o código de acesso.', 'status error');
+      button.disabled = true;
+      try {
+        const response = await fetch('/api/bets/access', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code }),
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error(result.message || 'Código inválido.');
+        registerAccessCode.value = '';
+        await refreshRegisterAccess();
+        addRegisterBubble('Acesso liberado. Pode mandar o print.', 'assistant');
+        const jobId = localStorage.getItem('betUploadJobId');
+        if (jobId) pollRegisterJob(jobId);
+      } catch (error) {
+        addRegisterBubble(error.message || 'Código inválido.', 'status error');
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    registerAccessCode.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') document.getElementById('registerUnlock').click();
+    });
+
     document.addEventListener('paste', (event) => {
       const registerPane = document.querySelector('.tab-pane[data-pane="registrar"]');
       if (!registerPane?.classList.contains('active')) return;
+      if (!registerAuthHeaders) return;
       const imageItems = [...(event.clipboardData?.items || [])]
         .filter((item) => item.kind === 'file' && item.type.startsWith('image/'));
       if (!imageItems.length) return;
@@ -1345,6 +1413,10 @@
 
     registerSend.addEventListener('click', async () => {
       if (registerBusy) return;
+      if (!registerAuthHeaders && !(await refreshRegisterAccess())) {
+        registerAccessCode.focus();
+        return addRegisterBubble('Informe o código de acesso para enviar.', 'status error');
+      }
       if (!registerImages.length) return addRegisterBubble('Cole ou selecione o print da bet primeiro.', 'status error');
       const description = registerDescription.value.trim();
       const selectedImages = [...registerImages];
@@ -1358,10 +1430,16 @@
         addRegisterBubble('Enviando o comprovante…', 'status', 'sending');
         const response = await fetch('/api/bets/register', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json', ...(registerAuthHeaders || {}) },
           body: JSON.stringify({ image_data_url: dataUrl, description }),
         });
         const result = await response.json();
+        if (response.status === 401) {
+          await refreshRegisterAccess();
+          registerAccessCode.focus();
+          throw new Error(result.message || 'Acesso expirado. Informe o código novamente.');
+        }
         if (!response.ok || !result.ok) throw new Error(result.message || 'Envie outro print.');
         localStorage.setItem('betUploadJobId', result.job.id);
         clearRegisterImages();
@@ -1377,8 +1455,12 @@
       }
     });
 
-    const existingRegisterJobId = localStorage.getItem('betUploadJobId');
-    if (existingRegisterJobId) pollRegisterJob(existingRegisterJobId);
+    // Checa o acesso ANTES de retomar o polling: sem credencial o upload-status
+    // responde 401 e o chat mostraria erro tecnico em vez de pedir o codigo.
+    refreshRegisterAccess().then((authHeaders) => {
+      const existingRegisterJobId = localStorage.getItem('betUploadJobId');
+      if (authHeaders && existingRegisterJobId) pollRegisterJob(existingRegisterJobId);
+    });
 
     const fmtMoney = (n) =>
       (n ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });

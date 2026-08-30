@@ -117,12 +117,22 @@ test('compositor preserva single e limita o composto final a 3 MB', () => {
   assert.match(sendHandler, /clearRegisterImages\(\)/);
 });
 
-test('aba publica abre composer sem login, cookie ou codigo', () => {
-  assert.doesNotMatch(registerMarkup, /e-mail|email|magic|link de acesso|código de acesso|liberar|type="password"|registerAccessCode|registerUnlock/i);
-  assert.doesNotMatch(dashboard, /signInWithOtp|registerMagicLink|registerEmail|\/api\/bets\/access|registerAuthHeaders|Este navegador precisa ser liberado|credentials:\s*'same-origin'/);
-  assert.doesNotMatch(registerMarkup, /id="registerDescription"[^>]*disabled/);
-  assert.doesNotMatch(registerMarkup, /id="registerSend"[^>]*disabled/);
-  assert.match(dashboard, /headers: \{ 'Content-Type': 'application\/json' \}/);
+// 2026-08-30 (ordem do CEO): a aba deixou de ser aberta. Antes deste teste dizia
+// "abre composer sem login, cookie ou codigo" — o upload gravava bet no banco pra
+// qualquer um que tivesse a URL. Agora o navegador troca um codigo por cookie de
+// 30 dias em /api/bets/access, e register/upload-status recusam sem ele.
+test('aba pede codigo de acesso e troca por cookie server-side, sem email nem magic link', () => {
+  // o campo de codigo existe e nao vaza o codigo pra tela
+  assert.match(registerMarkup, /id="registerAccessCode"[^>]*type="password"/);
+  assert.match(registerMarkup, /id="registerUnlock"/);
+
+  // troca codigo -> cookie, sempre same-origin (o cookie e HttpOnly, o JS nao le)
+  assert.match(dashboard, /fetch\('\/api\/bets\/access'/);
+  assert.match(dashboard, /credentials: 'same-origin'/);
+  assert.match(dashboard, /registerAccess\.hidden = Boolean\(registerAuthHeaders\)/);
+
+  // continua sem e-mail/magic link, e o segredo nunca aparece no cliente
+  assert.doesNotMatch(dashboard, /signInWithOtp|registerMagicLink|registerEmail/);
   assert.doesNotMatch(dashboard, /BET_UPLOAD_ACCESS_CODE|BET_UPLOAD_SESSION_SECRET|BET_UPLOAD_OWNER_ID/);
 });
 

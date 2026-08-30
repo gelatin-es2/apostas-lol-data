@@ -9,11 +9,20 @@ const { createHandler, createSupabaseGateway, ownerIdFromEnv, publicJob, request
 const { REJECTION_MESSAGES } = require('../lib/bet-upload-public-errors.cjs');
 const { createStatusHandler } = require('../bets/upload-status.js');
 
-const SAME_ORIGIN_HEADERS = { host: 'apostas.example', 'sec-fetch-site': 'same-origin' };
+const { COOKIE_NAME, createAccessSession } = require('../lib/bet-upload-auth.cjs');
 
 const PNG_DATA_URL = `data:image/png;base64,${Buffer.from('89504e470d0a1a0a00000000', 'hex').toString('base64')}`;
 const JOB_ID = '123e4567-e89b-42d3-a456-426614174000';
 const OWNER_ID = '223e4567-e89b-42d3-a456-426614174000';
+
+// A trava de acesso (2026-08-30) le process.env direto no handler, entao o ambiente do
+// teste precisa carregar o segredo e o owner. Valores sao de fixture, nao credencial real.
+process.env.BET_UPLOAD_OWNER_ID = OWNER_ID;
+process.env.BET_UPLOAD_SESSION_SECRET = 'x'.repeat(48);
+const AUTH_COOKIE = `${COOKIE_NAME}=${createAccessSession({ ownerId: OWNER_ID, secret: process.env.BET_UPLOAD_SESSION_SECRET })}`;
+const withAuth = (headers) => ({ ...headers, cookie: AUTH_COOKIE });
+
+const SAME_ORIGIN_HEADERS = withAuth({ host: 'apostas.example', 'sec-fetch-site': 'same-origin' });
 
 function makeDeps(overrides = {}) {
   const calls = { upload: [], delete: [], create: [] };
@@ -151,7 +160,42 @@ test('endpoint retorna 202 com job, sem processar aposta no request', async () =
   assert.equal(response.body.job.owner_id, undefined);
 });
 
-test('endpoint publico valida imagem sem exigir cookie ou bearer', async () => {
+// 2026-08-30: a trava de acesso voltou por ordem do CEO. Sem cookie valido o upload
+// nao passa nem com same-site OK — antes disso, quem tivesse a URL gravava bet no banco.
+test('register recusa 401 sem cookie de acesso, mesmo same-origin', async () => {
+  const response = fakeResponse();
+  await createHandler(() => { throw new Error('nao deve criar deps'); })({
+    method: 'POST',
+    headers: { host: 'apostas.example', 'sec-fetch-site': 'same-origin' },
+    body: { image_data_url: PNG_DATA_URL },
+  }, response);
+  assert.equal(response.statusCode, 401);
+  assert.equal(response.body.code, 'unauthorized');
+});
+
+test('upload-status recusa 401 sem cookie de acesso, mesmo same-origin', async () => {
+  const response = fakeResponse();
+  await createStatusHandler(() => { throw new Error('nao deve criar deps'); })({
+    method: 'GET',
+    headers: { host: 'apostas.example', 'sec-fetch-site': 'same-origin' },
+    query: { id: JOB_ID },
+  }, response);
+  assert.equal(response.statusCode, 401);
+  assert.equal(response.body.code, 'unauthorized');
+});
+
+test('cookie assinado com outro segredo nao abre o endpoint', async () => {
+  const forged = `${COOKIE_NAME}=${createAccessSession({ ownerId: OWNER_ID, secret: 'y'.repeat(48) })}`;
+  const response = fakeResponse();
+  await createHandler(() => { throw new Error('nao deve criar deps'); })({
+    method: 'POST',
+    headers: { host: 'apostas.example', 'sec-fetch-site': 'same-origin', cookie: forged },
+    body: { image_data_url: PNG_DATA_URL },
+  }, response);
+  assert.equal(response.statusCode, 401);
+});
+
+test('endpoint valida imagem depois de passar pela trava de acesso', async () => {
   const { deps } = makeDeps();
   const response = fakeResponse();
   await createHandler(() => deps)({
@@ -259,7 +303,7 @@ test('status publico retorna 404 para UUID opaco inexistente', async () => {
 test('status publico aceita GET same-origin sem Origin (fetch nao manda em same-origin)', async () => {
   const response = fakeResponse();
   await createStatusHandler(() => ({ ownerId: OWNER_ID, getJobForOwner: async () => ({ id: JOB_ID, status: 'queued' }) }))({
-    method: 'GET', headers: { host: 'apostas.example', origin: 'https://apostas.example' }, query: { id: JOB_ID },
+    method: 'GET', headers: withAuth({ host: 'apostas.example', origin: 'https://apostas.example' }), query: { id: JOB_ID },
   }, response);
   assert.equal(response.statusCode, 200);
 });
@@ -267,7 +311,7 @@ test('status publico aceita GET same-origin sem Origin (fetch nao manda em same-
 test('status publico aceita Referer same-host quando nao ha sec-fetch-site nem Origin', async () => {
   const response = fakeResponse();
   await createStatusHandler(() => ({ ownerId: OWNER_ID, getJobForOwner: async () => ({ id: JOB_ID, status: 'queued' }) }))({
-    method: 'GET', headers: { host: 'apostas.example', referer: 'https://apostas.example/dashboard' }, query: { id: JOB_ID },
+    method: 'GET', headers: withAuth({ host: 'apostas.example', referer: 'https://apostas.example/dashboard' }), query: { id: JOB_ID },
   }, response);
   assert.equal(response.statusCode, 200);
 });
