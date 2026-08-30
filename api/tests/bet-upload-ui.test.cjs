@@ -31,7 +31,10 @@ test('feature nao depende de OpenAI/Codex e prompt usa o checklist canonico do b
   assert.match(prompt, /\.claude\/agents\/bet-logger\.md/);
   assert.match(prompt, /Nunca finalize `registered` sem UUID real/);
   assert.match(prompt, /claim claude-bet-logger 3600/);
-  assert.match(prompt, /EstrelaBet, Pinnacle, Parimatch, Betano legado, Whale\.io, Thunderpick e Polymarket/);
+  // Ancorado no prefixo estavel da lista: casa nova entra no fim (hoje ja tem
+  // EsportivaBet, Betesporte, Shuffle, Winna, CoinCasino e Rakebit depois destas)
+  // e nao pode quebrar este teste.
+  assert.match(prompt, /Casas: EstrelaBet, Pinnacle, Parimatch, Betano legado, Whale\.io, Thunderpick, Polymarket/);
   assert.match(prompt, /stake.*round\(cost_usd \* fx_usd_brl, 2\)/);
   assert.match(prompt, /ticket\/order id e opcional/);
   assert.match(prompt, /getEventDetails para confirmar o mapa/);
@@ -46,7 +49,10 @@ test('prompt manda o worker resolver lolesports_match_id e mapping esportsTeamId
 });
 
 test('worker usa allowlist fechada de error_code para rejeicoes', () => {
-  assert.match(prompt, /unsupported_bookmaker` -> `Casa de aposta invalida\.`/);
+  // `unsupported_bookmaker` foi APOSENTADO como motivo de rejeicao pela regra
+  // fail-open de casa (17/08): casa nunca derruba card legivel. Segue na allowlist
+  // so por compatibilidade — o teste agora cobra a aposentadoria, nao a mensagem velha.
+  assert.match(prompt, /`unsupported_bookmaker` -> APOSENTADO \(fail-open 2026-08-17\)/);
   assert.match(prompt, /unreadable_image` -> `Nao consegui ler o comprovante\. Envie outro print mais claro\.`/);
   assert.match(prompt, /unsupported_receipt` -> `Comprovante de aposta nao reconhecido\.`/);
   assert.match(prompt, /too_many_bets` -> `O print tem mais de 10 apostas\.`/);

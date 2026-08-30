@@ -40,9 +40,10 @@ Scripts em `<projeto>\.claude\scripts\`. Credenciais Supabase em `<projeto>\.env
 | **Betano** | Tabs "Em Aberto"/"Resolvidas", botão "CASH OUT R$X", texto "Aposta:" e "Ganhos Potenciais:". Visual claro/branco. Datetime em texto natural ("Hoje 16:00", "Esta noite 20:30"). |
 | **Whale.io** | Branding explícito "whale.io" no card + valores em USD/cripto. Normalize como `whale.io` (NUNCA `whale` sem o `.io`). ⚠️ `Accepted bet: #` é SEMPRE Pinnacle, NUNCA Whale.io — slip em BRL com "Accepted bet" = Pinnacle. Sem o branding whale.io visível + moeda cripto/USD, NÃO classifique como Whale.io. |
 | **Thunderpick** | Logo/marca-d'água "THUNDERPICK" no slip, abas "Open / Cash out / Live / Settled", campos `Odds`/`Wager`/`Payout` em BRL, chip "Open"/"Single". Ticket é OPCIONAL (painel de aposta aberta não mostra bilhete). Números em formato pt-BR: `2.130,50 BRL` = `2130.50`. Botão "Cash Out R$X" é só o valor de cashout disponível — NUNCA é stake nem payout. Normalize como `thunderpick`. |
-| **Polymarket** | Mercado "Game N Winner", ação "Buy", `Filled`, `Avg. Price`, `Shares`, `Total` em USD. Pode não exibir ticket/order ID. |
+| **Polymarket** | Mercado "Game N Winner", ação "Buy", `Filled`, `Avg. Price`, `Shares`, `Total` em USD. Pode não exibir ticket/order ID. Dois layouts, **ambos válidos**: (a) página de posições — tabela TIPO/RESULTADO/MÉDIA/CUSTO/PARA GANHAR (auto-traduzida: "Cargos" = Positions); (b) **painel de trading ao vivo** — gráfico de probabilidade em %, seletor `Game N Winner`/`Linhas da Série`, outcomes com preço em centavos (`RED Canids 13¢`), ticket `Buy`/`Sell` + `Market`/`Limit`, linhas `Shares` e `To win`. Painel de trading **não é motivo de rejeição** (job 99151df8, 29/08). |
+| **Shuffle** | Branding literal "SHUFFLE" / "shuffle.com" no card ou cabeçalho (sportsbook cripto da malha Oddin). Valores em BRL (`R$`) ou USD/cripto. Painel "Open"/aposta aberta pode não mostrar bilhete (ticket opcional). Normalize como `shuffle` (alias `shuffle.com`). |
 
-Identifique a casa SEMPRE pelos termos literais do bilhete (tabela acima), por CARD — um print composto pode misturar casas. Na dúvida entre casas, NÃO chute: falhe com `Aposta N: casa não identificada`. Em qualquer casa, confirme `Win/Ganhos ~= round(Stake * (odd - 1), 2)` com tolerância de R$0,02 (Win é lucro potencial, nunca stake). Se não fechar, releia Stake/Win/odd e falhe com `Aposta N` se persistir. Exemplo real: `BRL 1599.62 @ 1.704 -> BRL 1126.13` (não `1509.62`). No batch, cada match_context continua obrigado a carregar o contrato v1 completo, inclusive `schema_version: 1`, `selection_reason` e `ambiguous`.
+Identifique a casa SEMPRE pelos termos literais do bilhete (tabela acima), por CARD — um print composto pode misturar casas. **Fail-OPEN (ordem CEO 2026-08-17): casa nunca derruba um card legível.** Marca conhecida → slug canônico; marca legível fora da tabela → nome lido em slug (lowercase, sem espaço) + `raw_extraction.bookmaker_unverified: true`; sem marca legível OU dúvida entre casas conhecidas (ex.: Whale.io vs Pinnacle) → `bookmaker: "unknown"` + `bookmaker_unverified: true` + `bookmaker_raw` (texto cru). NUNCA adivinhe entre duas casas conhecidas. Em qualquer casa, confirme `Win/Ganhos ~= round(Stake * (odd - 1), 2)` com tolerância de R$0,02 (Win é lucro potencial, nunca stake). Se não fechar, releia Stake/Win/odd e falhe com `Aposta N` se persistir. Exemplo real: `BRL 1599.62 @ 1.704 -> BRL 1126.13` (não `1509.62`). No batch, cada match_context continua obrigado a carregar o contrato v1 completo, inclusive `schema_version: 1`, `selection_reason` e `ambiguous`.
 
 # Contrato v1 (finder → payload → save)
 
@@ -98,8 +99,15 @@ Mínimos obrigatórios:
 Também preserve em `raw_extraction.bookmaker_native`:
 - `bet_id` (ID interno do bookmaker; obrigatório nas cinco casas BRL e opcional somente na Polymarket)
 - `raw_pick_text` e `raw_stake_text` (literais do print)
+- `bet_placed_at_raw` (literal do timestamp de colocação/aceite, quando o slip mostrar um — ver regra completa no passo 4)
 
 Para Polymarket, nunca trate USD como BRL nem shares como stake. Preserve `original_currency: "USD"`, `original_stake_usd`, `fx_usd_brl`, `fx_source` com timestamp e `execution_totals` com `cost_usd`, `shares`, `payout_usd`, `odd_display` e `odd_exact = payout_usd / cost_usd`. Se custo, shares, payout ou câmbio diário auditável faltarem/divergirem, retorne falha sem write.
+
+**Polymarket — mercado e método (29/08/2026):**
+- **Moneyline é mercado suportado.** Este pipeline não registra só Total Kills: `Game N Winner`, `Vencedor do Game N` e a moneyline da série entram normalmente. `pick` = nome literal do outcome comprado (ex. `RED Canids`).
+- `Game N Winner` → `is_map_bet: true` + `map_number: N`. Moneyline da série (BO3/BO5) → `is_map_bet: false` + `map_number: null`.
+- **Toda bet da Polymarket é do método `ML`**, qualquer que seja o mercado (ordem do CEO 29/08). Grave `raw_extraction.method_tag: "ml"`. A aba ML do dashboard classifica Polymarket **pela casa**, não pelo texto do mercado — nunca force o `market` pra encaixar num balde, registre o literal do painel.
+- **Painel de trading ao vivo é comprovante válido** — nunca rejeite por "não é bilhete". Mas exija evidência de ordem **executada** no print (posição/`Cargos` com shares + média + custo, ou `Filled`). Painel só com book/preço e nenhuma posição não é aposta: falha pedindo o print com shares, preço médio e custo.
 
 ## 3. Linka ao match via lolesports
 
@@ -119,6 +127,16 @@ Se não achar com `today`, tenta `tomorrow` (bet pra jogo de amanhã).
 **CRÍTICO — campos obrigatórios pro settle funcionar depois:**
 - `bet_datetime` = **`picked.start_time`** do finder (ISO 8601 UTC). NUNCA derivar de "hoje/ontem" do texto. NUNCA null (o save agora rejeita).
 - `raw_extraction.match_context.lolesports_match_id` = `picked.match_id`. Settle procura por esse path JSONB exato. Duplique também em `pandascore_match_id` (coluna legada).
+- `raw_extraction.bet_phase` = `"pre"` | `"live"` | **omitir** — fase do **MAPA apostado** no momento da aposta (fase 3, 23/08). `pre` = mapa ainda não tinha começado (inclui pós-draft); `live` = mapa já rolando. **Na dúvida, OMITA o campo** — NULL é resposta válida e um chute aqui envenena a análise de régua linha×fair (o artefato "linha abaixo da fair acerta 80%" era bet live em jogo lento).
+  ⚠️ **`match_context.state` NÃO responde isso.** `state` é o estado da **SÉRIE** no schedule: uma bet de mapa 2 feita pós-draft do mapa 2 vem com `state: "inProgress"` e é **`pre`**. Use o que o *slip* mostra (chip "AO VIVO", relógio do mapa, placar parcial de kills) ou o que o Elvis disser.
+  Quando marcar `live`, registre também o que provou: `raw_extraction.score_at_bet_time` (placar de kills no momento) e/ou o texto no `notes`.
+- `raw_extraction.bet_placed_at` = horário REAL em que a aposta foi feita (ISO 8601 UTC) — **NÃO é `bet_datetime`** (que é o início do MATCH, não da aposta). Fase 24/08: sem isso é impossível separar bet de draft (Milio/Camille/2peel/Pyke) de bet AO VIVO — "quando eu pego a bet no ao vivo é OUTRO MÉTODO" (Elvis, 23/08).
+  **Fonte:** o próprio slip/print, quando mostra um timestamp de aceite/colocação (ex: Pinnacle "Accepted bet" com data-hora; qualquer casa com "Colocada em"/"Placed at"/relógio da aposta visível).
+  ⚠️ **DUAS CONVENÇÕES DE FUSO — não confundir:**
+    - **Print/screenshot** (fluxo normal, seja print no chat ou card do bet-upload): mostra a hora do DISPOSITIVO do Elvis → na ausência de fuso explícito no print, assuma **America/Sao_Paulo (BRT, UTC-3, sem horário de verão)**.
+    - **Export `.xls` da Pinnacle** (`MyBets_*.xls`, usado só em reconciliação/backfill, não no fluxo normal de print): usa o fuso do book, **Curaçao/AST fixo (UTC-4)** — validado em 24/08 contra `game_drafts.first_frame_utc`/`last_frame_utc` com precisão de ~2-3min em 2 casos independentes (ver `.claude/scripts/backfill-bet-placed-at.cjs`).
+  Grave sempre os dois: o literal cru em `raw_extraction.bookmaker_native.bet_placed_at_raw` (texto exato do slip) + o valor convertido em `raw_extraction.bet_placed_at` (ISO 8601 UTC) + `raw_extraction.bet_placed_at_meta: { source, evidence }` descrevendo de onde veio e qual fuso foi assumido.
+  **Na dúvida — sem timestamp visível no slip, formato ambíguo, ou casa sem convenção de fuso validada — OMITA o campo.** Mesma regra do `bet_phase`: NULL é resposta válida; chutar fuso é pior do que não ter o dado (contaminaria justamente a análise que este campo existe pra viabilizar).
 
 **Estrutura do `raw_extraction` (contrato v1 — `schema_version` é obrigatório):**
 ```json
@@ -207,7 +225,7 @@ Se o finder retornou `ambiguous: true`:
 # Regras invioláveis
 
 1. **Nunca inventar valores.** Se odd não está visível, retornar erro. Não chutar.
-2. **Bookmaker tem que ser exato** (um dos 6 canônicos). Se não identificar, falhar.
+2. **Bookmaker fail-OPEN (2026-08-17):** casa conhecida → slug canônico; casa legível fora da lista → nome lido em slug + `bookmaker_unverified: true`; indeterminada/ambígua → `unknown` + `bookmaker_unverified: true` + `bookmaker_raw`. NUNCA derrubar o card por causa da casa; NUNCA adivinhar entre duas casas conhecidas.
 3. **Ler `pick` literal do print.** Não traduzir "Menos de 27.5" pra "Under 27.5".
 4. **`stake` em BRL.** Nas cinco casas BRL, normalize o valor exibido. Na Polymarket, converta `cost_usd` por FX diário auditável e preserve todos os valores originais.
 5. **Não mexer no Supabase além de INSERIR UMA bet por invocação** — nunca update, nunca delete, nunca segundo insert, nunca outra tabela.

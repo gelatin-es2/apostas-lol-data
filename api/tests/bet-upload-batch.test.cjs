@@ -73,13 +73,31 @@ test('prepareBatch suporta single e força todos os campos financeiros pending',
   });
 });
 
-test('prepareBatch valida todos e identifica o card invalido antes de qualquer dependencia mutavel', () => {
-  assert.throws(
-    () => prepareBatch({ items: [{ bet: bet() }, { bet: bet({ odd: 1 }) }] }),
-    /Aposta 2: odd .* deve ser > 1/,
-  );
+// Contrato mudou em 2026-08-15 (migrations/2026-08-15-bet-upload-partial-accept.sql):
+// card invalido NAO derruba mais o print inteiro — vira um item `rejected` isolado, na
+// posicao visual dele, e os cards validos seguem pro registro. Este teste cobrava o
+// comportamento antigo (throw) e ficou vermelho desde entao.
+// O que continua sendo falha de PRINT (throw, antes de qualquer dependencia): tamanho
+// do lote fora de 1..10 e documento sem `items`.
+test('prepareBatch isola o card invalido e mantem os validos, sem derrubar o print', () => {
+  const prepared = prepareBatch({ items: [{ bet: bet() }, { bet: bet({ odd: 1 }) }] });
+  assert.equal(prepared.length, 2);
+
+  // card 1 sobrevive inteiro
+  assert.equal(prepared[0].item_index, 1);
+  assert.equal(prepared[0].bet.odd, 1.826);
+
+  // card 2 vira rejeicao auditada, sem virar bet
+  assert.equal(prepared[1].item_index, 2);
+  assert.equal(prepared[1].bet, undefined);
+  assert.equal(prepared[1].rejected.error_code, 'extraction_failed');
+  assert.match(prepared[1].rejected.message, /odd \(1\) deve ser > 1/);
+  assert.match(prepared[1].item_hash, /^[a-f0-9]{64}$/);
+
+  // erro de nivel de PRINT continua sendo throw
   assert.throws(() => prepareBatch({ items: [] }), /1\.\.10/);
   assert.throws(() => prepareBatch({ items: Array.from({ length: 11 }, () => bet()) }), /1\.\.10/);
+  assert.throws(() => prepareBatch({ nao_e_items: [] }), /items em ordem visual/);
 });
 
 test('hash do item e estavel e ladders diferentes nao colapsam', () => {
@@ -198,9 +216,15 @@ test('quatro casas BRL aceitam os quatro paths legados de ticket', () => {
     },
   }));
   assert.equal(prepareBatch({ items }).length, 4);
-  assert.throws(() => prepareBatch({ items: [bet({ raw_extraction: {
+
+  // Sem ticket numa casa que exige: continua fail-closed, mas POR CARD (rejected),
+  // nao mais por throw — ver o teste do partial accept acima.
+  const [semTicket] = prepareBatch({ items: [bet({ raw_extraction: {
     match_context: { schema_version: 1, lolesports_match_id: 'match-1', start_time: '2026-08-14T12:00:00Z' },
-  } })] }), /Aposta 1: ticket da casa obrigatorio/);
+  } })] });
+  assert.equal(semTicket.bet, undefined);
+  assert.equal(semTicket.rejected.error_code, 'extraction_failed');
+  assert.match(semTicket.rejected.message, /ticket da casa obrigatorio/);
 });
 
 test('Polymarket sem ticket preserva USD, FX, shares e odd_exact', () => {
@@ -253,16 +277,41 @@ test('register-batch chama fair guard e uma unica RPC depois da validacao integr
   assert.equal(calls[1].items.length, 2);
 });
 
-test('batch invalido nao chama fair guard nem RPC', async (t) => {
-  const batchPath = workBatchPath('invalid');
+// Depois do partial accept (15/08), UM card invalido nao aborta mais o lote: o print
+// segue, o card ruim viaja como `rejected` e a RPC audita item a item.
+test('card invalido nao aborta o lote: fair guard e RPC seguem, com o rejeitado auditado', async (t) => {
+  const batchPath = workBatchPath('parcial');
   fs.writeFileSync(batchPath, JSON.stringify({ items: [bet(), bet({ stake: 0 })] }));
+  t.after(() => fs.rmSync(batchPath, { force: true }));
+  const calls = [];
+  await main(['register-batch', 'job-1', 'claim-1', batchPath], {
+    quiet: true,
+    client: { async registerBatch(jobId, claim, items) { calls.push({ items }); return { total: 1, inserted: 1, reused: 0 }; } },
+    assertFairReady() { calls.push('fair'); return { ok: true }; },
+  });
+  // ordem preservada: fair guard ANTES da RPC, e uma RPC so
+  assert.equal(calls[0], 'fair');
+  assert.equal(calls.length, 2);
+  const sent = calls[1].items;
+  assert.equal(sent.length, 2);
+  assert.ok(sent[0].bet, 'card valido tem que chegar na RPC');
+  assert.equal(sent[1].bet, undefined);
+  assert.equal(sent[1].item_index, 2);
+  assert.equal(sent[1].rejected.error_code, 'extraction_failed');
+});
+
+// Falha de nivel de PRINT (lote fora de 1..10) continua barrando tudo antes de
+// qualquer dependencia mutavel: nem fair guard, nem RPC.
+test('batch com tamanho invalido nao chama fair guard nem RPC', async (t) => {
+  const batchPath = workBatchPath('invalid');
+  fs.writeFileSync(batchPath, JSON.stringify({ items: [] }));
   t.after(() => fs.rmSync(batchPath, { force: true }));
   let calls = 0;
   await assert.rejects(() => main(['register-batch', 'job-1', 'claim-1', batchPath], {
     quiet: true,
     client: { async registerBatch() { calls += 1; } },
     assertFairReady() { calls += 1; },
-  }), /Aposta 2:/);
+  }), /1\.\.10/);
   assert.equal(calls, 0);
 });
 
@@ -324,7 +373,12 @@ test('preflight/backup/manifest ficam preparados sem executar migration', () => 
   assert.match(manifest.legacy_writer.residual_race, /direct REST writers/);
   for (const artifact of manifest.artifacts) {
     const artifactPath = path.resolve(__dirname, '../..', artifact.path);
-    const content = fs.readFileSync(artifactPath);
+    // O manifest foi gerado sobre o conteudo CANONICO (LF), que e o que o git guarda.
+    // Com `core.autocrlf=true` (padrao no Windows) o working tree entrega CRLF, o que
+    // soma 1 byte por linha e acusava drift falso: o .sql media 25317 em vez de 24781
+    // — exatamente as 536 linhas do arquivo. Normaliza antes de medir; se o SQL mudar
+    // de verdade, o sha256 continua estourando.
+    const content = Buffer.from(fs.readFileSync(artifactPath).toString('latin1').replace(/\r\n/g, '\n'), 'latin1');
     assert.equal(content.length, artifact.bytes, artifact.path);
     assert.equal(require('crypto').createHash('sha256').update(content).digest('hex'), artifact.sha256, artifact.path);
   }
@@ -425,8 +479,10 @@ test('prompt identifica casa pelos termos do bilhete — "Accepted bet" e sempre
   assert.doesNotMatch(whaleIdentification[0], /Accepted bet/i);
   assert.doesNotMatch(whaleIdentification[0], /card azul-escuro|faixa verde-clara/i);
 
-  // fail-closed: sem certeza de branding whale.io + valores cripto/USD, rejeita.
-  assert.match(prompt, /sem essa certeza, rejeite com `unsupported_bookmaker` \(fail-closed/);
+  // fail-OPEN (2026-08-17): sem certeza de branding, NAO rejeita — registra como unknown/unverified.
+  assert.match(prompt, /sem essa certeza, NAO adivinhe entre casas conhecidas \(Whale\.io vs Pinnacle\) e NAO derrube o card/);
+  assert.match(prompt, /REGRA CASA \(2026-08-17, fail-OPEN/);
+  assert.match(prompt, /`unsupported_bookmaker` fica APOSENTADO como motivo de rejeicao de card/);
 
   // Normalizacao correta — pinnacle e whale.io (com .io), nunca "whale" sozinho.
   assert.match(prompt, /Pinnacle -> `pinnacle`/);
@@ -441,13 +497,15 @@ test('prompt identifica casa pelos termos do bilhete — "Accepted bet" e sempre
 
 test('prompt cobre Thunderpick: ticket opcional, identificacao propria, formato pt-BR e casas mistas no mesmo print', () => {
   // Thunderpick entra na enumeracao de casas e normaliza pro slug canonico.
-  assert.match(prompt, /Whale\.io, Thunderpick e Polymarket/);
+  // Assert por casa (nao pela ordem da enumeracao) — a lista cresce quando o CEO abre casa nova.
+  assert.match(prompt, /Casas: .*Whale\.io.*Thunderpick.*Polymarket/);
   assert.match(prompt, /Thunderpick -> `thunderpick`/);
 
-  // Ticket e opcional na Thunderpick (mesmo tratamento da Polymarket) — as demais
-  // 5 casas BRL continuam exigindo ticket legivel.
+  // Ticket e opcional na Thunderpick (mesmo tratamento da Polymarket) — as casas
+  // BRL com ticket visivel no slip continuam exigindo ticket legivel.
   assert.match(prompt, /Ticket legivel e obrigatorio em EstrelaBet\/Pinnacle\/Parimatch\/Betano\/Whale\.io/);
-  assert.match(prompt, /na Polymarket e na Thunderpick, ticket\/order id e opcional/);
+  assert.match(prompt, /ticket\/order id e opcional/);
+  assert.match(prompt, /na Polymarket, na Thunderpick, na Betesporte e na Shuffle/);
 
   // Identificacao propria pelos termos do bilhete (nao por cor/estilo).
   assert.match(prompt, /Thunderpick = logo\/marca-dagua "THUNDERPICK" no slip/);
@@ -465,4 +523,85 @@ test('prompt cobre Thunderpick: ticket opcional, identificacao propria, formato 
 
   // Casas mistas no mesmo print/painel sao uso legitimo — identificacao e por CARD.
   assert.match(prompt, /sempre por CARD — cards do mesmo print\/painel podem ser de casas diferentes/);
+});
+
+// 2026-08-16: EsportivaBet e Betesporte entraram no set apos o bloqueio da EstrelaBet.
+// Duas bets reais (R$4.000 + R$1.000) foram rejeitadas no upload por nao estarem cadastradas.
+test('prompt cobre EsportivaBet e Betesporte: branding literal manda, termo generico de casa BR nao identifica', () => {
+  assert.match(prompt, /Casas: .*EsportivaBet.*Betesporte/);
+  assert.match(prompt, /EsportivaBet -> `esportivabet`/);
+  assert.match(prompt, /Betesporte -> `betesporte`/);
+
+  // EsportivaBet colide com EstrelaBet em "Cotacoes totais" — o branding literal desempata.
+  assert.match(prompt, /EsportivaBet = branding literal `ESPORTIVABET` no card/);
+  assert.match(prompt, /quando o branding ESPORTIVABET aparece ele MANDA sobre a heuristica de EstrelaBet/);
+  assert.match(prompt, /EstrelaBet = texto `Cotacoes totais` SEM branding de outra casa no card/);
+
+  // Betesporte so por branding literal — o slip dela costuma nao trazer ticket nem logo.
+  assert.match(prompt, /Betesporte = branding literal `Betesporte`\/`BETESPORTE`/);
+
+  // Termos genericos de casa BR nao identificam casa nenhuma sozinhos (fail-closed).
+  assert.match(prompt, /Termos genericos de casa BR .*NAO identificam casa nenhuma sozinhos/);
+  assert.match(prompt, /nunca chute a casa por eliminacao nem por cor do tema/);
+});
+
+// 2026-08-17: Shuffle (sportsbook cripto da malha Oddin) entrou apos a limitacao do Duel.
+// Card SHUFFLE.COM (R$1.519,81) rejeitado no upload por nao estar cadastrado.
+test('prompt cobre Shuffle: branding literal, ticket opcional, valores BRL ou cripto', () => {
+  assert.match(prompt, /Casas: .*Betesporte, Shuffle/);
+  assert.match(prompt, /Shuffle \/ shuffle\.com -> `shuffle`/);
+  assert.match(prompt, /Shuffle = branding literal `SHUFFLE`\/`shuffle\.com`/);
+  assert.match(prompt, /valores podem vir em BRL \(`R\$`\) OU em USD\/cripto/);
+});
+
+// 2026-08-22: Rakebit (malha Betby, USD) entrou. As 4 primeiras bets reais foram gravadas
+// como 'unknown' e com stake USD tratada como BRL — R$7.944,53 de lucro faltando no dashboard.
+test('prompt cobre Winna/CoinCasino/Rakebit e a malha Betby sem chute de casa', () => {
+  assert.match(prompt, /Casas: .*Winna, CoinCasino e Rakebit/);
+  assert.match(prompt, /Rakebit -> `rakebit`/);
+  assert.match(prompt, /MALHA BETBY .*identifica a REDE, NUNCA a casa/s);
+});
+
+// 2026-08-22: regra de moeda generica — antes so Polymarket tinha instrucao de conversao.
+test('prompt exige conversao USD->BRL em qualquer casa', () => {
+  assert.match(prompt, /o banco guarda `stake` e `profit` SEMPRE em BRL/);
+  assert.match(prompt, /stake = round\(stake_usd \* fx_usd_brl, 2\)/);
+  assert.match(prompt, /nunca assuma que `\$` e real/);
+});
+
+// 2026-08-22: job 837f7434 — pagina de posicoes da Polymarket (auto-traduzida, sem branding)
+// rejeitada como "sem marca de casa"; bet ML real recuperada na mao. Identificacao estrutural.
+test('prompt identifica Polymarket pela estrutura de prediction market, sem exigir branding', () => {
+  assert.match(prompt, /IDENTIFICACAO Polymarket/);
+  assert.match(prompt, /"Cargos" \(= Positions\)/);
+  assert.match(prompt, /nao rejeite por "sem marca de casa"/);
+});
+
+// 2026-08-29: job 99151df8 — painel de trading AO VIVO da Polymarket (LOUD x RED Canids,
+// Game 1 Winner) rejeitado como `unsupported_receipt` por "nao ser bilhete"; a bet real
+// (746,55 shares a 0,13, $97,10) teve de ser recuperada a mao pela wallet.
+test('prompt aceita painel de trading ao vivo da Polymarket e mercado ML', () => {
+  // o layout de trading e comprovante valido, nao motivo de rejeicao
+  assert.match(prompt, /PAINEL DE TRADING AO VIVO/);
+  assert.match(prompt, /Esse layout E comprovante valido de Polymarket/);
+  assert.match(prompt, /E PROIBIDO usar `unsupported_receipt` — de card ou de print inteiro — so porque a tela e painel de trading ao vivo/);
+  // nem no caminho de print inteiro (`finish rejected`)
+  assert.match(prompt, /Painel de prediction market \(Polymarket\) com posicao executada NUNCA cai em \(b\)/);
+
+  // moneyline e mercado suportado — o pipeline nao e so de Total Kills
+  assert.match(prompt, /MONEYLINE E MERCADO SUPORTADO/);
+  assert.match(prompt, /is_map_bet: true` \+ `map_number: N` quando o mercado for por mapa/);
+  assert.match(prompt, /`is_map_bet: false` \+ `map_number: null` quando for a serie/);
+
+  // fail-closed continua: sem ordem executada nao vira bet, mas o codigo e ambiguous_bet
+  assert.match(prompt, /EXECUCAO CONTINUA OBRIGATORIA/);
+  assert.match(prompt, /rejeite o card com `ambiguous_bet`/);
+});
+
+// 2026-08-29, ordem do CEO: "registrar toda bet na polymarket como metodo ml".
+test('prompt marca toda bet da Polymarket como metodo ML', () => {
+  assert.match(prompt, /TODA bet da Polymarket e do metodo `ML`, qualquer que seja o mercado/);
+  assert.match(prompt, /`raw_extraction\.method_tag: "ml"`/);
+  // o balde e pela casa, entao o texto do mercado nao pode ser forcado
+  assert.match(prompt, /nunca force o texto do `market` pra encaixar num balde/);
 });

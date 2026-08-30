@@ -102,13 +102,33 @@ const REQUIRED = ['bookmaker', 'team_a', 'team_b', 'market', 'pick', 'odd', 'sta
 // Sincronizar com normalize-bookmakers.cjs quando adicionar nova casa.
 const VALID_BOOKMAKERS = [
   'pinnacle', 'estrelabet', 'parimatch', 'betano', 'whale.io', 'clutch', 'girosbet',
-  'thunderpick', 'novibet', 'polymarket', 'simulated',
+  'thunderpick', 'novibet', 'polymarket', 'simulated', 'duel', '1win',
+  // 2026-08-16 (CEO): casas usadas apos o bloqueio da EstrelaBet. Ambas rejeitaram
+  // bets reais no upload (fail-closed) ate serem cadastradas aqui.
+  'esportivabet', 'betesporte',
+  // 2026-08-17 (CEO): Shuffle (sportsbook cripto Oddin, usada pos-limitacao Duel).
+  // Card SHUFFLE.COM rejeitado no upload por nao estar cadastrado. Canonico = 'shuffle'.
+  'shuffle',
+  // 2026-08-20: casas liberadas pelo martelo do CEO em 19/08 (Winna e CoinCasino = SAFE).
+  // Estavam em uso real e gravando com bookmaker_unverified=true por nao estarem aqui.
+  'winna', 'coincasino',
+  // 2026-08-22 (CEO): Rakebit — casa da malha Betby, opera em USD. 4 bets reais de 21-22/08
+  // entraram como 'unknown' com stake em USD gravada como se fosse BRL (corrigido na mao).
+  'rakebit',
+  // 2026-08-23 (CEO): BetEspecial (betespecial.bet.br). Bet real de 23/08 (FEARX x NS m2,
+  // BRL 800) entrou como 'unknown' porque o print veio com o topo cortado, sem branding —
+  // o CEO identificou a casa depois. Slip usa 'Total de Odds' / 'Aposta Total' /
+  // 'Retorno Total' / chip 'ABERTO' e prefixo BRL, com bilhete de 18 digitos.
+  'betespecial',
 ];
 
 // Aliases aceitos somente na borda de entrada. O banco recebe sempre o slug canonico.
+// Canônico é 'whale.io' (usado por bet-upload-worker-prompt.txt, migrations e
+// normalize-bookmakers.cjs) — aliases convergem PARA ele, nunca dele.
 const BOOKMAKER_ALIASES = new Map([
-  ['whale.io', 'whale'],
-  ['whale io', 'whale'],
+  ['whale', 'whale.io'],
+  ['whale io', 'whale.io'],
+  ['shuffle.com', 'shuffle'],
 ]);
 
 // Flag de bypass pra casas novas ainda não cadastradas (ex: Whale.io em teste).
@@ -198,7 +218,7 @@ function parseWhaleBrl(value, field) {
 }
 
 function validateWhaleExecution(bet) {
-  if (bet.bookmaker !== 'whale') return;
+  if (bet.bookmaker !== 'whale.io') return;
   const native = bet.raw_extraction?.bookmaker_native;
   const ticket = String(native?.bet_id ?? '').trim().replace(/^#+\s*/, '');
   if (!ticket) throw new ValidationError('Whale exige ticket numerico legivel.', 1);
@@ -272,23 +292,31 @@ function validateAndNormalize(inputRaw, opts = {}) {
       'Use snake_case (start_time) e match_context com schema_version: 1. Nada foi salvo.', 4);
   }
 
+  // Fail-open (2026-08-17): casa vazia/ausente nunca derruba a bet — vira 'unknown'
+  // (marcada como bookmaker_unverified logo abaixo). Coerção ANTES do check de obrigatórios.
+  if (bet.bookmaker === undefined || bet.bookmaker === null || String(bet.bookmaker).trim() === '') {
+    bet.bookmaker = 'unknown';
+  }
+
   // Campos obrigatórios (bet_datetime agora é obrigatório: settle quebra silencioso sem ele)
   const missing = REQUIRED.filter(k => bet[k] === undefined || bet[k] === null || bet[k] === '');
   if (missing.length > 0) {
     throw new ValidationError(`Campos obrigatórios faltando: ${missing.join(', ')}`, 1);
   }
 
-  // Bookmaker canônico
-  const bookmakerInput = (bet.bookmaker || '').toLowerCase().trim();
+  // Bookmaker — FAIL-OPEN por decisão do CEO (2026-08-17): nunca derrubar uma bet real
+  // por causa da casa. Casa legível fora da lista canônica é registrada com o nome lido
+  // e marcada `bookmaker_unverified=true` pra revisão; casa vazia vira 'unknown'. O que
+  // NÃO se faz (a montante, no worker/agent) é adivinhar entre duas casas CONHECIDAS
+  // (ex.: Whale.io vs Pinnacle) — nesse caso usa-se 'unknown', nunca um palpite.
+  let bookmakerInput = (bet.bookmaker || '').toLowerCase().trim();
+  if (!bookmakerInput) bookmakerInput = 'unknown';
   const bookmakerNorm = BOOKMAKER_ALIASES.get(bookmakerInput) || bookmakerInput;
   if (!VALID_BOOKMAKERS.includes(bookmakerNorm)) {
-    if (ALLOW_UNKNOWN_BOOKMAKER) {
-      warnings.push(`bookmaker "${bet.bookmaker}" fora da lista canônica — prosseguindo (ALLOW_UNKNOWN_BOOKMAKER=1).`);
-    } else {
-      throw new ValidationError(
-        `bookmaker "${bet.bookmaker}" não é canônico. Lista válida: ${VALID_BOOKMAKERS.join(', ')}. ` +
-        'Para casa nova em teste: ALLOW_UNKNOWN_BOOKMAKER=1.', 1);
-    }
+    warnings.push(`bookmaker "${bet.bookmaker || '(vazio)'}" fora da lista canônica — registrado como NÃO verificado (bookmaker_unverified=true) para revisão.`);
+    if (!bet.raw_extraction || typeof bet.raw_extraction !== 'object') bet.raw_extraction = {};
+    bet.raw_extraction.bookmaker_unverified = true;
+    if (bet.raw_extraction.bookmaker_raw == null) bet.raw_extraction.bookmaker_raw = bet.bookmaker || null;
   }
   bet.bookmaker = bookmakerNorm;
 

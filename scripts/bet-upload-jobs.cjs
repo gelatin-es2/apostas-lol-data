@@ -7,7 +7,9 @@ const { validateAndNormalize } = require('../.claude/scripts/supabase-save-bet.c
 const { isKnownErrorCode, coerceErrorCode } = require('../api/lib/bet-upload-error-codes.cjs');
 
 const MAX_BATCH_ITEMS = 10;
-const SUPPORTED_UPLOAD_BOOKMAKERS = new Set(['estrelabet', 'pinnacle', 'parimatch', 'betano', 'whale.io', 'thunderpick', 'polymarket']);
+// Casas cujo painel de aposta aberta nao mostra bilhete — ticket/order id e opcional.
+// Nas demais o ticket segue obrigatorio (dedup canonico depende dele).
+const TICKET_OPTIONAL_BOOKMAKERS = new Set(['polymarket', 'thunderpick', 'betesporte', 'shuffle']);
 const BATCH_WORK_DIR = path.resolve(__dirname, '..', 'cron-data', 'bet-upload-work');
 const JOB_ID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const CLEANUP_SUFFIXES = ['.png', '.jpg', '.webp', '-batch.json', '-result.json'];
@@ -102,6 +104,16 @@ function ticketFromBet(bet) {
   return null;
 }
 
+// ESPELHO EXATO de public.bet_upload_dedup_key. Divergir daqui faz a RPC levantar
+// 'dedup_key mismatch' em TODO upload novo — os dois mudam JUNTOS, nunca um só.
+//
+// ⚠️ TROCA PRONTA E NÃO APLICADA (2026-08-26): a chave abaixo deixa passar
+// duplicata quando `casa` ou `stake` variam sozinhos para a mesma aposta
+// (fail-open alternando slug real/'unknown'; casa USD convertendo com câmbio do
+// dia). Causou 17 duplicatas ao reprocessar jobs antigos. A chave nova é
+// `bilhete|mapa|odd` e está em migrations/2026-08-26-dedup-por-bilhete.sql,
+// junto com o bloco JS correspondente. Aplicar o SQL no painel PRIMEIRO, e só
+// então trocar esta função — o inverso derruba o pipeline.
 function canonicalDedupKey(bet) {
   const ticket = ticketFromBet(bet);
   if (!ticket) return null;
@@ -146,6 +158,22 @@ function cleanupJobFiles(id) {
   return { id: jobId, removed };
 }
 
+// Aceite parcial: um card ilegivel/de casa nao suportada nunca aborta o print inteiro.
+// Vira uma entrada `rejected` (mesmo formato que a RPC audita em result.rejected_items),
+// com error_code sempre coagido pra allowlist fechada — nunca inventa codigo novo.
+function prepareRejectedEntry(rejectedSource, itemIndex) {
+  const rawCode = typeof rejectedSource?.error_code === 'string' ? rejectedSource.error_code : null;
+  const coerced = coerceErrorCode(rawCode);
+  const message = sanitizeItemError({ message: rejectedSource?.message });
+  const rejected = { error_code: coerced.code, message };
+  if (coerced.original_code) rejected.original_error_code = coerced.original_code;
+  return {
+    item_index: itemIndex,
+    item_hash: itemHash({ rejected }),
+    rejected,
+  };
+}
+
 function prepareBatch(input, deps = {}) {
   const document = typeof input === 'string' ? JSON.parse(input) : input;
   if (!document || !Array.isArray(document.items)) throw new Error('batch deve conter items em ordem visual');
@@ -156,35 +184,44 @@ function prepareBatch(input, deps = {}) {
   const validate = deps.validateAndNormalize || validateAndNormalize;
   const prepared = document.items.map((source, zeroIndex) => {
     const itemIndex = zeroIndex + 1;
-    const rawBet = source?.bet || source;
-    let normalized;
-    try {
-      normalized = validate(JSON.stringify(rawBet)).bet;
-      if (!SUPPORTED_UPLOAD_BOOKMAKERS.has(normalized.bookmaker)) {
-        throw new Error('Casa de aposta invalida.');
-      }
-      if (normalized.bookmaker !== 'polymarket' && normalized.bookmaker !== 'thunderpick' && !ticketFromBet(normalized)) {
-        throw new Error('ticket da casa obrigatorio e ilegivel');
-      }
-    } catch (error) {
-      throw new Error(`Aposta ${itemIndex}: ${sanitizeItemError(error)}`);
+
+    // O worker (LLM) ja decidiu que este card e ilegivel/de casa nao suportada e nao
+    // tentou montar um payload de bet: so audita a rejeicao, sem chamar validateAndNormalize.
+    if (source && typeof source === 'object' && source.rejected && !source.bet) {
+      return prepareRejectedEntry(source.rejected, itemIndex);
     }
-    const betWithDefaults = {
-      ...normalized,
-      status: 'pending',
-      profit: null,
-      settled_at: null,
-      settle_source: null,
-    };
-    // Remove propriedades undefined antes de assinar: e exatamente este JSON que vai para a RPC.
-    const bet = JSON.parse(JSON.stringify(betWithDefaults));
-    return {
-      item_index: itemIndex,
-      item_hash: itemHash(bet),
-      dedup_key: canonicalDedupKey(bet),
-      bet,
-      result: publicItemResult(bet, itemIndex),
-    };
+
+    const rawBet = source?.bet || source;
+    try {
+      const normalized = validate(JSON.stringify(rawBet)).bet;
+      // REGRA CASA (2026-08-17, CEO): fail-OPEN na casa. `validateAndNormalize` ja resolve
+      // slug canonico / `unknown` + `bookmaker_unverified` — este allowlist duplicado so
+      // derrubava bet real legivel (jobs ac0a7530, 4f32c0b3, efe8f104). `unsupported_bookmaker`
+      // segue na allowlist de codigos por compatibilidade, mas nao rejeita mais card aqui.
+      if (!TICKET_OPTIONAL_BOOKMAKERS.has(normalized.bookmaker) && !ticketFromBet(normalized)) {
+        return prepareRejectedEntry({ error_code: 'extraction_failed', message: 'ticket da casa obrigatorio e ilegivel' }, itemIndex);
+      }
+      const betWithDefaults = {
+        ...normalized,
+        status: 'pending',
+        profit: null,
+        settled_at: null,
+        settle_source: null,
+      };
+      // Remove propriedades undefined antes de assinar: e exatamente este JSON que vai para a RPC.
+      const bet = JSON.parse(JSON.stringify(betWithDefaults));
+      return {
+        item_index: itemIndex,
+        item_hash: itemHash(bet),
+        dedup_key: canonicalDedupKey(bet),
+        bet,
+        result: publicItemResult(bet, itemIndex),
+      };
+    } catch (error) {
+      // Falha generica de validacao (campo ausente/invalido) tambem isola so este card —
+      // fail-closed POR CARD, nao por print (ver migrations/2026-08-15-bet-upload-partial-accept.sql).
+      return prepareRejectedEntry({ error_code: 'extraction_failed', message: sanitizeItemError(error) }, itemIndex);
+    }
   });
 
   return prepared;
@@ -197,16 +234,28 @@ async function jsonResponse(response) {
   return body;
 }
 
+// Aceite parcial: `total` agora e so a contagem de cards REGISTRADOS (inserted+reused),
+// que pode ser menor que expectedTotal (itens enviados). Os que faltam tem que aparecer,
+// um a um, em rejected_items — sem furo e sem invencao de item_index fora do lote enviado.
 function validateBatchResult(body, expectedTotal) {
   if (!body || typeof body !== 'object' || Array.isArray(body)) throw new Error('resposta batch invalida');
-  const { total, inserted, reused, bet_ids: betIds } = body;
-  if (!Number.isInteger(total) || total !== expectedTotal
+  const { total, inserted, reused, bet_ids: betIds, rejected_items: rejectedItemsRaw } = body;
+  if (!Number.isInteger(total) || total < 0 || total > expectedTotal
       || !Number.isInteger(inserted) || inserted < 0
       || !Number.isInteger(reused) || reused < 0
       || inserted + reused !== total
       || !Array.isArray(betIds) || betIds.length !== total
       || betIds.some((id) => typeof id !== 'string' || !/^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(id))) {
     throw new Error('resposta batch incompleta ou inconsistente');
+  }
+  const rejectedItems = Array.isArray(rejectedItemsRaw) ? rejectedItemsRaw : [];
+  const invalidRejection = rejectedItems.some((entry) => !entry || typeof entry !== 'object'
+    || !Number.isInteger(entry.item_index) || entry.item_index < 1 || entry.item_index > expectedTotal
+    || typeof entry.error_code !== 'string' || !entry.error_code
+    || typeof entry.message !== 'string' || !entry.message);
+  if (invalidRejection) throw new Error('resposta batch com item rejeitado invalido');
+  if (total + rejectedItems.length !== expectedTotal) {
+    throw new Error('resposta batch nao cobre todos os itens enviados');
   }
   return body;
 }
