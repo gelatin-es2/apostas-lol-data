@@ -3287,6 +3287,11 @@
     }
 
     function methodBucket(b) {
+      // Polymarket inteira = metodo ML (ordem Elvis, 29/08/2026: "registrar toda bet
+      // na polymarket como metodo ml"). Antes caia em ML so por acidente, porque o
+      // texto do mercado tinha "Winner"/"Moneyline" — bet de kills na Polymarket
+      // escaparia pra "outros". Agora e pela CASA, nao pelo texto.
+      if (String(b.bookmaker || '').toLowerCase() === 'polymarket') return 'ml';
       if (isWinBet(b)) return 'ml';
       if (hasSupport(b, 'milio')) return 'milio';
       if (hasSupport(b, 'camille')) return 'camille';
@@ -3308,7 +3313,7 @@
       { key: 'peel',    containerId: 'mtdPeel',    title: '2peel',
         desc: 'Gatilho 2peel e 1peel+flex, com peel que não é Milio · split 3' },
       { key: 'ml',      containerId: 'mtdMl',      title: 'ML',
-        desc: 'Apostas na vitória de um time — moneyline e handicap de mapas · split 3' },
+        desc: 'Apostas na vitória de um time — moneyline e handicap de mapas — mais TODA a operação Polymarket, qualquer mercado · split 3' },
       { key: 'outros',  containerId: 'mtdOutros',  title: 'Outros métodos',
         desc: 'Tudo que não se encaixa nos demais — Over Kill, avulsos, handicap de kills · split 3' },
     ];
