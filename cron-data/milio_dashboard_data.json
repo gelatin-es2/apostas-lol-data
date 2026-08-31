@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-08-29T16:06:37.643Z",
+  "generated_at": "2026-08-31T18:36:51.395Z",
   "source": "híbrido: results.json (majors) + Supabase (LFL + picks completos por game_id)",
   "range": [
     "2026-04-08",
-    "2026-08-29"
+    "2026-08-30"
   ],
-  "milio_count": 209,
+  "milio_count": 212,
   "games_with_full_picks": 118,
-  "baseline_under_hit_pct": 71.8,
+  "baseline_under_hit_pct": 70.8,
   "by_league": {
     "LPL": 81,
     "LCK": 53,
     "LEC": 28,
-    "CBLOL": 22,
-    "LCS": 21,
+    "CBLOL": 23,
+    "LCS": 23,
     "LFL": 4
   },
   "flags": {
@@ -6202,6 +6202,81 @@
       "fair_source": "formula(team+team)/2",
       "trigger": "2peel",
       "game_id": "117155436343202138",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-30",
+      "league": "CBLOL",
+      "map": 3,
+      "team_blue": "PAIN",
+      "team_red": "VKS",
+      "milio_side": "blue",
+      "milio_team": "PAIN",
+      "opp_team": "VKS",
+      "opp_sup": "Seraphine",
+      "sup_blue": "Milio",
+      "sup_red": "Seraphine",
+      "blue_picks": {
+        "support": "Milio"
+      },
+      "red_picks": {
+        "support": "Seraphine"
+      },
+      "total_kills": 33,
+      "fair": 27.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": "2peel",
+      "game_id": "115565671526403032",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-30",
+      "league": "LCS",
+      "map": 1,
+      "team_blue": "TLAW",
+      "team_red": "LYON",
+      "milio_side": "red",
+      "milio_team": "LYON",
+      "opp_team": "TLAW",
+      "opp_sup": "Bard",
+      "sup_blue": "Bard",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "support": "Bard"
+      },
+      "red_picks": {
+        "support": "Milio"
+      },
+      "total_kills": 32,
+      "fair": 25.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": "1peel+flex",
+      "game_id": "115564797164345568",
+      "src": "results.json"
+    },
+    {
+      "date": "2026-08-30",
+      "league": "LCS",
+      "map": 2,
+      "team_blue": "SR",
+      "team_red": "C9",
+      "milio_side": "red",
+      "milio_team": "C9",
+      "opp_team": "SR",
+      "opp_sup": "Leona",
+      "sup_blue": "Leona",
+      "sup_red": "Milio",
+      "blue_picks": {
+        "support": "Leona"
+      },
+      "red_picks": {
+        "support": "Milio"
+      },
+      "total_kills": 25,
+      "fair": 22.5,
+      "fair_source": "formula(team+team)/2",
+      "trigger": null,
+      "game_id": "115564797163886757",
       "src": "results.json"
     }
   ]
