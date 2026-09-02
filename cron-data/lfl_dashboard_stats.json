@@ -1,31 +1,31 @@
 {
-  "generated_at": "2026-09-01T15:57:05.424Z",
+  "generated_at": "2026-09-02T15:46:39.411Z",
   "league": "LFL",
   "split_start": "2026-04-01",
-  "total_games_fetched": 155,
+  "total_games_fetched": 160,
   "fair_method": "livestats_team_avg(blue+red)-1, fallback 29.5",
   "stake": 100,
   "odd": 1.85,
   "backtest_2peel": {
-    "n": 21,
-    "hit": 76.2,
-    "profit": 860,
-    "roi": 41,
+    "n": 22,
+    "hit": 77.3,
+    "profit": 945,
+    "roi": 43,
     "breakeven_185": 54.1,
     "breakeven_175": 57.1
   },
   "backtest_all": {
-    "n": 42,
-    "hit": 73.8,
-    "profit": 1535,
-    "roi": 36.5,
+    "n": 44,
+    "hit": 75,
+    "profit": 1705,
+    "roi": 38.8,
     "breakeven_185": 54.1,
     "breakeven_175": 57.1
   },
   "teams_2peel": [
     {
       "name": "TLN Pirates",
-      "n": 6,
+      "n": 7,
       "hit": 100
     },
     {
@@ -60,15 +60,15 @@
     },
     {
       "name": "Karmine Corp Blue",
-      "n": 4,
-      "hit": 50
+      "n": 5,
+      "hit": 60
     }
   ],
   "teams_all": [
     {
       "name": "TLN Pirates",
-      "n": 14,
-      "hit": 92.9
+      "n": 16,
+      "hit": 93.8
     },
     {
       "name": "Vitality.Bee",
@@ -86,13 +86,13 @@
       "hit": 75
     },
     {
-      "name": "Solary",
-      "n": 12,
-      "hit": 66.7
+      "name": "Karmine Corp Blue",
+      "n": 11,
+      "hit": 72.7
     },
     {
-      "name": "Karmine Corp Blue",
-      "n": 9,
+      "name": "Solary",
+      "n": 12,
       "hit": 66.7
     },
     {
@@ -119,8 +119,8 @@
     },
     {
       "name": "Lulu",
-      "n": 11,
-      "hit": 81.8
+      "n": 12,
+      "hit": 83.3
     },
     {
       "name": "Karma",
@@ -129,8 +129,8 @@
     },
     {
       "name": "Seraphine",
-      "n": 12,
-      "hit": 75
+      "n": 13,
+      "hit": 76.9
     },
     {
       "name": "Nami",
@@ -141,13 +141,13 @@
   "supports_all": [
     {
       "name": "Seraphine",
-      "n": 20,
-      "hit": 80
+      "n": 21,
+      "hit": 81
     },
     {
       "name": "Lulu",
-      "n": 14,
-      "hit": 78.6
+      "n": 15,
+      "hit": 80
     },
     {
       "name": "Milio",
@@ -156,13 +156,13 @@
     },
     {
       "name": "Bard",
-      "n": 18,
-      "hit": 72.2
+      "n": 19,
+      "hit": 73.7
     },
     {
       "name": "Karma",
-      "n": 9,
-      "hit": 66.7
+      "n": 10,
+      "hit": 70
     },
     {
       "name": "Nami",
@@ -174,7 +174,7 @@
     {
       "champ": "Vi",
       "role": "jungle",
-      "n": 4,
+      "n": 5,
       "hit": 100
     },
     {
@@ -192,20 +192,20 @@
     {
       "champ": "Viktor",
       "role": "mid",
-      "n": 6,
+      "n": 7,
       "hit": 100
     },
     {
       "champ": "Rumble",
       "role": "top",
-      "n": 7,
-      "hit": 85.7
+      "n": 8,
+      "hit": 87.5
     },
     {
       "champ": "Yunara",
       "role": "adc",
-      "n": 11,
-      "hit": 81.8
+      "n": 12,
+      "hit": 83.3
     },
     {
       "champ": "Azir",
@@ -220,6 +220,12 @@
       "hit": 80
     },
     {
+      "champ": "Ashe",
+      "role": "adc",
+      "n": 13,
+      "hit": 76.9
+    },
+    {
       "champ": "Ezreal",
       "role": "adc",
       "n": 8,
@@ -229,12 +235,6 @@
       "champ": "XinZhao",
       "role": "jungle",
       "n": 16,
-      "hit": 75
-    },
-    {
-      "champ": "Ashe",
-      "role": "adc",
-      "n": 12,
       "hit": 75
     },
     {
@@ -262,6 +262,12 @@
       "hit": 60
     },
     {
+      "champ": "MonkeyKing",
+      "role": "jungle",
+      "n": 6,
+      "hit": 50
+    },
+    {
       "champ": "Cassiopeia",
       "role": "mid",
       "n": 4,
@@ -270,12 +276,6 @@
     {
       "champ": "Sion",
       "role": "top",
-      "n": 5,
-      "hit": 40
-    },
-    {
-      "champ": "MonkeyKing",
-      "role": "jungle",
       "n": 5,
       "hit": 40
     }
@@ -290,13 +290,13 @@
     {
       "champ": "Anivia",
       "role": "mid",
-      "n": 4,
+      "n": 5,
       "hit": 100
     },
     {
       "champ": "Viktor",
       "role": "mid",
-      "n": 7,
+      "n": 8,
       "hit": 100
     },
     {
@@ -314,20 +314,26 @@
     {
       "champ": "KSante",
       "role": "top",
-      "n": 14,
-      "hit": 85.7
+      "n": 15,
+      "hit": 86.7
     },
     {
       "champ": "Vi",
       "role": "jungle",
-      "n": 11,
-      "hit": 81.8
+      "n": 12,
+      "hit": 83.3
     },
     {
       "champ": "Ashe",
       "role": "adc",
-      "n": 21,
-      "hit": 81
+      "n": 22,
+      "hit": 81.8
+    },
+    {
+      "champ": "Ezreal",
+      "role": "adc",
+      "n": 18,
+      "hit": 77.8
     },
     {
       "champ": "Lucian",
@@ -342,15 +348,15 @@
       "hit": 76.9
     },
     {
-      "champ": "Ezreal",
+      "champ": "Yunara",
       "role": "adc",
       "n": 17,
       "hit": 76.5
     },
     {
-      "champ": "Yunara",
-      "role": "adc",
-      "n": 16,
+      "champ": "Ornn",
+      "role": "top",
+      "n": 4,
       "hit": 75
     },
     {
@@ -384,22 +390,22 @@
       "hit": 66.7
     },
     {
-      "champ": "Aurora",
-      "role": "mid",
-      "n": 6,
-      "hit": 66.7
-    },
-    {
       "champ": "XinZhao",
       "role": "jungle",
-      "n": 23,
-      "hit": 65.2
+      "n": 24,
+      "hit": 66.7
     },
     {
       "champ": "Rumble",
       "role": "top",
-      "n": 17,
-      "hit": 64.7
+      "n": 18,
+      "hit": 66.7
+    },
+    {
+      "champ": "Aurora",
+      "role": "mid",
+      "n": 6,
+      "hit": 66.7
     },
     {
       "champ": "JarvanIV",
@@ -408,16 +414,16 @@
       "hit": 63.6
     },
     {
+      "champ": "MonkeyKing",
+      "role": "jungle",
+      "n": 8,
+      "hit": 62.5
+    },
+    {
       "champ": "Ahri",
       "role": "mid",
       "n": 10,
       "hit": 60
-    },
-    {
-      "champ": "MonkeyKing",
-      "role": "jungle",
-      "n": 7,
-      "hit": 57.1
     },
     {
       "champ": "Cassiopeia",
