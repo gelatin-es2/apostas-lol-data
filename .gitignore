@@ -65,6 +65,12 @@ audit-output/
 polymarket-charts/
 cron-data/polymarket-history/
 
+# Capturas novas de 01/09 (map totals Pinnacle, kill handicap/team totals Betby,
+# preços Polymarket) — dados locais deste PC, não versionar
+cron-data/betby-extra/
+cron-data/pinnacle-map-totals/
+cron-data/polymarket-prices/
+
 # Backups locais de produÃ§Ã£o â€” contÃªm dados completos e nunca sÃ£o versionados
 backups/
 .claude/scripts/tests/tmp/
