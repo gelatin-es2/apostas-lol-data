@@ -38,7 +38,8 @@
       "red_sample_n": 20,
       "league_baseline": 29.03,
       "vs_league": -1.53,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
@@ -68,15 +69,16 @@
       "red_sample_n": 20,
       "league_baseline": 29.03,
       "vs_league": -0.53,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
       "match_id": "115548128963037547",
       "game_id": "115548128963037550",
       "map_number": 3,
-      "team_blue": "DK",
-      "team_red": "KRX",
+      "team_blue": "KRX",
+      "team_red": "DK",
       "kills_blue": 8,
       "kills_red": 21,
       "total_kills": 29,
@@ -94,13 +96,16 @@
       "fair_source": "pinnacle_manual",
       "fair_raw": 54.75,
       "fair_adjusted": 27.5,
-      "blue_avg": 25,
-      "red_avg": 29.75,
-      "blue_sample_n": 14,
-      "red_sample_n": 20,
+      "blue_avg": 29.75,
+      "red_avg": 25,
+      "blue_sample_n": 20,
+      "red_sample_n": 14,
       "league_baseline": 29.03,
       "vs_league": -1.53,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "DK",
+      "orientation_original_team_red": "KRX",
+      "orientation_fixed": true
     },
     {
       "league": "LCK",
@@ -130,15 +135,16 @@
       "red_sample_n": 11,
       "league_baseline": 29.03,
       "vs_league": -1.53,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LPL",
       "match_id": "115616219464541907",
       "game_id": "115616219464541909",
       "map_number": 2,
-      "team_blue": "JDG",
-      "team_red": "TT",
+      "team_blue": "TT",
+      "team_red": "JDG",
       "kills_blue": 13,
       "kills_red": 17,
       "total_kills": 30,
@@ -156,13 +162,16 @@
       "fair_source": "pinnacle_manual",
       "fair_raw": 59.5,
       "fair_adjusted": 29.5,
-      "blue_avg": 29.25,
-      "red_avg": 30.25,
-      "blue_sample_n": 12,
-      "red_sample_n": 8,
+      "blue_avg": 30.25,
+      "red_avg": 29.25,
+      "blue_sample_n": 8,
+      "red_sample_n": 12,
       "league_baseline": 27.72,
       "vs_league": 1.78,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "JDG",
+      "orientation_original_team_red": "TT",
+      "orientation_fixed": true
     },
     {
       "league": "LPL",
@@ -192,15 +201,16 @@
       "red_sample_n": 8,
       "league_baseline": 27.72,
       "vs_league": 1.78,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LPL",
       "match_id": "115616219464541907",
       "game_id": "115616219464541911",
       "map_number": 4,
-      "team_blue": "JDG",
-      "team_red": "TT",
+      "team_blue": "TT",
+      "team_red": "JDG",
       "kills_blue": 9,
       "kills_red": 27,
       "total_kills": 36,
@@ -216,13 +226,16 @@
       "fair_source": "pinnacle_manual",
       "fair_raw": 58.25,
       "fair_adjusted": 29.5,
-      "blue_avg": 28.75,
-      "red_avg": 29.5,
-      "blue_sample_n": 12,
-      "red_sample_n": 8,
+      "blue_avg": 29.5,
+      "red_avg": 28.75,
+      "blue_sample_n": 8,
+      "red_sample_n": 12,
       "league_baseline": 27.72,
       "vs_league": 1.78,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "JDG",
+      "orientation_original_team_red": "TT",
+      "orientation_fixed": true
     },
     {
       "league": "LPL",
@@ -252,7 +265,8 @@
       "red_sample_n": 7,
       "league_baseline": 27.72,
       "vs_league": -2.22,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LPL",
@@ -282,15 +296,16 @@
       "red_sample_n": 7,
       "league_baseline": 27.72,
       "vs_league": -2.22,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LPL",
       "match_id": "115616219464541913",
       "game_id": "115616219464541916",
       "map_number": 3,
-      "team_blue": "TES",
-      "team_red": "LGD",
+      "team_blue": "LGD",
+      "team_red": "TES",
       "kills_blue": 8,
       "kills_red": 18,
       "total_kills": 26,
@@ -306,13 +321,16 @@
       "fair_source": "pinnacle_manual",
       "fair_raw": 50.24,
       "fair_adjusted": 25.5,
-      "blue_avg": 28.67,
-      "red_avg": 21.57,
-      "blue_sample_n": 9,
-      "red_sample_n": 7,
+      "blue_avg": 21.57,
+      "red_avg": 28.67,
+      "blue_sample_n": 7,
+      "red_sample_n": 9,
       "league_baseline": 27.72,
       "vs_league": -2.22,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_original_team_blue": "TES",
+      "orientation_original_team_red": "LGD",
+      "orientation_fixed": true
     }
   ]
 }

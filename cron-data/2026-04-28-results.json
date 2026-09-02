@@ -38,15 +38,16 @@
       "red_sample_n": 30,
       "league_baseline": 27.73,
       "vs_league": 0.63,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LPL",
       "match_id": "115615924499588577",
       "game_id": "115615926685695493",
       "map_number": 2,
-      "team_blue": "IG",
-      "team_red": "AL",
+      "team_blue": "AL",
+      "team_red": "IG",
       "kills_blue": 18,
       "kills_red": 12,
       "total_kills": 30,
@@ -60,13 +61,16 @@
       "fair_source": "livestats_team_avg(team+team)/2",
       "fair_raw": 55.77,
       "fair_adjusted": 27.89,
-      "blue_avg": 29.94,
-      "red_avg": 25.83,
-      "blue_sample_n": 33,
-      "red_sample_n": 30,
+      "blue_avg": 25.83,
+      "red_avg": 29.94,
+      "blue_sample_n": 30,
+      "red_sample_n": 33,
       "league_baseline": 27.73,
       "vs_league": 0.16,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "IG",
+      "orientation_original_team_red": "AL",
+      "orientation_fixed": true
     },
     {
       "league": "LPL",
@@ -96,7 +100,8 @@
       "red_sample_n": 32,
       "league_baseline": 27.73,
       "vs_league": 1.21,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LPL",
@@ -126,7 +131,8 @@
       "red_sample_n": 32,
       "league_baseline": 27.73,
       "vs_league": 0.91,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     }
   ]
 }

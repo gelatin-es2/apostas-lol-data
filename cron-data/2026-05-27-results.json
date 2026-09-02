@@ -40,7 +40,8 @@
       "red_sample_n": 16,
       "league_baseline": 29.63,
       "vs_league": 3.87,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
@@ -72,7 +73,8 @@
       "red_sample_n": 16,
       "league_baseline": 29.63,
       "vs_league": 2.87,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
@@ -104,7 +106,8 @@
       "red_sample_n": 16,
       "league_baseline": 29.63,
       "vs_league": 3.87,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
@@ -136,7 +139,8 @@
       "red_sample_n": 20,
       "league_baseline": 29.63,
       "vs_league": -0.13,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
@@ -168,15 +172,16 @@
       "red_sample_n": 20,
       "league_baseline": 29.63,
       "vs_league": -0.13,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
       "match_id": "115548128962971939",
       "game_id": "115548128962971942",
       "map_number": 3,
-      "team_blue": "BFX",
-      "team_red": "KRX",
+      "team_blue": "KRX",
+      "team_red": "BFX",
       "kills_blue": 12,
       "kills_red": 20,
       "total_kills": 32,
@@ -192,13 +197,16 @@
       "fair_source": "pinnacle_manual",
       "fair_raw": 58.48,
       "fair_adjusted": 29.5,
-      "blue_avg": 28.88,
-      "red_avg": 29.6,
-      "blue_sample_n": 16,
-      "red_sample_n": 20,
+      "blue_avg": 29.6,
+      "red_avg": 28.88,
+      "blue_sample_n": 20,
+      "red_sample_n": 16,
       "league_baseline": 29.63,
       "vs_league": -0.13,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "BFX",
+      "orientation_original_team_red": "KRX",
+      "orientation_fixed": true
     }
   ]
 }

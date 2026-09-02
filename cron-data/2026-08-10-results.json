@@ -15,8 +15,8 @@
       "match_id": "115548681803406187",
       "game_id": "115548681803406189",
       "map_number": 2,
-      "team_blue": "SK",
-      "team_red": "VIT",
+      "team_blue": "VIT",
+      "team_red": "SK",
       "kills_blue": 24,
       "kills_red": 7,
       "total_kills": 31,
@@ -32,13 +32,16 @@
       "fair_source": "formula(team+team)/2",
       "fair_raw": 63.88,
       "fair_adjusted": 31.5,
-      "blue_avg": 34.5,
-      "red_avg": 29.38,
+      "blue_avg": 29.38,
+      "red_avg": 34.5,
       "blue_sample_n": 8,
       "red_sample_n": 8,
       "league_baseline": 29.74,
       "vs_league": 1.76,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_original_team_blue": "SK",
+      "orientation_original_team_red": "VIT",
+      "orientation_fixed": true
     },
     {
       "league": "LEC",
@@ -68,7 +71,8 @@
       "red_sample_n": 7,
       "league_baseline": 29.74,
       "vs_league": 1.76,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
@@ -98,7 +102,8 @@
       "red_sample_n": 7,
       "league_baseline": 29.74,
       "vs_league": 1.76,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "CBLOL",
@@ -128,7 +133,8 @@
       "red_sample_n": 7,
       "league_baseline": 25.91,
       "vs_league": -2.41,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "CBLOL",
@@ -158,7 +164,8 @@
       "red_sample_n": 7,
       "league_baseline": 25.91,
       "vs_league": -2.41,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     }
   ]
 }

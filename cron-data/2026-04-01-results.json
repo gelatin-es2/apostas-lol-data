@@ -38,15 +38,16 @@
       "red_sample_n": 32,
       "league_baseline": 29.46,
       "vs_league": 0.7,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
       "match_id": "115548128962840607",
       "game_id": "115548128962840609",
       "map_number": 2,
-      "team_blue": "BRO",
-      "team_red": "HLE",
+      "team_blue": "HLE",
+      "team_red": "BRO",
       "kills_blue": 19,
       "kills_red": 15,
       "total_kills": 34,
@@ -60,13 +61,16 @@
       "fair_source": "livestats_team_avg(team+team)/2",
       "fair_raw": 59.48,
       "fair_adjusted": 29.74,
-      "blue_avg": 28.07,
-      "red_avg": 31.41,
-      "blue_sample_n": 29,
-      "red_sample_n": 32,
+      "blue_avg": 31.41,
+      "red_avg": 28.07,
+      "blue_sample_n": 32,
+      "red_sample_n": 29,
       "league_baseline": 29.46,
       "vs_league": 0.28,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "BRO",
+      "orientation_original_team_red": "HLE",
+      "orientation_fixed": true
     },
     {
       "league": "LCK",
@@ -94,7 +98,8 @@
       "red_sample_n": 29,
       "league_baseline": 29.46,
       "vs_league": 1.42,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
@@ -122,7 +127,8 @@
       "red_sample_n": 29,
       "league_baseline": 29.46,
       "vs_league": 0.52,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     }
   ]
 }

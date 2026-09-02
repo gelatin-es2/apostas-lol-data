@@ -38,7 +38,8 @@
       "red_sample_n": 13,
       "league_baseline": 28.6,
       "vs_league": 1.9,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
@@ -70,7 +71,8 @@
       "red_sample_n": 13,
       "league_baseline": 28.6,
       "vs_league": 2.9,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
@@ -102,7 +104,8 @@
       "red_sample_n": 13,
       "league_baseline": 28.6,
       "vs_league": 2.9,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
@@ -132,15 +135,16 @@
       "red_sample_n": 13,
       "league_baseline": 28.6,
       "vs_league": 2.9,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
       "match_id": "115548128963037587",
       "game_id": "115548128963037592",
       "map_number": 5,
-      "team_blue": "T1",
-      "team_red": "GEN",
+      "team_blue": "GEN",
+      "team_red": "T1",
       "kills_blue": 11,
       "kills_red": 19,
       "total_kills": 30,
@@ -156,21 +160,24 @@
       "fair_source": "formula(team+team)/2",
       "fair_raw": 62.42,
       "fair_adjusted": 31.5,
-      "blue_avg": 31.57,
-      "red_avg": 30.85,
-      "blue_sample_n": 14,
-      "red_sample_n": 13,
+      "blue_avg": 30.85,
+      "red_avg": 31.57,
+      "blue_sample_n": 13,
+      "red_sample_n": 14,
       "league_baseline": 28.6,
       "vs_league": 2.9,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_original_team_blue": "T1",
+      "orientation_original_team_red": "GEN",
+      "orientation_fixed": true
     },
     {
       "league": "LPL",
       "match_id": "115616219464607521",
       "game_id": "115616219464607522",
       "map_number": 1,
-      "team_blue": "BLG",
-      "team_red": "TES",
+      "team_blue": "TES",
+      "team_red": "BLG",
       "kills_blue": 13,
       "kills_red": 28,
       "total_kills": 41,
@@ -188,13 +195,16 @@
       "fair_source": "formula(team+team)/2",
       "fair_raw": 58.9,
       "fair_adjusted": 29.5,
-      "blue_avg": 32,
-      "red_avg": 26.9,
-      "blue_sample_n": 18,
-      "red_sample_n": 10,
+      "blue_avg": 26.9,
+      "red_avg": 32,
+      "blue_sample_n": 10,
+      "red_sample_n": 18,
       "league_baseline": 29.19,
       "vs_league": 0.31,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "BLG",
+      "orientation_original_team_red": "TES",
+      "orientation_fixed": true
     },
     {
       "league": "LPL",
@@ -224,7 +234,8 @@
       "red_sample_n": 10,
       "league_baseline": 29.19,
       "vs_league": 0.31,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LPL",
@@ -254,7 +265,8 @@
       "red_sample_n": 10,
       "league_baseline": 29.19,
       "vs_league": 1.31,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCS",
@@ -286,15 +298,16 @@
       "red_sample_n": 9,
       "league_baseline": 22.91,
       "vs_league": -0.41,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LCS",
       "match_id": "115564793879469330",
       "game_id": "115564793879469332",
       "map_number": 2,
-      "team_blue": "TLAW",
-      "team_red": "LYON",
+      "team_blue": "LYON",
+      "team_red": "TLAW",
       "kills_blue": 21,
       "kills_red": 8,
       "total_kills": 29,
@@ -310,13 +323,16 @@
       "fair_source": "formula(team+team)/2",
       "fair_raw": 45.62,
       "fair_adjusted": 22.5,
-      "blue_avg": 21.06,
-      "red_avg": 24.56,
-      "blue_sample_n": 16,
-      "red_sample_n": 9,
+      "blue_avg": 24.56,
+      "red_avg": 21.06,
+      "blue_sample_n": 9,
+      "red_sample_n": 16,
       "league_baseline": 22.91,
       "vs_league": -0.41,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "TLAW",
+      "orientation_original_team_red": "LYON",
+      "orientation_fixed": true
     }
   ]
 }

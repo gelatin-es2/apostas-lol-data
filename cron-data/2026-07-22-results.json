@@ -38,15 +38,16 @@
       "red_sample_n": 1,
       "league_baseline": 37,
       "vs_league": 0.5,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LPL",
       "match_id": "116566854547769644",
       "game_id": "116566854547769646",
       "map_number": 2,
-      "team_blue": "EDG",
-      "team_red": "LGD",
+      "team_blue": "LGD",
+      "team_red": "EDG",
       "kills_blue": 20,
       "kills_red": 11,
       "total_kills": 31,
@@ -68,7 +69,10 @@
       "red_sample_n": 1,
       "league_baseline": 37,
       "vs_league": 0.5,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_original_team_blue": "EDG",
+      "orientation_original_team_red": "LGD",
+      "orientation_fixed": true
     },
     {
       "league": "LPL",
@@ -98,7 +102,8 @@
       "red_sample_n": 1,
       "league_baseline": 37,
       "vs_league": 0.5,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LPL",
@@ -128,7 +133,8 @@
       "red_sample_n": 1,
       "league_baseline": 37,
       "vs_league": 0.5,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     }
   ]
 }

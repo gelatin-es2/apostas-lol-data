@@ -23,7 +23,7 @@ const https = require('https');
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const { loadFairPinnacle } = require(path.join(REPO_ROOT, 'lib', 'loadFairPinnacle.cjs'));
 
-const OUT_DIR = path.join(REPO_ROOT, 'cron-data');
+let OUT_DIR = path.join(REPO_ROOT, 'cron-data'); // sobrescrevível via --out-dir (teste sem tocar cron-data)
 const LOLES_KEY = '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z';
 
 const LEAGUE_IDS = {
@@ -52,7 +52,9 @@ function getArg(name) {
 }
 const FROM = getArg('from');
 const TO = getArg('to');
-if (!FROM || !TO) { console.error('Uso: node analyze_range.cjs --from YYYY-MM-DD --to YYYY-MM-DD'); process.exit(1); }
+const OUT_DIR_ARG = getArg('out-dir'); // opcional: escreve results.json em outro dir (validação sem tocar cron-data)
+if (OUT_DIR_ARG) OUT_DIR = path.resolve(OUT_DIR_ARG);
+if (!FROM || !TO) { console.error('Uso: node analyze_range.cjs --from YYYY-MM-DD --to YYYY-MM-DD [--out-dir DIR]'); process.exit(1); }
 if (!/^\d{4}-\d{2}-\d{2}$/.test(FROM) || !/^\d{4}-\d{2}-\d{2}$/.test(TO)) {
   console.error('Datas devem ser YYYY-MM-DD'); process.exit(1);
 }
@@ -80,7 +82,11 @@ function fetchJson(url, headers = {}) {
       res.on('data', c => body += c);
       res.on('end', () => {
         if (res.statusCode >= 400) return reject(new Error(`HTTP ${res.statusCode}: ${body.slice(0,200)}`));
-        try { resolve(JSON.parse(body)); } catch (e) { reject(new Error(`JSON err: ${e.message}`)); }
+        // Fix 2026-08-23: IDs longos (>=15 dígitos) vêm como number puro e o JSON.parse
+        // do V8 trunca por perda de precisão (esportsTeamId etc). Envolve em aspas antes
+        // de parsear — mesmo regex de settle-pending-bets.cjs e analyze_tier2_eu.cjs.
+        const fixed = body.replace(/"(id|esportsTeamId|leagueId|tournamentId|esportsGameId|esportsMatchId)":(\d{15,})/g, '"$1":"$2"');
+        try { resolve(JSON.parse(fixed)); } catch (e) { reject(new Error(`JSON err: ${e.message}`)); }
       });
     }).on('error', reject);
   });
@@ -89,6 +95,21 @@ function fetchJson(url, headers = {}) {
 function tsRoundedTo10s(date) {
   const t = Math.floor(date.getTime() / 10000) * 10000;
   return new Date(t).toISOString().replace(/\.\d{3}Z$/, '.000Z');
+}
+
+// Fix 2026-08-23 (bug pareamento time↔suporte): times ALTERNAM de lado a cada mapa,
+// então a ordem da série (ev.match.teams[0]/[1]) NÃO diz quem é blue/red num mapa
+// específico. A verdade por mapa vem do gameMetadata da livestats
+// (blueTeamMetadata.esportsTeamId / redTeamMetadata.esportsTeamId), mapeada pra
+// nome canônico SHORT (code) via getTeams. Convenção do CLAUDE.md: champions por
+// TIME, nunca por side — NUNCA assumir blue=team_a.
+async function loadTeamCodeById() {
+  const j = await fetchJson('https://esports-api.lolesports.com/persisted/gw/getTeams?hl=en-US');
+  const m = new Map();
+  for (const t of (j?.data?.teams || [])) {
+    if (t?.id) m.set(String(t.id), t.code || t.name);
+  }
+  return m;
 }
 
 async function fetchWindow(gameId, matchStart) {
@@ -154,8 +175,10 @@ async function collectGamesForLeague(league, leagueId, fromDate, toDate) {
         match_id: matchId,
         game_id: g.id,
         game_number: g.number,
-        team_blue: ev.match.teams[0]?.code || ev.match.teams[0]?.name,
-        team_red:  ev.match.teams[1]?.code || ev.match.teams[1]?.name,
+        // Ordem da SÉRIE — NÃO é o lado do mapa (times alternam side por mapa).
+        // Usada só como fallback quando a livestats não trouxer esportsTeamId.
+        series_team_a: ev.match.teams[0]?.code || ev.match.teams[0]?.name,
+        series_team_b: ev.match.teams[1]?.code || ev.match.teams[1]?.name,
         match_start: ev.startTime,
         match_date: ev.startTime.slice(0,10),
       });
@@ -166,7 +189,7 @@ async function collectGamesForLeague(league, leagueId, fromDate, toDate) {
 }
 
 // ---------- análise window ----------
-async function analyzeGame(g) {
+async function analyzeGame(g, teamCodeById) {
   let win;
   try {
     win = await fetchWindow(g.game_id, g.match_start);
@@ -182,8 +205,27 @@ async function analyzeGame(g) {
   const supBlue = meta?.blueTeamMetadata?.participantMetadata?.find(p => p.role === 'support')?.championId;
   const supRed  = meta?.redTeamMetadata?.participantMetadata?.find(p => p.role === 'support')?.championId;
 
+  // Lado REAL do mapa: esportsTeamId do gameMetadata → code canônico via getTeams.
+  // Fallback explícito (NUNCA silencioso): ordem da série + flag team_source.
+  const blueId = meta?.blueTeamMetadata?.esportsTeamId != null ? String(meta.blueTeamMetadata.esportsTeamId) : null;
+  const redId  = meta?.redTeamMetadata?.esportsTeamId  != null ? String(meta.redTeamMetadata.esportsTeamId)  : null;
+  const blueCode = blueId ? (teamCodeById.get(blueId) || null) : null;
+  const redCode  = redId  ? (teamCodeById.get(redId)  || null) : null;
+
+  let teamBlue, teamRed, teamSource;
+  if (blueCode && redCode) {
+    teamBlue = blueCode; teamRed = redCode;
+    teamSource = 'livestats_metadata';
+  } else {
+    teamBlue = g.series_team_a; teamRed = g.series_team_b;
+    teamSource = 'series_order_fallback';
+    console.error(`  [WARN] game ${g.game_id} m${g.game_number}: gameMetadata sem esportsTeamId mapeável (blueId=${blueId}, redId=${redId}) — fallback ordem da série ${teamBlue}/${teamRed} (pode estar invertido)`);
+  }
+
   return {
     ...g,
+    team_blue: teamBlue, team_red: teamRed,
+    team_source: teamSource,
     kills_blue: kBlue, kills_red: kRed,
     total_kills: kBlue + kRed,
     sup_blue: supBlue, sup_red: supRed,
@@ -206,11 +248,20 @@ async function analyzeGame(g) {
     allGames.push(...games);
   }
 
+  // 1b. mapa esportsTeamId → code canônico (pra derivar o lado REAL de cada mapa)
+  let teamCodeById = new Map();
+  try {
+    teamCodeById = await loadTeamCodeById();
+    console.error(`[1b] getTeams: ${teamCodeById.size} times mapeados (esportsTeamId → code)`);
+  } catch (e) {
+    console.error(`[1b] [WARN] getTeams falhou (${e.message}) — TODOS os games vão cair no fallback ordem-da-série (team_source=series_order_fallback)`);
+  }
+
   // 2. analisa window de cada jogo
   console.error(`[2/4] analisando window de ${allGames.length} games (kills + supports)...`);
   const analyzed = [];
   for (let i = 0; i < allGames.length; i++) {
-    const r = await analyzeGame(allGames[i]);
+    const r = await analyzeGame(allGames[i], teamCodeById);
     analyzed.push(r);
     if ((i+1) % 10 === 0) console.error(`       ${i+1}/${allGames.length}`);
     await sleep(REQUEST_DELAY_MS);
@@ -333,6 +384,7 @@ async function analyzeGame(g) {
       game_id: g.game_id,
       map_number: g.game_number,
       team_blue: g.team_blue, team_red: g.team_red,
+      team_source: g.team_source, // 'livestats_metadata' (lado real) | 'series_order_fallback' (pode estar invertido)
       kills_blue: g.kills_blue, kills_red: g.kills_red,
       total_kills: g.total_kills,
       sup_blue: g.sup_blue, sup_red: g.sup_red,

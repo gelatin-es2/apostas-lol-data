@@ -38,7 +38,8 @@
       "red_sample_n": 10,
       "league_baseline": 29.95,
       "vs_league": -0.45,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
@@ -70,15 +71,16 @@
       "red_sample_n": 10,
       "league_baseline": 29.95,
       "vs_league": -0.45,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
       "match_id": "115548147900487905",
       "game_id": "115548147900553444",
       "map_number": 3,
-      "team_blue": "T1",
-      "team_red": "HLE",
+      "team_blue": "HLE",
+      "team_red": "T1",
       "kills_blue": 28,
       "kills_red": 13,
       "total_kills": 41,
@@ -96,13 +98,16 @@
       "fair_source": "formula(team+team)/2",
       "fair_raw": 54.75,
       "fair_adjusted": 27.5,
-      "blue_avg": 25.25,
-      "red_avg": 29.5,
-      "blue_sample_n": 8,
-      "red_sample_n": 10,
+      "blue_avg": 29.5,
+      "red_avg": 25.25,
+      "blue_sample_n": 10,
+      "red_sample_n": 8,
       "league_baseline": 29.95,
       "vs_league": -2.45,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "T1",
+      "orientation_original_team_red": "HLE",
+      "orientation_fixed": true
     },
     {
       "league": "LCK",
@@ -132,7 +137,8 @@
       "red_sample_n": 9,
       "league_baseline": 29.95,
       "vs_league": 2.55,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCK",
@@ -162,7 +168,8 @@
       "red_sample_n": 9,
       "league_baseline": 29.95,
       "vs_league": 0.55,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LPL",
@@ -192,15 +199,16 @@
       "red_sample_n": 4,
       "league_baseline": 31.69,
       "vs_league": -3.19,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LPL",
       "match_id": "116566854547769732",
       "game_id": "116566854547769733",
       "map_number": 1,
-      "team_blue": "LGD",
-      "team_red": "AL",
+      "team_blue": "AL",
+      "team_red": "LGD",
       "kills_blue": 18,
       "kills_red": 9,
       "total_kills": 27,
@@ -218,21 +226,24 @@
       "fair_source": "formula(team+team)/2",
       "fair_raw": 57.51,
       "fair_adjusted": 28.5,
-      "blue_avg": 28.16,
-      "red_avg": 29.35,
-      "blue_sample_n": 19,
-      "red_sample_n": 17,
+      "blue_avg": 29.35,
+      "red_avg": 28.16,
+      "blue_sample_n": 17,
+      "red_sample_n": 19,
       "league_baseline": 31.69,
       "vs_league": -3.19,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_original_team_blue": "LGD",
+      "orientation_original_team_red": "AL",
+      "orientation_fixed": true
     },
     {
       "league": "LPL",
       "match_id": "116566854547769732",
       "game_id": "116566854547769734",
       "map_number": 2,
-      "team_blue": "LGD",
-      "team_red": "AL",
+      "team_blue": "AL",
+      "team_red": "LGD",
       "kills_blue": 22,
       "kills_red": 10,
       "total_kills": 32,
@@ -248,13 +259,16 @@
       "fair_source": "formula(team+team)/2",
       "fair_raw": 56.95,
       "fair_adjusted": 28.5,
-      "blue_avg": 27.89,
-      "red_avg": 29.06,
-      "blue_sample_n": 19,
-      "red_sample_n": 17,
+      "blue_avg": 29.06,
+      "red_avg": 27.89,
+      "blue_sample_n": 17,
+      "red_sample_n": 19,
       "league_baseline": 31.69,
       "vs_league": -3.19,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "LGD",
+      "orientation_original_team_red": "AL",
+      "orientation_fixed": true
     },
     {
       "league": "LPL",
@@ -284,15 +298,16 @@
       "red_sample_n": 17,
       "league_baseline": 31.69,
       "vs_league": 2.81,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LPL",
       "match_id": "116566854547769676",
       "game_id": "116566854547769678",
       "map_number": 2,
-      "team_blue": "EDG",
-      "team_red": "BLG",
+      "team_blue": "BLG",
+      "team_red": "EDG",
       "kills_blue": 27,
       "kills_red": 16,
       "total_kills": 43,
@@ -310,13 +325,16 @@
       "fair_source": "formula(team+team)/2",
       "fair_raw": 68.58,
       "fair_adjusted": 34.5,
-      "blue_avg": 33.29,
-      "red_avg": 35.29,
-      "blue_sample_n": 14,
-      "red_sample_n": 17,
+      "blue_avg": 35.29,
+      "red_avg": 33.29,
+      "blue_sample_n": 17,
+      "red_sample_n": 14,
       "league_baseline": 31.69,
       "vs_league": 2.81,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "EDG",
+      "orientation_original_team_red": "BLG",
+      "orientation_fixed": true
     },
     {
       "league": "LEC",
@@ -346,7 +364,8 @@
       "red_sample_n": 7,
       "league_baseline": 30.41,
       "vs_league": 3.09,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
@@ -376,7 +395,8 @@
       "red_sample_n": 7,
       "league_baseline": 30.41,
       "vs_league": 5.09,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
@@ -406,7 +426,8 @@
       "red_sample_n": 7,
       "league_baseline": 30.41,
       "vs_league": 3.09,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
@@ -436,7 +457,8 @@
       "red_sample_n": 12,
       "league_baseline": 30.41,
       "vs_league": 0.09,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
@@ -466,7 +488,8 @@
       "red_sample_n": 12,
       "league_baseline": 30.41,
       "vs_league": 0.09,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "CBLOL",
@@ -496,15 +519,16 @@
       "red_sample_n": 5,
       "league_baseline": 25.92,
       "vs_league": 4.58,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "CBLOL",
       "match_id": "115565671526402949",
       "game_id": "115565671526402951",
       "map_number": 2,
-      "team_blue": "LOUD",
-      "team_red": "FUR",
+      "team_blue": "FUR",
+      "team_red": "LOUD",
       "kills_blue": 28,
       "kills_red": 8,
       "total_kills": 36,
@@ -522,13 +546,16 @@
       "fair_source": "formula(team+team)/2",
       "fair_raw": 63.57,
       "fair_adjusted": 31.5,
-      "blue_avg": 28.17,
-      "red_avg": 35.4,
-      "blue_sample_n": 6,
-      "red_sample_n": 5,
+      "blue_avg": 35.4,
+      "red_avg": 28.17,
+      "blue_sample_n": 5,
+      "red_sample_n": 6,
       "league_baseline": 25.92,
       "vs_league": 5.58,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "LOUD",
+      "orientation_original_team_red": "FUR",
+      "orientation_fixed": true
     },
     {
       "league": "CBLOL",
@@ -560,7 +587,8 @@
       "red_sample_n": 6,
       "league_baseline": 25.92,
       "vs_league": -4.42,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "CBLOL",
@@ -590,7 +618,8 @@
       "red_sample_n": 6,
       "league_baseline": 25.92,
       "vs_league": -1.42,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "CBLOL",
@@ -620,15 +649,16 @@
       "red_sample_n": 4,
       "league_baseline": 25.92,
       "vs_league": -1.42,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "CBLOL",
       "match_id": "115565671526402985",
       "game_id": "115565671526402987",
       "map_number": 2,
-      "team_blue": "LEV",
-      "team_red": "LOS",
+      "team_blue": "LOS",
+      "team_red": "LEV",
       "kills_blue": 19,
       "kills_red": 8,
       "total_kills": 27,
@@ -646,13 +676,16 @@
       "fair_source": "formula(team+league)/2",
       "fair_raw": 47.12,
       "fair_adjusted": 23.5,
-      "blue_avg": 21.2,
-      "red_avg": 25.92,
-      "blue_sample_n": 5,
-      "red_sample_n": 4,
+      "blue_avg": 25.92,
+      "red_avg": 21.2,
+      "blue_sample_n": 4,
+      "red_sample_n": 5,
       "league_baseline": 25.92,
       "vs_league": -2.42,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "LEV",
+      "orientation_original_team_red": "LOS",
+      "orientation_fixed": true
     },
     {
       "league": "LCS",
@@ -682,15 +715,16 @@
       "red_sample_n": 7,
       "league_baseline": 30.96,
       "vs_league": -0.46,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCS",
       "match_id": "115564797163886743",
       "game_id": "115564797163886745",
       "map_number": 2,
-      "team_blue": "DSG",
-      "team_red": "C9",
+      "team_blue": "C9",
+      "team_red": "DSG",
       "kills_blue": 10,
       "kills_red": 24,
       "total_kills": 34,
@@ -708,13 +742,16 @@
       "fair_source": "formula(team+team)/2",
       "fair_raw": 57.4,
       "fair_adjusted": 28.5,
-      "blue_avg": 27.83,
-      "red_avg": 29.57,
-      "blue_sample_n": 6,
-      "red_sample_n": 7,
+      "blue_avg": 29.57,
+      "red_avg": 27.83,
+      "blue_sample_n": 7,
+      "red_sample_n": 6,
       "league_baseline": 30.96,
       "vs_league": -2.46,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "DSG",
+      "orientation_original_team_red": "C9",
+      "orientation_fixed": true
     },
     {
       "league": "LCS",
@@ -744,7 +781,8 @@
       "red_sample_n": 7,
       "league_baseline": 30.96,
       "vs_league": 0.54,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCS",
@@ -774,7 +812,8 @@
       "red_sample_n": 7,
       "league_baseline": 30.96,
       "vs_league": -1.46,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LCS",
@@ -804,7 +843,8 @@
       "red_sample_n": 7,
       "league_baseline": 30.96,
       "vs_league": -3.46,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LCS",
@@ -836,7 +876,8 @@
       "red_sample_n": 7,
       "league_baseline": 30.96,
       "vs_league": -0.46,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     }
   ]
 }

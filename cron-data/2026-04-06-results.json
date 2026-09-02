@@ -38,7 +38,8 @@
       "red_sample_n": 19,
       "league_baseline": 27.87,
       "vs_league": -3.08,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
@@ -66,7 +67,8 @@
       "red_sample_n": 19,
       "league_baseline": 27.87,
       "vs_league": -3.82,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
@@ -96,7 +98,8 @@
       "red_sample_n": 19,
       "league_baseline": 27.87,
       "vs_league": -2.82,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
@@ -124,15 +127,16 @@
       "red_sample_n": 23,
       "league_baseline": 27.87,
       "vs_league": 0.82,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
       "match_id": "115548668059523716",
       "game_id": "115548668059523718",
       "map_number": 2,
-      "team_blue": "MKOI",
-      "team_red": "VIT",
+      "team_blue": "VIT",
+      "team_red": "MKOI",
       "kills_blue": 5,
       "kills_red": 14,
       "total_kills": 19,
@@ -146,13 +150,16 @@
       "fair_source": "livestats_team_avg(team+team)/2",
       "fair_raw": 58.36,
       "fair_adjusted": 29.18,
-      "blue_avg": 31.27,
-      "red_avg": 27.09,
-      "blue_sample_n": 22,
-      "red_sample_n": 23,
+      "blue_avg": 27.09,
+      "red_avg": 31.27,
+      "blue_sample_n": 23,
+      "red_sample_n": 22,
       "league_baseline": 27.87,
       "vs_league": 1.31,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_original_team_blue": "MKOI",
+      "orientation_original_team_red": "VIT",
+      "orientation_fixed": true
     },
     {
       "league": "LEC",
@@ -182,7 +189,8 @@
       "red_sample_n": 23,
       "league_baseline": 27.87,
       "vs_league": 1.09,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     }
   ]
 }

@@ -36,15 +36,16 @@
       "red_sample_n": 20,
       "league_baseline": 27.87,
       "vs_league": -1.82,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
       "match_id": "115548668059523720",
       "game_id": "115548668059523722",
       "map_number": 2,
-      "team_blue": "VIT",
-      "team_red": "FNC",
+      "team_blue": "FNC",
+      "team_red": "VIT",
       "kills_blue": 12,
       "kills_red": 21,
       "total_kills": 33,
@@ -60,13 +61,16 @@
       "fair_source": "livestats_team_avg(team+team)/2",
       "fair_raw": 52.28,
       "fair_adjusted": 26.14,
-      "blue_avg": 26.48,
-      "red_avg": 25.8,
-      "blue_sample_n": 23,
-      "red_sample_n": 20,
+      "blue_avg": 25.8,
+      "red_avg": 26.48,
+      "blue_sample_n": 20,
+      "red_sample_n": 23,
       "league_baseline": 27.87,
       "vs_league": -1.73,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_original_team_blue": "VIT",
+      "orientation_original_team_red": "FNC",
+      "orientation_fixed": true
     },
     {
       "league": "LEC",
@@ -94,7 +98,8 @@
       "red_sample_n": 20,
       "league_baseline": 27.87,
       "vs_league": -1.36,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
@@ -122,7 +127,8 @@
       "red_sample_n": 20,
       "league_baseline": 27.87,
       "vs_league": 3.06,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
@@ -150,7 +156,8 @@
       "red_sample_n": 20,
       "league_baseline": 27.87,
       "vs_league": 3.06,
-      "under_hit": true
+      "under_hit": true,
+      "orientation_checked": true
     },
     {
       "league": "LEC",
@@ -181,7 +188,8 @@
       "red_sample_n": 20,
       "league_baseline": 27.87,
       "vs_league": 2.06,
-      "under_hit": false
+      "under_hit": false,
+      "orientation_checked": true
     }
   ]
 }
