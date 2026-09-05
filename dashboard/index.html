@@ -886,6 +886,54 @@
     .register-button.secondary { background:var(--card-2); color:var(--text); border:1px solid var(--border); }
     .register-button:disabled { opacity:.55; cursor:wait; }
 
+    /* ===== Aba "Finanças" (2026-09-04) =====
+       Reusa .register-card/.register-composer/.kpis/.days/.hbar-*/.filters do
+       resto do dashboard — só o que é genuinamente novo entra com prefixo .fin-. */
+    .fin-card { margin-bottom: 24px; }
+    .fin-preview-list { display:none; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+    .fin-preview-list img { display:block; width:84px; height:84px; object-fit:cover; border-radius:10px; border:1px solid var(--border); background:#0d1015; }
+    .fin-month-nav { display:flex; align-items:center; justify-content:center; gap:14px; margin:20px 0 16px; }
+    .fin-month-label { font-size:16px; font-weight:800; letter-spacing:-0.01em; min-width:110px; text-align:center; }
+    /* Coluna de rótulo mais larga que o hbar-row genérico (90px) — categoria
+       tem nome mais longo que liga/time/suporte. */
+    .fin-cat-bars .hbar-row { grid-template-columns: 150px 1fr; }
+    .fin-tx-tools { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
+    .fin-tx-tools select, .fin-tx-tools input {
+      background: var(--card); color: var(--text); border: 1px solid var(--border-soft);
+      border-radius: 8px; padding: 6px 10px; font-weight: 600; font-family: inherit; font-size: 13px;
+    }
+    .fin-tx-tools select { cursor: pointer; }
+    .fin-tx-tools input[type="search"] { min-width: 220px; cursor: text; }
+    .fin-tx-list { display:flex; flex-direction:column; gap:8px; }
+    .fin-tx {
+      background: var(--card); border: 1px solid var(--elev-border); border-radius: 12px;
+      padding: 12px 14px; display: grid; grid-template-columns: 1fr auto auto auto;
+      align-items: center; gap: 10px; box-shadow: var(--shadow-elev);
+    }
+    .fin-tx.ignored { opacity: .55; }
+    .fin-tx-desc { font-size: 13px; font-weight: 600; color: var(--text); }
+    .fin-tx-meta { font-size: 11px; color: var(--muted); margin-top: 3px; }
+    /* Sinal: entrada verde, saída fica no --text neutro (verde/vermelho aqui é
+       SÓ pra sinal de resultado — a regra do resto do dashboard vale igual). */
+    .fin-tx-amount { font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--text); white-space: nowrap; }
+    .fin-tx-amount.in { color: var(--green); }
+    .fin-cat-select {
+      background: var(--card-2); color: var(--text); border: 1px solid var(--border-soft);
+      border-radius: 8px; padding: 5px 8px; font-family: inherit; font-size: 12px; cursor: pointer;
+    }
+    .fin-tx-actions { display:flex; gap:6px; }
+    .fin-tx-actions button {
+      background: transparent; border: none; color: var(--accent-2); font-size: 12px; font-weight: 700;
+      cursor: pointer; padding: 4px 2px; white-space: nowrap;
+    }
+    .fin-tx-actions button:hover { text-decoration: underline; }
+    .fin-badge-manual {
+      display: inline-block; margin-left: 6px; padding: 2px 7px; border-radius: 999px; font-size: 9px; font-weight: 800;
+      letter-spacing: 0.05em; text-transform: uppercase; background: var(--accent-glow); color: var(--accent-2);
+    }
+    .fin-doc-status.rejected { color: var(--red); }
+    .fin-doc-status.registered { color: var(--green); }
+
     /* ===== PARTE 6B — Tablet (Fase 3, 2026-08-15) =====
        Só existia o breakpoint de 600px — entre 601 e 900px (notebook pequeno/
        tablet) o layout ficava "desktop cheio espremido". Validado por render
@@ -935,6 +983,11 @@
       .register-bubble { max-width:90%; }
       .register-composer-actions { align-items:stretch; flex-wrap:wrap; }
       .register-composer-hint { width:100%; }
+      .fin-tx { grid-template-columns: 1fr auto; }
+      .fin-tx-actions, .fin-cat-select { grid-column: 1 / -1; }
+      .fin-cat-bars .hbar-row { grid-template-columns: 110px 1fr; }
+      .fin-tx-tools { flex-direction: column; align-items: stretch; }
+      .fin-tx-tools select, .fin-tx-tools input[type="search"] { width: 100%; }
     }
   </style>
 </head>
@@ -948,6 +1001,7 @@
     <div class="tabs-inner">
       <button class="tab active" type="button" data-tab="hoje">Hoje</button>
       <button class="tab" type="button" data-tab="registrar">Registrar bet</button>
+      <button class="tab" type="button" data-tab="financas">Finanças</button>
       <button class="tab" type="button" data-tab="tracker">Planilha</button>
       <button class="tab" type="button" data-tab="baleias">Baleias</button>
       <button class="tab" type="button" data-tab="milio">Milio</button>
@@ -1140,6 +1194,76 @@
     </div>
   </main>
 
+  <!-- Aba "Finanças" (2026-09-04) — espelho do pipeline de Registrar bet: foto
+       da fatura/extrato entra por /api/finance/upload (mesmo código de acesso,
+       cookie agora vale pra /api inteiro), um worker local lê e extrai as
+       transações, e esta aba só consome /api/finance/summary e /transactions.
+       NUNCA fala direto com o client Supabase público — dados financeiros só
+       saem atrás do gate, via função Vercel com a chave secreta. -->
+  <main class="container tab-pane" data-pane="financas">
+    <div class="register-card fin-card" id="finUpload">
+      <div class="register-chat-head">
+        <h2>Finanças</h2>
+        <p>Privado. Mande foto da fatura do cartão ou do extrato bancário — eu leio, categorizo e monto o resumo do mês. A foto fica salva por 14 dias e depois é apagada; as transações ficam.</p>
+      </div>
+      <div class="register-chat-log" id="finLog" role="log" aria-live="polite">
+        <div class="register-bubble assistant">Mande foto da fatura do cartão ou do extrato bancário. Pode enviar quantas fotos precisar, uma de cada vez.</div>
+      </div>
+      <div class="register-access" id="finAccess" hidden>
+        <p id="finAccessMessage">Este navegador ainda não está autorizado.</p>
+        <div class="register-access-row">
+          <input id="finAccessCode" type="password" autocomplete="one-time-code" maxlength="256" placeholder="Código de acesso" aria-label="Código de acesso">
+          <button class="register-button" id="finUnlock" type="button">Liberar</button>
+        </div>
+      </div>
+      <div class="register-composer" id="finComposer">
+        <div class="fin-preview-list" id="finPreviewList" aria-live="polite"></div>
+        <textarea class="register-description" id="finNote" maxlength="500" placeholder="Informação extra (opcional)" aria-label="Informação extra"></textarea>
+        <input id="finPhotoInput" type="file" accept="image/png,image/jpeg,image/webp" multiple hidden>
+        <div class="register-composer-actions">
+          <button class="register-button secondary" id="finAttach" type="button">+ Foto</button>
+          <span class="register-composer-hint">PNG, JPEG ou WebP · reduzimos o tamanho automaticamente</span>
+          <button class="register-button" id="finSend" type="button">Enviar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="fin-month-nav">
+      <button class="ver-tabela-btn" id="finMonthPrev" type="button">◀</button>
+      <span class="fin-month-label" id="finMonthLabel">—</span>
+      <button class="ver-tabela-btn" id="finMonthNext" type="button">▶</button>
+    </div>
+
+    <div id="finKpis" class="kpis"></div>
+
+    <div class="section-title">Onde foi o dinheiro</div>
+    <div id="finCategoryBars" class="fin-cat-bars"><div class="loading">Carregando…</div></div>
+
+    <div class="section-title">Maiores estabelecimentos</div>
+    <div id="finMerchants" class="days"><div class="loading">Carregando…</div></div>
+
+    <div class="section-title">Últimos 6 meses — saldo</div>
+    <div id="finMonthsChartWrap"><div class="loading">Carregando…</div></div>
+    <div id="finMonthsTable" class="days" style="margin-top:10px"></div>
+
+    <div class="section-title">Transações</div>
+    <div class="filters" id="finTxFilters">
+      <button class="chip active" type="button" data-source="all">Todas</button>
+      <button class="chip" type="button" data-source="cartao">Cartão</button>
+      <button class="chip" type="button" data-source="conta">Conta</button>
+    </div>
+    <div class="fin-tx-tools">
+      <select id="finTxCategory" aria-label="Filtrar por categoria">
+        <option value="all">Todas as categorias</option>
+      </select>
+      <input id="finTxSearch" type="search" maxlength="60" placeholder="Buscar por descrição ou estabelecimento" aria-label="Buscar transação">
+    </div>
+    <div id="finTxList" class="fin-tx-list"><div class="loading">Carregando…</div></div>
+
+    <div class="section-title">Documentos enviados</div>
+    <div id="finDocs" class="days"><div class="loading">Carregando…</div></div>
+  </main>
+
   <!-- Vigia de Baleias (Polymarket) — 2026-08-07, Realtime desde 2026-08-07 (tarde).
        Lê a tabela whale_signals no mesmo Supabase, só leitura. Tenta Supabase Realtime
        (push na hora) e usa polling só como rede de segurança (5s sem Realtime, 60s com
@@ -1177,6 +1301,8 @@
     import {
       composeRegisterImages, removeRegisterImageAt, validateRegisterImageFiles,
     } from './register-image-composer.mjs';
+    import { FINANCE_CATEGORIES, financeCategoryLabel } from './finance-categories.mjs';
+    import { prepareFinanceImage } from './finance-image-resize.mjs';
 
     const SUPABASE_URL = 'https://yxhpopkxlupdpqkdaffg.supabase.co';
     const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_wGL02eZiYN9RV37jK-rzWg_LznsLOko';
@@ -1983,6 +2109,660 @@
         });
       }
     }
+
+    // ===== Aba "Finanças" (2026-09-04) =====
+    // Espelho do pipeline de Registrar bet, mas 100% atrás de /api/finance/* —
+    // nunca fala direto com o client Supabase público. O mesmo cookie de
+    // acesso de bets (agora Path=/api) autoriza os dois pipelines.
+    const finUploadCard = document.getElementById('finUpload');
+    const finLog = document.getElementById('finLog');
+    const finComposer = document.getElementById('finComposer');
+    const finAccess = document.getElementById('finAccess');
+    const finAccessMessage = document.getElementById('finAccessMessage');
+    const finAccessCode = document.getElementById('finAccessCode');
+    const finUnlock = document.getElementById('finUnlock');
+    const finPreviewList = document.getElementById('finPreviewList');
+    const finNote = document.getElementById('finNote');
+    const finPhotoInput = document.getElementById('finPhotoInput');
+    const finAttach = document.getElementById('finAttach');
+    const finSend = document.getElementById('finSend');
+    const finTxList = document.getElementById('finTxList');
+
+    let finMonth = currentMonthBRT();
+    let finAuth = null; // mesmo contrato de registerAuthHeaders: null = sem acesso, {} = cookie vale.
+    let finFiles = []; // fotos selecionadas ainda não enviadas: { file, previewUrl }
+    let finTx = [];
+    let finSummary = null;
+    let finLoaded = false;
+    let finBusy = false;
+    let finFilter = { source: 'all', category: 'all', q: '' };
+    const finLastStatus = new Map(); // jobId -> última "jobId:status" mostrada (evita bolha repetida no poll)
+    let finSearchTimer = null;
+    // Contador global de requisições dos loaders (summary/transactions) — cada
+    // loader captura o valor antes do fetch e descarta a resposta se alguém
+    // mais novo já rodou nesse meio tempo (evita mês/busca fora de ordem
+    // sobrescrever o estado mais recente quando a resposta chega depois).
+    let finRequestSeq = 0;
+    const FIN_ACCESS_REQUIRED_MESSAGE = 'Este navegador precisa ser liberado.';
+    const FIN_ACCESS_DEFAULT_MESSAGE = 'Este navegador ainda não está autorizado.';
+    const FIN_ACCESS_STALE_COOKIE_MESSAGE = 'Digite o código de novo pra liberar a aba Finanças neste navegador.';
+    // Backoff do poll por job: reinicia em 3s quando o status muda (ou na
+    // retomada do localStorage no boot), multiplica por 1.5 quando repete o
+    // mesmo status, teto de 30s. Erro de rede entra no mesmo backoff com piso
+    // de 8s. O worker do PC só acorda 1x/min — poll fixo de 3s desperdiça
+    // invocação Vercel à toa.
+    const finPollState = new Map(); // jobId -> { delay, lastStatus } ('__error__' pra falha de rede)
+    const FIN_POLL_BASE_MS = 3000;
+    const FIN_POLL_MAX_MS = 30000;
+    const FIN_POLL_ERROR_MIN_MS = 8000;
+    const FIN_POLL_BACKOFF_FACTOR = 1.5;
+
+    const MONTHS_PT = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+    function monthLabelPt(month) {
+      const [y, m] = String(month || '').split('-');
+      const idx = Number(m) - 1;
+      if (!y || !Number.isInteger(idx) || idx < 0 || idx > 11) return month || '—';
+      return `${MONTHS_PT[idx]}/${y}`;
+    }
+    function currentMonthBRT() {
+      return new Date().toLocaleDateString('en-CA', { timeZone: TZ }).slice(0, 7);
+    }
+    function shiftMonth(month, delta) {
+      const [y, m] = month.split('-').map(Number);
+      const date = new Date(Date.UTC(y, m - 1 + delta, 1));
+      return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}`;
+    }
+    const fmtBRL = (n) => `R$ ${fmtMoney(n)}`;
+
+    function financeCategoryOptionsHtml(selected) {
+      return FINANCE_CATEGORIES.map((c) => (
+        `<option value="${c.slug}"${c.slug === selected ? ' selected' : ''}>${escHtml(financeCategoryLabel(c.slug))}</option>`
+      )).join('');
+    }
+
+    function financeJobIds() {
+      try { return JSON.parse(localStorage.getItem('financeUploadJobIds') || '[]'); } catch { return []; }
+    }
+    function addFinanceJobId(jobId) {
+      const ids = financeJobIds();
+      if (!ids.includes(jobId)) ids.push(jobId);
+      localStorage.setItem('financeUploadJobIds', JSON.stringify(ids));
+    }
+    function removeFinanceJobId(jobId) {
+      localStorage.setItem('financeUploadJobIds', JSON.stringify(financeJobIds().filter((id) => id !== jobId)));
+    }
+
+    function addFinBubble(text, type = 'status', statusKey = '') {
+      if (statusKey) {
+        const jobId = statusKey.split(':')[0];
+        if (finLastStatus.get(jobId) === statusKey) return null;
+        finLastStatus.set(jobId, statusKey);
+      }
+      const bubble = document.createElement('div');
+      bubble.className = `register-bubble ${type}`;
+      bubble.textContent = text;
+      finLog.appendChild(bubble);
+      finLog.scrollTop = finLog.scrollHeight;
+      return bubble;
+    }
+
+    function setFinComposerEnabled(enabled) {
+      for (const control of finComposer.querySelectorAll('button, textarea, input')) control.disabled = !enabled || finBusy;
+    }
+
+    // Descobre se este navegador pode ver/enviar finanças. Mesma credencial de
+    // Registrar bet (cookie de /api/bets/access, agora válido pro /api inteiro)
+    // — mas só libera com scope:'api'. Um cookie ANTIGO (emitido antes do
+    // escopo mudar) ainda responde 200 em /api/bets/access porém não vale pra
+    // /api/finance/*; sem essa checagem a aba mostraria liberado e toda
+    // chamada de finança quebraria em 401.
+    async function refreshFinanceAccess() {
+      finAuth = null;
+      let staleCookie = false;
+      try {
+        const response = await fetch('/api/bets/access', { credentials: 'same-origin', cache: 'no-store' });
+        if (response.ok) {
+          const body = await response.json().catch(() => ({}));
+          if (body && body.scope === 'api') finAuth = {};
+          else staleCookie = true;
+        }
+      } catch {}
+      if (finAccessMessage) finAccessMessage.textContent = staleCookie ? FIN_ACCESS_STALE_COOKIE_MESSAGE : FIN_ACCESS_DEFAULT_MESSAGE;
+      finAccess.hidden = Boolean(finAuth);
+      setFinComposerEnabled(Boolean(finAuth));
+      return finAuth;
+    }
+
+    // Helper único pra toda chamada a /api/finance/*: credenciais/no-store
+    // sempre, parse de JSON, 401 -> refaz o gate e lança erro padrão, erro de
+    // negócio -> usa a mensagem do backend ou o fallback do chamador.
+    async function finApi(path, init = {}, fallback = 'Não consegui completar a operação.') {
+      const response = await fetch(path, { ...init, credentials: 'same-origin', cache: 'no-store' });
+      const body = await response.json().catch(() => ({}));
+      if (response.status === 401) {
+        await refreshFinanceAccess();
+        throw new Error(FIN_ACCESS_REQUIRED_MESSAGE);
+      }
+      if (!response.ok || body.ok === false) throw new Error(body.message || fallback);
+      return body;
+    }
+
+    function renderFinPreviews() {
+      finPreviewList.replaceChildren();
+      finFiles.forEach((entry, index) => {
+        const img = document.createElement('img');
+        img.src = entry.previewUrl;
+        img.alt = `Prévia da foto ${index + 1}`;
+        finPreviewList.appendChild(img);
+      });
+      finPreviewList.style.display = finFiles.length ? 'flex' : 'none';
+    }
+
+    function clearFinFiles() {
+      finFiles.forEach((entry) => URL.revokeObjectURL(entry.previewUrl));
+      finFiles = [];
+      finPhotoInput.value = '';
+      renderFinPreviews();
+    }
+
+    finAttach.addEventListener('click', () => finPhotoInput.click());
+    finPhotoInput.addEventListener('change', () => {
+      const selected = Array.from(finPhotoInput.files || []);
+      if (!selected.length) return;
+      finFiles = [...finFiles, ...selected.map((file) => ({ file, previewUrl: URL.createObjectURL(file) }))];
+      renderFinPreviews();
+      finPhotoInput.value = '';
+    });
+
+    finUnlock.addEventListener('click', async () => {
+      const code = finAccessCode.value.trim();
+      if (!code) return addFinBubble('Informe o código de acesso.', 'status error');
+      finUnlock.disabled = true;
+      try {
+        const response = await fetch('/api/bets/access', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code }),
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error(result.message || 'Código inválido.');
+        finAccessCode.value = '';
+        await refreshFinanceAccess();
+        await refreshRegisterAccess();
+        addFinBubble('Acesso liberado. Pode mandar a foto.', 'assistant');
+        if (!finLoaded) loadFinance();
+        financeJobIds().forEach((jobId) => pollFinanceJob(jobId));
+      } catch (error) {
+        addFinBubble(error.message || 'Código inválido.', 'status error');
+      } finally {
+        finUnlock.disabled = false;
+      }
+    });
+    finAccessCode.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') finUnlock.click();
+    });
+
+    // Cada foto vira 1 job — erro numa não interrompe as demais (S7). Prepara
+    // (redimensiona no navegador) e envia sequencialmente, uma por vez.
+    async function sendFinancePhotos() {
+      if (finBusy) return;
+      if (!finAuth && !(await refreshFinanceAccess())) {
+        finAccessCode.focus();
+        return addFinBubble('Informe o código de acesso para enviar.', 'status error');
+      }
+      if (!finFiles.length) return addFinBubble('Selecione ao menos uma foto da fatura ou do extrato.', 'status error');
+      const note = finNote.value.trim();
+      const files = finFiles.map((entry) => entry.file);
+      clearFinFiles();
+      finNote.value = '';
+      finBusy = true;
+      setFinComposerEnabled(true);
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const suffix = files.length > 1 ? ` ${i + 1}/${files.length}` : '';
+        try {
+          addFinBubble(`Preparando foto${suffix}…`, 'status');
+          const prepared = await prepareFinanceImage(file);
+          addFinBubble(`Enviando${suffix}…`, 'status');
+          const result = await finApi('/api/finance/upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ image_data_url: prepared.dataUrl, note }),
+          }, 'Não consegui enviar essa foto.');
+          addFinanceJobId(result.job.id);
+          addFinBubble(
+            result.duplicate ? 'Essa foto já tinha sido enviada antes.' : 'Recebi. O documento está na fila.',
+            'status',
+            `${result.job.id}:queued`,
+          );
+          pollFinanceJob(result.job.id);
+        } catch (error) {
+          if (error.message === FIN_ACCESS_REQUIRED_MESSAGE) finAccessCode.focus();
+          addFinBubble(error.message || `Não consegui enviar a foto${suffix}.`, 'status error');
+        }
+      }
+      finBusy = false;
+      setFinComposerEnabled(true);
+    }
+    finSend.addEventListener('click', sendFinancePhotos);
+
+    function finishFinanceRegisteredJob(jobId, job) {
+      const r = job.result || {};
+      const docLabel = r.doc_kind === 'extrato' ? 'Extrato' : 'Fatura';
+      const institutionLabel = r.institution ? ` ${r.institution}` : '';
+      addFinBubble(
+        `${docLabel}${institutionLabel} · ${monthLabelPt(r.ref_month)}: ${r.inserted ?? 0} transações novas, ${r.duplicates ?? 0} repetidas`,
+        'status success',
+        `${jobId}:registered`,
+      );
+      if (r.reconciliation) {
+        const diff = Number(r.reconciliation.diff || 0);
+        addFinBubble(
+          Math.abs(diff) < 0.01 ? 'Bateu com o total da fatura.' : `Diferença de R$ ${fmtMoney(Math.abs(diff))} vs total da fatura.`,
+          'status',
+          `${jobId}:reconciliation`,
+        );
+      }
+      if (r.ref_month && r.ref_month !== finMonth) {
+        const gotoBubble = addFinBubble(`Ver ${monthLabelPt(r.ref_month)}`, 'status', `${jobId}:goto`);
+        if (gotoBubble) {
+          gotoBubble.style.cursor = 'pointer';
+          gotoBubble.addEventListener('click', () => { finMonth = r.ref_month; loadFinance(); });
+        }
+      }
+      loadFinance();
+    }
+
+    // Calcula o próximo intervalo do poll deste job: reinicia no piso (3s, ou
+    // 8s se veio de erro de rede) quando o status muda, senão multiplica por
+    // 1.5 até o teto de 30s. statusKey usa '__error__' como sentinela pra
+    // falha de rede/parse, distinto de qualquer status real do job.
+    function nextFinPollDelay(jobId, statusKey) {
+      const state = finPollState.get(jobId);
+      const changed = !state || state.lastStatus !== statusKey;
+      const base = statusKey === '__error__' ? FIN_POLL_ERROR_MIN_MS : FIN_POLL_BASE_MS;
+      const delay = changed ? base : Math.min(FIN_POLL_MAX_MS, Math.round(state.delay * FIN_POLL_BACKOFF_FACTOR));
+      finPollState.set(jobId, { delay, lastStatus: statusKey });
+      return delay;
+    }
+
+    async function pollFinanceJob(jobId) {
+      try {
+        const result = await finApi(`/api/finance/upload?id=${encodeURIComponent(jobId)}`, {}, 'Falha ao consultar o processamento.');
+        const job = result.job;
+        if (job.status === 'queued') {
+          addFinBubble('Recebi. O documento está na fila.', 'status', `${jobId}:queued`);
+        } else if (job.status === 'processing') {
+          addFinBubble('Estou lendo a fatura/extrato…', 'status', `${jobId}:processing`);
+        } else if (job.status === 'registered') {
+          removeFinanceJobId(jobId);
+          finPollState.delete(jobId);
+          finishFinanceRegisteredJob(jobId, job);
+          return;
+        } else if (job.status === 'rejected') {
+          removeFinanceJobId(jobId);
+          finPollState.delete(jobId);
+          addFinBubble(job.error_message || 'Não consegui validar o documento.', 'status error', `${jobId}:rejected`);
+          return;
+        } else if (job.status === 'error') {
+          removeFinanceJobId(jobId);
+          finPollState.delete(jobId);
+          addFinBubble('Falha técnica no processamento. Tente novamente.', 'status error', `${jobId}:error`);
+          return;
+        }
+        setTimeout(() => pollFinanceJob(jobId), nextFinPollDelay(jobId, job.status));
+      } catch (error) {
+        addFinBubble(error.message || 'Falha ao consultar o processamento. Vou tentar novamente.', 'status error', `${jobId}:poll_error`);
+        setTimeout(() => pollFinanceJob(jobId), nextFinPollDelay(jobId, '__error__'));
+      }
+    }
+
+    function finTxQueryParams() {
+      const params = new URLSearchParams({ month: finMonth, limit: '200' });
+      if (finFilter.source !== 'all') params.set('source', finFilter.source);
+      if (finFilter.category !== 'all') params.set('category', finFilter.category);
+      if (finFilter.q) params.set('q', finFilter.q);
+      return params;
+    }
+
+    // Chama os 5 renders que dependem só do summary — os 3 loaders abaixo
+    // convergem aqui em vez de repetir a lista de renders cada um.
+    function renderFinSummary(summary) {
+      finSummary = summary;
+      renderFinKpis();
+      renderFinCategoryBars();
+      renderFinMerchants();
+      renderFinMonths();
+      renderFinDocs();
+    }
+
+    async function loadFinance() {
+      finLoaded = true;
+      const monthLabelEl = document.getElementById('finMonthLabel');
+      if (monthLabelEl) monthLabelEl.textContent = monthLabelPt(finMonth);
+      const seq = ++finRequestSeq;
+      try {
+        const [summary, tx] = await Promise.all([
+          finApi(`/api/finance/summary?month=${encodeURIComponent(finMonth)}`, {}, 'Falha ao carregar o resumo.'),
+          finApi(`/api/finance/transactions?${finTxQueryParams().toString()}`, {}, 'Falha ao carregar as transações.'),
+        ]);
+        if (seq !== finRequestSeq) return; // uma navegação mais nova já rodou — descarta esta resposta
+        renderFinSummary(summary);
+        finTx = tx.items || [];
+        renderFinTx();
+      } catch (error) {
+        if (seq !== finRequestSeq) return;
+        console.warn('finance load falhou:', error);
+        const message = `<div class="empty">${escHtml(error.message || 'Falha ao carregar.')}</div>`;
+        ['finCategoryBars', 'finMerchants', 'finMonthsChartWrap', 'finTxList', 'finDocs'].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.innerHTML = message;
+        });
+      }
+    }
+
+    // Recarrega só a lista de transações (filtros de fonte/categoria/busca) —
+    // não bate o summary de novo, já que KPIs/categorias/meses não mudam.
+    async function loadFinanceTransactionsOnly() {
+      const seq = ++finRequestSeq;
+      try {
+        const tx = await finApi(`/api/finance/transactions?${finTxQueryParams().toString()}`, {}, 'Falha ao carregar as transações.');
+        if (seq !== finRequestSeq) return;
+        finTx = tx.items || [];
+        renderFinTx();
+      } catch (error) {
+        if (seq !== finRequestSeq) return;
+        const el = document.getElementById('finTxList');
+        if (el) el.innerHTML = `<div class="empty">${escHtml(error.message || 'Falha ao carregar.')}</div>`;
+      }
+    }
+
+    // Recarrega só o resumo (KPIs/categorias/estabelecimentos/meses/documentos)
+    // depois de editar 1 transação — a lista em si já foi atualizada localmente.
+    async function loadFinanceSummaryOnly() {
+      const seq = ++finRequestSeq;
+      try {
+        const summary = await finApi(`/api/finance/summary?month=${encodeURIComponent(finMonth)}`, {}, 'Falha ao carregar o resumo.');
+        if (seq !== finRequestSeq) return;
+        renderFinSummary(summary);
+      } catch {}
+    }
+
+    function renderFinKpis() {
+      const el = document.getElementById('finKpis');
+      if (!el || !finSummary) return;
+      const s = finSummary;
+      const incomeClass = s.income > 0 ? 'green' : '';
+      const balanceClass = s.balance >= 0 ? 'green' : 'red';
+      const cardBillSub = s.card_bill_stated != null ? `fatura informada: ${fmtBRL(s.card_bill_stated)}` : 'sem fatura enviada';
+      el.innerHTML = `
+        <div class="kpi ${incomeClass}">
+          <div class="label">Entradas</div>
+          <div class="value ${incomeClass}">${fmtBRL(s.income)}</div>
+          <div class="sub">${monthLabelPt(s.month)}</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Saídas</div>
+          <div class="value">${fmtBRL(s.expenses)}</div>
+          <div class="sub">${s.counts?.transactions ?? 0} transações</div>
+        </div>
+        <div class="kpi ${balanceClass}">
+          <div class="label">Saldo</div>
+          <div class="value ${balanceClass}">${s.balance >= 0 ? '+' : ''}${fmtBRL(s.balance)}</div>
+          <div class="sub">entradas − saídas</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Fatura do cartão</div>
+          <div class="value">${fmtBRL(s.card_bill)}</div>
+          <div class="sub">${escHtml(cardBillSub)}</div>
+        </div>
+      `;
+    }
+
+    function renderFinCategoryBars() {
+      const el = document.getElementById('finCategoryBars');
+      if (!el || !finSummary) return;
+      const rows = (finSummary.by_category || []).filter((c) => c.total > 0);
+      if (!rows.length) { el.innerHTML = '<div class="empty">Nenhum gasto categorizado neste mês.</div>'; return; }
+      const max = Math.max(...rows.map((r) => r.total));
+      el.innerHTML = `<div class="hbar-rows">${rows.map((r) => {
+        const pct = max ? (r.total / max) * 100 : 0;
+        return `
+          <div class="hbar-row" title="${escHtml(r.label)} · ${r.count} lançamento${r.count === 1 ? '' : 's'}">
+            <div class="hbar-label">${escHtml(r.label)}</div>
+            <div class="hbar-track">
+              <div class="hbar-fill" style="left:0;width:${pct.toFixed(2)}%;background:var(--brand);border-radius:0 4px 4px 0"></div>
+              <div class="hbar-tip" style="left:min(calc(${pct.toFixed(2)}% + 5px), calc(100% - 72px))">${fmtBRL(r.total)}</div>
+            </div>
+          </div>
+        `;
+      }).join('')}</div>`;
+    }
+
+    function renderFinMerchants() {
+      const el = document.getElementById('finMerchants');
+      if (!el || !finSummary) return;
+      const rows = finSummary.top_merchants || [];
+      if (!rows.length) { el.innerHTML = '<div class="empty">Nenhum estabelecimento neste mês.</div>'; return; }
+      el.innerHTML = rows.map((r) => `
+        <div class="day">
+          <div>
+            <div class="date">${escHtml(r.merchant || '—')}</div>
+            <div class="stats">${r.count} lançamento${r.count === 1 ? '' : 's'}</div>
+          </div>
+          <div class="profit">${fmtBRL(r.total)}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderFinMonths() {
+      const wrap = document.getElementById('finMonthsChartWrap');
+      const table = document.getElementById('finMonthsTable');
+      if (!wrap || !finSummary) return;
+      const months = finSummary.months || [];
+      const bars = months.map((m) => ({ label: monthLabelPt(m.month), value: m.balance }));
+      wrap.innerHTML = svgColumnChart(bars, { height: 160, id: 'finMonthsChart' });
+      wireColumnChart('finMonthsChart', bars);
+      if (table) {
+        table.innerHTML = months.map((m) => `
+          <div class="day">
+            <div>
+              <div class="date">${monthLabelPt(m.month)}</div>
+              <div class="stats">↑ ${fmtBRL(m.income)} · ↓ ${fmtBRL(m.expenses)}</div>
+            </div>
+            <div class="profit ${m.balance >= 0 ? 'green' : 'red'}">${m.balance >= 0 ? '+' : ''}${fmtBRL(m.balance)}</div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function finTxRowHtml(item) {
+      const isIgnored = Boolean(item.ignore_in_totals);
+      const isIncome = Number(item.amount) > 0;
+      const amountLabel = `${isIncome ? '+' : '−'}${fmtBRL(Math.abs(item.amount))}`;
+      const sourceLabel = item.source === 'cartao' ? 'Cartão' : 'Conta';
+      const installmentLabel = item.installment_current && item.installment_total
+        ? ` · parcela ${item.installment_current}/${item.installment_total}` : '';
+      const manualBadge = item.category_source === 'manual' ? '<span class="fin-badge-manual">manual</span>' : '';
+      const [, m, d] = String(item.occurred_on || '').split('-');
+      const dateLabel = d && m ? `${d}/${m}` : '—';
+      return `
+        <div class="fin-tx${isIgnored ? ' ignored' : ''}" data-id="${item.id}">
+          <div>
+            <div class="fin-tx-desc">${escHtml(item.merchant || item.description)}${manualBadge}</div>
+            <div class="fin-tx-meta">${dateLabel} · ${sourceLabel} · ${escHtml(item.institution || '')}${installmentLabel} · ${escHtml(item.description)}</div>
+          </div>
+          <select class="fin-cat-select" data-id="${item.id}" aria-label="Categoria">${financeCategoryOptionsHtml(item.category)}</select>
+          <div class="fin-tx-amount${isIncome ? ' in' : ''}">${amountLabel}</div>
+          <div class="fin-tx-actions">
+            <button type="button" data-action="${isIgnored ? 'consider' : 'ignore'}" data-id="${item.id}">${isIgnored ? 'considerar' : 'ignorar'}</button>
+            <button type="button" data-action="delete" data-id="${item.id}">excluir</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFinTx(reset = true) {
+      renderPaginatedList('finTxList', finTx, finTxRowHtml, { emptyLabel: 'Nenhuma transação neste mês.', reset });
+    }
+
+    function applyFinTxPatch(item) {
+      if (!item) return;
+      const idx = finTx.findIndex((tx) => tx.id === item.id);
+      if (idx !== -1) finTx[idx] = { ...finTx[idx], ...item };
+      renderFinTx(false);
+      loadFinanceSummaryOnly();
+    }
+
+    // Listeners DELEGADOS uma vez só no container — renderPaginatedList troca o
+    // innerHTML a cada render, então bind por linha se perderia (S8 armadilha 5).
+    finTxList.addEventListener('change', async (event) => {
+      const select = event.target.closest('.fin-cat-select');
+      if (!select) return;
+      const id = select.dataset.id;
+      select.disabled = true;
+      try {
+        const result = await finApi('/api/finance/transactions', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, category: select.value }),
+        }, 'Não consegui salvar a categoria.');
+        applyFinTxPatch(result.item);
+      } catch (error) {
+        addFinBubble(error.message || 'Não consegui salvar a categoria.', 'status error');
+        renderFinTx(false);
+      } finally {
+        select.disabled = false;
+      }
+    });
+
+    finTxList.addEventListener('click', async (event) => {
+      const button = event.target.closest('button[data-action]');
+      if (!button) return;
+      const { action, id } = button.dataset;
+      if (action === 'delete') {
+        if (!confirm('Excluir esta transação? Não dá pra desfazer.')) return;
+        button.disabled = true;
+        try {
+          await finApi(`/api/finance/transactions?id=${encodeURIComponent(id)}`, { method: 'DELETE' }, 'Não consegui excluir.');
+          finTx = finTx.filter((tx) => tx.id !== id);
+          renderFinTx(false);
+          loadFinanceSummaryOnly();
+        } catch (error) {
+          addFinBubble(error.message || 'Não consegui excluir a transação.', 'status error');
+        } finally {
+          button.disabled = false;
+        }
+        return;
+      }
+      if (action === 'ignore' || action === 'consider') {
+        button.disabled = true;
+        try {
+          const result = await finApi('/api/finance/transactions', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, ignore_in_totals: action === 'ignore' }),
+          }, 'Não consegui salvar.');
+          applyFinTxPatch(result.item);
+        } catch (error) {
+          addFinBubble(error.message || 'Não consegui salvar.', 'status error');
+        } finally {
+          button.disabled = false;
+        }
+      }
+    });
+
+    function finDocStatusLabel(doc) {
+      if (doc.status === 'queued') return 'na fila';
+      if (doc.status === 'processing') return 'lendo…';
+      if (doc.status === 'rejected') return `rejeitado — ${doc.error_message || 'documento não reconhecido'}`;
+      if (doc.status === 'error') return 'falha técnica';
+      return 'registrado';
+    }
+    function finDocReconciliationLabel(doc) {
+      if (!doc.reconciliation) return 'sem total na foto';
+      const diff = Number(doc.reconciliation.diff || 0);
+      return Math.abs(diff) < 0.01 ? 'bateu com o total da fatura' : `diferença de ${fmtBRL(Math.abs(diff))}`;
+    }
+
+    function renderFinDocs() {
+      const el = document.getElementById('finDocs');
+      if (!el || !finSummary) return;
+      const docs = finSummary.documents || [];
+      if (!docs.length) { el.innerHTML = '<div class="empty">Nenhum documento enviado ainda.</div>'; return; }
+      el.innerHTML = docs.map((doc) => {
+        const statusClass = doc.status === 'rejected' || doc.status === 'error' ? 'rejected' : (doc.status === 'registered' ? 'registered' : '');
+        const docLabel = doc.doc_kind === 'extrato' ? 'Extrato' : 'Fatura';
+        const linesLabel = doc.status === 'registered'
+          ? `${doc.lines_detected ?? 0} linhas (${doc.inserted ?? 0} novas, ${doc.duplicates ?? 0} repetidas, ${doc.skipped ?? 0} ilegíveis)`
+          : finDocStatusLabel(doc);
+        return `
+          <div class="day">
+            <div>
+              <div class="date">${docLabel} · ${escHtml(doc.institution || '—')}${doc.account_label ? ' · ' + escHtml(doc.account_label) : ''}</div>
+              <div class="stats">${escHtml(linesLabel)}${doc.status === 'registered' ? ' · ' + escHtml(finDocReconciliationLabel(doc)) : ''}</div>
+            </div>
+            <div class="fin-doc-status ${statusClass}">${fmtDate(doc.created_at)}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    document.querySelectorAll('#finTxFilters .chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('#finTxFilters .chip').forEach((c) => c.classList.remove('active'));
+        chip.classList.add('active');
+        finFilter.source = chip.dataset.source;
+        loadFinanceTransactionsOnly();
+      });
+    });
+
+    const finTxCategorySelect = document.getElementById('finTxCategory');
+    finTxCategorySelect.innerHTML = '<option value="all">Todas as categorias</option>' + financeCategoryOptionsHtml();
+    finTxCategorySelect.addEventListener('change', () => {
+      finFilter.category = finTxCategorySelect.value;
+      loadFinanceTransactionsOnly();
+    });
+
+    const finTxSearch = document.getElementById('finTxSearch');
+    finTxSearch.addEventListener('input', () => {
+      clearTimeout(finSearchTimer);
+      finSearchTimer = setTimeout(() => {
+        finFilter.q = finTxSearch.value.trim();
+        loadFinanceTransactionsOnly();
+      }, 300);
+    });
+
+    document.getElementById('finMonthPrev').addEventListener('click', () => {
+      finMonth = shiftMonth(finMonth, -1);
+      loadFinance();
+    });
+    document.getElementById('finMonthNext').addEventListener('click', () => {
+      finMonth = shiftMonth(finMonth, 1);
+      loadFinance();
+    });
+
+    // Ativação sob demanda: só carrega quando o dono realmente abre a aba (não
+    // no boot da página) — listener próprio, sem tocar no handler genérico de
+    // abas (document.querySelectorAll('.tab') mais abaixo). Sem acesso ainda,
+    // reconsulta o gate aqui — cobre o caso de o código ter sido digitado na
+    // aba Registrar depois do boot (refreshRegisterAccess não avisa esta aba).
+    document.querySelector('.tab[data-tab="financas"]')?.addEventListener('click', async () => {
+      if (!finAuth) {
+        const auth = await refreshFinanceAccess();
+        if (auth && !finLoaded) loadFinance();
+        return;
+      }
+      if (!finLoaded) loadFinance();
+    });
+
+    // Boot: confere acesso antes de retomar o polling dos jobs pendentes (foto
+    // mandada e página fechada antes de terminar) — mesmo cuidado do Registrar bet.
+    refreshFinanceAccess().then((auth) => {
+      const pendingIds = financeJobIds();
+      if (auth) pendingIds.forEach((jobId) => pollFinanceJob(jobId));
+    });
 
     // ── Team name aliases → canônico ─────────────────────────────────────────
     // Quando bet-logger não normaliza na hora de salvar, o dashboard mostra
