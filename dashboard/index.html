@@ -911,6 +911,11 @@
       align-items: center; gap: 10px; box-shadow: var(--shadow-elev);
     }
     .fin-tx.ignored { opacity: .55; }
+    /* min-width:0 é o fix clássico de grid item que não encolhe abaixo do
+       max-content — sem ele a coluna 1fr da descrição empurra o card e
+       overflow-wrap:anywhere garante que um token longo sem espaço (nome de
+       estabelecimento colado) quebra em vez de estourar a largura do card. */
+    .fin-tx-main { min-width: 0; overflow-wrap: anywhere; }
     .fin-tx-desc { font-size: 13px; font-weight: 600; color: var(--text); }
     .fin-tx-meta { font-size: 11px; color: var(--muted); margin-top: 3px; }
     /* Sinal: entrada verde, saída fica no --text neutro (verde/vermelho aqui é
@@ -983,8 +988,22 @@
       .register-bubble { max-width:90%; }
       .register-composer-actions { align-items:stretch; flex-wrap:wrap; }
       .register-composer-hint { width:100%; }
-      .fin-tx { grid-template-columns: 1fr auto; }
-      .fin-tx-actions, .fin-cat-select { grid-column: 1 / -1; }
+      /* Item 1 — 4 KPIs em 2 colunas de ~173px: "R$ 8.500,00" a 24px (herdado
+         da regra .kpi .value acima) quebra em 2 linhas ("R$" / "8.500,00") em
+         3 dos 4 cards. Escopado só nesta aba — não mexe no resto do dashboard,
+         que tem menos dígito por card e não sofre o mesmo estouro. */
+      [data-pane="financas"] .kpi .value { white-space: nowrap; font-size: clamp(16px, 5vw, 20px); }
+      /* Item 6 — linha de transação: era 4 blocos empilhados (desc, select
+         largo, valor, ações) ~175px de altura. Grid 2x2 explícito por item
+         (em vez de depender da ordem/auto-flow) pra não ficar refém de como
+         cada engine resolve item auto-posicionado misturado com item
+         explícito: linha 1 = descrição + valor (topo/direita), linha 2 =
+         categoria (ocupa a coluna 1fr) + ações (encostadas na direita). */
+      .fin-tx { grid-template-columns: 1fr auto; row-gap: 6px; align-items: start; }
+      .fin-tx-main { grid-column: 1; grid-row: 1; }
+      .fin-tx-amount { grid-column: 2; grid-row: 1; justify-self: end; }
+      .fin-cat-select { grid-column: 1; grid-row: 2; width: 100%; }
+      .fin-tx-actions { grid-column: 2; grid-row: 2; justify-self: end; align-self: center; }
       .fin-cat-bars .hbar-row { grid-template-columns: 110px 1fr; }
       .fin-tx-tools { flex-direction: column; align-items: stretch; }
       .fin-tx-tools select, .fin-tx-tools input[type="search"] { width: 100%; }
@@ -2172,11 +2191,34 @@
       const date = new Date(Date.UTC(y, m - 1 + delta, 1));
       return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}`;
     }
-    const fmtBRL = (n) => `R$ ${fmtMoney(n)}`;
+    // Sinal tipográfico (U+2212, mais largo que hífen) antes do "R$" — nunca
+    // um hífen colado depois do "R$ " (parece bug de concatenação). plus:true
+    // só acrescenta "+" quando o valor é positivo (uso em Saldo, onde
+    // 0/negativo já tem seu próprio prefixo). fmtBRL é o caso comum (sem "+"
+    // em positivo).
+    function fmtSignedBRL(value, { plus = false } = {}) {
+      const n = Number(value) || 0;
+      if (n < 0) return `−R$ ${fmtMoney(Math.abs(n))}`;
+      if (plus && n > 0) return `+R$ ${fmtMoney(n)}`;
+      return `R$ ${fmtMoney(n)}`;
+    }
+    const fmtBRL = (n) => fmtSignedBRL(n);
 
-    function financeCategoryOptionsHtml(selected) {
+    // Rótulo curto pra espaço apertado (barra de categoria, select da linha de
+    // transação): remove o parêntese explicativo ("Contas (luz/água/...)" ->
+    // "Contas"). O <select> de FILTRO no topo da lista mantém o rótulo longo.
+    function shortCategoryLabel(slug) {
+      return financeCategoryLabel(slug).replace(/\s*\(.*\)$/, '');
+    }
+
+    // "1 repetida" / "2 repetidas" — evita "1 repetidas" nos contadores de documento.
+    function plural(n, singular, pluralForm) {
+      return `${n} ${Math.abs(Number(n)) === 1 ? singular : pluralForm}`;
+    }
+
+    function financeCategoryOptionsHtml(selected, { short = false } = {}) {
       return FINANCE_CATEGORIES.map((c) => (
-        `<option value="${c.slug}"${c.slug === selected ? ' selected' : ''}>${escHtml(financeCategoryLabel(c.slug))}</option>`
+        `<option value="${c.slug}"${c.slug === selected ? ' selected' : ''}>${escHtml(short ? shortCategoryLabel(c.slug) : financeCategoryLabel(c.slug))}</option>`
       )).join('');
     }
 
@@ -2359,7 +2401,7 @@
       if (r.reconciliation) {
         const diff = Number(r.reconciliation.diff || 0);
         addFinBubble(
-          Math.abs(diff) < 0.01 ? 'Bateu com o total da fatura.' : `Diferença de R$ ${fmtMoney(Math.abs(diff))} vs total da fatura.`,
+          Math.abs(diff) < 0.01 ? 'Bateu com o total da fatura.' : `Diferença de ${fmtBRL(Math.abs(diff))} vs total da fatura.`,
           'status',
           `${jobId}:reconciliation`,
         );
@@ -2495,7 +2537,7 @@
       const s = finSummary;
       const incomeClass = s.income > 0 ? 'green' : '';
       const balanceClass = s.balance >= 0 ? 'green' : 'red';
-      const cardBillSub = s.card_bill_stated != null ? `fatura informada: ${fmtBRL(s.card_bill_stated)}` : 'sem fatura enviada';
+      const cardBillSub = s.card_bill_stated != null ? `informada ${fmtBRL(s.card_bill_stated)}` : 'sem fatura enviada';
       el.innerHTML = `
         <div class="kpi ${incomeClass}">
           <div class="label">Entradas</div>
@@ -2509,7 +2551,7 @@
         </div>
         <div class="kpi ${balanceClass}">
           <div class="label">Saldo</div>
-          <div class="value ${balanceClass}">${s.balance >= 0 ? '+' : ''}${fmtBRL(s.balance)}</div>
+          <div class="value ${balanceClass}">${fmtSignedBRL(s.balance, { plus: true })}</div>
           <div class="sub">entradas − saídas</div>
         </div>
         <div class="kpi">
@@ -2530,7 +2572,7 @@
         const pct = max ? (r.total / max) * 100 : 0;
         return `
           <div class="hbar-row" title="${escHtml(r.label)} · ${r.count} lançamento${r.count === 1 ? '' : 's'}">
-            <div class="hbar-label">${escHtml(r.label)}</div>
+            <div class="hbar-label">${escHtml(shortCategoryLabel(r.category))}</div>
             <div class="hbar-track">
               <div class="hbar-fill" style="left:0;width:${pct.toFixed(2)}%;background:var(--brand);border-radius:0 4px 4px 0"></div>
               <div class="hbar-tip" style="left:min(calc(${pct.toFixed(2)}% + 5px), calc(100% - 72px))">${fmtBRL(r.total)}</div>
@@ -2571,7 +2613,7 @@
               <div class="date">${monthLabelPt(m.month)}</div>
               <div class="stats">↑ ${fmtBRL(m.income)} · ↓ ${fmtBRL(m.expenses)}</div>
             </div>
-            <div class="profit ${m.balance >= 0 ? 'green' : 'red'}">${m.balance >= 0 ? '+' : ''}${fmtBRL(m.balance)}</div>
+            <div class="profit ${m.balance >= 0 ? 'green' : 'red'}">${fmtSignedBRL(m.balance, { plus: true })}</div>
           </div>
         `).join('');
       }
@@ -2580,20 +2622,28 @@
     function finTxRowHtml(item) {
       const isIgnored = Boolean(item.ignore_in_totals);
       const isIncome = Number(item.amount) > 0;
-      const amountLabel = `${isIncome ? '+' : '−'}${fmtBRL(Math.abs(item.amount))}`;
+      const amountLabel = fmtSignedBRL(item.amount, { plus: true });
       const sourceLabel = item.source === 'cartao' ? 'Cartão' : 'Conta';
       const installmentLabel = item.installment_current && item.installment_total
         ? ` · parcela ${item.installment_current}/${item.installment_total}` : '';
       const manualBadge = item.category_source === 'manual' ? '<span class="fin-badge-manual">manual</span>' : '';
       const [, m, d] = String(item.occurred_on || '').split('-');
       const dateLabel = d && m ? `${d}/${m}` : '—';
+      // O extrator costuma copiar a mesma string em merchant e description
+      // quando não identifica o estabelecimento — repetir na meta é ruído puro.
+      // Só mostra a descrição crua quando ela traz informação NOVA (merchant
+      // existe e difere, ignorando maiúsculas/espaços nas pontas).
+      const merchant = String(item.merchant || '').trim();
+      const description = String(item.description || '').trim();
+      const hasDistinctMerchant = merchant && merchant.toLowerCase() !== description.toLowerCase();
+      const metaDescPart = hasDistinctMerchant ? ` · ${escHtml(description)}` : '';
       return `
         <div class="fin-tx${isIgnored ? ' ignored' : ''}" data-id="${item.id}">
-          <div>
-            <div class="fin-tx-desc">${escHtml(item.merchant || item.description)}${manualBadge}</div>
-            <div class="fin-tx-meta">${dateLabel} · ${sourceLabel} · ${escHtml(item.institution || '')}${installmentLabel} · ${escHtml(item.description)}</div>
+          <div class="fin-tx-main">
+            <div class="fin-tx-desc">${escHtml(merchant || description)}${manualBadge}</div>
+            <div class="fin-tx-meta">${dateLabel} · ${sourceLabel} · ${escHtml(item.institution || '')}${installmentLabel}${metaDescPart}</div>
           </div>
-          <select class="fin-cat-select" data-id="${item.id}" aria-label="Categoria">${financeCategoryOptionsHtml(item.category)}</select>
+          <select class="fin-cat-select" data-id="${item.id}" aria-label="Categoria">${financeCategoryOptionsHtml(item.category, { short: true })}</select>
           <div class="fin-tx-amount${isIncome ? ' in' : ''}">${amountLabel}</div>
           <div class="fin-tx-actions">
             <button type="button" data-action="${isIgnored ? 'consider' : 'ignore'}" data-id="${item.id}">${isIgnored ? 'considerar' : 'ignorar'}</button>
@@ -2693,14 +2743,20 @@
       if (!docs.length) { el.innerHTML = '<div class="empty">Nenhum documento enviado ainda.</div>'; return; }
       el.innerHTML = docs.map((doc) => {
         const statusClass = doc.status === 'rejected' || doc.status === 'error' ? 'rejected' : (doc.status === 'registered' ? 'registered' : '');
-        const docLabel = doc.doc_kind === 'extrato' ? 'Extrato' : 'Fatura';
+        // doc_kind vem null quando o documento foi rejeitado antes de o worker
+        // identificar se era fatura ou extrato — "Fatura" nesse caso é chute
+        // errado (o doc nem chegou a ser validado como fatura).
+        const docLabel = doc.doc_kind === 'extrato' ? 'Extrato' : (doc.doc_kind === 'fatura' ? 'Fatura' : 'Documento');
+        const titleParts = [docLabel];
+        if (doc.institution) titleParts.push(escHtml(doc.institution));
+        if (doc.account_label) titleParts.push(escHtml(doc.account_label));
         const linesLabel = doc.status === 'registered'
-          ? `${doc.lines_detected ?? 0} linhas (${doc.inserted ?? 0} novas, ${doc.duplicates ?? 0} repetidas, ${doc.skipped ?? 0} ilegíveis)`
+          ? `${plural(doc.lines_detected ?? 0, 'linha', 'linhas')} (${plural(doc.inserted ?? 0, 'nova', 'novas')}, ${plural(doc.duplicates ?? 0, 'repetida', 'repetidas')}, ${plural(doc.skipped ?? 0, 'ilegível', 'ilegíveis')})`
           : finDocStatusLabel(doc);
         return `
           <div class="day">
             <div>
-              <div class="date">${docLabel} · ${escHtml(doc.institution || '—')}${doc.account_label ? ' · ' + escHtml(doc.account_label) : ''}</div>
+              <div class="date">${titleParts.join(' · ')}</div>
               <div class="stats">${escHtml(linesLabel)}${doc.status === 'registered' ? ' · ' + escHtml(finDocReconciliationLabel(doc)) : ''}</div>
             </div>
             <div class="fin-doc-status ${statusClass}">${fmtDate(doc.created_at)}</div>

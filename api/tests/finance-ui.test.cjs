@@ -33,8 +33,15 @@ test('nav mostra Finanças logo apos Registrar bet', () => {
 });
 
 test('pane financas fica depois de tracker e antes de baleias (fora do recorte registrar->tracker)', () => {
-  assert.ok(dashboard.indexOf('data-pane="tracker"') < dashboard.indexOf('data-pane="financas"'));
-  assert.ok(dashboard.indexOf('data-pane="financas"') < dashboard.indexOf('data-pane="baleias"'));
+  // Usa a tag <main> completa, não só a substring 'data-pane="financas"' — o
+  // CSS de acabamento (2026-09-05) passou a ter seletores de atributo
+  // '[data-pane="financas"] .kpi .value' dentro do <style>, que contêm a
+  // mesma substring bem mais cedo no arquivo e falso-positivariam um indexOf ingênuo.
+  const trackerMainIdx = dashboard.indexOf('<main class="container tab-pane" data-pane="tracker">');
+  const financasMainIdx = dashboard.indexOf('<main class="container tab-pane" data-pane="financas">');
+  const baleiasMainIdx = dashboard.indexOf('<main class="container tab-pane" data-pane="baleias">');
+  assert.ok(trackerMainIdx < financasMainIdx);
+  assert.ok(financasMainIdx < baleiasMainIdx);
   assert.doesNotMatch(registerToTracker, /id="fin/);
 });
 
@@ -209,7 +216,7 @@ test('job registrado mostra fatura/extrato, mes, novas/repetidas, reconciliacao 
   assert.match(dashboard, /r\.doc_kind === 'extrato' \? 'Extrato' : 'Fatura'/);
   assert.match(dashboard, /monthLabelPt\(r\.ref_month\)/);
   assert.match(dashboard, /Bateu com o total da fatura\./);
-  assert.match(dashboard, /Diferença de R\$ \$\{fmtMoney\(Math\.abs\(diff\)\)\} vs total da fatura\./);
+  assert.match(dashboard, /Diferença de \$\{fmtBRL\(Math\.abs\(diff\)\)\} vs total da fatura\./);
   assert.match(dashboard, /r\.ref_month && r\.ref_month !== finMonth/);
 });
 
@@ -299,6 +306,73 @@ test('CSS .fin-tx tem regra base antes de @media (max-width: 600px) e override d
   assert.ok(baseIdx < mediaIdx, '.fin-tx base deveria vir antes do bloco mobile');
   const secondIdx = dashboard.indexOf('.fin-tx {', mediaIdx);
   assert.ok(secondIdx > mediaIdx, 'override mobile de .fin-tx ausente dentro do bloco de 600px');
+});
+
+// ── Retoques de acabamento (2026-09-05) ─────────────────────────────────────
+test('fmtSignedBRL usa sinal tipografico antes do "R$" e fmtBRL vira wrapper dela', () => {
+  assert.match(financeBlock, /function fmtSignedBRL\(value, \{ plus = false \} = \{\}\)/);
+  assert.match(financeBlock, /return `−R\$ \$\{fmtMoney\(Math\.abs\(n\)\)\}`;/);
+  assert.match(financeBlock, /const fmtBRL = \(n\) => fmtSignedBRL\(n\);/);
+  assert.doesNotMatch(financeBlock, /R\$ -/);
+});
+
+test('fmtSignedBRL(plus:true) e usado no saldo do KPI, na tabela dos 6 meses e no valor da transacao', () => {
+  assert.match(financeBlock, /fmtSignedBRL\(s\.balance, \{ plus: true \}\)/);
+  assert.match(financeBlock, /fmtSignedBRL\(m\.balance, \{ plus: true \}\)/);
+  assert.match(financeBlock, /fmtSignedBRL\(item\.amount, \{ plus: true \}\)/);
+});
+
+test('reconciliacao (bubble e finDocReconciliationLabel) usa fmtBRL em vez de concatenar "R$" cru', () => {
+  assert.match(financeBlock, /Diferença de \$\{fmtBRL\(Math\.abs\(diff\)\)\} vs total da fatura\./);
+  assert.match(financeBlock, /diferença de \$\{fmtBRL\(Math\.abs\(diff\)\)\}`/);
+});
+
+test('shortCategoryLabel remove o parentese do rotulo e e usado na barra de categoria e no select da linha', () => {
+  assert.match(financeBlock, /function shortCategoryLabel\(slug\)/);
+  assert.match(financeBlock, /return financeCategoryLabel\(slug\)\.replace\(\/\\s\*\\\(\.\*\\\)\$\/, ''\);/);
+  assert.match(financeBlock, /shortCategoryLabel\(r\.category\)/);
+  assert.match(financeBlock, /financeCategoryOptionsHtml\(item\.category, \{ short: true \}\)/);
+  // o <select> de FILTRO no topo continua com o rotulo longo (sem o short:true)
+  assert.match(financeBlock, /finTxCategorySelect\.innerHTML = '<option value="all">Todas as categorias<\/option>' \+ financeCategoryOptionsHtml\(\);/);
+});
+
+test('plural() corrige singular/plural nos contadores de documento em renderFinDocs', () => {
+  assert.match(financeBlock, /function plural\(n, singular, pluralForm\)/);
+  assert.match(financeBlock, /plural\(doc\.lines_detected \?\? 0, 'linha', 'linhas'\)/);
+  assert.match(financeBlock, /plural\(doc\.inserted \?\? 0, 'nova', 'novas'\)/);
+  assert.match(financeBlock, /plural\(doc\.duplicates \?\? 0, 'repetida', 'repetidas'\)/);
+  assert.match(financeBlock, /plural\(doc\.skipped \?\? 0, 'ilegível', 'ilegíveis'\)/);
+});
+
+test('renderFinDocs cai pra "Documento" (nao "Fatura") quando doc_kind vem null', () => {
+  assert.match(financeBlock, /const docLabel = doc\.doc_kind === 'extrato' \? 'Extrato' : \(doc\.doc_kind === 'fatura' \? 'Fatura' : 'Documento'\);/);
+});
+
+test('finTxRowHtml so repete a descricao na meta quando o merchant traz informacao NOVA (case-insensitive)', () => {
+  assert.match(financeBlock, /const merchant = String\(item\.merchant \|\| ''\)\.trim\(\);/);
+  assert.match(financeBlock, /const description = String\(item\.description \|\| ''\)\.trim\(\);/);
+  assert.match(financeBlock, /merchant\.toLowerCase\(\) !== description\.toLowerCase\(\)/);
+  assert.match(financeBlock, /const metaDescPart = hasDistinctMerchant \? ` · \$\{escHtml\(description\)\}` : '';/);
+});
+
+test('CSS mobile trava o valor do KPI de Financas em 1 linha sem tocar em .kpi .value global', () => {
+  const mediaIdx = dashboard.indexOf('@media (max-width: 600px)');
+  const scopedIdx = dashboard.indexOf('[data-pane="financas"] .kpi .value', mediaIdx);
+  assert.ok(mediaIdx > 0 && scopedIdx > mediaIdx, 'regra [data-pane="financas"] .kpi .value ausente dentro do bloco mobile');
+  assert.match(dashboard.slice(scopedIdx, scopedIdx + 120), /white-space:\s*nowrap/);
+});
+
+test('CSS mobile poe descricao+valor na linha 1 e categoria+acoes na linha 2 da transacao', () => {
+  const mediaIdx = dashboard.indexOf('@media (max-width: 600px)');
+  const mobileBlock = dashboard.slice(mediaIdx);
+  assert.match(mobileBlock, /\.fin-tx-main \{ grid-column: 1; grid-row: 1; \}/);
+  assert.match(mobileBlock, /\.fin-tx-amount \{ grid-column: 2; grid-row: 1;/);
+  assert.match(mobileBlock, /\.fin-cat-select \{ grid-column: 1; grid-row: 2; width: 100%; \}/);
+  assert.match(mobileBlock, /\.fin-tx-actions \{ grid-column: 2; grid-row: 2;/);
+});
+
+test('descricao da transacao tem min-width:0 e overflow-wrap:anywhere pra nao estourar 390px', () => {
+  assert.match(dashboard, /\.fin-tx-main \{ min-width: 0; overflow-wrap: anywhere; \}/);
 });
 
 test('finance-image-resize.mjs nao depende de DOM real fora do path default (deps injetaveis)', () => {
