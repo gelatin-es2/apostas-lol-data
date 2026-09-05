@@ -87,6 +87,17 @@ test('finance_transactions tem colunas e checks de S2.5', () => {
   assert.match(migration, /unique \(owner_id, dedup_key\)/);
 });
 
+test('indice de transacoes cobre owner+mes+ordenacao da lista; indice novo pelo ref_month do result do job', () => {
+  assert.match(
+    migration,
+    /create index if not exists finance_transactions_owner_month_idx\s*\n\s*on public\.finance_transactions \(owner_id, ref_month, occurred_on desc, created_at desc\)/,
+  );
+  assert.match(
+    migration,
+    /create index if not exists finance_upload_jobs_ref_month_idx\s*\n\s*on public\.finance_upload_jobs \(\(result->>'ref_month'\)\)/,
+  );
+});
+
 test('lista de categorias no check bate com FINANCE_CATEGORY_SLUGS na mesma ordem', () => {
   const match = migration.match(/category text not null check \(category in \(([\s\S]*?)\)\)/);
   assert.ok(match, 'check de category nao encontrado');

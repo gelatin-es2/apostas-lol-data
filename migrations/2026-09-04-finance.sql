@@ -65,6 +65,12 @@ create index if not exists finance_upload_jobs_purge_idx
 create index if not exists finance_upload_jobs_owner_idx
   on public.finance_upload_jobs (owner_id, created_at desc);
 
+-- listDocuments (api/lib/finance-gateway.cjs) filtra por `result->>'ref_month' = month`
+-- pra achar a fatura/extrato registrada do mes — sem indice isso e um scan sequencial
+-- inteiro da tabela a cada GET /api/finance/summary.
+create index if not exists finance_upload_jobs_ref_month_idx
+  on public.finance_upload_jobs ((result->>'ref_month'));
+
 -- Sem policy de proposito: o dono nunca le esta tabela direto do client publico,
 -- so via /api/finance/* (service_role). Diferente de bet_upload_jobs, que tem
 -- policy de leitura pro authenticated — aqui nao existe esse caminho.
@@ -101,8 +107,10 @@ create table if not exists public.finance_transactions (
   unique (owner_id, dedup_key)
 );
 
+-- occurred_on desc, created_at desc cobre a ordenacao de GET /api/finance/transactions
+-- (order=occurred_on.desc,created_at.desc) direto pelo indice, sem sort extra.
 create index if not exists finance_transactions_owner_month_idx
-  on public.finance_transactions (owner_id, ref_month);
+  on public.finance_transactions (owner_id, ref_month, occurred_on desc, created_at desc);
 
 create index if not exists finance_transactions_job_idx
   on public.finance_transactions (job_id);
