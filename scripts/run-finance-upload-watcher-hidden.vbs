@@ -1,0 +1,9 @@
+Option Explicit
+
+Dim shell, scriptDir, command, exitCode
+Set shell = CreateObject("WScript.Shell")
+shell.Environment("Process")("BET_CONFIG_PROJECT") = "C:\Users\Elvis\projects\apostas-lol-data"
+scriptDir = Left(WScript.ScriptFullName, InStrRev(WScript.ScriptFullName, "\"))
+command = """C:\Program Files\nodejs\node.exe"" """ & scriptDir & "finance-upload-watcher.cjs"" --once"
+exitCode = shell.Run(command, 0, True)
+WScript.Quit exitCode

@@ -1,0 +1,42 @@
+Processe no maximo um job de upload por execucao. Um documento (fatura de cartao de credito ou extrato bancario) pode ter varias linhas de transacao; extraia TODAS na ordem visual, sem pular nenhuma e sem inventar linha que nao esteja no documento.
+
+1. Execute primeiro o purge:
+   node scripts/finance-upload-jobs.cjs purge 25
+   Ele so remove a foto privada depois de 14 dias e preserva o job/transacoes ja registradas, que sao auditaveis. Se falhar, nao apague manualmente.
+2. Execute `node scripts/finance-upload-jobs.cjs claim claude-finance 900`. Se retornar null, encerre sem ler nenhuma imagem.
+3. Guarde id, claim_token e mime_type. Baixe somente em `cron-data/finance-upload-work/<id>.<ext>` (`png`, `jpg` ou `webp` conforme MIME):
+   node scripts/finance-upload-jobs.cjs download <id> <claim_token> cron-data/finance-upload-work/<id>.<ext>
+4. Leia o arquivo com o tool Read. `note` (quando o dono mandou) e somente contexto auxiliar: nunca substitui evidencia da foto, nunca relaxa validacoes e nunca inventa campo ausente.
+   - Identifique doc_kind: `fatura` (fatura de cartao de credito) ou `extrato` (extrato de conta corrente/poupanca). Se a foto NAO for nenhum dos dois (recibo avulso, comprovante isolado, print de outro app, foto ilegivel de outro assunto), NAO gere `<id>-extract.json`: va direto ao passo 6 com `unsupported_document`.
+   - institution: nome do banco/emissor visivel no documento (ex. "Nubank", "Itau", "Inter"). account_label: identificacao da conta/cartao quando visivel (ex. "Cartao final 1234"), ou null.
+   - period_start/period_end: periodo coberto pela fatura/extrato (ISO `AAAA-MM-DD`), quando visivel; senao null.
+   - ref_month (formato `AAAA-MM`): em fatura, o MES DE VENCIMENTO (fallback: mes rotulado pelo proprio banco; ultimo recurso, o mes da data mais recente entre as transacoes); em extrato, o mes do periodo coberto.
+   - statement_total: em fatura, o total impresso no documento (numero positivo) quando existir; em extrato, sempre null.
+   - Extraia TODAS as transacoes visiveis, uma por linha, na ordem visual do documento. Para cada uma: `occurred_on` (ISO `AAAA-MM-DD`, ano inferido do contexto do documento), `description` (texto cru da linha, sem resumir), `merchant` (nome do estabelecimento quando distinto da descricao, ou null), `amount` com sinal (fatura: compra = negativo, "Pagamento recebido"/estorno = positivo; extrato: debito = negativo, credito = positivo) usando ponto decimal (`1.234,56` no documento vira `1234.56` no JSON, NUNCA `1.234.56` nem `1234,56`), `installment_current`/`installment_total` quando houver parcela (ex. "2/10" -> 2 e 10), e `category` (lista fechada abaixo). Linha ilegivel ou cortada: NAO invente o valor — registre em `document.skipped` como `{ "line": "texto que da pra ler", "reason": "ilegivel" }` e siga para as demais. NUNCA invente linha que nao esteja no documento.
+   - Categorize cada transacao com UMA destas 18 categorias (use o slug, nunca o label): alimentacao, mercado, transporte, moradia, contas, saude, lazer, assinaturas, compras, educacao, apostas, cripto, transferencia, pagamento_fatura, renda, investimento, taxas_juros, outros. Regras de bolso:
+     - "Pagamento recebido" / linhas comecando com "PAG" / estorno do total da fatura -> `pagamento_fatura`.
+     - Pix/TED para casa de aposta (Betano, Pinnacle, EstrelaBet, Superbet, bet365, Parimatch, Betesporte, etc.) ou deposito/saque dessas casas -> `apostas`.
+     - Binance / Mercado Bitcoin / Coinbase / Bybit / OKX / Foxbit / USDT -> `cripto`.
+     - Salario ou Pix recebido de pessoa fisica -> `renda`.
+     - iFood/restaurante -> `alimentacao`; supermercado -> `mercado`; Uber/99/combustivel -> `transporte`; aluguel/condominio/IPTU -> `moradia`; luz/agua/gas/internet/celular -> `contas`; farmacia/plano de saude -> `saude`; Spotify/Netflix/iCloud -> `assinaturas`; cinema/bar/viagem -> `lazer`; Amazon/Shopee/Mercado Livre -> `compras`; curso/livros -> `educacao`; transferencia entre contas proprias -> `transferencia`; CDB/Tesouro Direto -> `investimento`; juros/IOF/anuidade/tarifa bancaria -> `taxas_juros`; sem certeza nenhuma -> `outros`.
+   - Reconciliacao antes de escrever o arquivo: some `sum_lines` (as transacoes que NAO sao `pagamento_fatura`, com o sinal invertido) e compare com `statement_total` quando ele existir. Se a diferenca passar de 5% ou de R$ 50, releia o documento com mais cuidado ANTES de registrar — nao registre um extract com reconciliacao capenga so porque leu rapido demais.
+5. Escreva um unico JSON UTF-8 em `cron-data/finance-upload-work/<id>-extract.json` no formato:
+   { "document": { "doc_kind": "fatura|extrato", "institution": "...", "account_label": "...|null", "period_start": "...|null", "period_end": "...|null", "ref_month": "AAAA-MM", "statement_total": 0.00, "skipped": [] }, "transactions": [ { "occurred_on": "AAAA-MM-DD", "description": "...", "merchant": "...|null", "amount": 0.00, "category": "...", "installment_current": null, "installment_total": null } ] }
+   Entao execute:
+   node scripts/finance-upload-jobs.cjs register <id> <claim_token> cron-data/finance-upload-work/<id>-extract.json
+   Esse comando valida o extract, insere as transacoes com dedup automatico (reenvio da mesma foto/linha nao duplica) e finaliza o job como `registered`. E idempotente: se a resposta se perder e voce nao tiver certeza se rodou, pode repetir o MESMO comando — ele nao insere a mesma transacao de novo.
+   Se o comando rejeitar o extract por dado invalido (a mensagem diz o campo e o motivo, ex. "transactions[3].category invalida"), CORRIJA o `<id>-extract.json` e rode o MESMO comando register de novo — no maximo 2 correcoes. O job continua na fila (nao fecha sozinho por um erro pequeno de dado). Se ainda assim falhar, finalize:
+   node scripts/finance-upload-jobs.cjs finish <id> <claim_token> error extraction_failed "<mensagem curta>" -
+6. Documento que nao e fatura nem extrato (sem gerar `<id>-extract.json`): finalize direto com um destes codigos da allowlist fechada — nunca invente outro:
+   - `unreadable_image` -> foto ilegivel, borrada, cortada ou escura demais pra ler qualquer dado.
+   - `unsupported_document` -> nao e fatura de cartao nem extrato bancario (recibo avulso, print de outro app etc.).
+   - `extraction_failed` -> qualquer outra causa de falha na extracao, com mensagem curta e sanitizada coerente com o motivo real.
+   node scripts/finance-upload-jobs.cjs finish <id> <claim_token> rejected <codigo> "<mensagem>" -
+7. Falha tecnica antes do register (comando trava, perde conexao, erro inesperado): finalize error com mensagem sanitizada.
+   node scripts/finance-upload-jobs.cjs finish <id> <claim_token> error extraction_failed "<mensagem>" -
+   Se o retorno do register/finish for perdido ou ambiguo, NAO repita o register mais de uma vez; preserve os arquivos locais para diagnostico, pois a transacao pode ja ter sido concluida no banco.
+8. Depois de um estado terminal confirmado (`registered`, `rejected` ou `error`), execute exatamente:
+   node scripts/finance-upload-jobs.cjs cleanup <id>
+   Isso apaga somente os TEMPs exatos deste job (imagem, `<id>-extract.json` e `<id>-result.json`, quando existirem) dentro de `cron-data/finance-upload-work`. Nunca apague manualmente, nunca use curinga, nunca remova outro path. Nunca toque fora de `cron-data/finance-upload-work` e nunca apague o Storage diretamente.
+
+Compatibilidade e auditoria: use somente `scripts/finance-upload-jobs.cjs` para falar com o Supabase — nunca chame a API do banco direto, nunca escreva SQL, nunca exponha tokens/secrets nem resposta crua com credenciais.
