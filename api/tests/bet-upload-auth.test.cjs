@@ -5,6 +5,7 @@ const assert = require('node:assert/strict');
 
 const {
   COOKIE_NAME,
+  clearAccessCookie,
   createAccessSession,
   credentialFromRequest,
   verifyAccessSession,
@@ -31,10 +32,20 @@ test('codigo forte vira cookie HttpOnly sem retornar segredo no body', async () 
   await createAccessHandler(ENV)({ method: 'POST', headers: {}, body: { code: ENV.BET_UPLOAD_ACCESS_CODE } }, response);
   assert.equal(response.statusCode, 200);
   assert.deepEqual(response.body, { ok: true });
-  assert.match(response.headers['Set-Cookie'], new RegExp(`^${COOKIE_NAME}=`));
-  for (const attribute of ['HttpOnly', 'Secure', 'SameSite=Lax', 'Path=/api/bets', 'Max-Age=2592000']) {
-    assert.match(response.headers['Set-Cookie'], new RegExp(attribute));
+  assert.ok(Array.isArray(response.headers['Set-Cookie']), 'Set-Cookie precisa ser array (cookie novo + clear do legado)');
+  assert.equal(response.headers['Set-Cookie'].length, 2);
+  const [issued, legacyClear] = response.headers['Set-Cookie'];
+  assert.match(issued, new RegExp(`^${COOKIE_NAME}=`));
+  for (const attribute of ['HttpOnly', 'Secure', 'SameSite=Lax', 'Path=/api', 'Max-Age=2592000']) {
+    assert.match(issued, new RegExp(attribute));
   }
+  // O cookie novo agora vale pra /api inteiro (bets + finance) — nao pode voltar a ficar preso em /api/bets.
+  assert.doesNotMatch(issued, /Path=\/api\/bets/);
+  // O segundo Set-Cookie apaga o v1 legado (Path=/api/bets) — sem ele o navegador
+  // ficaria guardando os 2 pra sempre.
+  assert.match(legacyClear, new RegExp(`^${COOKIE_NAME}=;`));
+  assert.match(legacyClear, /Path=\/api\/bets/);
+  assert.match(legacyClear, /Max-Age=0/);
   assert.doesNotMatch(JSON.stringify(response), new RegExp(ENV.BET_UPLOAD_ACCESS_CODE));
 });
 
@@ -42,16 +53,54 @@ test('cookie assinado autoriza GET e adulteracao falha fechada', async () => {
   const now = Date.now();
   const issued = createAccessSession({ ownerId: OWNER_ID, secret: ENV.BET_UPLOAD_SESSION_SECRET, now });
   assert.deepEqual(verifyAccessSession(issued, { ownerId: OWNER_ID, secret: ENV.BET_UPLOAD_SESSION_SECRET, now: now + 1000 }), {
-    id: OWNER_ID, source: 'access_cookie',
+    id: OWNER_ID, source: 'access_cookie', version: 2,
   });
   assert.equal(verifyAccessSession(`${issued}x`, { ownerId: OWNER_ID, secret: ENV.BET_UPLOAD_SESSION_SECRET, now: now + 1000 }), null);
 
   const allowed = fakeResponse();
   await createAccessHandler(ENV)({ method: 'GET', headers: { cookie: `${COOKIE_NAME}=${issued}` } }, allowed);
   assert.equal(allowed.statusCode, 200);
+  assert.equal(allowed.body.scope, 'api');
   const denied = fakeResponse();
   await createAccessHandler(ENV)({ method: 'GET', headers: { cookie: `${COOKIE_NAME}=${issued}x` } }, denied);
   assert.equal(denied.statusCode, 401);
+});
+
+test('cookie v1 legado (Path=/api/bets) ainda autentica com scope bets', async () => {
+  const now = Date.now();
+  const v1Payload = Buffer.from(JSON.stringify({ v: 1, sub: OWNER_ID, exp: Math.floor(now / 1000) + 3600 })).toString('base64url');
+  const v1Token = `${v1Payload}.${require('crypto').createHmac('sha256', ENV.BET_UPLOAD_SESSION_SECRET).update(v1Payload).digest('base64url')}`;
+  assert.deepEqual(verifyAccessSession(v1Token, { ownerId: OWNER_ID, secret: ENV.BET_UPLOAD_SESSION_SECRET, now }), {
+    id: OWNER_ID, source: 'access_cookie', version: 1,
+  });
+
+  const response = fakeResponse();
+  await createAccessHandler(ENV)({ method: 'GET', headers: { cookie: `${COOKIE_NAME}=${v1Token}` } }, response);
+  assert.equal(response.statusCode, 200);
+  assert.equal(response.body.scope, 'bets');
+});
+
+test('quando o navegador manda os 2 cookies (v1 mais especifico primeiro, v2 depois), o v2 vence e o scope vira api', async () => {
+  const now = Date.now();
+  const v1Payload = Buffer.from(JSON.stringify({ v: 1, sub: OWNER_ID, exp: Math.floor(now / 1000) + 3600 })).toString('base64url');
+  const v1Token = `${v1Payload}.${require('crypto').createHmac('sha256', ENV.BET_UPLOAD_SESSION_SECRET).update(v1Payload).digest('base64url')}`;
+  const v2Token = createAccessSession({ ownerId: OWNER_ID, secret: ENV.BET_UPLOAD_SESSION_SECRET, now });
+
+  const response = fakeResponse();
+  await createAccessHandler(ENV)({
+    method: 'GET',
+    headers: { cookie: `${COOKIE_NAME}=${v1Token}; ${COOKIE_NAME}=${v2Token}` },
+  }, response);
+  assert.equal(response.statusCode, 200);
+  assert.equal(response.body.scope, 'api');
+});
+
+test('clearAccessCookie apaga os 2 paths (novo e legado)', () => {
+  const cleared = clearAccessCookie();
+  assert.ok(Array.isArray(cleared));
+  assert.equal(cleared.length, 2);
+  assert.ok(cleared.some((c) => /Path=\/api;/.test(c) && /Max-Age=0/.test(c)));
+  assert.ok(cleared.some((c) => /Path=\/api\/bets/.test(c) && /Max-Age=0/.test(c)));
 });
 
 test('credential prefere bearer existente e aceita cookie sem expor valor', () => {

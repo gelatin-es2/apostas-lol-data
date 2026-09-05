@@ -1,0 +1,43 @@
+{
+  "transactions": [
+    { "id": "tx-01", "ref_month": "2026-09", "source": "cartao", "category": "alimentacao", "amount": -45.90, "merchant": "iFood", "description": "IFD*IFOOD BR", "ignore_in_totals": false, "occurred_on": "2026-08-14" },
+    { "id": "tx-02", "ref_month": "2026-09", "source": "cartao", "category": "alimentacao", "amount": -32.10, "merchant": "iFood", "description": "IFD*IFOOD BR", "ignore_in_totals": false, "occurred_on": "2026-08-20" },
+    { "id": "tx-03", "ref_month": "2026-09", "source": "cartao", "category": "mercado", "amount": -210.55, "merchant": "Carrefour", "description": "CARREFOUR COMER E IND", "ignore_in_totals": false, "occurred_on": "2026-08-15" },
+    { "id": "tx-04", "ref_month": "2026-09", "source": "cartao", "category": "transporte", "amount": -18.00, "merchant": "Uber", "description": "UBER *TRIP", "ignore_in_totals": false, "occurred_on": "2026-08-16" },
+    { "id": "tx-05", "ref_month": "2026-09", "source": "cartao", "category": "compras", "amount": -120.00, "merchant": "Amazon", "description": "AMAZON BR", "ignore_in_totals": false, "occurred_on": "2026-08-18" },
+    { "id": "tx-06", "ref_month": "2026-09", "source": "conta", "category": "pagamento_fatura", "amount": -3118.90, "merchant": null, "description": "Pagamento de fatura cartao", "ignore_in_totals": true, "occurred_on": "2026-09-05" },
+    { "id": "tx-07", "ref_month": "2026-09", "source": "cartao", "category": "compras", "amount": 120.00, "merchant": "Amazon", "description": "ESTORNO AMAZON BR", "ignore_in_totals": false, "occurred_on": "2026-08-22" },
+    { "id": "tx-08", "ref_month": "2026-09", "source": "conta", "category": "renda", "amount": 5000.00, "merchant": null, "description": "Pix recebido salario", "ignore_in_totals": false, "occurred_on": "2026-09-05" },
+    { "id": "tx-09", "ref_month": "2026-09", "source": "conta", "category": "apostas", "amount": -500.00, "merchant": "Betano", "description": "Pix enviado Betano", "ignore_in_totals": false, "occurred_on": "2026-09-06" },
+    { "id": "tx-10", "ref_month": "2026-09", "source": "conta", "category": "apostas", "amount": 300.00, "merchant": "Betano", "description": "Pix recebido Betano", "ignore_in_totals": false, "occurred_on": "2026-09-08" },
+    { "id": "tx-11", "ref_month": "2026-09", "source": "conta", "category": "cripto", "amount": -200.00, "merchant": "Binance", "description": "Pix enviado Binance", "ignore_in_totals": false, "occurred_on": "2026-09-09" },
+    { "id": "tx-12", "ref_month": "2026-09", "source": "conta", "category": "moradia", "amount": -1200.00, "merchant": null, "description": "Aluguel Setembro", "ignore_in_totals": false, "occurred_on": "2026-09-05" },
+    { "id": "tx-13", "ref_month": "2026-09", "source": "conta", "category": "contas", "amount": -150.00, "merchant": null, "description": "Conta de luz e agua", "ignore_in_totals": false, "occurred_on": "2026-09-10" },
+    { "id": "tx-14", "ref_month": "2026-09", "source": "cartao", "category": "alimentacao", "amount": -10.00, "merchant": null, "description": "Padaria do bairro", "ignore_in_totals": true, "occurred_on": "2026-08-25" },
+    { "id": "tx-15", "ref_month": "2026-09", "source": "cartao", "category": "saude", "amount": -80.00, "merchant": "Drogaria", "description": "DROGARIA SAO PAULO", "ignore_in_totals": false, "occurred_on": "2026-08-19" },
+    { "id": "tx-16", "ref_month": "2026-09", "source": "cartao", "category": "assinaturas", "amount": -55.90, "merchant": "Netflix", "description": "NETFLIX.COM", "ignore_in_totals": false, "occurred_on": "2026-08-17" },
+    { "id": "tx-17", "ref_month": "2026-08", "source": "cartao", "category": "alimentacao", "amount": -100.00, "merchant": "iFood", "description": "IFD*IFOOD BR", "ignore_in_totals": false, "occurred_on": "2026-07-14" },
+    { "id": "tx-18", "ref_month": "2026-08", "source": "conta", "category": "renda", "amount": 4800.00, "merchant": null, "description": "Pix recebido salario", "ignore_in_totals": false, "occurred_on": "2026-08-05" },
+    { "id": "tx-19", "ref_month": "2026-08", "source": "conta", "category": "pagamento_fatura", "amount": -2800.00, "merchant": null, "description": "Pagamento de fatura cartao", "ignore_in_totals": true, "occurred_on": "2026-08-05" },
+    { "id": "tx-20", "ref_month": "2026-08", "source": "cartao", "category": "mercado", "amount": -300.00, "merchant": "Carrefour", "description": "CARREFOUR COMER E IND", "ignore_in_totals": false, "occurred_on": "2026-07-15" },
+    { "id": "tx-21", "ref_month": "2026-08", "source": "cartao", "category": "lazer", "amount": -90.00, "merchant": "Cinemark", "description": "CINEMARK", "ignore_in_totals": false, "occurred_on": "2026-07-16" },
+    { "id": "tx-22", "ref_month": "2026-07", "source": "cartao", "category": "transporte", "amount": -60.00, "merchant": "Uber", "description": "UBER *TRIP", "ignore_in_totals": false, "occurred_on": "2026-06-14" },
+    { "id": "tx-23", "ref_month": "2026-07", "source": "conta", "category": "renda", "amount": 4700.00, "merchant": null, "description": "Pix recebido salario", "ignore_in_totals": false, "occurred_on": "2026-07-05" },
+    { "id": "tx-24", "ref_month": "2026-07", "source": "cartao", "category": "mercado", "amount": -250.00, "merchant": "Carrefour", "description": "CARREFOUR COMER E IND", "ignore_in_totals": false, "occurred_on": "2026-06-15" },
+    { "id": "tx-25", "ref_month": "2026-07", "source": "conta", "category": "pagamento_fatura", "amount": -2500.00, "merchant": null, "description": "Pagamento de fatura cartao", "ignore_in_totals": true, "occurred_on": "2026-07-05" }
+  ],
+  "documents": [
+    { "id": "job-a", "status": "registered", "note": null, "error_code": null, "error_message": null, "created_at": "2026-09-05T12:00:00Z",
+      "result": { "doc_kind": "fatura", "institution": "Nubank", "account_label": "Cartão final 1234", "ref_month": "2026-09", "period_start": "2026-08-08", "period_end": "2026-09-07", "statement_total": 3118.90, "lines_detected": 16, "inserted": 16, "duplicates": 0, "skipped": 0, "reconciliation": { "sum_lines": 3118.90, "statement_total": 3118.90, "diff": 0.00 } } },
+    { "id": "job-f", "status": "registered", "note": null, "error_code": null, "error_message": null, "created_at": "2026-09-01T09:00:00Z",
+      "result": { "doc_kind": "fatura", "institution": "Nubank", "account_label": "Cartão final 1234", "ref_month": "2026-09", "period_start": "2026-07-08", "period_end": "2026-08-07", "statement_total": 2900.00, "lines_detected": 10, "inserted": 9, "duplicates": 1, "skipped": 0, "reconciliation": { "sum_lines": 2900.00, "statement_total": 2900.00, "diff": 0.00 } } },
+    { "id": "job-b", "status": "registered", "note": null, "error_code": null, "error_message": null, "created_at": "2026-09-06T08:00:00Z",
+      "result": { "doc_kind": "extrato", "institution": "Itaú", "account_label": null, "ref_month": "2026-09", "period_start": "2026-09-01", "period_end": "2026-09-30", "statement_total": null, "lines_detected": 9, "inserted": 9, "duplicates": 0, "skipped": 0, "reconciliation": null } },
+    { "id": "job-c", "status": "queued", "note": "foto celular", "error_code": null, "error_message": null, "created_at": "2026-09-03T10:00:00Z", "result": null },
+    { "id": "job-d", "status": "rejected", "note": null, "error_code": "unsupported_document", "error_message": "mensagem interna", "created_at": "2026-08-20T10:00:00Z", "result": null },
+    { "id": "job-e", "status": "registered", "note": null, "error_code": null, "error_message": null, "created_at": "2026-08-05T12:00:00Z",
+      "result": { "doc_kind": "fatura", "institution": "Nubank", "account_label": "Cartão final 1234", "ref_month": "2026-08", "period_start": "2026-07-08", "period_end": "2026-08-07", "statement_total": 2800.00, "lines_detected": 12, "inserted": 12, "duplicates": 0, "skipped": 0, "reconciliation": { "sum_lines": 2800.00, "statement_total": 2800.00, "diff": 0.00 } } },
+    { "id": "job-g", "status": "registered", "note": null, "error_code": null, "error_message": null, "created_at": "2026-09-07T08:00:00Z",
+      "result": { "doc_kind": "fatura", "institution": "Inter", "account_label": "Cartão final 9876", "ref_month": "2026-09", "period_start": "2026-08-10", "period_end": "2026-09-09", "statement_total": 850.00, "lines_detected": 5, "inserted": 5, "duplicates": 0, "skipped": 0, "reconciliation": { "sum_lines": 850.00, "statement_total": 850.00, "diff": 0.00 } } }
+  ]
+}

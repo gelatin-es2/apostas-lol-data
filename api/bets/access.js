@@ -21,7 +21,11 @@ function createAccessHandler(env = process.env) {
       if (req.method === 'GET') {
         const credential = credentialFromRequest(req);
         const user = authenticateAccessCredential(credential, env);
-        return send(res, user ? 200 : 401, { ok: Boolean(user) });
+        if (!user) return send(res, 401, { ok: false });
+        // scope 'bets' = cookie v1 legado (Path=/api/bets) — ainda autentica bets, mas
+        // nunca chega em /api/finance/* (o navegador nao manda esse cookie pra la). O
+        // front usa isso pra saber quando precisa pedir o codigo de novo.
+        return send(res, 200, { ok: true, scope: user.version >= 2 ? 'api' : 'bets' });
       }
       if (req.method === 'DELETE') {
         res.setHeader('Set-Cookie', clearAccessCookie());
